@@ -24,7 +24,8 @@ Frontend
 `A guide to styling a ionic2 project
 <http://www.joshmorony.com/a-guide-to-styling-an-ionic-2-application/>`_
 
-
+`CSS Selectors Fundamental
+<https://code.tutsplus.com/tutorials/the-30-css-selectors-you-must-memorize--net-16048/>`_
 
 
 
