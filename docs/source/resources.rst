@@ -28,6 +28,9 @@ Frontend
 <https://code.tutsplus.com/tutorials/the-30-css-selectors-you-must-memorize--net-16048/>`_
 
 
+`Flexbox example
+<http://codepen.io/noahblon/post/a-practical-guide-to-flexbox-understanding-space-between-the-unsung-hero>`_
+
 
 Backend
 -------
