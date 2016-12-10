@@ -9,7 +9,14 @@
 // the Sass variables found in Ionic's source scss files.
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
+$text-color:#F2EDE7;
+$background-color: #000;
+$toolbar-md-text-color: #888;
+$toolbar-wp-text-color: #888;
+$toolbar-md-title-text-color:#888;
+$toolbar-md-background: #373a3c;
 
+//#373a3c
 
 
 
@@ -69,4 +76,4 @@ $colors: (
 $ionicons-font-path: "../assets/fonts";
 @import "ionicons";
 
-$background-color: #111111;
+
