@@ -7,9 +7,14 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'rank.html'
 })
 export class RankPage {
-
+  stats = "teams";
+  teamSortByStr = "ability";
   constructor(public navCtrl: NavController) {
 
   }
 
+  sortTeamBy(str) {
+    this.teamSortByStr = str;
+    //this.teamSortBy.next(this.teamSortByStr);
+  }
 }
