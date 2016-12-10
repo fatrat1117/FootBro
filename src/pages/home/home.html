@@ -1,17 +1,40 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>{{'Home' | trans}}</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content>
+  <ion-card>
+    <ion-slides [options]="adSlideOptions">
+      <ion-slide *ngFor="let slide of slides">
+        <img [src]="slide.image"/>
+      </ion-slide>
+    </ion-slides>
+
+    <!--<ion-row no-padding>
+      <ion-col>
+        <p text-center danger><ion-icon name='megaphone'></ion-icon></p>
+        <p text-center danger>News</p>
+      </ion-col>
+      <ion-col>
+        <p text-center primary><ion-icon name='trophy'></ion-icon></p>
+        <p text-center primary>Results</p>
+      </ion-col>
+      <ion-col>
+        <p text-center secondary><ion-icon name='photos'></ion-icon></p>
+        <p text-center secondary>Snapshots</p>
+      </ion-col>
+    </ion-row>-->
+  </ion-card>
+  <div class="card-background-page">
+    <ion-card (click) = "goLeaguePage()">
+      <img src="assets/img/matches.png"/>
+      <div class="card-title">{{'FriendlyMatches' | trans}}</div>
+    </ion-card>
+    <ion-card (click)="enterStandings()">
+      <img src="assets/img/tournaments.png"/>
+      <div class="card-title">{{'Tournaments' | trans}}</div>
+    </ion-card>
+  </div>
 </ion-content>
