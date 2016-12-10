@@ -1,7 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { AboutPage } from '../pages/about/about';
+import { RankPage } from '../pages/rank/rank';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -10,7 +10,7 @@ import { TransPipe, Localization } from '../providers/localization';
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
+    RankPage,
     ContactPage,
     HomePage,
     TabsPage,
@@ -22,7 +22,7 @@ import { TransPipe, Localization } from '../providers/localization';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
+    RankPage,
     ContactPage,
     HomePage,
     TabsPage
