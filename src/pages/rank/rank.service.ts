@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 export const TEAMRANKS = [
-  {id: 11, name: 'Mr. Nice'},
+  {logo: '', id: 11, ablity: 1000, totalPlayers: 20, popularity: 88, name: 'Mr. Nice'},
   {id: 12, name: 'Narco'},
   {id: 13, name: 'Bombasto'},
   {id: 14, name: 'Celeritas'},
@@ -15,6 +15,11 @@ export const TEAMRANKS = [
 @Injectable()
 export class RankService {
   getTeamRanks(): Promise<any[]> {
-    return Promise.resolve(TEAMRANKS);
+      return new Promise<any[]>(resolve =>
+    setTimeout(resolve, 2000)) // delay 2 seconds
+    .then(() => {
+        return Promise.resolve(TEAMRANKS);
+    }
+    )
   }
 }

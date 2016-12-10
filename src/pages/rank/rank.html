@@ -24,15 +24,14 @@
           </ion-option>
         </ion-select>
       </ion-item>
-      <!--<ion-list>
-        <ion-item *ngFor="let t of afTeams | async | reverseAndCountTeamPipe : teamData; let i = index;" tappable (click)="goTeamPage(t.$key)"
-          style="margin-bottom:10px">
+      <ion-list>
+        <ion-item *ngFor="let t of teamRanks; let i = index;" style="margin-bottom:10px">
           <ion-thumbnail item-left>
-            <ion-img [src]="(t.$key | teamBasicPipe | async)?.logo"></ion-img>
+            <ion-img [src]="t.logo"></ion-img>
           </ion-thumbnail>
           <ion-badge style="position:absolute;">{{ i+1 }}</ion-badge>
           <h2 text-center>
-            {{(t.$key | teamBasicPipe | async)?.name}}
+            {{t.name}}
           </h2>
           <ion-row>
             <ion-col>
@@ -41,7 +40,7 @@
             </ion-col>
             <ion-col>
               <p text-center><label><ion-icon name='people'></ion-icon>&nbsp;{{'Players' | trans}}</label></p>
-              <p text-center><label>{{(t.$key | teamBasicPipe | async)?.totalPlayers}}</label></p>
+              <p text-center><label>{{t.totalPlayers}}</label></p>
             </ion-col>
             <ion-col>
               <p text-center><label><ion-icon name='flame' danger></ion-icon>&nbsp;{{'Popularity' | trans}}</label></p>
@@ -50,7 +49,7 @@
           </ion-row>
         </ion-item>
       </ion-list>
-      <ion-infinite-scroll (ionInfinite)="moreTeam($event)">
+      <!--<ion-infinite-scroll (ionInfinite)="moreTeam($event)">
         <ion-infinite-scroll-content loadingSpinner="bubbles">
         </ion-infinite-scroll-content>
       </ion-infinite-scroll>-->
