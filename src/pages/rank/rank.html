@@ -34,17 +34,18 @@
             {{t.name}}
           </h2>
           <ion-row>
-            <ion-col>
+            <ion-col width-33>
               <p text-center>
-                <ion-icon name='football'></ion-icon>&nbsp;{{'Ability' | trans}}</p>
-              <p text-center>{{t.ability}}</p>
+                <ion-icon name='football'></ion-icon>
+                &nbsp;{{'Ability' | trans}}</p>
+              <p text-center color="secondary">{{t.ability}}</p>
             </ion-col>
-            <ion-col>
+            <ion-col width-33>
               <p text-center>
                 <ion-icon name='people'></ion-icon>&nbsp;{{'Players' | trans}}</p>
-              <p text-center>{{t.totalPlayers}}</p>
+              <p text-center color="secondary">{{t.totalPlayers}}</p>
             </ion-col>
-            <ion-col>
+            <ion-col width-33>
               <p text-center>
                 <ion-icon name='flame' color="danger"></ion-icon>&nbsp;{{'Popularity' | trans}}</p>
               <p text-center ion-text color="secondary">{{t.popularity}}</p>

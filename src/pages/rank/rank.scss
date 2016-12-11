@@ -1,8 +1,39 @@
 page-rank{
 
+  .rank-stats{
 
-  h2{
-    color: #666;
+
+    //default ion-thumbnail: min-width : 8rem, min height:8rem
+    //now     ion-thumbnail: min-width : 4rem, min height:4rem
+    .item-md ion-thumbnail{
+      min-width: 4rem;
+      min-height: 4rem;
+      img{
+        max-width: 6rem;
+        max-height: 6rem;
+      }
+    }
+
+    //default ion-item min-height:4.4 rem
+    //now     ion-item min-height:2.2 rem
+
+    ion-item{
+      min-height: 2.2rem;
+      ion-label{
+        margin: 0;
+        p{
+          font-size: 1.0rem;
+          ion-icon{
+            width:100%;
+          }
+        }
+      }
+    }
+
+
   }
+
+
+
 }
 
