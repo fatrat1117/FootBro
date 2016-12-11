@@ -17,7 +17,7 @@ export class RankPage {
   }
 
   ionViewDidLoad() {
-    this.teamRanks = this.rankService.getTeamRanks().then(teamRanks => {
+    this.rankService.getTeamRanks().then(teamRanks => {
       console.log(teamRanks);
       this.teamRanks = teamRanks;
     })
