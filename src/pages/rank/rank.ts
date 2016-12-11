@@ -1,23 +1,23 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { TeamRankService } from '../../app/teams/shared/team-rank.service'
+import { TeamPublicService } from '../../app/public/shared/team-public.service'
 
 @Component({
   selector: 'page-rank',
   templateUrl: 'rank.html',
-  providers: [TeamRankService]
+  providers: [TeamPublicService]
 })
 export class RankPage {
   stats = "teams";
   teamSortByStr = "ability";
   teamRanks;
   constructor(public navCtrl: NavController,
-    private rankService: TeamRankService) {
+    private rankService: TeamPublicService) {
 
   }
 
   ionViewDidLoad() {
-    this.rankService.getTeamRanks().then(teamRanks => {
+    this.rankService.getTeamPublics().then(teamRanks => {
       //console.log(teamRanks);
       this.teamRanks = teamRanks;
       this.sortTeamBy(this.teamSortByStr);

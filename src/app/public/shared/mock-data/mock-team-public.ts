@@ -1,6 +1,6 @@
-import { TeamRank } from '../team-rank.model';
+import { TeamPublic } from '../team-public.model';
 
-export const TEAMRANKS: TeamRank[] = [
+export const TEAMPUBLICS: TeamPublic[] = [
   {
     id: "-KL1a8zTfCXDapavsN_L",
     name: "STK Everpioneer FC",

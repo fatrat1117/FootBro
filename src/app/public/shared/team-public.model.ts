@@ -1,4 +1,4 @@
-export class TeamRank {
+export class TeamPublic {
   id: string;
   name: string;
   logo: string;
