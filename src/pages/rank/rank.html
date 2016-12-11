@@ -11,7 +11,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <div [ngSwitch]="stats">
+  <div class= "rank-stats" [ngSwitch]="stats">
     <div *ngSwitchCase="'teams'">
       <ion-item style="margin-bottom: 10px">
         <ion-label>{{'SortBy' | trans}}</ion-label>
