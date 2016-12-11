@@ -35,24 +35,27 @@
           </h2>
           <ion-row>
             <ion-col>
-              <p text-center><ion-icon name='football'></ion-icon>&nbsp;{{'Ability' | trans}}</p>
+              <p text-center>
+                <ion-icon name='football'></ion-icon>&nbsp;{{'Ability' | trans}}</p>
               <p text-center>{{t.ability}}</p>
             </ion-col>
             <ion-col>
-              <p text-center><ion-icon name='people'></ion-icon>&nbsp;{{'Players' | trans}}</p>
+              <p text-center>
+                <ion-icon name='people'></ion-icon>&nbsp;{{'Players' | trans}}</p>
               <p text-center>{{t.totalPlayers}}</p>
             </ion-col>
             <ion-col>
-              <p text-center><ion-icon name='flame' color="danger"></ion-icon>&nbsp;{{'Popularity' | trans}}</p>
-              <p text-center color="secondary">{{t.popularity}}</p>
+              <p text-center>
+                <ion-icon name='flame' danger></ion-icon>&nbsp;{{'Popularity' | trans}}</p>
+              <p text-center secondary>{{t.popularity}}</p>
             </ion-col>
           </ion-row>
         </ion-item>
       </ion-list>
-      <!--<ion-infinite-scroll (ionInfinite)="moreTeam($event)">
-        <ion-infinite-scroll-content loadingSpinner="bubbles">
+      <ion-infinite-scroll (ionInfinite)="moreTeam($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
         </ion-infinite-scroll-content>
-      </ion-infinite-scroll>-->
+      </ion-infinite-scroll>
     </div>
     <div *ngSwitchCase="'players'">
       <!--<ion-list>
