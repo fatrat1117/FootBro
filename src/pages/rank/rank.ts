@@ -27,7 +27,7 @@ export class RankPage {
   sortTeamBy(str) {
     this.teamSortByStr = str;
     this.teamRanks.sort((a, b)=> {
-      if ("ability" == this.teamSortByStr)
+      if ("ability" === this.teamSortByStr)
         return b.ability - a.ability;
       else 
         return b.popularity - a.popularity;
