@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { PlayerBasic, PlayerDetail, Player } from './player.model';
+import { PlayerBasic, PlayerDetail } from './player.model';
 import { PLAYERS } from './mock-data/mock-player';
 
 @Injectable()

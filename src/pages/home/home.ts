@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
-import {TransPipe} from '../../providers/localization'
 import {Localization} from '../../providers/localization';
 
 @Component({
@@ -27,7 +26,6 @@ export class HomePage {
   }
 
   loadSlides(langCode: string, total: number) {
-    let path = `assets/img/banners/${langCode}/`
     for (let i = 0; i < total; ++i) {
       this.slides.push({
         image: `assets/img/banners/${langCode}/${i}.jpg`
