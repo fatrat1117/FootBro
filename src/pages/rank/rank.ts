@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import {TeamRankService} from '../../app/teams/shared/team-rank.service'
+import { TeamRankService } from '../../app/teams/shared/team-rank.service'
 
 @Component({
   selector: 'page-rank',
@@ -12,7 +12,7 @@ export class RankPage {
   teamSortByStr = "ability";
   teamRanks;
   constructor(public navCtrl: NavController,
-  private rankService : TeamRankService) {
+    private rankService: TeamRankService) {
 
   }
 
