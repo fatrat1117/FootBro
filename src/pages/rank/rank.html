@@ -25,7 +25,7 @@
         </ion-select>
       </ion-item>
       <ion-list>
-        <ion-item *ngFor="let t of teamRanks; let i = index;" style="margin-bottom:10px">
+        <ion-item *ngFor="let t of teamRanks; let i = index;" style="margin-bottom:10px" text-wrap>
           <ion-thumbnail item-left>
             <ion-img [src]="t.logo"></ion-img>
           </ion-thumbnail>
@@ -35,16 +35,16 @@
           </h2>
           <ion-row>
             <ion-col>
-              <p text-center><label><ion-icon name='football'></ion-icon>&nbsp;{{'Ability' | trans}}</label></p>
+              <p text-center><ion-icon name='football'></ion-icon>&nbsp;{{'Ability' | trans}}</p>
               <p text-center>{{t.ability}}</p>
             </ion-col>
             <ion-col>
-              <p text-center><label><ion-icon name='people'></ion-icon>&nbsp;{{'Players' | trans}}</label></p>
-              <p text-center><label>{{t.totalPlayers}}</label></p>
+              <p text-center><ion-icon name='people'></ion-icon>&nbsp;{{'Players' | trans}}</p>
+              <p text-center>{{t.totalPlayers}}</p>
             </ion-col>
             <ion-col>
-              <p text-center><label><ion-icon name='flame' danger></ion-icon>&nbsp;{{'Popularity' | trans}}</label></p>
-              <p text-center><span secondary>{{t.popularity}}</span></p>
+              <p text-center><ion-icon name='flame' danger></ion-icon>&nbsp;{{'Popularity' | trans}}</p>
+              <p text-center secondary>{{t.popularity}}</p>
             </ion-col>
           </ion-row>
         </ion-item>
