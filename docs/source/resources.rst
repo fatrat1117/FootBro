@@ -7,6 +7,15 @@ resources
   This page is built for knowledge sharing.
 
 
+General
+-------
+
+* One Drive
+
+`SoccerBro-UI Materials
+<https://1drv.ms/f/s!Auz9JrLySuJUhp4k0kP19FeI3YWfkw>`_
+
+
 Ionic
 -----
 
@@ -20,6 +29,7 @@ Angular
 
 Frontend
 --------
+
 
 * Fundamental
 
@@ -39,6 +49,16 @@ Frontend
 
 `Flexbox example
 <http://codepen.io/noahblon/post/a-practical-guide-to-flexbox-understanding-space-between-the-unsung-hero>`_
+
+
+* Good Designs
+
+`OverWatch Loading Animation
+<https://codepen.io/CCG/pen/KrANmJ>`_
+
+`OverWatch SVG Drawing Animation
+<https://codepen.io/KryptikOne/pen/ONYGBg>`_
+
 
 
 Backend
