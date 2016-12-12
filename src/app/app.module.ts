@@ -6,6 +6,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TransPipe, Localization } from '../providers/localization';
+import {MePage} from "../pages/me/me";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { TransPipe, Localization } from '../providers/localization';
     ContactPage,
     HomePage,
     TabsPage,
-    TransPipe
+    TransPipe,
+    MePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -25,7 +27,8 @@ import { TransPipe, Localization } from '../providers/localization';
     RankPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    MePage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Localization]
 })

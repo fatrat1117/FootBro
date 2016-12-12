@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'Me' | trans}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item-group>
+    <!-- Me -->
+    <!--<ion-item-divider></ion-item-divider>-->
+    <!--<ion-item (click)="popupGuide()" detail-push>-->
+      <!--<ion-icon item-left primary name="cog"></ion-icon>-->
+      <!--{{'Guide' | trans}}-->
+    <!--</ion-item>-->
+    <!--<ion-item tappable (click)="goEditPlayerPage()" detail-push>-->
+      <!--<ion-avatar item-left>-->
+        <!--<ion-img [src]="(playerBasic)?.photoURL"></ion-img>-->
+      <!--</ion-avatar>-->
+      <!--<h2>{{ (playerBasic)?.displayName }}</h2>-->
+    <!--</ion-item>-->
+    <!--<ion-item tappable (click)="goManageTeamPage()" *ngIf="(playerBasic)?.teamId" detail-push>-->
+      <!--<ion-avatar item-left>-->
+        <!--<ion-img [src]="(teamBasic)?.logo"></ion-img>-->
+      <!--</ion-avatar>-->
+      <!--<h2>{{ (teamBasic)?.name }}</h2>-->
+    <!--</ion-item>-->
+
+    <!-- show pages -->
+    <!--<ion-item-divider light></ion-item-divider>-->
+    <ion-item tappable (click)="goPlayerPage()" detail-push>
+      <ion-icon name="aperture" item-left secondary></ion-icon>
+      {{'MyPage' | trans}}
+    </ion-item>
+    <!--<ion-item tappable (click)="goTeamPage()" *ngIf="(playerBasic)?.teamId" detail-push>-->
+      <!--<ion-icon name="people" item-left primary></ion-icon>-->
+      <!--{{'MyTeam' | trans}}-->
+    <!--</ion-item>-->
+    <!--<ion-item tappable (click)="showCreateTeamModel()" *ngIf="!(playerBasic)?.teamId">-->
+      <!--<ion-icon name="people" item-left primary></ion-icon>-->
+      <!--{{'CreateTeam' | trans}}-->
+    <!--</ion-item>-->
+    <!--<ion-item-divider light></ion-item-divider>-->
+    <!--<ion-item tappable (click)="goFeedbackPage()" detail-push>-->
+      <!--<ion-icon name="help" item-left gYellow></ion-icon>-->
+      <!--{{'Feedback' | trans}}-->
+    <!--</ion-item>-->
+    <!--<ion-item tappable (click)="onLogout()">-->
+      <!--<ion-icon name="exit" item-left danger></ion-icon>-->
+      <!--{{'Logout' | trans}}-->
+    <!--</ion-item>-->
+  </ion-item-group>
+</ion-content>
