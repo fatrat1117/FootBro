@@ -7,6 +7,9 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TransPipe, Localization } from '../providers/localization';
 import {MePage} from "../pages/me/me";
+import {MyPlayerPage} from "../pages/my-player/my-player";
+import {LuPrototypePage} from "../pages/my-player/lu-prototype";
+import {JixiangPrototypePage} from "../pages/my-player/jixiang-prototype";
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import {MePage} from "../pages/me/me";
     HomePage,
     TabsPage,
     TransPipe,
-    MePage
+    MePage,
+    MyPlayerPage,
+    JixiangPrototypePage,
+    LuPrototypePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -28,7 +34,10 @@ import {MePage} from "../pages/me/me";
     ContactPage,
     HomePage,
     TabsPage,
-    MePage
+    MePage,
+    MyPlayerPage,
+    JixiangPrototypePage,
+    LuPrototypePage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Localization]
 })
