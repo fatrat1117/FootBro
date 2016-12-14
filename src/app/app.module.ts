@@ -11,6 +11,8 @@ import {MyPlayerPage} from "../pages/my-player/my-player";
 import {LuPrototypePage} from "../pages/my-player/lu-prototype";
 import {JixiangPrototypePage} from "../pages/my-player/jixiang-prototype";
 
+import { SbLoadingComponent } from './common/loading.component';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -22,7 +24,8 @@ import {JixiangPrototypePage} from "../pages/my-player/jixiang-prototype";
     MePage,
     MyPlayerPage,
     JixiangPrototypePage,
-    LuPrototypePage
+    LuPrototypePage,
+    SbLoadingComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp)
