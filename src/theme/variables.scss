@@ -9,30 +9,34 @@
 // the Sass variables found in Ionic's source scss files.
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
+
+//global
 $text-color:#F2EDE7;
 $background-color: #000;
+
+//toolbar
 $toolbar-md-text-color: #888;
 $toolbar-wp-text-color: #888;
 $toolbar-md-title-text-color:#888;
 $toolbar-md-background: #373a3c;
 
-
 //alert-md
 $alert-md-background-color:#444;
 $alert-md-input-text-color:#fff;
-
 $alert-md-radio-border-color-on:#fff;
 $alert-md-radio-border-color-off:#888;
-
 $alert-md-button-text-color:#888;
 $alert-wp-button-text-color:#888;
 $alert-md-button-background-color-activated:#0f0;
-
 $alert-md-input-border-color:#0f0;
 $alert-md-radio-label-text-color-checked:#fff;
 
-//#373a3c
 
+//FONTS
+@font-face {
+  font-family: 'PingFang-SC'; /*a name to be used later*/
+  src: url('../assets/fonts/PingFang/PingFang Regular.ttf'); /*URL to font*/
+}
 
 
 // Named Color Variables
