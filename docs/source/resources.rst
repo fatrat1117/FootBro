@@ -15,6 +15,11 @@ General
 `SoccerBro-UI Materials
 <https://1drv.ms/f/s!Auz9JrLySuJUhp4k0kP19FeI3YWfkw>`_
 
+`SoccerBro-UI PSD.zip`
+<https://www.dropbox.com/s/lg6txu4keg2t16j/SoccerBro_Design.zip?dl=1>`_
+
+`SoccerBro-UI FONT.zip`
+<https://www.dropbox.com/s/dg7igpycnrxogz3/SoccerBro_Font.zip?dl=1>`_
 
 Ionic
 -----
@@ -68,4 +73,6 @@ Backend
 Database
 --------
 
+`Structuring Data with Firebase Realtime Database for C++
+<https://firebase.google.com/docs/database/cpp/structure-data>`_
 
