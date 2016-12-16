@@ -60,30 +60,32 @@
       </ion-infinite-scroll>
     </div>
     <div *ngSwitchCase="'players'">
-      <!--<ion-list>
-        <ion-item *ngFor="let p of afPlayers | async | reverseAndCountPlayerPipe : playerData; let i = index;" tappable (click)="goPlayerPage(p.$key)"
+      <ion-list>
+        <ion-item *ngFor="let p of playerRanks; let i = index;"
           style="margin-bottom:10px">
           <ion-avatar item-left>
-            <ion-img [src]="(p.$key | playerBasicPipe | async)?.photoURL"></ion-img>
+            <ion-img [src]="p.photoURL"></ion-img>
           </ion-avatar>
           <ion-row center>
             <ion-col class="stats-col-text">
               <h2>
                 <ion-badge>{{ i+1 }}</ion-badge>
-                {{(p.$key | playerBasicPipe | async)?.displayName}}
+                {{p.name}}
               </h2>
             </ion-col>
             <ion-col width-20 text-center>
-              <p><span primary text-uppercase>{{(p.$key | playerDetailPipe | async)?.position | uppercase | trans}}</span></p>
+              <p><span primary text-uppercase>{{p.position | uppercase | trans}}</span></p>
             </ion-col>
             <ion-col width-25 text-center class="stats-col-text">
               <p>
-                <ion-icon name='ios-flame' danger></ion-icon>&nbsp;<span secondary>{{p.popularity}}</span></p>
+                <ion-icon name='ios-flame' color="danger">
+                  </ion-icon>&nbsp;
+                  <span>{{p.popularity}}</span></p>
             </ion-col>
           </ion-row>
         </ion-item>
       </ion-list>
-      <ion-infinite-scroll (ionInfinite)="morePlayer($event)">
+      <!--<ion-infinite-scroll (ionInfinite)="morePlayer($event)">
         <ion-infinite-scroll-content loadingSpinner="bubbles">
         </ion-infinite-scroll-content>
       </ion-infinite-scroll>-->

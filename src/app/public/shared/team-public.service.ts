@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { TEAMPUBLICS } from './mock-data/mock-team-public';
+import { TEAMPUBLICS, PLAYERRANKS } from './mock-data/mock-team-public';
 
 @Injectable()
 export class TeamPublicService {
@@ -36,5 +36,11 @@ export class TeamPublicService {
         });
       setTimeout(resolve, 2000);
     }).then(() => Promise.resolve(TEAMPUBLICS));
+  }
+
+  getPlayerRanks(): Promise<any[]> {
+    return new Promise<any[]>(resolve =>
+      setTimeout(resolve, 1000))
+      .then(() => Promise.resolve(PLAYERRANKS));
   }
 }

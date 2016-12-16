@@ -10,7 +10,9 @@ import { TeamPublicService } from '../../app/public/shared/team-public.service'
 export class RankPage {
   stats = "teams";
   teamSortByStr = "ability";
+  playerSortByStr = "popularity";
   teamRanks;
+  playerRanks;
   constructor(public navCtrl: NavController,
     private rankService: TeamPublicService) {
 
@@ -22,17 +24,30 @@ export class RankPage {
       this.teamRanks = teamRanks;
       this.sortTeamBy(this.teamSortByStr);
     });
+
+    this.rankService.getPlayerRanks().then(ranks => {
+      //console.log(teamRanks);
+      this.playerRanks = ranks;
+      this.sortPlayerBy(this.playerSortByStr);
+    });
   }
 
   sortTeamBy(str) {
     this.teamSortByStr = str;
-    this.teamRanks.sort((a, b)=> {
+    this.teamRanks.sort((a, b) => {
       if ("ability" === this.teamSortByStr)
         return b.ability - a.ability;
-      else 
+      else
         return b.popularity - a.popularity;
     });
     //this.teamSortBy.next(this.teamSortByStr);
+  }
+
+  sortPlayerBy(str) {
+    this.playerSortByStr = str;
+    this.playerRanks.sort((a, b) => {
+      return b.popularity - a.popularity;
+    })
   }
 
   moreTeam(infiniteScroll) {

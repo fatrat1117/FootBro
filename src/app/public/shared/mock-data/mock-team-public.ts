@@ -34,3 +34,9 @@ export const TEAMPUBLICS: TeamPublic[] = [
     popularity: 23
   }
 ];
+
+export const PLAYERRANKS: any[] = [
+  {
+  },
+  {
+];
