@@ -37,6 +37,33 @@ export const TEAMPUBLICS: TeamPublic[] = [
 
 export const PLAYERRANKS: any[] = [
   {
+    name: "Li Jixiang",
+    photoURL: "assets/player-photo/player_photo.jpg",
+    position: 'cf',
+    popularity: 12
   },
   {
+    name: "Wang Tian Yi",
+    photoURL: "assets/player-photo/player_photo.jpg",
+    position: 'dmf',
+    popularity: 13
+  },
+  {
+    name: "Zeng Lei",
+    photoURL: "assets/player-photo/player_photo.jpg",
+    position: 'gk',
+    popularity: 11
+  },
+  {
+    name: "Lu Angxiao",
+    photoURL: "assets/player-photo/player_photo.jpg",
+    position: 'amf',
+    popularity: 15
+  },
+  {
+    name: "Li Hao",
+    photoURL: "assets/player-photo/player_photo.jpg",
+    position: 'cb',
+    popularity: 10
+  },
 ];
