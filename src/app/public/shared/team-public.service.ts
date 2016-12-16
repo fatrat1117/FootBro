@@ -19,6 +19,20 @@ export class TeamPublicService {
           totalPlayers: TEAMPUBLICS.length,
           ability: TEAMPUBLICS.length * 50,
           popularity: TEAMPUBLICS.length * 10
+        }, {
+          id: "-KL1a8zTfCXDapavsN_L",
+          name: "test" + TEAMPUBLICS.length,
+          logo: "assets/team-logo/team_logo.jpg",
+          totalPlayers: TEAMPUBLICS.length,
+          ability: TEAMPUBLICS.length * 50,
+          popularity: TEAMPUBLICS.length * 10
+        }, {
+          id: "-KL1a8zTfCXDapavsN_L",
+          name: "test" + TEAMPUBLICS.length,
+          logo: "assets/team-logo/team_logo.jpg",
+          totalPlayers: TEAMPUBLICS.length,
+          ability: TEAMPUBLICS.length * 50,
+          popularity: TEAMPUBLICS.length * 10
         });
       setTimeout(resolve, 2000);
     }).then(() => Promise.resolve(TEAMPUBLICS));

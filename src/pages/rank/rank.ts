@@ -39,6 +39,7 @@ export class RankPage {
     console.log('more team available');
     setTimeout(() => {
       this.rankService.getMoreTeamRanks().then(teamRanks => {
+        console.log('loading team finished');
         //console.log(teamRanks);  
         //this.sortTeamBy(this.teamSortByStr);
         infiniteScroll.complete();
