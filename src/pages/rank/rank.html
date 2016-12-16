@@ -29,7 +29,7 @@
           <ion-thumbnail item-left>
             <ion-img [src]="t.logo"></ion-img>
           </ion-thumbnail>
-          <ion-badge style="position:absolute;">{{ i+1 }}</ion-badge>
+          <ion-badge style="position:absolute;" color="sky">{{ i+1 }}</ion-badge>
           <h2 text-center>
             {{t.name}}
           </h2>
@@ -48,7 +48,7 @@
             <ion-col width-33>
               <p text-center>
                 <ion-icon name='flame' color="danger"></ion-icon>&nbsp;{{'Popularity' | trans}}</p>
-              <p text-center ion-text color="primary-text">{{t.popularity}}</p>
+              <p text-center ion-text color="secondary">{{t.popularity}}</p>
             </ion-col>
           </ion-row>
         </ion-item>
