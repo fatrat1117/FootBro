@@ -11,7 +11,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <div class= "rank-stats" [ngSwitch]="stats">
+  <div class="rank-stats" [ngSwitch]="stats">
     <div *ngSwitchCase="'teams'">
       <ion-item style="margin-bottom: 10px">
         <ion-label>{{'SortBy' | trans}}</ion-label>
@@ -54,33 +54,30 @@
         </ion-item>
       </ion-list>
       <ion-infinite-scroll (ionInfinite)="moreTeam($event)">
-        <ion-infinite-scroll-content  
-        loadingText="Loading more teams...">
+        <ion-infinite-scroll-content loadingText="Loading more teams...">
         </ion-infinite-scroll-content>
       </ion-infinite-scroll>
     </div>
     <div *ngSwitchCase="'players'">
       <ion-list>
-        <ion-item *ngFor="let p of playerRanks; let i = index;"
-          style="margin-bottom:10px">
+        <ion-item *ngFor="let p of playerRanks; let i = index;" style="margin-bottom:10px" text-wrap>
           <ion-avatar item-left>
             <ion-img [src]="p.photoURL"></ion-img>
           </ion-avatar>
           <ion-row center>
-            <ion-col class="stats-col-text">
+            <ion-col>
               <h2>
                 <ion-badge>{{ i+1 }}</ion-badge>
                 {{p.name}}
               </h2>
             </ion-col>
             <ion-col width-20 text-center>
-              <p><span primary text-uppercase>{{p.position | uppercase | trans}}</span></p>
+              {{p.position | uppercase | trans}}
             </ion-col>
-            <ion-col width-25 text-center class="stats-col-text">
-              <p>
-                <ion-icon name='ios-flame' color="danger">
-                  </ion-icon>&nbsp;
-                  <span>{{p.popularity}}</span></p>
+            <ion-col width-25 text-center>
+              <ion-icon name='ios-flame' color="danger">
+                {{p.popularity}}
+              </ion-icon>
             </ion-col>
           </ion-row>
         </ion-item>
