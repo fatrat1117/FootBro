@@ -1,14 +1,14 @@
 page-jixiang-prototype{
 
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font-family: 'Helvetica Neue', 'Microsoft YaHei', Helvetica, Arial, 'Liberation Sans', FreeSans, 'Hiragino Sans GB', sans-serif;
-  font-weight: normal;
-  vertical-align: baseline;
-  text-decoration: none;
-  line-height: 1.2;
+  //margin: 0;
+  //padding: 0;
+  //border: 0;
+  //font-size: 100%;
+  //font-family: 'Helvetica Neue', 'Microsoft YaHei', Helvetica, Arial, 'Liberation Sans', FreeSans, 'Hiragino Sans GB', sans-serif;
+  //font-weight: normal;
+  //vertical-align: baseline;
+  //text-decoration: none;
+  //line-height: 1.2;
   .fl {
     float: left;
   }
@@ -26,6 +26,28 @@ page-jixiang-prototype{
     content: "";
     overflow: hidden;
     height: 0;
+  }
+
+  .flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flex-start{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .flex-end{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .invisible{
+    visibility: hidden;
   }
 
   .my-player-header-card {
@@ -152,15 +174,34 @@ page-jixiang-prototype{
 
       .block{
         background-color: #25262b;
-        width: 6.11rem;
+        width: 33.33%;
         text-align: center;
         float: left;
         margin-left: 0.2rem;
         height: auto;
         .txt{
-          width: 4.5rem;
-          margin: 0.4rem auto 0 auto;
+          margin: 1rem;
         }
+        .data{
+          color: #fff;
+          font-size: 2rem;
+          font-weight: bold;
+          line-height: 3rem;
+          min-width: 4rem;
+        }
+
+        .unit{
+          color: #fff;
+          .unit-first{
+            font-size: 1rem;
+            font-weight: bold;
+          }
+          .unit-second{
+            color: #b0b0b0;
+            font-size: 0.8rem;
+          }
+        }
+
         h1{
           color: #fff;
           font-size: 2.5rem;
