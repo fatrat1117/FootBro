@@ -158,7 +158,7 @@ export class Localization {
             Update: 'Update',
             Close: 'Close',
             Name: 'Name',
-            GSGA: 'GS/GA',
+            GFGA: 'GF/GA',
             P: 'P',
             W: 'W',
             L: 'L',
