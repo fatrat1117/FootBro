@@ -236,5 +236,77 @@ page-jixiang-prototype{
         border-bottom: 4px solid #fcdb14;
       }
     }
+
+    .totalFeedBack{
+      padding: 0 .6rem 1.1rem .6rem;
+
+
+      .like{
+        width: 1.1rem;
+        margin-top: -.25rem;
+        background: url(../../assets/icon/smallgood.png) no-repeat;
+        background-size: contain;
+        height: 1rem;
+      }
+
+      .feed-back-bar{
+        width:100%;
+        .redPrg{
+          padding-right: 1px;
+          width: 80%;
+          //margin-left: 1.1rem;
+
+          .redStrip{
+            width: 100%;
+            height: .25rem;
+            border-radius: 4px;
+            background-color: #fa3b40;
+          }
+          .stripText{
+            font-size: .7rem;
+            color: #fa3b40;
+            display: block;
+            padding-top: .2rem;
+          }
+
+
+        }
+
+        .bluePrg{
+          padding-left: 1px;
+          width: 20%;
+          //margin-left: .15rem;
+
+          .blueStrip{
+            width: 100%;
+            height: .25rem;
+            border-radius: 4px;
+            background-color: #339adb;
+          }
+
+          .blueText{
+            font-size: .7rem;
+            color: #339adb;
+            text-align: right;
+            display: block;
+            padding-top: .2rem;
+          }
+
+
+        }
+      }
+
+      .unLike{
+        width: 1.1rem;
+        margin-top: -.25rem;
+        background: url(../../assets/icon/smallbad.png) no-repeat;
+        background-size: contain;
+        height: 1rem;
+      }
+
+
+    }
+
+
   }
 }
