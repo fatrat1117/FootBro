@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Schedule</ion-title>
+    <ion-buttons end>
+      <button> 
+        <ion-icon name="calculator"></ion-icon>
+      </button>
+      <button>
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div class="left-scrollview matches-date-tab-col" id="sketchElement" [ngStyle]="{'top': leftViewTop+'px'}">
+    <ion-list class="date-tab-list">
+      <ion-item *ngFor="let date of dates;let i = index;" #list_item [id]="'matches-scroll-target-'+i" 
+                (click)="showMatches(date)" [style.background]="selectedDate == date ? '#00ef00' : 'none'">
+        {{date | stringToDatePipe}}
+      </ion-item>
+    </ion-list>
+  </div>
+  <div class="right-scrollview matches-match-info-col" [ngStyle]="{'top': rightViewTop+'px'}">
+    <ion-item *ngFor="let match of matchBasics; let i = index">
+      <sb-match-basic [matchBasic]="match"></sb-match-basic>
+    </ion-item>
+
+    <!--[style.margin-bottom]="i == 0 ? '0' : '-1'" [style.margin-top]="i % 2 ==0 ? '1px' : '0px'"
+    <ion-item *ngFor="let j = index;let match of afMatches | async | tournamentFilterPipe : tournamentId ">
+      <ion-grid no-padding>
+        <ion-row>
+          <ion-col class="matches-info" no-padding [ngStyle]="{'margin-bottom': getRightViewMarginBottom(j)+'px'}">
+            <ion-item class="team-bar">
+              <ion-avatar item-left>
+                <ion-img [src]="(match.homeId | teamBasicPipe | async)?.logo"></ion-img>
+              </ion-avatar>
+              <ion-grid no-padding>
+                <ion-row no-padding>
+                  <ion-col no-padding class="team-name">
+                    {{(match.homeId | teamBasicPipe | async)?.name}}
+                  </ion-col>
+                  <ion-col no-padding width-10 class="team-score">
+                    {{match.homeScore}}
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+            <ion-item class="team-bar">
+              <ion-avatar item-left>
+                <ion-img [src]="(match.awayId | teamBasicPipe | async)?.logo"></ion-img>
+              </ion-avatar>
+              <ion-grid no-padding>
+                <ion-row no-padding>
+                  <ion-col no-padding class="team-name">
+                    {{(match.awayId | teamBasicPipe | async)?.name}}
+                  </ion-col>
+                  <ion-col no-padding width-20 class="team-score">
+                    {{match.awayScore}}
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+          </ion-col>
+          <ion-col class="matches-time">
+            <div class="matches-time-wrapper">
+              <ion-item>
+                <p>{{match.time | numberToTimePipe}}</p>
+              </ion-item>
+              <ion-item>
+                <button class="detail-button" text-center (click)="popupMatchResult(match,$event)" clear>{{'Details' | trans}}</button>
+                <button class="update-button" *ngIf="(match.homeId | teamBasicPipe | async)?.captain === selfId ||
+						(match.awayId | teamBasicPipe | async)?.captain === selfId ||
+						(afTournamentAdmin | async)?.$value" text-center (click)="popupUpdateSchedulePage(match,$event)" clear>{{'Update' | trans}}</button>
+              </ion-item>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <-->
+  </div>
+</ion-content>

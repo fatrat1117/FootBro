@@ -6,12 +6,16 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TransPipe, Localization } from '../providers/localization';
-import {MePage} from "../pages/me/me";
-import {MyPlayerPage} from "../pages/my-player/my-player";
-import {LuPrototypePage} from "../pages/my-player/lu-prototype";
-import {JixiangPrototypePage} from "../pages/my-player/jixiang-prototype";
+import { StringToDatePipe, NumberToTimePipe } from '../pipes/moment.pipe';
+import { MePage } from "../pages/me/me";
+import { MyPlayerPage } from "../pages/my-player/my-player";
+import { SchedulePage } from "../pages/schedule/schedule";
+import { LuPrototypePage } from "../pages/my-player/lu-prototype";
+import { JixiangPrototypePage } from "../pages/my-player/jixiang-prototype";
 
+// components
 import { SbLoadingComponent } from './common/loading.component';
+import { SbMatchBasicComponent } from './matches/match-basic.component';
 
 @NgModule({
   declarations: [
@@ -20,12 +24,18 @@ import { SbLoadingComponent } from './common/loading.component';
     ContactPage,
     HomePage,
     TabsPage,
-    TransPipe,
     MePage,
     MyPlayerPage,
     JixiangPrototypePage,
     LuPrototypePage,
-    SbLoadingComponent
+    SchedulePage,
+    // pipes
+    TransPipe,
+    StringToDatePipe,
+    NumberToTimePipe,
+    // components
+    SbLoadingComponent,
+    SbMatchBasicComponent,
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -40,8 +50,9 @@ import { SbLoadingComponent } from './common/loading.component';
     MePage,
     MyPlayerPage,
     JixiangPrototypePage,
-    LuPrototypePage
+    LuPrototypePage,
+    SchedulePage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Localization]
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, Localization]
 })
-export class AppModule {}
+export class AppModule { }
