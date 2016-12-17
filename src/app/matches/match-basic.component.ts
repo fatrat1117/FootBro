@@ -42,7 +42,7 @@ import {MatchBasic} from './shared/match.model'
         <ion-col class="matches-time">
           <div class="matches-time-wrapper">
             <ion-item>
-              <p>{{ matchBasic.time }}</p>
+              <p>{{ matchBasic.time | numberToTimePipe }}</p>
             </ion-item>
             <ion-item>
               <button class="detail-button" text-center clear>Details</button>

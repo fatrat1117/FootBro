@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { HomePage } from '../home/home';
 import { RankPage } from '../rank/rank';
 import { ContactPage } from '../contact/contact';
-import { SchedulePage } from '../schedule/schedule';
+import { MatchesPage } from '../matches/matches';
 import { MePage } from '../me/me';
 
 @Component({
@@ -15,7 +15,7 @@ export class TabsPage {
   // should be each tab's root Page
   tab1Root: any = HomePage;
   tab2Root: any = RankPage;
-  tab3Root: any = SchedulePage;
+  tab3Root: any = MatchesPage;
   tab4Root: any = MePage;
 
   constructor() {

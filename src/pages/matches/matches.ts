@@ -2,24 +2,25 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { MatchBasic } from '../../app/matches/shared/match.model'
+import { MatchStanding } from '../../app/matches/shared/match.model'
 import { MatchService } from '../../app/matches/shared/match.service'
 
-import { Localization } from '../../providers/localization';
-import { StringToDatePipe, NumberToTimePipe } from '../../pipes/moment.pipe';
 
 @Component({
-  selector: 'page-schedule',
-  templateUrl: 'schedule.html',
+  selector: 'page-matches',
+  templateUrl: 'matches.html',
   providers: [MatchService]
 })
 
-export class SchedulePage {
-  dates: any;
-  matchBasics: MatchBasic[];
+export class MatchesPage {
+  matchesInfo: string;
+  dates: number[];
   selectedDate: number;
+  matchBasics: MatchBasic[];
+  matchStandings: MatchStanding[];
 
   constructor(public navCtrl: NavController, private matchService: MatchService) {
-
+    this.matchesInfo = "schedule"
   }
 
   ionViewDidLoad() {
@@ -29,6 +30,10 @@ export class SchedulePage {
 
     this.matchService.getMatchBasics("test_date").then(matchBasics => {
       this.matchBasics = matchBasics;
+    });
+
+    this.matchService.getMatchStandings("test_league_id").then(matchStandings => {
+      this.matchStandings = matchStandings;
     });
 
   }

@@ -1,0 +1,95 @@
+<ion-header>
+  <div padding>
+    <ion-segment [(ngModel)]="matchesInfo">
+      <ion-segment-button value="schedule">
+        Schedule
+      </ion-segment-button>
+      <ion-segment-button value="standings">
+        Standings
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+</ion-header>
+<ion-content>
+  <div [ngSwitch]="matchesInfo">
+    <!-- schedule -->
+    <div *ngSwitchCase="'schedule'">
+      <div class="left-scrollview matches-date-tab-col" id="sketchElement" [ngStyle]="{'top': leftViewTop+'px'}">
+        <ion-list class="date-tab-list">
+          <ion-item *ngFor="let date of dates;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (click)="showMatches(date)"
+            [style.background]="selectedDate == date ? '#00ef00' : 'none'">
+            {{date | stringToDatePipe}}
+          </ion-item>
+        </ion-list>
+      </div>
+      <div class="right-scrollview matches-match-info-col" [ngStyle]="{'top': rightViewTop+'px'}">
+        <ion-item *ngFor="let match of matchBasics; let i = index">
+          <sb-match-basic [matchBasic]="match"></sb-match-basic>
+        </ion-item>
+      </div>
+    </div>
+    <!-- table -->
+    <div *ngSwitchCase="'standings'">
+      <div class="league-stats-standing">
+        <ion-grid>
+          <ion-row no-margin>
+            <ion-col class="badge">
+            </ion-col>
+            <ion-col width-50>
+              <ion-avatar>
+              </ion-avatar>
+              <p text-center><label>{{'Team' | trans}}</label></p>
+            </ion-col>
+            <ion-col class="data-column">
+              <p><label>{{'P' | trans}}</label></p>
+            </ion-col>
+            <ion-col class="data-column">
+              <p><label>{{'W' | trans}}</label></p>
+            </ion-col>
+            <ion-col class="data-column">
+              <p><label>{{'D' | trans}}</label></p>
+            </ion-col>
+            <ion-col class="data-column">
+              <p><label>{{'L' | trans}}</label></p>
+            </ion-col>
+            <ion-col class="data-column-broad">
+              <p><label>{{'GFGA' | trans}}</label></p>
+            </ion-col>
+            <ion-col class="data-column">
+              <p><label>{{'PTS' | trans}}</label></p>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngFor="let s of matchStandings;" no-margin>
+            <ion-col class="badge">
+              <ion-badge style="position:absolute;" color="sky">1</ion-badge>
+            </ion-col>
+            <ion-col width-50>
+              <ion-thumbnail>
+                <ion-img src="assets/team-logo/team_logo.jpg"></ion-img>
+              </ion-thumbnail>
+              <p text-left><label>{{ s.teamId }}</label></p>
+            </ion-col>
+            <ion-col class="data-column">
+              <p><label>{{s.matchesPlayed}}</label></p>
+            </ion-col>
+            <ion-col class="data-column">
+              <p><label>{{s.wins}}</label></p>
+            </ion-col>
+            <ion-col class="data-column">
+              <p><label>{{s.draws}}</label></p>
+            </ion-col>
+            <ion-col class="data-column">
+              <p><label>{{s.losses}}</label></p>
+            </ion-col>
+            <ion-col class="data-column-broad">
+              <p><label>{{s.goalsFor}}/{{s.goalsAgainst}}</label></p>
+            </ion-col>
+            <ion-col class="data-column">
+              <p><label>{{s.points}}</label></p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+  </div>
+</ion-content>

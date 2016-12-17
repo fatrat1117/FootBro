@@ -9,7 +9,7 @@ import { TransPipe, Localization } from '../providers/localization';
 import { StringToDatePipe, NumberToTimePipe } from '../pipes/moment.pipe';
 import { MePage } from "../pages/me/me";
 import { MyPlayerPage } from "../pages/my-player/my-player";
-import { SchedulePage } from "../pages/schedule/schedule";
+import { MatchesPage } from "../pages/matches/matches";
 import { LuPrototypePage } from "../pages/my-player/lu-prototype";
 import { JixiangPrototypePage } from "../pages/my-player/jixiang-prototype";
 
@@ -28,7 +28,7 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     MyPlayerPage,
     JixiangPrototypePage,
     LuPrototypePage,
-    SchedulePage,
+    MatchesPage,
     // pipes
     TransPipe,
     StringToDatePipe,
@@ -51,7 +51,7 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     MyPlayerPage,
     JixiangPrototypePage,
     LuPrototypePage,
-    SchedulePage
+    MatchesPage
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, Localization]
 })
