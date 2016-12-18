@@ -45,7 +45,7 @@ import {MatchBasic} from './shared/match.model'
               <p>{{ matchBasic.time | numberToTimePipe }}</p>
             </ion-item>
             <ion-item>
-              <button class="detail-button" text-center clear>Details</button>
+              <button class="detail-button" text-center ion-button clear>Details</button>
             <!-->
               <button class="detail-button" text-center (click)="popupMatchResult(match,$event)" clear>{{'Details' | trans}}</button>
               <button class="update-button" *ngIf="(match.homeId | teamBasicPipe | async)?.captain === selfId ||
