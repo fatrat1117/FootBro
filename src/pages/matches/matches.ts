@@ -5,22 +5,29 @@ import { MatchBasic } from '../../app/matches/shared/match.model'
 import { MatchStanding } from '../../app/matches/shared/match.model'
 import { MatchService } from '../../app/matches/shared/match.service'
 
+import { LeagueBasic } from '../../app/leagues/shared/league.model'
+import { LeagueService } from '../../app/leagues/shared/league.service'
+
 
 @Component({
   selector: 'page-matches',
   templateUrl: 'matches.html',
-  providers: [MatchService]
+  providers: [MatchService, LeagueService]
 })
 
 export class MatchesPage {
-  matchesInfo: string;
   dates: number[];
   selectedDate: number;
   matchBasics: MatchBasic[];
   matchStandings: MatchStanding[];
+  leagueBasics: LeagueBasic[];
+  
+  selectedInfo: string;
+  selectedId: string;
 
-  constructor(public navCtrl: NavController, private matchService: MatchService) {
-    this.matchesInfo = "schedule"
+  constructor(public navCtrl: NavController, private matchService: MatchService, private leagueService: LeagueService) {
+    this.selectedInfo = "schedule";
+    this.selectedId = "0";
   }
 
   ionViewDidLoad() {
@@ -36,9 +43,18 @@ export class MatchesPage {
       this.matchStandings = matchStandings;
     });
 
+    this.leagueService.getLeagueBasics("test_league_id").then(leagueBasics => {
+      this.leagueBasics = leagueBasics;
+    });
   }
 
   showMatches(date, index) {
     this.selectedDate = date;
+  }
+
+  onSelectionChange(event) {
+    this.selectedId = event;
+    if (event == "0")
+      this.selectedInfo = "schedule";
   }
 }

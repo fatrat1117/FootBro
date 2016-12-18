@@ -23,6 +23,10 @@ page-matches {
     .item-inner {
       padding-right: 0;
     }
+    margin-top: -1px;
+    ion-item {
+      max-height: 88px;
+    }
     ion-label {
       margin-right: 0.3em;
       margin-left: 0.3em;
@@ -57,7 +61,7 @@ page-matches {
   // table
   .league-stats-standing {
     .badge {
-      flex: 0 0 5%;
+      //flex: 0 0 5%;
       max-width: 5%;
     }
     .data-column {
@@ -104,8 +108,8 @@ page-matches {
         }
       }
       ion-badge {
-        font-size: $badge-font-size;
-        padding: 1.5px 4px;
+        //font-size: 80%;
+        padding: 1.5px 3px;
       }
     }
     .standings-title {

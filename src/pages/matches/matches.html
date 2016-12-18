@@ -1,6 +1,19 @@
 <ion-header>
-  <div padding>
-    <ion-segment [(ngModel)]="matchesInfo">
+  <ion-navbar no-border-bottom>
+    <ion-title>
+      <ion-select [(ngModel)]="selectedId" (ngModelChange)="onSelectionChange($event)">
+        <ion-option *ngFor="let league of leagueBasics" [value]="league.id">{{ league.name }}</ion-option>
+      </ion-select>
+    </ion-title>
+  </ion-navbar>
+  <ion-toolbar no-border-top>
+    <ion-segment  *ngIf="selectedId == '0'" [(ngModel)]="selectedInfo">
+      <ion-segment-button value="schedule">
+        Schedule
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-segment *ngIf="selectedId != '0'" [(ngModel)]="selectedInfo">
       <ion-segment-button value="schedule">
         Schedule
       </ion-segment-button>
@@ -8,10 +21,10 @@
         Standings
       </ion-segment-button>
     </ion-segment>
-  </div>
+  </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div [ngSwitch]="matchesInfo">
+  <div [ngSwitch]="selectedInfo">
     <!-- schedule -->
     <div *ngSwitchCase="'schedule'">
       <div class="left-scrollview matches-date-tab-col" id="sketchElement" [ngStyle]="{'top': leftViewTop+'px'}">
