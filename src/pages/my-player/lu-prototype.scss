@@ -20,10 +20,355 @@ page-lu-prototype{
     color: #171717;
   }
   .win-rate{
-    background-image: url("/../../assets/img/my-player/bg4@3x.png");
-    min-height: 30px;
+    //background-image: url("/../../assets/img/my-player/bg4@3x.png");
+    //min-height: 30px;
+    .section .progressbar{
+      position: relative;
+    }
+
+
+    .section .pro {
+      width: 9rem;
+      position: relative;
+    }
+    .section .progressTxt {
+      text-align: center;
+      color: #f8f8f8;
+      font-size: 0.75rem;
+      padding: 1rem 0rem;
+    }
+    .position {
+        float: left;
+    }
+    .progress-bar {
+        position: relative;
+        height: 5.5rem;
+        width: 5.5rem;
+        transform: rotate(180deg);
+        left: 1.65rem;
+    }
+    .progress-bar .precent {
+        font-size: 1.5rem;
+        color: #fff;
+        position: absolute;
+        right: 0;
+        transform: rotate(180deg);
+        text-align: center;
+        left: 0;
+        margin: 0 auto;
+        top: 50%;
+        margin-top: -18px;
+    }
+    .progress-bar div {
+        position: absolute;
+        height: 5.5rem;
+        width: 5.5rem;
+        border-radius: 50%;
+    }
+    .progress-bar div span {
+        position: absolute;
+        font-family: Arial;
+        font-size: 25px;
+        line-height: 4.8rem;
+        height: 4.8rem;
+        width: 4.8rem;
+        left: .35rem;
+        top: .35rem;
+        text-align: center;
+        border-radius: 50%;
+        background-color: #2b2c30;
+    }
+    .progress-bar .background {
+        background-color: #b3cef6;
+    }
+    .progress-bar .rotate {
+        clip: rect(0 2.75rem 5.5rem 0);
+        background-color: #f00;
+    }
+    .progress-bar .left {
+        clip: rect(0 2.75rem 5.5rem 0);
+        opacity: 1;
+        background-color: #b3cef6;
+    }
+    .progress-bar .right {
+        clip: rect(0 2.75rem 5.5rem 0);
+        transform: rotate(180deg);
+        opacity: 0;
+        background-color: #4b86db;
+    }
+    @keyframes toggle {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+    .section .text {
+      color: #fff;
+      font-size: .65rem;
+      position: absolute;
+      text-align: center;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      top:5.2rem;
+    }
+    .section .centerText {
+      color: #fff;
+      font-size: 0.65rem;
+      text-align: center;
+      left: 0;
+      right: 0;
+      position: absolute;
+      bottom: -1.75rem;
+    }
+    .section .centerText:last-child {
+      bottom: -3.25rem;
+    }
   }
   .light-grey{
     background-color: #2d2e32;
   }
+  //
+  .feedHead{
+    width: 100%;
+  }
+  .feedHead .firstPic {
+    width: .85rem;
+    display: inline-block;
+    vertical-align: middle;
 }
+  .feedHead .rose {
+    padding: .75rem 0;
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+}
+  .feedBack {
+    background: #1a1a1d;
+    width: 100%;
+}
+  .totalText {
+    padding: .9rem 0 1.25rem 0;
+}
+  .totalFeedBack {
+    padding: 0 .6rem 1.1rem .6rem;
+}
+  .feedBack .like {
+    width: 1.1rem;
+    margin-top: -.25rem;
+    background: url(../../assets/img/my-player/deflike.png) no-repeat;
+    background-size: contain;
+    height: 1rem;
+}
+  .feedBack .likes {
+    width: 1.1rem;
+    margin-top: -.25rem;
+    background: url(../../assets/img/my-player/like.png) no-repeat;
+    background-size: contain;
+    height: 1rem;
+}
+  .redPrg {
+    width: 32rem;
+    margin-left:1.1rem;
+}
+  .redStrip {
+    width: 32rem;
+    height: .25rem;
+    border-radius: 4px;
+    background-color: #fa3b40;
+}
+.bluePrg {
+    width: 16.8rem;
+    margin-left: .15rem;
+}
+  .blueStrip {
+    width: 16.8rem;
+    height: .25rem;
+    border-radius: 4px;
+    background-color: #339adb;
+}
+  .redPrg .stripText {
+    font-size: .7rem;
+    color: #fa3b40;
+    display: block;
+    padding-top: .2rem;
+}
+  .blueText {
+    font-size: .7rem;
+    color: #339adb;
+    text-align: right;
+    display: block;
+    padding-top: .2rem;
+}
+  .feedBack .unLike {
+    width: 1.1rem;
+    margin-top: -.25rem;
+    background: url(../../assets/img/my-player/defunlike.png) no-repeat;
+    background-size: contain;
+    height: 1rem;
+}
+  .feedBack .unLikes {
+    width: 1.1rem;
+    margin-top: -.25rem;
+    background: url(../../assets/img/my-player/unlike.png) no-repeat;
+    background-size: contain;
+    height: 1rem;
+}
+//setone
+  .setOne {
+    width: 100%;
+  }
+  .setOne .TabbedPanelsTab {
+    background: #dbffdb;
+    float: left;
+    width: 3.675rem;
+    font-size: .6rem;
+    text-align: center;
+    padding: .425rem 0rem;
+    outline: none !important;
+    border-radius: 15px;
+}
+.setOne .TabbedPanelsTab h4 {
+    color: #333333;
+}
+.setOne .TabbedPanelsTabSelected {
+    background: #00ff00 !important;
+}
+.setOne .setOneRight {
+    width: 2.5rem;
+    position: absolute;
+    top: .15rem;
+    right: .2rem;
+}
+.setOne .btn {
+    width: 100%;
+    background: #0d0d0f;
+    border-radius: 50%;
+    height: 2.5rem;
+    color: #fcdb14;
+    font-size: .6rem;
+}
+.setOne .btn .pic {
+    width: 1rem;
+    display: block;
+    margin: 0 auto;
+}
+.setOne .TabbedPanelsTabGroup {
+    padding: .625rem 2% .625rem 2%;
+    width: 96%;
+    background: #2c2d31;
+}
+.setOne .myTab {
+    width: 4.2rem !important;
+    margin: 0rem .6rem;
+}
+.setOne .booSet {
+    padding: 1rem 0rem;
+    margin-bottom: .2rem;
+    background: #1a1a1d;
+}
+.setOne .ballRight {
+    color: #ababab;
+    font-size: .6rem;
+    padding-top: .2rem;
+}
+.setOne .ballpic {
+    width: 1.475rem;
+}
+.setOne .ballLeft {
+    margin-left: .4rem;
+    color: #ffffff;
+    font-size: .75rem;
+    line-height: 1.475rem;
+}
+.setOne .ball {
+    margin-bottom: .9rem;
+}
+.setOne .booSet p {
+    color: #ffffff;
+    font-size: .6rem;
+    line-height: 1rem;
+	padding-bottom: .74rem;
+}
+.setOne .like {
+    background: url(../../assets/img/my-player/defunlike.png) no-repeat;
+    width: .7rem;
+    height: .65rem;
+    display: inline-block;
+    background-size: 100% 100%;
+    margin-right: .2rem;
+    vertical-align: middle;
+}
+.setOne .unlike {
+    background: url(../../assets/img/my-player/deflike.png) no-repeat;
+    background-size: 100% 100%;
+}
+.setOne .mainLike {
+    color: #dedede;
+    font-size: .6rem;
+    width: 3.45rem;
+    border-radius: 15px;
+    border: 1px solid #bdbdbe;
+    text-align: center;
+    padding: .15rem 0rem;
+    margin-left: .425rem;
+}
+.setOne .activeLike {
+    color: #00ff00 !important;
+    border: 1px solid #00ff00 !important;
+}
+.setOne .alike {
+    background: url(../../assets/img/my-player/arrowgreenup.png) no-repeat;
+    background-size: 100% 100%;
+}
+.setOne .changlike {
+    background: url(../../assets/img/my-player/arrowgreedown.png) no-repeat;
+    background-size: 100% 100%;
+}
+.setOne .mainLikez {
+    color: #dedede;
+    font-size: .6rem;
+    width: 3.45rem;
+    border-radius: 15px;
+    border: 1px solid #bdbdbe;
+    text-align: center;
+    padding: .15rem 0rem;
+    margin-left: .425rem;
+}
+.setOne .tabMain{
+	position: relative;
+}
+/* setOne end*/
+
+
+
+
+
+
+
+  //basic
+  .wrapper{
+    width:96%;
+    margin:0 auto;
+  }
+  .fl{
+    float:left;
+  }
+  .fr{
+    float:right;
+  }
+
+  .clearfloat{zoom:1;}
+  .clearfloat:after{
+    display:block;
+    clear:both;
+    content:"";
+    overflow:hidden;
+    height:0;
+  }
+
+}
+
+

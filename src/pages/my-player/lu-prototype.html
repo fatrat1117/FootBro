@@ -34,21 +34,33 @@
   <hr class="separate" no-margin>
 </ion-grid>
 <ion-grid class="win-rate">
-  <ion-row >
-    <ion-col width-40 text-center>出席比赛胜率</ion-col>
-    <ion-col width-20 text-center></ion-col>
-    <ion-col width-40 text-center>未出席比赛胜率</ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col width-40 text-center>圆圈</ion-col>
-    <ion-col width-20 text-center>胜率</ion-col>
-    <ion-col width-40 text-center>圆圈</ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col width-40 text-center>0.0</ion-col>
-    <ion-col width-20 text-center>进球率</ion-col>
-    <ion-col width-40 text-center>0.0</ion-col>
-  </ion-row>
+
+
+  <!---->
+  <div class="section">
+    <div class="progressbar clearfloat">
+        <div class="fl pro">
+            <h4 class="progressTxt">出席比赛胜率</h4>
+            <div class="progress-bar position" data-percent="90"></div>
+            <h3>0.0</h3>
+            <h3>0.0</h3>
+        </div>
+        <h2 class="text">胜率</h2>
+        <div class="fr pro">
+            <h4 class="progressTxt">未出席比赛胜率</h4>
+            <div class="progress-bar position" data-percent="86"></div>
+            <h3>0.0</h3>
+            <h3>0.0</h3>
+        </div>
+        <h2 class="centerText">进球率</h2>
+        <h2 class="centerText">失球率</h2>
+    </div>
+  </div>
+
+
+
+
+  <!---->
   <ion-row>
     <ion-col width-40 text-center>0.0</ion-col>
     <ion-col width-20 text-center>失球率</ion-col>
@@ -96,15 +108,255 @@
     <ion-col>我要投票</ion-col>
   </ion-row>
   <ion-row class="light-grey">
-    <ion-col><i class="icon ion-ios-flower"></i>魅力</ion-col>
+    <div class="feedHead">
+      <div class="wrapper">
+          <div class="rose"><span class="firstPic"><img src="../../assets/img/my-player/flowerrose.png"></span><span class="picText">魅力</span>
+          </div>
+      </div>
+      </div>
   </ion-row>
-    <ion-row >
-    <ion-col>我喜欢他</ion-col>
+  <ion-row class="personal-data-title">
+      <div class="feedBack">
+      <div class="wrapper">
+          <div class="clearfloat totalText">
+              <h1 class="fl" style="margin: 0">我喜欢他</h1>
+              <h2 class="fr">看到他就想吐</h2>
+          </div>
+          <div class="clearfloat totalFeedBack">
+              <div class="like fl">
+              </div>
+              <div class="redPrg fl">
+                  <div class="redStrip"></div>
+                  <span class="stripText">213</span>
+              </div>
+              <div class="bluePrg fl">
+                  <div class="blueStrip"></div>
+                  <span class="blueText">67</span>
+              </div>
+              <div class="unLike fr">
+              </div>
+          </div>
+      </div>
+  </div>
+    </ion-row>
+  <ion-row class="light-grey">
+    <div class="feedHead">
+      <div class="wrapper">
+          <div class="rose"><span class="firstPic"><img src="../../assets/img/my-player/football.png"></span><span class="picText">球技</span>
+          </div>
+      </div>
+      </div>
+  </ion-row>
+  <ion-row class="personal-data-title">
+      <div class="feedBack">
+      <div class="wrapper">
+          <div class="clearfloat totalText">
+              <h1 class="fl" style="margin: 0">他球技我服</h1>
+              <h2 class="fr">他弱爆了</h2>
+          </div>
+          <div class="clearfloat totalFeedBack">
+              <div class="like fl">
+              </div>
+              <div class="redPrg fl">
+                  <div class="redStrip"></div>
+                  <span class="stripText">213</span>
+              </div>
+              <div class="bluePrg fl">
+                  <div class="blueStrip"></div>
+                  <span class="blueText">67</span>
+              </div>
+              <div class="unLike fr">
+              </div>
+          </div>
+      </div>
+  </div>
+  </ion-row>
+  <ion-row class="light-grey">
+    <div class="feedHead">
+      <div class="wrapper">
+          <div class="rose"><span class="firstPic"><img src="../../assets/img/my-player/footplayer.png"></span><span class="picText">球风</span>
+          </div>
+      </div>
+      </div>
+  </ion-row>
+  <ion-row class="personal-data-title">
+      <div class="feedBack">
+      <div class="wrapper">
+          <div class="clearfloat totalText">
+              <h1 class="fl" style="margin: 0">他球技我服</h1>
+              <h2 class="fr">他弱爆了</h2>
+          </div>
+          <div class="clearfloat totalFeedBack">
+              <div class="like fl">
+              </div>
+              <div class="redPrg fl">
+                  <div class="redStrip"></div>
+                  <span class="stripText">213</span>
+              </div>
+              <div class="bluePrg fl">
+                  <div class="blueStrip"></div>
+                  <span class="blueText">67</span>
+              </div>
+              <div class="unLike fr">
+              </div>
+          </div>
+      </div>
+  </div>
+  </ion-row>
+  <ion-row class="personal-data-title">
+    <ion-col>个人简介</ion-col>
+  </ion-row>
+    <ion-row class="light-grey personal-data">
+      <p>奥·梅西（Lionel Messi），1987年6月24日出生于圣菲省罗 萨里奥市，阿根廷足球运动员。2000年，梅西加入巴塞罗那俱乐部 。2005年，阿根廷青年队夺取世青赛冠军，梅西赢得了金球奖和金 靴奖双项大奖。2007年4月18日，梅西在国王杯半决赛对赫塔菲时 复制了马拉多纳在世界杯上的连过五人进球。
+      </p>
+  </ion-row>
+    <ion-row class="personal-data-title">
+    <ion-col>我要评论</ion-col>
+  </ion-row>
+  <ion-row>
+        <div class="setOne">
+            <!--setOne starts-->
+            <div class="tabMain">
+                <div id="TabbedPanels1" class="TabbedPanels">
+                    <!--tabMain start-->
+                    <ul class="TabbedPanelsTabGroup clearfloat">
+                        <li class="TabbedPanelsTab" tabindex="0">
+                            <span class="tabpic"></span>
+                            <h4>全部(56)</h4>
+                        </li>
+                        <li class="TabbedPanelsTab myTab" tabindex="0">
+                            <span class="tabpic"></span>
+                            <h4>天生射手(22)</h4>
+                        </li>
+                        <li class="TabbedPanelsTab" tabindex="0">
+                            <span class="tabpic"></span>
+                            <h4>差劲(1)</h4>
+                        </li>
+                    </ul>
+                    <div class="TabbedPanelsContentGroup tabbedContents clearfloat">
+                        <div class="TabbedPanelsContent">
+                            <!--one-->
+                            <div class="booSet">
+                                <div class="wrapper">
+                                    <div class="ball clearfloat">
+                                        <div class="ballpic fl"><img src="../../assets/img/my-player/ball.png">
+                                        </div>
+                                        <div class="ballLeft fl">BOO</div>
+                                        <div class="ballRight fr">2016-11-12</div>
+                                    </div>
+                                    <p>他是一名天生的射手，他嗅觉灵敏，射术出众，头球出色。踢得很6，喜欢~</p>
+                                    <div class="clearfloat">
+                                        <div class="fr">
+                                            <a href="#" class="mainLike"><i class="like"></i>踩56</a>
+                                            <a href="#" class="mainLikez"><i class="like unlike"></i>赞451</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="booSet">
+                                <div class="wrapper">
+                                    <div class="ball clearfloat">
+                                        <div class="ballpic fl"><img src="../../assets/img/my-player/ball.png">
+                                        </div>
+                                        <div class="ballLeft fl">BOO</div>
+                                        <div class="ballRight fr">2016-11-12</div>
+                                    </div>
+                                    <p>他是一名天生的射手，他嗅觉灵敏，射术出众，头球出色。踢得很6，喜欢~</p>
+                                    <div class="clearfloat">
+                                        <div class="fr">
+                                            <a href="#" class="mainLike"><i class="like"></i>踩56</a>
+                                            <a href="#" class="mainLikez"><i class="like unlike"></i>赞451</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="TabbedPanelsContent ">
+                            <!--two-->
+                            <div class="booSet">
+                                <div class="wrapper">
+                                    <div class="ball clearfloat">
+                                        <div class="ballpic fl"><img src="../../assets/img/my-player/ball.png">
+                                        </div>
+                                        <div class="ballLeft fl">BOO</div>
+                                        <div class="ballRight fr">2016-11-12</div>
+                                    </div>
+                                    <p>他是一名天生的射手，他嗅觉灵敏，射术出众，头球出色。踢得很6，喜欢~</p>
+                                    <div class="clearfloat">
+                                        <div class="fr">
+                                            <a href="#" class="mainLike"><i class="like"></i>踩56</a>
+                                            <a href="#" class="mainLikez"><i class="like unlike"></i>赞451</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="booSet">
+                                <div class="wrapper">
+                                    <div class="ball clearfloat">
+                                        <div class="ballpic fl"><img src="../../assets/img/my-player/ball.png">
+                                        </div>
+                                        <div class="ballLeft fl">BOO</div>
+                                        <div class="ballRight fr">2016-11-12</div>
+                                    </div>
+                                    <p>他是一名天生的射手，他嗅觉灵敏，射术出众，头球出色。踢得很6，喜欢~</p>
+                                    <div class="clearfloat">
+                                        <div class="fr">
+                                            <a href="#" class="mainLike"><i class="like"></i>踩56</a>
+                                            <a href="#" class="mainLikez"><i class="like unlike"></i>赞451</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="TabbedPanelsContent ">
+                            <!--three-->
+                            <div class="booSet">
+                                <div class="wrapper">
+                                    <div class="ball clearfloat">
+                                        <div class="ballpic fl"><img src="../../assets/img/my-player/ball.png">
+                                        </div>
+                                        <div class="ballLeft fl">BOO</div>
+                                        <div class="ballRight fr">2016-11-12</div>
+                                    </div>
+                                    <p>他是一名天生的射手，他嗅觉灵敏，射术出众，头球出色。踢得很6，喜欢~</p>
+                                    <div class="clearfloat">
+                                        <div class="fr">
+                                            <a href="#" class="mainLike"><i class="like"></i>踩56</a>
+                                            <a href="#" class="mainLikez"><i class="like unlike"></i>赞451</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="booSet">
+                                <div class="wrapper">
+                                    <div class="ball clearfloat">
+                                        <div class="ballpic fl"><img src="../../assets/img/my-player/ball.png">
+                                        </div>
+                                        <div class="ballLeft fl">BOO</div>
+                                        <div class="ballRight fr">2016-11-12</div>
+                                    </div>
+                                    <p>他是一名天生的射手，他嗅觉灵敏，射术出众，头球出色。踢得很6，喜欢~</p>
+                                    <div class="clearfloat">
+                                        <div class="fr">
+                                            <a href="#" class="mainLike"><i class="like"></i>踩56</a>
+                                            <a href="#" class="mainLikez"><i class="like unlike"></i>赞451</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--tabMain ends-->
+                <div class="setOneRight">
+                    <button class="btn"><span class="pic"><img src="../../assets/img/my-player/yellowpic.png"></span>评论</button>
+                </div>
+            </div>
+        </div>
+        <!--setOne ends-->
+
   </ion-row>
 </ion-grid>
-
-
-
 
 
 
