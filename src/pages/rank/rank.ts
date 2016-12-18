@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { TeamPublicService } from '../../app/public/shared/team-public.service'
+import { RankService } from '../../app/rank/shared/rank.service'
 
 @Component({
   selector: 'page-rank',
   templateUrl: 'rank.html',
-  providers: [TeamPublicService]
+  providers: [RankService]
 })
 export class RankPage {
   stats = "teams";
@@ -14,7 +14,7 @@ export class RankPage {
   teamRanks;
   playerRanks;
   constructor(public navCtrl: NavController,
-    private rankService: TeamPublicService) {
+    private rankService: RankService) {
 
   }
 
@@ -57,6 +57,16 @@ export class RankPage {
         console.log('loading team finished');
         //console.log(teamRanks);  
         //this.sortTeamBy(this.teamSortByStr);
+        infiniteScroll.complete();
+      });
+    }, 500);
+  }
+
+  morePlayer(infiniteScroll) {
+    console.log('more player available');
+    setTimeout(() => {
+      this.rankService.getMorePlayerRanks().then(ranks => {
+        console.log('loading player finished');
         infiniteScroll.complete();
       });
     }, 500);
