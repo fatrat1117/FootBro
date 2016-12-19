@@ -7,17 +7,17 @@
 <ion-content>
   <ion-item-group>
     <!-- Me -->
-    <!--<ion-item-divider></ion-item-divider>-->
+    <ion-item-divider></ion-item-divider>
     <!--<ion-item (click)="popupGuide()" detail-push>-->
       <!--<ion-icon item-left primary name="cog"></ion-icon>-->
       <!--{{'Guide' | trans}}-->
     <!--</ion-item>-->
-    <!--<ion-item tappable (click)="goEditPlayerPage()" detail-push>-->
-      <!--<ion-avatar item-left>-->
-        <!--<ion-img [src]="(playerBasic)?.photoURL"></ion-img>-->
-      <!--</ion-avatar>-->
-      <!--<h2>{{ (playerBasic)?.displayName }}</h2>-->
-    <!--</ion-item>-->
+    <!--ion-item tappable detail-push>
+      <ion-avatar item-left>
+        <ion-img [src]="player?.photoURL"></ion-img>
+      </ion-avatar>
+      <h2>{{ player?.displayName }}</h2>
+    </ion-item-->
     <!--<ion-item tappable (click)="goManageTeamPage()" *ngIf="(playerBasic)?.teamId" detail-push>-->
       <!--<ion-avatar item-left>-->
         <!--<ion-img [src]="(teamBasic)?.logo"></ion-img>-->

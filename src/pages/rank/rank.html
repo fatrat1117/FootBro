@@ -27,7 +27,7 @@
       <ion-list>
         <ion-item *ngFor="let t of teamRanks; let i = index;" style="margin-bottom:10px" text-wrap>
           <ion-thumbnail item-left>
-            <ion-img [src]="t.logo"></ion-img>
+            <img [src]="t.logo">
           </ion-thumbnail>
           <ion-badge style="position:absolute;" color="sky">{{ i+1 }}</ion-badge>
           <h2 text-center>
@@ -62,7 +62,7 @@
       <ion-list>
         <ion-item *ngFor="let p of playerRanks; let i = index;" style="margin-bottom:10px" text-wrap>
           <ion-avatar item-left>
-            <ion-img [src]="p.photoURL"></ion-img>
+            <img [src]="p.photoURL">
           </ion-avatar>
           <ion-row center>
             <ion-col>

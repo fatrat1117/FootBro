@@ -1,19 +1,35 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import {MyPlayerPage} from "../my-player/my-player";
+import { PlayerBasic } from '../../app/players/shared/player.model'
+
+import { PlayerService } from '../../app/players/shared/player.service'
+
+import { MyPlayerPage } from "../my-player/my-player";
 
 @Component({
   selector: 'page-me',
   templateUrl: 'me.html',
+  providers: [PlayerService]
 })
 export class MePage {
-
-  constructor(private navCtrl: NavController) {
+  player: PlayerBasic;
+  constructor(private navCtrl: NavController, private playerService: PlayerService) {
 
   }
 
-  goPlayerPage(){
+  
+
+  ionViewDidLoad() {
+    this.playerService.getSelfBasic().then(player => {
+      this.player = player;
+      //console.log(player);
+      
+    });
+  }
+  
+
+  goPlayerPage() {
     this.navCtrl.push(MyPlayerPage);
   }
 }
