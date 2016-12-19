@@ -1,5 +1,12 @@
-page-me{
-
-
+page-me {
+  ion-thumbnail[item-left] {
+    min-width: 0;
+    min-height: 0;
+    max-height: 4rem;
+    max-width: 4rem;
+    img {
+      max-width: 4rem;
+      max-height: 4rem;
+    }
+  }
 }
-

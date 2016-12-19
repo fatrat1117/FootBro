@@ -5,6 +5,10 @@ import { TEAMS } from './mock-data/mock-team';
 
 @Injectable()
 export class TeamService {
+  getSelfBasic(): Promise<TeamBasic> {
+    return Promise.resolve(TEAMS[0].basic);
+  }
+
   getTeamBasic(id: string): Promise<TeamBasic> {
     return Promise.resolve(TEAMS[0].basic);
   }

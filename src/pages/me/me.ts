@@ -2,29 +2,34 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { PlayerBasic } from '../../app/players/shared/player.model'
+import { TeamBasic } from '../../app/teams/shared/team.model'
 
 import { PlayerService } from '../../app/players/shared/player.service'
+import { TeamService } from '../../app/teams/shared/team.service'
 
 import { MyPlayerPage } from "../my-player/my-player";
 
 @Component({
   selector: 'page-me',
   templateUrl: 'me.html',
-  providers: [PlayerService]
+  providers: [PlayerService, TeamService]
 })
 export class MePage {
-  player: PlayerBasic;
-  constructor(private navCtrl: NavController, private playerService: PlayerService) {
+  playerBasic: PlayerBasic;
+  teamBasic: TeamBasic;
+  constructor(private navCtrl: NavController, private playerService: PlayerService, private teamService: TeamService) {
 
   }
 
   
 
   ionViewDidLoad() {
-    this.playerService.getSelfBasic().then(player => {
-      this.player = player;
-      //console.log(player);
-      
+    this.playerService.getSelfBasic().then(playerBasic => {
+      this.playerBasic = playerBasic;
+    });
+
+    this.teamService.getSelfBasic().then(teamBasic => {
+      this.teamBasic = teamBasic;
     });
   }
   
