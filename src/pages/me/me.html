@@ -11,7 +11,7 @@
       <!--<ion-icon item-left primary name="cog"></ion-icon>-->
       <!--{{'Guide' | trans}}-->
     <!--</ion-item>-->
-    <ion-item tappable detail-push>
+    <ion-item detail-push>
       <ion-avatar item-left>
         <img [src]="playerBasic?.photoURL">
       </ion-avatar>
@@ -25,8 +25,8 @@
     </ion-item>
 
     <!-- show pages -->
-    <ion-item-divider color='light'></ion-item-divider>
-    <ion-item tappable (click)="goPlayerPage()" detail-push>
+    <ion-item-divider></ion-item-divider>
+    <ion-item (click)="goPlayerPage()" detail-push>
       <ion-icon name="aperture" item-left color="gGreen"></ion-icon>
       {{'MyPage' | trans}}
     </ion-item>
@@ -39,7 +39,7 @@
       {{'MyTeam' | trans}}
     </ion-item>
 
-    <ion-item-divider color='light'></ion-item-divider>
+    <ion-item-divider></ion-item-divider>
     <ion-item tappable detail-push>
       <ion-icon name="help" item-left color="gYellow"></ion-icon>
       {{'Feedback' | trans}}
