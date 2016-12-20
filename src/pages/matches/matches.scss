@@ -60,20 +60,16 @@ page-matches {
   }
   // table
   .league-stats-standing {
-    .badge {
-      //flex: 0 0 5%;
-      max-width: 5%;
-    }
     .data-column {
-      flex: 0 0 6%;
-      max-width: 6%;
+      flex: 0 0 8%;
+      max-width: 8%;
       p {
         margin: auto;
       }
     }
     .data-column-broad {
       flex: 0 0 10%;
-      max-width: 12%;
+      max-width: 10%;
       p {
         margin: auto;
       }
@@ -82,7 +78,7 @@ page-matches {
       max-width: 16% !important;
     }
     label {
-      font-size: 70%;
+      font-size: 80%;
     }
     p {
       margin: auto;
@@ -106,10 +102,6 @@ page-matches {
           max-width: 3rem;
           max-height: 3rem;
         }
-      }
-      ion-badge {
-        //font-size: 80%;
-        padding: 1.5px 3px;
       }
     }
     .standings-title {

@@ -7,7 +7,6 @@
 <ion-content>
   <ion-item-group>
     <!-- Me -->
-    <ion-item-divider></ion-item-divider>
     <!--<ion-item (click)="popupGuide()" detail-push>-->
       <!--<ion-icon item-left primary name="cog"></ion-icon>-->
       <!--{{'Guide' | trans}}-->
@@ -26,27 +25,27 @@
     </ion-item>
 
     <!-- show pages -->
-    <ion-item-divider light></ion-item-divider>
+    <ion-item-divider color='light'></ion-item-divider>
     <ion-item tappable (click)="goPlayerPage()" detail-push>
-      <ion-icon name="aperture" item-left secondary></ion-icon>
+      <ion-icon name="aperture" item-left color="gGreen"></ion-icon>
       {{'MyPage' | trans}}
     </ion-item>
     <ion-item tappable *ngIf="!playerBasic?.teamId">
-      <ion-icon name="people" item-left primary></ion-icon>
+      <ion-icon name="people" item-left color="gBlue"></ion-icon>
       {{'CreateTeam' | trans}}
     </ion-item>
     <ion-item tappable *ngIf="(playerBasic)?.teamId" detail-push>
-      <ion-icon name="people" item-left primary></ion-icon>
+      <ion-icon name="people" item-left color="gBlue"></ion-icon>
       {{'MyTeam' | trans}}
     </ion-item>
 
-    <ion-item-divider light></ion-item-divider>
+    <ion-item-divider color='light'></ion-item-divider>
     <ion-item tappable detail-push>
-      <ion-icon name="help" item-left gYellow></ion-icon>
+      <ion-icon name="help" item-left color="gYellow"></ion-icon>
       {{'Feedback' | trans}}
     </ion-item>
     <ion-item tappable (click)="onLogout()">
-      <ion-icon name="exit" item-left danger></ion-icon>
+      <ion-icon name="exit" item-left color="danger"></ion-icon>
       {{'Logout' | trans}}
     </ion-item>
   </ion-item-group>

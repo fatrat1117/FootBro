@@ -43,13 +43,17 @@ $alert-md-radio-label-text-color-checked:#fff;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #00ef00,
-  secondary:  #32db64,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222,
+  primary:      #00ef00,
+  secondary:    #32db64,
+  danger:       #f53d3d,
+  light:        #373a3c,
+  dark:         #222,
   primary-text: #fff,
-  sky: #387ef5
+  sky:          #387ef5,
+  gRed:         #db3236,
+  gGreen:       #3cba54,
+  gBlue:        #4885ed,
+  gYellow:      #f4c20d
 );
 
 

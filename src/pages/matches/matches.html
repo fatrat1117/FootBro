@@ -46,12 +46,10 @@
       <div class="league-stats-standing">
         <ion-grid>
           <ion-row no-margin>
-            <ion-col class="badge">
-            </ion-col>
             <ion-col width-50>
-              <ion-avatar>
-              </ion-avatar>
-              <p text-center><label>{{'Team' | trans}}</label></p>
+              <p text-center>
+                <label>{{'Team' | trans}}</label>
+              </p>
             </ion-col>
             <ion-col class="data-column">
               <p><label>{{'P' | trans}}</label></p>
@@ -72,15 +70,18 @@
               <p><label>{{'PTS' | trans}}</label></p>
             </ion-col>
           </ion-row>
-          <ion-row *ngFor="let s of matchStandings;" no-margin>
-            <ion-col class="badge">
+          <ion-row *ngFor="let s of matchStandings; let i = index;" no-margin>
+            <!--ion-col class="badge">
               <ion-badge style="position:absolute;" color="sky">1</ion-badge>
-            </ion-col>
+            </ion-col-->
             <ion-col width-50>
               <ion-thumbnail>
-                <ion-img src="assets/team-logo/team_logo.jpg"></ion-img>
+                <img src="assets/team-logo/team_logo.jpg">
               </ion-thumbnail>
-              <p text-left><label>{{ s.teamId }}</label></p>
+              <p text-left>
+                <ion-badge color="sky">{{ i+1 }}</ion-badge>
+                <label>{{ s.teamId }}</label>
+              </p>
             </ion-col>
             <ion-col class="data-column">
               <p><label>{{s.matchesPlayed}}</label></p>
