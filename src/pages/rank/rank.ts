@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { RankService } from '../../app/rank/shared/rank.service'
+import { MyPlayerPage } from '../my-player/my-player'
 
 @Component({
   selector: 'page-rank',
@@ -13,7 +14,7 @@ export class RankPage {
   playerSortByStr = "popularity";
   teamRanks;
   playerRanks;
-  constructor(public navCtrl: NavController,
+  constructor(public nav: NavController,
     private rankService: RankService) {
 
   }
@@ -70,5 +71,9 @@ export class RankPage {
         infiniteScroll.complete();
       });
     }, 500);
+  }
+
+  goPlayerPage(id) {
+    this.nav.push(MyPlayerPage, { pId: id });
   }
 }
