@@ -1,0 +1,37 @@
+{
+    "rules": {
+        ".read": true,
+        ".write": true,
+        "public": {
+            "players": {
+                ".indexOn": [
+                    "popularity"
+                ]
+            },
+            "teams": {
+                ".indexOn": [
+                    "popularity",
+                    "name",
+                    "ability"
+                ]
+            }
+        },
+        "matches": {
+            "list": {
+                ".indexOn": [
+                    "date",
+                    "tournamentId"
+                ]
+            }
+        },
+        "teams": {
+            "$team_id": {
+                "matches": {
+                    ".indexOn": [
+                        "time"
+                    ]
+                }
+            }
+        }
+    }
+}
