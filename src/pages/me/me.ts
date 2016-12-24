@@ -7,7 +7,10 @@ import { TeamBasic } from '../../app/teams/shared/team.model'
 import { PlayerService } from '../../app/players/shared/player.service'
 import { TeamService } from '../../app/teams/shared/team.service'
 
+import { EditPlayerPage } from "../edit-player/edit-player";
+import { EditTeamPage } from "../edit-team/edit-team";
 import { MyPlayerPage } from "../my-player/my-player";
+import { FeedbackPage } from "../feedback/feedback";
 
 @Component({
   selector: 'page-me',
@@ -32,9 +35,20 @@ export class MePage {
       this.teamBasic = teamBasic;
     });
   }
-  
+
+  goEditPlayerPage() {
+    this.navCtrl.push(EditPlayerPage);
+  }
+
+  goEditTeamPage() {
+    this.navCtrl.push(EditTeamPage);
+  }
 
   goPlayerPage() {
     this.navCtrl.push(MyPlayerPage);
+  }
+
+  goFeedbackPage() {
+    this.navCtrl.push(FeedbackPage);
   }
 }

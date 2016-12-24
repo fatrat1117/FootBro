@@ -49,7 +49,7 @@ export class Localization {
             Opponent: 'Opponent',
             Location: 'Location',
             JerseyColor: 'Jersey color',
-            Details: 'Detials',
+            Details: 'Details',
             Post: 'Post',
             Cancel: 'Cancel',
             MatchNotice: 'Match Notice',

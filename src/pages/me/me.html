@@ -11,15 +11,15 @@
       <!--<ion-icon item-left primary name="cog"></ion-icon>-->
       <!--{{'Guide' | trans}}-->
     <!--</ion-item>-->
-    <ion-item detail-push>
+    <ion-item (click)="goEditPlayerPage()" detail-push>
       <ion-avatar item-left>
-        <img [src]="playerBasic?.photoURL">
+        <img [src]="(playerBasic)?.photoURL">
       </ion-avatar>
       <h2>{{ playerBasic?.displayName }}</h2>
     </ion-item>
-    <ion-item tappable  *ngIf="playerBasic?.teamId" detail-push>
+    <ion-item (click)="goEditTeamPage()" *ngIf="(playerBasic)?.teamId" detail-push>
       <ion-thumbnail item-left>
-        <img [src]="teamBasic?.logo">
+        <img [src]="(teamBasic)?.logo">
       </ion-thumbnail>
       <h2>{{ teamBasic?.name }}</h2>
     </ion-item>
@@ -40,7 +40,7 @@
     </ion-item>
 
     <ion-item-divider></ion-item-divider>
-    <ion-item tappable detail-push>
+    <ion-item (click)="goFeedbackPage()"  detail-push>
       <ion-icon name="help" item-left color="gYellow"></ion-icon>
       {{'Feedback' | trans}}
     </ion-item>

@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'EditPlayer' | trans}}</ion-title>
+    <ion-buttons end>
+      <button [disabled]="!isSavable" text-center ion-button clear color="primary">
+        {{'Save' | trans}}
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-item-group>
+    <!-- Basic -->
+    <ion-item detail-push (click)="changePhoto()">
+      <h2>{{'Photo' | trans}}</h2>
+      <ion-thumbnail item-right *ngIf="playerBasic">
+        <img [src]="playerBasic.photoURL">
+      </ion-thumbnail>
+    </ion-item>
+    <ion-item detail-push (click)="editName()">
+      <h2>{{'Nickname' | trans}}</h2>
+      <p item-right>{{ (playerBasic)?.displayName }}</p>
+    </ion-item>
+    <!-- Detail -->
+    <ion-item-divider></ion-item-divider>
+    <ion-item detail-push>
+      <h2>{{'HeightCM' | trans}}</h2>
+      <p item-right>{{ playerDetail?.height }}</p>
+    </ion-item>
+    <ion-item detail-push>
+      <h2>{{'WeightKG' | trans}}</h2>
+      <p item-right>{{ playerDetail?.weight }}</p>
+    </ion-item>
+    <ion-item detail-push>
+      <h2>{{'Position' | trans}}</h2>
+      <p item-right>{{ playerDetail?.position }}</p>
+    </ion-item>
+    <ion-item detail-push>
+      <h2 item-left>{{'Description' | trans}}</h2>
+      <p item-right style="margin-left: 20%">aaaaaaaaaaaaaaaaadjalsjdaskjdlkasdjasldjlasjdklasjdlsakdjlkasjdaskdladas</p>
+    </ion-item>
+  </ion-item-group>
+</ion-content>

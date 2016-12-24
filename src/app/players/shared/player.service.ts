@@ -9,6 +9,10 @@ export class PlayerService {
     return Promise.resolve(PLAYERS[0].basic);
   }
 
+  getSelfDetail(): Promise<PlayerDetail> {
+    return Promise.resolve(PLAYERS[0].detail);
+  }
+
   getPlayerBasic(id: string): Promise<PlayerBasic> {
     return Promise.resolve(PLAYERS[0].basic);
   }
