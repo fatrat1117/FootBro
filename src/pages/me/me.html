@@ -12,9 +12,9 @@
       <!--{{'Guide' | trans}}-->
     <!--</ion-item>-->
     <ion-item (click)="goEditPlayerPage()" detail-push>
-      <ion-avatar item-left>
+      <ion-thumbnail item-left>
         <img [src]="(playerBasic)?.photoURL">
-      </ion-avatar>
+      </ion-thumbnail>
       <h2>{{ playerBasic?.displayName }}</h2>
     </ion-item>
     <ion-item (click)="goEditTeamPage()" *ngIf="(playerBasic)?.teamId" detail-push>

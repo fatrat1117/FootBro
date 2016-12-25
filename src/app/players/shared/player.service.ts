@@ -5,6 +5,7 @@ import { PLAYERS } from './mock-data/mock-player';
 
 @Injectable()
 export class PlayerService {
+  // self
   getSelfBasic(): Promise<PlayerBasic> {
     return Promise.resolve(PLAYERS[0].basic);
   }
@@ -13,6 +14,15 @@ export class PlayerService {
     return Promise.resolve(PLAYERS[0].detail);
   }
 
+  saveSelfBasic(playerBasic: PlayerBasic) {
+    PLAYERS[0].basic = playerBasic;
+  }
+
+  saveSelfDetail(playerDetail: PlayerDetail) {
+    PLAYERS[0].detail = playerDetail;
+  }
+
+  // general
   getPlayerBasic(id: string): Promise<PlayerBasic> {
     return Promise.resolve(PLAYERS[0].basic);
   }

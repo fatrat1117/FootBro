@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar no-border-bottom>
     <ion-title>
-      <ion-select [(ngModel)]="selectedId" (ngModelChange)="onSelectionChange($event)">
+      <ion-select [(ngModel)]="selectedId" (ngModelChange)="onSelectionChange()">
         <ion-option *ngFor="let league of leagueBasics" [value]="league.id">{{ league.name }}</ion-option>
       </ion-select>
     </ion-title>

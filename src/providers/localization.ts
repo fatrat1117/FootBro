@@ -1,4 +1,4 @@
-import {Injectable, Pipe, PipeTransform} from '@angular/core';
+import { Injectable, Pipe, PipeTransform } from '@angular/core';
 
 @Injectable()
 export class Localization {
@@ -9,7 +9,7 @@ export class Localization {
         let l = lowerLang.split('-')[0];
         if (lowerLang != 'zh-tw' && 'zh' == l)
             this.langCode = 'zh';
-        else 
+        else
             this.langCode = 'en';
         console.log('lang', lang, l, this.langCode);
     }
@@ -62,13 +62,13 @@ export class Localization {
             RightFoot: 'Right Foot',
             LeftFoot: 'Left Foot',
             Position: 'Position',
-            GK: 'GK',
-            CB: 'CB',
-            SB: 'SB',
-            DMF: 'DMF',
-            AMF: 'AMF',
-            CF: 'CF',
-            SF: 'SF',
+            gk: 'GK',
+            cb: 'CB',
+            sb: 'SB',
+            dmf: 'DMF',
+            amf: 'AMF',
+            cf: 'CF',
+            sf: 'SF',
             Feedback: 'Feedback',
             Submit: 'Submit',
             Logout: 'Logout',
@@ -93,7 +93,7 @@ export class Localization {
             Typeyourmessage: 'Type your message',
             Redcard: 'Red card',
             Yellowcard: 'Yellow card',
-            Rank : 'Rank',
+            Rank: 'Rank',
             Message: 'Message',
             Played: 'Played',
             Matches: 'Matches',
@@ -230,13 +230,13 @@ export class Localization {
             RightFoot: '右脚',
             LeftFoot: '左脚',
             Position: '场上位置',
-            GK: '门神',
-            CB: '中卫',
-            SB: '边卫',
-            DMF: '兽腰',
-            AMF: '前腰',
-            CF: '中锋',
-            SF: '边锋',
+            gk: '门神',
+            cb: '中卫',
+            sb: '边卫',
+            dmf: '兽腰',
+            amf: '前腰',
+            cf: '中锋',
+            sf: '边锋',
             Feedback: '反馈',
             Submit: '提交',
             Logout: '注销',
@@ -261,7 +261,7 @@ export class Localization {
             Typeyourmessage: '输入消息',
             Redcard: '红牌',
             Yellowcard: '黄牌',
-            Rank : '排名',
+            Rank: '排名',
             Message: '信息',
             Played: '出场',
             Matches: '比赛',
@@ -360,14 +360,17 @@ export class Localization {
 }
 
 @Pipe({
-  name: 'trans'
+    name: 'trans'
 })
 
 export class TransPipe implements PipeTransform {
-  constructor(private localization: Localization) {
-  }
+    constructor(private localization: Localization) {
+    }
 
-  transform(id) {
-    return this.localization.getString(id);
-  }
+    transform(id) {
+        if (id) {
+            return this.localization.getString(id);
+        }
+        return '';
+    }
 }

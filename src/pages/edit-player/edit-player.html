@@ -1,11 +1,6 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{'EditPlayer' | trans}}</ion-title>
-    <ion-buttons end>
-      <button [disabled]="!isSavable" text-center ion-button clear color="primary">
-        {{'Save' | trans}}
-      </button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content>
@@ -23,17 +18,21 @@
     </ion-item>
     <!-- Detail -->
     <ion-item-divider></ion-item-divider>
-    <ion-item detail-push>
+    <ion-item detail-push (click)="editHeight()">
       <h2>{{'HeightCM' | trans}}</h2>
       <p item-right>{{ playerDetail?.height }}</p>
     </ion-item>
-    <ion-item detail-push>
+    <ion-item detail-push (click)="editWeight()">
       <h2>{{'WeightKG' | trans}}</h2>
       <p item-right>{{ playerDetail?.weight }}</p>
     </ion-item>
-    <ion-item detail-push>
+    <ion-item detail-push (click)="editPosition()">
       <h2>{{'Position' | trans}}</h2>
-      <p item-right>{{ playerDetail?.position }}</p>
+      <p item-right>{{ playerDetail?.position | trans }}</p>
+    </ion-item>
+    <ion-item detail-push (click)="editFoot()">
+      <h2>{{'Foot' | trans}}</h2>
+      <p item-right>{{ playerDetail?.foot | trans}}</p>
     </ion-item>
     <ion-item detail-push>
       <h2 item-left>{{'Description' | trans}}</h2>

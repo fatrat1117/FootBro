@@ -52,9 +52,8 @@ export class MatchesPage {
     this.selectedDate = date;
   }
 
-  onSelectionChange(event) {
-    this.selectedId = event;
-    if (event == "0")
+  onSelectionChange() {
+    if (this.selectedId == "0")
       this.selectedInfo = "schedule";
   }
 }

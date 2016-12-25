@@ -1,14 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { ViewController} from 'ionic-angular';
 
-import { PlayerBasic } from '../../app/players/shared/player.model'
+import { PlayerDetail } from '../../app/players/shared/player.model'
 import { PlayerService } from '../../app/players/shared/player.service'
 
 @Component({
   template: `
   <ion-header>
     <ion-navbar>
-      <ion-title>{{'Nickname' | trans}}</ion-title>
+      <ion-title>{{'WeightKG' | trans}}</ion-title>
       <ion-buttons start> <!--showWhen="ios"-->
         <button (click)="dismiss()" text-center ion-button clear color="light">
           {{ 'Cancel' | trans }}
@@ -24,17 +24,17 @@ import { PlayerService } from '../../app/players/shared/player.service'
 
   <ion-content>
     <ion-item>
-      <ion-input #valueInput type="text" maxlength="32" clearInput [(ngModel)]="newValue" (ngModelChange)=onValueChange()>
+      <ion-input #valueInput type="number" clearInput [(ngModel)]="newValue" (ngModelChange)=onValueChange()>
       </ion-input>
     </ion-item>
   </ion-content>
   `,
   providers: [PlayerService]
 })
-export class EditPlayerNamePage {
+export class EditPlayerWeightPage {
   @ViewChild('valueInput') valueInput;
 
-  playerBasic: PlayerBasic;
+  playerDetail: PlayerDetail;
   newValue: string;
   isSavable: boolean;
   constructor(private viewCtrl: ViewController, private playerService: PlayerService) {
@@ -42,21 +42,21 @@ export class EditPlayerNamePage {
   }
 
   ionViewDidLoad() {
-    this.playerService.getSelfBasic().then(playerBasic => {
-      this.playerBasic = playerBasic;
-      this.newValue = playerBasic.displayName;
+    this.playerService.getSelfDetail().then(playerDetail => {
+      this.playerDetail = playerDetail;
+      this.newValue = playerDetail.weight.toString();
     });
 
     this.valueInput.setFocus();
   }
 
   onValueChange() {
-    this.isSavable = (this.newValue != '' && this.newValue != this.playerBasic.displayName);
+    this.isSavable = (this.newValue != '' && this.newValue != this.playerDetail.weight.toString());
   }
 
   save() {
-    this.playerBasic.displayName = this.newValue;
-    this.playerService.saveSelfBasic(this.playerBasic);
+    this.playerDetail.weight = Number(this.newValue);
+    this.playerService.saveSelfDetail(this.playerDetail);
     this.dismiss();
   }
 

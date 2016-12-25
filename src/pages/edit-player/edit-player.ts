@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 
 import { EditPlayerNamePage } from './edit-player-name'
+import { EditPlayerHeightPage } from './edit-player-height'
+import { EditPlayerWeightPage } from './edit-player-weight'
+import { EditPlayerPositionPage } from './edit-player-position'
+import { EditPlayerFootPage } from './edit-player-foot'
 
 import { PlayerBasic, PlayerDetail } from '../../app/players/shared/player.model'
 import { PlayerService } from '../../app/players/shared/player.service'
@@ -33,6 +37,22 @@ export class EditPlayerPage {
 
   editName() {
     this.modalCtrl.create(EditPlayerNamePage).present();
+  }
+
+  editHeight() {
+    this.modalCtrl.create(EditPlayerHeightPage).present();
+  }
+
+  editWeight() {
+    this.modalCtrl.create(EditPlayerWeightPage).present();
+  }
+
+  editPosition() {
+    this.modalCtrl.create(EditPlayerPositionPage).present();
+  }
+
+  editFoot() {
+    this.modalCtrl.create(EditPlayerFootPage).present();
   }
 }
 

@@ -13,9 +13,9 @@ export const PLAYERS: Player[] = [
     detail:
     {
       description: "player description",
-      foot: "Left",
+      foot: "left",
       height: 175,
-      position: "AMF",
+      position: "amf",
       pushId: "000",
       slogan: "player slogan",
       weight: 65

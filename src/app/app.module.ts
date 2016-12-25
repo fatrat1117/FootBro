@@ -10,6 +10,10 @@ import { StringToDatePipe, NumberToTimePipe } from '../pipes/moment.pipe';
 import { MePage } from "../pages/me/me";
 import { EditPlayerPage } from "../pages/edit-player/edit-player";
 import { EditPlayerNamePage } from "../pages/edit-player/edit-player-name";
+import { EditPlayerHeightPage } from "../pages/edit-player/edit-player-height";
+import { EditPlayerWeightPage } from "../pages/edit-player/edit-player-weight";
+import { EditPlayerPositionPage } from "../pages/edit-player/edit-player-position";
+import { EditPlayerFootPage } from "../pages/edit-player/edit-player-foot";
 import { EditTeamPage } from "../pages/edit-team/edit-team";
 import { MyPlayerPage } from "../pages/my-player/my-player";
 import { FeedbackPage } from "../pages/feedback/feedback";
@@ -31,6 +35,10 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     MePage,
     EditPlayerPage,
     EditPlayerNamePage,
+    EditPlayerHeightPage,
+    EditPlayerWeightPage,
+    EditPlayerPositionPage,
+    EditPlayerFootPage,
     EditTeamPage,
     MyPlayerPage,
     JixiangPrototypePage,
@@ -58,6 +66,10 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     MePage,
     EditPlayerPage,
     EditPlayerNamePage,
+    EditPlayerHeightPage,
+    EditPlayerWeightPage,
+    EditPlayerPositionPage,
+    EditPlayerFootPage,
     EditTeamPage,
     MyPlayerPage,
     JixiangPrototypePage,
