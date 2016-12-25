@@ -26,89 +26,40 @@ page-lu-prototype{
   .win-rate{
     //background-image: url("/../../assets/img/my-player/bg4@3x.png");
     //min-height: 30px;
-    .section .progressbar{
+    .progressbar{
       position: relative;
     }
 
 
-    .section .pro {
+    .pro {
       //width: 9rem;
       position: relative;
     }
-    .section .progressTxt {
+    .progressTxt {
       text-align: center;
       color: #f8f8f8;
       font-size: 1.3em;
       padding: 1rem 0rem;
     }
     .position {
-        float: left;
+      float: left;
     }
-    .progress-bar {
-        position: relative;
-        height: 5.5rem;
-        width: 5.5rem;
-        transform: rotate(180deg);
-        left: 1.65rem;
+    round-progress svg circle{
+      stroke: rgb(160, 160, 160);
     }
-    .progress-bar .precent {
-        font-size: 1.5rem;
-        color: #fff;
-        position: absolute;
-        right: 0;
-        transform: rotate(180deg);
-        text-align: center;
-        left: 0;
-        margin: 0 auto;
-        top: 50%;
-        margin-top: -18px;
+    round-progress svg path{
+      stroke: rgb(0, 255, 0);
     }
-    .progress-bar div {
-        position: absolute;
-        height: 5.5rem;
-        width: 5.5rem;
-        border-radius: 50%;
-    }
-    .progress-bar div span {
-        position: absolute;
-        font-family: Arial;
-        font-size: 25px;
-        line-height: 4.8rem;
-        height: 4.8rem;
-        width: 4.8rem;
-        left: .35rem;
-        top: .35rem;
-        text-align: center;
-        border-radius: 50%;
-        background-color: #2b2c30;
-    }
-    .progress-bar .background {
-        background-color: #b3cef6;
-    }
-    .progress-bar .rotate {
-        clip: rect(0 2.75rem 5.5rem 0);
-        background-color: #f00;
-    }
-    .progress-bar .left {
-        clip: rect(0 2.75rem 5.5rem 0);
-        opacity: 1;
-        background-color: #b3cef6;
-    }
-    .progress-bar .right {
-        clip: rect(0 2.75rem 5.5rem 0);
-        transform: rotate(180deg);
-        opacity: 0;
-        background-color: #4b86db;
-    }
+
     @keyframes toggle {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
     }
-    .section .text {
+    .text {
       color: #fff;
       font-size: 1.3em;
       position: absolute;
@@ -118,7 +69,7 @@ page-lu-prototype{
       margin: 0 auto;
       top:5.2rem;
     }
-    .section .centerText {
+    .centerText {
       color: #fff;
       font-size: 0.65rem;
       text-align: center;
@@ -127,7 +78,7 @@ page-lu-prototype{
       position: absolute;
       bottom: -1.75rem;
     }
-    .section .centerText:last-child {
+    .centerText:last-child {
       bottom: -3.25rem;
     }
   }
@@ -143,86 +94,86 @@ page-lu-prototype{
     display: inline-block;
     vertical-align: middle;
     margin-right: 0.5rem;
-}
+  }
   .feedHead .rose {
     padding: .75rem 0;
     display: flex;
     vertical-align: middle;
     align-items: center;
     font-size: 2rem;
-}
+  }
   .feedBack {
     background: #1a1a1d;
     width: 100%;
-}
+  }
   .totalText {
     padding: .9rem 0 1.25rem 0;
-}
+  }
   .totalFeedBack {
     padding: 0 .6rem 1.1rem .6rem;
-}
+  }
   .feedBack .like {
     width: 1.1rem;
     margin-top: -.25rem;
     background: url(../../assets/img/my-player/deflike.png) no-repeat;
     background-size: contain;
     height: 1rem;
-}
+  }
   .feedBack .likes {
     width: 1.1rem;
     margin-top: -.25rem;
     background: url(../../assets/img/my-player/like.png) no-repeat;
     background-size: contain;
     height: 1rem;
-}
+  }
   .redPrg {
     width: 32rem;
     margin-left:1.1rem;
-}
+  }
   .redStrip {
     width: 32rem;
     height: .25rem;
     border-radius: 4px;
     background-color: #fa3b40;
-}
-.bluePrg {
+  }
+  .bluePrg {
     width: 16.8rem;
     margin-left: .15rem;
-}
+  }
   .blueStrip {
     width: 16.8rem;
     height: .25rem;
     border-radius: 4px;
     background-color: #339adb;
-}
+  }
   .redPrg .stripText {
     font-size: .7rem;
     color: #fa3b40;
     display: block;
     padding-top: .2rem;
-}
+  }
   .blueText {
     font-size: .7rem;
     color: #339adb;
     text-align: right;
     display: block;
     padding-top: .2rem;
-}
+  }
   .feedBack .unLike {
     width: 1.1rem;
     margin-top: -.25rem;
     background: url(../../assets/img/my-player/defunlike.png) no-repeat;
     background-size: contain;
     height: 1rem;
-}
+  }
   .feedBack .unLikes {
     width: 1.1rem;
     margin-top: -.25rem;
     background: url(../../assets/img/my-player/unlike.png) no-repeat;
     background-size: contain;
     height: 1rem;
-}
-//setone
+  }
+  //setone
   .setOne {
     width: 100%;
   }
@@ -237,73 +188,73 @@ page-lu-prototype{
     border-radius: 2rem;
     list-style-type: none;
     margin:2rem  0.5rem 2rem 0.5rem;
-}
-.setOne .TabbedPanelsTab h4 {
+  }
+  .setOne .TabbedPanelsTab h4 {
     color: #333333;
     margin:1rem 0;
-}
-.setOne .TabbedPanelsTabSelected {
+  }
+  .setOne .TabbedPanelsTabSelected {
     background: #00ff00 !important;
-}
-.setOne .setOneRight {
+  }
+  .setOne .setOneRight {
     width: 8rem;
     position: absolute;
     top: 1rem;
     right: .2rem;
-}
-.setOne .btn {
+  }
+  .setOne .btn {
     width: 100%;
     background: #0d0d0f;
     border-radius: 50%;
     height: 8rem;
     color: #fcdb14;
     font-size: .6rem;
-}
-.setOne .btn .pic {
+  }
+  .setOne .btn .pic {
     width: 5rem;
     display: block;
     margin: 0 auto;
     font-size: 3rem;
-}
-.setOne .TabbedPanelsTabGroup {
+  }
+  .setOne .TabbedPanelsTabGroup {
     padding: .625rem 2% .625rem 2%;
     //width: 96%;
     background: #2c2d31;
-}
-.setOne .myTab {
+  }
+  .setOne .myTab {
     //width: 4.2rem !important;
     //margin: 0rem .6rem;
-}
-.setOne .booSet {
+  }
+  .setOne .booSet {
     padding: 1rem 0rem;
     margin-bottom: .2rem;
     background: #1a1a1d;
-}
-.setOne .ballRight {
+  }
+  .setOne .ballRight {
     color: #ababab;
     font-size: 1.5rem;
     padding-top: .2rem;
-}
-.setOne .ballpic {
+  }
+  .setOne .ballpic {
     width: 3rem;
-}
-.setOne .ballLeft {
-  margin-top: 0.75rem;
+  }
+  .setOne .ballLeft {
+    margin-top: 0.75rem;
     margin-left: 1rem;
     color: #ffffff;
     font-size: 2.5rem;
     line-height: 1.475rem;
-}
-.setOne .ball {
+  }
+  .setOne .ball {
     margin-bottom: .9rem;
-}
-.setOne .booSet p {
+  }
+  .setOne .booSet p {
     color: #ffffff;
     font-size: 2rem;
     line-height: 2rem;
-	padding-bottom: .74rem;
-}
-.setOne .like {
+    padding-bottom: .74rem;
+  }
+  .setOne .like {
     background: url(../../assets/img/my-player/defunlike.png) no-repeat;
     width: 1.4rem;
     height: 1.3rem;
@@ -311,12 +262,12 @@ page-lu-prototype{
     background-size: 100% 100%;
     margin-right: .5rem;
     vertical-align: middle;
-}
-.setOne .unlike {
+  }
+  .setOne .unlike {
     background: url(../../assets/img/my-player/deflike.png) no-repeat;
     background-size: 100% 100%;
-}
-.setOne .mainLike {
+  }
+  .setOne .mainLike {
     color: #dedede;
     font-size: 1.5rem;
     width: 3.45rem;
@@ -326,20 +277,20 @@ page-lu-prototype{
     padding: 0.4rem 1.5rem;
     margin-left: .425rem;
     text-decoration: none;
-}
-.setOne .activeLike {
+  }
+  .setOne .activeLike {
     color: #00ff00 !important;
     border: 1px solid #00ff00 !important;
-}
-.setOne .alike {
+  }
+  .setOne .alike {
     background: url(../../assets/img/my-player/arrowgreenup.png) no-repeat;
     background-size: 100% 100%;
-}
-.setOne .changlike {
+  }
+  .setOne .changlike {
     background: url(../../assets/img/my-player/arrowgreedown.png) no-repeat;
     background-size: 100% 100%;
-}
-.setOne .mainLikez {
+  }
+  .setOne .mainLikez {
     color: #dedede;
     font-size: 1.5rem;
     width: 3.45rem;
@@ -349,16 +300,11 @@ page-lu-prototype{
     padding: 0.4rem 1.5rem;
     margin-left: .425rem;
     text-decoration: none;
-}
-.setOne .tabMain{
-	position: relative;
-}
-/* setOne end*/
-
-
-
-
-
+  }
+  .setOne .tabMain{
+    position: relative;
+  }
+  /* setOne end*/
 
 
   //basic

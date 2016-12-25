@@ -1,5 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import {RoundProgressModule} from 'angular-svg-round-progressbar';
 import { MyApp } from './app.component';
 import { RankPage } from '../pages/rank/rank';
 import { ContactPage } from '../pages/contact/contact';
@@ -56,7 +57,8 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     SbMatchBasicComponent,
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    RoundProgressModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -82,4 +84,5 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, Localization]
 })
-export class AppModule { }
+export class AppModule {
+}

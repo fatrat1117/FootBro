@@ -37,19 +37,45 @@
 
 
   <!---->
-  <div class="section">
-    <div class="progressbar clearfloat">
-        <div class="fl pro">
-            <h4 class="progressTxt">出席比赛胜率</h4>
-            <div class="progress-bar position" data-percent="90"></div>
-        </div>
-        <h2 class="text">胜率</h2>
-        <div class="fr pro">
+  <!--<div class="section">-->
+    <ion-row>
+    <!--<div class="progressbar clearfloat">-->
+        <ion-col width-10></ion-col>
+        <ion-col width-30 class="align-center">
+          <h4 class="progressTxt">出席比赛胜率</h4>
+          <round-progress [current]=80
+                              [max]=100
+                              [color]="'#'+'00ff00'"
+                              [background]="'#'+'a0a0a0'"
+                              [radius]="125"
+                              [stroke]="20"
+                              [semicircle]="false"
+                              [rounded]="true"
+                              [clockwise]="false"
+                              [responsive]="true"
+              ></round-progress>
+        </ion-col>
+        <ion-col width-20 class="progressTxt" style="margin-top: 20%">胜率</ion-col>
+        <ion-col width-30 class="align-center">
+
             <h4 class="progressTxt">未出席比赛胜率</h4>
-            <div class="progress-bar position" data-percent="86"></div>
-        </div>
-    </div>
-  </div>
+            <round-progress [current]=80
+                            [max]=100
+                            [color]="'#'+'00ff00'"
+                            [background]="'#'+'a0a0a0'"
+                            [radius]="125"
+                            [stroke]="20"
+                            [semicircle]="false"
+                            [rounded]="true"
+                            [clockwise]="false"
+                            [responsive]="true"
+          ></round-progress>
+        </ion-col>
+        <ion-col width-10></ion-col>
+    <!--</div>-->
+    </ion-row>
+
+  <!--</div>-->
 
 
 
