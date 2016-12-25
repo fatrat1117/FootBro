@@ -8,8 +8,8 @@ import { PlayerService } from '../../app/players/shared/player.service'
   template: `
   <ion-header>
     <ion-navbar>
-      <ion-title>{{'HeightCM' | trans}}</ion-title>
-      <ion-buttons start> <!--showWhen="ios"-->
+      <ion-title>{{ 'HeightCM' | trans }}</ion-title>
+      <ion-buttons start showWhen="ios">
         <button (click)="dismiss()" text-center ion-button clear color="light">
           {{ 'Cancel' | trans }}
         </button>

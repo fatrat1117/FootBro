@@ -12,7 +12,7 @@ export const PLAYERS: Player[] = [
     },
     detail:
     {
-      description: "player description",
+      description: "player description, player description, player description, player description, player description.",
       foot: "left",
       height: 175,
       position: "amf",

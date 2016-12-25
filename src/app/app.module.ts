@@ -14,6 +14,7 @@ import { EditPlayerHeightPage } from "../pages/edit-player/edit-player-height";
 import { EditPlayerWeightPage } from "../pages/edit-player/edit-player-weight";
 import { EditPlayerPositionPage } from "../pages/edit-player/edit-player-position";
 import { EditPlayerFootPage } from "../pages/edit-player/edit-player-foot";
+import { EditPlayerDescriptionPage } from "../pages/edit-player/edit-player-description";
 import { EditTeamPage } from "../pages/edit-team/edit-team";
 import { MyPlayerPage } from "../pages/my-player/my-player";
 import { FeedbackPage } from "../pages/feedback/feedback";
@@ -39,6 +40,7 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     EditPlayerWeightPage,
     EditPlayerPositionPage,
     EditPlayerFootPage,
+    EditPlayerDescriptionPage,
     EditTeamPage,
     MyPlayerPage,
     JixiangPrototypePage,
@@ -70,6 +72,7 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     EditPlayerWeightPage,
     EditPlayerPositionPage,
     EditPlayerFootPage,
+    EditPlayerDescriptionPage,
     EditTeamPage,
     MyPlayerPage,
     JixiangPrototypePage,

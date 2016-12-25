@@ -34,9 +34,9 @@
       <h2>{{'Foot' | trans}}</h2>
       <p item-right>{{ playerDetail?.foot | trans}}</p>
     </ion-item>
-    <ion-item detail-push>
+    <ion-item detail-push (click)="editDescription()">
       <h2 item-left>{{'Description' | trans}}</h2>
-      <p item-right style="margin-left: 20%">aaaaaaaaaaaaaaaaadjalsjdaskjdlkasdjasldjlasjdklasjdlsakdjlkasjdaskdladas</p>
+      <p item-right style="margin-left: 20%">{{ playerDetail?.description }}</p>
     </ion-item>
   </ion-item-group>
 </ion-content>

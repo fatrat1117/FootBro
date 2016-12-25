@@ -6,6 +6,7 @@ import { EditPlayerHeightPage } from './edit-player-height'
 import { EditPlayerWeightPage } from './edit-player-weight'
 import { EditPlayerPositionPage } from './edit-player-position'
 import { EditPlayerFootPage } from './edit-player-foot'
+import { EditPlayerDescriptionPage } from './edit-player-description'
 
 import { PlayerBasic, PlayerDetail } from '../../app/players/shared/player.model'
 import { PlayerService } from '../../app/players/shared/player.service'
@@ -36,7 +37,7 @@ export class EditPlayerPage {
   }
 
   editName() {
-    this.modalCtrl.create(EditPlayerNamePage).present();
+    this.modalCtrl.create(EditPlayerNamePage, {showBackdrop: true}).present();
   }
 
   editHeight() {
@@ -53,6 +54,10 @@ export class EditPlayerPage {
 
   editFoot() {
     this.modalCtrl.create(EditPlayerFootPage).present();
+  }
+
+  editDescription() {
+    this.modalCtrl.create(EditPlayerDescriptionPage).present();
   }
 }
 

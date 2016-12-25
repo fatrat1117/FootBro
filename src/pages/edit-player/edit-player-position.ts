@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ViewController} from 'ionic-angular';
 
 import { PlayerDetail } from '../../app/players/shared/player.model'
@@ -9,6 +9,11 @@ import { PlayerService } from '../../app/players/shared/player.service'
   <ion-header>
     <ion-navbar>
       <ion-title>{{ 'Position' | trans }}</ion-title>
+      <ion-buttons end showWhen="ios">
+        <button (click)="dismiss()" text-center ion-button clear color="light">
+          {{ 'Cancel' | trans }}
+        </button>
+      </ion-buttons>
     </ion-navbar>
   </ion-header>
 
