@@ -25,6 +25,7 @@ import { JixiangPrototypePage } from "../pages/my-player/jixiang-prototype";
 
 // components
 import { SbLoadingComponent } from './common/loading.component';
+import { SbModalNavbarComponent } from './common/modal.navbar.component';
 import { SbMatchBasicComponent } from './matches/match-basic.component';
 
 @NgModule({
@@ -54,6 +55,7 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     NumberToTimePipe,
     // components
     SbLoadingComponent,
+    SbModalNavbarComponent,
     SbMatchBasicComponent,
   ],
   imports: [

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 
 import { PlayerBasic } from '../../app/players/shared/player.model'
 import { TeamBasic } from '../../app/teams/shared/team.model'
@@ -20,7 +20,7 @@ import { FeedbackPage } from "../feedback/feedback";
 export class MePage {
   playerBasic: PlayerBasic;
   teamBasic: TeamBasic;
-  constructor(private navCtrl: NavController, private playerService: PlayerService, private teamService: TeamService) {
+  constructor(private navCtrl: NavController, private modalCtrl: ModalController, private playerService: PlayerService, private teamService: TeamService) {
 
   }
 
@@ -49,6 +49,6 @@ export class MePage {
   }
 
   goFeedbackPage() {
-    this.navCtrl.push(FeedbackPage);
+    this.modalCtrl.create(FeedbackPage).present();
   }
 }

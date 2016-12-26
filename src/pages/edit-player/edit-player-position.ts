@@ -7,14 +7,7 @@ import { PlayerService } from '../../app/players/shared/player.service'
 @Component({
   template: `
   <ion-header>
-    <ion-navbar>
-      <ion-title>{{ 'Position' | trans }}</ion-title>
-      <ion-buttons end showWhen="ios">
-        <button (click)="dismiss()" text-center ion-button clear color="light">
-          {{ 'Cancel' | trans }}
-        </button>
-      </ion-buttons>
-    </ion-navbar>
+    <sb-modal-navbar title="Position" (onFinish)="save()"></sb-modal-navbar>
   </ion-header>
 
   <ion-content>

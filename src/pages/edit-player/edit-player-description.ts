@@ -7,21 +7,9 @@ import { PlayerService } from '../../app/players/shared/player.service'
 @Component({
   template: `
   <ion-header>
-    <ion-navbar>
-      <ion-title>{{ 'Description' | trans }}</ion-title>
-      <ion-buttons start showWhen="ios">
-        <button (click)="dismiss()" text-center ion-button clear color="light">
-          {{ 'Cancel' | trans }}
-        </button>
-      </ion-buttons>
-      <ion-buttons end>
-        <button [disabled] = "!isSavable" (click)="save()" text-center ion-button clear color="primary">
-          {{ 'Save' | trans }}
-        </button>
-      </ion-buttons>
-    </ion-navbar>
+    <sb-modal-navbar title="Description" buttonName="Save" [isEnabled]="isSavable" (onFinish)="save()"></sb-modal-navbar>
   </ion-header>
-
+  
   <ion-content>
     <ion-item>
       <ion-textarea #valueInput type="text" rows="6" maxlength="128" clearInput [(ngModel)]="newValue" (ngModelChange)=onValueChange()>
