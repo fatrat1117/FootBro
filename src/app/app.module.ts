@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import {RoundProgressModule} from 'angular-svg-round-progressbar';
+import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { MyApp } from './app.component';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { RankPage } from '../pages/rank/rank';
@@ -23,6 +23,7 @@ import { FeedbackPage } from "../pages/feedback/feedback";
 import { MatchesPage } from "../pages/matches/matches";
 import { LuPrototypePage } from "../pages/my-player/lu-prototype";
 import { JixiangPrototypePage } from "../pages/my-player/jixiang-prototype";
+
 
 // components
 import { SbLoadingComponent } from './common/loading.component';

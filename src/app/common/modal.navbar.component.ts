@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { ViewController} from 'ionic-angular';
+import { ViewController } from 'ionic-angular';
 
 @Component({
   selector: 'sb-modal-navbar',

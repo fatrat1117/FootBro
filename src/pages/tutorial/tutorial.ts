@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ViewController } from 'ionic-angular';
+
+import * as localforage from "localforage";
 
 
 @Component({
@@ -23,4 +26,12 @@ export class TutorialPage {
       image: "assets/img/tutorial/ica-slidebox-img-3.png",
     }
   ];
+
+  constructor(private viewCtrl: ViewController) {
+  }
+
+  finishTutorial() {
+    this.viewCtrl.dismiss();
+    localforage.setItem('notFirstTime', 'true');
+  }
 }

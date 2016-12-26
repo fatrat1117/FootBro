@@ -19,6 +19,5 @@ export class TabsPage {
   tab4Root: any = MePage;
 
   constructor() {
-
   }
 }
