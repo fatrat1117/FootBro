@@ -39,7 +39,7 @@ export class EditPlayerDescriptionPage {
   }
 
   onValueChange() {
-    this.isSavable = (this.newValue != '' && this.newValue != this.playerDetail.description);
+    this.isSavable = (this.newValue != this.playerDetail.description);
   }
 
   save() {

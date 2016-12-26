@@ -10,7 +10,7 @@ import { NavController } from 'ionic-angular';
 
   <ion-content>
     <ion-item>
-      <ion-textarea type="text" rows="6" maxlength="200" [(ngModel)]="content">
+      <ion-textarea type="text" rows="6" maxlength="200" [(ngModel)]="content" (ngModelChange)=onValueChange()>
       </ion-textarea>
     </ion-item>
   </ion-content>
@@ -26,6 +26,10 @@ export class FeedbackPage {
   }
 
   ionViewDidLoad() {
+  }
+
+  onValueChange() {
+    this.isEnabled = (this.content.trim().length != 0);
   }
 
   onSubmit() {

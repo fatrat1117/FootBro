@@ -39,7 +39,7 @@ export class EditPlayerNamePage {
   }
 
   onValueChange() {
-    this.isSavable = (this.newValue != '' && this.newValue != this.playerBasic.displayName);
+    this.isSavable = (this.newValue.trim().length != 0 && this.newValue != this.playerBasic.displayName);
   }
 
   save() {

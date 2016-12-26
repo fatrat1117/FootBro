@@ -39,7 +39,7 @@ export class EditPlayerHeightPage {
   }
 
   onValueChange() {
-    this.isSavable = (this.newValue != '' && this.newValue != this.playerDetail.height.toString());
+    this.isSavable = (this.newValue.trim().length != 0 && this.newValue != this.playerDetail.height.toString());
   }
 
   save() {

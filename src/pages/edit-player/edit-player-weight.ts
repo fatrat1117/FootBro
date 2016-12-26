@@ -39,7 +39,7 @@ export class EditPlayerWeightPage {
   }
 
   onValueChange() {
-    this.isSavable = (this.newValue != '' && this.newValue != this.playerDetail.weight.toString());
+    this.isSavable = (this.newValue.trim().length != 0 && this.newValue != this.playerDetail.weight.toString());
   }
 
   save() {

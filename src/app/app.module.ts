@@ -2,6 +2,7 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import {RoundProgressModule} from 'angular-svg-round-progressbar';
 import { MyApp } from './app.component';
+import { TutorialPage } from '../pages/tutorial/tutorial';
 import { RankPage } from '../pages/rank/rank';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
@@ -31,6 +32,7 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
 @NgModule({
   declarations: [
     MyApp,
+    TutorialPage,
     RankPage,
     ContactPage,
     HomePage,
@@ -65,6 +67,7 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    TutorialPage,
     RankPage,
     ContactPage,
     HomePage,
