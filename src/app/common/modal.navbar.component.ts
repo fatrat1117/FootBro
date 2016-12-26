@@ -6,7 +6,7 @@ import { ViewController} from 'ionic-angular';
   template: `
   <ion-navbar>
     <ion-title>{{ title | trans }}</ion-title>
-    <ion-buttons start> <!--showWhen="ios"-->
+    <ion-buttons start showWhen="ios"-->
       <button (click)="dismiss()" text-center ion-button clear color="light">
         {{ 'Cancel' | trans }}
       </button>
