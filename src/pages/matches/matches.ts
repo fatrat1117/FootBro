@@ -11,8 +11,7 @@ import { LeagueService } from '../../app/leagues/shared/league.service'
 
 @Component({
   selector: 'page-matches',
-  templateUrl: 'matches.html',
-  providers: [MatchService, LeagueService]
+  templateUrl: 'matches.html'
 })
 
 export class MatchesPage {

@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'ManageTeams' | trans}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let t of teams; let i = index;">
+      <ion-item>
+        <ion-thumbnail item-left>
+          <img [src]="(t | teamBasicPipe | async)?.logo">
+        </ion-thumbnail>
+        <h2>{{ (t | teamBasicPipe | async)?.name }}</h2>
+      </ion-item>
+      <ion-item-options side="right">
+        <button *ngIf="(playerBasic)?.teamId != t" ion-button color="primary" (click)="setDefaultTeam(t)">
+          Set Default
+        </button>
+        <button [disabled]="(playerBasic)?.teamId == t" ion-button color="danger" (click)="quitTeam(i)">
+          Quit
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

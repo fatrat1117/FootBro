@@ -8,14 +8,13 @@ import { PlayerService } from '../../app/players/shared/player.service'
 import { TeamService } from '../../app/teams/shared/team.service'
 
 import { EditPlayerPage } from "../edit-player/edit-player";
-import { EditTeamPage } from "../edit-team/edit-team";
+import { ManageTeamPage } from "../manage-team/manage-team";
 import { MyPlayerPage } from "../my-player/my-player";
 import { FeedbackPage } from "../feedback/feedback";
 
 @Component({
   selector: 'page-me',
-  templateUrl: 'me.html',
-  providers: [PlayerService, TeamService]
+  templateUrl: 'me.html'
 })
 export class MePage {
   playerBasic: PlayerBasic;
@@ -40,8 +39,8 @@ export class MePage {
     this.navCtrl.push(EditPlayerPage);
   }
 
-  goEditTeamPage() {
-    this.navCtrl.push(EditTeamPage);
+  goSwitchTeamPage() {
+    this.navCtrl.push(ManageTeamPage);
   }
 
   goPlayerPage() {

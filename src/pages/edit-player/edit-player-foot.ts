@@ -18,8 +18,7 @@ import { PlayerService } from '../../app/players/shared/player.service'
       </ion-item>
     </ion-list>
   </ion-content>
-  `,
-  providers: [PlayerService]
+  `
 })
 export class EditPlayerFootPage {
   playerDetail: PlayerDetail;

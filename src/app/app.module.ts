@@ -7,8 +7,6 @@ import { RankPage } from '../pages/rank/rank';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import { TransPipe, Localization } from '../providers/localization';
-import { StringToDatePipe, NumberToTimePipe } from '../pipes/moment.pipe';
 import { MePage } from "../pages/me/me";
 import { EditPlayerPage } from "../pages/edit-player/edit-player";
 import { EditPlayerNamePage } from "../pages/edit-player/edit-player-name";
@@ -17,13 +15,21 @@ import { EditPlayerWeightPage } from "../pages/edit-player/edit-player-weight";
 import { EditPlayerPositionPage } from "../pages/edit-player/edit-player-position";
 import { EditPlayerFootPage } from "../pages/edit-player/edit-player-foot";
 import { EditPlayerDescriptionPage } from "../pages/edit-player/edit-player-description";
-import { EditTeamPage } from "../pages/edit-team/edit-team";
+import { ManageTeamPage } from "../pages/manage-team/manage-team";
 import { MyPlayerPage } from "../pages/my-player/my-player";
 import { FeedbackPage } from "../pages/feedback/feedback";
 import { MatchesPage } from "../pages/matches/matches";
 import { LuPrototypePage } from "../pages/my-player/lu-prototype";
 import { JixiangPrototypePage } from "../pages/my-player/jixiang-prototype";
 
+// services
+import { PlayerService } from './players/shared/player.service';
+import { TeamService } from './teams/shared/team.service';
+
+// pipes
+import { TransPipe, Localization } from '../providers/localization';
+import { StringToDatePipe, NumberToTimePipe } from '../pipes/moment.pipe';
+import { TeamBasicPipe } from '../pipes/team.pipe'
 
 // components
 import { SbLoadingComponent } from './common/loading.component';
@@ -46,7 +52,7 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     EditPlayerPositionPage,
     EditPlayerFootPage,
     EditPlayerDescriptionPage,
-    EditTeamPage,
+    ManageTeamPage,
     MyPlayerPage,
     JixiangPrototypePage,
     LuPrototypePage,
@@ -56,13 +62,16 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     TransPipe,
     StringToDatePipe,
     NumberToTimePipe,
+    TeamBasicPipe,
     // components
     SbLoadingComponent,
     SbModalNavbarComponent,
     SbMatchBasicComponent,
   ],
   imports: [
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      tabsHideOnSubPages: true
+    }),
     RoundProgressModule
   ],
   bootstrap: [IonicApp],
@@ -81,14 +90,14 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     EditPlayerPositionPage,
     EditPlayerFootPage,
     EditPlayerDescriptionPage,
-    EditTeamPage,
+    ManageTeamPage,
     MyPlayerPage,
     JixiangPrototypePage,
     LuPrototypePage,
     FeedbackPage,
     MatchesPage
   ],
-  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, Localization]
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, Localization, PlayerService, TeamService]
 })
 export class AppModule {
 }

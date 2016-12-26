@@ -16,8 +16,7 @@ import { PlayerService } from '../../app/players/shared/player.service'
       </ion-input>
     </ion-item>
   </ion-content>
-  `,
-  providers: [PlayerService]
+  `
 })
 export class EditPlayerWeightPage {
   @ViewChild('valueInput') valueInput;

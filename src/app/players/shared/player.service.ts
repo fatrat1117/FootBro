@@ -14,12 +14,21 @@ export class PlayerService {
     return Promise.resolve(PLAYERS[0].detail);
   }
 
+  getSelfTeams(): Promise<string[]> {
+    return Promise.resolve(PLAYERS[0].teams);
+  }
+
   saveSelfBasic(playerBasic: PlayerBasic) {
     PLAYERS[0].basic = playerBasic;
   }
 
   saveSelfDetail(playerDetail: PlayerDetail) {
     PLAYERS[0].detail = playerDetail;
+  }
+
+  saveSelfTeams(teams: string[]) {
+    PLAYERS[0].teams = teams;
+    // TODO: update team
   }
 
   // general

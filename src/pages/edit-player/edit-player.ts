@@ -14,8 +14,7 @@ import { PlayerService } from '../../app/players/shared/player.service'
 
 @Component({
   selector: 'page-edit-player',
-  templateUrl: 'edit-player.html',
-  providers: [PlayerService]
+  templateUrl: 'edit-player.html'
 })
 export class EditPlayerPage {
   playerBasic: PlayerBasic;

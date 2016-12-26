@@ -20,4 +20,5 @@ export class Player {
   basic: PlayerBasic;
   detail: PlayerDetail;
   role: string;
+  teams: string[];
 }

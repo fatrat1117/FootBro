@@ -17,7 +17,7 @@
       </ion-thumbnail>
       <h2>{{ playerBasic?.displayName }}</h2>
     </ion-item>
-    <ion-item (click)="goEditTeamPage()" *ngIf="(playerBasic)?.teamId" detail-push>
+    <ion-item (click)="goSwitchTeamPage()" *ngIf="(playerBasic)?.teamId" detail-push>
       <ion-thumbnail item-left>
         <img [src]="(teamBasic)?.logo">
       </ion-thumbnail>

@@ -14,15 +14,14 @@ import { NavController } from 'ionic-angular';
       </ion-textarea>
     </ion-item>
   </ion-content>
-  `,
-  providers: []
+  `
 })
 export class FeedbackPage {
   isEnabled: boolean;
   content: string;
 
   constructor(private navCtrl: NavController) {
-    this.isEnabled = true;
+    this.isEnabled = false;
   }
 
   ionViewDidLoad() {

@@ -20,6 +20,7 @@ export const PLAYERS: Player[] = [
       slogan: "player slogan",
       weight: 65
     },
-    role: "player"
+    role: "player",
+    teams: ["-KL1a8zTfCXDapavsN_L", "-KSdPo0mqxW4onbULW85"]
   }
 ];

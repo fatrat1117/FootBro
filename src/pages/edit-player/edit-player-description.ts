@@ -16,8 +16,7 @@ import { PlayerService } from '../../app/players/shared/player.service'
       </ion-textarea>
     </ion-item>
   </ion-content>
-  `,
-  providers: [PlayerService]
+  `
 })
 export class EditPlayerDescriptionPage {
   @ViewChild('valueInput') valueInput;
