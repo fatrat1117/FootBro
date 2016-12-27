@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
-import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
-
+import {NavController} from 'ionic-angular'
 
 @Component({
   selector: 'page-my-player',
@@ -10,21 +8,20 @@ import {CHART_DIRECTIVES} from 'ng2-charts/ng2-charts';
 export class MyPlayerPage {
   pId: any;
   //af
-  afBasic: any;
-  afDetail: any;
-  afPublic: any;
-  secretCount = 0;
-  // Radar
-  public radarChartLabels:string[];
-
-  public radarChartData:any = [
-    [20, 20, 20, 20, 20, 20],
-  ];
-  public radarChartType:string = 'radar';
-  public radarOptions = { legend: { display: false }};
+  NumOfLikes : number;
+  NumOfUnLikes : number;
+  PercentOfLikes : number;
+  PercentOfUnLikes : number;
 
   constructor(private nav: NavController) {
+    var fromDBLikes = 1390;
+    var fromDBUnLikes = 60;
 
+
+    this.NumOfLikes = fromDBLikes;
+    this.NumOfUnLikes = fromDBUnLikes;
+    this.PercentOfLikes = fromDBLikes/(fromDBLikes+fromDBUnLikes) * 100;
+    this.PercentOfUnLikes = fromDBUnLikes/ (fromDBLikes+fromDBUnLikes) * 100;
   }
 
 }

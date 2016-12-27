@@ -1,5 +1,15 @@
 page-my-player{
   font-family: 'PingFang SC', 'Helvetica Neue', 'Helvetica', 'STHeitiSC-Light', 'Arial', sans-serif;
+  margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font-family:'Helvetica Neue', 'Microsoft YaHei', Helvetica, Arial, 'Liberation Sans', FreeSans, 'Hiragino Sans GB', sans-serif;
+	font-weight: normal;
+	vertical-align: baseline;
+	text-decoration: none;
+	line-height: 1.2;
+  
   ion-header{
 
     .toolbar-background-md{
@@ -32,4 +42,304 @@ page-my-player{
     background-color: #00ef00 ;
   }
 
+ .fl {
+    float: left;
+  }
+  .fr{
+    float:right;
+  }
+
+  .clearfloat{
+    zoom:1;
+  }
+
+  .clearfloat:after{
+    display: block;
+    clear: both;
+    content: "";
+    overflow: hidden;
+    height: 0;
+  }
+
+  .flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flex-start{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .flex-end{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .invisible{
+    visibility: hidden;
+  }
+
+  .my-player-header-card {
+    position: relative;
+    width: 100%;
+
+    .banner{
+      width: 100%;
+      position: relative;
+      img{
+        width: 100%;
+        display: block;
+      }
+
+      .banner-info{
+        position: absolute;
+        bottom: 6%;
+        width: 74.5%;
+        padding: 0rem 2.66%;
+
+        h1,h2,h3,h4{
+          font-size: 135%;
+        }
+
+        .info-pop{
+          width: 21.43%;
+          .pop-number{
+            background-color: #444343;
+            h3{
+              color: #fff;
+              text-align: center;
+              padding: 0.3rem 0rem;
+            }
+          }
+
+          .pop-label{
+            background-color: #fa3b40;
+            padding: 0 0.2rem;
+            zoom: 1;
+            .label-fire{
+              display: inline-block;
+              width: 1rem;
+              margin: 0.15rem 0rem;
+            }
+            .label-word{
+              color: #fff;
+              line-height: 1.2rem;
+              font-size: 1rem;
+            }
+          }
+
+
+        }
+
+        .info-name{
+          color: #ffffff;
+          bottom: 0;
+          position: absolute;
+          right: 0;
+          max-width: 70%;
+        }
+      }
+    }
+
+
+    .player{
+      background-color: #171717;
+      position: relative;
+      border-bottom: 2px solid #737373;
+      h1{
+        text-align: center;
+        color: #ffffff;
+        font-size: 0.8rem;
+        padding: 0.5rem 0rem;
+        .player-position{
+          color: #00ff00;
+        }
+        .player-at{
+          color: #757575;
+        }
+
+        .player-team-name{
+          color:#fff;
+        }
+      }
+
+      .player-logo{
+        width: 20%;
+        position: absolute;
+        right: 0.25rem;
+        bottom: 0.25rem;
+        border: 1px solid #cccccc;
+        img{
+          width: 100%;
+          display: block;
+        }
+      }
+
+      .company-logo{
+        position: absolute;
+        width:33.33%;
+        max-width: 10rem;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        img{
+          width: 100%;
+          display: block;
+        }
+        h4{
+          color: #858585;
+          font-size: 1.2rem;
+          width: 100%;
+          text-align: center;
+          margin: 0;
+          position: absolute;
+          top: 0;
+        }
+      }
+    }
+
+
+    .player-statistics{
+      background-color: #171717;
+
+      .block{
+        background-color: #25262b;
+        width: 33.33%;
+        text-align: center;
+        float: left;
+        margin-left: 0.2rem;
+        height: auto;
+        .txt{
+          margin: 1rem;
+        }
+        .data{
+          color: #fff;
+          font-size: 2rem;
+          font-weight: bold;
+          line-height: 3rem;
+          min-width: 4rem;
+        }
+
+        .unit{
+          color: #fff;
+          .unit-first{
+            font-size: 1rem;
+            font-weight: bold;
+          }
+          .unit-second{
+            color: #b0b0b0;
+            font-size: 0.8rem;
+          }
+        }
+
+        h1{
+          color: #fff;
+          font-size: 2.5rem;
+          line-height: 3rem;
+        }
+        h2{
+          color: #fff;
+          font-size: 1.8rem;
+          margin: 0.6rem 0rem 0.6rem 0.2rem;
+
+          span{
+            font-size: 1.75rem;
+          }
+          span:last-child{
+            color: #b0b0b0;
+            display: block;
+            font-size: 1.65rem;
+          }
+        }
+      }
+      .height{
+        border-bottom: 4px solid #00ffac;
+        margin-left: 0;
+      }
+
+      .weight{
+        border-bottom: 4px solid #01c5ff;
+      }
+
+      .foot{
+        border-bottom: 4px solid #fcdb14;
+      }
+    }
+
+    .totalFeedBack{
+      padding: 0 .6rem 1.1rem .6rem;
+
+
+      .like{
+        width: 1.1rem;
+        margin-top: -.25rem;
+        background: url(../../assets/icon/smallgood.png) no-repeat;
+        background-size: contain;
+        height: 1rem;
+      }
+
+      .feed-back-bar{
+        width:100%;
+        .redPrg{
+          padding-right: 1px;
+          width: 80%;
+          //margin-left: 1.1rem;
+
+          .redStrip{
+            width: 100%;
+            height: .25rem;
+            border-radius: 4px;
+            background-color: #fa3b40;
+          }
+          .stripText{
+            font-size: .7rem;
+            color: #fa3b40;
+            display: block;
+            padding-top: .2rem;
+          }
+
+
+        }
+
+        .bluePrg{
+          padding-left: 1px;
+          width: 20%;
+          //margin-left: .15rem;
+
+          .blueStrip{
+            width: 100%;
+            height: .25rem;
+            border-radius: 4px;
+            background-color: #339adb;
+          }
+
+          .blueText{
+            font-size: .7rem;
+            color: #339adb;
+            text-align: right;
+            display: block;
+            padding-top: .2rem;
+          }
+
+
+        }
+      }
+
+      .unLike{
+        width: 1.1rem;
+        margin-top: -.25rem;
+        background: url(../../assets/icon/smallbad.png) no-repeat;
+        background-size: contain;
+        height: 1rem;
+      }
+
+
+    }
+
+
+  }
 }
