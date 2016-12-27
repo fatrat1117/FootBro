@@ -36,7 +36,7 @@ export class EditPlayerPage {
   }
 
   editName() {
-    this.modalCtrl.create(EditPlayerNamePage, {showBackdrop: true}).present();
+    this.modalCtrl.create(EditPlayerNamePage).present();
   }
 
   editHeight() {

@@ -26,6 +26,7 @@ export class MePage {
   
 
   ionViewDidLoad() {
+    
     this.playerService.getSelfBasic().then(playerBasic => {
       this.playerBasic = playerBasic;
     });

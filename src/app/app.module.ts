@@ -16,6 +16,7 @@ import { EditPlayerPositionPage } from "../pages/edit-player/edit-player-positio
 import { EditPlayerFootPage } from "../pages/edit-player/edit-player-foot";
 import { EditPlayerDescriptionPage } from "../pages/edit-player/edit-player-description";
 import { ManageTeamPage } from "../pages/manage-team/manage-team";
+import { NewTeamPage } from "../pages/manage-team/new-team";
 import { MyPlayerPage } from "../pages/my-player/my-player";
 import { FeedbackPage } from "../pages/feedback/feedback";
 import { MatchesPage } from "../pages/matches/matches";
@@ -53,6 +54,7 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     EditPlayerFootPage,
     EditPlayerDescriptionPage,
     ManageTeamPage,
+    NewTeamPage,
     MyPlayerPage,
     JixiangPrototypePage,
     LuPrototypePage,
@@ -91,6 +93,7 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     EditPlayerFootPage,
     EditPlayerDescriptionPage,
     ManageTeamPage,
+    NewTeamPage,
     MyPlayerPage,
     JixiangPrototypePage,
     LuPrototypePage,

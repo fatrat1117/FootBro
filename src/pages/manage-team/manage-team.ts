@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { ViewController, ModalController } from 'ionic-angular';
+
+import { NewTeamPage } from './new-team'
 
 import { PlayerBasic } from '../../app/players/shared/player.model'
 import { PlayerService } from '../../app/players/shared/player.service'
@@ -12,7 +14,7 @@ import { PlayerService } from '../../app/players/shared/player.service'
 export class ManageTeamPage {
   playerBasic: PlayerBasic;
   teams: string[];
-  constructor(private navCtrl: NavController, private playerService: PlayerService) {
+  constructor(private viewCtrl: ViewController, private modalCtrl: ModalController, private playerService: PlayerService) {
 
   }
 
@@ -26,13 +28,33 @@ export class ManageTeamPage {
     });
   }
   
-  setDefaultTeam(id: string) {
-    this.playerBasic.teamId = id;
-    this.playerService.saveSelfBasic(this.playerBasic);
+  setDefaultTeam(index: number, slidingItem) {
+    slidingItem.close();
+    this.updateSelfBasic(this.teams[index]);
   }
 
   quitTeam(index: number) {
+    // if is default team, clear it
+    if (this.teams[index] == this.playerBasic.teamId)
+      this.updateSelfBasic("");
+
+    // remove from team list
     this.teams.splice(index, 1);
     this.playerService.saveSelfTeams(this.teams);
+
+    // set default
+    if (this.teams.length > 0)
+      this.updateSelfBasic(this.teams[0]);
+    else
+      this.viewCtrl.dismiss();
+  }
+
+  adddNewTeam() {
+    this.modalCtrl.create(NewTeamPage).present();
+  }
+
+  updateSelfBasic(teamId: string) {
+    this.playerBasic.teamId = teamId;
+    this.playerService.saveSelfBasic(this.playerBasic);
   }
 }
