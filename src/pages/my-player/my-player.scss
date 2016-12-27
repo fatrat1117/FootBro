@@ -118,17 +118,17 @@ page-my-player{
 
           .pop-label{
             background-color: #fa3b40;
-            padding: 0 0.2rem;
+            padding: 0.2rem 0.3rem;
             zoom: 1;
+            height: 2.5rem;
             .label-fire{
-              display: inline-block;
-              width: 1rem;
-              margin: 0.15rem 0rem;
+              //display: inline-block;
+              width: 1.6rem;
+              //margin: 0.15rem 0rem;
             }
             .label-word{
               color: #fff;
-              line-height: 1.2rem;
-              font-size: 1rem;
+              font-size: 110%;
             }
           }
 
@@ -153,7 +153,7 @@ page-my-player{
       h1{
         text-align: center;
         color: #ffffff;
-        font-size: 0.8rem;
+        font-size: 1.7rem;
         padding: 0.5rem 0rem;
         .player-position{
           color: #00ff00;
