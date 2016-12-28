@@ -11,7 +11,8 @@ import { LeagueService } from '../../app/leagues/shared/league.service'
 
 @Component({
   selector: 'page-matches',
-  templateUrl: 'matches.html'
+  templateUrl: 'matches.html',
+  providers: [ MatchService, LeagueService ]
 })
 
 export class MatchesPage {
@@ -20,7 +21,7 @@ export class MatchesPage {
   matchBasics: MatchBasic[];
   matchStandings: MatchStanding[];
   leagueBasics: LeagueBasic[];
-  
+
   selectedInfo: string;
   selectedId: string;
 

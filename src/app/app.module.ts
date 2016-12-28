@@ -97,7 +97,7 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     FeedbackPage,
     MatchesPage
   ],
-  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, Localization, PlayerService, TeamService]
+  providers: [ { provide: ErrorHandler, useClass: IonicErrorHandler }, Localization, PlayerService, TeamService ]
 })
 export class AppModule {
 }
