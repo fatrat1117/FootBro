@@ -21,7 +21,6 @@ import { MyPlayerPage } from "../pages/my-player/my-player";
 import { FeedbackPage } from "../pages/feedback/feedback";
 import { MatchesPage } from "../pages/matches/matches";
 import { LuPrototypePage } from "../pages/my-player/lu-prototype";
-import { JixiangPrototypePage } from "../pages/my-player/jixiang-prototype";
 
 // services
 import { PlayerService } from './players/shared/player.service';
@@ -56,7 +55,6 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     ManageTeamPage,
     NewTeamPage,
     MyPlayerPage,
-    JixiangPrototypePage,
     LuPrototypePage,
     FeedbackPage,
     MatchesPage,
@@ -95,7 +93,6 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     ManageTeamPage,
     NewTeamPage,
     MyPlayerPage,
-    JixiangPrototypePage,
     LuPrototypePage,
     FeedbackPage,
     MatchesPage
