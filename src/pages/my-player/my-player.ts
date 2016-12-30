@@ -14,8 +14,8 @@ export class MyPlayerPage {
   PercentOfUnLikes : number;
 
   constructor(private nav: NavController) {
-    var fromDBLikes = 1390;
-    var fromDBUnLikes = 60;
+    var fromDBLikes = 213;
+    var fromDBUnLikes = 67;
 
 
     this.NumOfLikes = fromDBLikes;

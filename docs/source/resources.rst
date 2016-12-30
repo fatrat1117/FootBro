@@ -47,6 +47,9 @@ Frontend
 `CSS Selectors Fundamental
 <https://code.tutsplus.com/tutorials/the-30-css-selectors-you-must-memorize--net-16048/>`_
 
+`EM VS REM
+<https://zellwk.com/blog/rem-vs-em/>`_
+
 * SASS
 
 `A guide to styling a ionic2 project
