@@ -20,7 +20,6 @@ import { NewTeamPage } from "../pages/manage-team/new-team";
 import { MyPlayerPage } from "../pages/my-player/my-player";
 import { FeedbackPage } from "../pages/feedback/feedback";
 import { MatchesPage } from "../pages/matches/matches";
-import { LuPrototypePage } from "../pages/my-player/lu-prototype";
 
 // services
 import { PlayerService } from './players/shared/player.service';
@@ -55,7 +54,6 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     ManageTeamPage,
     NewTeamPage,
     MyPlayerPage,
-    LuPrototypePage,
     FeedbackPage,
     MatchesPage,
     // pipes
@@ -93,7 +91,6 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     ManageTeamPage,
     NewTeamPage,
     MyPlayerPage,
-    LuPrototypePage,
     FeedbackPage,
     MatchesPage
   ],
