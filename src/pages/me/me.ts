@@ -49,6 +49,6 @@ export class MePage {
   }
 
   goFeedbackPage() {
-    this.modalCtrl.create(FeedbackPage).present();
+    this.navCtrl.push(FeedbackPage);
   }
 }

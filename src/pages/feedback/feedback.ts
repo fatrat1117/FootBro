@@ -32,5 +32,6 @@ export class FeedbackPage {
   }
 
   onSubmit() {
+    this.navCtrl.pop();
   }
 }
