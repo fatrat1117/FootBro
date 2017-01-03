@@ -11,3 +11,58 @@
   </ion-navbar>
 
 </ion-header>
+
+<ion-content>
+  <div class="cheering-team-segment">
+    <ion-segment [(ngModel)]="who">
+      <ion-segment-button no-padding value="baby">
+        <ion-icon name="football" class="football-icon"><span>{{'宝贝' | trans}}</span></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button no-padding value="judge">
+        <ion-icon name="hand" class="judge-icon"><span>{{'裁判' | trans}}</span></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button no-padding value="player">
+        <ion-icon name="body" class="player-icon"><span>{{'球员' | trans}}</span></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div class="cheering-team-type" [ngSwitch]="who">
+
+    <div *ngSwitchCase="'baby'">
+      <ion-row>
+        <ion-col width-25 no-margin tabindex="0">
+          <div class="TabbedPanelsTab">
+          <ion-label no-margin class="label label-md">颜值高</ion-label>
+          </div>
+        </ion-col>
+        <ion-col width-25 no-margin tabindex="0">
+         <div class="TabbedPanelsTab">
+          <ion-label no-margin class="label label-md">在校生</ion-label>
+          </div>
+        </ion-col>
+        <ion-col width-25 no-margin tabindex="0">
+          <div class="TabbedPanelsTab">
+          <ion-label no-margin class="label label-md">兼职模特</ion-label>
+          </div>
+        </ion-col>
+        <ion-col width-25 no-margin tabindex="0">
+            <div class="TabbedPanelsTab">
+          <ion-label no-margin class="label label-md">团体</ion-label>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div *ngSwitchCase="'judge'">
+      裁判
+    </div>
+
+    <div *ngSwitchCase="'player'">
+      球员
+    </div>
+
+
+  </div>
+
+</ion-content>

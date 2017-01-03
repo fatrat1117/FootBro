@@ -1,3 +1,31 @@
-.cheering-team{
+page-cheering-team{
 
+  font-size: 1.7rem;
+
+  .cheering-team-segment{
+
+    ion-segment-button{
+      ion-icon{
+        font-size: 1.6rem !important;
+      }
+      span{
+        font-size: 1.4rem;
+        margin-left: 0.3rem;
+      }
+    }
+
+  }
+  .cheering-team-type{
+    .TabbedPanelsTab {
+      border: 1px solid #999;
+      //width: 3.675rem;
+      font-size: 1.2rem;
+      color: #888;
+      text-align: center;
+      padding: .425rem 0.4rem;
+      outline: none !important;
+      border-radius: 2rem;
+      list-style-type: none;
+    }
+  }
 }

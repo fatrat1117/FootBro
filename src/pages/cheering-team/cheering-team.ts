@@ -6,7 +6,7 @@ import {NavController} from 'ionic-angular'
   templateUrl: 'cheering-team.html',
 })
 export class CheeringTeamPage {
-  pId: any;
+  who = "baby";
 
 
   constructor(private nav: NavController) {
