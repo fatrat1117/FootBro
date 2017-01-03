@@ -31,7 +31,7 @@ page-cheering-team{
       width: 85%;
       margin: 0 auto;
     }
-    .baby-row-2{
+    .baby-become-row{
       width:97%;
     }
 
@@ -58,6 +58,50 @@ page-cheering-team{
         }
         span{
           font-size:1.2rem;
+        }
+      }
+    }
+
+    .baby-row{
+      .baby-img-frame{
+        position:relative;
+        .chat-shadow{
+          position: absolute;
+          background: grey;
+          border-radius: 50%;
+          width: 2.8rem;
+          height: 2.8rem;
+          top: 0.7rem;
+          right: 0.7rem;
+          }
+        .chat-logo{
+          position:absolute;
+          top: 1.2rem;
+          right: 1.2rem;
+          max-width: 1.8rem;
+        }
+      }
+
+      .baby-status{
+        width:100%;
+        h3{
+            margin:0;
+            font-size:1.4rem;
+        }
+
+        .eyes{
+          font-size:1rem;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          img{
+            max-width:1rem;
+          }
+        }
+        .prize{
+          padding-right:0;
+          text-align: right;
+          color:rgba(249, 0, 32, 1);
         }
       }
     }
