@@ -16,16 +16,53 @@ page-cheering-team{
 
   }
   .cheering-team-type{
+
+    margin-top: 0.5rem;
+    font-size:1.2rem;
     .TabbedPanelsTab {
       border: 1px solid #999;
       //width: 3.675rem;
-      font-size: 1.2rem;
       color: #888;
       text-align: center;
-      padding: .425rem 0.4rem;
+      padding: .325rem 0.1rem;
       outline: none !important;
       border-radius: 2rem;
       list-style-type: none;
+      width: 85%;
+      margin: 0 auto;
     }
+    .baby-row-2{
+      width:97%;
+    }
+
+    .speaker{
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      img{
+        max-width:1.2rem;
+      }
+    }
+
+    .become-col{
+      background: rgba(249, 0, 32, 1);
+      border-radius: 0.3rem;
+        .become{
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        ion-icon{
+          font-size:1.2rem;
+        }
+        span{
+          font-size:1.2rem;
+        }
+      }
+    }
+ 
   }
+
+
 }

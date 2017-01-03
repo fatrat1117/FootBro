@@ -30,27 +30,47 @@
   <div class="cheering-team-type" [ngSwitch]="who">
 
     <div *ngSwitchCase="'baby'">
-      <ion-row>
-        <ion-col width-25 no-margin tabindex="0">
+      <ion-row class="baby-row-1">
+        <ion-col width-25 tabindex="0">
           <div class="TabbedPanelsTab">
           <ion-label no-margin class="label label-md">颜值高</ion-label>
           </div>
         </ion-col>
-        <ion-col width-25 no-margin tabindex="0">
+        <ion-col width-25 tabindex="0">
          <div class="TabbedPanelsTab">
           <ion-label no-margin class="label label-md">在校生</ion-label>
           </div>
         </ion-col>
-        <ion-col width-25 no-margin tabindex="0">
+        <ion-col width-25 tabindex="0">
           <div class="TabbedPanelsTab">
           <ion-label no-margin class="label label-md">兼职模特</ion-label>
           </div>
         </ion-col>
-        <ion-col width-25 no-margin tabindex="0">
+        <ion-col width-25 tabindex="0">
             <div class="TabbedPanelsTab">
           <ion-label no-margin class="label label-md">团体</ion-label>
           </div>
         </ion-col>
+      </ion-row>
+
+      <ion-row class="baby-row-2">
+
+        <ion-col width-75 no-margin>
+          <div class="speaker">
+            <span><img src="../../assets/img/cheering-team/speaker.png"/>全国共有2313位宝贝可约</span>
+          </div>
+        </ion-col>
+
+        <ion-col class="become-col" width-25 no-margin>
+          <div class="become">
+              <ion-icon name="football" class="football-icon"><span>{{'成为宝贝' | trans}}</span></ion-icon>
+          </div>
+          <!--  <div class="TabbedPanelsTab">
+          <ion-label no-margin class="label label-md">团体</ion-label>
+          </div> -->
+        </ion-col>
+
+       
       </ion-row>
     </div>
 
