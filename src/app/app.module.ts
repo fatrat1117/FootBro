@@ -20,6 +20,7 @@ import { NewTeamPage } from "../pages/manage-team/new-team";
 import { MyPlayerPage } from "../pages/my-player/my-player";
 import { FeedbackPage } from "../pages/feedback/feedback";
 import { MatchesPage } from "../pages/matches/matches";
+import { CheeringTeamPage } from "../pages/cheering-team/cheering-team";
 
 // services
 import { PlayerService } from './players/shared/player.service';
@@ -56,6 +57,7 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     MyPlayerPage,
     FeedbackPage,
     MatchesPage,
+    CheeringTeamPage,
     // pipes
     TransPipe,
     StringToDatePipe,
@@ -92,7 +94,8 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     NewTeamPage,
     MyPlayerPage,
     FeedbackPage,
-    MatchesPage
+    MatchesPage,
+    CheeringTeamPage,
   ],
   providers: [ { provide: ErrorHandler, useClass: IonicErrorHandler }, Localization, PlayerService, TeamService ]
 })

@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
+
 import {Localization} from '../../providers/localization';
+import {CheeringTeamPage} from '../cheering-team/cheering-team';
 
 @Component({
   selector: 'page-home',
@@ -39,6 +41,10 @@ export class HomePage {
 
   enterStandings() {
     return;
+  }
+
+  enterCheeringTeam(){
+    this.navCtrl.push(CheeringTeamPage);
   }
 
 }
