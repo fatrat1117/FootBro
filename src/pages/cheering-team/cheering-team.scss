@@ -3,6 +3,21 @@ page-cheering-team{
   font-size: 1.7rem;
   font-family:'Microsoft YaHei';
 
+  ion-header{
+
+    ion-icon{
+      color: #F2EDE7;;
+    }
+    ion-title{
+      .toolbar-title{
+        color:#F2EDE7;;
+      }
+    }
+    .share-icon{
+      max-width:2rem;
+    }
+  }
+
   .cheering-team-segment{
 
     ion-segment-button{

@@ -5,7 +5,7 @@
 
     <ion-buttons end>
       <button class="my-player-btn-right" ion-button>
-        分享按钮
+        <img class="share-icon" src="./../assets/img/cheering-team/share.png"/>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -32,22 +32,26 @@
     <div *ngSwitchCase="'baby'">
       <ion-row class="baby-type-row">
         <ion-col width-25 tabindex="0">
-          <div class="TabbedPanelsTab">
+          <div class="TabbedPanelsTab" [ngStyle]="{'color':getColor(0),
+          'border-color': getColor(0)}" (click)="highLight(0)">
           <ion-label no-margin class="label label-md">颜值高</ion-label>
           </div>
         </ion-col>
         <ion-col width-25 tabindex="0">
-         <div class="TabbedPanelsTab">
+         <div class="TabbedPanelsTab" [ngStyle]="{'color':getColor(1),
+          'border-color': getColor(1)}" (click)="highLight(1)">
           <ion-label no-margin class="label label-md">在校生</ion-label>
           </div>
         </ion-col>
         <ion-col width-25 tabindex="0">
-          <div class="TabbedPanelsTab">
+          <div class="TabbedPanelsTab" [ngStyle]="{'color':getColor(2),
+          'border-color': getColor(2)}" (click)="highLight(2)">
           <ion-label no-margin class="label label-md">兼职模特</ion-label>
           </div>
         </ion-col>
         <ion-col width-25 tabindex="0">
-            <div class="TabbedPanelsTab">
+            <div class="TabbedPanelsTab" [ngStyle]="{'color':getColor(3),
+          'border-color': getColor(3)}" (click)="highLight(3)">
           <ion-label no-margin class="label label-md">团体</ion-label>
           </div>
         </ion-col>

@@ -7,10 +7,29 @@ import {NavController} from 'ionic-angular'
 })
 export class CheeringTeamPage {
   who = "baby";
+  colorArray = [-1,-1,-1,-1];
 
 
   constructor(private nav: NavController) {
 
+  }
+
+  highLight(index:number){
+    if (index < this.colorArray.length){
+     this.colorArray[index] = this.colorArray[index] * -1;
+    }
+  }
+
+  getColor(index:number){
+    if (index < this.colorArray.length){
+        if (this.colorArray[index] == 1){
+           return "#00ef00";
+        }else{
+            return "#999";
+        }
+    }else{
+      return "#999";
+    }
   }
 
 }
