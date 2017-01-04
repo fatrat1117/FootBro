@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { HomePage } from '../home/home';
 import { RankPage } from '../rank/rank';
-import { ContactPage } from '../contact/contact';
+//import { ContactPage } from '../contact/contact';
 import { MatchesPage } from '../matches/matches';
 import { MePage } from '../me/me';
 

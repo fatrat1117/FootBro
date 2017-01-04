@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
 
-import { TeamBasic } from '../app/teams/shared/team.model'
+//import { TeamBasic } from '../app/teams/shared/team.model'
 import { TeamService } from '../app/teams/shared/team.service'
 
 @Pipe({
