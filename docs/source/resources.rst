@@ -21,8 +21,14 @@ General
 `SoccerBro-UI FONT.zip
 <https://www.dropbox.com/s/dg7igpycnrxogz3/SoccerBro_Font.zip?dl=1>`_
 
-`PSD to HTML Source Code.zip
+`PSD to HTML Source Code(Player).zip
 <https://www.dropbox.com/s/36w1f6dof7mqu9a/soccerBro15-12-2016v1.zip?dl=1>`_
+
+`PSD (Cheering Team).zip
+<https://www.dropbox.com/s/em2qxc759y4kdji/%E5%85%84%E5%BC%9F%E8%B6%B3%E7%90%83-3%E7%BA%A6.zip?dl=0>`_
+
+`PSD (Home Page).zip
+<https://www.dropbox.com/sh/1a3hcm9ug0hcyy0/AADgK_ruhKxO6ftJOz8Gles5a?dl=0>`_
 
 Ionic
 -----
