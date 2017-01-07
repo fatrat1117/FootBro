@@ -114,12 +114,13 @@
 
 
     <!---->
-    <!--<div class="section">-->
+    <div style="margin-bottom: 20%">
     <ion-row>
       <!--<div class="progressbar clearfloat">-->
       <ion-col width-10></ion-col>
       <ion-col width-30 class="align-center">
         <h4 class="progressTxt">出席比赛胜率</h4>
+        <div class="proBar">
         <round-progress [current]=80
                         [max]=100
                         [color]="'#'+'00ff00'"
@@ -131,12 +132,15 @@
                         [clockwise]="false"
                         [responsive]="true"
         ></round-progress>
+         <div text-center class="win-rate-text" >80%</div>
+        </div>
       </ion-col>
       <ion-col width-20 class="progressTxt" style="margin-top: 20%">胜率</ion-col>
       <ion-col width-30 class="align-center">
 
         <h4 class="progressTxt">未出席比赛胜率</h4>
-        <round-progress [current]=80
+        <div class="proBar">
+          <round-progress [current]=80
                         [max]=100
                         [color]="'#'+'00ff00'"
                         [background]="'#'+'a0a0a0'"
@@ -147,12 +151,15 @@
                         [clockwise]="false"
                         [responsive]="true"
         ></round-progress>
+        <div text-center class="win-rate-text">80%</div>
+        </div>
+
       </ion-col>
       <ion-col width-10></ion-col>
       <!--</div>-->
     </ion-row>
 
-    <!--</div>-->
+    </div>
 
 
 

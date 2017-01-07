@@ -22,6 +22,7 @@ export class MyPlayerPage {
     this.NumOfUnLikes = fromDBUnLikes;
     this.PercentOfLikes = fromDBLikes/(fromDBLikes+fromDBUnLikes) * 100;
     this.PercentOfUnLikes = fromDBUnLikes/ (fromDBLikes+fromDBUnLikes) * 100;
+
   }
 
 }

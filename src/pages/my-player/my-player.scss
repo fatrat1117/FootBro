@@ -278,16 +278,16 @@ page-my-player{
   //lu start
   .personal-data-title{
     background: #171717;
-    font-size: 1.7rem;
+    font-size: 2.3rem;
     color: #ababab;
   }
   .personal-data-header{
     background-image: url("/../../assets/img/my-player/bg3@3x.png");
-    font-size: 1.3rem;
+    font-size: 1.8rem;
     color: #ababab;
   }
   .main-font{
-    font-size: 1.3rem;
+    font-size: 1.8rem;
     color: #ababab;
   }
   .personal-data{
@@ -296,7 +296,7 @@ page-my-player{
     color: #ffffff;
   }
   .separate{
-    height: 2px;
+    height: 2.2px;
     color: #171717;
   }
   .win-rate{
@@ -314,8 +314,26 @@ page-my-player{
     .progressTxt {
       text-align: center;
       color: #f8f8f8;
-      font-size: 1.3rem;
+      font-size: 1.8rem;
       padding: 1rem 0rem;
+    }
+    .proBar{
+      position:relative;
+      display: block;
+    }
+    .proBar round-progress{
+      position: absolute;
+    }
+    .proBar .win-rate-text{
+      left: 40%;
+      padding-top: 40%;
+      min-height: 100%;
+      vertical-align: middle;
+      line-height: 100%;
+      position: absolute;
+      font-size: 2rem;;
+      text-align: center;
+
     }
     .position {
       float: left;
@@ -337,7 +355,7 @@ page-my-player{
     }
     .text {
       color: #fff;
-      font-size: 1.3rem;
+      font-size: 1.8rem;
       position: absolute;
       text-align: center;
       left: 0;
