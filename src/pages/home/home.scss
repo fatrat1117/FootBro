@@ -1,4 +1,52 @@
+
 page-home {
+
+  $toolbar-md-background:#171717;
+  ion-header{
+
+    ion-navbar.toolbar{
+      min-height: 2.5rem;
+      position: relative;
+      padding: 0.8rem;
+
+      .toolbar-background{
+        background: none;
+      }
+    }
+    .home-location-select{
+      color: white;
+      align-items: center;
+      justify-content: flex-start;
+      display: flex;
+      h5{
+        margin:0;
+        font-size: 1rem;
+        float: left;
+        margin-right: 0.2rem;
+      }
+      ion-icon{
+        font-size: 1rem;
+        float: left;
+      }
+    }
+
+    .home-title{
+      width: 50%;
+      height: 50%;
+      overflow: auto;
+      margin: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      text-align: center;
+      .toolbar-title{
+        padding:0;
+        color: white;
+      }
+    }
+  }
 
   .card-background-page{
     ion-card {
@@ -17,5 +65,4 @@ page-home {
     }
   }
 
- 
 }
