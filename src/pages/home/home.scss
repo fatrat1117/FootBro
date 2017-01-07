@@ -1,7 +1,6 @@
 
 page-home {
 
-  $toolbar-md-background:#171717;
   ion-header{
 
     ion-navbar.toolbar{
@@ -9,9 +8,6 @@ page-home {
       position: relative;
       padding: 0.8rem;
 
-      .toolbar-background{
-        background: none;
-      }
     }
     .home-location-select{
       color: white;
