@@ -1,8 +1,10 @@
-import {Component} from '@angular/core';
+import {Component,ElementRef,OnInit} from '@angular/core';
 import {NavController} from 'ionic-angular';
 
 import {Localization} from '../../providers/localization';
 import {CheeringTeamPage} from '../cheering-team/cheering-team';
+
+declare var jQuery:any;
 
 @Component({
   selector: 'page-home',
@@ -13,7 +15,7 @@ export class HomePage {
   slides: any[];
   adSlideOptions: any;
 
-  constructor(public navCtrl: NavController, local: Localization) {
+  constructor(public navCtrl: NavController, local: Localization,private elRef: ElementRef) {
 
     this.slides = [];
     this.loadSlides(local.langCode, 4);
@@ -25,6 +27,12 @@ export class HomePage {
     console.log(local.langCode);
 
 
+  }
+
+  ngOnInit() :any{
+    jQuery(this.elRef.nativeElement).find('.test-button').on('click',function(){
+        alert("jQuery works");
+    });
   }
 
   loadSlides(langCode: string, total: number) {

@@ -1,6 +1,19 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{'Home' | trans}}</ion-title>
+
+ <div class="select">
+ <select id="year" class="select-hidden">
+    <option value="hide">-- Year --</option>
+    <option value="2010">2010</option>
+    <option value="2011">2011</option>
+    <option value="2012">2012</option>
+    <option value="2013">2013</option>
+    <option value="2014">2014</option>
+    <option value="2015">2015</option>
+</select>
+</div>
+
+<ion-title>{{'Home' | trans}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -25,6 +38,7 @@
         <p text-center secondary><ion-icon name='photos'></ion-icon></p>
         <p text-center secondary>Snapshots</p>
       </ion-col>
+      (click)="enterStandings()
     </ion-row>-->
   </ion-card>
   <div class="card-background-page">
@@ -32,7 +46,7 @@
       <img src="assets/img/matches.png"/>
       <div class="card-title">{{'FriendlyMatches' | trans}}</div>
     </ion-card>
-    <ion-card (click)="enterStandings()">
+    <ion-card class="test-button">
     <img src="assets/img/tournaments.png"/>
     <div class="card-title">{{'Tournaments' | trans}}</div>
     </ion-card>
