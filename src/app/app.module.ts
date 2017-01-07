@@ -36,6 +36,7 @@ import { TeamBasicPipe } from '../pipes/team.pipe'
 import { SbLoadingComponent } from './common/loading.component';
 import { SbModalNavbarComponent } from './common/modal.navbar.component';
 import { SbMatchBasicComponent } from './matches/match-basic.component';
+import {MatchDetailPage} from "../pages/match-detail/match-detail";
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     MyPlayerPage,
     FeedbackPage,
     MatchesPage,
+    MatchDetailPage,
     CheeringTeamPage,
     MyTeamPage,
     // pipes
@@ -69,6 +71,7 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     SbLoadingComponent,
     SbModalNavbarComponent,
     SbMatchBasicComponent,
+
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
@@ -97,6 +100,7 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
     MyPlayerPage,
     FeedbackPage,
     MatchesPage,
+    MatchDetailPage,
     CheeringTeamPage,
     MyTeamPage,
   ],
