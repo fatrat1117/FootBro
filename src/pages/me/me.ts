@@ -6,7 +6,7 @@ import { TeamBasic } from '../../app/teams/shared/team.model'
 
 import { PlayerService } from '../../app/players/shared/player.service'
 import { TeamService } from '../../app/teams/shared/team.service'
-
+import { MyTeamPage } from "../my-team/my-team";
 import { EditPlayerPage } from "../edit-player/edit-player";
 import { ManageTeamPage } from "../manage-team/manage-team";
 import { MyPlayerPage } from "../my-player/my-player";
@@ -50,5 +50,9 @@ export class MePage {
 
   goFeedbackPage() {
     this.navCtrl.push(FeedbackPage);
+  }
+
+  goTeamPage() {
+    this.navCtrl.push(MyTeamPage);
   }
 }

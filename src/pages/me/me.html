@@ -34,7 +34,7 @@
       <ion-icon name="people" item-left color="gBlue"></ion-icon>
       {{'CreateTeam' | trans}}
     </ion-item>
-    <ion-item tappable *ngIf="(playerBasic)?.teamId" detail-push>
+    <ion-item tappable *ngIf="(playerBasic)?.teamId" detail-push (click)="goTeamPage()">
       <ion-icon name="people" item-left color="gBlue"></ion-icon>
       {{'MyTeam' | trans}}
     </ion-item>
