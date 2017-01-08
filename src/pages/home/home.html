@@ -40,7 +40,7 @@
   </ion-row>
 
   <ion-row class="home-menu">
-    <ion-col class="menu-col">
+    <ion-col (click)="enterCheeringTeam()" class="menu-col">
       <ion-row><ion-icon name="mail-open"></ion-icon></ion-row>
       <ion-row><p no-margin>约</p></ion-row>
     </ion-col>
@@ -58,40 +58,40 @@
     </ion-col>
   </ion-row>
 
-  <ion-list>
+  <ion-list class="home-news">
     <!--<button ion-item *ngFor="let item of items" (click)="itemSelected(item)">-->
       <!--{{ item }}-->
     <!--</button>-->
-    <ion-row ion-item *ngFor="let item of items" (click)="selectItems(item)">
+    <ion-row class="news-row" ion-item *ngFor="let item of items" (click)="selectItems(item)">
       <ion-thumbnail item-left>
-        <img src="img/thumbnail-totoro.png">
+        <img src="../../assets/img/home/news_pic.png">
       </ion-thumbnail>
       <ion-row>
         <h2>早报: 老司机翻车了</h2>
       </ion-row>
       <ion-row>
-        <p>切尔西13连胜被终结; 皇马主场轻取塞维利亚</p>
+        <div class="news-subtitle">切尔西13连胜被终结; 皇马主场轻取塞维利亚</div>
       </ion-row>
-      <ion-row>
-        <ion-col width-66><div><h5>置顶</h5></div></ion-col>
-        <ion-col width-33><div><h5>336评论</h5><ion-icon name="md-text"></ion-icon></div></ion-col>
+      <ion-row class="news-operation">
+        <ion-col class="top-col" width-66><div class="top-border"><h5>置顶</h5></div></ion-col>
+        <ion-col class="comments-col" width-33><div class="comments-div"><h5>336评论</h5><img src="../../assets/img/home/comments.png"/></div></ion-col>
       </ion-row>
     </ion-row>
   </ion-list>
 
-  <div class="card-background-page">
-    <ion-card (click)="goLeaguePage()">
-      <img src="assets/img/matches.png"/>
-      <div class="card-title">{{'FriendlyMatches' | trans}}</div>
-    </ion-card>
-    <ion-card class="test-button">
-      <img src="assets/img/tournaments.png"/>
-      <div class="card-title">{{'Tournaments' | trans}}</div>
-    </ion-card>
+  <!--<div class="card-background-page">-->
+    <!--<ion-card (click)="goLeaguePage()">-->
+      <!--<img src="assets/img/matches.png"/>-->
+      <!--<div class="card-title">{{'FriendlyMatches' | trans}}</div>-->
+    <!--</ion-card>-->
+    <!--<ion-card class="test-button">-->
+      <!--<img src="assets/img/tournaments.png"/>-->
+      <!--<div class="card-title">{{'Tournaments' | trans}}</div>-->
+    <!--</ion-card>-->
 
-    <ion-card (click)="enterCheeringTeam()">
-      <img src="assets/img/tournaments.png"/>
-      <div class="card-title">{{'CheeringTeam' | trans}}</div>
-    </ion-card>
-  </div>
+    <!--<ion-card >-->
+      <!--<img src="assets/img/tournaments.png"/>-->
+      <!--<div class="card-title">{{'CheeringTeam' | trans}}</div>-->
+    <!--</ion-card>-->
+  <!--</div>-->
 </ion-content>
