@@ -43,6 +43,7 @@ page-home {
         padding:0;
         color: white;
         font-family: 'U.S.S. Dallas Bold';
+        font-size: 1.7rem;
       }
     }
   }
@@ -72,6 +73,10 @@ page-home {
       ion-row{
         align-items: center;
         justify-content: center;
+        img{
+          max-width: 4rem;
+          max-height: 3rem;
+        }
       }
     }
   }
