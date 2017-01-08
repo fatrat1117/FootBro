@@ -1,7 +1,9 @@
 
 page-home {
 
+
   ion-header{
+
 
     ion-navbar.toolbar{
       min-height: 2.5rem;
@@ -40,6 +42,7 @@ page-home {
       .toolbar-title{
         padding:0;
         color: white;
+        font-family: 'U.S.S. Dallas Bold';
       }
     }
   }
@@ -58,6 +61,18 @@ page-home {
       width: 100%;
       font-weight: bold;
       color: #fff;
+    }
+  }
+
+
+  .home-menu{
+    .menu-col{
+      display: flex;
+      flex-direction: column;
+      ion-row{
+        align-items: center;
+        justify-content: center;
+      }
     }
   }
 

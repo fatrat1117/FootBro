@@ -14,6 +14,7 @@ export class HomePage {
 
   slides: any[];
   adSlideOptions: any;
+  items = ["item1","item2","item3"];
 
   constructor(public navCtrl: NavController, local: Localization,private elRef: ElementRef) {
 
@@ -53,6 +54,10 @@ export class HomePage {
 
   enterCheeringTeam(){
     this.navCtrl.push(CheeringTeamPage);
+  }
+
+  selectItems(item:string){
+    console.log("Selected Item", item);
   }
 
 }

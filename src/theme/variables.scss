@@ -45,6 +45,14 @@ $list-md-border-color: #888;
 $item-md-detail-push-show: true;
 
 
+//fonts
+@font-face {
+  font-family: 'U.S.S. Dallas Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: local('U.S.S. Dallas Bold'), url('../assets/fonts/ussdallasb.woff') format('woff');
+}
+
 
 // Named Color Variables
 // --------------------------------------------------
