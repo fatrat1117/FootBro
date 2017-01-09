@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import {NavController} from 'ionic-angular';
 
 
 @Component({
@@ -8,7 +8,7 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'my-team.html'
 })
 export class MyTeamPage {
-  first =[];
+  first = [];
 
 
   constructor(public navCtrl: NavController) {
@@ -20,26 +20,30 @@ export class MyTeamPage {
       }
     ]
   }
+
   //打开邀请
-  openInvite(){
+  openInvite() {
     alert("invite");
   }
+
   //打开修改
-  openModify(){
+  openModify() {
     alert("modify");
   }
+
   //查看更多球队赛程
-  seeMoreTeamGamePlan(){
+  seeMoreTeamGamePlan() {
     alert("see more team game plan");
   }
+
   //查看更多球队成员
-  seeMoreTeamMember(){
+  seeMoreTeamMember() {
     alert("see more team member");
   }
 
   //切换函数
   //最近15场 最近20场 全部
-  setChoosePosition(position){
+  setChoosePosition(position) {
     //3个选项页
     var recent15 = document.getElementById("recent15");
     var recent20 = document.getElementById("recent20");
@@ -53,53 +57,76 @@ export class MyTeamPage {
     var secondLine = document.getElementById("secondLine");
     var thirdLine = document.getElementById("thirdLine");
     //都设置为默认样式
-    recent15.setAttribute("class","team-all-game-unchoose");
-    recent20.setAttribute("class","team-all-game-unchoose");
-    all.setAttribute("class","team-all-game-unchoose");
-    btnRecent15.style.color="#999999";
-    btnRecent20.style.color="#999999";
-    btnAll.style.color="#999999";
-    firstLine.style.backgroundColor="#555555";
-    secondLine.style.backgroundColor="#555555";
-    thirdLine.style.backgroundColor="#555555";
+    recent15.setAttribute("class", "team-all-game-unchoose");
+    recent20.setAttribute("class", "team-all-game-unchoose");
+    all.setAttribute("class", "team-all-game-unchoose");
+    btnRecent15.style.color = "#999999";
+    btnRecent20.style.color = "#999999";
+    btnAll.style.color = "#999999";
+    firstLine.style.backgroundColor = "#555555";
+    secondLine.style.backgroundColor = "#555555";
+    thirdLine.style.backgroundColor = "#555555";
 
-    switch (position){
+    switch (position) {
       case 0:
-        recent15.setAttribute("class","team-all-game-choose");
-        btnRecent15.style.color="white";
-        firstLine.style.backgroundColor="yellow";
+        recent15.setAttribute("class", "team-all-game-choose");
+        btnRecent15.style.color = "white";
+        firstLine.style.backgroundColor = "yellow";
         this.setSuccessRate(90);
         break;
       case 1:
-        recent20.setAttribute("class","team-all-game-choose");
-        btnRecent20.style.color="white";
-        secondLine.style.backgroundColor="yellow";
+        recent20.setAttribute("class", "team-all-game-choose");
+        btnRecent20.style.color = "white";
+        secondLine.style.backgroundColor = "yellow";
         this.setSuccessRate(27.5);
         break;
       case 2:
-        all.setAttribute("class","team-all-game-choose");
-        btnAll.style.color="white";
-        thirdLine.style.backgroundColor="yellow";
+        all.setAttribute("class", "team-all-game-choose");
+        btnAll.style.color = "white";
+        thirdLine.style.backgroundColor = "yellow";
         this.setSuccessRate(30);
         break;
     }
 
   }
+
   //根据胜率设置图像例如90%
-  setSuccessRate(successRate){
+  setSuccessRate(successRate) {
     var backCircle1 = document.getElementById("backCircle1");
-    var backCircle2= document.getElementById("backCircle2");
-      if(successRate<=50){
-        var angle=-360*successRate/100;
-        backCircle2.style.transform="rotate("+angle+"deg)";
-        backCircle2.style.backgroundColor="#a4a4a4";
-      }else{
-        var angle=180-360*successRate/100;
-        backCircle2.style.transform="rotate("+angle+"deg)";
-        backCircle2.style.backgroundColor="green";
+    var backCircle2 = document.getElementById("backCircle2");
+    if (successRate <= 50) {
+      var angle = -360 * successRate / 100;
+      backCircle2.style.transform = "rotate(" + angle + "deg)";
+      backCircle2.style.backgroundColor = "#a4a4a4";
+    } else {
+      var angle = 180 - 360 * successRate / 100;
+      backCircle2.style.transform = "rotate(" + angle + "deg)";
+      backCircle2.style.backgroundColor = "green";
+    }
+    var successRateText = document.getElementById("success-rate-text");
+    successRateText.innerHTML = successRate + "%";
+    //显示百分比数字并调整相对位置
+    if (this.getByteLen(successRate + "%")>4) {
+      successRateText.style.fontSize="3.5rem";
+      successRateText.style.marginTop="0px";
+    }else{
+      successRateText.style.fontSize="4.5rem";
+      successRateText.style.marginTop="-10px";
+    }
+  }
+  //获取字符串长度
+  getByteLen(val) {
+    var len = 0;
+    for (var i = 0; i < val.length; i++) {
+      var a = val.charAt(i);
+      if (a.match(/[^\x00-\xff]/ig) != null) {
+        len += 2;
       }
-      var successRateText = document.getElementById("success-rate-text");
-      successRateText.innerHTML=successRate+"%";
+      else {
+        len += 1;
+      }
+    }
+    return len;
   }
 
 }
