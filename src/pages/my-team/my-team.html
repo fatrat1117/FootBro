@@ -1,3 +1,4 @@
+<!-->
 <ion-header class="ion-header-setting">
 
   <div class="head-left">
@@ -7,6 +8,7 @@
   </div>
 
   <div class="head-right">
+    <ion-icon name="person-add" (click)="openInvite()"></ion-icon>
     <div class="head-right-item" (click)="openInvite()">
       <img src="assets/icon/user.png" class="head-right-item-icon">
       <p class="head-right-item-text">邀请</p>
@@ -18,9 +20,23 @@
   </div>
 
   <p class="head-title">球队信息</p>
+</ion-header>
+<-->
 
+<ion-header>
+  <ion-navbar no-padding>
+
+    <ion-title text-center>球队信息</ion-title>
+
+    <ion-buttons end>
+      <button ion-button class="my-team-btn-right" (click)="invitePlayer()">
+        <ion-icon name="person-add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 
 </ion-header>
+
 
 <ion-content class="content-background-page"  >
 
