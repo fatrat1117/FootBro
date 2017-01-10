@@ -1,6 +1,12 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{'Me' | trans}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="goMessagesPage()">
+        <ion-icon *ngIf="messageCount != 0" name="mail" color="primary"></ion-icon>
+        <ion-icon *ngIf="messageCount == 0" name="mail-open"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 

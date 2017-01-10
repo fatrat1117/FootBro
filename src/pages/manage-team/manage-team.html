@@ -18,10 +18,10 @@
         <h2 ion-text [color]="(playerBasic)?.teamId == t ? 'primary' : 'none'">{{ (t | teamBasicPipe | async)?.name }}</h2>
       </ion-item>
       <ion-item-options side="right">
-        <button *ngIf="(playerBasic)?.teamId != t" ion-button color="primary" (click)="setDefaultTeam(i, slidingItem)">
+        <button *ngIf="(playerBasic)?.teamId != t" ion-button color="primary" text-capitalize (click)="setDefaultTeam(i, slidingItem)">
           Set Default
         </button>
-        <button ion-button color="danger" (click)="quitTeam(i)">
+        <button ion-button color="danger" text-capitalize (click)="quitTeam(i)">
           Quit
         </button>
       </ion-item-options>

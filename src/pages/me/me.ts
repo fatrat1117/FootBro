@@ -11,6 +11,7 @@ import { EditPlayerPage } from "../edit-player/edit-player";
 import { ManageTeamPage } from "../manage-team/manage-team";
 import { MyPlayerPage } from "../my-player/my-player";
 import { FeedbackPage } from "../feedback/feedback";
+import { MessagesPage } from "../messages/messages";
 
 @Component({
   selector: 'page-me',
@@ -19,11 +20,10 @@ import { FeedbackPage } from "../feedback/feedback";
 export class MePage {
   playerBasic: PlayerBasic;
   teamBasic: TeamBasic;
+  messageCount: number;
   constructor(private navCtrl: NavController, private modalCtrl: ModalController, private playerService: PlayerService, private teamService: TeamService) {
-
+    this.messageCount = 1;
   }
-
-  
 
   ionViewDidLoad() {
     
@@ -54,5 +54,9 @@ export class MePage {
 
   goTeamPage() {
     this.navCtrl.push(MyTeamPage);
+  }
+
+  goMessagesPage() {
+    this.navCtrl.push(MessagesPage);
   }
 }

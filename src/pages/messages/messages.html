@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Messages</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-sliding #slidingItem>
+      <ion-item>
+        <ion-thumbnail item-left>
+          <img src="assets/player-photo/player_photo.jpg">
+        </ion-thumbnail>
+        <h2>Woody</h2>
+        <p>This town ain't big enough for the two of us!</p>
+        <ion-note item-right>3:43 PM</ion-note>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="lightGrey" text-capitalize (click)="markAsRead(slidingItem)">
+          Mark as Unread
+        </button>
+        <button ion-button color="danger" text-capitalize>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
