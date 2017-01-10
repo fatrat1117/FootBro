@@ -1,4 +1,3 @@
-<!-->
 <ion-header class="ion-header-setting">
 
   <div class="head-left">
@@ -8,7 +7,6 @@
   </div>
 
   <div class="head-right">
-    <ion-icon name="person-add" (click)="openInvite()"></ion-icon>
     <div class="head-right-item" (click)="openInvite()">
       <img src="assets/icon/user.png" class="head-right-item-icon">
       <p class="head-right-item-text">邀请</p>
@@ -20,23 +18,9 @@
   </div>
 
   <p class="head-title">球队信息</p>
-</ion-header>
-<-->
 
-<ion-header>
-  <ion-navbar no-padding>
-
-    <ion-title text-center>球队信息</ion-title>
-
-    <ion-buttons end>
-      <button ion-button class="my-team-btn-right" (click)="invitePlayer()">
-        <ion-icon name="person-add"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
 
 </ion-header>
-
 
 <ion-content class="content-background-page"  >
 
@@ -47,19 +31,18 @@
 
 
     <div class="team-right-item">
-      <p class="team-right-item-text default-font-size-p">1102</p>
-      <div style="width: 55px;height: 20px;background:red;text-align:center;position:relative;">
-
-        <img src="assets/icon/fire.png" style="width: 20px;height:20px;float:left;padding:2px;background: red;">
-        <a style="height:100%;padding:0px;margin: 0px;color:white;" class="default-font-size-p">人气</a>
+      <p class="team-right-item-text">1102</p>
+      <div class="team-right-item-bottom">
+        <img src="assets/icon/fire.png" class="team-right-item-bottom-img">
+        <a class="team-right-item-bottom-text">人气</a>
       </div>
     </div>
-    <div class="team-right-item">
-      <p class="team-right-item-text default-font-size-p">986</p>
-      <div style="width: 55px;height: 20px;background:red;text-align:center;position:relative;">
 
-        <img src="assets/icon/football.png" style="width: 20px;height:20px;float:left;padding:2px;background: red;">
-        <a style="height:100%;padding:0px;margin: 0px;color:white;" class="default-font-size-p">能力</a>
+    <div class="team-right-item">
+      <p class="team-right-item-text">986</p>
+      <div class="team-right-item-bottom">
+        <img src="assets/icon/football.png" class="team-right-item-bottom-img">
+        <a class="team-right-item-bottom-text">能力</a>
       </div>
     </div>
 
@@ -96,7 +79,7 @@
     <div class="game-left">
       <div class="game-left-setting">
         <img src="assets/img/icon1.jpg" class="game-left-img">
-        <p class="default-font-size-p">阿根廷</p>
+        <p class="game-left-text">阿根廷</p>
       </div>
     </div>
     <div class="game-center">
@@ -105,7 +88,7 @@
     <div class="game-right">
       <div class="game-right-setting">
         <img src="assets/img/icon1.jpg" class="game-right-img">
-        <p class="default-font-size-p">墨西哥</p>
+        <p class="game-right-text">墨西哥</p>
       </div>
     </div>
   </div>
@@ -334,8 +317,8 @@
       <img src="assets/img/icon1.jpg" class="left-image" item-left>
       <ion-row>
         <ion-col>
-          <ion-row class="gray default-font-size-p">梅西</ion-row>
-          <ion-row class="white default-font-size-p">6球</ion-row>
+          <ion-row class="award-team-member-name">梅西</ion-row>
+          <ion-row class="award-team-member-score">6球</ion-row>
         </ion-col>
         <ion-col><p class="right-info">
           <span class="white-big">9</span>
@@ -356,8 +339,8 @@
       <img src="assets/img/icon1.jpg" class="left-image" item-left>
       <ion-row>
         <ion-col>
-          <ion-row class="gray default-font-size-p">梅西</ion-row>
-          <ion-row class="white default-font-size-p">6球</ion-row>
+          <ion-row class="award-team-member-name">梅西</ion-row>
+          <ion-row class="award-team-member-score">6球</ion-row>
         </ion-col>
         <ion-col><p class="right-info">
           <span class="white-big">9</span>
@@ -377,8 +360,8 @@
       <img src="assets/img/icon1.jpg" class="left-image" item-left>
       <ion-row>
         <ion-col>
-          <ion-row class="gray default-font-size-p">梅西</ion-row>
-          <ion-row class="white default-font-size-p">6球</ion-row>
+          <ion-row class="award-team-member-name">梅西</ion-row>
+          <ion-row class="award-team-member-score">6球</ion-row>
         </ion-col>
         <ion-col><p class="right-info">
           <span class="white-big">9</span>

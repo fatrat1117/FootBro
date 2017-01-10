@@ -1,9 +1,5 @@
 page-my-team {
-  .my-team-btn-right{
-    color: #fff;
-  }
   //通用样式
-  font-family: "Microsoft Yahei";
   .center-margin {
     margin: 0px auto;
   }
@@ -41,11 +37,13 @@ page-my-team {
   //标题设置
   .ion-header-setting {
     font-family: "Microsoft Yahei";
+
     //背景颜色
     background: #161616;
     //左边样式
     .head-left {
       float: left;
+      margin-top:3px;
       width: 20%;
     }
     //右边样式
@@ -82,7 +80,9 @@ page-my-team {
     .head-title {
       text-align: center;
       color: white;
-      font-size:1.2rem;
+      font-size:1.8rem;
+      margin:13px 0px 0px 0px;
+      padding:0px;
     }
   }
 
@@ -120,19 +120,35 @@ page-my-team {
         margin-right: 10px;
         margin-top: -30px;
         width: 55px;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         .team-right-item-text {
           text-align: center;
           background: #434343;
           color: white;
           margin: 0px;
-          padding: 10px 0px 0px 0px;
+          padding: 10px 0px 5px 0px;
+          font-size:1.5rem;
         }
         .team-right-item-bottom {
-          width: 100%;
-          margin: 0px;
-          padding: 0px;
-          background: #ff3c3c;
+          width: 55px;
+          height: 20px;
+          background:#ff3c3c;
+          text-align:center;
+          position:relative;
+          .team-right-item-bottom-img{
+            width: 20px;
+            height:20px;
+            float:left;
+            padding:2px;
+            background: #ff3c3c;
+          }
+          .team-right-item-bottom-text{
+            height:100%;
+            padding:0px;
+            margin: 0px;
+            color:white;
+            font-size:1.2rem;
+          }
         }
       }
 
@@ -169,11 +185,16 @@ page-my-team {
         .game-left-setting {
           float: right;
           color: white;
+          text-align: center;
           //左边战队头像
           .game-left-img {
             width: 40px;
             height: 40px;
             margin-top: 15px;
+          }
+          .game-left-text{
+            font-size:1.2rem;
+            text-align: center;
           }
         }
 
@@ -203,10 +224,15 @@ page-my-team {
           float: left;
           margin-top: -85px;
           color: white;
+          text-align: center;
           //右边战队头像
           .game-right-img {
             width: 40px;
             height: 40px;
+          }
+          .game-right-text{
+            font-size:1.2rem;
+            text-align: center;
           }
         }
       }
@@ -314,10 +340,11 @@ page-my-team {
         .team-member-img {
           width: 30px;
           height: 30px;
+          border-radius:10%;
         }
         //球队成员姓名
         .team-member-name {
-          font-size: 0.5rem;
+          font-size: 0.8rem;
           color: #999999;
         }
       }
@@ -522,12 +549,15 @@ page-my-team {
           height: 40px;
           border-radius: 10%;
         }
-        .gray {
+        .award-team-member-name {
           color: gray;
+          font-size:1.5rem;
+          margin-bottom: 5px;
         }
 
-        .white {
+        .award-team-member-score {
           color: white;
+          font-size:1.2rem;
         }
         .right-info {
           float: right;
