@@ -1,26 +1,14 @@
-<ion-header class="ion-header-setting">
-
-  <div class="head-left">
-    <button ion-button icon-only clear color="light">
-      <ion-icon name="ios-arrow-back"></ion-icon>
-    </button>
-  </div>
-
-  <div class="head-right">
-    <div class="head-right-item" (click)="openInvite()">
-      <img src="assets/icon/user.png" class="head-right-item-icon">
-      <p class="head-right-item-text">邀请</p>
-    </div>
-    <div class="head-right-item" (click)="openModify()">
-      <img src="assets/icon/edit.png" class="head-right-item-icon">
-      <p class="head-right-item-text">修改</p>
-    </div>
-  </div>
-
-  <p class="head-title">球队信息</p>
-
-
+<ion-header>
+  <ion-navbar no-padding>
+    <ion-title text-center>球队信息</ion-title>
+    <ion-buttons end>
+      <button ion-button class="my-team-btn-right" (click)="invitePlayer()">
+        <ion-icon name="person-add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
+  		  
 
 <ion-content class="content-background-page"  >
 
@@ -187,7 +175,7 @@
       </ion-col>
     </ion-row>
     <button ion-button clear icon-right class="team-see-more-members" (click)="seeMoreTeamMember()">
-      <p class="team-see-more-member-text">查看所有队员(<a style="color: green;">38</a>人)</p>
+      <p class="team-see-more-member-text">查看所有队员(<a style="color: #00ff00;">38</a>人)</p>
       <ion-icon name="ios-arrow-forward"></ion-icon>
     </button>
   </div>

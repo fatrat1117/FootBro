@@ -22,7 +22,7 @@ export class MyTeamPage {
   }
 
   //打开邀请
-  openInvite() {
+  invitePlayer() {
     alert("invite");
   }
 

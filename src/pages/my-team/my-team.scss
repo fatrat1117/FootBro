@@ -1,4 +1,8 @@
 page-my-team {
+  .my-team-btn-right{
+    color: #fff;
+  }
+  
   //通用样式
   .center-margin {
     margin: 0px auto;
@@ -280,7 +284,7 @@ page-my-team {
           height: 60px;
           border-radius: 50%;
           margin: 0px auto;
-          background: green;
+          background: #00ff00;
         }
         //遮盖圆
         .nearest-5-game-top {
@@ -299,11 +303,11 @@ page-my-team {
         }
         //胜利背景圆颜色
         .game-success {
-          background: green;
+          background: #00ff00;
         }
         //平局背景圆颜色
         .game-tie {
-          background: #007aff;
+          background: #01c5ff;
         }
         //失败背景圆颜色
         .game-failed {
@@ -311,11 +315,11 @@ page-my-team {
         }
         //胜利文字颜色
         .game-text-success {
-          color: green;
+          color: #00ff00;
         }
         //平局文字颜色
         .game-text-tie {
-          color: #007aff;
+          color: #01c5ff;
         }
         //失败文字颜色
         .game-text-failed {
@@ -386,7 +390,7 @@ page-my-team {
     }
     //下面选中显示小黄线
     .yellow-line {
-      background: yellow;
+      background: #fcdb14;
       padding: 0px;
     }
     .gray-line {
@@ -424,7 +428,7 @@ page-my-team {
           transform: rotate(0deg); //超过180 0
           clip: rect(0px, 75px, 150px, 0px); /* 这个clip属性用来绘制半圆，在clip的rect范围内的内容显示出来，使用clip属性，元素必须是absolute的 */
           border-radius: 75px;
-          background-color: green;
+          background-color: #00ff00;
         }
         //显示百分比用的图片2
         .team-success-fail-picture-2 {
@@ -434,7 +438,7 @@ page-my-team {
           transform: rotate(-144deg); //超过180 180-angle
           clip: rect(0px, 75px, 150px, 0px);
           border-radius: 75px;
-          background-color: green; //超过180
+          background-color: #00ff00; //超过180
           //background-color:#777777;//不超过180
         }
         //显示在顶端用的图片
