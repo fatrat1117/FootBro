@@ -1,16 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
-import { PlayerBasic } from '../../app/players/shared/player.model'
-import { TeamBasic } from '../../app/teams/shared/team.model'
-
-import { PlayerService } from '../../app/players/shared/player.service'
-import { TeamService } from '../../app/teams/shared/team.service'
-import { MyTeamPage } from "../my-team/my-team";
-import { EditPlayerPage } from "../edit-player/edit-player";
-import { ManageTeamPage } from "../manage-team/manage-team";
-import { MyPlayerPage } from "../my-player/my-player";
-import { FeedbackPage } from "../feedback/feedback";
+import { ChatPage } from '../chat/chat'
 
 @Component({
   selector: 'page-messages',
@@ -23,5 +14,11 @@ export class MessagesPage {
 
   markAsRead(slidingItem) {
     slidingItem.close();
+  }
+
+  enterChatPage(userId: string) {
+    this.navCtrl.push(ChatPage, {
+      userId: userId
+    });
   }
 }

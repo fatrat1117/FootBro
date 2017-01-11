@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Woody</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list no-lines>
+    <!-- time -->
+    <ion-item class="chat-room-time-item">
+      <label>12/18/16 11:14</label>
+    </ion-item>
+
+    <!-- other -->
+    <ion-item class="chat-room-msg-item">
+      <div class="chat-room-avatar-div">
+        <ion-thumbnail item-left>
+          <img src="assets/player-photo/player_photo.jpg">
+        </ion-thumbnail>
+      </div>
+        <div class="msg-box left">
+          contentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontentcontent
+      </div>
+    </ion-item>
+
+    <!-- self -->
+    <ion-item class="chat-room-msg-item">
+      <div class="msg-box right">
+        content
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<!--ion-footer class="chat-room-footer">
+  <ion-toolbar>
+    <ion-buttons right>
+      <button class="send-button">
+        Send
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer-->
+
+<ion-footer class="chat-room-footer">
+  <ion-toolbar text-center>
+    <input class="text-input" [(ngModel)]="newMessage">
+    <ion-buttons right>
+      <button ion-button class="send-button">
+        Send
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { MePage } from "../pages/me/me";
 import { MessagesPage } from "../pages/messages/messages";
+import { ChatPage } from "../pages/chat/chat";
 import { EditPlayerPage } from "../pages/edit-player/edit-player";
 import { EditPlayerNamePage } from "../pages/edit-player/edit-player-name";
 import { EditPlayerHeightPage } from "../pages/edit-player/edit-player-height";
@@ -49,6 +50,7 @@ import {MatchDetailPage} from "../pages/match-detail/match-detail";
     TabsPage,
     MePage,
     MessagesPage,
+    ChatPage,
     EditPlayerPage,
     EditPlayerNamePage,
     EditPlayerHeightPage,
@@ -91,6 +93,7 @@ import {MatchDetailPage} from "../pages/match-detail/match-detail";
     TabsPage,
     MePage,
     MessagesPage,
+    ChatPage,
     EditPlayerPage,
     EditPlayerNamePage,
     EditPlayerHeightPage,
