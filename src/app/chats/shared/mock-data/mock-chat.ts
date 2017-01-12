@@ -4,7 +4,13 @@ export const CHATS: Chat[] = [
   {
     createdBy: "-KSRCrl5VueNKSNpmEvd",
     createdAt: 1474943964851,
-    content: "hello",
+    content: "hell",
+    isUnread: true
+  },
+  {
+    createdBy: "-KSRCrl5VueNKSNpmEvd",
+    createdAt: 1474944065000,
+    content: "hello1",
     isUnread: true
   }
 ];

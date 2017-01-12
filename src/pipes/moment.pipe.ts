@@ -23,8 +23,6 @@ export class MomentPipe implements PipeTransform {
   }
 
   transform(timestamp: number) {
-    console.log(timestamp);
-    
     return moment(timestamp).calendar(null, {
       sameDay: `[${this.local.getString('Today')}] HH:mm`,
       lastDay: `[${this.local.getString('Yesterday')}]  HH:mm`,

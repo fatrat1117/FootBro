@@ -6,10 +6,10 @@
 
 <ion-content>
   <ion-list no-lines>
-    <div *ngFor="let chat of chats">
+    <div *ngFor="let chat of chats; let i = index;">
       <!-- time -->
-      <ion-item class="chat-room-time-item">
-        <label>{{ chat.createdAt }}</label>
+      <ion-item *ngIf="shouldShowTime(i)" class="chat-room-time-item">
+        <label>{{ getDisplayTime(i) }}</label>
       </ion-item>
 
       <!-- other -->
