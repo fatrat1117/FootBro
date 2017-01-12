@@ -38,7 +38,7 @@ import { TeamBasicPipe } from '../pipes/team.pipe'
 import { SbLoadingComponent } from './common/loading.component';
 import { SbModalNavbarComponent } from './common/modal.navbar.component';
 import { SbMatchBasicComponent } from './matches/match-basic.component';
-import {MatchDetailPage} from "../pages/match-detail/match-detail";
+import { MatchDetailPage } from "../pages/match-detail/match-detail";
 
 @NgModule({
   declarations: [
