@@ -46,9 +46,9 @@
 
 <ion-footer class="chat-room-footer">
   <ion-toolbar text-center>
-    <input class="text-input" [(ngModel)]="newMessage">
+    <input #input type="text" class="text-input" [(ngModel)]="newMessage">
     <ion-buttons right>
-      <button ion-button class="send-button">
+      <button ion-button class="send-button" (click)="sendMessage(input)">
         Send
       </button>
     </ion-buttons>

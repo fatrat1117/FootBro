@@ -30,12 +30,19 @@ export class ChatPage {
     })
   }
 
+  sendMessage(input) {
+    this.chatService.sendChat(this.newMessage);
+    this.newMessage = '';
+    input.focus();
+  }
+
   shouldShowTime(index: number) {
     if (index == 0)
       return true;
 
     return (this.chats[index].createdAt - this.chats[index - 1].createdAt > 300000);
   }
+
   getDisplayTime(index: number) {
     var isTheSameDay: boolean;
     var current = this.chats[index].createdAt;
@@ -53,7 +60,6 @@ export class ChatPage {
     else {
       newTime = moment(current).format('HH:mm');
     }
-
     return newTime;
   }
 }
