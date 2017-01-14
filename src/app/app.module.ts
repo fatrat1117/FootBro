@@ -26,8 +26,9 @@ import { CheeringTeamPage } from "../pages/cheering-team/cheering-team";
 import { MyTeamPage } from "../pages/my-team/my-team";
 import { LoginPage } from '../pages/login/login';
 
-import { AngularFireModule } from 'angularfire2';
 // services
+import { AngularFireModule } from 'angularfire2';
+import { FirebaseManager} from '../providers/firebase-manager';
 import { PlayerService } from './players/shared/player.service';
 import { TeamService } from './teams/shared/team.service';
 
@@ -123,7 +124,11 @@ export const firebaseConfig = {
     MyTeamPage,
     LoginPage,
   ],
-  providers: [ { provide: ErrorHandler, useClass: IonicErrorHandler }, Localization, PlayerService, TeamService ]
+  providers: [ { provide: ErrorHandler, useClass: IonicErrorHandler }, 
+  FirebaseManager,
+  Localization, 
+  PlayerService, 
+  TeamService ]
 })
 export class AppModule {
 }
