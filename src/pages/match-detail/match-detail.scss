@@ -1,15 +1,22 @@
 page-match-detail {
-.card .item{
-  background: #40444d;
-}
+  .card .item {
+    background: #40444d;
+  }
 
-  .card .item-redCard{
+  .card .item-redCard {
     background: #373a3c;
   }
-  .card .item-field{
+  .card .item-field {
     background: #373a3c;
   }
-  .card .item-yellowCard{
-    background:#555555;
+  .card .item-yellowCard {
+    background: #37383d;
   }
+  .match-detail {
+    background: #40444d;
+  }
+  .item-md.item-block .item-inner {
+    border-bottom: 0px;
+  }
+
 }

@@ -1,7 +1,6 @@
 import {Modal, NavController, ViewController} from 'ionic-angular';
 import {Component, Inject} from '@angular/core';
 import {
-    FIREBASE_PROVIDERS, defaultFirebase,
     AngularFire, firebaseAuthConfig, AuthProviders,
     AuthMethods
 } from 'angularfire2';
@@ -19,7 +18,7 @@ export class LoginPage {
     error: any
     busy: boolean;
     _credentials: any;
-    private facebookProvider: Facebook = new Facebook({
+    private facebookProvider = new Facebook({
         clientId: "463670290510920",
         appScope: ["email"]
     })
@@ -34,7 +33,6 @@ export class LoginPage {
             password: ''
         };
         this.busy = false;
-        //this.cordovaOauth = new CordovaOauth(new Facebook({ clientId: "463670290510920", appScope: ["email"] }));
         //this.cordovaOauth = new CordovaOauth(new Facebook({clientId: "502807016597247", appScope: ["email"]}));
     }
 
@@ -76,18 +74,20 @@ export class LoginPage {
 
         this.busy = true;
         //console.log(this.cordovaOauth);
-        this.cordovaOauth.logInVia(this.facebookProvider).then(success => {
-            console.log("Facebook success: " + JSON.stringify(success));
-            let creds = firebase.auth.FacebookAuthProvider.credential(success["access_token"]);
-            //console.log(creds);
+        this.cordovaOauth.logInVia(this.facebookProvider).then(fb => {
+            console.log("Facebook success: " + JSON.stringify(fb));
+            try {
+            let token = fb["access_token"];
+            console.log(token, firebase);
+            let creds = firebase.auth.FacebookAuthProvider.credential(token);
+            console.log(creds);
 
             let providerConfig = {
                 provider: AuthProviders.Facebook,
                 method: AuthMethods.OAuthToken,
-                remember: 'default',
                 scope: ['email'],
             };
-
+            
             this.af.auth.login(creds, providerConfig).then((value) => {
                 console.log('firebase success');
                 //console.log(value);
@@ -96,6 +96,7 @@ export class LoginPage {
                 this.error = error;
                 self.busy = false;
             });
+            } catch(e) {alert(e);}
         }).catch((error) => {
             //this.error = error;
             self.busy = false;
