@@ -1,4 +1,4 @@
-import {Component,ElementRef,OnInit} from '@angular/core';
+import {Component,ElementRef} from '@angular/core';
 import {NavController} from 'ionic-angular';
 
 import {Localization} from '../../providers/localization';
@@ -30,7 +30,7 @@ export class HomePage {
 
   }
 
-  ngOnInit() :any{
+  ionViewDidLoad() :any{
     jQuery(this.elRef.nativeElement).find('.test-button').on('click',function(){
         alert("jQuery works");
     });
