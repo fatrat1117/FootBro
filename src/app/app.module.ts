@@ -24,7 +24,9 @@ import { FeedbackPage } from "../pages/feedback/feedback";
 import { MatchesPage } from "../pages/matches/matches";
 import { CheeringTeamPage } from "../pages/cheering-team/cheering-team";
 import { MyTeamPage } from "../pages/my-team/my-team";
+import { LoginPage } from '../pages/login/login';
 
+import { AngularFireModule } from 'angularfire2';
 // services
 import { PlayerService } from './players/shared/player.service';
 import { TeamService } from './teams/shared/team.service';
@@ -40,6 +42,14 @@ import { SbModalNavbarComponent } from './common/modal.navbar.component';
 import { SbMatchBasicComponent } from './matches/match-basic.component';
 import { MatchDetailPage } from "../pages/match-detail/match-detail";
 
+export const firebaseConfig = {
+    apiKey: "AIzaSyCrhL6g6rHs7-X09jw5Oq8I_g0fspD8bf8",
+    authDomain: "project-3416565325366537224.firebaseapp.com",
+    databaseURL: "https://project-3416565325366537224.firebaseio.com",
+    storageBucket: "project-3416565325366537224.appspot.com",
+    messagingSenderId: "149844388984"
+  };
+  
 @NgModule({
   declarations: [
     MyApp,
@@ -66,6 +76,7 @@ import { MatchDetailPage } from "../pages/match-detail/match-detail";
     MatchDetailPage,
     CheeringTeamPage,
     MyTeamPage,
+    LoginPage,
     // pipes
     TransPipe,
     StringToDatePipe,
@@ -81,7 +92,8 @@ import { MatchDetailPage } from "../pages/match-detail/match-detail";
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: true
     }),
-    RoundProgressModule
+    RoundProgressModule,
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -109,6 +121,7 @@ import { MatchDetailPage } from "../pages/match-detail/match-detail";
     MatchDetailPage,
     CheeringTeamPage,
     MyTeamPage,
+    LoginPage,
   ],
   providers: [ { provide: ErrorHandler, useClass: IonicErrorHandler }, Localization, PlayerService, TeamService ]
 })

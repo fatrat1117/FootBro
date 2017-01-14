@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
-
+import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import { PlayerBasic } from '../../app/players/shared/player.model'
 import { TeamBasic } from '../../app/teams/shared/team.model'
 
@@ -21,7 +21,11 @@ export class MePage {
   playerBasic: PlayerBasic;
   teamBasic: TeamBasic;
   messageCount: number;
-  constructor(private navCtrl: NavController, private modalCtrl: ModalController, private playerService: PlayerService, private teamService: TeamService) {
+  constructor(private navCtrl: NavController, 
+  private modalCtrl: ModalController, 
+  private playerService: PlayerService, 
+  private teamService: TeamService,
+  private af: AngularFire) {
     this.messageCount = 1;
   }
 
@@ -58,5 +62,9 @@ export class MePage {
 
   goMessagesPage() {
     this.navCtrl.push(MessagesPage);
+  }
+
+  onLogout() {
+    this.af.auth.logout();
   }
 }
