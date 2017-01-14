@@ -4,7 +4,7 @@ export const PLAYERS: Player[] = [
   {
     basic:
     {
-      id: "-KSRCrl5VueNKSNpmEvd",
+      id: "06mhyVlgtEd7YoJwdTSygMXXdeY2",
       created: true,
       displayName: "TestUser",
       photoURL: "assets/player-photo/player_photo.jpg",

@@ -3,12 +3,15 @@ import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'a
 import { LoginPage } from '../pages/login/login';
 import {NavController, ModalController} from 'ionic-angular';
 
+import Firebase from 'firebase'
+
 @Injectable()
 export class FirebaseManager {
   auth;
+  selfId: string;
 
-  constructor(private modalCtrl: ModalController) {
-
+  constructor(private modalCtrl: ModalController, private af: AngularFire) {
+    this.selfId = "06mhyVlgtEd7YoJwdTSygMXXdeY2";
   }
 
   popupLoginPage() {
@@ -25,6 +28,32 @@ export class FirebaseManager {
     if (null == this.auth) {
       this.popupLoginPage();
     }
+  }
+
+  /****************************** Chat Room ******************************/
+  getChatsWithUser(userId: string, subject: any) {
+    return this.af.database.list(`/players/${this.selfId}/chats/${userId}`, {
+      query: {
+        limitToLast: subject
+      }
+    });
+  }
+
+  addChatToUser(userId: string, content: string) {
+    // add to self
+    this.af.database.list(`/players/${this.selfId}/chats/${userId}`).push({
+      createdAt: Firebase.database.ServerValue.TIMESTAMP,
+      content: content,
+      isFromSelf: true
+    })
+
+    // add to other
+    this.af.database.list(`/players/${userId}/chats/${this.selfId}`).push({
+      createdAt: Firebase.database.ServerValue.TIMESTAMP,
+      content: content,
+      isFromSelf: false
+    })
+
   }
 }
 // @Injectable()

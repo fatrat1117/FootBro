@@ -3,10 +3,9 @@ import { NavController, NavParams } from 'ionic-angular';
 
 import { MomentPipe } from '../../pipes/moment.pipe'
 import * as moment from 'moment';
+import { FirebaseListObservable } from 'angularfire2';
 
 import {Localization} from '../../providers/localization';
-
-
 import { Chat } from '../../app/chats/shared/chat.model'
 import { ChatService } from '../../app/chats/shared/chat.service'
 
@@ -16,7 +15,8 @@ import { ChatService } from '../../app/chats/shared/chat.service'
   providers: [ ChatService ]
 })
 export class ChatPage {
-  chats: Chat[];
+  //chats: FirebaseListObservable<any[]>;
+  chats: any[];
   userId: string;
   newMessage: string;
   constructor(private navCtrl: NavController, private navParams: NavParams, private chatService: ChatService, private loacal: Localization) {
@@ -25,13 +25,16 @@ export class ChatPage {
   ionViewDidLoad() {
     this.userId = this.navParams.get('userId');
 
-    this.chatService.getRecentChats("0").then(chats => {
+    this.chatService.getRecentChats("0").subscribe(chats => {
       this.chats = chats;
+      console.log(chats);
     })
+
+    this.chatService.loadMoreChats();
   }
 
   sendMessage(input) {
-    this.chatService.sendChat(this.newMessage);
+    this.chatService.sendChat(this.userId, this.newMessage);
     this.newMessage = '';
     input.focus();
   }
@@ -60,6 +63,7 @@ export class ChatPage {
     else {
       newTime = moment(current).format('HH:mm');
     }
+
     return newTime;
   }
 }

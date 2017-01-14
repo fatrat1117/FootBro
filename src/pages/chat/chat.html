@@ -1,6 +1,9 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Woody</ion-title>
+    <ion-title>
+      <img class="chat-room-avatar" src="assets/player-photo/player_photo.jpg">
+      <span>Woody</span>
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -13,21 +16,21 @@
       </ion-item>
 
       <!-- other -->
-      <ion-item class="chat-room-msg-item">
-        <div class="chat-room-avatar-div">
+      <ion-item *ngIf="!chat.isFromSelf" class="chat-room-msg-item">
+        <!--div class="chat-room-avatar-div">
           <ion-thumbnail item-left>
             <img src="assets/player-photo/player_photo.jpg">
           </ion-thumbnail>
-        </div>
+        </div-->
         <div class="msg-box left">
           {{ chat.content }}
         </div>
       </ion-item>
 
       <!-- self -->
-      <ion-item class="chat-room-msg-item">
+      <ion-item *ngIf="chat.isFromSelf" class="chat-room-msg-item">
         <div class="msg-box right">
-          content
+          {{ chat.content }}
         </div>
       </ion-item>
     </div>
