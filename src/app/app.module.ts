@@ -91,7 +91,8 @@ export const firebaseConfig = {
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
-      tabsHideOnSubPages: true
+      tabsHideOnSubPages: true,
+      backButtonText: ''
     }),
     RoundProgressModule,
     AngularFireModule.initializeApp(firebaseConfig)

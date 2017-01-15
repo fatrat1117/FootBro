@@ -3,8 +3,8 @@
     <ion-title>{{'Me' | trans}}</ion-title>
     <ion-buttons end>
       <button ion-button (click)="goMessagesPage()">
-        <ion-icon *ngIf="messageCount != 0" name="mail" color="primary"></ion-icon>
-        <ion-icon *ngIf="messageCount == 0" name="mail-open"></ion-icon>
+        <ion-icon *ngIf="messageCount != 0" name="md-mail" color="primary"></ion-icon>
+        <ion-icon *ngIf="messageCount == 0" name="md-mail-open"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -33,25 +33,25 @@
     <!-- show pages -->
     <ion-item-divider></ion-item-divider>
     <ion-item (click)="goPlayerPage()" detail-push>
-      <ion-icon name="aperture" item-left color="gGreen"></ion-icon>
+      <ion-icon name="md-aperture" item-left color="gGreen"></ion-icon>
       {{'MyPage' | trans}}
     </ion-item>
     <ion-item tappable *ngIf="!playerBasic?.teamId">
-      <ion-icon name="people" item-left color="gBlue"></ion-icon>
+      <ion-icon name="md-people" item-left color="gBlue"></ion-icon>
       {{'CreateTeam' | trans}}
     </ion-item>
     <ion-item tappable *ngIf="(playerBasic)?.teamId" detail-push (click)="goTeamPage()">
-      <ion-icon name="people" item-left color="gBlue"></ion-icon>
+      <ion-icon name="md-people" item-left color="gBlue"></ion-icon>
       {{'MyTeam' | trans}}
     </ion-item>
 
     <ion-item-divider></ion-item-divider>
     <ion-item (click)="goFeedbackPage()"  detail-push>
-      <ion-icon name="help" item-left color="gYellow"></ion-icon>
+      <ion-icon name="md-help" item-left color="gYellow"></ion-icon>
       {{'Feedback' | trans}}
     </ion-item>
     <ion-item tappable (click)="onLogout()">
-      <ion-icon name="exit" item-left color="danger"></ion-icon>
+      <ion-icon name="md-exit" item-left color="danger"></ion-icon>
       {{'Logout' | trans}}
     </ion-item>
   </ion-item-group>

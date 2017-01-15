@@ -16,14 +16,15 @@ $background-color: #171717;
 
 // toolbar
 $toolbar-text-color: #888;
-$toolbar-title-text-color:#888;
 $toolbar-background: #222;
+$toolbar-md-title-text-color: #888;
+$toolbar-ios-title-text-color: #888;
 
 // tabs
 $tabs-background: #222;
 $tabs-tab-color-active: #0f0;
 $tabs-md-tab-color-inactive: #888;
-$tabs-ios-tab-color-inactive: #888;
+$tabs-ion-tab-color-inactive: #888;
 
 //alert-md
 $alert-background-color:#444;
@@ -40,11 +41,17 @@ $item-md-divider-background: #222;
 $item-ios-divider-background: #222;
 
 // list
-$list-activated-background-color: #222;
-$list-border-color: #888;
+$list-md-activated-background-color: #222;
+$list-ios-activated-background-color: #222;
+$list-md-border-color: #888;
+$list-ios-border-color: #888;
 
 // item
 $item-detail-push-show: true;
+
+// refresher
+$refresher-border-color: transparent;
+$refresher-icon-color: #888;
 
 
 //fonts

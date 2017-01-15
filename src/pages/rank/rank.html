@@ -36,25 +36,25 @@
           <ion-row>
             <ion-col width-33>
               <p text-center>
-                <ion-icon name='football'></ion-icon>
+                <ion-icon name='md-football'></ion-icon>
                 &nbsp;{{'Ability' | trans}}</p>
               <p text-center ion-text color="primary-text">{{t.ability}}</p>
             </ion-col>
             <ion-col width-33>
               <p text-center>
-                <ion-icon name='people'></ion-icon>&nbsp;{{'Players' | trans}}</p>
+                <ion-icon name='md-people'></ion-icon>&nbsp;{{'Players' | trans}}</p>
               <p text-center ion-text color="primary-text">{{t.totalPlayers}}</p>
             </ion-col>
             <ion-col width-33>
               <p text-center>
-                <ion-icon name='flame' color="danger"></ion-icon>&nbsp;{{'Popularity' | trans}}</p>
+                <ion-icon name='md-flame' color="danger"></ion-icon>&nbsp;{{'Popularity' | trans}}</p>
               <p text-center ion-text color="secondary">{{t.popularity}}</p>
             </ion-col>
           </ion-row>
         </ion-item>
       </ion-list>
       <ion-infinite-scroll (ionInfinite)="moreTeam($event)">
-        <ion-infinite-scroll-content loadingText="Loading more teams...">
+        <ion-infinite-scroll-content refreshingSpinner="circles">
         </ion-infinite-scroll-content>
       </ion-infinite-scroll>
     </div>
@@ -83,7 +83,7 @@
         </ion-item>
       </ion-list>
       <ion-infinite-scroll (ionInfinite)="morePlayer($event)">
-        <ion-infinite-scroll-content loadingText="Loading more players...">
+        <ion-infinite-scroll-content loadingSpinner="circles">
         </ion-infinite-scroll-content>
       </ion-infinite-scroll>
     </div>

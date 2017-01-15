@@ -1,7 +1,15 @@
 page-chat {
-  .chat-room-avatar{
+  .chat-room-avatar {
+    float: left;
+    margin-right: 10px;
     max-width: 3.5rem;
     max-height: 3.5rem;
+  }
+
+  .chat-room-title {
+    float: left;
+    text-align: center;
+    margin: 0 auto;
   }
 
   .chat-room-time-item {

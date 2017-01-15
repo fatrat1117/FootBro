@@ -1,43 +1,36 @@
-page-rank{
-
-  .rank-stats{
+page-rank {
+  .rank-stats {
     .stats-col-text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
     //default ion-thumbnail: min-width : 8rem, min height:8rem
     //now     ion-thumbnail: min-width : 4rem, min height:4rem
-    .item-md ion-thumbnail{
+    .item-md ion-thumbnail {
       min-width: 0;
       min-height: 0;
       max-height: 6rem;
       max-width: 6rem;
-      img{
+      img {
         max-width: 6rem;
         max-height: 6rem;
       }
     }
-
     //default ion-item min-height:4.4 rem
     //now     ion-item min-height:2.2 rem
-
-    ion-item{
+    ion-item {
       min-height: 2.2rem;
       margin-bottom: 10px;
-      ion-label{
+      ion-label {
         margin: 0;
-        p{
+        p {
           font-size: 1.0rem;
-          ion-icon{
-            width:100%;
+          ion-icon {
+            width: 100%;
           }
         }
       }
     }
-
-
   }
 }
-

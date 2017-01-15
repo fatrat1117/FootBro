@@ -2,12 +2,15 @@
   <ion-navbar>
     <ion-title>
       <img class="chat-room-avatar" src="assets/player-photo/player_photo.jpg">
-      <span>Woody</span>
+      <p class="chat-room-title">Woody</p>
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
+  <ion-refresher  color="lightGrey" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content refreshingSpinner="circles"></ion-refresher-content>
+  </ion-refresher>
   <ion-list no-lines>
     <div *ngFor="let chat of chats; let i = index;">
       <!-- time -->
@@ -51,7 +54,7 @@
   <ion-toolbar text-center>
     <input #input type="text" class="text-input" [(ngModel)]="newMessage">
     <ion-buttons right>
-      <button ion-button class="send-button" (click)="sendMessage(input)">
+      <button *ngIf="newMessage?.trim()" ion-button class="send-button" (click)="sendMessage(input)">
         Send
       </button>
     </ion-buttons>
