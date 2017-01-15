@@ -1,3 +1,4 @@
+import * as firebase from 'firebase';
 import {Modal, NavController, ViewController} from 'ionic-angular';
 import {Component, Inject} from '@angular/core';
 import {
@@ -7,7 +8,6 @@ import {
 import {Facebook} from 'ng2-cordova-oauth/core';
 import {OauthCordova} from 'ng2-cordova-oauth/platform/cordova'
 import {Localization} from '../../providers/localization';
-declare let firebase: any;
 
 @Component({
     selector: 'page-login',
