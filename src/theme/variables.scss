@@ -15,34 +15,36 @@ $text-color:#F2EDE7;
 $background-color: #171717;
 
 // toolbar
-$toolbar-md-text-color: #888;
-$toolbar-md-title-text-color:#888;
-$toolbar-md-background: linear-gradient(to bottom, #444, #000);;
+$toolbar-text-color: #888;
+$toolbar-title-text-color:#888;
+$toolbar-background: #222;
 
 // tabs
-$tabs-md-background: #373a3c;
-$tabs-md-tab-color-active: #0f0;
+$tabs-background: #222;
+$tabs-tab-color-active: #0f0;
 $tabs-md-tab-color-inactive: #888;
+$tabs-ios-tab-color-inactive: #888;
 
 //alert-md
-$alert-md-background-color:#444;
-$alert-md-input-text-color:#fff;
-$alert-md-radio-border-color-on:#fff;
-$alert-md-radio-border-color-off:#888;
-$alert-md-button-text-color:#888;
-$alert-md-button-background-color-activated:#0f0;
-$alert-md-input-border-color:#0f0;
-$alert-md-radio-label-text-color-checked:#fff;
+$alert-background-color:#444;
+$alert-input-text-color:#fff;
+$alert-radio-border-color-on:#fff;
+$alert-radio-border-color-off:#888;
+$alert-button-text-color:#888;
+$alert-button-background-color-activated:#0f0;
+$alert-input-border-color:#0f0;
+$alert-radio-label-text-color-checked:#fff;
 
 // divider
 $item-md-divider-background: #222;
+$item-ios-divider-background: #222;
 
 // list
-$list-md-activated-background-color: #222;
-$list-md-border-color: #888;
+$list-activated-background-color: #222;
+$list-border-color: #888;
 
 // item
-$item-md-detail-push-show: true;
+$item-detail-push-show: true;
 
 
 //fonts
@@ -74,7 +76,7 @@ $colors: (
   gRed:         #db3236,
   gGreen:       #3cba54,
   gBlue:        #4885ed,
-  gYellow:      #f4c20d
+  gYellow:      #f4c20d,
 );
 
 
