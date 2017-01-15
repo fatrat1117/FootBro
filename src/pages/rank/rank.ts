@@ -21,7 +21,7 @@ export class RankPage {
 
   ionViewDidLoad() {
     this.rankService.getTeamPublics().then(teamRanks => {
-      //console.log(teamRanks);
+      console.log(teamRanks);
       this.teamRanks = teamRanks;
       this.sortTeamBy(this.teamSortByStr);
     });

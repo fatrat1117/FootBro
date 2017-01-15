@@ -55,6 +55,15 @@ export class FirebaseManager {
     })
 
   }
+
+    queryPublicTeams(orderby, limit) {
+    return this.af.database.list(`/public/teams/`, {
+      query: {
+        orderByChild: orderby,
+        limitToLast: limit
+      }
+    });
+  }
 }
 // @Injectable()
 // export class FirebaseManager {
@@ -476,15 +485,6 @@ export class FirebaseManager {
 //   getPublicTeams() {
 //     return this.af.database.list(`/public/teams/`, {
 //       query: { orderByChild: 'name' }
-//     });
-//   }
-
-//   queryPublicTeams(subject, limit) {
-//     return this.af.database.list(`/public/teams/`, {
-//       query: {
-//         orderByChild: subject,
-//         limitToLast: limit
-//       }
 //     });
 //   }
 
