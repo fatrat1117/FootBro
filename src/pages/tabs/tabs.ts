@@ -1,8 +1,8 @@
 import { Component, ViewChild} from '@angular/core';
-import {NavController, Tabs} from 'ionic-angular';
+import {Tabs} from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { RankPage } from '../rank/rank';
-import { AngularFire,  AuthMethods } from 'angularfire2';
+import { AngularFire} from 'angularfire2';
 import { MatchesPage } from '../matches/matches';
 import { MePage } from '../me/me';
 import {FirebaseManager} from '../../providers/firebase-manager';
