@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
-import { AngularFire, AuthMethods } from 'angularfire2';
+import { AngularFire } from 'angularfire2';
 import { PlayerBasic } from '../../app/players/shared/player.model'
 import { TeamBasic } from '../../app/teams/shared/team.model'
 
