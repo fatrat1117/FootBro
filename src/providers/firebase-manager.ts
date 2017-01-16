@@ -105,6 +105,8 @@ export class FirebaseManager {
       this.afSortedPublicTeams.subscribe(snapShots =>{
         this.sortedPublicTeams = snapShots.reverse();
         console.log(this.sortedPublicTeams);
+        let event = new Event('PublicTeamsChanged');
+        document.dispatchEvent(event);
       });
     }
 
