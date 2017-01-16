@@ -2,13 +2,17 @@ import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { LoginPage } from '../pages/login/login';
 import {NavController, ModalController} from 'ionic-angular';
-
+import {Subject} from 'rxjs/Subject';
 import Firebase from 'firebase'
 
 @Injectable()
 export class FirebaseManager {
   auth;
   selfId: string;
+  afSortedPublicTeams;
+  sortedPublicTeams;
+  subjectTeamSortBy = new Subject();
+  subjectTeamLimitTo = new Subject();
 
   constructor(private modalCtrl: ModalController, private af: AngularFire) {
     this.selfId = "06mhyVlgtEd7YoJwdTSygMXXdeY2";
@@ -56,13 +60,20 @@ export class FirebaseManager {
 
   }
 
-    queryPublicTeams(orderby, limit) {
-    return this.af.database.list(`/public/teams/`, {
-      query: {
-        orderByChild: orderby,
-        limitToLast: limit
-      }
-    });
+  queryPublicTeams(orderby, limit) {
+    if (!this.afSortedPublicTeams) {
+      this.afSortedPublicTeams = this.af.database.list(`/public/teams/`, {
+        query: {
+          orderByChild: orderby,
+          limitToLast: limit
+        }
+      });
+
+      this.afSortedPublicTeams.subscribe(snapShots =>{
+        console.log(snapShots);
+        this.sortedPublicTeams = snapShots;
+      });
+    }
   }
 }
 // @Injectable()
