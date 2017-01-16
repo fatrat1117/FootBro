@@ -6,14 +6,17 @@
 
 <ion-content>
   <ion-list>
-    <ion-item-sliding #slidingItem>
+    <ion-item-sliding *ngFor="let msg of messages" #slidingItem>
       <ion-item (click)="enterChatPage('0')">
         <ion-thumbnail item-left>
           <img src="assets/player-photo/player_photo.jpg">
         </ion-thumbnail>
-        <h2>Woody</h2>
-        <p>This town ain't big enough for the two of us!</p>
-        <ion-note item-right>3:43 PM</ion-note>
+        <h2>{{ msg.$key }}</h2>
+        <p>{{ msg.lastContent }}</p>
+        <ion-note item-right text-right>
+          <p>{{ msg.lastTimestamp | momentPipe }}</p>
+          <ion-badge *ngIf="msg.isUnread" color="gBlue">1</ion-badge>
+        </ion-note>
       </ion-item>
       <ion-item-options side="right">
         <button ion-button color="lightGrey" text-capitalize (click)="markAsRead(slidingItem)">

@@ -34,7 +34,7 @@ import { TeamService } from './teams/shared/team.service';
 
 // pipes
 import { TransPipe, Localization } from '../providers/localization';
-import { StringToDatePipe, NumberToTimePipe } from '../pipes/moment.pipe';
+import { StringToDatePipe, NumberToTimePipe, MomentPipe } from '../pipes/moment.pipe';
 import { TeamBasicPipe } from '../pipes/team.pipe'
 
 // components
@@ -82,6 +82,7 @@ export const firebaseConfig = {
     TransPipe,
     StringToDatePipe,
     NumberToTimePipe,
+    MomentPipe,
     TeamBasicPipe,
     // components
     SbLoadingComponent,

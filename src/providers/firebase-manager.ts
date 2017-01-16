@@ -34,8 +34,30 @@ export class FirebaseManager {
     }
   }
 
+  /****************************** Messages ******************************/
+  getAllMessages() {
+    return this.af.database.list(`/players/${this.selfId}/chats/basic-info/`, {
+      query: {
+        orderByChild: 'lastTimestamp'
+      }
+    })
+  }
+
+
+
+
+
+
+
+
+
+
   /****************************** Chat Room ******************************/
   getChatsWithUser(userId: string, subject: any) {
+    this.af.database.object(`/players/${this.selfId}/chats/basic-info/${userId}`).update({
+      isUnread: false,
+    })
+
     return this.af.database.list(`/players/${this.selfId}/chats/${userId}`, {
       query: {
         limitToLast: subject
@@ -51,6 +73,12 @@ export class FirebaseManager {
       isFromSelf: true
     })
 
+    this.af.database.object(`/players/${this.selfId}/chats/basic-info/${userId}`).set({
+      isUnread: false,
+      lastContent: content,
+      lastTimestamp: Firebase.database.ServerValue.TIMESTAMP
+    })
+
     // add to other
     this.af.database.list(`/players/${userId}/chats/${this.selfId}`).push({
       createdAt: Firebase.database.ServerValue.TIMESTAMP,
@@ -58,6 +86,11 @@ export class FirebaseManager {
       isFromSelf: false
     })
 
+    this.af.database.object(`/players/${userId}/chats/basic-info/${this.selfId}`).set({
+      isUnread: true,
+      lastContent: content,
+      lastTimestamp: Firebase.database.ServerValue.TIMESTAMP
+    })
   }
 
   queryPublicTeams(orderby, limit) {
