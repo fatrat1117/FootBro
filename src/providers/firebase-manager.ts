@@ -93,23 +93,26 @@ export class FirebaseManager {
     })
   }
 
-  queryPublicTeams(orderby, limit) {
+  queryPublicTeams(orderby, count) {
     if (!this.afSortedPublicTeams) {
       this.afSortedPublicTeams = this.af.database.list(`/public/teams/`, {
         query: {
-          orderByChild: orderby,
-          limitToLast: limit
+          orderByChild: this.subjectTeamSortBy,
+          limitToLast: this.subjectTeamLimitTo
         }
       });
 
       this.afSortedPublicTeams.subscribe(snapShots =>{
-        console.log(snapShots);
-        this.sortedPublicTeams = snapShots;
+        this.sortedPublicTeams = snapShots.reverse();
+        console.log(this.sortedPublicTeams);
       });
     }
+
+    this.subjectTeamSortBy.next(orderby);
+    this.subjectTeamLimitTo.next(count);
   }
 }
-// @Injectable()
+// @Injectable().
 // export class FirebaseManager {
 //   selfId: string;
 //   selfTeamId: string;

@@ -124,6 +124,10 @@ export class RankService {
     // }
   }
 
+getTeamPublicsSync(orderby, count) {
+  this.fm.queryPublicTeams(orderby, count);
+}
+
   getTeamPublics(): Promise<any[]> {
     return new Promise<any[]>(resolve => {
       if (0 === this.teamRanks.length) {
