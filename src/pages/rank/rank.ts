@@ -21,17 +21,21 @@ export class RankPage {
 
   ionViewDidLoad() {
     this.rankService.getTeamRankAsync(this.teamSortByStr, 20);
+    let self = this;
+    setTimeout(function() {
+      self.teamRanks = self.rankService.teamRanks;
+    }, 5000);
+    
     // this.rankService.getTeamPublics();.then(teamRanks => {
     //   console.log(teamRanks);
     //   this.teamRanks = teamRanks;
     //   this.sortTeamBy(this.teamSortByStr);
     // });
-
-    this.rankService.getPlayerRanks().then(ranks => {
-      //console.log(teamRanks);
-      this.playerRanks = ranks;
-      this.sortPlayerBy(this.playerSortByStr);
-    });
+    // this.rankService.getPlayerRanks().then(ranks => {
+    //   //console.log(teamRanks);
+    //   this.playerRanks = ranks;
+    //   this.sortPlayerBy(this.playerSortByStr);
+    // });
   }
 
   sortTeamBy(str) {
