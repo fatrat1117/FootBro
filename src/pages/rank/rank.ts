@@ -20,7 +20,7 @@ export class RankPage {
   }
 
   ionViewDidLoad() {
-    this.rankService.getTeamPublicsSync(this.teamSortByStr, 20);
+    this.rankService.getTeamRankAsync(this.teamSortByStr, 20);
     // this.rankService.getTeamPublics();.then(teamRanks => {
     //   console.log(teamRanks);
     //   this.teamRanks = teamRanks;

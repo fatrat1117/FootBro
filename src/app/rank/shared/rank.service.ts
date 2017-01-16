@@ -112,19 +112,28 @@ export class RankService {
   }
 ];
 
+  needRefreshTeamsRankUI = false;
   constructor(private fm: FirebaseManager) {
-    // for (let i = 0; i < 10; ++i) {
-    //   PLAYERRANKS.push({
-    //     id: "-KL1a8zTfCXDapavsN_L",
-    //     name: "Li Jixiang" + i,
-    //     photoURL: "assets/player-photo/player_photo.jpg",
-    //     position: 'cf',
-    //     popularity: i
-    //   })
-    // }
+    document.addEventListener('PublicTeamsChanged',
+      e => {
+        console.log('PublicTeamsChanged');
+        this.teamRanks = [];
+        let sortedPublicTeams = this.fm.sortedPublicTeams;
+        for (let i = 0; i < sortedPublicTeams.length; ++i) {
+          this.teamRanks.push({
+            id: sortedPublicTeams[i].$key,
+            name: sortedPublicTeams[i].name,
+            logo: "assets/team-logo/team_logo.jpg",
+            totalPlayers: 201,
+            ability: sortedPublicTeams[i].ability,
+            popularity: sortedPublicTeams[i].popularity
+          })
+        }
+      });
   }
 
-getTeamPublicsSync(orderby, count) {
+getTeamRankAsync(orderby, count) {
+  this.needRefreshTeamsRankUI = true;
   this.fm.queryPublicTeams(orderby, count);
 }
 
