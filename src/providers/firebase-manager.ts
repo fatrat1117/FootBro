@@ -102,8 +102,27 @@ export class FirebaseManager {
   }
 
   //teams
+  getTeamPublic(id) {
+    return this.sortedPublicTeamsMap[id];
+  }
+
+  getTeamPublicAsync(id) {
+    if (this.sortedPublicTeams[id])
+      this.FireCustomEvent('TeamPublicDataReady', id);
+    else {
+      this.af.database.object(`/public/teams/${id}`).subscribe(snapshot => {
+        this.sortedPublicTeams[id] = snapshot;
+        this.FireCustomEvent('TeamPublicDataReady', id);
+      });
+    }
+  }
+
   queryPublicTeams(orderby, count) {
+    console.log('queryPublicTeams', orderby, count);
+    
     if (!this.afSortedPublicTeams) {
+      console.log('subscribe sorted public teams');
+      
       this.afSortedPublicTeams = this.af.database.list(`/public/teams/`, {
         query: {
           orderByChild: this.subjectTeamSortBy,
@@ -116,9 +135,7 @@ export class FirebaseManager {
         for (let i = 0; i < snapshots.length; ++i) {
           this.sortedPublicTeamsMap[snapshots[i].$key] = snapshots[i];
         }
-        console.log('PublicTeamsChanged');
-        let event = new Event('PublicTeamsChanged');
-        document.dispatchEvent(event);
+        this.FireEvent('PublicTeamsChanged');
       });
     }
 
@@ -151,10 +168,13 @@ export class FirebaseManager {
   }
   
   increaseTeamPopularity(teamId) {
-    let teamPublicData = this.sortedPublicTeamsMap[teamId];
-    if (teamPublicData) {
-      this.af.database.object(`public/teams/${teamId}`).update({ popularity: teamPublicData.popularity + 1 });
-    }
+    //setTimeout(() => {
+      //cause pulic team changed to fire multiple times, need a fix
+      let teamPublicData = this.sortedPublicTeamsMap[teamId];
+      if (teamPublicData) {
+        this.af.database.object(`public/teams/${teamId}`).update({ popularity: teamPublicData.popularity + 1 });
+      };
+    //}, 1000);
   }
 
   //Fire document events 
