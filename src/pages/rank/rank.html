@@ -25,7 +25,7 @@
         </ion-select>
       </ion-item>
       <ion-list>
-        <ion-item *ngFor="let t of teamRanks; let i = index;" style="margin-bottom:10px" text-wrap>
+        <ion-item *ngFor="let t of teamRanks; let i = index;" style="margin-bottom:10px" text-wrap (click)='goTeamPage(t.id)'>
           <ion-thumbnail item-left>
             <img [src]="t.logo">
           </ion-thumbnail>

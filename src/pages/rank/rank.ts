@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { RankService } from '../../app/rank/shared/rank.service'
 import { MyPlayerPage } from '../my-player/my-player'
+import { MyTeamPage } from '../my-team/my-team'
 
 @Component({
   selector: 'page-rank',
@@ -62,4 +63,8 @@ export class RankPage {
   goPlayerPage(id) {
     this.nav.push(MyPlayerPage, { pId: id });
   }
+
+  goTeamPage(tId) {
+    this.nav.push(MyTeamPage, { id: tId });
+  } 
 }

@@ -89,7 +89,7 @@ export class RankService {
         //if (this.teamRankRefreshMap[teamId]) {
         //  this.teamRankRefreshMap[teamId] = false;
           let team = this.fm.getTeam(teamId);
-          console.log(team);
+          //console.log(team);
           let teamRankData = this.teamRankMap[teamId];
           if (teamRankData) {
             teamRankData.logo = team['basic-info'].logo;
