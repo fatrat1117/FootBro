@@ -13,7 +13,7 @@ export class FirebaseManager {
   sortedPublicTeams;
   subjectTeamSortBy = new Subject();
   subjectTeamLimitTo = new Subject();
-
+  cachedTeams = {};
   constructor(private modalCtrl: ModalController, private af: AngularFire) {
     this.selfId = "06mhyVlgtEd7YoJwdTSygMXXdeY2";
   }
@@ -93,6 +93,7 @@ export class FirebaseManager {
     })
   }
 
+  //teams
   queryPublicTeams(orderby, count) {
     if (!this.afSortedPublicTeams) {
       this.afSortedPublicTeams = this.af.database.list(`/public/teams/`, {
@@ -102,8 +103,8 @@ export class FirebaseManager {
         }
       });
 
-      this.afSortedPublicTeams.subscribe(snapShots =>{
-        this.sortedPublicTeams = snapShots.reverse();
+      this.afSortedPublicTeams.subscribe(snapshots =>{
+        this.sortedPublicTeams = snapshots.reverse();
         console.log('PublicTeamsChanged');
         let event = new Event('PublicTeamsChanged');
         document.dispatchEvent(event);
@@ -113,7 +114,30 @@ export class FirebaseManager {
     this.subjectTeamSortBy.next(orderby);
     this.subjectTeamLimitTo.next(count);
   }
+
+  getTeamAsync(teamId) {
+    if (!this.cachedTeams[teamId]) {
+      this.af.database.object(`/teams/${teamId}`).subscribe(snapshot => {
+        this.cachedTeams[teamId] = snapshot;
+        this.FireCustomEvent('TeamDataReady', teamId);
+      })
+    }
+    else
+      this.FireCustomEvent('TeamDataReady', teamId);
+  }
+
+  getTeam(teamId) {
+    return this.cachedTeams[teamId];
+  }
+  
+  //Fire document events 
+  FireCustomEvent(name, data) {
+    console.log(name);
+    var event = new CustomEvent(name, { detail: data });
+    document.dispatchEvent(event);
+  }
 }
+
 // @Injectable().
 // export class FirebaseManager {
 //   selfId: string;

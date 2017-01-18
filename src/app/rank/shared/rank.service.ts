@@ -1,41 +1,5 @@
 import { Injectable } from '@angular/core';
 import { FirebaseManager } from '../../../providers/firebase-manager'
-
-// export const TEAMRANKS: any[] = [
-//   {
-//     id: "-KL1a8zTfCXDapavsN_L",
-//     name: "STK Everpioneer FC",
-//     logo: "assets/team-logo/team_logo.jpg",
-//     totalPlayers: 20,
-//     ability: 1000,
-//     popularity: 110
-//   },
-//   {
-//     id: "-KL1a8zTfCXDapavsN_L",
-//     name: "Test 2",
-//     logo: "assets/team-logo/team_logo.jpg",
-//     totalPlayers: 20,
-//     ability: 1100,
-//     popularity: 100
-//   },
-//   {
-//     id: "-KL1a8zTfCXDapavsN_L",
-//     name: "Test 3",
-//     logo: "assets/team-logo/team_logo.jpg",
-//     totalPlayers: 20,
-//     ability: 1120,
-//     popularity: 101
-//   },
-//   {
-//     id: "-KL1a8zTfCXDapavsN_L",
-//     name: "Test 1",
-//     logo: "assets/team-logo/team_logo.jpg",
-//     totalPlayers: 201,
-//     ability: 1111,
-//     popularity: 23
-//   }
-// ];
-
 // export const PLAYERRANKS: any[] = [
 //   {
 //     id: "-KL1a8zTfCXDapavsN_L",
@@ -77,42 +41,11 @@ import { FirebaseManager } from '../../../providers/firebase-manager'
 @Injectable()
 export class RankService {
   playerRanks = [];
-  teamRanks = [
-  {
-    id: "-KL1a8zTfCXDapavsN_L",
-    name: "STK Everpioneer FC",
-    logo: "assets/team-logo/team_logo.jpg",
-    totalPlayers: 20,
-    ability: 1000,
-    popularity: 110
-  },
-  {
-    id: "-KL1a8zTfCXDapavsN_L",
-    name: "Test 2",
-    logo: "assets/team-logo/team_logo.jpg",
-    totalPlayers: 20,
-    ability: 1100,
-    popularity: 100
-  },
-  {
-    id: "-KL1a8zTfCXDapavsN_L",
-    name: "Test 3",
-    logo: "assets/team-logo/team_logo.jpg",
-    totalPlayers: 20,
-    ability: 1120,
-    popularity: 101
-  },
-  {
-    id: "-KL1a8zTfCXDapavsN_L",
-    name: "Test 1",
-    logo: "assets/team-logo/team_logo.jpg",
-    totalPlayers: 201,
-    ability: 1111,
-    popularity: 23
-  }
-];
+  teamRanks = [];
 
   needRefreshTeamsRankUI = false;
+  teamRankRefreshMap = {};
+  teamRankMap = {};
   constructor(private fm: FirebaseManager) {
     document.addEventListener('PublicTeamsChanged',
       e => {
@@ -122,18 +55,41 @@ export class RankService {
           this.teamRanks = [];
           let sortedPublicTeams = this.fm.sortedPublicTeams;
           for (let i = 0; i < sortedPublicTeams.length; ++i) {
-            this.teamRanks.push({
-              id: sortedPublicTeams[i].$key,
+            let teamId = sortedPublicTeams[i].$key;
+            let teamRankData = {
+              id: teamId,
               name: sortedPublicTeams[i].name,
               logo: "assets/team-logo/team_logo.jpg",
               totalPlayers: 201,
               ability: sortedPublicTeams[i].ability,
               popularity: sortedPublicTeams[i].popularity
-            })
+            };
+            this.teamRanks.push(teamRankData);
+            //easy find taemRankData
+            this.teamRankMap[teamId] = teamRankData;
+
+            //nneed to refresh team rank
+            this.teamRankRefreshMap[teamId] = true;
+            this.fm.getTeamAsync(teamId);
           }
           console.log('TeamRankChanged');
+          
           let event = new Event('TeamRankChanged');
           document.dispatchEvent(event);
+        }
+      });
+
+      document.addEventListener('TeamDataReady', e => {
+        let teamId = e['detail'];
+        if (this.teamRankRefreshMap[teamId]) {
+          this.teamRankRefreshMap[teamId] = false;
+          let team = this.fm.getTeam(teamId);
+          console.log(team);
+          let teamRankData = this.teamRankMap[teamId];
+          if (teamRankData) {
+            teamRankData.logo = team['basic-info'].logo;
+            teamRankData.totalPlayers = team['basic-info'].totalPlayers;
+          }
         }
       });
   }
