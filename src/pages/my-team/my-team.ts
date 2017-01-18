@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
-
-import {NavController} from 'ionic-angular';
-
+import {NavController, NavParams} from 'ionic-angular';
+import {FirebaseManager} from '../../providers/firebase-manager'
 
 @Component({
   selector: 'page-my-team',
@@ -9,9 +8,11 @@ import {NavController} from 'ionic-angular';
 })
 export class MyTeamPage {
   first = [];
+  id;
 
-
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, 
+  private navParams: NavParams,
+  private fm: FirebaseManager) {
     this.first = [
       {
         'win': '7',
@@ -21,6 +22,10 @@ export class MyTeamPage {
     ]
   }
 
+  ionViewDidLoad() {
+    this.id = this.navParams.get('id');
+    this.fm.increasePopularity(this.id);
+  }
   //打开邀请
   invitePlayer() {
     alert("invite");

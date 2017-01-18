@@ -11,6 +11,7 @@ export class FirebaseManager {
   selfId: string;
   afSortedPublicTeams;
   sortedPublicTeams;
+  sortedPublicTeamsMap = {};
   subjectTeamSortBy = new Subject();
   subjectTeamLimitTo = new Subject();
   cachedTeams = {};
@@ -103,8 +104,11 @@ export class FirebaseManager {
         }
       });
 
-      this.afSortedPublicTeams.subscribe(snapshots =>{
+      this.afSortedPublicTeams.subscribe(snapshots => {
         this.sortedPublicTeams = snapshots.reverse();
+        for (let i = 0; i < snapshots.length; ++i) {
+          this.sortedPublicTeamsMap[snapshots[i].$key] = snapshots[i];
+        }
         console.log('PublicTeamsChanged');
         let event = new Event('PublicTeamsChanged');
         document.dispatchEvent(event);
@@ -132,6 +136,12 @@ export class FirebaseManager {
     return this.cachedTeams[teamId];
   }
   
+  increasePopularity(teamId) {
+    let teamPublicData = this.sortedPublicTeamsMap[teamId];
+    if (teamPublicData) {
+      this.af.database.object(`public/teams/${teamId}`).update({ popularity: teamPublicData.popularity + 1 });
+    }
+  }
   //Fire document events 
   FireCustomEvent(name, data) {
     console.log(name);

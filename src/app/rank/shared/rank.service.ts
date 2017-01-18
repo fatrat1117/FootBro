@@ -116,35 +116,7 @@ getTeamRankAsync(orderby, count) {
     }
     );
   }
-
-  getMoreTeamRanks(): Promise<any[]> {
-    return new Promise<any[]>(resolve => {
-      setTimeout(resolve, 2000);
-      // TEAMRANKS.push({
-      //   id: "-KL1a8zTfCXDapavsN_L",
-      //   name: "test" + TEAMRANKS.length,
-      //   logo: "assets/team-logo/team_logo.jpg",
-      //   totalPlayers: TEAMRANKS.length,
-      //   ability: TEAMRANKS.length * 50,
-      //   popularity: TEAMRANKS.length * 10
-      // }, {
-      //     id: "-KL1a8zTfCXDapavsN_L",
-      //     name: "test" + TEAMRANKS.length,
-      //     logo: "assets/team-logo/team_logo.jpg",
-      //     totalPlayers: TEAMRANKS.length,
-      //     ability: TEAMRANKS.length * 50,
-      //     popularity: TEAMRANKS.length * 10
-      //   }, {
-      //     id: "-KL1a8zTfCXDapavsN_L",
-      //     name: "test" + TEAMRANKS.length,
-      //     logo: "assets/team-logo/team_logo.jpg",
-      //     totalPlayers: TEAMRANKS.length,
-      //     ability: TEAMRANKS.length * 50,
-      //     popularity: TEAMRANKS.length * 10
-      //   });
-    }).then(() => Promise.resolve(this.teamRanks));
-  }
-
+  
   getPlayerRanks(): Promise<any[]> {
     return new Promise<any[]>(resolve =>
       setTimeout(resolve, 1000))
