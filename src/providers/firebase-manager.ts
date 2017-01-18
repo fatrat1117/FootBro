@@ -118,6 +118,8 @@ export class FirebaseManager {
   getTeamAsync(teamId) {
     if (!this.cachedTeams[teamId]) {
       this.af.database.object(`/teams/${teamId}`).subscribe(snapshot => {
+        if ('img/none.png' === snapshot['basic-info'].logo)
+          snapshot['basic-info'].logo = 'assets/img/none.png';
         this.cachedTeams[teamId] = snapshot;
         this.FireCustomEvent('TeamDataReady', teamId);
       })

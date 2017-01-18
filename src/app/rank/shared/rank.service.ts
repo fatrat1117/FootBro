@@ -44,7 +44,7 @@ export class RankService {
   teamRanks = [];
 
   needRefreshTeamsRankUI = false;
-  teamRankRefreshMap = {};
+  //teamRankRefreshMap = {};
   teamRankMap = {};
   constructor(private fm: FirebaseManager) {
     document.addEventListener('PublicTeamsChanged',
@@ -67,10 +67,15 @@ export class RankService {
             this.teamRanks.push(teamRankData);
             //easy find taemRankData
             this.teamRankMap[teamId] = teamRankData;
-
             //nneed to refresh team rank
-            this.teamRankRefreshMap[teamId] = true;
-            this.fm.getTeamAsync(teamId);
+            //this.teamRankRefreshMap[teamId] = true;
+            let cachedTeam = this.fm.getTeam(teamId);
+            if (cachedTeam) {
+              teamRankData.logo = cachedTeam['basic-info'].logo;
+              teamRankData.totalPlayers = cachedTeam['basic-info'].totalPlayers;
+            }
+            else 
+              this.fm.getTeamAsync(teamId);
           }
           console.log('TeamRankChanged');
           
@@ -81,8 +86,8 @@ export class RankService {
 
       document.addEventListener('TeamDataReady', e => {
         let teamId = e['detail'];
-        if (this.teamRankRefreshMap[teamId]) {
-          this.teamRankRefreshMap[teamId] = false;
+        //if (this.teamRankRefreshMap[teamId]) {
+        //  this.teamRankRefreshMap[teamId] = false;
           let team = this.fm.getTeam(teamId);
           console.log(team);
           let teamRankData = this.teamRankMap[teamId];
@@ -91,7 +96,8 @@ export class RankService {
             teamRankData.totalPlayers = team['basic-info'].totalPlayers;
           }
         }
-      });
+      //}
+      );
   }
 
 getTeamRankAsync(orderby, count) {
