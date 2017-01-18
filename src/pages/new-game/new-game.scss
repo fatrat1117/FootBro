@@ -1,0 +1,368 @@
+page-new-game {
+  //标题栏
+  ion-header {
+    //background-color: #161616;
+  }
+  ion-content {
+    //进度条
+    .content-round-progress {
+      height: 240px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      background-color: #2c2b31;
+      .circle-inside {
+        margin: 0px auto;
+        width: 200px;
+        .background-circle {
+          position: absolute;
+          width: 200px;
+          height: 200px;
+          background-color: #9e9e9e;
+          border-radius: 50%;
+        }
+        .rate-picture-1 {
+          position: absolute;
+          width: 200px;
+          height: 200px;
+          transform: rotate(0deg); //超过180 0
+          clip: rect(0px, 100px, 200px, 0px); /* 这个clip属性用来绘制半圆，在clip的rect范围内的内容显示出来，使用clip属性，元素必须是absolute的 */
+          border-radius: 50%;
+          background-color: green;
+        }
+        .rate-picture-2 {
+          position: absolute;
+          width: 200px;
+          height: 200px;
+          transform: rotate(-144deg); //超过180 180-angle
+          clip: rect(0px, 100px, 200px, 0px);
+          border-radius: 50%;
+          background-color: green; //超过180
+          //background-color:#777777;//不超过180
+        }
+        .top-circle {
+          position: absolute;
+          margin: 10px;
+          width: 180px;
+          height: 180px;
+          background-color: #2c2b31;
+          border-radius: 50%;
+        }
+        .progress-text {
+          position: absolute;
+          text-align: center;
+          width: 200px;
+          height: 200px;
+          .text-top {
+            margin-top: 50px;
+            color: gray;
+            font-size: 1.2rem;
+          }
+          .text-center {
+            margin-top: 10px;
+            color: white;
+            font-size: 3.5rem;
+            font-weight: 600;
+          }
+          .text-bottom {
+            margin-top: 10px;
+            color: white;
+            font-size: 3rem;
+          }
+        }
+
+      }
+    }
+    //战队比分
+    .content-fight {
+      background-color: #2c2b31;
+      //左边战队信息
+      .left-team {
+        text-align: center;
+        //左战队名称
+        .left-team-name {
+          color: white;
+          font-size: 1.2rem;
+        }
+        .left-team-info {
+          position: relative;
+          margin-top: 5px;
+          .left-team-flag {
+            margin-left: -50px;
+            width: 15px;
+            height: 15px;
+          }
+          .left-team-position {
+            position: absolute;
+            padding: 0px;
+            font-size: 1.3rem;
+            color: gray;
+          }
+        }
+      }
+      //中间比分
+      .center-score {
+        margin: 0px;
+        padding: 0px;
+        text-align: center;
+        //左队得分
+        .left-number {
+          margin: 0px;
+          padding: 0px;
+          position: relative;
+          .back-top{
+            position:absolute;
+            background: white;
+            width: 100%;
+            height: 20px;
+            margin: 0px;
+            padding:0px;
+          }
+          .back-bottom{
+            position: absolute;
+            background: #e5e5e5;
+            width: 100%;
+            height: 20px;
+            margin-top: 20px;
+          }
+          .top-score{
+            position: absolute;
+            font-size:3.0rem;
+            color: #686868;
+            text-align:center;
+            width: 100%;
+          }
+        }
+        //比：
+        .center-compare {
+          font-size: 3rem;
+          color: white;
+          text-align: center;
+        }
+        //右队得分
+        .right-number {
+          margin: 0px;
+          padding: 0px;
+          text-align: center;
+          position: relative;
+          .back-top{
+            position:absolute;
+            background: white;
+            width: 100%;
+            height: 20px;
+            margin: 0px;
+            padding:0px;
+          }
+          .back-bottom{
+            position: absolute;
+            background: #e5e5e5;
+            width: 100%;
+            height: 20px;
+            margin-top: 20px;
+          }
+          .top-score{
+            position: absolute;
+            font-size:3.0rem;
+            color: #686868;
+            text-align:center;
+            width: 100%;
+          }
+        }
+      }
+      //右边战队信息
+      .right-team {
+        text-align: center;
+        //战队名称
+        .right-team-name {
+          color: white;
+          font-size: 1.2rem;
+        }
+        //右边战队作战信息
+        .right-team-info {
+          position: relative;
+          margin-top: 5px;
+          //右边战队主客场气旗帜
+          .right-team-flag {
+            margin-left: -50px;
+            width: 15px;
+            height: 15px;
+          }
+          //右边战队主客场
+          .right-team-position {
+            position: absolute;
+            padding: 0px;
+            font-size: 1.3rem;
+            color: gray;
+          }
+        }
+      }
+    }
+    //球赛信息
+    .content-game-info{
+      margin: 0px;
+      padding: 1px 0px 0px 0px;
+      background-color: #161510;
+      .game-info-item{
+        padding: 0px;
+        margin: 0px 0px 1px 0px;
+        height:50px;
+        background-color: #2e2f34;
+        //普通item
+        .game-info-item-left{
+          margin: 0px;
+          padding: 0px;
+          width: 30%;
+          height: 100%;
+          background-color: #1d1c21;
+          color:#aaaaaa;
+          font-size:1.5rem;
+        }
+        .game-info-item-right{
+          margin: 0px;
+          padding: 0px;
+          width: 100%;
+          height: 100%;
+          .right-button{
+            float: right;
+            height: 100%;
+            font-size:1.5rem;
+          }
+        }
+        //左边文字（队员）
+        .item-game-info-left-text{
+          color:white;
+          font-size: 1.8rem;
+        }
+        //右边文字（参赛球员）
+        .item-game-info-right-text{
+          color:gray;
+          font-size: 1.2rem;
+        }
+      }
+      //微亮item样式
+      .game-info-item-light{
+        padding: 0px;
+        margin: 0px 0px 1px 0px;
+        height:50px;
+        background-color: #41444d;
+        //左边部分
+        .game-info-item-left{
+          margin: 0px;
+          padding: 0px;
+          width: 30%;
+          height: 100%;
+          background-color: #1d1c21;
+          color:#aaaaaa;
+          font-size:1.5rem;
+        }
+          //右边70%部分
+        .game-info-item-right-gray{
+          margin: 0px;
+          padding: 0px;
+          width: 100%;
+          height: 50px;
+          background-color: #41444d;
+          .right-button{
+            float: right;
+            margin-right: 0px;
+            height: 100%;
+            font-size:1.5rem;
+          }
+        }
+      }
+
+      //深色item样式
+      .game-info-item-dark{
+        padding: 0px;
+        margin: 0px 0px 1px 0px;
+        height:50px;
+        background-color: #171717;
+        //主客场flag
+        .game-info-position{
+          margin-left:50px;
+          position: relative;
+          .game-info-position-img{
+            margin-left: -40px;
+            width: 15px;
+            height: 15px;
+          }
+          //主客场文本
+          .game-info-position-text{
+            position: absolute;
+            padding: 0px;
+            font-size: 1.5rem;
+            margin-left: 10px;
+            color: #aaaaaa;
+          }
+        }
+      }
+      //阿根廷男子足球国家队标题显示样式
+      .game-info-item-team-title{
+        padding: 0px;
+        margin: 0px 0px 1px 0px;
+        height:50px;
+        background-color: #41444d;
+        text-align: center;
+        //中间button
+        .game-info-team-title-button{
+          border-radius: 20px;
+          background-color:#303136;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+    }
+    .content-expandable{
+      //样式一
+      .expandable-member-name{
+        padding: 0px 0px 0px 10px;
+        margin: 0px 0px 1px 0px;
+        height:50px;
+        background-color: #2e2f34;
+        .member-img{
+          width: 30px;
+          height:30px;
+          border-radius:10%;
+        }
+      }
+      .expandable-member-property{
+        padding: 0px 0px 0px 0px;
+        margin: 0px 0px 1px 0px;
+        height:50px;
+        background-color: #2e2f34;
+        .desc-img{
+          width: 20px;
+          height:20px;
+          margin-left: 50px;
+        }
+      }
+    }
+
+    //底部
+    .content-bottom{
+      padding: 10px;
+      background: #333333;
+      //更新按钮
+      .update-button{
+        background: #fa3b40;
+        color:white;
+        margin: 0px;
+        padding: 0px;
+      }
+    }
+
+
+
+  }
+
+
+  //通用
+  no-margin{
+    margin: 0px;
+  }
+  no-padding{
+    padding:0px;
+  }
+  default-font-size{
+    font-size:1.2rem;
+  }
+}
