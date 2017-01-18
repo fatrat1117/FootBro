@@ -15,6 +15,7 @@ export class RankPage {
   teamRanks;
   playerRanks;
   numOfTeam = 0;
+  teamScroll;
   constructor(public nav: NavController,
     private rankService: RankService) {
 
@@ -24,34 +25,15 @@ export class RankPage {
     document.addEventListener('TeamRankChanged', e => {
       this.teamRanks = this.rankService.teamRanks;
       this.numOfTeam = this.teamRanks.length;
+      if (this.teamScroll)
+        this.teamScroll.complete();
     });
     this.rankService.getTeamRankAsync(this.teamSortByStr, this.numOfTeam + 10);
-    // let self = this;
-    // setTimeout(function() {
-    //   self.teamRanks = self.rankService.teamRanks;
-    // }, 5000);
-    
-    // this.rankService.getTeamPublics();.then(teamRanks => {
-    //   console.log(teamRanks);
-    //   this.teamRanks = teamRanks;
-    //   this.sortTeamBy(this.teamSortByStr);
-    // });
-    // this.rankService.getPlayerRanks().then(ranks => {
-    //   //console.log(teamRanks);
-    //   this.playerRanks = ranks;
-    //   this.sortPlayerBy(this.playerSortByStr);
-    // });
   }
 
   sortTeamBy(str) {
     this.teamSortByStr = str;
-    this.teamRanks.sort((a, b) => {
-      if ("ability" === this.teamSortByStr)
-        return b.ability - a.ability;
-      else
-        return b.popularity - a.popularity;
-    });
-    //this.teamSortBy.next(this.teamSortByStr);
+    this.rankService.getTeamRankAsync(this.teamSortByStr, this.numOfTeam);
   }
 
   sortPlayerBy(str) {
@@ -63,15 +45,8 @@ export class RankPage {
 
   moreTeam(infiniteScroll) {
     console.log('more team available');
+    this.teamScroll = infiniteScroll;
     this.rankService.getTeamRankAsync(this.teamSortByStr, this.numOfTeam + 10);
-    setTimeout(() => {
-      // this.rankService.getMoreTeamRanks().then(teamRanks => {
-      //   console.log('loading team finished');
-        //console.log(teamRanks);  
-        //this.sortTeamBy(this.teamSortByStr);
-        infiniteScroll.complete();
-     // });
-    }, 500);
   }
 
   morePlayer(infiniteScroll) {
