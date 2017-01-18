@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
-import {FirebaseManager} from '../../providers/firebase-manager'
+import {MyTeamService} from '../../app/my-team/my-team.service'
+import {MyTeam} from '../../app/my-team/my-team.model'
 
 @Component({
   selector: 'page-my-team',
@@ -9,10 +10,11 @@ import {FirebaseManager} from '../../providers/firebase-manager'
 export class MyTeamPage {
   first = [];
   id;
+  team : MyTeam = new MyTeam();
 
   constructor(public navCtrl: NavController, 
   private navParams: NavParams,
-  private fm: FirebaseManager) {
+  private service: MyTeamService) {
     this.first = [
       {
         'win': '7',
@@ -23,9 +25,24 @@ export class MyTeamPage {
   }
 
   ionViewDidLoad() {
+    this.addEventListeners();
     this.id = this.navParams.get('id');
-    this.fm.increasePopularity(this.id);
+    this.service.increasePopularity(this.id);
+    this.service.getMyTeamAsync(this.id);
   }
+
+  addEventListeners() {
+    document.addEventListener('ServiceMyTeamDataReady', e => {
+      //console.log(e);
+      let teamId = e['detail'];
+      //console.log(teamId, this.id);
+      if (teamId === this.id) {
+        this.team = this.service.getMyTeam(teamId);
+        //console.log(this.team);
+      }
+    });
+  }
+
   //打开邀请
   invitePlayer() {
     alert("invite");

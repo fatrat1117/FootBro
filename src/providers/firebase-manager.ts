@@ -122,10 +122,17 @@ export class FirebaseManager {
   getTeamAsync(teamId) {
     if (!this.cachedTeams[teamId]) {
       this.af.database.object(`/teams/${teamId}`).subscribe(snapshot => {
-        if ('img/none.png' === snapshot['basic-info'].logo)
-          snapshot['basic-info'].logo = 'assets/img/none.png';
-        this.cachedTeams[teamId] = snapshot;
-        this.FireCustomEvent('TeamDataReady', teamId);
+        //console.log(snapshot);
+        if ('$value' in snapshot && null == snapshot.$value) {
+          //team deleted
+          delete this.cachedTeams[teamId];
+        }
+        else {
+          if ('img/none.png' === snapshot['basic-info'].logo)
+            snapshot['basic-info'].logo = 'assets/img/none.png';
+          this.cachedTeams[teamId] = snapshot;
+          this.FireCustomEvent('TeamDataReady', teamId);
+        }
       })
     }
     else
@@ -136,13 +143,20 @@ export class FirebaseManager {
     return this.cachedTeams[teamId];
   }
   
-  increasePopularity(teamId) {
+  increaseTeamPopularity(teamId) {
     let teamPublicData = this.sortedPublicTeamsMap[teamId];
     if (teamPublicData) {
       this.af.database.object(`public/teams/${teamId}`).update({ popularity: teamPublicData.popularity + 1 });
     }
   }
+
   //Fire document events 
+  FireEvent(name) {
+    console.log(name);
+    var event = new Event(name);
+    document.dispatchEvent(event);
+  }
+
   FireCustomEvent(name, data) {
     console.log(name);
     var event = new CustomEvent(name, { detail: data });
