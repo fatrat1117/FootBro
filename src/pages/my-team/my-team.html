@@ -19,7 +19,7 @@
 
 
     <div class="team-right-item">
-      <p class="team-right-item-text">1102</p>
+      <p class="team-right-item-text">{{team.popularity}}</p>
       <div class="team-right-item-bottom">
         <img src="assets/icon/fire.png" class="team-right-item-bottom-img">
         <a class="team-right-item-bottom-text">人气</a>
@@ -27,7 +27,7 @@
     </div>
 
     <div class="team-right-item">
-      <p class="team-right-item-text">986</p>
+      <p class="team-right-item-text">{{team.ability}}</p>
       <div class="team-right-item-bottom">
         <img src="assets/icon/football.png" class="team-right-item-bottom-img">
         <a class="team-right-item-bottom-text">能力</a>
@@ -175,7 +175,7 @@
       </ion-col>
     </ion-row>
     <button ion-button clear icon-right class="team-see-more-members" (click)="seeMoreTeamMember()">
-      <p class="team-see-more-member-text">查看所有队员(<a style="color: #00ff00;">38</a>人)</p>
+      <p class="team-see-more-member-text">查看所有队员(<a style="color: #00ff00;">{{team.totalPlayers}}</a>人)</p>
       <ion-icon name="ios-arrow-forward"></ion-icon>
     </button>
   </div>

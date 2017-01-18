@@ -102,6 +102,21 @@ export class FirebaseManager {
   }
 
   //teams
+  getTeamPublic(id) {
+    return this.sortedPublicTeamsMap[id];
+  }
+
+  getTeamPublicAsync(id) {
+    if (this.sortedPublicTeams[id])
+      this.FireCustomEvent('TeamPublicDataReady', id);
+    else {
+      this.af.database.object(`/public/teams/${id}`).subscribe(snapshot => {
+        this.sortedPublicTeams[id] = snapshot;
+        this.FireCustomEvent('TeamPublicDataReady', id);
+      });
+    }
+  }
+
   queryPublicTeams(orderby, count) {
     if (!this.afSortedPublicTeams) {
       this.afSortedPublicTeams = this.af.database.list(`/public/teams/`, {
