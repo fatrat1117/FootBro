@@ -14,17 +14,22 @@ export class RankPage {
   playerSortByStr = "popularity";
   teamRanks;
   playerRanks;
+  numOfTeam = 0;
   constructor(public nav: NavController,
     private rankService: RankService) {
 
   }
 
   ionViewDidLoad() {
-    this.rankService.getTeamRankAsync(this.teamSortByStr, 20);
-    let self = this;
-    setTimeout(function() {
-      self.teamRanks = self.rankService.teamRanks;
-    }, 5000);
+    document.addEventListener('TeamRankChanged', e => {
+      this.teamRanks = this.rankService.teamRanks;
+      this.numOfTeam = this.teamRanks.length;
+    });
+    this.rankService.getTeamRankAsync(this.teamSortByStr, this.numOfTeam + 10);
+    // let self = this;
+    // setTimeout(function() {
+    //   self.teamRanks = self.rankService.teamRanks;
+    // }, 5000);
     
     // this.rankService.getTeamPublics();.then(teamRanks => {
     //   console.log(teamRanks);
@@ -58,13 +63,14 @@ export class RankPage {
 
   moreTeam(infiniteScroll) {
     console.log('more team available');
+    this.rankService.getTeamRankAsync(this.teamSortByStr, this.numOfTeam + 10);
     setTimeout(() => {
-      this.rankService.getMoreTeamRanks().then(teamRanks => {
-        console.log('loading team finished');
+      // this.rankService.getMoreTeamRanks().then(teamRanks => {
+      //   console.log('loading team finished');
         //console.log(teamRanks);  
         //this.sortTeamBy(this.teamSortByStr);
         infiniteScroll.complete();
-      });
+     // });
     }, 500);
   }
 

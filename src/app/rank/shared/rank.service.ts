@@ -116,7 +116,6 @@ export class RankService {
   constructor(private fm: FirebaseManager) {
     document.addEventListener('PublicTeamsChanged',
       e => {
-        console.log('PublicTeamsChanged');
         if (this.needRefreshTeamsRankUI) {
           console.log('needRefreshTeamsRankUI');
           this.needRefreshTeamsRankUI = false;
@@ -132,7 +131,9 @@ export class RankService {
               popularity: sortedPublicTeams[i].popularity
             })
           }
-          console.log(this.teamRanks);
+          console.log('TeamRankChanged');
+          let event = new Event('TeamRankChanged');
+          document.dispatchEvent(event);
         }
       });
   }
