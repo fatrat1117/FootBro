@@ -31,17 +31,16 @@ export class ChatPage {
     this.content.resize();
     this.userId = this.navParams.get('userId');
 
-    this.chatService.getRecentChats("0").subscribe(chats => {
+    this.chatService.getRecentChats(this.userId).subscribe(chats => {
       this.chats = chats;
-      //this.content.scrollToBottom();
-      if (this.isRefreshing)
-      {
-        setTimeout(_ => this.content.scrollToTop(), 100);
-        this.isRefreshing = false;
-      }
-      else
-      {
-        setTimeout(_ => this.content.scrollToBottom(), 100);
+      if (this.content._scroll) {
+        if (this.isRefreshing) {
+          setTimeout(_ => this.content.scrollToTop(), 100);
+          this.isRefreshing = false;
+        }
+        else {
+          setTimeout(_ => this.content.scrollToBottom(), 100);
+        }
       }
     })
 

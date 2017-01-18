@@ -19,15 +19,16 @@ export class MessagesPage {
 
   ionViewDidLoad() {
     this.messageService.getAllMessages().subscribe(messages => {
-      this.messages = [];
-      messages.forEach(msg => {
-        if (msg.isUnread) {
-          this.messages.splice(0, 0, msg);
-        }
-        else {
-          this.messages.push(msg);
-        }
-      })
+      let read = [];
+      let unRead = [];
+      for (var i = messages.length - 1; i >= 0; --i)
+      {
+        if (messages[i].isUnread)
+          unRead.push(messages[i]);
+        else
+          read.push(messages[i]);
+      }
+      this.messages = unRead.concat(read);
     })
   }
 

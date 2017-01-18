@@ -39,7 +39,7 @@ export class FirebaseManager {
   getAllMessages() {
     return this.af.database.list(`/players/${this.selfId}/chats/basic-info/`, {
       query: {
-        orderByChild: 'lastTimestamp'
+        orderByChild: 'lastActiveTime'
       }
     })
   }
@@ -55,8 +55,13 @@ export class FirebaseManager {
 
   /****************************** Chat Room ******************************/
   getChatsWithUser(userId: string, subject: any) {
-    this.af.database.object(`/players/${this.selfId}/chats/basic-info/${userId}`).update({
-      isUnread: false,
+    this.af.database.object(`/players/${this.selfId}/chats/basic-info/${userId}`).subscribe(info => {
+      if (info.isUnread) { 
+        this.af.database.object(`/players/${this.selfId}/chats/basic-info/${userId}`).update({
+          isUnread: false,
+          lastActiveTime: Firebase.database.ServerValue.TIMESTAMP
+        })
+      }
     })
 
     return this.af.database.list(`/players/${this.selfId}/chats/${userId}`, {
@@ -77,7 +82,8 @@ export class FirebaseManager {
     this.af.database.object(`/players/${this.selfId}/chats/basic-info/${userId}`).set({
       isUnread: false,
       lastContent: content,
-      lastTimestamp: Firebase.database.ServerValue.TIMESTAMP
+      lastTimestamp: Firebase.database.ServerValue.TIMESTAMP,
+      lastActiveTime: Firebase.database.ServerValue.TIMESTAMP
     })
 
     // add to other
@@ -90,7 +96,8 @@ export class FirebaseManager {
     this.af.database.object(`/players/${userId}/chats/basic-info/${this.selfId}`).set({
       isUnread: true,
       lastContent: content,
-      lastTimestamp: Firebase.database.ServerValue.TIMESTAMP
+      lastTimestamp: Firebase.database.ServerValue.TIMESTAMP,
+      lastActiveTime: Firebase.database.ServerValue.TIMESTAMP
     })
   }
 

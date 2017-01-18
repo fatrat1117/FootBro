@@ -7,7 +7,7 @@
 <ion-content>
   <ion-list>
     <ion-item-sliding *ngFor="let msg of messages" #slidingItem>
-      <ion-item (click)="enterChatPage('0')">
+      <ion-item (click)="enterChatPage(msg.$key)">
         <ion-thumbnail item-left>
           <img src="assets/player-photo/player_photo.jpg">
         </ion-thumbnail>
@@ -15,7 +15,7 @@
         <p>{{ msg.lastContent }}</p>
         <ion-note item-right text-right>
           <p>{{ msg.lastTimestamp | momentPipe }}</p>
-          <ion-badge *ngIf="msg.isUnread" color="gBlue">1</ion-badge>
+          <ion-badge *ngIf="msg.isUnread" color="gBlue">New</ion-badge>
         </ion-note>
       </ion-item>
       <ion-item-options side="right">
