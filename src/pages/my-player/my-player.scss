@@ -306,7 +306,31 @@ page-my-player{
       position: relative;
     }
 
+    .col-20{
+      flex: 0 0 20%;
+      max-width: 20%;
+    }
 
+    .col-40{
+      flex: 0 0 40%;
+      max-width: 40%;
+    }
+
+    .col-left{
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+    }
+    .col-center{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .col-right{
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
     .pro {
       //width: 9rem;
       position: relative;
@@ -314,27 +338,34 @@ page-my-player{
     .progressTxt {
       text-align: center;
       color: #f8f8f8;
-      font-size: 1.8rem;
+      font-size: 1.4rem;
       padding: 1rem 0rem;
+      margin:0;
     }
     .proBar{
       position:relative;
       display: block;
-    }
-    .proBar round-progress{
-      position: absolute;
-    }
-    .proBar .win-rate-text{
-      left: 40%;
-      padding-top: 40%;
-      min-height: 100%;
-      vertical-align: middle;
-      line-height: 100%;
-      position: absolute;
-      font-size: 2rem;;
-      text-align: center;
+      round-progress{
+        position: absolute;
+      }
+      .win-rate-text{
+        padding-top: 40%;
+        font-size: 2rem;
+        text-align: center;
+        padding-bottom: 40%;
+      }
 
     }
+    .proBar-left{
+      left:1rem;
+    }
+    .proBar-right{
+      right:1rem;
+    }
+
+
+
+
     .position {
       float: left;
     }
