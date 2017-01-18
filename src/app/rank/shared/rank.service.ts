@@ -77,10 +77,7 @@ export class RankService {
             else 
               this.fm.getTeamAsync(teamId);
           }
-          console.log('TeamRankChanged');
-          
-          let event = new Event('TeamRankChanged');
-          document.dispatchEvent(event);
+          this.fm.FireEvent('ServiceTeamRankChanged');
         }
       });
 

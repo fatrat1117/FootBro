@@ -23,7 +23,7 @@ export class RankPage {
   }
 
   ionViewDidLoad() {
-    document.addEventListener('TeamRankChanged', e => {
+    document.addEventListener('ServiceTeamRankChanged', e => {
       this.teamRanks = this.rankService.teamRanks;
       this.numOfTeam = this.teamRanks.length;
       if (this.teamScroll)
