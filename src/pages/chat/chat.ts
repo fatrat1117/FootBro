@@ -20,6 +20,7 @@ export class ChatPage {
   //chats: FirebaseListObservable<any[]>;
   chats: any[];
   userId: string;
+  isUnread: boolean;
   newMessage: string;
   isRefreshing: boolean;
 
@@ -30,8 +31,9 @@ export class ChatPage {
     this.isRefreshing = false;
     this.content.resize();
     this.userId = this.navParams.get('userId');
+    this.isUnread = this.navParams.get('isUnread');
 
-    this.chatService.getRecentChats(this.userId).subscribe(chats => {
+    this.chatService.getRecentChats(this.userId, this.isUnread).subscribe(chats => {
       this.chats = chats;
       if (this.content._scroll) {
         if (this.isRefreshing) {

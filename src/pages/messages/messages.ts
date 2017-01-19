@@ -36,9 +36,10 @@ export class MessagesPage {
     slidingItem.close();
   }
 
-  enterChatPage(userId: string) {
+  enterChatPage(userId: string, isUnread: boolean) {
     this.navCtrl.push(ChatPage, {
-      userId: userId
+      userId: userId,
+      isUnread: isUnread
     });
   }
 }

@@ -4,8 +4,6 @@ import { AngularFire } from 'angularfire2';
 import { PlayerBasic } from '../../app/players/shared/player.model'
 import { TeamBasic } from '../../app/teams/shared/team.model'
 
-import { PlayerService } from '../../app/players/shared/player.service'
-import { TeamService } from '../../app/teams/shared/team.service'
 import { MyTeamPage } from "../my-team/my-team";
 import { EditPlayerPage } from "../edit-player/edit-player";
 import { ManageTeamPage } from "../manage-team/manage-team";
@@ -13,9 +11,14 @@ import { MyPlayerPage } from "../my-player/my-player";
 import { FeedbackPage } from "../feedback/feedback";
 import { MessagesPage } from "../messages/messages";
 
+import { PlayerService } from '../../app/players/shared/player.service'
+import { TeamService } from '../../app/teams/shared/team.service'
+import { MessageService } from '../../app/messages/shared/message.service'
+
 @Component({
   selector: 'page-me',
-  templateUrl: 'me.html'
+  templateUrl: 'me.html',
+  providers: [ MessageService ]
 })
 export class MePage {
   playerBasic: PlayerBasic;
@@ -24,9 +27,10 @@ export class MePage {
   constructor(private navCtrl: NavController, 
   private modalCtrl: ModalController, 
   private playerService: PlayerService, 
+  private messageService: MessageService, 
   private teamService: TeamService,
   private af: AngularFire) {
-    this.messageCount = 1;
+    this.messageCount = 0;
   }
 
   ionViewDidLoad() {
@@ -38,6 +42,10 @@ export class MePage {
     this.teamService.getSelfBasic().then(teamBasic => {
       this.teamBasic = teamBasic;
     });
+
+    this.messageService.getAllUnreadMessages().subscribe(messages => {
+      this.messageCount = messages.length;
+    })
   }
 
   goEditPlayerPage() {

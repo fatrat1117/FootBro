@@ -14,4 +14,8 @@ export class MessageService {
   getAllMessages() {
     return this.fm.getAllMessages();
   }
+
+  getAllUnreadMessages() {
+    return this.fm.getAllUnreadMessages();
+  }
 }

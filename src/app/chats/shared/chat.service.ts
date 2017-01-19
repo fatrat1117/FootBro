@@ -16,10 +16,10 @@ export class ChatService {
     this.currentSize = 0;
   }
 
-  getRecentChats(id: string) {
+  getRecentChats(id: string, isUnread: boolean) {
     //this.fm.getChatsWithUser(id, this.sizeSubject).subscribe(chats => {
     //})
-    return this.fm.getChatsWithUser(id, this.sizeSubject);
+    return this.fm.getChatsWithUser(id, this.sizeSubject, isUnread);
     //return Promise.resolve(CHATS);
   }
 

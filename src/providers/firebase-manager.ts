@@ -44,6 +44,15 @@ export class FirebaseManager {
     })
   }
 
+  getAllUnreadMessages() {
+    return this.af.database.list(`/players/${this.selfId}/chats/basic-info/`, {
+      query: {
+        orderByChild: 'isUnread',
+        equalTo: true 
+      }
+    })
+  }
+
 
 
 
@@ -54,15 +63,13 @@ export class FirebaseManager {
 
 
   /****************************** Chat Room ******************************/
-  getChatsWithUser(userId: string, subject: any) {
-    this.af.database.object(`/players/${this.selfId}/chats/basic-info/${userId}`).subscribe(info => {
-      if (info.isUnread) { 
-        this.af.database.object(`/players/${this.selfId}/chats/basic-info/${userId}`).update({
-          isUnread: false,
-          lastActiveTime: Firebase.database.ServerValue.TIMESTAMP
-        })
-      }
-    })
+  getChatsWithUser(userId: string, subject: any, isUnread: boolean) {
+    if (isUnread) { 
+      this.af.database.object(`/players/${this.selfId}/chats/basic-info/${userId}`).update({
+        isUnread: false,
+        lastActiveTime: Firebase.database.ServerValue.TIMESTAMP
+      })
+    }
 
     return this.af.database.list(`/players/${this.selfId}/chats/${userId}`, {
       query: {

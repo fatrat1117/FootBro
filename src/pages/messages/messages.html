@@ -7,7 +7,7 @@
 <ion-content>
   <ion-list>
     <ion-item-sliding *ngFor="let msg of messages" #slidingItem>
-      <ion-item (click)="enterChatPage(msg.$key)">
+      <ion-item (click)="enterChatPage(msg.$key, msg.isUnread)">
         <ion-thumbnail item-left>
           <img src="assets/player-photo/player_photo.jpg">
         </ion-thumbnail>
