@@ -108,11 +108,11 @@ export class FirebaseManager {
   }
 
   getTeamPublicAsync(id) {
-    if (this.sortedPublicTeams[id])
+    if (this.sortedPublicTeamsMap[id])
       this.FireCustomEvent('TeamPublicDataReady', id);
     else {
       this.af.database.object(`/public/teams/${id}`).subscribe(snapshot => {
-        this.sortedPublicTeams[id] = snapshot;
+        this.sortedPublicTeamsMap[id] = snapshot;
         this.FireCustomEvent('TeamPublicDataReady', id);
       });
     }
@@ -148,6 +148,10 @@ export class FirebaseManager {
     // });
     let self = this;
     this.queryTeams.on("child_changed", function (snapshot) {
+      let val = snapshot.val();
+      //console.log('TeamPublicDataChanged', val);
+      val['$key'] = snapshot.key;
+       self.sortedPublicTeamsMap[snapshot.key] = val;
       self.FireCustomEvent('TeamPublicDataReady', snapshot.key);
       //console.log("child_changed", snapshot.key);
     });
