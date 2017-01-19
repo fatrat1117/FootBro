@@ -88,13 +88,23 @@ export class RankService {
           let team = this.fm.getTeam(teamId);
           //console.log(team);
           let teamRankData = this.teamRankMap[teamId];
-          if (teamRankData) {
+          if (team && teamRankData) {
             teamRankData.logo = team['basic-info'].logo;
             teamRankData.totalPlayers = team['basic-info'].totalPlayers;
           }
         }
-      //}
       );
+
+      document.addEventListener('TeamPublicDataReady', e => {
+        let teamId = e['detail'];
+        let team = this.fm.getTeamPublic(teamId);
+        let teamRankData = this.teamRankMap[teamId];
+          if (team && teamRankData) {
+            teamRankData.ability = team.ability;
+            teamRankData.popularity = team.popularity;
+          }
+        //console.log(teamRankData);
+      });
   }
 
 getTeamRankAsync(orderby, count) {

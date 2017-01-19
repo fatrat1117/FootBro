@@ -3,6 +3,7 @@ import {NavController} from 'ionic-angular';
 
 import {Localization} from '../../providers/localization';
 import {CheeringTeamPage} from '../cheering-team/cheering-team';
+import {GameSchedulePage} from "../game-schedule/game-schedule";
 
 declare var jQuery:any;
 
@@ -54,6 +55,10 @@ export class HomePage {
 
   enterCheeringTeam(){
     this.navCtrl.push(CheeringTeamPage);
+  }
+
+  enterGameSchedule(){
+    this.navCtrl.push(GameSchedulePage);
   }
 
   selectItems(item:string){

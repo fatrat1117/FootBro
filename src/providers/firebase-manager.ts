@@ -3,7 +3,7 @@ import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'a
 import { LoginPage } from '../pages/login/login';
 import {NavController, ModalController} from 'ionic-angular';
 import {Subject} from 'rxjs/Subject';
-import Firebase from 'firebase'
+import * as firebase from 'firebase';
 
 @Injectable()
 export class FirebaseManager {
@@ -12,9 +12,10 @@ export class FirebaseManager {
   afSortedPublicTeams;
   sortedPublicTeams;
   sortedPublicTeamsMap = {};
-  subjectTeamSortBy = new Subject();
-  subjectTeamLimitTo = new Subject();
+  //subjectTeamSortBy = new Subject();
+  //subjectTeamLimitTo = new Subject();
   cachedTeams = {};
+  queryTeams;
   constructor(private modalCtrl: ModalController, private af: AngularFire) {
     this.selfId = "06mhyVlgtEd7YoJwdTSygMXXdeY2";
   }
@@ -67,7 +68,7 @@ export class FirebaseManager {
     if (isUnread) { 
       this.af.database.object(`/players/${this.selfId}/chats/basic-info/${userId}`).update({
         isUnread: false,
-        lastActiveTime: Firebase.database.ServerValue.TIMESTAMP
+        lastActiveTime: firebase.database.ServerValue.TIMESTAMP
       })
     }
 
@@ -81,7 +82,7 @@ export class FirebaseManager {
   addChatToUser(userId: string, content: string) {
     // add to self
     this.af.database.list(`/players/${this.selfId}/chats/${userId}`).push({
-      createdAt: Firebase.database.ServerValue.TIMESTAMP,
+      createdAt: firebase.database.ServerValue.TIMESTAMP,
       content: content,
       isFromSelf: true
     })
@@ -89,13 +90,13 @@ export class FirebaseManager {
     this.af.database.object(`/players/${this.selfId}/chats/basic-info/${userId}`).set({
       isUnread: false,
       lastContent: content,
-      lastTimestamp: Firebase.database.ServerValue.TIMESTAMP,
-      lastActiveTime: Firebase.database.ServerValue.TIMESTAMP
+      lastTimestamp: firebase.database.ServerValue.TIMESTAMP,
+      lastActiveTime: firebase.database.ServerValue.TIMESTAMP
     })
 
     // add to other
     this.af.database.list(`/players/${userId}/chats/${this.selfId}`).push({
-      createdAt: Firebase.database.ServerValue.TIMESTAMP,
+      createdAt: firebase.database.ServerValue.TIMESTAMP,
       content: content,
       isFromSelf: false
     })
@@ -103,34 +104,67 @@ export class FirebaseManager {
     this.af.database.object(`/players/${userId}/chats/basic-info/${this.selfId}`).set({
       isUnread: true,
       lastContent: content,
-      lastTimestamp: Firebase.database.ServerValue.TIMESTAMP,
-      lastActiveTime: Firebase.database.ServerValue.TIMESTAMP
+      lastTimestamp: firebase.database.ServerValue.TIMESTAMP,
+      lastActiveTime: firebase.database.ServerValue.TIMESTAMP
     })
   }
 
   //teams
-  queryPublicTeams(orderby, count) {
-    if (!this.afSortedPublicTeams) {
-      this.afSortedPublicTeams = this.af.database.list(`/public/teams/`, {
-        query: {
-          orderByChild: this.subjectTeamSortBy,
-          limitToLast: this.subjectTeamLimitTo
-        }
-      });
+  getTeamPublic(id) {
+    return this.sortedPublicTeamsMap[id];
+  }
 
-      this.afSortedPublicTeams.subscribe(snapshots => {
-        this.sortedPublicTeams = snapshots.reverse();
-        for (let i = 0; i < snapshots.length; ++i) {
-          this.sortedPublicTeamsMap[snapshots[i].$key] = snapshots[i];
-        }
-        console.log('PublicTeamsChanged');
-        let event = new Event('PublicTeamsChanged');
-        document.dispatchEvent(event);
+  getTeamPublicAsync(id) {
+    if (this.sortedPublicTeamsMap[id])
+      this.FireCustomEvent('TeamPublicDataReady', id);
+    else {
+      this.af.database.object(`/public/teams/${id}`).subscribe(snapshot => {
+        this.sortedPublicTeamsMap[id] = snapshot;
+        this.FireCustomEvent('TeamPublicDataReady', id);
       });
     }
+  }
 
-    this.subjectTeamSortBy.next(orderby);
-    this.subjectTeamLimitTo.next(count);
+  queryPublicTeams(orderby, count) {
+    console.log('queryPublicTeams', orderby, count);
+    //if (!this.afSortedPublicTeams) {
+    //  console.log('subscribe sorted public teams')
+    this.afSortedPublicTeams = this.af.database.list(`/public/teams/`, {
+      query: {
+        orderByChild: orderby,
+        limitToLast: count
+      }
+    });
+
+    let sub = this.afSortedPublicTeams.subscribe(snapshots => {
+      this.sortedPublicTeams = snapshots.reverse();
+      for (let i = 0; i < snapshots.length; ++i) {
+        this.sortedPublicTeamsMap[snapshots[i].$key] = snapshots[i];
+      }
+      this.FireEvent('PublicTeamsChanged');
+      sub.unsubscribe();
+    });
+
+    if (this.queryTeams)
+      this.queryTeams.off();
+
+    let ref = firebase.database().ref(`/public/teams/`);
+    this.queryTeams = ref.orderByChild(orderby).limitToLast(count);
+    // query.on("child_added", function (snapshot) {
+    //   console.log("child_added", snapshot.key);
+    // });
+    let self = this;
+    this.queryTeams.on("child_changed", function (snapshot) {
+      let val = snapshot.val();
+      //console.log('TeamPublicDataChanged', val);
+      val['$key'] = snapshot.key;
+       self.sortedPublicTeamsMap[snapshot.key] = val;
+      self.FireCustomEvent('TeamPublicDataReady', snapshot.key);
+      //console.log("child_changed", snapshot.key);
+    });
+    //}
+    //this.subjectTeamSortBy.next(orderby);
+    //this.subjectTeamLimitTo.next(count);
   }
 
   getTeamAsync(teamId) {
@@ -158,10 +192,13 @@ export class FirebaseManager {
   }
   
   increaseTeamPopularity(teamId) {
-    let teamPublicData = this.sortedPublicTeamsMap[teamId];
-    if (teamPublicData) {
-      this.af.database.object(`public/teams/${teamId}`).update({ popularity: teamPublicData.popularity + 1 });
-    }
+    //setTimeout(() => {
+      //cause pulic team changed to fire multiple times, need a fix
+      let teamPublicData = this.sortedPublicTeamsMap[teamId];
+      if (teamPublicData) {
+        this.af.database.object(`public/teams/${teamId}`).update({ popularity: teamPublicData.popularity + 1 });
+      };
+    //}, 1000);
   }
 
   //Fire document events 

@@ -1,0 +1,182 @@
+<ion-header>
+    <ion-navbar color="dark">
+        <ion-buttons left>
+            <button ion-button icon-only clear>
+                <ion-icon name="ios-arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title text-center class="default-font-size">
+            八分之一决赛
+        </ion-title>
+        <ion-buttons right>
+            <button ion-button icon-only clear>
+                <ion-icon name="share-alt"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <!--前4个战队-->
+    <div class="content-left">
+        <button ion-button clear icon-left class="content-left-button no-margin">
+            <ion-icon name="flag"color="danger"></ion-icon>
+            第一轮
+        </button>
+        <ion-list no-lines class="content-left-list no-margin">
+            <ion-item class="content-left-list-item">
+                <img src="assets/img/icon1.jpg" class="content-left-img" item-left>
+                <button ion-button clear class="team-name">阿根廷男子足球国家队</button>
+                <button ion-button clear color="secondary" item-right class="team-score">6</button>
+            </ion-item>
+            <ion-item class="content-left-list-item">
+                <img src="assets/img/icon1.jpg" class="content-left-img" item-left>
+                <button ion-button clear class="team-name">墨西哥男子足球国家队</button>
+                <button ion-button clear color="secondary" item-right class="team-score">4</button>
+            </ion-item>
+        </ion-list>
+
+        <button ion-button clear icon-left class="content-left-button no-margin">
+            <ion-icon name="flag"color="danger"></ion-icon>
+            第二轮
+        </button>
+        <ion-list no-lines class="content-left-list no-margin">
+            <ion-item class="content-left-list-item">
+                <img src="assets/img/icon1.jpg" class="content-left-img" item-left>
+                <button ion-button clear class="team-name">阿根廷男子足球国家队</button>
+                <button ion-button clear color="secondary" item-right class="team-score">6</button>
+            </ion-item>
+            <ion-item class="content-left-list-item">
+                <img src="assets/img/icon1.jpg" class="content-left-img" item-left>
+                <button ion-button clear class="team-name">墨西哥男子足球国家队</button>
+                <button ion-button clear color="secondary" item-right class="team-score">4</button>
+            </ion-item>
+        </ion-list>
+
+
+    </div>
+    <div class="content-right">
+        <div class="right-horizontal-line"></div>
+        <div class="right-horizontal-line-center"></div>
+        <div class="right-horizontal-line_bottom"></div>
+        <div class="right-vertical-line"></div>
+        <div class="right-vertical-line-bottom"></div>
+        <button ion-button class="right-button no-margin" color="secondary" outline small>半决赛1</button>
+    </div>
+
+
+
+
+    <!--后4个战队-->
+    <div class="content-left">
+        <button ion-button clear icon-left class="content-left-button no-margin">
+            <ion-icon name="flag"color="danger"></ion-icon>
+            第三轮
+        </button>
+        <ion-list no-lines class="content-left-list no-margin">
+            <ion-item class="content-left-list-item">
+                <img src="assets/img/icon1.jpg" class="content-left-img" item-left>
+                <button ion-button clear class="team-name">阿根廷男子足球国家队</button>
+                <button ion-button clear color="secondary" item-right class="team-score">6</button>
+            </ion-item>
+            <ion-item class="content-left-list-item">
+                <img src="assets/img/icon1.jpg" class="content-left-img" item-left>
+                <button ion-button clear class="team-name">墨西哥男子足球国家队</button>
+                <button ion-button clear color="secondary" item-right class="team-score">4</button>
+            </ion-item>
+        </ion-list>
+
+        <button ion-button clear icon-left class="content-left-button no-margin">
+            <ion-icon name="flag"color="danger"></ion-icon>
+            第四轮
+        </button>
+        <ion-list no-lines class="content-left-list no-margin">
+            <ion-item class="content-left-list-item">
+                <img src="assets/img/icon1.jpg" class="content-left-img" item-left>
+                <button ion-button clear class="team-name">阿根廷男子足球国家队</button>
+                <button ion-button clear color="secondary" item-right class="team-score">6</button>
+            </ion-item>
+            <ion-item class="content-left-list-item">
+                <img src="assets/img/icon1.jpg" class="content-left-img" item-left>
+                <button ion-button clear class="team-name">墨西哥男子足球国家队</button>
+                <button ion-button clear color="secondary" item-right class="team-score">4</button>
+            </ion-item>
+        </ion-list>
+
+
+    </div>
+    <div class="content-right">
+        <div class="right-horizontal-line"></div>
+        <div class="right-horizontal-line-center"></div>
+        <div class="right-horizontal-line_bottom"></div>
+        <div class="right-vertical-line"></div>
+        <div class="right-vertical-line-bottom"></div>
+        <button ion-button class="right-button no-margin" color="secondary" outline small>半决赛2</button>
+    </div>
+</ion-content>
+
+<ion-footer>
+    <!--横线-->
+    <ion-row class="footer-horizontal-line">
+        <ion-col>
+            <div id="line-one" class="footer-single-line unchoose-back"></div>
+        </ion-col>
+        <ion-col>
+            <div id="line-two" class="footer-single-line choose-back "></div>
+        </ion-col>
+        <ion-col>
+            <div id="line-three" class="footer-single-line unchoose-back"></div>
+        </ion-col>
+        <ion-col>
+            <div id="line-four" class="footer-single-line unchoose-back"></div>
+        </ion-col>
+    </ion-row>
+    <!--圆圈-->
+    <ion-row class="footer-circle">
+        <ion-col>
+            <button ion-button small color="secondary" id="button-one" class="footer-button unchoose-back"
+                    (click)="setCurrentPosition(1)">GS</button>
+        </ion-col>
+        <ion-col>
+            <button ion-button small color="secondary" id="button-two" class="footer-button choose-back"
+                    (click)="setCurrentPosition(2)">QF</button>
+        </ion-col>
+        <ion-col>
+            <button ion-button small color="secondary" id="button-three" class="footer-button unchoose-back"
+                    (click)="setCurrentPosition(3)">SF</button>
+        </ion-col>
+        <ion-col>
+            <button ion-button small color="secondary" id="button-four" class="footer-button unchoose-back"
+                    (click)="setCurrentPosition(4)">F</button>
+        </ion-col>
+        <ion-col>
+            <button ion-button small color="secondary" id="button-five" class="footer-button unchoose-back"
+                    (click)="setCurrentPosition(5)">W</button>
+        </ion-col>
+    </ion-row>
+    <!--决赛名称-->
+    <ion-row class="footer-compete-name">
+        <ion-col style="text-align: center">
+            <button ion-button clear small id="text-one" class="footer-compete-item unchoose-color"
+                    (click)="setCurrentPosition(1)">小组赛</button>
+        </ion-col>
+        <ion-col style="text-align: center">
+            <button ion-button clear small id="text-two" class="footer-compete-item choose-color"
+                    (click)="setCurrentPosition(2)">8分之1决赛</button>
+        </ion-col>
+        <ion-col style="text-align: center">
+            <button ion-button clear small id="text-three" class="footer-compete-item unchoose-color"
+                    (click)="setCurrentPosition(3)">4分之1决赛</button>
+        </ion-col>
+        <ion-col style="text-align: center">
+            <button ion-button clear small id="text-four" class="footer-compete-item unchoose-color"
+                    (click)="setCurrentPosition(4)">半决赛</button>
+        </ion-col>
+        <ion-col style="text-align: center">
+            <button ion-button clear small id="text-five" class="footer-compete-item unchoose-color"
+                    (click)="setCurrentPosition(5)">决赛</button>
+        </ion-col>
+    </ion-row>
+
+
+</ion-footer>

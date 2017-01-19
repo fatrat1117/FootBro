@@ -25,6 +25,8 @@ import { MatchesPage } from "../pages/matches/matches";
 import { CheeringTeamPage } from "../pages/cheering-team/cheering-team";
 import { MyTeamPage } from "../pages/my-team/my-team";
 import { LoginPage } from '../pages/login/login';
+import {GameSchedulePage} from "../pages/game-schedule/game-schedule";
+import {NewGamePage} from "../pages/new-game/new-game";
 
 // services
 import { AngularFireModule } from 'angularfire2';
@@ -44,6 +46,7 @@ import { SbModalNavbarComponent } from './common/modal.navbar.component';
 import { SbMatchBasicComponent } from './matches/match-basic.component';
 import { MatchDetailPage } from "../pages/match-detail/match-detail";
 
+
 export const firebaseConfig = {
     apiKey: "AIzaSyCrhL6g6rHs7-X09jw5Oq8I_g0fspD8bf8",
     authDomain: "project-3416565325366537224.firebaseapp.com",
@@ -51,7 +54,7 @@ export const firebaseConfig = {
     storageBucket: "project-3416565325366537224.appspot.com",
     messagingSenderId: "149844388984"
   };
-  
+
 @NgModule({
   declarations: [
     MyApp,
@@ -79,6 +82,8 @@ export const firebaseConfig = {
     CheeringTeamPage,
     MyTeamPage,
     LoginPage,
+    GameSchedulePage,
+    NewGamePage,
     // pipes
     TransPipe,
     StringToDatePipe,
@@ -126,11 +131,13 @@ export const firebaseConfig = {
     CheeringTeamPage,
     MyTeamPage,
     LoginPage,
+    GameSchedulePage,
+    NewGamePage,
   ],
-  providers: [ { provide: ErrorHandler, useClass: IonicErrorHandler }, 
+  providers: [ { provide: ErrorHandler, useClass: IonicErrorHandler },
   FirebaseManager,
-  Localization, 
-  PlayerService, 
+  Localization,
+  PlayerService,
   TeamService,
   MyTeamService ]
 })

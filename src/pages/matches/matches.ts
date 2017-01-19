@@ -7,6 +7,7 @@ import { MatchService } from '../../app/matches/shared/match.service'
 
 import { LeagueBasic } from '../../app/leagues/shared/league.model'
 import { LeagueService } from '../../app/leagues/shared/league.service'
+import {NewGamePage} from "../new-game/new-game";
 
 
 @Component({
@@ -55,5 +56,9 @@ export class MatchesPage {
   onSelectionChange() {
     if (this.selectedId == "0")
       this.selectedInfo = "schedule";
+  }
+
+  enterNewGame(){
+    this.navCtrl.push(NewGamePage);
   }
 }
