@@ -12,9 +12,10 @@ export class FirebaseManager {
   afSortedPublicTeams;
   sortedPublicTeams;
   sortedPublicTeamsMap = {};
-  subjectTeamSortBy = new Subject();
-  subjectTeamLimitTo = new Subject();
+  //subjectTeamSortBy = new Subject();
+  //subjectTeamLimitTo = new Subject();
   cachedTeams = {};
+  queryTeams;
   constructor(private modalCtrl: ModalController, private af: AngularFire) {
     this.selfId = "06mhyVlgtEd7YoJwdTSygMXXdeY2";
   }
@@ -120,37 +121,41 @@ export class FirebaseManager {
   queryPublicTeams(orderby, count) {
     console.log('queryPublicTeams', orderby, count);
     
-    if (!this.afSortedPublicTeams) {
+    //if (!this.afSortedPublicTeams) {
       console.log('subscribe sorted public teams');
       
       this.afSortedPublicTeams = this.af.database.list(`/public/teams/`, {
         query: {
-          orderByChild: this.subjectTeamSortBy,
-          limitToLast: this.subjectTeamLimitTo
+          orderByChild: orderby,
+          limitToLast: count
         }
       });
 
-      this.afSortedPublicTeams.subscribe(snapshots => {
+      let sub = this.afSortedPublicTeams.subscribe(snapshots => {
         this.sortedPublicTeams = snapshots.reverse();
         for (let i = 0; i < snapshots.length; ++i) {
           this.sortedPublicTeamsMap[snapshots[i].$key] = snapshots[i];
         }
         this.FireEvent('PublicTeamsChanged');
+        sub.unsubscribe();
       });
 
-      // var ref = firebase.database().ref(`/public/teams/`);
-      // let query = ref.orderByChild(orderby).limitToLast(count );
+      if (this.queryTeams)
+        this.queryTeams.off();
+
+      var ref = firebase.database().ref(`/public/teams/`);
+      this.queryTeams = ref.orderByChild(orderby).limitToLast(count );
       // query.on("child_added", function (snapshot) {
       //   console.log("child_added", snapshot.key);
       // });
 
-      // query.on("child_changed", function (snapshot) {
-      //   console.log("child_changed", snapshot.key);
-      // });
-    }
+      this.queryTeams.on("child_changed", function (snapshot) {
+        console.log("child_changed", snapshot.key);
+      });
+    //}
 
-    this.subjectTeamSortBy.next(orderby);
-    this.subjectTeamLimitTo.next(count);
+    //this.subjectTeamSortBy.next(orderby);
+    //this.subjectTeamLimitTo.next(count);
   }
 
   getTeamAsync(teamId) {
