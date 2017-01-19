@@ -32,8 +32,7 @@ import {NewGamePage} from "../pages/new-game/new-game";
 import { AngularFireModule } from 'angularfire2';
 import { FirebaseManager} from '../providers/firebase-manager';
 import { PlayerService } from './players/shared/player.service';
-import { TeamService } from './teams/shared/team.service';
-import { MyTeamService } from './my-team/my-team.service';
+import { TeamService } from './teams/team.service'
 
 // pipes
 import { TransPipe, Localization } from '../providers/localization';
@@ -138,8 +137,7 @@ export const firebaseConfig = {
   FirebaseManager,
   Localization,
   PlayerService,
-  TeamService,
-  MyTeamService ]
+  TeamService ]
 })
 export class AppModule {
 }

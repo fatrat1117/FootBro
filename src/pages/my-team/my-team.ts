@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
-import {MyTeamService} from '../../app/my-team/my-team.service'
-import {MyTeam} from '../../app/my-team/my-team.model'
+import {TeamService} from '../../app/teams/team.service'
+import {Team} from '../../app/teams/team.model'
 
 @Component({
   selector: 'page-my-team',
@@ -10,11 +10,11 @@ import {MyTeam} from '../../app/my-team/my-team.model'
 export class MyTeamPage {
   first = [];
   id;
-  team : MyTeam = new MyTeam();
+  team : Team = new Team();
 
   constructor(public navCtrl: NavController, 
   private navParams: NavParams,
-  private service: MyTeamService) {
+  private service: TeamService) {
     this.first = [
       {
         'win': '7',
@@ -28,7 +28,7 @@ export class MyTeamPage {
     this.addEventListeners();
     this.id = this.navParams.get('id');
     this.service.increasePopularity(this.id);
-    this.service.getMyTeamAsync(this.id);
+    this.service.getTeamAsync(this.id);
   }
 
   addEventListeners() {
@@ -37,7 +37,7 @@ export class MyTeamPage {
       let teamId = e['detail'];
       //console.log(teamId, this.id);
       if (teamId === this.id) {
-        this.team = this.service.getMyTeam(teamId);
+        this.team = this.service.getTeam(teamId);
         //console.log(this.team);
       }
     });

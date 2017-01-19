@@ -1,4 +1,4 @@
-export class MyTeam {
+export class Team {
   id;
   popularity;
   logo;

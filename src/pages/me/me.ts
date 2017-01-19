@@ -12,7 +12,7 @@ import { FeedbackPage } from "../feedback/feedback";
 import { MessagesPage } from "../messages/messages";
 
 import { PlayerService } from '../../app/players/shared/player.service'
-import { TeamService } from '../../app/teams/shared/team.service'
+import { TeamService } from '../../app/teams/team.service'
 import { MessageService } from '../../app/messages/shared/message.service'
 
 @Component({
@@ -22,7 +22,6 @@ import { MessageService } from '../../app/messages/shared/message.service'
 })
 export class MePage {
   playerBasic: PlayerBasic;
-  teamBasic: TeamBasic;
   messageCount: number;
   constructor(private navCtrl: NavController, 
   private modalCtrl: ModalController, 
@@ -39,9 +38,6 @@ export class MePage {
       this.playerBasic = playerBasic;
     });
 
-    this.teamService.getSelfBasic().then(teamBasic => {
-      this.teamBasic = teamBasic;
-    });
 
     this.messageService.getAllUnreadMessages().subscribe(messages => {
       this.messageCount = messages.length;

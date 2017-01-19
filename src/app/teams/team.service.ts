@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FirebaseManager } from '../../providers/firebase-manager';
-import { MyTeam } from './my-team.model';
+import { Team } from './team.model';
 
 @Injectable()
-export class MyTeamService {
+export class TeamService {
   teamDataMap = {};
 
   constructor(private fm: FirebaseManager) {
@@ -13,7 +13,7 @@ export class MyTeamService {
       //console.log(team);
 
       if (team) {
-        let teamData: MyTeam = {
+        let teamData: Team = {
           id: team.$key,
           popularity: 1,
           logo: team['basic-info'].logo,
@@ -46,11 +46,11 @@ export class MyTeamService {
 
   }
 
-  getMyTeamAsync(id) {
+  getTeamAsync(id) {
     this.fm.getTeamAsync(id);
   }
 
-  getMyTeam(id) {
+  getTeam(id) {
     return this.teamDataMap[id];
   }
 
