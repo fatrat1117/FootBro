@@ -3,7 +3,7 @@ import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'a
 import { LoginPage } from '../pages/login/login';
 import {NavController, ModalController} from 'ionic-angular';
 import {Subject} from 'rxjs/Subject';
-import Firebase from 'firebase'
+import * as firebase from 'firebase';
 
 @Injectable()
 export class FirebaseManager {
@@ -59,7 +59,7 @@ export class FirebaseManager {
       if (info.isUnread) { 
         this.af.database.object(`/players/${this.selfId}/chats/basic-info/${userId}`).update({
           isUnread: false,
-          lastActiveTime: Firebase.database.ServerValue.TIMESTAMP
+          lastActiveTime: firebase.database.ServerValue.TIMESTAMP
         })
       }
     })
@@ -74,7 +74,7 @@ export class FirebaseManager {
   addChatToUser(userId: string, content: string) {
     // add to self
     this.af.database.list(`/players/${this.selfId}/chats/${userId}`).push({
-      createdAt: Firebase.database.ServerValue.TIMESTAMP,
+      createdAt: firebase.database.ServerValue.TIMESTAMP,
       content: content,
       isFromSelf: true
     })
@@ -82,13 +82,13 @@ export class FirebaseManager {
     this.af.database.object(`/players/${this.selfId}/chats/basic-info/${userId}`).set({
       isUnread: false,
       lastContent: content,
-      lastTimestamp: Firebase.database.ServerValue.TIMESTAMP,
-      lastActiveTime: Firebase.database.ServerValue.TIMESTAMP
+      lastTimestamp: firebase.database.ServerValue.TIMESTAMP,
+      lastActiveTime: firebase.database.ServerValue.TIMESTAMP
     })
 
     // add to other
     this.af.database.list(`/players/${userId}/chats/${this.selfId}`).push({
-      createdAt: Firebase.database.ServerValue.TIMESTAMP,
+      createdAt: firebase.database.ServerValue.TIMESTAMP,
       content: content,
       isFromSelf: false
     })
@@ -96,8 +96,8 @@ export class FirebaseManager {
     this.af.database.object(`/players/${userId}/chats/basic-info/${this.selfId}`).set({
       isUnread: true,
       lastContent: content,
-      lastTimestamp: Firebase.database.ServerValue.TIMESTAMP,
-      lastActiveTime: Firebase.database.ServerValue.TIMESTAMP
+      lastTimestamp: firebase.database.ServerValue.TIMESTAMP,
+      lastActiveTime: firebase.database.ServerValue.TIMESTAMP
     })
   }
 
@@ -137,6 +137,16 @@ export class FirebaseManager {
         }
         this.FireEvent('PublicTeamsChanged');
       });
+
+      // var ref = firebase.database().ref(`/public/teams/`);
+      // let query = ref.orderByChild(orderby).limitToLast(count );
+      // query.on("child_added", function (snapshot) {
+      //   console.log("child_added", snapshot.key);
+      // });
+
+      // query.on("child_changed", function (snapshot) {
+      //   console.log("child_changed", snapshot.key);
+      // });
     }
 
     this.subjectTeamSortBy.next(orderby);
