@@ -12,9 +12,8 @@ export class FirebaseManager {
   afSortedPublicTeams;
   sortedPublicTeams;
   sortedPublicTeamsMap = {};
-  //subjectTeamSortBy = new Subject();
-  //subjectTeamLimitTo = new Subject();
-  cachedTeams = {};
+  cachedTeamStatsMap = {};
+  cachedTeamsMap = {};
   queryTeams;
   constructor(private modalCtrl: ModalController, private af: AngularFire) {
     this.selfId = "06mhyVlgtEd7YoJwdTSygMXXdeY2";
@@ -53,15 +52,6 @@ export class FirebaseManager {
       }
     })
   }
-
-
-
-
-
-
-
-
-
 
   /****************************** Chat Room ******************************/
   getChatsWithUser(userId: string, subject: any, isUnread: boolean) {
@@ -125,6 +115,21 @@ export class FirebaseManager {
     }
   }
 
+  getTeamStats(id) {
+    return this.cachedTeamStatsMap[id];
+  }
+
+  getTeamStatsAsync(id) {
+    if (this.cachedTeamStatsMap[id])
+      this.FireCustomEvent('TeamStatsDataReady', id);
+    else {
+      this.af.database.object(`/teams_stats/${id}`).subscribe(snapshot => {
+        this.cachedTeamStatsMap[id] = snapshot;
+        this.FireCustomEvent('TeamStatsDataReady', id);
+      });
+    }
+  }
+  
   queryPublicTeams(orderby, count) {
     console.log('queryPublicTeams', orderby, count);
     //if (!this.afSortedPublicTeams) {
@@ -168,17 +173,17 @@ export class FirebaseManager {
   }
 
   getTeamAsync(teamId) {
-    if (!this.cachedTeams[teamId]) {
+    if (!this.cachedTeamsMap[teamId]) {
       this.af.database.object(`/teams/${teamId}`).subscribe(snapshot => {
         //console.log(snapshot);
         if ('$value' in snapshot && null == snapshot.$value) {
           //team deleted
-          delete this.cachedTeams[teamId];
+          delete this.cachedTeamsMap[teamId];
         }
         else {
           if ('img/none.png' === snapshot['basic-info'].logo)
             snapshot['basic-info'].logo = 'assets/img/none.png';
-          this.cachedTeams[teamId] = snapshot;
+          this.cachedTeamsMap[teamId] = snapshot;
           this.FireCustomEvent('TeamDataReady', teamId);
         }
       })
@@ -188,7 +193,7 @@ export class FirebaseManager {
   }
 
   getTeam(teamId) {
-    return this.cachedTeams[teamId];
+    return this.cachedTeamsMap[teamId];
   }
   
   increaseTeamPopularity(teamId) {
