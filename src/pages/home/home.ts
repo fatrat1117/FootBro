@@ -1,9 +1,10 @@
 import {Component,ElementRef} from '@angular/core';
-import {NavController} from 'ionic-angular';
+import {NavController, ModalController, NavParams, ViewController, Platform} from 'ionic-angular';
 
 import {Localization} from '../../providers/localization';
 import {CheeringTeamPage} from '../cheering-team/cheering-team';
 import {GameSchedulePage} from "../game-schedule/game-schedule";
+import {ModalContentPage} from "../home/place-selection";
 
 declare var jQuery:any;
 
@@ -17,7 +18,7 @@ export class HomePage {
   adSlideOptions: any;
   items = ["item1","item2","item3"];
 
-  constructor(public navCtrl: NavController, local: Localization,private elRef: ElementRef) {
+  constructor(public navCtrl: NavController, local: Localization,private elRef: ElementRef,public modalCtrl: ModalController  ) {
 
     this.slides = [];
     this.loadSlides(local.langCode, 4);
@@ -65,4 +66,14 @@ export class HomePage {
     console.log("Selected Item", item);
   }
 
+  openModal(characterNum:number) {
+
+    let modal = this.modalCtrl.create(ModalContentPage, characterNum);
+    modal.present();
+    // alert("123");
+  }
+
+
+
 }
+

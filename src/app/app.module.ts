@@ -5,7 +5,8 @@ import { MyApp } from './app.component';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { RankPage } from '../pages/rank/rank';
 import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
+import { HomePage} from '../pages/home/home';
+import { ModalContentPage} from '../pages/home/place-selection';
 import { TabsPage } from '../pages/tabs/tabs';
 import { MePage } from "../pages/me/me";
 import { MessagesPage } from "../pages/messages/messages";
@@ -83,6 +84,7 @@ export const firebaseConfig = {
     LoginPage,
     GameSchedulePage,
     NewGamePage,
+    ModalContentPage,
     // pipes
     TransPipe,
     StringToDatePipe,
@@ -132,6 +134,7 @@ export const firebaseConfig = {
     LoginPage,
     GameSchedulePage,
     NewGamePage,
+    ModalContentPage,
   ],
   providers: [ { provide: ErrorHandler, useClass: IonicErrorHandler },
   FirebaseManager,
