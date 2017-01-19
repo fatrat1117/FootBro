@@ -120,40 +120,38 @@ export class FirebaseManager {
 
   queryPublicTeams(orderby, count) {
     console.log('queryPublicTeams', orderby, count);
-    
     //if (!this.afSortedPublicTeams) {
-      console.log('subscribe sorted public teams');
-      
-      this.afSortedPublicTeams = this.af.database.list(`/public/teams/`, {
-        query: {
-          orderByChild: orderby,
-          limitToLast: count
-        }
-      });
+    //  console.log('subscribe sorted public teams')
+    this.afSortedPublicTeams = this.af.database.list(`/public/teams/`, {
+      query: {
+        orderByChild: orderby,
+        limitToLast: count
+      }
+    });
 
-      let sub = this.afSortedPublicTeams.subscribe(snapshots => {
-        this.sortedPublicTeams = snapshots.reverse();
-        for (let i = 0; i < snapshots.length; ++i) {
-          this.sortedPublicTeamsMap[snapshots[i].$key] = snapshots[i];
-        }
-        this.FireEvent('PublicTeamsChanged');
-        sub.unsubscribe();
-      });
+    let sub = this.afSortedPublicTeams.subscribe(snapshots => {
+      this.sortedPublicTeams = snapshots.reverse();
+      for (let i = 0; i < snapshots.length; ++i) {
+        this.sortedPublicTeamsMap[snapshots[i].$key] = snapshots[i];
+      }
+      this.FireEvent('PublicTeamsChanged');
+      sub.unsubscribe();
+    });
 
-      if (this.queryTeams)
-        this.queryTeams.off();
+    if (this.queryTeams)
+      this.queryTeams.off();
 
-      var ref = firebase.database().ref(`/public/teams/`);
-      this.queryTeams = ref.orderByChild(orderby).limitToLast(count );
-      // query.on("child_added", function (snapshot) {
-      //   console.log("child_added", snapshot.key);
-      // });
-
-      this.queryTeams.on("child_changed", function (snapshot) {
-        console.log("child_changed", snapshot.key);
-      });
+    let ref = firebase.database().ref(`/public/teams/`);
+    this.queryTeams = ref.orderByChild(orderby).limitToLast(count);
+    // query.on("child_added", function (snapshot) {
+    //   console.log("child_added", snapshot.key);
+    // });
+    let self = this;
+    this.queryTeams.on("child_changed", function (snapshot) {
+      self.FireCustomEvent('TeamPublicDataReady', snapshot.key);
+      //console.log("child_changed", snapshot.key);
+    });
     //}
-
     //this.subjectTeamSortBy.next(orderby);
     //this.subjectTeamLimitTo.next(count);
   }
