@@ -449,8 +449,11 @@ page-my-player{
         width: 1.5rem;
         height: 1.5rem;
         margin-top: -.25rem;
-        background: url(../../assets/icon/good@2x.png) no-repeat;
-        background-size: contain;
+        //background: url(/../../assets/icon/good@2x.png) no-repeat;
+        //background-size: contain;
+        img{
+          display: block;
+        }
 
       }
 
@@ -505,9 +508,11 @@ page-my-player{
         width: 1.5rem;
         height: 1.5rem;
         margin-top: -.25rem;
-        background: url(../../assets/icon/bed@2x.png) no-repeat;
-        background-size: contain;
-
+        //background: url(/../../assets/icon/bed@2x.png) no-repeat;
+        //background-size: contain;
+        img{
+          display: block;
+        }
       }
     }
   }
