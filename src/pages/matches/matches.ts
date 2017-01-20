@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 
 import { MatchBasic } from '../../app/matches/shared/match.model'
 import { MatchStanding } from '../../app/matches/shared/match.model'
@@ -7,7 +7,7 @@ import { MatchService } from '../../app/matches/shared/match.service'
 
 import { LeagueBasic } from '../../app/leagues/shared/league.model'
 import { LeagueService } from '../../app/leagues/shared/league.service'
-import {NewGamePage} from "../new-game/new-game";
+import { NewGamePage } from "../new-game/new-game";
 
 
 @Component({
@@ -26,7 +26,7 @@ export class MatchesPage {
   selectedInfo: string;
   selectedId: string;
 
-  constructor(public navCtrl: NavController, private matchService: MatchService, private leagueService: LeagueService) {
+  constructor(public navCtrl: NavController, private modalCtrl: ModalController, private matchService: MatchService, private leagueService: LeagueService) {
     this.selectedInfo = "schedule";
     this.selectedId = "0";
   }
@@ -59,6 +59,6 @@ export class MatchesPage {
   }
 
   enterNewGame(){
-    this.navCtrl.push(NewGamePage);
+    this.modalCtrl.create(NewGamePage).present();
   }
 }

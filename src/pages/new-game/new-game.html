@@ -1,3 +1,4 @@
+<!--
 <ion-header>
     <ion-navbar color="dark">
         <ion-buttons left style=": #161616;">
@@ -14,6 +15,10 @@
             </button>
         </ion-buttons>
     </ion-navbar>
+</ion-header>
+-->
+<ion-header>
+    <sb-modal-navbar title="新球赛" buttonName="Save" isEnabled="true" (onFinish)="openUpdate()"></sb-modal-navbar>
 </ion-header>
 <!--主体内容区-->
 <ion-content>
@@ -198,11 +203,11 @@
         </ion-item>
     </ion-list>
 
-    <div class="content-bottom">
+    <!--div class="content-bottom">
         <button ion-button full clear
                 class="update-button" (click)="openUpdate()">更新
         </button>
-    </div>
+    </div-->
 
 
 </ion-content>
