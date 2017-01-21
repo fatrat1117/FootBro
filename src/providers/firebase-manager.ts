@@ -19,6 +19,19 @@ export class FirebaseManager {
     this.selfId = "1kLb7Vs6G9aVum1PHZ6DWElk4nB2";
   }
 
+  initialize() {
+    this.af.auth.subscribe(auth => {
+      console.log('firebase auth', auth);
+      this.auth = auth;
+      if (auth) {
+        this.FireCustomEvent('userlogin', auth);
+      } else {
+        this.FireEvent('userlogout');
+      }
+    }
+    );
+  }
+
   popupLoginPage() {
     console.log('popupLoginPage');
     
