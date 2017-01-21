@@ -1,12 +1,9 @@
-export class PlayerBasic {
+export class Player {
   id: string;
   created: boolean;
   displayName: string;
   photoURL: string;
   teamId: string;
-}
-
-export class PlayerDetail {
   description: string;
   foot: string;
   height: number;
@@ -14,11 +11,6 @@ export class PlayerDetail {
   pushId: string;
   slogan: string;
   weight: number;
-}
-
-export class Player {
-  basic: PlayerBasic;
-  detail: PlayerDetail;
   role: string;
   teams: string[];
 }

@@ -1,17 +1,15 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { AngularFire } from 'angularfire2';
-import { PlayerBasic } from '../../app/players/shared/player.model'
-import { TeamBasic } from '../../app/teams/shared/team.model'
-
+import { Player } from '../../app/players/player.model'
+import { Team } from '../../app/teams/team.model'
 import { MyTeamPage } from "../my-team/my-team";
 import { EditPlayerPage } from "../edit-player/edit-player";
 import { ManageTeamPage } from "../manage-team/manage-team";
 import { MyPlayerPage } from "../my-player/my-player";
 import { FeedbackPage } from "../feedback/feedback";
 import { MessagesPage } from "../messages/messages";
-
-import { PlayerService } from '../../app/players/shared/player.service'
+import { PlayerService } from '../../app/players/player.service'
 import { TeamService } from '../../app/teams/team.service'
 import { MessageService } from '../../app/messages/shared/message.service'
 
@@ -21,7 +19,7 @@ import { MessageService } from '../../app/messages/shared/message.service'
   providers: [ MessageService ]
 })
 export class MePage {
-  playerBasic: PlayerBasic;
+  player: Player;
   messageCount: number;
   constructor(private navCtrl: NavController, 
   private modalCtrl: ModalController, 
@@ -34,9 +32,9 @@ export class MePage {
 
   ionViewDidLoad() {
     
-    this.playerService.getSelfBasic().then(playerBasic => {
-      this.playerBasic = playerBasic;
-    });
+    // this.playerService.getSelfBasic().then(playerBasic => {
+    //   this.playerBasic = playerBasic;
+    // });
 
 
     this.messageService.getAllUnreadMessages().subscribe(messages => {

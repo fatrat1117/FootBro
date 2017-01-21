@@ -12,12 +12,12 @@ import { MePage } from "../pages/me/me";
 import { MessagesPage } from "../pages/messages/messages";
 import { ChatPage } from "../pages/chat/chat";
 import { EditPlayerPage } from "../pages/edit-player/edit-player";
-import { EditPlayerNamePage } from "../pages/edit-player/edit-player-name";
-import { EditPlayerHeightPage } from "../pages/edit-player/edit-player-height";
-import { EditPlayerWeightPage } from "../pages/edit-player/edit-player-weight";
-import { EditPlayerPositionPage } from "../pages/edit-player/edit-player-position";
-import { EditPlayerFootPage } from "../pages/edit-player/edit-player-foot";
-import { EditPlayerDescriptionPage } from "../pages/edit-player/edit-player-description";
+// import { EditPlayerNamePage } from "../pages/edit-player/edit-player-name";
+// import { EditPlayerHeightPage } from "../pages/edit-player/edit-player-height";
+// import { EditPlayerWeightPage } from "../pages/edit-player/edit-player-weight";
+// import { EditPlayerPositionPage } from "../pages/edit-player/edit-player-position";
+// import { EditPlayerFootPage } from "../pages/edit-player/edit-player-foot";
+// import { EditPlayerDescriptionPage } from "../pages/edit-player/edit-player-description";
 import { ManageTeamPage } from "../pages/manage-team/manage-team";
 import { NewTeamPage } from "../pages/manage-team/new-team";
 import { MyPlayerPage } from "../pages/my-player/my-player";
@@ -32,7 +32,7 @@ import {NewGamePage} from "../pages/new-game/new-game";
 // services
 import { AngularFireModule } from 'angularfire2';
 import { FirebaseManager} from '../providers/firebase-manager';
-import { PlayerService } from './players/shared/player.service';
+import { PlayerService } from './players/player.service';
 import { TeamService } from './teams/team.service'
 import { MiscService } from './misc/misc.service'
 
@@ -68,12 +68,12 @@ export const firebaseConfig = {
     MessagesPage,
     ChatPage,
     EditPlayerPage,
-    EditPlayerNamePage,
-    EditPlayerHeightPage,
-    EditPlayerWeightPage,
-    EditPlayerPositionPage,
-    EditPlayerFootPage,
-    EditPlayerDescriptionPage,
+    // EditPlayerNamePage,
+    // EditPlayerHeightPage,
+    // EditPlayerWeightPage,
+    // EditPlayerPositionPage,
+    // EditPlayerFootPage,
+    // EditPlayerDescriptionPage,
     ManageTeamPage,
     NewTeamPage,
     MyPlayerPage,
@@ -118,12 +118,12 @@ export const firebaseConfig = {
     MessagesPage,
     ChatPage,
     EditPlayerPage,
-    EditPlayerNamePage,
-    EditPlayerHeightPage,
-    EditPlayerWeightPage,
-    EditPlayerPositionPage,
-    EditPlayerFootPage,
-    EditPlayerDescriptionPage,
+    // EditPlayerNamePage,
+    // EditPlayerHeightPage,
+    // EditPlayerWeightPage,
+    // EditPlayerPositionPage,
+    // EditPlayerFootPage,
+    // EditPlayerDescriptionPage,
     ManageTeamPage,
     NewTeamPage,
     MyPlayerPage,
