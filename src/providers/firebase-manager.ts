@@ -15,6 +15,7 @@ export class FirebaseManager {
   cachedTeamStatsMap = {};
   cachedTeamsMap = {};
   queryTeams;
+  pushIdsMap = {};
   constructor(private modalCtrl: ModalController, private af: AngularFire) {
     this.selfId = "1kLb7Vs6G9aVum1PHZ6DWElk4nB2";
   }
@@ -24,6 +25,13 @@ export class FirebaseManager {
       console.log('firebase auth', auth);
       this.auth = auth;
       if (auth) {
+        window["plugins"].OneSignal.getIds(ids => {
+          console.log('push ids', ids);
+          this.getPlayerDetail(auth.uid).update({ pushId: ids.userId });
+          this.pushIdsMap[auth.uid] = ids.userId;
+          
+        });
+
         this.FireCustomEvent('userlogin', auth);
       } else {
         this.FireEvent('userlogout');
@@ -110,6 +118,10 @@ export class FirebaseManager {
       lastTimestamp: firebase.database.ServerValue.TIMESTAMP,
       lastActiveTime: firebase.database.ServerValue.TIMESTAMP
     })
+  }
+  //players
+  getPlayerDetail(id) {
+    return this.af.database.object(`/players/${id}/detail-info`);
   }
 
   //teams
