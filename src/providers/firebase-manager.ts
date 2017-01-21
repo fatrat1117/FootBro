@@ -174,7 +174,7 @@ export class FirebaseManager {
       for (let i = 0; i < snapshots.length; ++i) {
         this.sortedPublicTeamsMap[snapshots[i].$key] = snapshots[i];
       }
-      this.FireEvent('PublicTeamsChanged');
+      this.FireEvent('publicteamschanged');
       sub.unsubscribe();
     });
 
@@ -212,12 +212,12 @@ export class FirebaseManager {
           if ('img/none.png' === snapshot['basic-info'].logo)
             snapshot['basic-info'].logo = 'assets/img/none.png';
           this.cachedTeamsMap[teamId] = snapshot;
-          this.FireCustomEvent('TeamDataReady', teamId);
+          this.FireCustomEvent('teamdataready', teamId);
         }
       })
     }
     else
-      this.FireCustomEvent('TeamDataReady', teamId);
+      this.FireCustomEvent('teamdataready', teamId);
   }
 
   getTeam(teamId) {
@@ -253,7 +253,7 @@ export class FirebaseManager {
       });
     }
   }
-  
+
   getPlayerAsync(id) {
     if (this.cachedPlayersMap[id]) {
       this.FireCustomEvent('playerdataready', id);
@@ -270,6 +270,36 @@ export class FirebaseManager {
     return this.cachedPlayersMap[id];
   }
 
+  queryPublicPlayers(orderby, count) {
+    let afQuery = this.af.database.list(`/public/players/`, {
+      query: {
+        orderByChild: orderby,
+        limitToLast: count
+      }
+    });
+
+    let sub = afQuery.subscribe(snapshots => {
+      // this.sortedPublicTeams = snapshots.reverse();
+      // for (let i = 0; i < snapshots.length; ++i) {
+      //   this.sortedPublicTeamsMap[snapshots[i].$key] = snapshots[i];
+      // }
+      this.FireEvent('publicplayerschanged');
+      sub.unsubscribe();
+    });
+
+    // if (this.queryTeams)
+    //   this.queryTeams.off();
+
+    // let ref = firebase.database().ref(`/public/teams/`);
+    // this.queryTeams = ref.orderByChild(orderby).limitToLast(count);
+    // let self = this;
+    // this.queryTeams.on("child_changed", function (snapshot) {
+    //   let val = snapshot.val();
+    //   val['$key'] = snapshot.key;
+    //   self.sortedPublicTeamsMap[snapshot.key] = val;
+    //   self.FireCustomEvent('teampublicdataready', snapshot.key);
+    // });
+  }
   //Fire document events 
   FireEvent(name) {
     console.log(name);

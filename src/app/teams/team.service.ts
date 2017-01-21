@@ -7,7 +7,7 @@ export class TeamService {
   teamDataMap = {};
 
   constructor(private fm: FirebaseManager) {
-    document.addEventListener('TeamDataReady', e => {
+    document.addEventListener('teamdataready', e => {
       let teamId = e['detail'];
       let team = this.fm.getTeam(teamId);
       //console.log(team);
