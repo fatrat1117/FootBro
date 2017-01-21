@@ -14,8 +14,10 @@ export class PlayerService {
       player.id = playerData.$key;
       player.name = playerData['basic-info'].displayName;
       player.photo = playerData['basic-info'].photoURL;
-      player.position = playerData['detail-info'].position;
-      player.pushId = this.fm.pushIdsMap[id];
+      if (playerData['detail-info'] && 'position' in playerData['detail-info'])
+        player.position = playerData['detail-info'].position;
+      if (playerData['detail-info'] && 'pushId' in playerData['detail-info'])
+        player.pushId = playerData['detail-info'].pushId;
 
       this.playersMap[id] = player;
       this.fm.getPlayerPublicAsync(id);
