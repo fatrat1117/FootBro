@@ -34,6 +34,7 @@ import { AngularFireModule } from 'angularfire2';
 import { FirebaseManager} from '../providers/firebase-manager';
 import { PlayerService } from './players/shared/player.service';
 import { TeamService } from './teams/team.service'
+import { MiscService } from './misc/misc.service'
 
 // pipes
 import { TransPipe, Localization } from '../providers/localization';

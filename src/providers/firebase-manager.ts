@@ -16,7 +16,7 @@ export class FirebaseManager {
   cachedTeamsMap = {};
   queryTeams;
   constructor(private modalCtrl: ModalController, private af: AngularFire) {
-    this.selfId = "06mhyVlgtEd7YoJwdTSygMXXdeY2";
+    this.selfId = "1kLb7Vs6G9aVum1PHZ6DWElk4nB2";
   }
 
   popupLoginPage() {
@@ -218,7 +218,18 @@ export class FirebaseManager {
     var event = new CustomEvent(name, { detail: data });
     document.dispatchEvent(event);
   }
+
+  /****************************** Mis ******************************/
+  sendFeedback(content: string) {
+    this.af.database.list(`misc/feedbacks/`).push({
+      content: content,
+      creatorId: this.selfId,
+      timestamp: firebase.database.ServerValue.TIMESTAMP
+    })
+  }
 }
+
+
 
 // @Injectable().
 // export class FirebaseManager {

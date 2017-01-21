@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+import { MiscService } from '../../app/misc/misc.service'
+
 
 @Component({
   template: `
@@ -14,13 +16,14 @@ import { NavController } from 'ionic-angular';
       </ion-textarea>
     </ion-item>
   </ion-content>
-  `
+  `,
+  providers: [ MiscService ]
 })
 export class FeedbackPage {
   isEnabled: boolean;
   content: string;
 
-  constructor(private navCtrl: NavController) {
+  constructor(private navCtrl: NavController, private miscService: MiscService) {
     this.isEnabled = false;
   }
 
@@ -32,6 +35,7 @@ export class FeedbackPage {
   }
 
   onSubmit() {
+    this.miscService.sendFeedBack(this.content);
     this.navCtrl.pop();
   }
 }
