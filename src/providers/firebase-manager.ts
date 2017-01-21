@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { LoginPage } from '../pages/login/login';
-import {NavController, ModalController} from 'ionic-angular';
-import {Subject} from 'rxjs/Subject';
+import { NavController, ModalController, Platform } from 'ionic-angular';
+import { Subject } from 'rxjs/Subject';
 import * as firebase from 'firebase';
 
 @Injectable()
@@ -16,7 +16,9 @@ export class FirebaseManager {
   cachedTeamsMap = {};
   queryTeams;
   pushIdsMap = {};
-  constructor(private modalCtrl: ModalController, private af: AngularFire) {
+  constructor(private modalCtrl: ModalController,
+    private af: AngularFire,
+    private platform: Platform) {
     this.selfId = "1kLb7Vs6G9aVum1PHZ6DWElk4nB2";
   }
 
@@ -25,13 +27,15 @@ export class FirebaseManager {
       console.log('firebase auth', auth);
       this.auth = auth;
       if (auth) {
-        window["plugins"].OneSignal.getIds(ids => {
-          console.log('push ids', ids);
-          this.getPlayerDetail(auth.uid).update({ pushId: ids.userId });
-          this.pushIdsMap[auth.uid] = ids.userId;
-          
-        });
-
+        //save push id for real device
+        if (!(this.platform.is('mobileweb') ||
+          this.platform.is('core'))) {
+          window["plugins"].OneSignal.getIds(ids => {
+            console.log('push ids', ids);
+            this.getPlayerDetail(auth.uid).update({ pushId: ids.userId });
+            this.pushIdsMap[auth.uid] = ids.userId;
+          });
+        }
         this.FireCustomEvent('userlogin', auth);
       } else {
         this.FireEvent('userlogout');
@@ -42,10 +46,10 @@ export class FirebaseManager {
 
   popupLoginPage() {
     console.log('popupLoginPage');
-    
+
     let loginPage = this.modalCtrl.create(LoginPage);
     console.log(loginPage);
-    
+
     loginPage.present();
   }
 
@@ -69,14 +73,14 @@ export class FirebaseManager {
     return this.af.database.list(`/players/${this.selfId}/chats/basic-info/`, {
       query: {
         orderByChild: 'isUnread',
-        equalTo: true 
+        equalTo: true
       }
     })
   }
 
   /****************************** Chat Room ******************************/
   getChatsWithUser(userId: string, subject: any, isUnread: boolean) {
-    if (isUnread) { 
+    if (isUnread) {
       this.af.database.object(`/players/${this.selfId}/chats/basic-info/${userId}`).update({
         isUnread: false,
         lastActiveTime: firebase.database.ServerValue.TIMESTAMP
@@ -154,7 +158,7 @@ export class FirebaseManager {
       });
     }
   }
-  
+
   queryPublicTeams(orderby, count) {
     console.log('queryPublicTeams', orderby, count);
     //if (!this.afSortedPublicTeams) {
@@ -188,7 +192,7 @@ export class FirebaseManager {
       let val = snapshot.val();
       //console.log('TeamPublicDataChanged', val);
       val['$key'] = snapshot.key;
-       self.sortedPublicTeamsMap[snapshot.key] = val;
+      self.sortedPublicTeamsMap[snapshot.key] = val;
       self.FireCustomEvent('TeamPublicDataReady', snapshot.key);
       //console.log("child_changed", snapshot.key);
     });
@@ -220,14 +224,14 @@ export class FirebaseManager {
   getTeam(teamId) {
     return this.cachedTeamsMap[teamId];
   }
-  
+
   increaseTeamPopularity(teamId) {
     //setTimeout(() => {
-      //cause pulic team changed to fire multiple times, need a fix
-      let teamPublicData = this.sortedPublicTeamsMap[teamId];
-      if (teamPublicData) {
-        this.af.database.object(`public/teams/${teamId}`).update({ popularity: teamPublicData.popularity + 1 });
-      };
+    //cause pulic team changed to fire multiple times, need a fix
+    let teamPublicData = this.sortedPublicTeamsMap[teamId];
+    if (teamPublicData) {
+      this.af.database.object(`public/teams/${teamId}`).update({ popularity: teamPublicData.popularity + 1 });
+    };
     //}, 1000);
   }
 
