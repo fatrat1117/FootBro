@@ -95,7 +95,7 @@ export class RankService {
         }
       );
 
-      document.addEventListener('TeamPublicDataReady', e => {
+      document.addEventListener('teampublicdataready', e => {
         let teamId = e['detail'];
         let team = this.fm.getTeamPublic(teamId);
         let teamRankData = this.teamRankMap[teamId];

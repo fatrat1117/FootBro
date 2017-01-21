@@ -15,7 +15,10 @@ export class FirebaseManager {
   cachedTeamStatsMap = {};
   cachedTeamsMap = {};
   queryTeams;
+  cachedPlayersMap = {};
+  sortedPublicPlayersMap = {};
   pushIdsMap = {};
+
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,
     private platform: Platform) {
@@ -123,10 +126,6 @@ export class FirebaseManager {
       lastActiveTime: firebase.database.ServerValue.TIMESTAMP
     })
   }
-  //players
-  getPlayerDetail(id) {
-    return this.af.database.object(`/players/${id}/detail-info`);
-  }
 
   //teams
   getTeamPublic(id) {
@@ -135,11 +134,11 @@ export class FirebaseManager {
 
   getTeamPublicAsync(id) {
     if (this.sortedPublicTeamsMap[id])
-      this.FireCustomEvent('TeamPublicDataReady', id);
+      this.FireCustomEvent('teampublicdataready', id);
     else {
       this.af.database.object(`/public/teams/${id}`).subscribe(snapshot => {
         this.sortedPublicTeamsMap[id] = snapshot;
-        this.FireCustomEvent('TeamPublicDataReady', id);
+        this.FireCustomEvent('teampublicdataready', id);
       });
     }
   }
@@ -193,7 +192,7 @@ export class FirebaseManager {
       //console.log('TeamPublicDataChanged', val);
       val['$key'] = snapshot.key;
       self.sortedPublicTeamsMap[snapshot.key] = val;
-      self.FireCustomEvent('TeamPublicDataReady', snapshot.key);
+      self.FireCustomEvent('teampublicdataready', snapshot.key);
       //console.log("child_changed", snapshot.key);
     });
     //}
@@ -233,6 +232,42 @@ export class FirebaseManager {
       this.af.database.object(`public/teams/${teamId}`).update({ popularity: teamPublicData.popularity + 1 });
     };
     //}, 1000);
+  }
+
+  //players 
+  getPlayerDetail(id) {
+    return this.af.database.object(`/players/${id}/detail-info`);
+  }
+
+  getPlayerPublic(id) {
+    return this.sortedPublicPlayersMap[id];
+  }
+
+  getPlayerPublicAsync(id) {
+    if (this.sortedPublicPlayersMap[id])
+      this.FireCustomEvent('playerpublicdataready', id);
+    else {
+      this.af.database.object(`/public/players/${id}`).subscribe(snapshot => {
+        this.sortedPublicPlayersMap[id] = snapshot;
+        this.FireCustomEvent('playerpublicdataready', id);
+      });
+    }
+  }
+  
+  getPlayerAsync(id) {
+    if (this.cachedPlayersMap[id]) {
+      this.FireCustomEvent('playerdataready', id);
+    }
+    else {
+      this.af.database.object(`/players/${id}`).subscribe(snapshot => {
+        this.cachedPlayersMap[id] = snapshot;
+        this.FireCustomEvent('playerdataready', id);
+      });
+    }
+  }
+
+  getPlayer(id) {
+    return this.cachedPlayersMap[id];
   }
 
   //Fire document events 

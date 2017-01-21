@@ -1,8 +1,8 @@
 export class Player {
   id: string;
   created: boolean;
-  displayName: string;
-  photoURL: string;
+  name: string;
+  photo: string;
   teamId: string;
   description: string;
   foot: string;
@@ -13,4 +13,5 @@ export class Player {
   weight: number;
   role: string;
   teams: string[];
+  popularity;
 }

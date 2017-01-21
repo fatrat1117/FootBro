@@ -1,12 +1,50 @@
 import { Injectable } from '@angular/core';
 import { FirebaseManager } from '../../providers/firebase-manager';
-import { Player} from './player.model';
+import { Player } from './player.model';
 
 @Injectable()
 export class PlayerService {
-constructor(private fm: FirebaseManager) {
+  playersMap = {};
 
-}
+  constructor(private fm: FirebaseManager) {
+    document.addEventListener('playerdataready', e => {
+      let id = e['detail'];
+      let playerData = this.fm.getPlayer(id);
+      let player = new Player();
+      player.id = playerData.$key;
+      player.name = playerData['basic-info'].displayName;
+      player.photo = playerData['basic-info'].photoURL;
+      player.position = playerData['detail-info'].position;
+      player.pushId = this.fm.pushIdsMap[id];
+
+      this.playersMap[id] = player;
+      this.fm.getPlayerPublicAsync(id);
+      this.fm.FireCustomEvent('serviceplayerdataready', id);
+    });
+
+    document.addEventListener('playerpublicdataready', e => {
+      let id = e['detail'];
+      let playerPublicData = this.fm.getPlayerPublic(id);
+      let player = this.getPlayer(id);
+      if (player) {
+        player.popularity = playerPublicData.popularity;
+      }
+    });
+  }
+
+  getPlayerAsync(id) {
+    if (this.playersMap[id]) {
+      this.fm.FireCustomEvent('serviceplayerdataready', id);
+    }
+    else 
+    {
+      this.fm.getPlayerAsync(id);
+    }
+  }
+
+  getPlayer(id) : Player {
+    return this.playersMap[id];
+  } 
   // self
   // getSelfBasic(): Promise<PlayerBasic> {
   //   return Promise.resolve(PLAYERS[0].basic);
