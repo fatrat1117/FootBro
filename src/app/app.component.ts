@@ -42,7 +42,7 @@ export class MyApp {
     };
     
     window["plugins"].OneSignal
-      .startInit("f6268d9c-3503-4696-8e4e-a6cf2c028fc6")
+      .startInit("f6268d9c-3503-4696-8e4e-a6cf2c028fc6", "63493717987")
       .handleNotificationOpened(notificationOpenedCallback)
       .endInit();
     // window["plugins"].OneSignal.init("f6268d9c-3503-4696-8e4e-a6cf2c028fc6",
