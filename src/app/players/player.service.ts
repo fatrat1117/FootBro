@@ -25,7 +25,6 @@ export class PlayerService {
 
       this.playersMap[id] = player;
       this.fm.getPlayerPublicAsync(id);
-      this.fm.FireCustomEvent('serviceplayerdataready', id);
     });
 
     document.addEventListener('playerpublicdataready', e => {
@@ -35,7 +34,9 @@ export class PlayerService {
       if (player) {
         player.popularity = playerPublicData.popularity;
       }
-    });
+      this.fm.FireCustomEvent('serviceplayerdataready', id);
+    }
+    );
   }
 
   getPlayerAsync(id) {
@@ -51,43 +52,4 @@ export class PlayerService {
   getPlayer(id) : Player {
     return this.playersMap[id];
   } 
-
-  // self
-  // getSelfBasic(): Promise<PlayerBasic> {
-  //   return Promise.resolve(PLAYERS[0].basic);
-  // }
-
-  // getSelfDetail(): Promise<PlayerDetail> {
-  //   return Promise.resolve(PLAYERS[0].detail);
-  // }
-
-  // getSelfTeams(): Promise<string[]> {
-  //   return Promise.resolve(PLAYERS[0].teams);
-  // }
-
-  // saveSelfBasic(playerBasic: PlayerBasic) {
-  //   PLAYERS[0].basic = playerBasic;
-  // }
-
-  // saveSelfDetail(playerDetail: PlayerDetail) {
-  //   PLAYERS[0].detail = playerDetail;
-  // }
-
-  // saveSelfTeams(teams: string[]) {
-  //   PLAYERS[0].teams = teams;
-  //   // TODO: update team
-  // }
-
-  // // general
-  // getPlayerBasic(id: string): Promise<PlayerBasic> {
-  //   return Promise.resolve(PLAYERS[0].basic);
-  // }
-
-  // getPlayerDetail(id: string): Promise<PlayerDetail> {
-  //   return Promise.resolve(PLAYERS[0].detail);
-  // }
-
-  // getPlayerRole(id: string): Promise<string> {
-  //   return Promise.resolve(PLAYERS[0].role);
-  // }
 }
