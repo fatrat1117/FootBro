@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { OneSignal } from 'ionic-native';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { LoginPage } from '../pages/login/login';
 import { NavController, ModalController, Platform } from 'ionic-angular';
@@ -30,11 +31,14 @@ export class FirebaseManager {
         //save push id for real device
         if (!(this.platform.is('mobileweb') ||
           this.platform.is('core'))) {
+          this.registerForPushNotifications()
+          /*
           window["plugins"].OneSignal.getIds(ids => {
             console.log('push ids', ids);
             this.getPlayerDetail(auth.uid).update({ pushId: ids.userId });
             this.pushIdsMap[auth.uid] = ids.userId;
           });
+          */
         }
         this.FireCustomEvent('userlogin', auth);
       } else {
@@ -43,6 +47,32 @@ export class FirebaseManager {
     }
     );
   }
+
+  registerForPushNotifications() {
+    if (this.platform.is('mobileweb') ||
+      this.platform.is('core'))
+      return;
+
+    OneSignal.startInit('f6268d9c-3503-4696-8e4e-a6cf2c028fc6', '63493717987');
+
+    OneSignal.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.InAppAlert);
+    OneSignal.handleNotificationReceived().subscribe(() => {
+      // do something when notification is received
+    });
+
+    OneSignal.handleNotificationOpened().subscribe(() => {
+      // do something when a notification is opened
+    });
+
+    OneSignal.endInit();
+    OneSignal.getIds().then(data => {
+      console.log("data ", data);
+
+      // this gives you back the new userId and pushToken associated with the device. Helpful.
+    });
+  }
+
+
 
   popupLoginPage() {
     console.log('popupLoginPage');
@@ -248,7 +278,18 @@ export class FirebaseManager {
     document.dispatchEvent(event);
   }
 
-  /****************************** Mis ******************************/
+  /****************************** Misc ******************************/
+  postNotification(senderId:string, targetId: string) {
+    let notificationObj = {
+      app_id: "f6268d9c-3503-4696-8e4e-a6cf2c028fc6",
+      contents: "user name",
+      include_player_ids: [targetId]
+    };
+
+    OneSignal.postNotification(notificationObj);
+
+  }
+
   sendFeedback(content: string) {
     this.af.database.list(`misc/feedbacks/`).push({
       content: content,
