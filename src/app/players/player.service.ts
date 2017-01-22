@@ -52,4 +52,12 @@ export class PlayerService {
   getPlayer(id) : Player {
     return this.playersMap[id];
   } 
+
+  updatePlayerBasic(property: string, value) {
+    this.fm.updatePlayerBasic(property, value);
+  }
+
+  updatePlayerDetail(property: string, value) {
+    this.fm.updatePlayerDetail(property, value);
+  }
 }

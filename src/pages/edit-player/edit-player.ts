@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, NavParams } from 'ionic-angular';
 
-// import { EditPlayerNamePage } from './edit-player-name'
-// import { EditPlayerHeightPage } from './edit-player-height'
-// import { EditPlayerWeightPage } from './edit-player-weight'
-// import { EditPlayerPositionPage } from './edit-player-position'
-// import { EditPlayerFootPage } from './edit-player-foot'
-// import { EditPlayerDescriptionPage } from './edit-player-description'
+import { EditPlayerNamePage } from './edit-player-name'
+import { EditPlayerHeightPage } from './edit-player-height'
+import { EditPlayerWeightPage } from './edit-player-weight'
+import { EditPlayerPositionPage } from './edit-player-position'
+import { EditPlayerFootPage } from './edit-player-foot'
+import { EditPlayerDescriptionPage } from './edit-player-description'
 
 import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
@@ -19,43 +19,48 @@ import { PlayerService } from '../../app/players/player.service'
 export class EditPlayerPage {
   player : Player;
   isSavable: boolean;
-  constructor(private navCtrl: NavController, private modalCtrl: ModalController, private playerService: PlayerService) {
+  constructor(private modalCtrl: ModalController, private navParams: NavParams, private playerService: PlayerService) {
   }
 
   ionViewDidLoad() {
     this.isSavable = false;
-
-//     this.playerService.getSelfBasic().then(playerBasic => {
-//       //this.playerBasic = playerBasic;
-//     });
-
-//     this.playerService.getSelfDetail().then(playerDetail => {
-// //this.playerDetail = playerDetail;
-//     });
+    this.player = this.navParams.get('player');
   }
 
   editName() {
-    //this.modalCtrl.create(EditPlayerNamePage).present();
+    this.modalCtrl.create(EditPlayerNamePage, {
+      name: this.player.name
+    }).present();
   }
 
   editHeight() {
-    //this.modalCtrl.create(EditPlayerHeightPage).present();
+    this.modalCtrl.create(EditPlayerHeightPage, {
+      height: this.player.height
+    }).present();
   }
 
   editWeight() {
-    //this.modalCtrl.create(EditPlayerWeightPage).present();
+    this.modalCtrl.create(EditPlayerWeightPage, {
+      weight: this.player.weight
+    }).present();
   }
 
   editPosition() {
-   // this.modalCtrl.create(EditPlayerPositionPage).present();
+   this.modalCtrl.create(EditPlayerPositionPage, {
+     position: this.player.position
+   }).present();
   }
 
   editFoot() {
-    //this.modalCtrl.create(EditPlayerFootPage).present();
+    this.modalCtrl.create(EditPlayerFootPage, {
+      foot: this.player.foot
+    }).present();
   }
 
   editDescription() {
-    //this.modalCtrl.create(EditPlayerDescriptionPage).present();
+    this.modalCtrl.create(EditPlayerDescriptionPage, {
+      description: this.player.description
+    }).present();
   }
 }
 

@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { ViewController} from 'ionic-angular';
+import { ViewController, NavParams} from 'ionic-angular';
 
-import { PlayerDetail } from '../../app/players/shared/player.model'
-import { PlayerService } from '../../app/players/shared/player.service'
+import { PlayerService } from '../../app/players/player.service'
 
 @Component({
   template: `
@@ -21,18 +20,16 @@ import { PlayerService } from '../../app/players/shared/player.service'
   `
 })
 export class EditPlayerPositionPage {
-  playerDetail: PlayerDetail;
   values: string[];
+  oldValue: string;
   selectedValue: string;
-  constructor(private viewCtrl: ViewController, private playerService: PlayerService) {
+  constructor(private viewCtrl: ViewController, private navParams: NavParams, private playerService: PlayerService) {
     this.values = ["gk", "cb", "sb", "dmf", "amf", "cf", "sf"];
   }
 
   ionViewDidLoad() {
-    this.playerService.getSelfDetail().then(playerDetail => {
-      this.playerDetail = playerDetail;
-      this.selectedValue = playerDetail.position;
-    });
+    this.oldValue = this.navParams.get("position");
+    this.selectedValue = this.oldValue;
   }
 
   changePosition(position: string) {
@@ -41,8 +38,8 @@ export class EditPlayerPositionPage {
   }
 
   save() {
-    this.playerDetail.position = this.selectedValue;
-    this.playerService.saveSelfDetail(this.playerDetail);
+    if (this.selectedValue != this.oldValue)
+      this.playerService.updatePlayerDetail("position", this.selectedValue);
     this.dismiss();
   }
 

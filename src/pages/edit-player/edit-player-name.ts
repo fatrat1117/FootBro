@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { ViewController} from 'ionic-angular';
+import { ViewController, NavParams} from 'ionic-angular';
 
 import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
@@ -21,29 +21,26 @@ import { PlayerService } from '../../app/players/player.service'
 export class EditPlayerNamePage {
   @ViewChild('valueInput') valueInput;
 
-  player: Player;
+  oldValue: string;
   newValue: string;
   isSavable: boolean;
-  constructor(private viewCtrl: ViewController, private playerService: PlayerService) {
+  constructor(private viewCtrl: ViewController, private navParams: NavParams, private playerService: PlayerService) {
     this.isSavable = false;
   }
 
   ionViewDidLoad() {
-    // this.playerService.getSelfBasic().then(playerBasic => {
-    //   this.playerBasic = playerBasic;
-    //   this.newValue = playerBasic.displayName;
-    // });
+    this.oldValue = this.navParams.get("name");
+    this.newValue = this.oldValue;
 
     this.valueInput.setFocus();
   }
 
   onValueChange() {
-    this.isSavable = (this.newValue.trim().length != 0 && this.newValue != this.playerBasic.displayName);
+    this.isSavable = (this.newValue.trim().length != 0 && this.newValue != this.oldValue);
   }
 
   save() {
-    this.player.displayName = this.newValue;
-    // this.playerService.saveSelfBasic(this.playerBasic);
+    this.playerService.updatePlayerBasic('displayName', this.newValue);
     this.dismiss();
   }
 

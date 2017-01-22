@@ -55,7 +55,9 @@ export class MePage {
   }
 
   goEditPlayerPage() {
-    this.navCtrl.push(EditPlayerPage);
+    this.navCtrl.push(EditPlayerPage, {
+      player: this.player
+    });
   }
 
   goSwitchTeamPage() {

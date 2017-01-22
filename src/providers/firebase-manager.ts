@@ -134,7 +134,11 @@ export class FirebaseManager {
     })
   }
 
-  //teams
+
+
+
+
+  /****************************** Teams ******************************/
   getTeamPublic(id) {
     return this.sortedPublicTeamsMap[id];
   }
@@ -241,7 +245,11 @@ export class FirebaseManager {
     //}, 1000);
   }
 
-  //players 
+
+
+
+
+  /****************************** Players ******************************/
   getPlayerDetail(id) {
     return this.af.database.object(`/players/${id}/detail-info`);
   }
@@ -323,6 +331,18 @@ export class FirebaseManager {
     var event = new CustomEvent(name, { detail: data });
     document.dispatchEvent(event);
   }
+
+  updatePlayerBasic(property: string, value) {
+    this.af.database.object(`players/${this.auth.uid}/basic-info/${property}`).set(value);
+  }
+
+  updatePlayerDetail(property: string, value) {
+    this.af.database.object(`players/${this.auth.uid}/detail-info/${property}`).set(value);
+  }
+
+
+
+
 
   /****************************** Misc ******************************/
   postNotification(senderId:string, targetId: string) {
