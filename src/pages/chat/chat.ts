@@ -9,17 +9,18 @@ import { FirebaseListObservable } from 'angularfire2';
 import { Localization } from '../../providers/localization';
 import { Chat } from '../../app/chats/shared/chat.model'
 import { ChatService } from '../../app/chats/shared/chat.service'
+import { Player } from '../../app/players/player.model';
 
 @Component({
   selector: 'page-chat',
   templateUrl: 'chat.html',
-  providers: [ ChatService ]
+  providers: [ChatService]
 })
 export class ChatPage {
   @ViewChild(Content) content: Content;
   //chats: FirebaseListObservable<any[]>;
   chats: any[];
-  userId: string;
+  user: Player;
   isUnread: boolean;
   newMessage: string;
   isRefreshing: boolean;
@@ -30,27 +31,31 @@ export class ChatPage {
   ionViewDidLoad() {
     this.isRefreshing = false;
     this.content.resize();
-    this.userId = this.navParams.get('userId');
     this.isUnread = this.navParams.get('isUnread');
+    this.user = this.navParams.get('user');
 
-    this.chatService.getRecentChats(this.userId, this.isUnread).subscribe(chats => {
+    this.chatService.getRecentChats(this.user.id, this.isUnread).subscribe(chats => {
       this.chats = chats;
-      if (this.content._scroll) {
-        if (this.isRefreshing) {
-          setTimeout(_ => this.content.scrollToTop(), 100);
-          this.isRefreshing = false;
-        }
-        else {
-          setTimeout(_ => this.content.scrollToBottom(), 100);
-        }
-      }
+      this.scrollView();
     })
 
     this.chatService.loadMoreChats();
   }
 
+  scrollView() {
+    if (this.content._scroll) {
+      if (this.isRefreshing) {
+        setTimeout(_ => this.content.scrollToTop(), 100);
+        this.isRefreshing = false;
+      }
+      else {
+        setTimeout(_ => this.content.scrollToBottom(), 100);
+      }
+    }
+  }
+
   sendMessage(input) {
-    this.chatService.sendChat(this.userId, this.newMessage);
+    this.chatService.sendChat(this.user.id, this.newMessage);
     input.focus();
     this.newMessage = '';
     //input.setFocus();

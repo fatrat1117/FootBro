@@ -4,6 +4,8 @@ import { NavController } from 'ionic-angular';
 import { ChatPage } from '../chat/chat'
 import { Message } from '../../app/messages/shared/message.model'
 import { MessageService } from '../../app/messages/shared/message.service'
+import { Player } from '../../app/players/player.model';
+import { PlayerService } from '../../app/players/player.service';
 
 
 @Component({
@@ -13,40 +15,37 @@ import { MessageService } from '../../app/messages/shared/message.service'
 })
 export class MessagesPage {
   messages: any[];
+  watchListMap : {};
 
-  constructor(private navCtrl: NavController, private messageService: MessageService) {
+  constructor(private navCtrl: NavController, private messageService: MessageService, private playerService: PlayerService) {
   }
 
   ionViewDidLoad() {
     this.addEventListeners();
 
     this.messageService.getAllMessages().subscribe(messages => {
-      let read = [];
-      let unRead = [];
-      for (var i = messages.length - 1; i >= 0; --i)
-      {
-        if (messages[i].isUnread)
-          unRead.push(messages[i]);
-        else
-          read.push(messages[i]);
-      }
-      this.messages = unRead.concat(read);
+      this.messages = messages;
+      this.watchListMap = {};
+      messages.forEach(msg => {
+        this.watchListMap[msg.$key] = {};
+        this.playerService.getPlayerAsync(msg.$key);
+      })
     })
+
   }
 
   addEventListeners() {
-    /*
     document.addEventListener('serviceplayerdataready', e => {
       let playerId = e['detail'];
-      //console.log(teamId, this.id);
-      if (playerId === this.selfId) {
-        console.log("selfId:", this.selfId);
-        this.player = this.playerService.getPlayer(playerId);
-        console.log(this.player);
-        //console.log(this.team);
+      if (this.watchListMap[playerId])
+      {
+        this.watchListMap[playerId] = this.playerService.getPlayer(playerId);
       }
     });
-    */
+  }
+
+  getPlayerInfo(playerId: string) {
+    return this.watchListMap[playerId];
   }
 
   markAsRead(slidingItem) {
@@ -55,8 +54,8 @@ export class MessagesPage {
 
   enterChatPage(userId: string, isUnread: boolean) {
     this.navCtrl.push(ChatPage, {
-      userId: userId,
-      isUnread: isUnread
+      isUnread: isUnread,
+      user: this.watchListMap[userId]
     });
   }
 }

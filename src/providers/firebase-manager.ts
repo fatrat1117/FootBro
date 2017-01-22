@@ -72,15 +72,15 @@ export class FirebaseManager {
 
   /****************************** Messages ******************************/
   getAllMessages() {
-    return this.af.database.list(`/players/${this.auth.uid}/chats/basic-info/`, {
+    return this.af.database.list(`/chats/${this.auth.uid}/basic-info/`, {
       query: {
-        orderByChild: 'lastActiveTime'
+        orderByChild: 'lastTimestamp'
       }
     })
   }
 
   getAllUnreadMessages() {
-    return this.af.database.list(`/players/${this.auth.uid}/chats/basic-info/`, {
+    return this.af.database.list(`/chats/${this.auth.uid}/basic-info/`, {
       query: {
         orderByChild: 'isUnread',
         equalTo: true
@@ -88,16 +88,19 @@ export class FirebaseManager {
     })
   }
 
+
+
+
+
   /****************************** Chat Room ******************************/
   getChatsWithUser(userId: string, subject: any, isUnread: boolean) {
     if (isUnread) {
-      this.af.database.object(`/players/${this.auth.uid}/chats/basic-info/${userId}`).update({
+      this.af.database.object(`/chats/${this.auth.uid}/basic-info/${userId}`).update({
         isUnread: false,
-        lastActiveTime: firebase.database.ServerValue.TIMESTAMP
       })
     }
 
-    return this.af.database.list(`/players/${this.auth.uid}/chats/${userId}`, {
+    return this.af.database.list(`/chats/${this.auth.uid}/${userId}`, {
       query: {
         limitToLast: subject
       }
@@ -106,31 +109,29 @@ export class FirebaseManager {
 
   addChatToUser(userId: string, content: string) {
     // add to self
-    this.af.database.list(`/players/${this.auth.uid}/chats/${userId}`).push({
+    this.af.database.list(`/chats/${this.auth.uid}/${userId}`).push({
       createdAt: firebase.database.ServerValue.TIMESTAMP,
       content: content,
       isFromSelf: true
     })
 
-    this.af.database.object(`/players/${this.auth.uid}/chats/basic-info/${userId}`).set({
+    this.af.database.object(`/chats/${this.auth.uid}/basic-info/${userId}`).set({
       isUnread: false,
       lastContent: content,
       lastTimestamp: firebase.database.ServerValue.TIMESTAMP,
-      lastActiveTime: firebase.database.ServerValue.TIMESTAMP
     })
 
     // add to other
-    this.af.database.list(`/players/${userId}/chats/${this.auth.uid}`).push({
+    this.af.database.list(`/chats/${userId}/${this.auth.uid}`).push({
       createdAt: firebase.database.ServerValue.TIMESTAMP,
       content: content,
       isFromSelf: false
     })
 
-    this.af.database.object(`/players/${userId}/chats/basic-info/${this.auth.uid}`).set({
+    this.af.database.object(`/chats/${userId}/basic-info/${this.auth.uid}`).set({
       isUnread: true,
       lastContent: content,
       lastTimestamp: firebase.database.ServerValue.TIMESTAMP,
-      lastActiveTime: firebase.database.ServerValue.TIMESTAMP
     })
   }
 

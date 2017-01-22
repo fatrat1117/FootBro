@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, NavParams } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 
 import { EditPlayerNamePage } from './edit-player-name'
 import { EditPlayerHeightPage } from './edit-player-height'
@@ -17,14 +17,25 @@ import { PlayerService } from '../../app/players/player.service'
   templateUrl: 'edit-player.html'
 })
 export class EditPlayerPage {
+  selfId: string;
   player : Player;
   isSavable: boolean;
-  constructor(private modalCtrl: ModalController, private navParams: NavParams, private playerService: PlayerService) {
+  constructor(private modalCtrl: ModalController, private playerService: PlayerService) {
+    this.selfId = this.playerService.selfId;
   }
 
   ionViewDidLoad() {
+    this.addEventListeners();
     this.isSavable = false;
-    this.player = this.navParams.get('player');
+  }
+
+  addEventListeners() {
+    document.addEventListener('serviceplayerdataready', e => {
+      let playerId = e['detail'];
+      if (playerId === this.selfId) {
+        this.player = this.playerService.getPlayer(playerId);
+      }
+    });
   }
 
   editName() {

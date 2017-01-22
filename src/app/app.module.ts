@@ -40,6 +40,7 @@ import { MiscService } from './misc/misc.service'
 import { TransPipe, Localization } from '../providers/localization';
 import { StringToDatePipe, NumberToTimePipe, MomentPipe } from '../pipes/moment.pipe';
 import { TeamBasicPipe } from '../pipes/team.pipe'
+import { ReversePipe } from '../pipes/utilities.pipe'
 
 // components
 import { SbLoadingComponent } from './common/loading.component';
@@ -92,6 +93,7 @@ export const firebaseConfig = {
     NumberToTimePipe,
     MomentPipe,
     TeamBasicPipe,
+    ReversePipe,
     // components
     SbLoadingComponent,
     SbModalNavbarComponent,

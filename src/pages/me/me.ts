@@ -46,18 +46,14 @@ export class MePage {
       let playerId = e['detail'];
       //console.log(teamId, this.id);
       if (playerId === this.selfId) {
-        console.log("selfId:", this.selfId);
         this.player = this.playerService.getPlayer(playerId);
-        console.log(this.player);
         //console.log(this.team);
       }
     });
   }
 
   goEditPlayerPage() {
-    this.navCtrl.push(EditPlayerPage, {
-      player: this.player
-    });
+    this.navCtrl.push(EditPlayerPage);
   }
 
   goSwitchTeamPage() {

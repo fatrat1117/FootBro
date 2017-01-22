@@ -1,8 +1,8 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      <img class="chat-room-avatar" src="assets/player-photo/player_photo.jpg">
-      <p class="chat-room-title">{{ userId }}</p>
+      <img class="chat-room-avatar" [src]="user?.photo">
+      <p class="chat-room-title">{{ user?.name }}</p>
     </ion-title>
   </ion-navbar>
 </ion-header>
