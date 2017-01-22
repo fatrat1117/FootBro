@@ -47,7 +47,7 @@ export class RankService {
   //teamRankRefreshMap = {};
   teamRankMap = {};
   constructor(private fm: FirebaseManager) {
-    document.addEventListener('PublicTeamsChanged',
+    document.addEventListener('publicteamschanged',
       e => {
         if (this.needRefreshTeamsRankUI) {
           console.log('needRefreshTeamsRankUI');
@@ -81,7 +81,7 @@ export class RankService {
         }
       });
 
-      document.addEventListener('TeamDataReady', e => {
+      document.addEventListener('teamdataready', e => {
         let teamId = e['detail'];
         //if (this.teamRankRefreshMap[teamId]) {
         //  this.teamRankRefreshMap[teamId] = false;
@@ -95,7 +95,7 @@ export class RankService {
         }
       );
 
-      document.addEventListener('TeamPublicDataReady', e => {
+      document.addEventListener('teampublicdataready', e => {
         let teamId = e['detail'];
         let team = this.fm.getTeamPublic(teamId);
         let teamRankData = this.teamRankMap[teamId];

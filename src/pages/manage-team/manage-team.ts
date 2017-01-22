@@ -3,8 +3,8 @@ import { ViewController, ModalController } from 'ionic-angular';
 
 import { NewTeamPage } from './new-team'
 
-import { PlayerBasic } from '../../app/players/shared/player.model'
-import { PlayerService } from '../../app/players/shared/player.service'
+import { Player } from '../../app/players/player.model'
+import { PlayerService } from '../../app/players/player.service'
 
 
 @Component({
@@ -12,20 +12,20 @@ import { PlayerService } from '../../app/players/shared/player.service'
   templateUrl: 'manage-team.html'
 })
 export class ManageTeamPage {
-  playerBasic: PlayerBasic;
+  player: Player;
   teams: string[];
   constructor(private viewCtrl: ViewController, private modalCtrl: ModalController, private playerService: PlayerService) {
 
   }
 
   ionViewDidLoad() {
-    this.playerService.getSelfBasic().then(playerBasic => {
-      this.playerBasic = playerBasic;
-    })
+    // this.playerService.getSelfBasic().then(playerBasic => {
+    //   this.playerBasic = playerBasic;
+    // })
 
-    this.playerService.getSelfTeams().then(teams => {
-      this.teams = teams;
-    });
+    // this.playerService.getSelfTeams().then(teams => {
+    //   this.teams = teams;
+    // });
   }
   
   setDefaultTeam(index: number, slidingItem) {
@@ -35,12 +35,12 @@ export class ManageTeamPage {
 
   quitTeam(index: number) {
     // if is default team, clear it
-    if (this.teams[index] == this.playerBasic.teamId)
+    if (this.teams[index] == this.player.teamId)
       this.updateSelfBasic("");
 
     // remove from team list
     this.teams.splice(index, 1);
-    this.playerService.saveSelfTeams(this.teams);
+    //this.playerService.saveSelfTeams(this.teams);
 
     // set default
     if (this.teams.length > 0)
@@ -54,7 +54,7 @@ export class ManageTeamPage {
   }
 
   updateSelfBasic(teamId: string) {
-    this.playerBasic.teamId = teamId;
-    this.playerService.saveSelfBasic(this.playerBasic);
+    // this.playerBasic.teamId = teamId;
+    // this.playerService.saveSelfBasic(this.playerBasic);
   }
 }

@@ -7,7 +7,7 @@ export class TeamService {
   teamDataMap = {};
 
   constructor(private fm: FirebaseManager) {
-    document.addEventListener('TeamDataReady', e => {
+    document.addEventListener('teamdataready', e => {
       let teamId = e['detail'];
       let team = this.fm.getTeam(teamId);
       //console.log(team);
@@ -29,12 +29,12 @@ export class TeamService {
           this.fm.getTeamPublicAsync(teamId);
 
         this.fm.getTeamStatsAsync(teamId);
-        this.fm.FireCustomEvent('ServiceMyTeamDataReady', teamId);
+        this.fm.FireCustomEvent('servicemyteamdataready', teamId);
       }
     }
     );
 
-    document.addEventListener('TeamPublicDataReady', e => {
+    document.addEventListener('teampublicdataready', e => {
       let teamId = e['detail'];
       let teamData = this.teamDataMap[teamId];
       let teamPublic = this.fm.getTeamPublic(teamId);

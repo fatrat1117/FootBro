@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { ViewController} from 'ionic-angular';
 
-import { PlayerBasic } from '../../app/players/shared/player.model'
-import { PlayerService } from '../../app/players/shared/player.service'
+import { Player } from '../../app/players/player.model'
+import { PlayerService } from '../../app/players/player.service'
 
 @Component({
   template: `
@@ -21,7 +21,7 @@ import { PlayerService } from '../../app/players/shared/player.service'
 export class NewTeamPage {
   @ViewChild('valueInput') valueInput;
 
-  playerBasic: PlayerBasic;
+  player: Player;
   newValue: string;
   isValid: boolean;
   constructor(private viewCtrl: ViewController, private playerService: PlayerService) {

@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 
-import { EditPlayerNamePage } from './edit-player-name'
-import { EditPlayerHeightPage } from './edit-player-height'
-import { EditPlayerWeightPage } from './edit-player-weight'
-import { EditPlayerPositionPage } from './edit-player-position'
-import { EditPlayerFootPage } from './edit-player-foot'
-import { EditPlayerDescriptionPage } from './edit-player-description'
+// import { EditPlayerNamePage } from './edit-player-name'
+// import { EditPlayerHeightPage } from './edit-player-height'
+// import { EditPlayerWeightPage } from './edit-player-weight'
+// import { EditPlayerPositionPage } from './edit-player-position'
+// import { EditPlayerFootPage } from './edit-player-foot'
+// import { EditPlayerDescriptionPage } from './edit-player-description'
 
-import { PlayerBasic, PlayerDetail } from '../../app/players/shared/player.model'
-import { PlayerService } from '../../app/players/shared/player.service'
+import { Player } from '../../app/players/player.model'
+import { PlayerService } from '../../app/players/player.service'
 
 
 @Component({
@@ -17,8 +17,7 @@ import { PlayerService } from '../../app/players/shared/player.service'
   templateUrl: 'edit-player.html'
 })
 export class EditPlayerPage {
-  playerBasic: PlayerBasic;
-  playerDetail: PlayerDetail;
+  player : Player;
   isSavable: boolean;
   constructor(private navCtrl: NavController, private modalCtrl: ModalController, private playerService: PlayerService) {
   }
@@ -26,37 +25,37 @@ export class EditPlayerPage {
   ionViewDidLoad() {
     this.isSavable = false;
 
-    this.playerService.getSelfBasic().then(playerBasic => {
-      this.playerBasic = playerBasic;
-    });
+//     this.playerService.getSelfBasic().then(playerBasic => {
+//       //this.playerBasic = playerBasic;
+//     });
 
-    this.playerService.getSelfDetail().then(playerDetail => {
-      this.playerDetail = playerDetail;
-    });
+//     this.playerService.getSelfDetail().then(playerDetail => {
+// //this.playerDetail = playerDetail;
+//     });
   }
 
   editName() {
-    this.modalCtrl.create(EditPlayerNamePage).present();
+    //this.modalCtrl.create(EditPlayerNamePage).present();
   }
 
   editHeight() {
-    this.modalCtrl.create(EditPlayerHeightPage).present();
+    //this.modalCtrl.create(EditPlayerHeightPage).present();
   }
 
   editWeight() {
-    this.modalCtrl.create(EditPlayerWeightPage).present();
+    //this.modalCtrl.create(EditPlayerWeightPage).present();
   }
 
   editPosition() {
-    this.modalCtrl.create(EditPlayerPositionPage).present();
+   // this.modalCtrl.create(EditPlayerPositionPage).present();
   }
 
   editFoot() {
-    this.modalCtrl.create(EditPlayerFootPage).present();
+    //this.modalCtrl.create(EditPlayerFootPage).present();
   }
 
   editDescription() {
-    this.modalCtrl.create(EditPlayerDescriptionPage).present();
+    //this.modalCtrl.create(EditPlayerDescriptionPage).present();
   }
 }
 
