@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { RankService } from '../../app/rank/shared/rank.service'
+import { RankService } from '../../app/rank/rank.service'
 import { MyPlayerPage } from '../my-player/my-player'
 import { MyTeamPage } from '../my-team/my-team'
 
@@ -15,26 +15,37 @@ export class RankPage {
   playerSortByStr = "popularity";
   teamRanks;
   playerRanks;
-  numOfTeam = 0;
+  numOfTeams = 0;
   teamScroll;
+  numOfPlayers = 0;
+
   constructor(public nav: NavController,
     private rankService: RankService) {
 
   }
 
   ionViewDidLoad() {
-    document.addEventListener('ServiceTeamRankChanged', e => {
+    document.addEventListener('serviceteamrankschanged', e => {
       this.teamRanks = this.rankService.teamRanks;
-      this.numOfTeam = this.teamRanks.length;
+      this.numOfTeams = this.teamRanks.length;
       if (this.teamScroll)
         this.teamScroll.complete();
     });
-    this.rankService.getTeamRankAsync(this.teamSortByStr, this.numOfTeam + 10);
+
+    document.addEventListener('serviceplayerrankschanged', e => {
+      this.playerRanks = this.rankService.playerRanks;
+      this.numOfPlayers = this.playerRanks.length;
+      // if (this.teamScroll)
+      //   this.teamScroll.complete();
+    });
+
+    this.rankService.getTeamRanksAsync(this.teamSortByStr, this.numOfTeams + 10);
+    this.rankService.getPlayerRanksAsync(this.playerSortByStr, this.numOfPlayers + 20);
   }
 
   sortTeamBy(str) {
     this.teamSortByStr = str;
-    this.rankService.getTeamRankAsync(this.teamSortByStr, this.numOfTeam);
+    this.rankService.getTeamRanksAsync(this.teamSortByStr, this.numOfTeams);
   }
 
   sortPlayerBy(str) {
@@ -47,17 +58,12 @@ export class RankPage {
   moreTeam(infiniteScroll) {
     console.log('more team available');
     this.teamScroll = infiniteScroll;
-    this.rankService.getTeamRankAsync(this.teamSortByStr, this.numOfTeam + 10);
+    this.rankService.getTeamRanksAsync(this.teamSortByStr, this.numOfTeams + 10);
   }
 
   morePlayer(infiniteScroll) {
     console.log('more player available');
-    setTimeout(() => {
-      this.rankService.getMorePlayerRanks().then(ranks => {
-        console.log('loading player finished');
-        infiniteScroll.complete();
-      });
-    }, 500);
+    this.rankService.getPlayerRanksAsync(this.playerSortByStr, this.numOfPlayers + 20);
   }
 
   goPlayerPage(id) {

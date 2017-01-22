@@ -17,6 +17,8 @@ export class FirebaseManager {
   queryTeams;
   cachedPlayersMap = {};
   sortedPublicPlayersMap = {};
+  sortedPublicPlayers;
+  queryPlayers;
   pushIdsMap = {};
 
   constructor(private modalCtrl: ModalController,
@@ -248,6 +250,10 @@ export class FirebaseManager {
     return this.sortedPublicPlayersMap[id];
   }
 
+  publicPlayersRef() {
+    return '/public/players/';
+  }
+
   getPlayerPublicAsync(id) {
     if (this.sortedPublicPlayersMap[id])
       this.FireCustomEvent('playerpublicdataready', id);
@@ -276,7 +282,7 @@ export class FirebaseManager {
   }
 
   queryPublicPlayers(orderby, count) {
-    let afQuery = this.af.database.list(`/public/players/`, {
+    let afQuery = this.af.database.list(this.publicPlayersRef(), {
       query: {
         orderByChild: orderby,
         limitToLast: count
@@ -284,26 +290,26 @@ export class FirebaseManager {
     });
 
     let sub = afQuery.subscribe(snapshots => {
-      // this.sortedPublicTeams = snapshots.reverse();
-      // for (let i = 0; i < snapshots.length; ++i) {
-      //   this.sortedPublicTeamsMap[snapshots[i].$key] = snapshots[i];
-      // }
+      this.sortedPublicPlayers = snapshots.reverse();
+      for (let i = 0; i < snapshots.length; ++i) {
+        this.sortedPublicPlayersMap[snapshots[i].$key] = snapshots[i];
+      }
       this.FireEvent('publicplayerschanged');
       sub.unsubscribe();
     });
 
-    // if (this.queryTeams)
-    //   this.queryTeams.off();
+    if (this.queryPlayers)
+      this.queryPlayers.off();
 
-    // let ref = firebase.database().ref(`/public/teams/`);
-    // this.queryTeams = ref.orderByChild(orderby).limitToLast(count);
-    // let self = this;
-    // this.queryTeams.on("child_changed", function (snapshot) {
-    //   let val = snapshot.val();
-    //   val['$key'] = snapshot.key;
-    //   self.sortedPublicTeamsMap[snapshot.key] = val;
-    //   self.FireCustomEvent('teampublicdataready', snapshot.key);
-    // });
+    let ref = firebase.database().ref(this.publicPlayersRef());
+    this.queryPlayers = ref.orderByChild(orderby).limitToLast(count);
+    let self = this;
+    this.queryPlayers.on("child_changed", function (snapshot) {
+      let val = snapshot.val();
+      val['$key'] = snapshot.key;
+      self.sortedPublicPlayersMap[snapshot.key] = val;
+      self.FireCustomEvent('playerpublicdataready', snapshot.key);
+    });
   }
   //Fire document events 
   FireEvent(name) {

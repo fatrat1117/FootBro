@@ -54,7 +54,7 @@
         </ion-item>
       </ion-list>
       <ion-infinite-scroll (ionInfinite)="moreTeam($event)">
-        <ion-infinite-scroll-content refreshingSpinner="circles">
+        <ion-infinite-scroll-content loadingSpinner="circles">
         </ion-infinite-scroll-content>
       </ion-infinite-scroll>
     </div>
@@ -62,7 +62,7 @@
       <ion-list>
         <ion-item *ngFor="let p of playerRanks; let i = index;" (click)="goPlayerPage(p.id)" style="margin-bottom:10px" text-wrap>
           <ion-avatar item-left>
-            <img [src]="p.photoURL">
+            <img [src]="p.photo">
           </ion-avatar>
           <ion-row center>
             <ion-col>
