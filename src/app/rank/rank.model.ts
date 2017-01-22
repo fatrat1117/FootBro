@@ -12,7 +12,7 @@ export class PlayerRank {
   name;
   popularity;
   position;
-  photoURL;
+  photo;
 }
 
 
