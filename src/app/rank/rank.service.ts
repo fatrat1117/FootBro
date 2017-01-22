@@ -117,15 +117,13 @@ export class RankService {
         let playerRank = new PlayerRank();
         let id = sortedPublicPlayers[i].$key;
         playerRank.popularity = sortedPublicPlayers[i].popularity;
+        playerRank.id = id;
         this.playerRanks.push(playerRank);
         this.playerRanksMap[id] = playerRank;
         this.playerService.getPlayerAsync(id);
       }
-      // let self = this;
-      // setTimeout(function() {
-      //   console.log(self.playerRanks);
+
       this.fm.FireEvent('serviceplayerrankschanged');
-      //}, 3000);
     });
 
     document.addEventListener('serviceplayerdataready', e => {
@@ -136,8 +134,8 @@ export class RankService {
         playerRank.photo = player.photo;
         playerRank.name = player.name;
         playerRank.position = player.position;
-      }
-      //console.log(playerRank); 
+        playerRank.popularity = player.popularity;
+      } 
     });
   }
 
