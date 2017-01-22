@@ -68,8 +68,9 @@ export class RankPage {
     this.rankService.getPlayerRanksAsync(this.playerSortByStr, this.numOfPlayers + 20);
   }
 
-  goPlayerPage(id) {
-    this.nav.push(MyPlayerPage, { pId: id });
+  goPlayerPage(pId) {
+    //console.log(pId);
+    this.nav.push(MyPlayerPage, { id: pId });
   }
 
   goTeamPage(tId) {

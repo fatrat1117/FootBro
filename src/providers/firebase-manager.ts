@@ -251,6 +251,12 @@ export class FirebaseManager {
 
 
   /****************************** Players ******************************/
+  increasePlayerPopularity(id) {
+    let publicData = this.sortedPublicPlayersMap[id];
+    if (publicData) {
+      this.af.database.object(`public/players/${id}`).update({ popularity: publicData.popularity + 1 });
+    };
+  }
   getPlayerDetail(id) {
     return this.af.database.object(`/players/${id}/detail-info`);
   }
@@ -280,6 +286,8 @@ export class FirebaseManager {
     }
     else {
       this.af.database.object(`/players/${id}`).subscribe(snapshot => {
+        if ('img/none.png' === snapshot['basic-info'].photoURL)
+            snapshot['basic-info'].photoURL = 'assets/img/none.png';
         this.cachedPlayersMap[id] = snapshot;
         this.FireCustomEvent('playerdataready', id);
       });

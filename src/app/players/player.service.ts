@@ -60,4 +60,8 @@ export class PlayerService {
   updatePlayerDetail(property: string, value) {
     this.fm.updatePlayerDetail(property, value);
   }
+
+  increasePopularity(id) {
+    this.fm.increasePlayerPopularity(id);
+  }
 }
