@@ -18,6 +18,8 @@ export class MessagesPage {
   }
 
   ionViewDidLoad() {
+    this.addEventListeners();
+
     this.messageService.getAllMessages().subscribe(messages => {
       let read = [];
       let unRead = [];
@@ -30,6 +32,21 @@ export class MessagesPage {
       }
       this.messages = unRead.concat(read);
     })
+  }
+
+  addEventListeners() {
+    /*
+    document.addEventListener('serviceplayerdataready', e => {
+      let playerId = e['detail'];
+      //console.log(teamId, this.id);
+      if (playerId === this.selfId) {
+        console.log("selfId:", this.selfId);
+        this.player = this.playerService.getPlayer(playerId);
+        console.log(this.player);
+        //console.log(this.team);
+      }
+    });
+    */
   }
 
   markAsRead(slidingItem) {

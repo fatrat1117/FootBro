@@ -5,12 +5,16 @@ import { Player } from './player.model';
 @Injectable()
 export class PlayerService {
   playersMap = {};
+  selfId: string;
 
   constructor(private fm: FirebaseManager) {
+    this.selfId = fm.auth.uid;
     document.addEventListener('playerdataready', e => {
       let id = e['detail'];
+      
       let playerData = this.fm.getPlayer(id);
       let player = new Player();
+      
       player.id = playerData.$key;
       player.name = playerData['basic-info'].displayName;
       player.photo = playerData['basic-info'].photoURL;
@@ -47,6 +51,7 @@ export class PlayerService {
   getPlayer(id) : Player {
     return this.playersMap[id];
   } 
+
   // self
   // getSelfBasic(): Promise<PlayerBasic> {
   //   return Promise.resolve(PLAYERS[0].basic);

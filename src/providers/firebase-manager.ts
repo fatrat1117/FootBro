@@ -9,7 +9,6 @@ import * as firebase from 'firebase';
 @Injectable()
 export class FirebaseManager {
   auth;
-  selfId: string;
   afSortedPublicTeams;
   sortedPublicTeams;
   sortedPublicTeamsMap = {};
@@ -23,7 +22,6 @@ export class FirebaseManager {
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,
     private platform: Platform) {
-    this.selfId = "1kLb7Vs6G9aVum1PHZ6DWElk4nB2";
   }
 
   initialize() {
@@ -34,7 +32,6 @@ export class FirebaseManager {
         //save push id for real device
         if (!(this.platform.is('mobileweb') ||
           this.platform.is('core'))) {
-          this.registerForPushNotifications()
           /*
           window["plugins"].OneSignal.getIds(ids => {
             console.log('push ids', ids);
@@ -51,29 +48,7 @@ export class FirebaseManager {
     );
   }
 
-  registerForPushNotifications() {
-    if (this.platform.is('mobileweb') ||
-      this.platform.is('core'))
-      return;
-
-    OneSignal.startInit('f6268d9c-3503-4696-8e4e-a6cf2c028fc6', '63493717987');
-
-    OneSignal.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.InAppAlert);
-    OneSignal.handleNotificationReceived().subscribe(() => {
-      // do something when notification is received
-    });
-
-    OneSignal.handleNotificationOpened().subscribe(() => {
-      // do something when a notification is opened
-    });
-
-    OneSignal.endInit();
-    OneSignal.getIds().then(data => {
-      console.log("data ", data);
-
-      // this gives you back the new userId and pushToken associated with the device. Helpful.
-    });
-  }
+  
 
 
 
@@ -95,7 +70,7 @@ export class FirebaseManager {
 
   /****************************** Messages ******************************/
   getAllMessages() {
-    return this.af.database.list(`/players/${this.selfId}/chats/basic-info/`, {
+    return this.af.database.list(`/players/${this.auth.uid}/chats/basic-info/`, {
       query: {
         orderByChild: 'lastActiveTime'
       }
@@ -103,7 +78,7 @@ export class FirebaseManager {
   }
 
   getAllUnreadMessages() {
-    return this.af.database.list(`/players/${this.selfId}/chats/basic-info/`, {
+    return this.af.database.list(`/players/${this.auth.uid}/chats/basic-info/`, {
       query: {
         orderByChild: 'isUnread',
         equalTo: true
@@ -114,13 +89,13 @@ export class FirebaseManager {
   /****************************** Chat Room ******************************/
   getChatsWithUser(userId: string, subject: any, isUnread: boolean) {
     if (isUnread) {
-      this.af.database.object(`/players/${this.selfId}/chats/basic-info/${userId}`).update({
+      this.af.database.object(`/players/${this.auth.uid}/chats/basic-info/${userId}`).update({
         isUnread: false,
         lastActiveTime: firebase.database.ServerValue.TIMESTAMP
       })
     }
 
-    return this.af.database.list(`/players/${this.selfId}/chats/${userId}`, {
+    return this.af.database.list(`/players/${this.auth.uid}/chats/${userId}`, {
       query: {
         limitToLast: subject
       }
@@ -129,13 +104,13 @@ export class FirebaseManager {
 
   addChatToUser(userId: string, content: string) {
     // add to self
-    this.af.database.list(`/players/${this.selfId}/chats/${userId}`).push({
+    this.af.database.list(`/players/${this.auth.uid}/chats/${userId}`).push({
       createdAt: firebase.database.ServerValue.TIMESTAMP,
       content: content,
       isFromSelf: true
     })
 
-    this.af.database.object(`/players/${this.selfId}/chats/basic-info/${userId}`).set({
+    this.af.database.object(`/players/${this.auth.uid}/chats/basic-info/${userId}`).set({
       isUnread: false,
       lastContent: content,
       lastTimestamp: firebase.database.ServerValue.TIMESTAMP,
@@ -143,13 +118,13 @@ export class FirebaseManager {
     })
 
     // add to other
-    this.af.database.list(`/players/${userId}/chats/${this.selfId}`).push({
+    this.af.database.list(`/players/${userId}/chats/${this.auth.uid}`).push({
       createdAt: firebase.database.ServerValue.TIMESTAMP,
       content: content,
       isFromSelf: false
     })
 
-    this.af.database.object(`/players/${userId}/chats/basic-info/${this.selfId}`).set({
+    this.af.database.object(`/players/${userId}/chats/basic-info/${this.auth.uid}`).set({
       isUnread: true,
       lastContent: content,
       lastTimestamp: firebase.database.ServerValue.TIMESTAMP,
@@ -358,7 +333,7 @@ export class FirebaseManager {
   sendFeedback(content: string) {
     this.af.database.list(`misc/feedbacks/`).push({
       content: content,
-      creatorId: this.selfId,
+      creatorId: this.auth.uid,
       timestamp: firebase.database.ServerValue.TIMESTAMP
     })
   }

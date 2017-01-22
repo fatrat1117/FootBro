@@ -19,6 +19,7 @@ import { MessageService } from '../../app/messages/shared/message.service'
   providers: [ MessageService ]
 })
 export class MePage {
+  selfId: string
   player: Player;
   messageCount: number;
   constructor(private navCtrl: NavController, 
@@ -28,18 +29,29 @@ export class MePage {
   private teamService: TeamService,
   private af: AngularFire) {
     this.messageCount = 0;
+    this.selfId = this.playerService.selfId;
   }
 
   ionViewDidLoad() {
-    
-    // this.playerService.getSelfBasic().then(playerBasic => {
-    //   this.playerBasic = playerBasic;
-    // });
-
+    this.addEventListeners();
+    this.playerService.getPlayerAsync(this.selfId);
 
     this.messageService.getAllUnreadMessages().subscribe(messages => {
       this.messageCount = messages.length;
     })
+  }
+
+  addEventListeners() {
+    document.addEventListener('serviceplayerdataready', e => {
+      let playerId = e['detail'];
+      //console.log(teamId, this.id);
+      if (playerId === this.selfId) {
+        console.log("selfId:", this.selfId);
+        this.player = this.playerService.getPlayer(playerId);
+        console.log(this.player);
+        //console.log(this.team);
+      }
+    });
   }
 
   goEditPlayerPage() {

@@ -22,7 +22,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
-      //this.registerForPushNotifications();
+      this.registerForPushNotifications();
       // tutorial
       localforage.getItem('notFirstTime').then(val => {
         if (!val) {
@@ -31,4 +31,45 @@ export class MyApp {
       });
     });
   }
+
+  registerForPushNotifications() {
+    if (this.platform.is('mobileweb') ||
+      this.platform.is('core'))
+      return;
+
+    OneSignal.startInit('f6268d9c-3503-4696-8e4e-a6cf2c028fc6', '63493717987');
+
+    OneSignal.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.InAppAlert);
+    OneSignal.handleNotificationReceived().subscribe(() => {
+      // do something when notification is received
+    });
+
+    OneSignal.handleNotificationOpened().subscribe(() => {
+      // do something when a notification is opened
+    });
+
+    OneSignal.endInit();
+    OneSignal.getIds().then(data => {
+      console.log("data ", data);
+
+      // this gives you back the new userId and pushToken associated with the device. Helpful.
+    });
+  }
+    /*
+    // Enable to debug issues.
+    window["plugins"].OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+    let notificationOpenedCallback = function (jsonData) {
+      console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+    };
+
+    window["plugins"].OneSignal
+      .startInit("f6268d9c-3503-4696-8e4e-a6cf2c028fc6", "63493717987")
+      .handleNotificationOpened(notificationOpenedCallback)
+      .endInit();
+    // window["plugins"].OneSignal.init("f6268d9c-3503-4696-8e4e-a6cf2c028fc6",
+    //   { googleProjectNumber: "63493717987" },
+    //   notificationOpenedCallback);
+     window["plugins"].OneSignal.enableInAppAlertNotification(false);
+     window["plugins"].OneSignal.enableNotificationsWhenActive(true);
+    */
 }
