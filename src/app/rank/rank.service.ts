@@ -117,18 +117,20 @@ export class RankService {
         let playerRank = new PlayerRank();
         let id = sortedPublicPlayers[i].$key;
         playerRank.popularity = sortedPublicPlayers[i].popularity;
-        this.playerService.getPlayerAsync(id);
         this.playerRanks.push(playerRank);
         this.playerRanksMap[id] = playerRank;
+        this.playerService.getPlayerAsync(id);
       }
-
+      // let self = this;
+      // setTimeout(function() {
+      //   console.log(self.playerRanks);
       this.fm.FireEvent('serviceplayerrankschanged');
+      //}, 3000);
     });
 
     document.addEventListener('serviceplayerdataready', e => {
       let id = e['detail'];
       let player = this.playerService.getPlayer(id);
-      //console.log(player);
       let playerRank = this.playerRanksMap[id];
       if (playerRank) {
         playerRank.photo = player.photo;
@@ -143,23 +145,6 @@ export class RankService {
     this.needRefreshTeamsRankUI = true;
     this.fm.queryPublicTeams(orderby, count);
     //return this.teamRanks;
-  }
-
-  getTeamPublics(): Promise<any[]> {
-    return new Promise<any[]>(resolve => {
-      if (0 === this.teamRanks.length) {
-        //pull from firebase
-      }
-      else
-        resolve(this.teamRanks);
-    }
-    );
-  }
-
-  getPlayerRanks(): Promise<any[]> {
-    return new Promise<any[]>(resolve =>
-      setTimeout(resolve, 1000))
-      .then(() => Promise.resolve(this.playerRanks));
   }
 
   getPlayerRanksAsync(sortby, count) {

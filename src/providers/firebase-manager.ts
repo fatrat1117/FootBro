@@ -290,6 +290,7 @@ export class FirebaseManager {
   }
 
   queryPublicPlayers(orderby, count) {
+    console.log('queryPublicPlayers', orderby, count);
     let afQuery = this.af.database.list(this.publicPlayersRef(), {
       query: {
         orderByChild: orderby,
@@ -312,6 +313,7 @@ export class FirebaseManager {
     let ref = firebase.database().ref(this.publicPlayersRef());
     this.queryPlayers = ref.orderByChild(orderby).limitToLast(count);
     let self = this;
+    
     this.queryPlayers.on("child_changed", function (snapshot) {
       let val = snapshot.val();
       val['$key'] = snapshot.key;

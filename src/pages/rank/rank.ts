@@ -18,6 +18,7 @@ export class RankPage {
   numOfTeams = 0;
   teamScroll;
   numOfPlayers = 0;
+  playerScroll;
 
   constructor(public nav: NavController,
     private rankService: RankService) {
@@ -35,8 +36,8 @@ export class RankPage {
     document.addEventListener('serviceplayerrankschanged', e => {
       this.playerRanks = this.rankService.playerRanks;
       this.numOfPlayers = this.playerRanks.length;
-      // if (this.teamScroll)
-      //   this.teamScroll.complete();
+      if (this.playerScroll)
+         this.playerScroll.complete();
     });
 
     this.rankService.getTeamRanksAsync(this.teamSortByStr, this.numOfTeams + 10);
@@ -63,6 +64,7 @@ export class RankPage {
 
   morePlayer(infiniteScroll) {
     console.log('more player available');
+    this.playerScroll = infiniteScroll;
     this.rankService.getPlayerRanksAsync(this.playerSortByStr, this.numOfPlayers + 20);
   }
 

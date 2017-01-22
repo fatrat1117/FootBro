@@ -29,7 +29,6 @@ export class TeamService {
           this.fm.getTeamPublicAsync(teamId);
 
         this.fm.getTeamStatsAsync(teamId);
-        this.fm.FireCustomEvent('servicemyteamdataready', teamId);
       }
     }
     );
@@ -42,6 +41,7 @@ export class TeamService {
         teamData.ability = teamPublic.ability;
         teamData.popularity = teamPublic.popularity;
       }
+      this.fm.FireCustomEvent('servicemyteamdataready', teamId);
     });
 
     document.addEventListener('TeamStatsDataReady', e => {
