@@ -134,8 +134,9 @@ export class RankService {
       if (playerRank) {
         playerRank.photo = player.photo;
         playerRank.name = player.name;
+        playerRank.position = player.position;
       }
-      console.log(playerRank); 
+      //console.log(playerRank); 
     });
   }
 

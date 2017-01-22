@@ -31,6 +31,14 @@ export class RankPage {
       if (this.teamScroll)
         this.teamScroll.complete();
     });
+
+    document.addEventListener('serviceplayerrankschanged', e => {
+      this.playerRanks = this.rankService.playerRanks;
+      this.numOfPlayers = this.playerRanks.length;
+      // if (this.teamScroll)
+      //   this.teamScroll.complete();
+    });
+
     this.rankService.getTeamRanksAsync(this.teamSortByStr, this.numOfTeams + 10);
     this.rankService.getPlayerRanksAsync(this.playerSortByStr, this.numOfPlayers + 20);
   }
