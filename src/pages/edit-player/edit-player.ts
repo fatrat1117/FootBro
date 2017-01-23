@@ -26,6 +26,7 @@ export class EditPlayerPage {
 
   ionViewDidLoad() {
     this.addEventListeners();
+    this.playerService.getPlayerAsync(this.selfId);
     this.isSavable = false;
   }
 
@@ -34,6 +35,8 @@ export class EditPlayerPage {
       let playerId = e['detail'];
       if (playerId === this.selfId) {
         this.player = this.playerService.getPlayer(playerId);
+        console.log(this.player);
+        
       }
     });
   }
