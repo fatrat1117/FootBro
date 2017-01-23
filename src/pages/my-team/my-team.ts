@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
-import {TeamService} from '../../app/teams/team.service'
-import {Team} from '../../app/teams/team.model'
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { TeamService } from '../../app/teams/team.service'
+import { Team, TeamStat } from '../../app/teams/team.model'
 
 @Component({
   selector: 'page-my-team',
@@ -10,11 +10,12 @@ import {Team} from '../../app/teams/team.model'
 export class MyTeamPage {
   first = [];
   id;
-  team : Team = new Team();
+  team: Team = new Team();
+  currTeamStat = new TeamStat();
 
-  constructor(public navCtrl: NavController, 
-  private navParams: NavParams,
-  private service: TeamService) {
+  constructor(public navCtrl: NavController,
+    private navParams: NavParams,
+    private service: TeamService) {
     this.first = [
       {
         'win': '7',
@@ -29,6 +30,8 @@ export class MyTeamPage {
     this.id = this.navParams.get('id');
     this.service.increasePopularity(this.id);
     this.service.getTeamAsync(this.id);
+    this.currTeamStat = this.team.last_15;
+    //
   }
 
   addEventListeners() {
@@ -38,7 +41,7 @@ export class MyTeamPage {
       //console.log(teamId, this.id);
       if (teamId === this.id) {
         this.team = this.service.getTeam(teamId);
-        //console.log(this.team);
+        //this.setChoosePosition(0);
       }
     });
   }
@@ -91,25 +94,27 @@ export class MyTeamPage {
 
     switch (position) {
       case 0:
+        this.currTeamStat = this.team.last_15;
         recent15.setAttribute("class", "team-all-game-choose");
         btnRecent15.style.color = "white";
         firstLine.style.backgroundColor = "yellow";
-        this.setSuccessRate(90);
         break;
       case 1:
+        this.currTeamStat = this.team.last_30;
         recent20.setAttribute("class", "team-all-game-choose");
         btnRecent20.style.color = "white";
         secondLine.style.backgroundColor = "yellow";
-        this.setSuccessRate(27.5);
         break;
       case 2:
+        this.currTeamStat = this.team.overall;
         all.setAttribute("class", "team-all-game-choose");
         btnAll.style.color = "white";
         thirdLine.style.backgroundColor = "yellow";
-        this.setSuccessRate(30);
         break;
     }
-
+    console.log(this.currTeamStat);
+    
+    this.setSuccessRate(Math.round(this.currTeamStat.rate * 100));
   }
 
   //根据胜率设置图像例如90%
@@ -128,12 +133,12 @@ export class MyTeamPage {
     var successRateText = document.getElementById("success-rate-text");
     successRateText.innerHTML = successRate + "%";
     //显示百分比数字并调整相对位置
-    if (this.getByteLen(successRate + "%")>4) {
-      successRateText.style.fontSize="3.5rem";
-      successRateText.style.marginTop="0px";
-    }else{
-      successRateText.style.fontSize="4.5rem";
-      successRateText.style.marginTop="-10px";
+    if (this.getByteLen(successRate + "%") > 4) {
+      successRateText.style.fontSize = "3.5rem";
+      successRateText.style.marginTop = "0px";
+    } else {
+      successRateText.style.fontSize = "4.5rem";
+      successRateText.style.marginTop = "-10px";
     }
   }
   //获取字符串长度

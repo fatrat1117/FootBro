@@ -14,7 +14,7 @@ export class Team {
   ability;
   totalPlayers;
   last_5;
-  last_15: TeamStat;
-  last_30: TeamStat;
-  overall: TeamStat;
+  last_15 = new TeamStat();
+  last_30 = new TeamStat();
+  overall = new TeamStat();
 }

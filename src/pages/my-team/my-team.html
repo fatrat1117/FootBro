@@ -142,8 +142,6 @@
       <div class="nearest-5-game-top"></div>
       <p class="nearest-5-game-result game-text-failed">败</p>
     </ion-col>
-
-
   </ion-row>
 
   <ion-list class="no-margin">
@@ -205,16 +203,15 @@
       <div class="team-success-fail-top"></div>
       <div class="team-success-fail-text">
         <p class="text-up">胜率</p>
-        <p id="success-rate-text" class="text-down">90%</p>
+        <p id="success-rate-text" class="text-down">0</p>
       </div>
     </div>
 
-
     <ion-row>
-      <ion-col class="recent-game-result">15</ion-col>
-      <ion-col class="recent-game-result">14</ion-col>
-      <ion-col class="recent-game-result">10</ion-col>
-      <ion-col class="recent-game-result">12</ion-col>
+      <ion-col class="recent-game-result">{{currTeamStat.total_matches}}</ion-col>
+      <ion-col class="recent-game-result">{{currTeamStat.win}}</ion-col>
+      <ion-col class="recent-game-result">{{currTeamStat.draw}}</ion-col>
+      <ion-col class="recent-game-result">{{currTeamStat.lose}}</ion-col>
       <ion-col class="recent-game-result">10</ion-col>
       <ion-col class="recent-game-result">11</ion-col>
     </ion-row>
