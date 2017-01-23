@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar no-padding>
-    <ion-title text-center>球队信息</ion-title>
+    <ion-title text-center>{{'TeamInfo' | trans}}</ion-title>
     <ion-buttons end>
       <button ion-button class="my-team-btn-right" (click)="invitePlayer()">
         <ion-icon name="md-person-add"></ion-icon>
@@ -9,20 +9,18 @@
   </ion-navbar>
 </ion-header>
   		  
-
 <ion-content class="content-background-page"  >
 
   <div class="content-top">
     <img [src]="team.logo" class="thumbnail-img"/>
     <h6 class="team-name default-font-size-h6">{{team.name}}</h6>
-    <p class="team-place default-font-size-p">阿根廷&nbsp;|&nbsp;纪念碑球场</p>
-
+    <!--<p class="team-place default-font-size-p">阿根廷&nbsp;|&nbsp;纪念碑球场</p>-->
 
     <div class="team-right-item">
       <p class="team-right-item-text">{{team.popularity}}</p>
       <div class="team-right-item-bottom">
         <img src="assets/icon/fire.png" class="team-right-item-bottom-img">
-        <a class="team-right-item-bottom-text">人气</a>
+        <a class="team-right-item-bottom-text">{{'Popularity' | trans}}</a>
       </div>
     </div>
 
@@ -30,7 +28,7 @@
       <p class="team-right-item-text">{{team.ability}}</p>
       <div class="team-right-item-bottom">
         <img src="assets/icon/football.png" class="team-right-item-bottom-img">
-        <a class="team-right-item-bottom-text">能力</a>
+        <a class="team-right-item-bottom-text">{{'Ability' | trans}}</a>
       </div>
     </div>
 

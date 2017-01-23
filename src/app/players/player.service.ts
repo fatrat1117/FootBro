@@ -22,9 +22,15 @@ export class PlayerService {
         player.position = playerData['detail-info'].position;
       if (playerData['detail-info'] && 'pushId' in playerData['detail-info'])
         player.pushId = playerData['detail-info'].pushId;
+      if (playerData['detail-info'] && 'height' in playerData['detail-info'])
+        player.height = playerData['detail-info'].height;
+      if (playerData['detail-info'] && 'weight' in playerData['detail-info'])
+        player.weight = playerData['detail-info'].weight;
+        
       this.playersMap[id] = player;
-      
       this.fm.getPlayerPublicAsync(id);
+
+      this.fm.FireCustomEvent('serviceplayerdataready', id);
     });
 
     document.addEventListener('playerpublicdataready', e => {
@@ -34,7 +40,7 @@ export class PlayerService {
       if (player) {
         player.popularity = playerPublicData.popularity;
       }
-      this.fm.FireCustomEvent('serviceplayerdataready', id);
+      
     }
     );
   }
