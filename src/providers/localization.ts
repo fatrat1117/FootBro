@@ -186,7 +186,9 @@ export class Localization {
             Needtofillnumber: 'All your performance data is recored based on your sqaud number. Please fill up your squad number.',
             Done: 'Done',
             Welcometobrotherhood: 'Welcome to brotherhood',
-            Numberexists: 'Number exists'
+            Numberexists: 'Number exists',
+            ViewMore: 'View More',
+            Recent5Matches: 'Recent 5 Matches'
         },
 
         zh: {
@@ -354,7 +356,9 @@ export class Localization {
             Needtofillnumber: '裁判会根据你的球衣号码记录你在比赛中的表现。请正确填写你在球队中的号码。',
             Done: '完成',
             Welcometobrotherhood: '欢迎来到兄弟会',
-            Numberexists: '号码已经有人使用了'
+            Numberexists: '号码已经有人使用了',
+            ViewMore: '查看更多',
+            Recent5Matches: '最近5场比赛战绩'
         }
     }
 }

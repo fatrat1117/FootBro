@@ -13,7 +13,7 @@ export class Team {
   name;
   ability;
   totalPlayers;
-  last_5;
+  last_5 = [];
   last_15 = new TeamStat();
   last_30 = new TeamStat();
   overall = new TeamStat();

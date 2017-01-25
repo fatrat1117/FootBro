@@ -30,8 +30,6 @@ export class TeamService {
 
         this.fm.getTeamStatsAsync(teamId);
       }
-
-      this.fm.FireCustomEvent('servicemyteamdataready', teamId);
     }
     );
 
@@ -55,7 +53,7 @@ export class TeamService {
         teamData.last_30 = teamStats.last_30;
         teamData.overall = teamStats.overall;
       }
-      //console.log(teamData);
+      this.fm.FireCustomEvent('servicemyteamdataready', teamId);
     });
   }
 

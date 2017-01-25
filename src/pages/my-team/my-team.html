@@ -48,9 +48,9 @@
 
   <ion-list class="subtitle no-margin">
     <ion-item color="dark">
-      <button ion-button item-left clear class="subtitle-text">球队赛程</button>
+      <button ion-button item-left clear class="subtitle-text">{{'UpcomingMatches' | trans}}</button>
       <button ion-button item-right icon-right clear class="subtitle-text-small" (click)="seeMoreTeamGamePlan()">
-        查看更多
+        {{'ViewMore' | trans}}
         <ion-icon name="ios-arrow-forward"></ion-icon>
       </button>
     </ion-item>
@@ -59,7 +59,6 @@
   <button ion-button full class="nearest-game-time default-font-color">
     2016-09-25 星期日 12:00
   </button>
-
 
   <div class="nearest-game-display">
     <div class="game-left">
@@ -107,19 +106,16 @@
   </ion-row>
 
   <button ion-button full class="nearest-5-game-result-title default-font-color">
-    最近5场胜负平
+    {{'Recent5Matches' | trans}}
   </button>
 
-
   <ion-row class="nearest-5-game-result-content">
-
-    <ion-col class="nearest-5-game-result-content-item">
-      <div class="nearest-5-game-background game-success"></div>
+    <ion-col *ngFor="let result of team.last_5" class="nearest-5-game-result-content-item">
+      <div class="nearest-5-game-background" [ngStyle]="getCircleBkColor(result)"></div>
       <div class="nearest-5-game-top"></div>
-      <p class="nearest-5-game-result game-text-success">胜</p>
+      <p class="nearest-5-game-result" [ngStyle]="getCircleTextColor(result)">{{result | trans}}</p>
     </ion-col>
-
-    <ion-col class="nearest-5-game-result-content-item">
+    <!--<ion-col class="nearest-5-game-result-content-item">
       <div class="nearest-5-game-background game-success"></div>
       <div class="nearest-5-game-top"></div>
       <p class="nearest-5-game-result game-text-success">胜</p>
@@ -141,7 +137,7 @@
       <div class="nearest-5-game-background game-failed"></div>
       <div class="nearest-5-game-top"></div>
       <p class="nearest-5-game-result game-text-failed">败</p>
-    </ion-col>
+    </ion-col>-->
   </ion-row>
 
   <ion-list class="no-margin">

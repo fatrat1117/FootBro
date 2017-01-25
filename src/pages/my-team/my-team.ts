@@ -30,8 +30,8 @@ export class MyTeamPage {
     this.id = this.navParams.get('id');
     this.service.increasePopularity(this.id);
     this.service.getTeamAsync(this.id);
-    this.currTeamStat = this.team.last_15;
-    //
+    if ('last_15' in this.team)
+      this.currTeamStat = this.team.last_15;
   }
 
   addEventListeners() {
@@ -113,7 +113,7 @@ export class MyTeamPage {
         break;
     }
     console.log(this.currTeamStat);
-    
+
     this.setSuccessRate(Math.round(this.currTeamStat.rate * 100));
   }
 
@@ -156,4 +156,35 @@ export class MyTeamPage {
     return len;
   }
 
+  getCircleBkColor(result) {
+    let style: any = {};
+    switch (result) {
+      case 'W':
+        style.background = '#00ff00';
+        break;
+      case 'L':
+        style.background = '#8c8c8c';
+        break;
+      default:
+        style.background = '#01c5ff';
+        break;
+    }
+    return style;
+  }
+
+  getCircleTextColor(result) {
+    let style: any = {};
+    switch (result) {
+      case 'W':
+        style.color = '#00ff00';
+        break;
+      case 'L':
+        style.color = '#8c8c8c';
+        break;
+      default:
+        style.color = '#01c5ff';
+        break;
+    }
+    return style;
+  }
 }

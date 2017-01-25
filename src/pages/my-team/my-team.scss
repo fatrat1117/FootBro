@@ -271,7 +271,7 @@ page-my-team {
     //最近5场比赛胜负结果
     .nearest-5-game-result-content {
       margin: 0px;
-      padding: 20px 0px;
+      padding: 10px 0px;
       background: #24252a;
       //每场比赛样式
       .nearest-5-game-result-content-item {
@@ -280,10 +280,10 @@ page-my-team {
         background: #24252a;
         //背景圆
         .nearest-5-game-background {
-          width: 60px;
-          height: 60px;
+          width: 54px;
+          height: 54px;
           border-radius: 50%;
-          margin: 0px auto;
+          margin: 3px auto;
           background: #00ff00;
         }
         //遮盖圆
@@ -297,7 +297,7 @@ page-my-team {
         //胜负平结果
         .nearest-5-game-result {
           text-align: center;
-          margin: 10px auto;
+          margin: 12px auto;
           font-size: 2.5rem;
           font-weight: 600;
         }
