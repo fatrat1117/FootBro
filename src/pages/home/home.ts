@@ -1,10 +1,10 @@
 import {Component,ElementRef} from '@angular/core';
 import {NavController, ModalController, NavParams, ViewController, Platform} from 'ionic-angular';
-
 import {Localization} from '../../providers/localization';
 import {CheeringTeamPage} from '../cheering-team/cheering-team';
 import {GameSchedulePage} from "../game-schedule/game-schedule";
 import {ModalContentPage} from "../home/place-selection";
+import {GameRatingPage} from "../game-rating/game-rating";
 
 declare var jQuery:any;
 
@@ -47,7 +47,8 @@ export class HomePage {
   }
 
   goLeaguePage() {
-    return;
+    this.modalCtrl.create(GameRatingPage).present();
+   // this.navCtrl.push(GameRatingPage);
   }
 
   enterStandings() {

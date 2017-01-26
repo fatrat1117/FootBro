@@ -47,7 +47,7 @@ import { SbLoadingComponent } from './common/loading.component';
 import { SbModalNavbarComponent } from './common/modal.navbar.component';
 import { SbMatchBasicComponent } from './matches/match-basic.component';
 import { MatchDetailPage } from "../pages/match-detail/match-detail";
-
+import {GameRatingPage} from "../pages/game-rating/game-rating";
 
 export const firebaseConfig = {
     apiKey: "AIzaSyCrhL6g6rHs7-X09jw5Oq8I_g0fspD8bf8",
@@ -87,6 +87,7 @@ export const firebaseConfig = {
     GameSchedulePage,
     NewGamePage,
     ModalContentPage,
+    GameRatingPage,
     // pipes
     TransPipe,
     StringToDatePipe,
@@ -138,6 +139,7 @@ export const firebaseConfig = {
     GameSchedulePage,
     NewGamePage,
     ModalContentPage,
+    GameRatingPage
   ],
   providers: [ { provide: ErrorHandler, useClass: IonicErrorHandler },
   FirebaseManager,

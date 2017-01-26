@@ -1,0 +1,216 @@
+page-game-rating{
+  ion-content {
+    //数据显示区域
+    .content-list {
+      margin: 0px;
+      background: #40444d;
+      text-align: center;
+      //居中对战时间按钮
+      .content-center-button {
+        mrgin: 0px 0px 10px 0px;
+        height: 30px;
+        border-radius: 15px;
+        background-color: #2e3138;
+        text-align: center;
+      }
+      //对战信息
+      .fight-team-info {
+        background-color: #40444d;
+        padding: 0px;
+        margin: 10px 0px 0px 0px;
+        width: 100%;
+        //左边战队信息
+        .fight-team-info-left {
+          text-align: center;
+          padding: 0px;
+          margin: 0px;
+          //左战队头像
+          .team-left-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 5%;
+          }
+          //左战队名称
+          .team-left-text {
+            color: white;
+            font-size: 1.0rem;
+            margin-top: 10px;
+          }
+        }
+        //比分部分
+        .fight-score {
+          text-align: center;
+          padding-top: 20px;
+          //左队得分
+          .left-number {
+            margin: 0px;
+            padding: 0px;
+            position: relative;
+            .back-top {
+              position: absolute;
+              background: white;
+              width: 100%;
+              height: 20px;
+              margin: 0px;
+              padding: 0px;
+            }
+            .back-bottom {
+              position: absolute;
+              background: #e5e5e5;
+              width: 100%;
+              height: 20px;
+              margin-top: 20px;
+            }
+            .top-score {
+              position: absolute;
+              font-size: 3.0rem;
+              color: #686868;
+              text-align: center;
+              width: 100%;
+            }
+          }
+          //比：
+          .center-compare {
+            font-size: 3rem;
+            color: white;
+            text-align: center;
+          }
+          //右队得分
+          .right-number {
+            margin: 0px;
+            padding: 0px;
+            text-align: center;
+            position: relative;
+            .back-top {
+              position: absolute;
+              background: white;
+              width: 100%;
+              height: 20px;
+              margin: 0px;
+              padding: 0px;
+            }
+            .back-bottom {
+              position: absolute;
+              background: #e5e5e5;
+              width: 100%;
+              height: 20px;
+              margin-top: 20px;
+            }
+            .top-score {
+              position: absolute;
+              font-size: 3.0rem;
+              color: #686868;
+              text-align: center;
+              width: 100%;
+            }
+          }
+        }
+        //右边战队信息
+        .fight-team-info-right {
+          text-align: center;
+          padding: 0px;
+          margin: 0px;
+          //右边战队信息
+          .team-right-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 5%;
+          }
+          //右战队名称
+          .team-right-text {
+            color: white;
+            font-size: 1.0rem;
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+    //刚结束一场比赛，请对你的队友进行评分
+    .tip-string{
+      background-color: #151515;
+      margin:0px;
+      color:#adadad;
+      height:40px;
+      font-size:1.2rem;
+    }
+    //球员列表 开始评分
+    .list-start-evalute{
+      margin: 0px;
+      background-color: #333333;
+      .item-evalute{
+        background-color:#2a2b30;
+        margin:0px 0px 1px 0px;
+        .img-evalute{
+          width:50px;
+          height:50px;
+        }
+        //球员姓名
+        .member-name{
+          margin: -10px 0px 0px 0px;
+          padding:0px;
+          font-size:1.2rem;
+        }
+        //评价星星背景
+        .star-touch-back{
+          position:relative;
+          height:20px;
+          padding:0px 20px 0px 0px;
+          //星星下面div属性
+          .star-back{
+            float:left;
+            width:20px;
+            height:20px;
+            margin: 0px;
+            padding:0px;
+            //星星按钮属性
+            .star-button{
+              width:20px;
+              height:20px;
+              margin: 0px;
+            }
+          }
+        }
+        //点击事件处理div 背景
+        .touch-back{
+          float:left;
+          margin-left: -100px;
+          //半按钮背景
+          .half-button-back{
+            float:left;
+            margin: 0px;
+            padding: 0px;
+            //半按钮
+            .half-button{
+              width:10px;
+              height:20px;
+              margin:0px;
+              padding: 0px;
+            }
+          }
+        }
+        //评价字符串
+        .evalute-string{
+          margin-top: 30px;
+          font-size:1.2rem;
+        }
+      }
+    }
+    //取消 & 确定
+    .row-back{
+      background-color:#171717;
+      margin-top:-1px;
+      //取消按钮
+      .cancel-button{
+        background-color: #40444d;
+        color:#ffffff;
+        font-size: 1.2rem;
+      }
+      //确定按钮
+      .ensure-button{
+        background-color: #20bd16;
+        color:#ffffff;
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
