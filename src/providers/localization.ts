@@ -188,7 +188,12 @@ export class Localization {
             Welcometobrotherhood: 'Welcome to brotherhood',
             Numberexists: 'Number exists',
             ViewMore: 'View More',
-            Recent5Matches: 'Recent 5 Matches'
+            Recent5Matches: 'Recent 5 Matches',
+            YearBuilt: 'Year Built',
+            AvgAge: 'Avg. Age',
+            WholeSeasonRecord: 'Whole Season Record',
+            GF: 'GF',
+            GA: 'GA',
         },
 
         zh: {
@@ -358,7 +363,12 @@ export class Localization {
             Welcometobrotherhood: '欢迎来到兄弟会',
             Numberexists: '号码已经有人使用了',
             ViewMore: '查看更多',
-            Recent5Matches: '最近5场比赛战绩'
+            Recent5Matches: '最近5场比赛战绩',
+            YearBuilt: '成立 ',
+            AvgAge: '成立时间',
+            WholeSeasonRecord: '赛季数据',
+            GF: 'GF',
+            GA: 'GA',
         }
     }
 }

@@ -24,6 +24,13 @@ export class FirebaseManager {
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,
     private platform: Platform) {
+    document.addEventListener('playernotregistered', e => {
+      let id = e['detail'];
+      if (id === this.auth.uid) {
+
+      }
+    });
+
   }
 
   initialize() {
@@ -32,16 +39,8 @@ export class FirebaseManager {
       this.auth = auth;
       if (auth) {
         //save push id for real device
-        if (!(this.platform.is('mobileweb') ||
-          this.platform.is('core'))) {
-          /*
-          window["plugins"].OneSignal.getIds(ids => {
-            console.log('push ids', ids);
-            this.getPlayerDetail(auth.uid).update({ pushId: ids.userId });
-            this.pushIdsMap[auth.uid] = ids.userId;
-          });
-          */
-        }
+        this.getPlayerAsync(auth.uid);
+        this.updatePushId();
         this.FireCustomEvent('userlogin', auth);
       } else {
         this.FireEvent('userlogout');
@@ -49,10 +48,7 @@ export class FirebaseManager {
     }
     );
   }
-
   
-
-
 
   popupLoginPage() {
     console.log('popupLoginPage');
@@ -251,6 +247,17 @@ export class FirebaseManager {
 
 
   /****************************** Players ******************************/
+    updatePushId() {
+    if (!(this.platform.is('mobileweb') ||
+      this.platform.is('core'))) {
+      OneSignal.getIds().then(ids => {
+        console.log('push ids', ids);
+        this.getPlayerDetail(this.auth.uid).update({ pushId: ids.userId });
+        this.pushIdsMap[this.auth.uid] = ids.userId;
+      });
+    }
+  }
+  
   increasePlayerPopularity(id) {
     let publicData = this.sortedPublicPlayersMap[id];
     if (publicData) {
@@ -286,10 +293,14 @@ export class FirebaseManager {
     }
     else {
       this.af.database.object(`/players/${id}`).subscribe(snapshot => {
-        if ('img/none.png' === snapshot['basic-info'].photoURL)
+        if (snapshot && snapshot['basic-info']) {
+          if ('img/none.png' === snapshot['basic-info'].photoURL)
             snapshot['basic-info'].photoURL = 'assets/img/none.png';
-        this.cachedPlayersMap[id] = snapshot;
-        this.FireCustomEvent('playerdataready', id);
+          this.cachedPlayersMap[id] = snapshot;
+          this.FireCustomEvent('playerdataready', id);
+        }
+        else
+          this.FireCustomEvent('playernotregistered', id);
       });
     }
   }
@@ -322,7 +333,7 @@ export class FirebaseManager {
     let ref = firebase.database().ref(this.publicPlayersRef());
     this.queryPlayers = ref.orderByChild(orderby).limitToLast(count);
     let self = this;
-    
+
     this.queryPlayers.on("child_changed", function (snapshot) {
       let val = snapshot.val();
       val['$key'] = snapshot.key;
@@ -356,7 +367,7 @@ export class FirebaseManager {
 
 
   /****************************** Misc ******************************/
-  postNotification(senderId:string, targetId: string) {
+  postNotification(senderId: string, targetId: string) {
     let notificationObj = {
       app_id: "f6268d9c-3503-4696-8e4e-a6cf2c028fc6",
       contents: "user name",

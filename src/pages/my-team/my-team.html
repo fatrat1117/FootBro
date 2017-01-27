@@ -15,7 +15,7 @@
     <img [src]="team.logo" class="thumbnail-img"/>
     <h6 class="team-name default-font-size-h6">{{team.name}}</h6>
     <!--<p class="team-place default-font-size-p">阿根廷&nbsp;|&nbsp;纪念碑球场</p>-->
-
+    <p class="team-place default-font-size-p">&nbsp;|&nbsp;</p>
     <div class="team-right-item">
       <p class="team-right-item-text">{{team.popularity}}</p>
       <div class="team-right-item-bottom">
@@ -33,16 +33,16 @@
     </div>
 
     <ion-row>
-      <ion-col class="default-font-color default-font-size-col">成立时间</ion-col>
-      <ion-col class="default-font-color default-font-size-col">平均年龄</ion-col>
-      <ion-col class="default-font-color default-font-size-col">年龄跨度</ion-col>
-      <ion-col class="default-font-color default-font-size-col">队服颜色</ion-col>
+      <ion-col class="default-font-color default-font-size-col">{{'YearBuilt' | trans | uppercase}}</ion-col>
+      <!--<ion-col class="default-font-color default-font-size-col">平均年龄</ion-col>-->
+      <!--<ion-col class="default-font-color default-font-size-col">年龄跨度</ion-col>
+      <ion-col class="default-font-color default-font-size-col">队服颜色</ion-col>-->
     </ion-row>
     <ion-row>
       <ion-col class="white default-font-size-col">1893</ion-col>
-      <ion-col class="white default-font-size-col">27</ion-col>
+      <!--<ion-col class="white default-font-size-col">27</ion-col>
       <ion-col class="white default-font-size-col">6</ion-col>
-      <ion-col class="white default-font-size-col">蓝</ion-col>
+      <ion-col class="white default-font-size-col">蓝</ion-col>-->
     </ion-row>
   </div>
 
@@ -81,18 +81,18 @@
 
   <ion-list class="no-margin">
     <ion-item class="subtitle">
-      <button ion-button item-left clear class="subtitle-text">赛季数据</button>
+      <button ion-button item-left clear class="subtitle-text">{{'WholeSeasonRecord' | trans}}</button>
     </ion-item>
   </ion-list>
 
   <ion-row class="team-info-title">
-    <ion-col class="team-info-title-setting">年份</ion-col>
-    <ion-col class="team-info-title-setting">总进球</ion-col>
-    <ion-col class="team-info-title-setting">总失球</ion-col>
-    <ion-col class="team-info-title-setting">参赛</ion-col>
-    <ion-col class="team-info-title-setting">胜利</ion-col>
-    <ion-col class="team-info-title-setting">平局</ion-col>
-    <ion-col class="team-info-title-setting">失败</ion-col>
+    <ion-col class="team-info-title-setting">{{'Year' | trans}}</ion-col>
+    <ion-col class="team-info-title-setting">{{'Played' | trans}}</ion-col>
+    <ion-col class="team-info-title-setting">{{'W' | trans}}</ion-col>
+    <ion-col class="team-info-title-setting">{{'D' | trans}}</ion-col>
+    <ion-col class="team-info-title-setting">{{'L' | trans}}</ion-col>
+    <ion-col class="team-info-title-setting">{{'GF' | trans}}</ion-col>
+    <ion-col class="team-info-title-setting">{{'GA' | trans}}</ion-col>
   </ion-row>
 
   <ion-row class="team-info-content">
