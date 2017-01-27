@@ -5,7 +5,7 @@
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center class="default-font-size">
+    <ion-title text-center class="default-font-size" >
       评价
     </ion-title>
 
@@ -66,11 +66,11 @@
     <ion-item *ngFor="let member of memberlist" class="item-evalute">
       <img src="assets/img/icon1.jpg" class="img-evalute" item-left>
       <div>
-        <button ion-button clear class="member-name" color="light">{{member.name}}</button>
+        <button ion-button clear class="member-name">{{member.name}}</button>
         <div class="star-touch-back">
           <div class="star-back" *ngFor="let item of member.starArray">
-            <button ion-button class="star-button" icon-only clear>
-              <ion-icon name="{{item.src}}"></ion-icon>
+            <button ion-button class="star-button" icon-only clear color="secondary">
+              <ion-icon name="{{item.src}}" style="color: #ffdc00;"></ion-icon>
             </button>
           </div>
 

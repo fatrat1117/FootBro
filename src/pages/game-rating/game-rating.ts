@@ -2,8 +2,7 @@
  * Created by Administrator on 2017/1/23.
  */
 import {NavController} from "ionic-angular";
-import {Component} from "@angular/core";
-
+import {Component, NgModule} from "@angular/core";
 @Component({
   selector: 'page-game-rating',
   templateUrl: 'game-rating.html'
@@ -16,7 +15,7 @@ export class GameRatingPage {
 
     for (var i = 0; i < 5; i++) {
       this.memberlist[i] = {
-        name: "球员" + i,
+        name: "梅西" + i,
         star: 5 - 0.5 * (i + 1),
         evaluteString: i,
         evaluteColor:"#00ff00",
@@ -72,8 +71,14 @@ export class GameRatingPage {
     } else if (member.star >= 3) {
       member.evaluteString= "一般";
       member.evaluteColor="primary";
-    } else {
+    } else if (member.star >= 2.5){
       member.evaluteString= "差";
+      member.evaluteColor="light";
+    }else if (member.star >= 2){
+      member.evaluteString= "很差";
+      member.evaluteColor="light";
+    }else{
+      member.evaluteString= "非常差";
       member.evaluteColor="light";
     }
   }
