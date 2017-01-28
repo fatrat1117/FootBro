@@ -76,7 +76,7 @@ export class MePage {
   }
 
   goTeamPage() {
-    this.navCtrl.push(MyTeamPage);
+    this.navCtrl.push(MyTeamPage, {id: this.player.teamId});
   }
 
   goMessagesPage() {

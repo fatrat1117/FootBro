@@ -35,7 +35,7 @@ export class MyTeamPage {
   }
 
   addEventListeners() {
-    document.addEventListener('servicemyteamdataready', e => {
+    document.addEventListener('serviceteamdataready', e => {
       //console.log(e);
       let teamId = e['detail'];
       //console.log(teamId, this.id);
