@@ -68,4 +68,8 @@ export class TeamService {
   increasePopularity(id) {
     this.fm.increaseTeamPopularity(id);
   }
+
+  createTeam(teamObj) {
+    this.fm.createTeam(teamObj);
+  }
 }

@@ -13,21 +13,21 @@
 <ion-content>
   <ion-item-group>
     <!-- Me -->
-    <!--<ion-item (click)="popupGuide()" detail-push>-->
-      <!--<ion-icon item-left primary name="cog"></ion-icon>-->
-      <!--{{'Guide' | trans}}-->
-    <!--</ion-item>-->
+    <ion-item (click)="popupGuide()" detail-push>
+      <ion-icon item-left primary name="cog"></ion-icon>
+      {{'Guide' | trans}}
+    </ion-item>
     <ion-item (click)="goEditPlayerPage()" detail-push>
       <ion-thumbnail item-left>
         <img [src]="player?.photo">
       </ion-thumbnail>
       <h2>{{ player?.name }}</h2>
     </ion-item>
-    <ion-item (click)="goSwitchTeamPage()" *ngIf="(playerBasic)?.teamId" detail-push>
+    <ion-item (click)="goSwitchTeamPage()" *ngIf="(player)?.teamId" detail-push>
       <ion-thumbnail item-left>
-        <img [src]="(teamBasic)?.logo">
+        <img [src]="(team)?.logo">
       </ion-thumbnail>
-      <h2>{{ teamBasic?.name }}</h2>
+      <h2>{{ team?.name }}</h2>
     </ion-item>
 
     <!-- show pages -->
@@ -36,11 +36,11 @@
       <ion-icon name="md-aperture" item-left color="gGreen"></ion-icon>
       {{'MyPage' | trans}}
     </ion-item>
-    <ion-item tappable *ngIf="!playerBasic?.teamId">
+    <ion-item tappable *ngIf="!player?.teamId" (click) = "createTeam()">
       <ion-icon name="md-people" item-left color="gBlue"></ion-icon>
       {{'CreateTeam' | trans}}
     </ion-item>
-    <ion-item tappable *ngIf="(playerBasic)?.teamId" detail-push (click)="goTeamPage()">
+    <ion-item tappable *ngIf="(player)?.teamId" detail-push (click)="goTeamPage()">
       <ion-icon name="md-people" item-left color="gBlue"></ion-icon>
       {{'MyTeam' | trans}}
     </ion-item>

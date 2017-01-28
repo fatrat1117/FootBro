@@ -12,11 +12,12 @@ import { MessagesPage } from "../messages/messages";
 import { PlayerService } from '../../app/players/player.service'
 import { TeamService } from '../../app/teams/team.service'
 import { MessageService } from '../../app/messages/shared/message.service'
+import {CreateTeamPage} from '../create-team/create-team'
 
 @Component({
   selector: 'page-me',
   templateUrl: 'me.html',
-  providers: [ MessageService ]
+  providers: [ MessageService],
 })
 export class MePage {
   selfId: string
@@ -74,6 +75,10 @@ export class MePage {
 
   goMessagesPage() {
     this.navCtrl.push(MessagesPage);
+  }
+
+  createTeam() {
+    this.modalCtrl.create(CreateTeamPage).present();
   }
 
   onLogout() {

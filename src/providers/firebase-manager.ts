@@ -26,20 +26,18 @@ export class FirebaseManager {
     private platform: Platform) {
     document.addEventListener('playernotregistered', e => {
       let id = e['detail'];
-      if (id === this.auth.uid) {
-
+      if (this.auth && id === this.auth.uid) {
+        this.registerPlayer();
       }
     });
-
   }
 
   initialize() {
     this.af.auth.subscribe(auth => {
-      console.log('firebase auth', auth);
       this.auth = auth;
       if (auth) {
-        //save push id for real device
         this.getPlayerAsync(auth.uid);
+        //save push id for real device
         this.updatePushId();
         this.FireCustomEvent('userlogin', auth);
       } else {
@@ -48,7 +46,7 @@ export class FirebaseManager {
     }
     );
   }
-  
+
 
   popupLoginPage() {
     console.log('popupLoginPage');
@@ -135,7 +133,30 @@ export class FirebaseManager {
 
 
 
+
   /****************************** Teams ******************************/
+  //ref
+  publicTeamsRef() {
+    return '/public/teams';
+  }
+
+  publicTeamRef(id) {
+    return `public/teams/${id}`;
+  }
+
+  teamPlayerRef(pId, tId) {
+    return "/teams/" + tId + '/players/' + pId;
+  }
+
+  playerTeamRef(pId, tId) {
+    return "/players/" + pId + "/teams" + '/' + tId;
+  }
+
+  //af   
+  afTeamBasic(teamId: string) {
+    return this.af.database.object(`/teams/${teamId}/basic-info`);
+  }
+
   getTeamPublic(id) {
     return this.sortedPublicTeamsMap[id];
   }
@@ -242,12 +263,113 @@ export class FirebaseManager {
     //}, 1000);
   }
 
+  createTeam(teamObj) {
+    let self = this;
+    console.log("createTeam", teamObj);
+    const queryObservable = this.af.database.list(this.publicTeamsRef(), {
+      query: {
+        orderByChild: 'name',
+        equalTo: teamObj.name
+      }
+    });
 
+    let subscription = queryObservable.subscribe(queriedItems => {
+      //console.log("check team name", queriedItems);
+      //stopping monitoring changes
+      subscription.unsubscribe();
+      if (0 === queriedItems.length) {
+        let teamData = {
+          location: teamObj.location,
+          "basic-info":
+          {
+            name: teamObj.name,
+            captain: this.auth.uid,
+            logo: 'assets/img/none.png',
+            totalMatches: 0,
+            totalPlayers: 0
+          },
+          "detail-info": {
+            founder: this.auth.uid
+          }
+        };
 
+        this.af.database.list('/teams').push(teamData).then(newTeam => {
+          console.log('create team success', newTeam);
+          let newTeamId = newTeam["key"];
+          //joinTeam
+          this.joinTeam(newTeamId);
+          //update public
+          this.af.database.object(this.publicTeamRef(newTeamId)).update(
+            {
+              name: teamObj.name,
+              popularity: 1
+            });
+            this.FireCustomEvent('createteamsucceeded', newTeamId);
+          //success();
+        });//.catch(err => error(err));
+      } else {
+        this.FireCustomEvent('createteamfailed', 'Teamexists');
+        //error(this.loc.getString("Teamexists"));
+      }
+    });
+  }
 
+  joinTeam(id) {
+    this.af.database.object(this.teamPlayerRef(this.selfId(), id)).set(true);
+    this.af.database.object(this.playerTeamRef(this.selfId(), id)).set({ isMember: true });
+    let player = this.cachedPlayersMap[this.auth.uid];
+    //set default team if no team
+    if (!this.selfTeamId())
+      this.afPlayerBasic(this.selfId()).update({ teamId: id });
+
+    let afTeamBasic = this.afTeamBasic(id);
+    let sub = afTeamBasic.subscribe(snapshot => {
+      setTimeout(() => {
+        sub.unsubscribe();
+        //increase total by 1
+        //trade-off: performance is better than updateTotalPlayers but might have bug when 2 players join at same time
+        afTeamBasic.update({ totalPlayers: snapshot.totalPlayers + 1 });
+      },
+        250);
+    });
+  }
 
   /****************************** Players ******************************/
-    updatePushId() {
+  publicPlayersRef() {
+    return '/public/players/';
+  }
+
+  playerRef(id) {
+    return `/players/${id}`;
+  }
+
+  playerBasicRef(id) {
+    return `/players/${id}/basic-info`;
+  }
+
+  playerPublicRef(id) {
+    return `public/players/${id}`;
+  }
+
+  //af
+  afPlayerBasic(id) {
+    return this.af.database.object(this.playerBasicRef(id));
+  }
+
+  selfId() {
+    if (this.auth)
+      return this.auth.uid;
+    return null;
+  }
+
+  selfTeamId() {
+    let player = this.cachedPlayersMap[this.selfId()];
+    if (player && player['basic-info'])
+      return player['basic-info'].teamId;
+    return null;
+  }
+
+  updatePushId() {
     if (!(this.platform.is('mobileweb') ||
       this.platform.is('core'))) {
       OneSignal.getIds().then(ids => {
@@ -257,7 +379,7 @@ export class FirebaseManager {
       });
     }
   }
-  
+
   increasePlayerPopularity(id) {
     let publicData = this.sortedPublicPlayersMap[id];
     if (publicData) {
@@ -270,10 +392,6 @@ export class FirebaseManager {
 
   getPlayerPublic(id) {
     return this.sortedPublicPlayersMap[id];
-  }
-
-  publicPlayersRef() {
-    return '/public/players/';
   }
 
   getPlayerPublicAsync(id) {
@@ -349,7 +467,7 @@ export class FirebaseManager {
   }
 
   FireCustomEvent(name, data) {
-    console.log(name);
+    console.log(name, data);
     var event = new CustomEvent(name, { detail: data });
     document.dispatchEvent(event);
   }
@@ -362,9 +480,23 @@ export class FirebaseManager {
     this.af.database.object(`players/${this.auth.uid}/detail-info/${property}`).set(value);
   }
 
-
-
-
+  registerPlayer() {
+    console.log("first time login");
+    let user = this.auth.auth;
+    let photoURL = user.photoURL || 'assets/img/none.png';
+    let providerData = user.providerData[0]
+    if (providerData.providerId.toLowerCase().indexOf('facebook') != -1) {
+      photoURL = 'https://graph.facebook.com/' + providerData.uid + '/picture';
+    }
+    //todo
+    this.afPlayerBasic(this.auth.uid).update({
+      photoURL: photoURL,
+      displayName: user.displayName || user.email,
+      created: true
+    });
+    //update player public
+    this.af.database.object(this.playerPublicRef(this.auth.uid)).update({ popularity: 1 });
+  }
 
   /****************************** Misc ******************************/
   postNotification(senderId: string, targetId: string) {
@@ -401,10 +533,6 @@ export class FirebaseManager {
 //   }
 
 //   /********** All Players Operations ***********/
-//   getPlayerBasic(playerId: string) {
-//     return this.af.database.object(`/players/${playerId}/basic-info`);
-//   }
-
 //   getPlayerDetail(playerId: string) {
 //     return this.af.database.object(`/players/${playerId}/detail-info`);
 //   }
@@ -550,92 +678,12 @@ export class FirebaseManager {
 //     return this.af.database.object(this.getRefTeam_Player(pId, tId));
 //   }
 
-//   getRefPlayer_Team(pId, tId) {
-//     return "/teams/" + tId + '/players/' + pId;
-//   }
-
 //   getPlayerOfTeam(pId, tId) {
 //     return this.af.database.object(this.getRefPlayer_Team(pId, tId));
 //   }
 
-//   joinTeam(id) {
-//     this.getTeamOfPlayer(this.selfId, id).set(true);
-//     this.getPlayerOfTeam(this.selfId, id).set({ isMember: true });
-//     //set default team if no team
-//     if (!this.selfTeamId)
-//       this.getPlayerBasic(this.selfId).update({ teamId: id });
-
-//     let afTeamBasic = this.getTeamBasic(id);
-//     let sub = afTeamBasic.subscribe(snapshot => {
-//       setTimeout(() => {
-//         sub.unsubscribe();
-//         //increase total by 1
-//         //trade-off: performance is better than updateTotalPlayers but might have bug when 2 players join at same time
-//         afTeamBasic.update({ totalPlayers: snapshot.totalPlayers + 1 });
-//       },
-//         250);
-//     });
-//   }
-
-// createTeam(teamObj, success, error) {
-//     let self = this;
-//     console.log("createTeam", teamObj);
-//     const queryObservable = this.af.database.list('/public/teams', {
-//       query: {
-//         orderByChild: 'name',
-//         equalTo: teamObj.name
-//       }
-//     });
-
-//     let subscription = queryObservable.subscribe(queriedItems => {
-//       console.log("check team name", queriedItems);
-//       //stopping monitoring changes
-//       subscription.unsubscribe();
-//       if (0 === queriedItems.length) {
-//         let teamData = {
-//           "basic-info":
-//           {
-//             name: teamObj.name,
-//             captain: this.selfId,
-//             logo: 'img/none.png',
-//             totalMatches: 0,
-//             totalPlayers: 0
-//           },
-//           "detail-info": {
-//             founder: this.selfId,
-//             location: teamObj.location
-//           }
-//         };
-
-//         this.getAllTeams().push(teamData).then(newTeam => {
-//           console.log('create team success', newTeam);
-//           let newTeamId = newTeam["key"];
-//           //joinTeam
-//           this.joinTeam(newTeamId);
-//           //update default  
-//           // if (!this.selfTeamId) {
-//           //   this.getPlayerBasic(this.selfId).update({ teamId: newTeamId });
-//           // }
-//           //update public
-//           this.getTeamPublic(newTeamId).update(
-//             {
-//               name: teamObj.name,
-//               popularity: 1
-//             });
-//           success();
-//         }).catch(err => error(err));
-//       } else {
-//         error(this.loc.getString("Teamexists"));
-//       }
-//     });
-//   }
-
 //   getTeam(teamId: string) {
 //     return this.af.database.object(`/teams/${teamId}`);
-//   }
-
-//   getTeamBasic(teamId: string) {
-//     return this.af.database.object(`/teams/${teamId}/basic-info`);
 //   }
 
 //   getTeamDetail(teamId: string) {
@@ -789,13 +837,6 @@ export class FirebaseManager {
 
 
 //   /********** All Public Operations ***********/
-//   getPlayerPublic(playerId: string) {
-//     return this.af.database.object(`public/players/${playerId}`);
-//   }
-
-//   getTeamPublic(teamId: string) {
-//     return this.af.database.object(`public/teams/${teamId}`);
-//   }
 
 //   queryPublicPlayers(subject, limit) {
 //     return this.af.database.list(`/public/players/`, {

@@ -28,6 +28,7 @@ import { MyTeamPage } from "../pages/my-team/my-team";
 import { LoginPage } from '../pages/login/login';
 import {GameSchedulePage} from "../pages/game-schedule/game-schedule";
 import {NewGamePage} from "../pages/new-game/new-game";
+import {CreateTeamPage} from '../pages/create-team/create-team';
 
 // services
 import { AngularFireModule } from 'angularfire2';
@@ -88,6 +89,7 @@ export const firebaseConfig = {
     NewGamePage,
     ModalContentPage,
     GameRatingPage,
+    CreateTeamPage,
     // pipes
     TransPipe,
     StringToDatePipe,
@@ -139,7 +141,8 @@ export const firebaseConfig = {
     GameSchedulePage,
     NewGamePage,
     ModalContentPage,
-    GameRatingPage
+    GameRatingPage,
+    CreateTeamPage
   ],
   providers: [ { provide: ErrorHandler, useClass: IonicErrorHandler },
   FirebaseManager,
