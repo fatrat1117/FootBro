@@ -72,4 +72,8 @@ export class TeamService {
   createTeam(teamObj) {
     this.fm.createTeam(teamObj);
   }
+
+  selfTeamId() {
+    return this.fm.selfTeamId();
+  }
 }

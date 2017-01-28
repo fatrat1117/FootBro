@@ -21,7 +21,7 @@ export class EditPlayerPage {
   player : Player;
   isSavable: boolean;
   constructor(private modalCtrl: ModalController, private playerService: PlayerService) {
-    this.selfId = this.playerService.selfId;
+    this.selfId = this.playerService.selfId();
   }
 
   ionViewDidLoad() {

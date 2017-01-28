@@ -20,8 +20,8 @@ import {CreateTeamPage} from '../create-team/create-team'
   providers: [ MessageService],
 })
 export class MePage {
-  selfId: string
   player: Player;
+  team: Team;
   messageCount: number;
   constructor(private navCtrl: NavController, 
   private modalCtrl: ModalController, 
@@ -30,12 +30,11 @@ export class MePage {
   private teamService: TeamService,
   private af: AngularFire) {
     this.messageCount = 0;
-    this.selfId = this.playerService.selfId;
   }
 
   ionViewDidLoad() {
     this.addEventListeners();
-    this.playerService.getPlayerAsync(this.selfId);
+    this.playerService.getPlayerAsync(this.playerService.selfId());
 
     this.messageService.getAllUnreadMessages().subscribe(messages => {
       this.messageCount = messages.length;
@@ -46,10 +45,17 @@ export class MePage {
     document.addEventListener('serviceplayerdataready', e => {
       let playerId = e['detail'];
       //console.log(teamId, this.id);
-      if (playerId === this.selfId) {
+      if (playerId === this.playerService.selfId()) {
         this.player = this.playerService.getPlayer(playerId);
+        if (this.player.teamId) 
+          this.teamService.getTeamAsync(this.player.teamId);
         //console.log(this.team);
       }
+    });
+
+    document.addEventListener('serviceteamdataready', e => {
+      let teamId = e['detail'];
+      this.team = this.teamService.getTeam(teamId);
     });
   }
 

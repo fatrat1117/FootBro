@@ -5,10 +5,8 @@ import { Player } from './player.model';
 @Injectable()
 export class PlayerService {
   playersMap = {};
-  selfId: string;
 
   constructor(private fm: FirebaseManager) {
-    this.selfId = fm.auth.uid;
     document.addEventListener('playerdataready', e => {
       let id = e['detail'];
       
@@ -18,6 +16,8 @@ export class PlayerService {
       player.id = playerData.$key;
       player.name = playerData['basic-info'].displayName;
       player.photo = playerData['basic-info'].photoURL;
+      player.teamId = playerData['basic-info'].teamId;
+      
       if (playerData['detail-info'] && 'position' in playerData['detail-info'])
         player.position = playerData['detail-info'].position;
       if (playerData['detail-info'] && 'pushId' in playerData['detail-info'])
@@ -69,5 +69,9 @@ export class PlayerService {
 
   increasePopularity(id) {
     this.fm.increasePlayerPopularity(id);
+  }
+
+  selfId() {
+    return this.fm.selfId();
   }
 }
