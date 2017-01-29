@@ -68,7 +68,7 @@ export class MePage {
   }
 
   goPlayerPage() {
-    this.navCtrl.push(MyPlayerPage);
+    this.navCtrl.push(MyPlayerPage, {id: this.player.id});
   }
 
   goFeedbackPage() {

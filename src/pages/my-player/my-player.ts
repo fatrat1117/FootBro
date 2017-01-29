@@ -1,7 +1,9 @@
-import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
-import {PlayerService} from '../../app/players/player.service'
-import {Player} from '../../app/players/player.model'
+import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+import { PlayerService } from '../../app/players/player.service'
+import { Player } from '../../app/players/player.model'
+import { Screenshot } from 'ionic-native';
+declare var Wechat: any;
 
 @Component({
   selector: 'page-my-player',
@@ -11,20 +13,20 @@ export class MyPlayerPage {
   id;
   player = new Player();
   //af
-  NumOfLikes : number;
-  NumOfUnLikes : number;
-  PercentOfLikes : number;
-  PercentOfUnLikes : number;
+  NumOfLikes: number;
+  NumOfUnLikes: number;
+  PercentOfLikes: number;
+  PercentOfUnLikes: number;
 
   constructor(private nav: NavController,
-  private service : PlayerService,
-  private navParams: NavParams) {
+    private service: PlayerService,
+    private navParams: NavParams) {
     var fromDBLikes = 213;
     var fromDBUnLikes = 67;
     this.NumOfLikes = fromDBLikes;
     this.NumOfUnLikes = fromDBUnLikes;
-    this.PercentOfLikes = fromDBLikes/(fromDBLikes+fromDBUnLikes) * 100;
-    this.PercentOfUnLikes = fromDBUnLikes/ (fromDBLikes+fromDBUnLikes) * 100;
+    this.PercentOfLikes = fromDBLikes / (fromDBLikes + fromDBUnLikes) * 100;
+    this.PercentOfUnLikes = fromDBUnLikes / (fromDBLikes + fromDBUnLikes) * 100;
   }
 
   ionViewDidLoad() {
@@ -37,5 +39,64 @@ export class MyPlayerPage {
     this.id = this.navParams.get('id');
     this.service.getPlayerAsync(this.id);
     this.service.increasePopularity(this.id);
+  }
+
+  sharePhoto(picAddress) {
+    if (typeof Wechat === "undefined") {
+      alert("Wechat plugin is not installed.");
+      return false;
+    }
+    var params = {
+      scene: 1//0：对话 1：朋友圈
+    };
+    params['message'] = {
+      title: "绿荫兄弟-图片分享",
+      description: "这是图片描述",
+      mediaTagName: "媒体标签",
+      messageExt: "消息字段",
+      messageAction: "<action>dotalist</action>",//消息行为
+      media: {}//媒体内容
+    };
+    params['message'].media.type = Wechat.Type.IMAGE;//媒体类型
+    params['message'].media.image = picAddress;//图片文件地址
+    console.log(Wechat, params);
+
+
+    Wechat.share({
+      text: "This is just a plain string",
+      scene: Wechat.Scene.TIMELINE   // share to Timeline
+    }, function () {
+      alert("Success");
+    }, function (reason) {
+      alert("Failed: " + reason);
+    });
+
+    // //开始分享
+    // Wechat.share(params, function () {
+    //   alert("Share Success");
+    // }, function (reason) {
+    //   alert("Share Failed: " + reason);
+    // });
+  }
+
+
+  share() {
+    Screenshot.save('jpg', 80, 'myscreenshot').then((res) => {
+      console.log(res);
+      this.sharePhoto(res.filePath);
+    },
+      () => {
+        alert('Screenshot failed');
+      });
+    // Screenshot.save(function (error, res) {
+    //   if (error) {
+    //     console.error(error);
+    //   } else {
+    //     console.log('ok', res.filePath); //should be path/to/myScreenshot.jpg
+    //     imageLink = res.filePath;
+    //     //调用微信插件开始分享
+    //     sharePhoto(imageLink);//todo 需要测试iOS地址是否需要加前缀 我没iOS手机 无法测试
+    //   }
+    // }, 'jpg', 50, 'myScreenShot');
   }
 }
