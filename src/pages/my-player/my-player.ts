@@ -59,26 +59,15 @@ export class MyPlayerPage {
     };
     params['message'].media.type = Wechat.Type.IMAGE;//媒体类型
     params['message'].media.image = picAddress;//图片文件地址
-    console.log(Wechat, params);
-
-
-    Wechat.share({
-      text: "This is just a plain string",
-      scene: Wechat.Scene.TIMELINE   // share to Timeline
-    }, function () {
-      alert("Success");
-    }, function (reason) {
-      alert("Failed: " + reason);
-    });
+    //console.log(Wechat, params);
 
     // //开始分享
-    // Wechat.share(params, function () {
-    //   alert("Share Success");
-    // }, function (reason) {
-    //   alert("Share Failed: " + reason);
-    // });
+    Wechat.share(params, function () {
+      alert("Share Success");
+    }, function (reason) {
+      alert("Share Failed: " + reason);
+    });
   }
-
 
   share() {
     Screenshot.save('jpg', 80, 'myscreenshot').then((res) => {
