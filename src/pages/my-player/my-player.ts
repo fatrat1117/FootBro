@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { PlayerService } from '../../app/players/player.service'
 import { Player } from '../../app/players/player.model'
-import { Screenshot } from 'ionic-native';
+import { Screenshot, SocialSharing} from 'ionic-native';
 declare var Wechat: any;
 
 @Component({
@@ -77,15 +77,21 @@ export class MyPlayerPage {
       () => {
         alert('Screenshot failed');
       });
-    // Screenshot.save(function (error, res) {
-    //   if (error) {
-    //     console.error(error);
-    //   } else {
-    //     console.log('ok', res.filePath); //should be path/to/myScreenshot.jpg
-    //     imageLink = res.filePath;
-    //     //调用微信插件开始分享
-    //     sharePhoto(imageLink);//todo 需要测试iOS地址是否需要加前缀 我没iOS手机 无法测试
-    //   }
-    // }, 'jpg', 50, 'myScreenShot');
   }
+
+  facebookShare() {
+      Screenshot.URI(80)
+        .then((res) => {
+            console.log(res);
+            SocialSharing.shareViaFacebook(null, res.URI, null)
+              .then(() => {},
+                err => {
+                  alert(err);
+                });
+          },
+          err => {
+            alert(err);
+          });
+  }
+ 
 }
