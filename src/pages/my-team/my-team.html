@@ -8,11 +8,11 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-  		  
-<ion-content class="content-background-page"  >
+
+<ion-content class="content-background-page">
 
   <div class="content-top">
-    <img [src]="team.logo" class="thumbnail-img"/>
+    <img [src]="team.logo" class="thumbnail-img" />
     <h6 class="team-name default-font-size-h6">{{team.name}}</h6>
     <!--<p class="team-place default-font-size-p">阿根廷&nbsp;|&nbsp;纪念碑球场</p>-->
     <p class="team-place default-font-size-p">&nbsp;|&nbsp;</p>
@@ -145,190 +145,196 @@
     </ion-row>
     <button ion-button clear icon-right class="team-see-more-members" (click)="seeMoreTeamMember()">
       <p class="team-see-more-member-text">查看所有队员(<a style="color: #00ff00;">{{team.totalPlayers}}</a>人)</p>
-      <ion-icon name="ios-arrow-forward"></ion-icon>
-    </button>
-  </div>
+<ion-icon name="ios-arrow-forward"></ion-icon>
+</button>
+</div>
 
-  <ion-list class="no-margin">
-    <ion-item class="subtitle">
-      <button ion-button item-left clear class="subtitle-text">对战记录</button>
-    </ion-item>
-  </ion-list>
-  <ion-row class="team-all-game">
-    <ion-col id="recent15" class="team-all-game-choose" (click)="setChoosePosition(0)">
-      <p id="btn-recent-15" class="recent-tab-button white">最近15场</p></ion-col>
-    <ion-col id="recent20" class="team-all-game-unchoose" (click)="setChoosePosition(1)">
-      <p id="btn-recent-20" class="recent-tab-button">最近20场</p></ion-col>
-    <ion-col id="all" class="team-all-game-unchoose" (click)="setChoosePosition(2)">
-      <p id="btn-all" class="recent-tab-button">全部</p></ion-col>
-  </ion-row>
-  <ion-row style="height: 2px;padding: 0px;">
-    <ion-col id="firstLine" class="yellow-line"></ion-col>
-    <ion-col id="secondLine" class="gray-line"></ion-col>
-    <ion-col id="thirdLine" class="gray-line"></ion-col>
+<ion-list class="no-margin">
+  <ion-item class="subtitle">
+    <button ion-button item-left clear class="subtitle-text">{{'Records' | trans}}</button>
+  </ion-item>
+</ion-list>
+<ion-row class="team-all-game">
+  <ion-col id="recent15" class="team-all-game-choose" (click)="setChoosePosition(0)">
+    <p id="btn-recent-15" class="recent-tab-button white">{{'Recent15matches' | trans}}</p>
+  </ion-col>
+  <ion-col id="recent20" class="team-all-game-unchoose" (click)="setChoosePosition(1)">
+    <p id="btn-recent-20" class="recent-tab-button">{{'Recent30matches' | trans}}</p>
+  </ion-col>
+  <ion-col id="all" class="team-all-game-unchoose" (click)="setChoosePosition(2)">
+    <p id="btn-all" class="recent-tab-button">{{'all' | trans}}</p>
+  </ion-col>
+</ion-row>
+<ion-row style="height: 2px;padding: 0px;">
+<ion-col id="firstLine" class="yellow-line"></ion-col>
+<ion-col id="secondLine" class="gray-line"></ion-col>
+<ion-col id="thirdLine" class="gray-line"></ion-col>
+</ion-row>
+
+<div class="team-success-fail-data">
+  <ion-row>
+    <ion-col class="col-30"></ion-col>
+    <ion-col class="col-40">
+    <round-progress [current]="currTeamStat?.rate * 100" [max]=100 [color]="'#'+'00ff00'" [background]="'#'+'a0a0a0'" [radius]="125" [stroke]="20" [semicircle]="false"
+      [rounded]="true" [clockwise]="false" [responsive]="true"></round-progress>
+      <!--<div text-center class="win-rate-text">{{currTeamStat?.rate * 100}}</div>-->
+    </ion-col>
+    <ion-col class="col-30"></ion-col>
   </ion-row>
 
-  <div class="team-success-fail-data">
-    <div class="team-success-fail-img">
-      <div class="team-success-fail-background"></div>
-      <div id="backCircle1" class="team-success-fail-picture-1"></div>
-      <div id="backCircle2" class="team-success-fail-picture-2"></div>
-      <div class="team-success-fail-top"></div>
-      <div class="team-success-fail-text">
-        <p class="text-up">胜率</p>
-        <p id="success-rate-text" class="text-down">0</p>
-      </div>
+  <ion-row>
+    <ion-col class="recent-game-result">{{currTeamStat?.total_matches}}</ion-col>
+    <ion-col class="recent-game-result">{{currTeamStat?.win}}</ion-col>
+    <ion-col class="recent-game-result">{{currTeamStat?.draw}}</ion-col>
+    <ion-col class="recent-game-result">{{currTeamStat?.lose}}</ion-col>
+    <ion-col class="recent-game-result">10</ion-col>
+    <ion-col class="recent-game-result">11</ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col class="recent-game-result-name">参赛</ion-col>
+    <ion-col class="recent-game-result-name">胜利</ion-col>
+    <ion-col class="recent-game-result-name">平局</ion-col>
+    <ion-col class="recent-game-result-name">失败</ion-col>
+    <ion-col class="recent-game-result-name">平均进球</ion-col>
+    <ion-col class="recent-game-result-name">平均失球</ion-col>
+  </ion-row>
+</div>
+
+
+<ion-list no-lines="true" class="game-data-assist">
+  <ion-item class="game-data-assist-item">
+    <div item-left class="goal-title">第一进球</div>
+    <div item-right>
+      <p class="goal-data">90%</p>
+      <p class="goal-data-detail">{{first.win}}胜{{first.win}}平{{first.win}}负</p>
     </div>
+  </ion-item>
+  <ion-item class="game-data-assist-item">
+    <div item-left class="goal-title">第一对手进球</div>
+    <div item-right>
+      <p class="goal-data">90%</p>
+      <p class="goal-data-detail">{{first.win}}胜{{first.win}}平{{first.win}}负</p>
+    </div>
+  </ion-item>
+  <ion-item class="game-data-assist-item">
+    <div item-left class="goal-title">进球最多的比赛</div>
+    <div item-right>
+      <p class="goal-data">90%</p>
+      <p class="goal-data-detail">{{first.win}}胜{{first.win}}平{{first.win}}负</p>
+    </div>
+  </ion-item>
+  <ion-item class="game-data-assist-item">
+    <div item-left class="goal-title">失球最多的比赛</div>
+    <div item-right>
+      <p class="goal-data">90%</p>
+      <p class="goal-data-detail">{{first.win}}胜{{first.win}}平{{first.win}}负</p>
+    </div>
+  </ion-item>
+  <ion-item class="game-data-assist-item">
+    <div item-left class="goal-title-2">最长的连续胜利</div>
+    <div item-right>
+      <p class="goal-data">90</p>
+    </div>
+  </ion-item>
+  <ion-item class="game-data-assist-item">
+    <div item-left class="goal-title-2">最长的连续失败</div>
+    <div item-right>
+      <p class="goal-data">90</p>
+    </div>
+  </ion-item>
+  <ion-item class="game-data-assist-item">
+    <div item-left class="goal-title-2">最长的连续不败</div>
+    <div item-right>
+      <p class="goal-data">90</p>
+    </div>
+  </ion-item>
+  <ion-item class="game-data-assist-item no-margin">
+    <div item-left class="goal-title-2 no-margin">最长的连续不失球</div>
+    <div item-right class="no-margin">
+      <p class="goal-data no-margin">90</p>
+    </div>
+  </ion-item>
+</ion-list>
 
-    <ion-row>
-      <ion-col class="recent-game-result">{{currTeamStat?.total_matches}}</ion-col>
-      <ion-col class="recent-game-result">{{currTeamStat?.win}}</ion-col>
-      <ion-col class="recent-game-result">{{currTeamStat?.draw}}</ion-col>
-      <ion-col class="recent-game-result">{{currTeamStat?.lose}}</ion-col>
-      <ion-col class="recent-game-result">10</ion-col>
-      <ion-col class="recent-game-result">11</ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col class="recent-game-result-name">参赛</ion-col>
-      <ion-col class="recent-game-result-name">胜利</ion-col>
-      <ion-col class="recent-game-result-name">平局</ion-col>
-      <ion-col class="recent-game-result-name">失败</ion-col>
-      <ion-col class="recent-game-result-name">平均进球</ion-col>
-      <ion-col class="recent-game-result-name">平均失球</ion-col>
-    </ion-row>
-  </div>
-
-
-  <ion-list no-lines="true" class="game-data-assist">
-    <ion-item class="game-data-assist-item">
-      <div item-left class="goal-title">第一进球</div>
-      <div item-right>
-        <p class="goal-data">90%</p>
-        <p class="goal-data-detail">{{first.win}}胜{{first.win}}平{{first.win}}负</p>
-      </div>
-    </ion-item>
-    <ion-item class="game-data-assist-item">
-      <div item-left class="goal-title">第一对手进球</div>
-      <div item-right>
-        <p class="goal-data">90%</p>
-        <p class="goal-data-detail">{{first.win}}胜{{first.win}}平{{first.win}}负</p>
-      </div>
-    </ion-item>
-    <ion-item class="game-data-assist-item">
-      <div item-left class="goal-title">进球最多的比赛</div>
-      <div item-right>
-        <p class="goal-data">90%</p>
-        <p class="goal-data-detail">{{first.win}}胜{{first.win}}平{{first.win}}负</p>
-      </div>
-    </ion-item>
-    <ion-item class="game-data-assist-item">
-      <div item-left class="goal-title">失球最多的比赛</div>
-      <div item-right>
-        <p class="goal-data">90%</p>
-        <p class="goal-data-detail">{{first.win}}胜{{first.win}}平{{first.win}}负</p>
-      </div>
-    </ion-item>
-    <ion-item class="game-data-assist-item">
-      <div item-left class="goal-title-2">最长的连续胜利</div>
-      <div item-right>
-        <p class="goal-data">90</p>
-      </div>
-    </ion-item>
-    <ion-item class="game-data-assist-item">
-      <div item-left class="goal-title-2">最长的连续失败</div>
-      <div item-right>
-        <p class="goal-data">90</p>
-      </div>
-    </ion-item>
-    <ion-item class="game-data-assist-item">
-      <div item-left class="goal-title-2">最长的连续不败</div>
-      <div item-right>
-        <p class="goal-data">90</p>
-      </div>
-    </ion-item>
-    <ion-item class="game-data-assist-item no-margin">
-      <div item-left class="goal-title-2 no-margin">最长的连续不失球</div>
-      <div item-right class="no-margin">
-        <p class="goal-data no-margin">90</p>
-      </div>
-    </ion-item>
-  </ion-list>
-
-  <div class="team-best-member-padding">
-    <button ion-button full class="nearest-5-game-result-title no-margin no-padding default-font-color">
+<div class="team-best-member-padding">
+  <button ion-button full class="nearest-5-game-result-title no-margin no-padding default-font-color">
       最佳球员排名
     </button>
-  </div>
+</div>
 
 
-  <ion-list no-lines="true" class="team-best-member-info no-margin no-padding">
+<ion-list no-lines="true" class="team-best-member-info no-margin no-padding">
 
-    <ion-item class="team-best-member-award-title">
-      <img src="assets/icon/b2.png" item-left class="award-img">
-      <p class="award-title"> 射手王</p>
-    </ion-item>
+  <ion-item class="team-best-member-award-title">
+    <img src="assets/icon/b2.png" item-left class="award-img">
+    <p class="award-title"> 射手王</p>
+  </ion-item>
 
-    <ion-item class="team-best-member-award-people">
-      <img src="assets/img/icon1.jpg" class="left-image" item-left>
-      <ion-row>
-        <ion-col>
-          <ion-row class="award-team-member-name">梅西</ion-row>
-          <ion-row class="award-team-member-score">6球</ion-row>
-        </ion-col>
-        <ion-col><p class="right-info">
+  <ion-item class="team-best-member-award-people">
+    <img src="assets/img/icon1.jpg" class="left-image" item-left>
+    <ion-row>
+      <ion-col>
+        <ion-row class="award-team-member-name">梅西</ion-row>
+        <ion-row class="award-team-member-score">6球</ion-row>
+      </ion-col>
+      <ion-col>
+        <p class="right-info">
           <span class="white-big">9</span>
-          <span class="small-text">出场</span>
-          |<span class="white-big">&nbsp;23</span>
+          <span class="small-text">出场</span> |
+          <span class="white-big">&nbsp;23</span>
           <span class="small-text"> 进球</span>
-        </p></ion-col>
-      </ion-row>
-    </ion-item>
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-item>
 
 
-    <ion-item class="team-best-member-award-title">
-      <img src="assets/icon/b3.png" item-left class="award-img">
-      <p class="award-title"> 助攻王</p>
+  <ion-item class="team-best-member-award-title">
+    <img src="assets/icon/b3.png" item-left class="award-img">
+    <p class="award-title"> 助攻王</p>
 
-    </ion-item>
-    <ion-item class="team-best-member-award-people">
-      <img src="assets/img/icon1.jpg" class="left-image" item-left>
-      <ion-row>
-        <ion-col>
-          <ion-row class="award-team-member-name">梅西</ion-row>
-          <ion-row class="award-team-member-score">6球</ion-row>
-        </ion-col>
-        <ion-col><p class="right-info">
+  </ion-item>
+  <ion-item class="team-best-member-award-people">
+    <img src="assets/img/icon1.jpg" class="left-image" item-left>
+    <ion-row>
+      <ion-col>
+        <ion-row class="award-team-member-name">梅西</ion-row>
+        <ion-row class="award-team-member-score">6球</ion-row>
+      </ion-col>
+      <ion-col>
+        <p class="right-info">
           <span class="white-big">9</span>
-          <span class="small-text">出场</span>
-          |<span class="white-big">&nbsp;23</span>
+          <span class="small-text">出场</span> |
+          <span class="white-big">&nbsp;23</span>
           <span class="small-text"> 进球</span>
-        </p></ion-col>
-      </ion-row>
-    </ion-item>
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-item>
 
-    <ion-item class="team-best-member-award-title">
-      <img src="assets/icon/b4.png" item-left class="award-img">
-      <p class="award-title"> MVP</p>
-    </ion-item>
+  <ion-item class="team-best-member-award-title">
+    <img src="assets/icon/b4.png" item-left class="award-img">
+    <p class="award-title"> MVP</p>
+  </ion-item>
 
-    <ion-item class="team-best-member-award-people no-margin">
-      <img src="assets/img/icon1.jpg" class="left-image" item-left>
-      <ion-row>
-        <ion-col>
-          <ion-row class="award-team-member-name">梅西</ion-row>
-          <ion-row class="award-team-member-score">6球</ion-row>
-        </ion-col>
-        <ion-col><p class="right-info">
+  <ion-item class="team-best-member-award-people no-margin">
+    <img src="assets/img/icon1.jpg" class="left-image" item-left>
+    <ion-row>
+      <ion-col>
+        <ion-row class="award-team-member-name">梅西</ion-row>
+        <ion-row class="award-team-member-score">6球</ion-row>
+      </ion-col>
+      <ion-col>
+        <p class="right-info">
           <span class="white-big">9</span>
-          <span class="small-text">出场</span>
-          |<span class="white-big">&nbsp;23</span>
+          <span class="small-text">出场</span> |
+          <span class="white-big">&nbsp;23</span>
           <span class="small-text"> 进球</span>
-        </p></ion-col>
-      </ion-row>
-    </ion-item>
-  </ion-list>
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-item>
+</ion-list>
 
 </ion-content>
-
-

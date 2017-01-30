@@ -11,7 +11,8 @@ export class MyTeamPage {
   first = [];
   id;
   team: Team = new Team();
-  currTeamStat = new TeamStat();
+  currTeamStat;
+  selectedStatIndex = 0;
 
   constructor(public navCtrl: NavController,
     private navParams: NavParams,
@@ -30,8 +31,8 @@ export class MyTeamPage {
     this.id = this.navParams.get('id');
     this.service.increasePopularity(this.id);
     this.service.getTeamAsync(this.id);
-    if ('last_15' in this.team)
-      this.currTeamStat = this.team.last_15;
+    // if ('last_15' in this.team)
+    //   this.currTeamStat = this.team.last_15;
   }
 
   addEventListeners() {
@@ -41,7 +42,7 @@ export class MyTeamPage {
       //console.log(teamId, this.id);
       if (teamId === this.id) {
         this.team = this.service.getTeam(teamId);
-        //this.setChoosePosition(0);
+        this.setChoosePosition(this.selectedStatIndex);
       }
     });
   }
@@ -112,9 +113,9 @@ export class MyTeamPage {
         thirdLine.style.backgroundColor = "yellow";
         break;
     }
-    console.log(this.currTeamStat);
-
-    this.setSuccessRate(Math.round(this.currTeamStat.rate * 100));
+    //console.log(this.currTeamStat);
+    this.selectedStatIndex = position;
+    //this.setSuccessRate(Math.round(this.currTeamStat.rate * 100));
   }
 
   //根据胜率设置图像例如90%
