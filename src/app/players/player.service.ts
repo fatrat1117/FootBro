@@ -46,7 +46,7 @@ export class PlayerService {
   }
 
   getPlayerAsync(id) {
-    if (this.playersMap[id]) {
+    if (this.getPlayer(id)) {
       this.fm.FireCustomEvent('serviceplayerready', id);
     }
     else 

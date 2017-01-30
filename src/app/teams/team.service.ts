@@ -18,6 +18,7 @@ export class TeamService {
         teamData.logo = team['basic-info'].logo;
         teamData.name = team['basic-info'].name;
         teamData.totalPlayers = team['basic-info'].totalPlayers;
+        teamData.players = team.players;
         
         this.teamDataMap[teamId] = teamData;
         let teamPublic = this.fm.getTeamPublic(teamId);
@@ -43,7 +44,7 @@ export class TeamService {
       }
     });
 
-    document.addEventListener('TeamStatsDataReady', e => {
+    document.addEventListener('teamstatsdataready', e => {
       let teamId = e['detail'];
       let teamData = this.teamDataMap[teamId];
       let teamStats = this.fm.getTeamStats(teamId);
@@ -58,10 +59,13 @@ export class TeamService {
   }
 
   getTeamAsync(id) {
-    this.fm.getTeamAsync(id);
+    if (this.getTeam(id))
+      this.fm.FireCustomEvent('serviceteamready', id);
+    else
+      this.fm.getTeamAsync(id);
   }
 
-  getTeam(id) {
+  getTeam(id) : Team{
     return this.teamDataMap[id];
   }
 

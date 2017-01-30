@@ -34,7 +34,8 @@ import {CreateTeamPage} from '../pages/create-team/create-team';
 import { AngularFireModule } from 'angularfire2';
 import { FirebaseManager} from '../providers/firebase-manager';
 import { PlayerService } from './players/player.service';
-import { TeamService } from './teams/team.service'
+import { TeamService } from './teams/team.service';
+import { TeamPlayersService } from './teams/teamplayers.service'
 import { MiscService } from './misc/misc.service'
 
 // pipes
@@ -148,7 +149,8 @@ export const firebaseConfig = {
   FirebaseManager,
   Localization,
   PlayerService,
-  TeamService ]
+  TeamService,
+  TeamPlayersService ]
 })
 export class AppModule {
 }

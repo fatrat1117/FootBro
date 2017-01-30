@@ -9,7 +9,14 @@ export class TeamPlayersService {
 
   constructor(private fm: FirebaseManager,
     private teamService: TeamService,
-  private PlayerService: PlayerService) {
+    private PlayerService: PlayerService) {
+      document.addEventListener('serviceteamready', e => {
+        let id = e['detail'];
+        let team = this.teamService.getTeam(id);
+        let players = [];
+        console.log(team.players);
+        this.fm.FireCustomEvent('serviceteamplayersready', id);
+      });
   }
 
   getTeamPlayers(id) {
@@ -19,5 +26,7 @@ export class TeamPlayersService {
   getTeamPlayersAsync(id) {
     if (this.getTeamPlayers(id))
       this.fm.FireCustomEvent('serviceteamplayersready', id);
+    else
+      this.teamService.getTeamAsync(id);
   }
 }

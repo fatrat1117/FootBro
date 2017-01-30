@@ -55,7 +55,8 @@ export class MePage {
 
     document.addEventListener('serviceteamready', e => {
       let teamId = e['detail'];
-      this.team = this.teamService.getTeam(teamId);
+      if (this.player && this.player.teamId === teamId)
+        this.team = this.teamService.getTeam(teamId);
     });
   }
 

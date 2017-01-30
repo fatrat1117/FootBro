@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { TeamService } from '../../app/teams/team.service'
 import { Team, TeamStat } from '../../app/teams/team.model'
+import { TeamPlayersService } from '../../app/teams/teamplayers.service'
 
 @Component({
   selector: 'page-my-team',
@@ -16,7 +17,8 @@ export class MyTeamPage {
 
   constructor(public navCtrl: NavController,
     private navParams: NavParams,
-    private service: TeamService) {
+    private service: TeamService,
+    private teamPlayersService: TeamPlayersService) {
     this.first = [
       {
         'win': '7',
@@ -40,6 +42,7 @@ export class MyTeamPage {
       //console.log(teamId, this.id);
       if (teamId === this.id) {
         this.team = this.service.getTeam(teamId);
+        //this.teamPlayersService.getTeamPlayersAsync(teamId);
         this.setChoosePosition(this.selectedStatIndex);
       }
     });

@@ -178,11 +178,11 @@ export class FirebaseManager {
 
   getTeamStatsAsync(id) {
     if (this.cachedTeamStatsMap[id])
-      this.FireCustomEvent('TeamStatsDataReady', id);
+      this.FireCustomEvent('teamstatsdataready', id);
     else {
       this.af.database.object(`/teams_stats/${id}`).subscribe(snapshot => {
         this.cachedTeamStatsMap[id] = snapshot;
-        this.FireCustomEvent('TeamStatsDataReady', id);
+        this.FireCustomEvent('teamstatsdataready', id);
       });
     }
   }
