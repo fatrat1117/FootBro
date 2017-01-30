@@ -163,11 +163,11 @@ export class FirebaseManager {
 
   getTeamPublicAsync(id) {
     if (this.sortedPublicTeamsMap[id])
-      this.FireCustomEvent('teampublicdataready', id);
+      this.FireCustomEvent('teampublicready', id);
     else {
       this.af.database.object(`/public/teams/${id}`).subscribe(snapshot => {
         this.sortedPublicTeamsMap[id] = snapshot;
-        this.FireCustomEvent('teampublicdataready', id);
+        this.FireCustomEvent('teampublicready', id);
       });
     }
   }
@@ -221,7 +221,7 @@ export class FirebaseManager {
       //console.log('TeamPublicDataChanged', val);
       val['$key'] = snapshot.key;
       self.sortedPublicTeamsMap[snapshot.key] = val;
-      self.FireCustomEvent('teampublicdataready', snapshot.key);
+      self.FireCustomEvent('teampublicready', snapshot.key);
       //console.log("child_changed", snapshot.key);
     });
     //}
@@ -241,12 +241,12 @@ export class FirebaseManager {
           if ('img/none.png' === snapshot['basic-info'].logo)
             snapshot['basic-info'].logo = 'assets/img/none.png';
           this.cachedTeamsMap[teamId] = snapshot;
-          this.FireCustomEvent('teamdataready', teamId);
+          this.FireCustomEvent('teamready', teamId);
         }
       })
     }
     else
-      this.FireCustomEvent('teamdataready', teamId);
+      this.FireCustomEvent('teamready', teamId);
   }
 
   getTeam(teamId) {
@@ -396,18 +396,18 @@ export class FirebaseManager {
 
   getPlayerPublicAsync(id) {
     if (this.sortedPublicPlayersMap[id])
-      this.FireCustomEvent('playerpublicdataready', id);
+      this.FireCustomEvent('playerpublicready', id);
     else {
       this.af.database.object(`/public/players/${id}`).subscribe(snapshot => {
         this.sortedPublicPlayersMap[id] = snapshot;
-        this.FireCustomEvent('playerpublicdataready', id);
+        this.FireCustomEvent('playerpublicready', id);
       });
     }
   }
 
   getPlayerAsync(id) {
     if (this.cachedPlayersMap[id]) {
-      this.FireCustomEvent('playerdataready', id);
+      this.FireCustomEvent('playerready', id);
     }
     else {
       this.af.database.object(`/players/${id}`).subscribe(snapshot => {
@@ -415,7 +415,7 @@ export class FirebaseManager {
           if ('img/none.png' === snapshot['basic-info'].photoURL)
             snapshot['basic-info'].photoURL = 'assets/img/none.png';
           this.cachedPlayersMap[id] = snapshot;
-          this.FireCustomEvent('playerdataready', id);
+          this.FireCustomEvent('playerready', id);
         }
         else
           this.FireCustomEvent('playernotregistered', id);
@@ -456,7 +456,7 @@ export class FirebaseManager {
       let val = snapshot.val();
       val['$key'] = snapshot.key;
       self.sortedPublicPlayersMap[snapshot.key] = val;
-      self.FireCustomEvent('playerpublicdataready', snapshot.key);
+      self.FireCustomEvent('playerpublicready', snapshot.key);
     });
   }
   //Fire document events 

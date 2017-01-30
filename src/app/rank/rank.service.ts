@@ -40,7 +40,7 @@ export class RankService {
         }
       );
 
-    document.addEventListener('serviceteamdataready', e => {
+    document.addEventListener('serviceteamready', e => {
       let teamId = e['detail'];
       let team = this.teamService.getTeam(teamId);
       let teamRankData = this.teamRanksMap[teamId];
@@ -70,7 +70,7 @@ export class RankService {
       this.fm.FireEvent('serviceplayerrankschanged');
     });
 
-    document.addEventListener('serviceplayerdataready', e => {
+    document.addEventListener('serviceplayerready', e => {
       let id = e['detail'];
       let player = this.playerService.getPlayer(id);
       let playerRank = this.playerRanksMap[id];

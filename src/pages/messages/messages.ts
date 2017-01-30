@@ -35,7 +35,7 @@ export class MessagesPage {
   }
 
   addEventListeners() {
-    document.addEventListener('serviceplayerdataready', e => {
+    document.addEventListener('serviceplayerready', e => {
       let playerId = e['detail'];
       if (this.watchListMap[playerId])
       {

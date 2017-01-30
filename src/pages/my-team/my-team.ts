@@ -34,7 +34,7 @@ export class MyTeamPage {
   }
 
   addEventListeners() {
-    document.addEventListener('serviceteamdataready', e => {
+    document.addEventListener('serviceteamready', e => {
       //console.log(e);
       let teamId = e['detail'];
       //console.log(teamId, this.id);
@@ -68,8 +68,7 @@ export class MyTeamPage {
   //切换函数
   //最近15场 最近20场 全部
   setChoosePosition(position) {
-    console.log(this);
-    
+    //console.log(this);
     //3个选项页
     var recent15 = document.getElementById("recent15");
     //this page is not shown

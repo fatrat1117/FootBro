@@ -31,7 +31,7 @@ export class EditPlayerPage {
   }
 
   addEventListeners() {
-    document.addEventListener('serviceplayerdataready', e => {
+    document.addEventListener('serviceplayerready', e => {
       let playerId = e['detail'];
       if (playerId === this.selfId) {
         this.player = this.playerService.getPlayer(playerId);

@@ -42,7 +42,7 @@ export class MePage {
   }
 
   addEventListeners() {
-    document.addEventListener('serviceplayerdataready', e => {
+    document.addEventListener('serviceplayerready', e => {
       let playerId = e['detail'];
       //console.log(teamId, this.id);
       if (playerId === this.playerService.selfId()) {
@@ -53,7 +53,7 @@ export class MePage {
       }
     });
 
-    document.addEventListener('serviceteamdataready', e => {
+    document.addEventListener('serviceteamready', e => {
       let teamId = e['detail'];
       this.team = this.teamService.getTeam(teamId);
     });

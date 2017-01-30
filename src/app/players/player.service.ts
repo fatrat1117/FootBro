@@ -7,7 +7,7 @@ export class PlayerService {
   playersMap = {};
 
   constructor(private fm: FirebaseManager) {
-    document.addEventListener('playerdataready', e => {
+    document.addEventListener('playerready', e => {
       let id = e['detail'];
       
       let playerData = this.fm.getPlayer(id);
@@ -30,10 +30,10 @@ export class PlayerService {
       this.playersMap[id] = player;
       this.fm.getPlayerPublicAsync(id);
 
-      this.fm.FireCustomEvent('serviceplayerdataready', id);
+      this.fm.FireCustomEvent('serviceplayerready', id);
     });
 
-    document.addEventListener('playerpublicdataready', e => {
+    document.addEventListener('playerpublicready', e => {
       let id = e['detail'];
       let playerPublicData = this.fm.getPlayerPublic(id);
       let player = this.getPlayer(id);
@@ -47,7 +47,7 @@ export class PlayerService {
 
   getPlayerAsync(id) {
     if (this.playersMap[id]) {
-      this.fm.FireCustomEvent('serviceplayerdataready', id);
+      this.fm.FireCustomEvent('serviceplayerready', id);
     }
     else 
     {

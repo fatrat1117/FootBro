@@ -7,7 +7,7 @@ export class TeamService {
   teamDataMap = {};
 
   constructor(private fm: FirebaseManager) {
-    document.addEventListener('teamdataready', e => {
+    document.addEventListener('teamready', e => {
       let teamId = e['detail'];
       let team = this.fm.getTeam(teamId);
       //console.log(team);
@@ -33,7 +33,7 @@ export class TeamService {
     }
     );
 
-    document.addEventListener('teampublicdataready', e => {
+    document.addEventListener('teampublicready', e => {
       let teamId = e['detail'];
       let teamData = this.teamDataMap[teamId];
       let teamPublic = this.fm.getTeamPublic(teamId);
@@ -53,7 +53,7 @@ export class TeamService {
         teamData.last_30 = teamStats.last_30;
         teamData.overall = teamStats.overall;
       }
-      this.fm.FireCustomEvent('serviceteamdataready', teamId);
+      this.fm.FireCustomEvent('serviceteamready', teamId);
     });
   }
 

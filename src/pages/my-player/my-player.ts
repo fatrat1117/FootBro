@@ -30,7 +30,7 @@ export class MyPlayerPage {
   }
 
   ionViewDidLoad() {
-    document.addEventListener('serviceplayerdataready', e => {
+    document.addEventListener('serviceplayerready', e => {
       let id = e['detail'];
       if (this.id === id)
         this.player = this.service.getPlayer(id);
