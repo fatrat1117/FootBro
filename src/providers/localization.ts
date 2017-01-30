@@ -194,7 +194,7 @@ export class Localization {
             WholeSeasonRecord: 'Whole Season Record',
             GF: 'GF',
             GA: 'GA',
-            Recrods: 'Records',
+            Records: 'Records',
             Recent15matches: 'Recent 15 matches',
             Recent30matches: 'Recent 30 matches',
             All: 'all'
@@ -373,7 +373,7 @@ export class Localization {
             WholeSeasonRecord: '赛季数据',
             GF: 'GF',
             GA: 'GA',
-            Recrods: '记录',
+            Records: '记录',
             Recent15matches: '最近15场',
             Recent30matches: '最近30场',
             All: '全部'

@@ -31,8 +31,6 @@ export class MyTeamPage {
     this.id = this.navParams.get('id');
     this.service.increasePopularity(this.id);
     this.service.getTeamAsync(this.id);
-    // if ('last_15' in this.team)
-    //   this.currTeamStat = this.team.last_15;
   }
 
   addEventListeners() {
@@ -70,8 +68,13 @@ export class MyTeamPage {
   //切换函数
   //最近15场 最近20场 全部
   setChoosePosition(position) {
+    console.log(this);
+    
     //3个选项页
     var recent15 = document.getElementById("recent15");
+    //this page is not shown
+    if (!recent15)
+      return;
     var recent20 = document.getElementById("recent20");
     var all = document.getElementById("all");
     //三个按钮
