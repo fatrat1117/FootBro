@@ -14,6 +14,7 @@ export class MyTeamPage {
   team: Team = new Team();
   currTeamStat;
   selectedStatIndex = 0;
+  players;
 
   constructor(public navCtrl: NavController,
     private navParams: NavParams,
@@ -42,8 +43,17 @@ export class MyTeamPage {
       //console.log(teamId, this.id);
       if (teamId === this.id) {
         this.team = this.service.getTeam(teamId);
-        //this.teamPlayersService.getTeamPlayersAsync(teamId);
+        this.teamPlayersService.getTeamPlayersAsync(teamId);
         this.setChoosePosition(this.selectedStatIndex);
+      }
+    });
+
+    document.addEventListener('serviceteamplayersready', e => {
+      let teamId = e['detail'];
+      //console.log(teamId, this.id);
+      if (teamId === this.id) {
+        this.players = this.teamPlayersService.getTeamPlayers(teamId);
+        console.log(this.players);
       }
     });
   }

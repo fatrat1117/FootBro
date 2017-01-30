@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ViewController } from 'ionic-angular';
-import { TeamService } from '../../app/teams/team.service'
+import { TeamService } from '../../app/teams/team.service';
+import { Localization} from '../../providers/localization'
 
 @Component({
   selector: 'page-create-team',
@@ -11,7 +12,8 @@ export class CreateTeamPage {
   location: any;
   busy: boolean;
   constructor(private viewCtrl: ViewController,
-    private service: TeamService) {
+    private service: TeamService,
+    private loc : Localization) {
     this.busy = false;
     this.location = 'SG';
     this.teamName = '';
@@ -22,7 +24,7 @@ export class CreateTeamPage {
 
     document.addEventListener('createteamfailed', e => {
       this.busy = false;
-      alert(e['detail']);
+      alert(this.loc.getString(e['detail']));
     })
   }
 

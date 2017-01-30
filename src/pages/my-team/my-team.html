@@ -15,7 +15,7 @@
     <img [src]="team.logo" class="thumbnail-img" />
     <h6 class="team-name default-font-size-h6">{{team.name}}</h6>
     <!--<p class="team-place default-font-size-p">阿根廷&nbsp;|&nbsp;纪念碑球场</p>-->
-    <p class="team-place default-font-size-p">&nbsp;|&nbsp;</p>
+    <p class="team-place default-font-size-p">&nbsp;&nbsp;</p>
     <div class="team-right-item">
       <p class="team-right-item-text">{{team.popularity}}</p>
       <div class="team-right-item-bottom">
@@ -126,21 +126,9 @@
 
   <div class="team-member-info">
     <ion-row class="team-member-display">
-      <ion-col>
-        <img src="assets/img/icon1.jpg" class="team-member-img">
-        <p class="team-member-name">梅西</p>
-      </ion-col>
-      <ion-col>
-        <img src="assets/img/icon2.jpg" class="team-member-img">
-        <p class="team-member-name">特维斯</p>
-      </ion-col>
-      <ion-col>
-        <img src="assets/img/icon3.jpg" class="team-member-img">
-        <p class="team-member-name">迪巴拉</p>
-      </ion-col>
-      <ion-col>
-        <img src="assets/img/icon4.jpg" class="team-member-img">
-        <p class="team-member-name">罗西亚诺</p>
+      <ion-col *ngFor="let p of players?.slice(0,4)">
+        <img [src]="p.photo" class="team-member-img">
+        <p class="team-member-name">{{p.name}}</p>
       </ion-col>
     </ion-row>
     <button ion-button clear icon-right class="team-see-more-members" (click)="seeMoreTeamMember()">
@@ -175,8 +163,8 @@
   <ion-row>
     <ion-col class="col-30"></ion-col>
     <ion-col class="col-40">
-    <round-progress [current]="currTeamStat?.rate * 100" [max]=100 [color]="'#'+'00ff00'" [background]="'#'+'a0a0a0'" [radius]="125" [stroke]="20" [semicircle]="false"
-      [rounded]="true" [clockwise]="false" [responsive]="true"></round-progress>
+      <round-progress [current]="currTeamStat?.rate * 100" [max]=100 [color]="'#'+'00ff00'" [background]="'#'+'a0a0a0'" [radius]="125"
+        [stroke]="20" [semicircle]="false" [rounded]="true" [clockwise]="false" [responsive]="true"></round-progress>
       <!--<div text-center class="win-rate-text">{{currTeamStat?.rate * 100}}</div>-->
     </ion-col>
     <ion-col class="col-30"></ion-col>
