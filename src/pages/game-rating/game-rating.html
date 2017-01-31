@@ -5,7 +5,7 @@
         <ion-icon name="ios-arrow-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center class="default-font-size" >
+    <ion-title text-center class="default-font-size">
       评价
     </ion-title>
 
@@ -19,6 +19,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+
   <ion-list no-lines class="content-list">
     <!--中间的对战时间-->
     <button ion-button clear color="light" class="content-center-button">
@@ -69,61 +70,17 @@
         <button ion-button clear class="member-name">{{member.name}}</button>
         <div class="star-touch-back">
           <div class="star-back" *ngFor="let item of member.starArray">
-            <button ion-button class="star-button" icon-only clear color="secondary">
-              <ion-icon name="{{item.src}}" style="color: #ffdc00;"></ion-icon>
-            </button>
+            <ion-icon name="{{item.src}}" class="star-icon" isActive="true"></ion-icon>
           </div>
-
-          <!--滑动事件处理-->
-          <div class="touch-back" >
-            <div class="half-button-back">
-              <button ion-button clear class="half-button" (mousedown)="down(member,1)"
-                      (mouseup)="up(member,1)" (mouseleave)="leave(member,1)"  ></button>
-            </div>
-            <div class="half-button-back">
-              <button ion-button clear class="half-button" (mousedown)="down(member,2)"
-                      (mouseup)="up(member,2)" (mouseleave)="leave(member,2)" ></button>
-            </div>
-            <div class="half-button-back">
-              <button ion-button clear class="half-button" (mousedown)="down(member,3)"
-                      (mouseup)="up(member,3)" (mouseleave)="leave(member,3)"  ></button>
-            </div>
-            <div class="half-button-back">
-              <button ion-button clear class="half-button" (mousedown)="down(member,4)"
-                      (mouseup)="up(member,4)" (mouseleave)="leave(member,4)" ></button>
-            </div>
-            <div class="half-button-back">
-              <button ion-button clear class="half-button" (mousedown)="down(member,5)"
-                      (mouseup)="up(member,5)" (mouseleave)="leave(member,5)"></button>
-            </div>
-            <div class="half-button-back">
-              <button ion-button clear class="half-button" (mousedown)="down(member,6)"
-                      (mouseup)="up(member,6)" (mouseleave)="leave(member,6)"></button>
-            </div>
-            <div class="half-button-back">
-              <button ion-button clear class="half-button" (mousedown)="down(member,7)"
-                      (mouseup)="up(member,7)" (mouseleave)="leave(member,7)"></button>
-            </div>
-            <div class="half-button-back">
-              <button ion-button clear class="half-button" (mousedown)="down(member,8)"
-                      (mouseup)="up(member,8)" (mouseleave)="leave(member,8)"></button>
-            </div>
-            <div class="half-button-back">
-              <button ion-button clear class="half-button" (mousedown)="down(member,9)"
-                      (mouseup)="up(member,9)" (mouseleave)="leave(member,9)" ></button>
-            </div>
-            <div class="half-button-back">
-              <button ion-button clear class="half-button" (mousedown)="down(member,10)"
-                      (mouseup)="up(member,10)" (mouseleave)="leave(member,10)"></button>
-            </div>
-          </div>
+          <div class="touch-back"(pan)="panStar(member,$event)" (click)="clickStar(member,$event)"></div>
         </div>
       </div>
-      <button ion-button clear color="{{member.evaluteColor}}" class="evalute-string" item-right>{{member.evaluteString}}</button>
+      <button ion-button clear color="{{member.evaluteColor}}" class="evalute-string" item-right>
+        {{member.evaluteString}}
+      </button>
     </ion-item>
-
-
   </ion-list>
+
   <ion-row class="row-back">
     <ion-col>
       <button ion-button full class="cancel-button" (click)="openCancel()">取消</button>

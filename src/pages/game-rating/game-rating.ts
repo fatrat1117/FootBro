@@ -1,15 +1,18 @@
 /**
  * Created by Administrator on 2017/1/23.
  */
-import {NavController} from "ionic-angular";
+import {NavController, Slides} from "ionic-angular";
 import {Component, NgModule} from "@angular/core";
+
+import {ViewChild} from '@angular/core';
 @Component({
   selector: 'page-game-rating',
   templateUrl: 'game-rating.html'
 })
-
+@NgModule({})
 export class GameRatingPage {
   memberlist = [];
+
 
   constructor(public navCtrl: NavController) {
 
@@ -18,7 +21,7 @@ export class GameRatingPage {
         name: "梅西" + i,
         star: 5 - 0.5 * (i + 1),
         evaluteString: i,
-        evaluteColor:"#00ff00",
+        evaluteColor: "#00ff00",
         starArray: [{
           id: 2,
           src: "ios-star-outline"
@@ -39,49 +42,38 @@ export class GameRatingPage {
     }
     for (var i = 0; i < 5; i++) {
       this.modifyEvaluteDataByStar(this.memberlist[i]);
-      this.modifyStarPictureByStar(this.memberlist[i].starArray,this.memberlist[i].star);
+      this.modifyStarPictureByStar(this.memberlist[i].starArray, this.memberlist[i].star);
     }
   }
 
-  //mousedown事件处理
-  down(member, itemId) {
-    this.onTouchChanged(member,itemId);
-  }
-  //mouseup事件处理
-  up(member, itemId) {
-    this.onTouchChanged(member,itemId);
-  }
-  //mouseleave事件处理
-  leave(member,itemId){
-    this.onTouchChanged(member,itemId);
-  }
 
 
   //通过star修改评价字符串及评价字颜色
-  modifyEvaluteDataByStar(member){
+  modifyEvaluteDataByStar(member) {
     if (member.star >= 4.5) {
-      member.evaluteString= "非常好";
-      member.evaluteColor="secondary";
+      member.evaluteString = "非常好";
+      member.evaluteColor = "secondary";
     } else if (member.star >= 4) {
-      member.evaluteString="很好";
-      member.evaluteColor="secondary";
+      member.evaluteString = "很好";
+      member.evaluteColor = "secondary";
     } else if (member.star >= 3.5) {
-      member.evaluteString= "好";
-      member.evaluteColor="secondary";
+      member.evaluteString = "好";
+      member.evaluteColor = "secondary";
     } else if (member.star >= 3) {
-      member.evaluteString= "一般";
-      member.evaluteColor="primary";
-    } else if (member.star >= 2.5){
-      member.evaluteString= "差";
-      member.evaluteColor="light";
-    }else if (member.star >= 2){
-      member.evaluteString= "很差";
-      member.evaluteColor="light";
-    }else{
-      member.evaluteString= "非常差";
-      member.evaluteColor="light";
+      member.evaluteString = "一般";
+      member.evaluteColor = "primary";
+    } else if (member.star >= 2.5) {
+      member.evaluteString = "差";
+      member.evaluteColor = "light";
+    } else if (member.star >= 2) {
+      member.evaluteString = "很差";
+      member.evaluteColor = "light";
+    } else {
+      member.evaluteString = "非常差";
+      member.evaluteColor = "light";
     }
   }
+
   //通过star修改星星图片
   modifyStarPictureByStar(starArray, star) {
     switch (star) {
@@ -137,8 +129,9 @@ export class GameRatingPage {
         break;
     }
   }
+
   //touch事件处理
-  onTouchChanged(member,itemId){
+  onTouchChanged(member, itemId) {
     member.star = itemId / 2;
     for (var i = 0; i < member.starArray.length; i++) {
       if (member.starArray[i].id == itemId + 1) {
@@ -150,17 +143,38 @@ export class GameRatingPage {
       }
     }
     this.modifyEvaluteDataByStar(member);
-    this.modifyStarPictureByStar(member.starArray,member.star);
-
+    this.modifyStarPictureByStar(member.starArray, member.star);
+  }
+  //星星评分拖动效果的实现函数
+  panStar(member, e) {
+    var dist = -1;
+    if(e.additionalEvent == "panright" || e.additionalEvent == "panleft"){
+      dist = e.changedPointers[0].clientX - 70;
+    }
+    if (dist > -1) {
+      var j = parseInt("" + dist) / 12;
+      this.onTouchChanged(member, parseInt("" + j));
+    }
+  }
+  //点击星星也能修改评分
+  clickStar(member, e) {
+    var dist = -1;
+    dist = e.clientX - 65;
+    if (dist > -1) {
+      var j = parseInt("" + dist) / 12+1;
+      this.onTouchChanged(member, parseInt("" + j));
+    }
   }
 
 
   //取消
-  openCancel(){
+  openCancel() {
     alert("cancel");
   }
+
   //确定
-  openEnsure(){
+  openEnsure() {
     alert("ensure");
   }
+
 }
