@@ -51,14 +51,8 @@ export class TeamPlayersService {
       let player = this.playerService.getPlayer(id);
       let cachedPlayer = this.playerMap[id];
       if (cachedPlayer) {
-        if (player.name) {
           cachedPlayer.name = player.name;
           cachedPlayer.photo = player.photo;
-        }
-        else {
-          cachedPlayer.name = "John Doe";
-          cachedPlayer.photo = "assets/img/none.png";
-        }
       }
     });
   }

@@ -14,8 +14,8 @@ export class PlayerService {
       //console.log(playerData);
       let player = new Player();
       player.id = playerData.$key;
-      player.name = playerData['basic-info'].displayName;
-      player.photo = playerData['basic-info'].photoURL;
+      player.name = playerData['basic-info'].displayName || "John Doe" ;
+      player.photo = playerData['basic-info'].photoURL || "assets/img/none.png";
       player.teamId = playerData['basic-info'].teamId;
       
       if (playerData['detail-info'] && 'position' in playerData['detail-info'])
