@@ -1,22 +1,240 @@
 page-match-detail {
-  .card .item {
-    background: #40444d;
+  ion-content {
+    //给整个内容区调整背景及边距
+    .content-all {
+      padding: 15px 10px 15px 10px;
+      background-color: #171717;
+      //数据显示区域
+      .content-list {
+        margin: 0px;
+        background: #40444d;
+        text-align: center;
+        //居中对战时间按钮
+        .content-center-button {
+          mrgin: 0px 0px 10px 0px;
+          height: 30px;
+          border-radius: 15px;
+          background-color: #2e3138;
+          text-align: center;
+        }
+        //对战信息
+        .fight-team-info {
+          background-color: #40444d;
+          padding: 0px;
+          margin: 10px 0px 0px 0px;
+          width: 100%;
+          //左边战队信息
+          .fight-team-info-left {
+            text-align: center;
+            padding: 0px;
+            margin: 0px;
+            //左战队头像
+            .team-left-img {
+              width: 70px;
+              height: 70px;
+              border-radius: 5%;
+            }
+            //左战队名称
+            .team-left-text {
+              color: white;
+              font-size: 1.0rem;
+              margin-top: 10px;
+            }
+          }
+          //比分部分
+          .fight-score {
+            text-align: center;
+            padding-top: 20px;
+            //左队得分
+            .left-number {
+              margin: 0px;
+              padding: 0px;
+              position: relative;
+              .back-top {
+                position: absolute;
+                background: white;
+                width: 100%;
+                height: 20px;
+                margin: 0px;
+                padding: 0px;
+              }
+              .back-bottom {
+                position: absolute;
+                background: #e5e5e5;
+                width: 100%;
+                height: 20px;
+                margin-top: 20px;
+              }
+              .top-score {
+                position: absolute;
+                font-size: 3.0rem;
+                color: #686868;
+                text-align: center;
+                width: 100%;
+              }
+            }
+            //比：
+            .center-compare {
+              font-size: 3rem;
+              color: white;
+              text-align: center;
+            }
+            //右队得分
+            .right-number {
+              margin: 0px;
+              padding: 0px;
+              text-align: center;
+              position: relative;
+              .back-top {
+                position: absolute;
+                background: white;
+                width: 100%;
+                height: 20px;
+                margin: 0px;
+                padding: 0px;
+              }
+              .back-bottom {
+                position: absolute;
+                background: #e5e5e5;
+                width: 100%;
+                height: 20px;
+                margin-top: 20px;
+              }
+              .top-score {
+                position: absolute;
+                font-size: 3.0rem;
+                color: #686868;
+                text-align: center;
+                width: 100%;
+              }
+            }
+          }
+          //右边战队信息
+          .fight-team-info-right {
+            text-align: center;
+            padding: 0px;
+            margin: 0px;
+            //右边战队信息
+            .team-right-img {
+              width: 70px;
+              height: 70px;
+              border-radius: 5%;
+            }
+            //右战队名称
+            .team-right-text {
+              color: white;
+              font-size: 1.0rem;
+              margin-top: 10px;
+            }
+          }
+        }
+
+        //红牌
+        .red-style {
+          text-align: center;
+          background: #2d2e32;
+          .center-img {
+            width: 10px;
+            height: 15px;
+          }
+        }
+        //黄牌
+        .yellow-style {
+          text-align: center;
+          background: #40444d;
+          .center-img {
+            width: 10px;
+            height: 15px;
+          }
+        }
+        //地图--标题
+        .map-title {
+          background: #2d2e32;
+          //左边图片
+          .title-left {
+            width: 15px;
+            height: 40px;
+            .title-left-img {
+              width: 15px;
+              height: 20px;
+            }
+          }
+          //地区
+          .map-district {
+            color: white;
+            font-size: 1.8rem;
+            margin: 0px;
+          }
+          //场所
+          .map-place {
+            font-size: 1.2rem;
+          }
+
+        }
+      }
+      //地图
+      .map-back {
+        padding: 0px 10px 10px 10px;
+        height: 200px;
+        width: 100%;
+        background-color: #2d2e32;
+        position: relative;
+        //地图控件
+        .map {
+          width: 100%;
+          height: 100%;
+          position: relative;
+        }
+        //右下角背景
+        .map-right-bottom-back {
+          border-radius: 50%;
+          width: 50px;
+          height: 50px;
+          background-color: #a0a0a0;
+          position: absolute;
+          right: 20px;
+          bottom: 20px;
+        }
+        //车背景
+        .map-car-back {
+          width: 30px;
+          height: 18px;
+          position: absolute;
+          right: 30px;
+          bottom: 45px;
+          .map-car {
+            width: 100%;
+            height: 100%;
+          }
+        }
+        //到这里
+        .map-to-here {
+          width: 50px;
+          height: 25px;
+          text-align: center;
+          position: absolute;
+          right: 20px;
+          bottom: 20px;
+          //文字 到这里
+          .map-to-here-text {
+            font-size: 0.7rem;
+          }
+        }
+      }
+    }
   }
 
-  .card .item-redCard {
-    background: #373a3c;
+  //通用
+  .no-margin {
+    margin: 0px;
   }
-  .card .item-field {
-    background: #373a3c;
+  .no-padding {
+    padding: 0px;
   }
-  .card .item-yellowCard {
-    background: #37383d;
+  .default-back-color {
+    background-color: #40444d;
   }
-  .match-detail {
-    background: #40444d;
+  .default-font-size {
+    font-size: 1.2rem;
   }
-  .item-md.item-block .item-inner {
-    border-bottom: 0px;
-  }
-
 }
