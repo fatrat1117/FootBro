@@ -1,4 +1,4 @@
-import { MatchStanding } from '../match.model';
+import { MatchStanding } from '../../match.model';
 
 export const MATCHSTANDINGS: MatchStanding[] = [
   {

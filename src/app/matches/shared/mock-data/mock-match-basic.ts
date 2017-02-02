@@ -1,4 +1,4 @@
-import { MatchBasic } from '../match.model';
+import { MatchBasic } from '../../match.model';
 
 export const MATCHBASICS: MatchBasic[] = [
   {

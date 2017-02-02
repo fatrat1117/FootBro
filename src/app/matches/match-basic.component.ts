@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import {MatchBasic} from './shared/match.model'
+import {MatchBasic} from './match.model'
 
 import{MatchDetailPage} from '../../pages/match-detail/match-detail'
 import {NavController} from "ionic-angular";

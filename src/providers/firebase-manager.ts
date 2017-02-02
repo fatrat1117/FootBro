@@ -21,6 +21,9 @@ export class FirebaseManager {
   queryPlayers;
   pushIdsMap = {};
 
+  //matches 
+  matchDatesMap = {};
+
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,
     private platform: Platform) {
@@ -304,7 +307,7 @@ export class FirebaseManager {
               name: teamObj.name,
               popularity: 1
             });
-            this.FireCustomEvent('createteamsucceeded', newTeamId);
+          this.FireCustomEvent('createteamsucceeded', newTeamId);
           //success();
         });//.catch(err => error(err));
       } else {
@@ -497,6 +500,41 @@ export class FirebaseManager {
     //update player public
     this.af.database.object(this.playerPublicRef(this.auth.uid)).update({ popularity: 1 });
   }
+
+  //matches
+  afMatchDates() {
+    return this.af.database.list('/matches/dates');
+  }
+
+  afTournamentDates(id) {
+    return this.af.database.list('/tournaments/list/' + id + '/dates');
+  }
+
+  getMatchDatesAsync(id) {
+    if (this.getMatchDates(id)) {
+      this.FireCustomEvent('matchdatesready', id);
+    } else {
+      if (id == "all") {
+        let sub = this.afMatchDates().subscribe(snapshots => {
+          this.matchDatesMap[id] = snapshots;
+          //sub.unsubscribe();
+          this.FireCustomEvent('matchdatesready', id);
+        });
+      }
+      else {
+        let sub = this.afTournamentDates(id).subscribe(snapshots => {
+          this.matchDatesMap[id] = snapshots;
+          //sub.unsubscribe();
+          this.FireCustomEvent('matchdatesready', id);
+        });
+      }
+    }
+  }
+  
+  getMatchDates(id) {
+    return this.matchDatesMap[id];
+  }
+
 
   /****************************** Misc ******************************/
   postNotification(senderId: string, targetId: string) {
@@ -897,16 +935,8 @@ export class FirebaseManager {
 //   }
 
 
-//   getMatchDates() {
-//     return this.af.database.list('/matches/dates');
-//   }
-
 //   getMatchDate(day) {
 //     return this.af.database.object('/matches/dates/' + day);
-//   }
-
-//   getTournamentDateByTournamentId(id) {
-//     return this.af.database.list('/tournaments/list/' + id + '/dates');
 //   }
 
 //   getTournamentMatchDate(id, day) {
