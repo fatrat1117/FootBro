@@ -23,6 +23,8 @@ export class FirebaseManager {
 
   //matches 
   matchDatesMap = {};
+  matchesByDateMap = {};
+  matchesMap = {};
 
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,
@@ -190,8 +192,8 @@ export class FirebaseManager {
     }
   }
 
-  queryPublicTeams(orderby, count) {
-    console.log('queryPublicTeams', orderby, count);
+  getPublicTeams(orderby, count) {
+    console.log('getPublicTeams', orderby, count);
     //if (!this.afSortedPublicTeams) {
     //  console.log('subscribe sorted public teams')
     this.afSortedPublicTeams = this.af.database.list(`/public/teams/`, {
@@ -202,12 +204,12 @@ export class FirebaseManager {
     });
 
     let sub = this.afSortedPublicTeams.subscribe(snapshots => {
+      sub.unsubscribe();
       this.sortedPublicTeams = snapshots.reverse();
       for (let i = 0; i < snapshots.length; ++i) {
         this.sortedPublicTeamsMap[snapshots[i].$key] = snapshots[i];
       }
       this.FireEvent('publicteamschanged');
-      sub.unsubscribe();
     });
 
     if (this.queryTeams)
@@ -276,10 +278,10 @@ export class FirebaseManager {
       }
     });
 
-    let subscription = queryObservable.subscribe(queriedItems => {
+    let sub = queryObservable.subscribe(queriedItems => {
       //console.log("check team name", queriedItems);
       //stopping monitoring changes
-      subscription.unsubscribe();
+      sub.unsubscribe();
       if (0 === queriedItems.length) {
         let teamData = {
           location: teamObj.location,
@@ -440,12 +442,12 @@ export class FirebaseManager {
     });
 
     let sub = afQuery.subscribe(snapshots => {
+      sub.unsubscribe();
       this.sortedPublicPlayers = snapshots.reverse();
       for (let i = 0; i < snapshots.length; ++i) {
         this.sortedPublicPlayersMap[snapshots[i].$key] = snapshots[i];
       }
       this.FireEvent('publicplayerschanged');
-      sub.unsubscribe();
     });
 
     if (this.queryPlayers)
@@ -510,6 +512,10 @@ export class FirebaseManager {
     return this.af.database.list('/tournaments/list/' + id + '/dates');
   }
 
+  matchListRef() {
+    return '/matches/list';
+  }
+
   getMatchDatesAsync(id) {
     if (this.getMatchDates(id)) {
       this.FireCustomEvent('matchdatesready', id);
@@ -543,6 +549,26 @@ export class FirebaseManager {
     return this.matchDatesMap[id];
   }
 
+  getMatchesByDate(date) {
+    return this.matchesByDateMap[date];
+  }
+
+  getMatchesByDateAsync(date) {
+    let afQuery = this.af.database.list(this.matchListRef(), {
+      query: {
+        orderByChild: 'date',
+        equalTo: date
+    }});
+
+    let sub = afQuery.subscribe(snapshots => {
+      sub.unsubscribe();
+      snapshots.forEach(snapshot => {
+        this.matchesMap[snapshot.$key] = snapshot;
+      });
+      this.matchesByDateMap[date] = snapshots;
+      this.FireCustomEvent('matchesbydateready', date);
+    });
+  }
 
   /****************************** Misc ******************************/
   postNotification(senderId: string, targetId: string) {
@@ -931,15 +957,6 @@ export class FirebaseManager {
 
 //   getMatch(id) {
 //     return this.af.database.object('/matches/list/' + id);
-//   }
-
-//   queryMatches(dateSubject) {
-//     return this.af.database.list('/matches/list', {
-//       query: {
-//         orderByChild: 'date',
-//         equalTo: dateSubject
-//       }
-//     });
 //   }
 
 

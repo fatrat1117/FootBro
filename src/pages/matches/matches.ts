@@ -19,7 +19,7 @@ import { NewGamePage } from "../new-game/new-game";
 export class MatchesPage {
   dates: number[];
   selectedDate: number;
-  //matchBasics: MatchBasic[];
+  matches;
   matchStandings: MatchStanding[];
   leagueBasics: LeagueBasic[];
 
@@ -35,14 +35,6 @@ export class MatchesPage {
     this.addEventListeners();
     this.matchService.getMatchDatesAsync("all");
 
-    // this.matchService.getMatchDates("test_league_id").then(dates => {
-    //   this.dates = dates;
-    // });
-
-    this.matchService.getMatchBasics("test_date").then(matchBasics => {
-    //  this.matchBasics = matchBasics;
-    });
-
     this.matchService.getMatchStandings("test_league_id").then(matchStandings => {
       this.matchStandings = matchStandings;
     });
@@ -56,13 +48,17 @@ export class MatchesPage {
     document.addEventListener('matchdatesready', e=> {
       let id = e['detail'];
       this.dates = this.matchService.getMatchDates(id);
-      console.log(this.dates);
-      
-    })
+    });
+
+    document.addEventListener('matchesbydateready', e => {
+      let date = e['detail'];
+      this.matches = this.matchService.getMatchesByDate(date);
+    });
   }
 
   showMatches(date, index) {
     this.selectedDate = date;
+    this.matchService.getMatchesByDateAsync(date);
   }
 
   onSelectionChange() {

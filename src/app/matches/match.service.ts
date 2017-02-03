@@ -29,4 +29,12 @@ export class MatchService {
   getMatchDates(id) {
     return this.fm.getMatchDates(id);
   }
+
+  getMatchesByDate(date) {
+    return this.fm.getMatchesByDate(date);
+  }
+
+  getMatchesByDateAsync(date) {
+    this.fm.getMatchesByDateAsync(date);
+  }
 }

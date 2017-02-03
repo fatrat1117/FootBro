@@ -85,7 +85,7 @@ export class RankService {
 
   getTeamRanksAsync(orderby, count) {
     //this.needRefreshTeamsRankUI = true;
-    this.fm.queryPublicTeams(orderby, count);
+    this.fm.getPublicTeams(orderby, count);
   }
 
   getPlayerRanksAsync(sortby, count) {
