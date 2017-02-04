@@ -24,7 +24,7 @@ export class FirebaseManager {
   //matches 
   matchDatesMap = {};
   matchesByDateMap = {};
-  matchesMap = {};
+  cashedMatchesMap = {};
 
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,
@@ -512,6 +512,10 @@ export class FirebaseManager {
     return this.af.database.list('/tournaments/list/' + id + '/dates');
   }
 
+  afMatch(id) {
+    return this.af.database.object('/matches/list/' + id);
+  }
+
   matchListRef() {
     return '/matches/list';
   }
@@ -563,11 +567,29 @@ export class FirebaseManager {
     let sub = afQuery.subscribe(snapshots => {
       sub.unsubscribe();
       snapshots.forEach(snapshot => {
-        this.matchesMap[snapshot.$key] = snapshot;
+        //monitor match change
+        this.getMatchAsync(snapshot.$key);
+        //this.cashedMatchesMap[snapshot.$key] = snapshot;
       });
       this.matchesByDateMap[date] = snapshots;
       this.FireCustomEvent('matchesbydateready', date);
     });
+  }
+
+  getMatch(id) {
+    return this.cashedMatchesMap[id];
+  }
+
+  getMatchAsync(id) {
+    if (this.getMatch(id))
+      this.FireCustomEvent('matchready', id);
+    else 
+    {
+      this.afMatch(id).subscribe(snapshot => {
+        this.cashedMatchesMap[id] = snapshot;
+        this.FireCustomEvent('matchready', id);
+      }); 
+    }
   }
 
   /****************************** Misc ******************************/
@@ -954,11 +976,6 @@ export class FirebaseManager {
 //   getMatchesExport() {
 //     return this.af.database.object('/matches/export');
 //   }
-
-//   getMatch(id) {
-//     return this.af.database.object('/matches/list/' + id);
-//   }
-
 
 //   getMatchDate(day) {
 //     return this.af.database.object('/matches/dates/' + day);

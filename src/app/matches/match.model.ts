@@ -16,3 +16,17 @@ export class MatchStanding {
   goalsAgainst: number;
   points: number;
 }
+
+export class Match {
+  id;
+  date;
+  time;
+  homeId;
+  awayId;
+  homeName;
+  awayName;
+  homeScore;
+  awayScore;
+  type;
+  tournamentId;
+}

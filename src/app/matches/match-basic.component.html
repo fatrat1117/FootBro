@@ -3,30 +3,30 @@
     <ion-col class="matches-info" no-padding>
       <ion-item class="team-bar">
         <ion-thumbnail item-left>
-          <img src="assets/team-logo/team_logo.jpg">
+          <img [src]="home?.logo">
         </ion-thumbnail>
         <ion-grid no-padding>
           <ion-row no-padding>
             <ion-col no-padding class="team-name">
-              {{ matchBasic.homeId }}
+              {{ home?.name }}
             </ion-col>
             <ion-col no-padding width-10 class="team-score">
-              {{ matchBasic.homeScore }}
+              {{ match.homeScore }}
             </ion-col>
           </ion-row>
         </ion-grid>
       </ion-item>
       <ion-item class="team-bar">
         <ion-thumbnail item-left>
-          <img src="assets/team-logo/team_logo.jpg">
+          <img [src]="away?.logo">
         </ion-thumbnail>
         <ion-grid no-padding>
           <ion-row no-padding>
             <ion-col no-padding class="team-name">
-              {{ matchBasic.awayId }}
+              {{ away?.name }}
             </ion-col>
             <ion-col no-padding width-20 class="team-score">
-              {{matchBasic.awayScore}}
+              {{match.awayScore}}
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -35,7 +35,7 @@
     <ion-col class="matches-time">
       <div class="matches-time-wrapper">
         <ion-item>
-          <p>{{ matchBasic.time | numberToTimePipe }}</p>
+          <p>{{ match.time | numberToTimePipe }}</p>
         </ion-item>
         <ion-item>
           <button class="detail-button" text-center ion-button clear (click)="goMatchDetailPage()">Details</button>

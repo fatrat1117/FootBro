@@ -42,7 +42,7 @@
       </div>
       <div class="right-scrollview matches-match-info-col" [ngStyle]="{'top': rightViewTop+'px'}">
         <ion-item *ngFor="let match of matches; let i = index">
-          <sb-match-basic [matchBasic]="match"></sb-match-basic>
+          <sb-match-basic [match]="match"></sb-match-basic>
         </ion-item>
       </div>
     </div>

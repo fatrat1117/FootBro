@@ -1,18 +1,33 @@
 import { Injectable } from '@angular/core';
-import { MatchBasic } from './match.model';
+import { MatchBasic, Match } from './match.model';
 import { MatchStanding } from './match.model';
 import { MATCHBASICS } from './shared/mock-data/mock-match-basic';
 import { MATCHSTANDINGS } from './shared/mock-data/mock-match-standing';
 import { FirebaseManager } from '../../providers/firebase-manager';
+import { TeamService} from '../teams/team.service';
 
 @Injectable()
 export class MatchService {
-  constructor(private fm: FirebaseManager) {
+  matchesMap = {};
 
+  constructor(private fm: FirebaseManager,
+  private teamService : TeamService) {
+    // document.addEventListener('matchready', e => {
+    //   let id = e['detail'];
+    //   let fmMatch = this.fm.getMatch(id);
+    //   let match = new Match();
+    //   match.id = fmMatch.$key;
+    //   match.tournamentId = fmMatch.tournamentId;
+    //   match.homeId = fmMatch.homeId;
+    //   match.awayId = fmMatch.awayId;
+    //   match.homeScore = fmMatch.homeScore;
+    //   match.awayScore = fmMatch.awayScore;
+    //   match.date = fmMatch.date;
+    //   match.time = fmMatch.time;
+    //   this.matchesMap[id] = match;
+    //   this.fm.FireCustomEvent('servicematchready', id);
+    // })
   }
-  // getMatchDates(leagueId: string): Promise<number[]> {
-  //   return Promise.resolve(MATCHDATES);
-  // }
 
   getMatchBasics(date: string): Promise<MatchBasic[]> {
     return Promise.resolve(MATCHBASICS);
