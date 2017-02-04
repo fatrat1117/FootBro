@@ -58,10 +58,6 @@ export class MatchService {
     });
   }
 
-  getMatchBasics(date: string): Promise<MatchBasic[]> {
-    return Promise.resolve(MATCHBASICS);
-  }
-
   getMatchStandings(leagueId: string): Promise<MatchStanding[]> {
     return Promise.resolve(MATCHSTANDINGS);
   }
