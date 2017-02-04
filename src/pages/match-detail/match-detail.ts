@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {NavController, Platform} from 'ionic-angular';
+import {ViewController} from 'ionic-angular';
 
 declare var google:any;
 
@@ -8,11 +8,13 @@ declare var google:any;
   templateUrl: 'match-detail.html'
 })
 export class MatchDetailPage {
-  platform;
   map;
 
-  constructor(public navCtrl: NavController, platform: Platform) {
-    this.platform = platform;
+  constructor( private viewCtrl: ViewController) {
+  }
+
+  dismiss() {
+    this.viewCtrl.dismiss();
   }
 
   openHere() {

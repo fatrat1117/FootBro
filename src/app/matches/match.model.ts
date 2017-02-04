@@ -1,3 +1,5 @@
+import { Team} from '../teams/team.model';
+
 export class MatchBasic {
   time: number;
   homeId: string;
@@ -23,8 +25,8 @@ export class Match {
   time;
   homeId;
   awayId;
-  homeName;
-  awayName;
+  home : Team;
+  away : Team;
   homeScore;
   awayScore;
   type;

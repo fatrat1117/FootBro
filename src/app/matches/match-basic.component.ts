@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatchDetailPage } from '../../pages/match-detail/match-detail'
 import { NavController, ModalController } from "ionic-angular";
-import { TeamService } from '../teams/team.service';
+import { MatchService } from '../matches/match.service';
+import { Match} from '../matches/match.model';
 
 @Component({
   selector: 'sb-match-basic',
@@ -11,31 +12,29 @@ import { TeamService } from '../teams/team.service';
 
 export class SbMatchBasicComponent implements OnInit {
   @Input()
-  match;
-  home;
-  away;
+  matchObj;
+  // home;
+  // away;
+  match : Match;
 
   constructor(private navCtrl: NavController,
-    private teamService: TeamService,
-    private modelCtrl: ModalController) {
+    private matchService: MatchService,
+    private modalCtrl: ModalController) {
 
   }
 
   ngOnInit() {
-    document.addEventListener('serviceteamready', e => {
+    document.addEventListener('servicematchready', e => {
       let id = e['detail'];
-      if (id === this.match.homeId)
-        this.home = this.teamService.getTeam(id);
-      else if (id === this.match.awayId)
-        this.away = this.teamService.getTeam(id);
-    });
+      if (id === this.matchObj.$key) {
+        this.match = this.matchService.getMatch(id);
+      }
+    })
 
-    this.teamService.getTeamAsync(this.match.homeId);
-    this.teamService.getTeamAsync(this.match.awayId);
+    this.matchService.getMatchAsync(this.matchObj.$key);
   }
 
   goMatchDetailPage() {
-    this.modelCtrl.create(MatchDetailPage, {id: this.match.$key}).present();
-    //this.navCtrl.push(MatchDetailPage);
+    this.modalCtrl.create(MatchDetailPage, {id: this.match.id}).present();
   }
 }

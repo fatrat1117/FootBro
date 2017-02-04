@@ -32,7 +32,7 @@
   <div [ngSwitch]="selectedInfo">
     <!-- schedule -->
     <div *ngSwitchCase="'schedule'">
-      <div class="left-scrollview matches-date-tab-col" id="sketchElement" [ngStyle]="{'top': leftViewTop+'px'}">
+      <div class="left-scrollview matches-date-tab-col">
         <ion-list class="date-tab-list">
           <ion-item *ngFor="let date of dates;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (click)="showMatches(date)"
             [style.background]="selectedDate == date ? '#00ef00' : 'none'">
@@ -42,7 +42,7 @@
       </div>
       <div class="right-scrollview matches-match-info-col" [ngStyle]="{'top': rightViewTop+'px'}">
         <ion-item *ngFor="let match of matches; let i = index">
-          <sb-match-basic [match]="match"></sb-match-basic>
+          <sb-match-basic [matchObj]="match"></sb-match-basic>
         </ion-item>
       </div>
     </div>
