@@ -8,7 +8,7 @@ import { MatchService } from '../../app/matches/match.service'
 import { LeagueBasic } from '../../app/leagues/shared/league.model'
 import { LeagueService } from '../../app/leagues/shared/league.service'
 import { NewGamePage } from "../new-game/new-game";
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'page-matches',
@@ -22,7 +22,7 @@ export class MatchesPage {
   matches;
   matchStandings: MatchStanding[];
   leagueBasics: LeagueBasic[];
-
+  today;
   selectedInfo: string;
   selectedId: string;
 
@@ -32,6 +32,7 @@ export class MatchesPage {
   }
 
   ionViewDidLoad() {
+    this.today = moment(moment().format("YYYY-MM-DD")).unix() * 1000;
     this.addEventListeners();
     this.matchService.getMatchDatesAsync("all");
 
@@ -44,10 +45,48 @@ export class MatchesPage {
     });
   }
 
+    scrollToToday() {
+      let iToday = -1;
+      if (this.dates.length > 0)
+        iToday = 0;
+      for (let i = 1; i < this.dates.length; ++i) {
+        if (Number(this.dates[i]) > this.today) {
+          break;
+        }
+        iToday = i;
+      }
+
+      //console.log('today index', iToday, this.today);
+
+      if (iToday != -1) {
+        let closeToToday = this.dates[iToday];
+        console.log('date close to today', closeToToday);
+        this.showMatches(closeToToday, iToday);
+        let scrollableDiv = document.getElementById("sketchElement");
+        
+        if (scrollableDiv) {
+          scrollableDiv.scrollTop = 0;
+          let scrollableItem = scrollableDiv.getElementsByTagName("ion-item");
+          
+          if (scrollableItem.length > 0) {
+            scrollableDiv.scrollTop += scrollableItem[0].clientHeight * iToday;
+            console.log(scrollableItem[0].clientHeight, iToday, scrollableDiv, scrollableDiv.scrollTop);
+          }
+        }
+      }
+  }
+
   addEventListeners() {
     document.addEventListener('matchdatesready', e=> {
       let id = e['detail'];
       this.dates = this.matchService.getMatchDates(id);
+      if (!this.selectedDate) {
+        let self = this;
+        setTimeout( () => {
+        self.scrollToToday()
+        },
+        1000);
+      }
     });
 
     document.addEventListener('matchesbydateready', e => {

@@ -35,6 +35,6 @@ export class SbMatchBasicComponent implements OnInit {
   }
 
   goMatchDetailPage() {
-    this.modalCtrl.create(MatchDetailPage, {id: this.match.id}).present();
+    this.modalCtrl.create(MatchDetailPage, {match: this.match}).present();
   }
 }

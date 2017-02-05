@@ -17,14 +17,14 @@
       <!--中间的对战时间-->
       <button ion-button clear color="light" class="content-center-button">
         <img src="assets/icon/icon_time.png" style="width: 20px;height: 15px;">
-        5-15 星期天 09:20
+        {{match?.time | date:'medium'}}
       </button>
       <!--对战信息-->
       <ion-row class="fight-team-info">
         <!--左边队伍信息-->
         <ion-col class="fight-team-info-left">
-          <img src="assets/img/icon1.jpg" class="team-left-img">
-          <p class="team-left-text">阿根廷男子足球国家队</p>
+          <img [src]="match?.home?.logo" class="team-left-img">
+          <p class="team-left-text">{{match?.home?.name}}</p>
         </ion-col>
         <!--中间比分-->
         <ion-col width-25 class="fight-score">
@@ -32,7 +32,7 @@
             <ion-col class="left-number">
               <div class="back-top"></div>
               <div class="back-bottom"></div>
-              <div class="top-score">4</div>
+              <div class="top-score">{{match?.homeScore}}</div>
             </ion-col>
             <ion-col class="center-compare">
               :
@@ -40,29 +40,28 @@
             <ion-col class="right-number">
               <div class="back-top"></div>
               <div class="back-bottom"></div>
-              <div class="top-score">1</div>
+              <div class="top-score">{{match?.awayScore}}</div>
             </ion-col>
           </ion-row>
         </ion-col>
         <!--右边队伍信息-->
         <ion-col class="fight-team-info-right">
-          <img src="assets/img/icon1.jpg" class="team-right-img">
-          <p class="team-right-text">墨西哥男子足球国家队</p>
+          <img [src]="match?.away?.logo" class="team-right-img">
+          <p class="team-right-text">{{match?.away?.name}}</p>
         </ion-col>
       </ion-row>
 
-
       <!--红牌 需要添加图标 todo-->
       <ion-item class="red-style">
-        <button ion-button clear item-left color="light" class="default-font-size">2</button>
+        <button ion-button clear item-left color="light" class="default-font-size">0</button>
         <img class="center-img no-padding" style="background-color: red;">
-        <button ion-button clear item-right color="light" class="default-font-size">2</button>
+        <button ion-button clear item-right color="light" class="default-font-size">0</button>
       </ion-item>
       <!--黄牌  需要添加图标 todo-->
       <ion-item class="yellow-style">
-        <button ion-button clear item-left color="light" class="default-font-size">2</button>
+        <button ion-button clear item-left color="light" class="default-font-size">0</button>
         <img class="center-img no-padding" style="background-color: yellow;">
-        <button ion-button clear item-right color="light" class="default-font-size">2</button>
+        <button ion-button clear item-right color="light" class="default-font-size">0</button>
       </ion-item>
       <!--地图 标题-->
       <ion-item class="map-title">

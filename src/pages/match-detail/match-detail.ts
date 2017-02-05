@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {ViewController} from 'ionic-angular';
+import {ViewController, NavParams} from 'ionic-angular';
 
 declare var google:any;
 
@@ -9,8 +9,11 @@ declare var google:any;
 })
 export class MatchDetailPage {
   map;
+  match;
 
-  constructor( private viewCtrl: ViewController) {
+  constructor( private viewCtrl: ViewController,
+    navParams : NavParams) {
+      this.match = navParams.get('match');
   }
 
   dismiss() {
