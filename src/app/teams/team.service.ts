@@ -15,6 +15,7 @@ export class TeamService {
 
       if (team) {
         let teamData = this.findOrCreateTeam(team.$key);
+        
         teamData.id = team.$key;
         teamData.logo = team['basic-info'].logo;
         teamData.name = team['basic-info'].name;
@@ -59,11 +60,12 @@ export class TeamService {
 
     document.addEventListener('allpublicteamsready', e => {
       let allPublicTeams = this.fm.getAllPublicTeams();
+      this.allTeams = [];
       allPublicTeams.forEach(publicTeam => {
         let id = publicTeam.$key;
         let team = this.findOrCreateTeam(id);
         this.allTeams.push(team);
-        this.getTeamAsync(publicTeam.$key);
+        this.getTeamAsync(id);
       });
 
       this.fm.FireEvent('serviceallteamsready');
@@ -82,10 +84,10 @@ export class TeamService {
   }
 
   getTeamAsync(id) {
-    if (this.getTeam(id))
-      this.fm.FireCustomEvent('serviceteamready', id);
-    else
-      this.fm.getTeamAsync(id);
+    // if (this.getTeam(id))
+    //   this.fm.FireCustomEvent('serviceteamready', id);
+    // else
+    this.fm.getTeamAsync(id);
   }
 
   getTeam(id): Team {

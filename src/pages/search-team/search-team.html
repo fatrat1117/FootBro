@@ -9,6 +9,14 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
+  <!--<ion-list>
+    <ion-item *ngFor='let team of totalTeams'>
+      <ion-avatar item-left>
+        <ion-img [src] = "team.logo"></ion-img>
+      </ion-avatar>
+      {{ team.name }}
+    </ion-item>
+  </ion-list>-->
   <ion-searchbar (ionInput)="filterTeams($event)"></ion-searchbar>
   <ion-list [virtualScroll]="filteredTeams">
     <ion-item *virtualItem="let team" tappable (click)="dismiss(team)">
@@ -18,4 +26,5 @@
       {{ team.name }}
     </ion-item>
   </ion-list>
+
 </ion-content>

@@ -23,22 +23,6 @@ export class SearchTeamPage {
     });
 
     this.service.getAllTeamsAsync();
-    // firebase
-    // let sub = this.fm.getAllPublicTeams().subscribe(snapshots => {
-    //   sub.unsubscribe();
-    //   snapshots.forEach(snapshot => {
-    //     let team: any = {};
-    //     let id = snapshot.$key;
-    //     this.service.getTeamAsync(id);
-    //     // let subs = this.fm.getTeamBasic(snapshot.$key).subscribe(s => {
-    //     //   team.id = snapshot.$key;
-    //     //   team.name = s.name;
-    //     //   team.logo = s.logo;
-    //     // });
-    //     this.totalTeams.push(team);
-    //   });
-    //  this.resetFilter();
-    //});
   }
 
   resetFilter() {
@@ -55,7 +39,7 @@ export class SearchTeamPage {
 
     // set val to the value of the searchbar
     let val = ev.target.value;
-
+    
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
       this.filteredTeams = this.filteredTeams.filter((team) => {
