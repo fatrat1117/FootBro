@@ -5,6 +5,7 @@ import { Team } from './team.model';
 @Injectable()
 export class TeamService {
   teamDataMap = {};
+  allTeams = [];
 
   constructor(private fm: FirebaseManager) {
     document.addEventListener('teamready', e => {
@@ -13,14 +14,13 @@ export class TeamService {
       //console.log(team);
 
       if (team) {
-        let teamData = new Team();
+        let teamData = this.findOrCreateTeam(team.$key);
         teamData.id = team.$key;
         teamData.logo = team['basic-info'].logo;
         teamData.name = team['basic-info'].name;
         teamData.totalPlayers = team['basic-info'].totalPlayers;
         teamData.players = team.players;
-        
-        this.teamDataMap[teamId] = teamData;
+
         let teamPublic = this.fm.getTeamPublic(teamId);
         if (teamPublic) {
           teamData.ability = teamPublic.ability;
@@ -56,6 +56,29 @@ export class TeamService {
       }
       this.fm.FireCustomEvent('serviceteamready', teamId);
     });
+
+    document.addEventListener('allpublicteamsready', e => {
+      let allPublicTeams = this.fm.getAllPublicTeams();
+      allPublicTeams.forEach(publicTeam => {
+        let id = publicTeam.$key;
+        let team = this.findOrCreateTeam(id);
+        this.allTeams.push(team);
+        this.getTeamAsync(publicTeam.$key);
+      });
+
+      this.fm.FireEvent('serviceallteamsready');
+    })
+  }
+
+  findOrCreateTeam(id) {
+    let team;
+    if (this.teamDataMap[id])
+      team = this.teamDataMap[id];
+    else {
+      team = new Team();
+      this.teamDataMap[id] = team;
+    }
+    return team;
   }
 
   getTeamAsync(id) {
@@ -65,7 +88,7 @@ export class TeamService {
       this.fm.getTeamAsync(id);
   }
 
-  getTeam(id) : Team{
+  getTeam(id): Team {
     return this.teamDataMap[id];
   }
 
@@ -79,5 +102,18 @@ export class TeamService {
 
   selfTeamId() {
     return this.fm.selfTeamId();
+  }
+
+  getAllTeams() {
+    return this.allTeams;
+  }
+
+  getAllTeamsAsync() {
+    this.fm.getAllPublicTeamsAsync();
+    // if (this.getAllTeams()) {
+    //   this.fm.FireEvent('allteamsready');
+    // }
+    // else 
+    //   this.fm.getAllPublicTeams();
   }
 }

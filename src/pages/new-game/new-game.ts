@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
-
-import {NavController} from 'ionic-angular';
-
+import {NavController, ModalController} from 'ionic-angular';
+import {SearchTeamPage} from '../search-team/search-team';
 
 @Component({
     selector: 'page-new-game',
@@ -11,7 +10,8 @@ export class NewGamePage {
     players = [];
 
 
-    constructor(public navCtrl: NavController) {
+    constructor(public navCtrl : NavController,
+    private modalCtrl : ModalController) {
         for (var i = 0; i < 4; i++) {
             this.players[i] = {
                 name: i,
@@ -134,6 +134,7 @@ export class NewGamePage {
         alert("delete");
     }
 
-
-
+    searchTeam() {
+        this.modalCtrl.create(SearchTeamPage).present();
+    }
 }

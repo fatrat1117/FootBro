@@ -20,7 +20,7 @@ export class FirebaseManager {
   sortedPublicPlayers;
   queryPlayers;
   pushIdsMap = {};
-
+  cachedAllPublicTeams;
   //matches 
   matchDatesMap = {};
   matchesByDateMap = {};
@@ -190,6 +190,20 @@ export class FirebaseManager {
         this.FireCustomEvent('teamstatsdataready', id);
       });
     }
+  }
+
+  getAllPublicTeams() {
+    return this.cachedAllPublicTeams;
+  }
+
+  getAllPublicTeamsAsync() {
+    let sub = this.af.database.list(`/public/teams/`, {
+      query: { orderByChild: 'name' }
+    }).subscribe(snapshots => {
+      sub.unsubscribe();
+      this.cachedAllPublicTeams = snapshots;
+      this.FireEvent('allpublicteamsready');
+    });
   }
 
   getPublicTeams(orderby, count) {
@@ -938,12 +952,6 @@ export class FirebaseManager {
 //         orderByChild: subject,
 //         limitToLast: limit
 //       }
-//     });
-//   }
-
-//   getPublicTeams() {
-//     return this.af.database.list(`/public/teams/`, {
-//       query: { orderByChild: 'name' }
 //     });
 //   }
 

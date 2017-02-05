@@ -23,7 +23,7 @@
 <!--主体内容区-->
 <ion-content>
     <!--第一部分 圆形进度-->
-    <div class="content-round-progress">
+    <!--<div class="content-round-progress">
         <div class="circle-inside">
             <div class="background-circle"></div>
             <div id="backCircle1" class="rate-picture-1"></div>
@@ -35,7 +35,7 @@
                 <div class="text-bottom">II</div>
             </div>
         </div>
-    </div>
+    </div>-->
     <ion-row class="content-fight">
 
         <ion-col class="left-team">
@@ -69,7 +69,7 @@
         </ion-col>
 
         <ion-col class="right-team">
-            <a class="right-team-name">墨西哥男子足球国家队</a>
+            <a class="right-team-name" (click) = "searchTeam()">墨西哥男子足球国家队</a>
             <button ion-button icon-left clear full style="margin:0px;padding:0px;"color="light">
             <ion-icon name="flag" color="primary"></ion-icon>
             客队

@@ -25,6 +25,7 @@ export class MatchesPage {
   today;
   selectedInfo: string;
   selectedId: string;
+  tournamentId;
 
   constructor(public navCtrl: NavController, private modalCtrl: ModalController, private matchService: MatchService, private leagueService: LeagueService) {
     this.selectedInfo = "schedule";
@@ -106,6 +107,6 @@ export class MatchesPage {
   }
 
   enterNewGame(){
-    this.modalCtrl.create(NewGamePage).present();
+    this.modalCtrl.create(NewGamePage, {tournamentId: this.tournamentId}).present();
   }
 }
