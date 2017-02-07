@@ -65,7 +65,7 @@ export class TeamService {
         let id = publicTeam.$key;
         let team = this.findOrCreateTeam(id);
         this.allTeams.push(team);
-        this.getTeamAsync(id);
+        this.fm.getTeamAsync(id);
       });
 
       this.fm.FireEvent('serviceallteamsready');
@@ -84,10 +84,10 @@ export class TeamService {
   }
 
   getTeamAsync(id) {
-    // if (this.getTeam(id))
-    //   this.fm.FireCustomEvent('serviceteamready', id);
-    // else
-    this.fm.getTeamAsync(id);
+    if (this.getTeam(id))
+      this.fm.FireCustomEvent('serviceteamready', id);
+    else
+      this.fm.getTeamAsync(id);
   }
 
   getTeam(id): Team {
