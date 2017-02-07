@@ -5,8 +5,8 @@
         <ion-option *ngFor="let league of leagueBasics" [value]="league.id">{{ league.name }}</ion-option>
       </ion-select>
     </ion-title>
-    <ion-buttons (click)="enterNewGame()" right>
-      <button ion-button icon-only clear>
+    <ion-buttons right>
+      <button (click)="enterNewGame()" ion-button icon-only clear>
         <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>

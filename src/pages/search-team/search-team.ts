@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {ViewController} from 'ionic-angular';
-import {FirebaseManager} from '../../providers/firebase-manager';
+import {ViewController, ModalController} from 'ionic-angular';
 import {TeamService} from '../../app/teams/team.service';
+import {CreateTeamPage} from '../create-team/create-team'
 
 @Component({
   selector: 'page-search-team',
@@ -10,9 +10,9 @@ import {TeamService} from '../../app/teams/team.service';
 export class SearchTeamPage {
   totalTeams: any[];
   filteredTeams: any[];
-  constructor(private viewCtrl: ViewController, 
-  private fm : FirebaseManager,
-  private service : TeamService) {
+  constructor(private viewCtrl: ViewController,
+  private service : TeamService,
+  private modalCtrl: ModalController) {
     this.totalTeams = [];
   }
 
@@ -55,4 +55,9 @@ export class SearchTeamPage {
   close() {
     this.viewCtrl.dismiss();
   }
+
+  createTeam() {
+    this.modalCtrl.create(CreateTeamPage).present();
+  }
+
 }

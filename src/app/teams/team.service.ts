@@ -98,8 +98,8 @@ export class TeamService {
     this.fm.increaseTeamPopularity(id);
   }
 
-  createTeam(teamObj) {
-    this.fm.createTeam(teamObj);
+  createTeam(teamObj, isDefault = false) {
+    this.fm.createTeam(teamObj, isDefault);
   }
 
   selfTeamId() {

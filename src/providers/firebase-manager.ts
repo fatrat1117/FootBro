@@ -282,7 +282,7 @@ export class FirebaseManager {
     //}, 1000);
   }
 
-  createTeam(teamObj) {
+  createTeam(teamObj, isDefault) {
     let self = this;
     console.log("createTeam", teamObj);
     const queryObservable = this.af.database.list(this.publicTeamsRef(), {
@@ -316,7 +316,7 @@ export class FirebaseManager {
           console.log('create team success', newTeam);
           let newTeamId = newTeam["key"];
           //joinTeam
-          this.joinTeam(newTeamId);
+          this.joinTeam(newTeamId, isDefault);
           //update public
           this.af.database.object(this.publicTeamRef(newTeamId)).update(
             {
@@ -333,12 +333,12 @@ export class FirebaseManager {
     });
   }
 
-  joinTeam(id) {
+  joinTeam(id, isDefault) {
     this.af.database.object(this.teamPlayerRef(this.selfId(), id)).set(true);
     this.af.database.object(this.playerTeamRef(this.selfId(), id)).set({ isMember: true });
     let player = this.cachedPlayersMap[this.auth.uid];
     //set default team if no team
-    if (!this.selfTeamId())
+    if (isDefault || !this.selfTeamId())
       this.afPlayerBasic(this.selfId()).update({ teamId: id });
 
     let afTeamBasic = this.afTeamBasic(id);

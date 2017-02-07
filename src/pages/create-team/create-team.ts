@@ -11,6 +11,9 @@ export class CreateTeamPage {
   teamName: any;
   location: any;
   busy: boolean;
+  isDefault = false;
+  //isDisabled = false;
+
   constructor(private viewCtrl: ViewController,
     private service: TeamService,
     private loc : Localization) {
@@ -45,14 +48,6 @@ export class CreateTeamPage {
 
     this.busy = true;
     let self = this;
-    // let success = function () {
-    //   self.dismiss();
-    // }
-
-    // let error = function (e) {
-    //   self.busy = false;
-    //   alert(e);
-    // }
-    this.service.createTeam(teamObj);
+    this.service.createTeam(teamObj, this.isDefault);
   }
 }

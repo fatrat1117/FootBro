@@ -12,23 +12,23 @@ import { MessagesPage } from "../messages/messages";
 import { PlayerService } from '../../app/players/player.service'
 import { TeamService } from '../../app/teams/team.service'
 import { MessageService } from '../../app/messages/shared/message.service'
-import {CreateTeamPage} from '../create-team/create-team'
+import { CreateTeamPage } from '../create-team/create-team'
 
 @Component({
   selector: 'page-me',
   templateUrl: 'me.html',
-  providers: [ MessageService],
+  providers: [MessageService],
 })
 export class MePage {
   player: Player;
   team: Team;
   messageCount: number;
-  constructor(private navCtrl: NavController, 
-  private modalCtrl: ModalController, 
-  private playerService: PlayerService, 
-  private messageService: MessageService, 
-  private teamService: TeamService,
-  private af: AngularFire) {
+  constructor(private navCtrl: NavController,
+    private modalCtrl: ModalController,
+    private playerService: PlayerService,
+    private messageService: MessageService,
+    private teamService: TeamService,
+    private af: AngularFire) {
     this.messageCount = 0;
   }
 
@@ -47,7 +47,7 @@ export class MePage {
       //console.log(teamId, this.id);
       if (playerId === this.playerService.selfId()) {
         this.player = this.playerService.getPlayer(playerId);
-        if (this.player.teamId) 
+        if (this.player.teamId)
           this.teamService.getTeamAsync(this.player.teamId);
         //console.log(this.team);
       }
@@ -69,7 +69,7 @@ export class MePage {
   }
 
   goPlayerPage() {
-    this.navCtrl.push(MyPlayerPage, {id: this.player.id});
+    this.navCtrl.push(MyPlayerPage, { id: this.player.id });
   }
 
   goFeedbackPage() {
@@ -77,7 +77,7 @@ export class MePage {
   }
 
   goTeamPage() {
-    this.navCtrl.push(MyTeamPage, {id: this.player.teamId});
+    this.navCtrl.push(MyTeamPage, { id: this.player.teamId });
   }
 
   goMessagesPage() {
