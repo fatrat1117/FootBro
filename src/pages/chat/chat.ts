@@ -21,6 +21,7 @@ export class ChatPage {
   //chats: FirebaseListObservable<any[]>;
   chats: any[];
   user: Player;
+  isSystem: boolean;
   isUnread: boolean;
   newMessage: string;
   isRefreshing: boolean;
@@ -31,6 +32,7 @@ export class ChatPage {
   ionViewDidLoad() {
     this.isRefreshing = false;
     this.content.resize();
+    this.isSystem = this.navParams.get('isSystem');
     this.isUnread = this.navParams.get('isUnread');
     this.user = this.navParams.get('user');
 

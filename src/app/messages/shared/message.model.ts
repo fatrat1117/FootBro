@@ -3,4 +3,5 @@ export class Message {
   lastContent: string;
   lastTimestamp: number;
   isUnread: boolean;
+  isSystem: boolean;
 }

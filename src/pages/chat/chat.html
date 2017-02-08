@@ -18,24 +18,34 @@
         <label>{{ getDisplayTime(i) }}</label>
       </ion-item>
 
-      <!-- other -->
-      <ion-item *ngIf="!chat.isFromSelf" class="chat-room-msg-item">
-        <!--div class="chat-room-avatar-div">
-          <ion-thumbnail item-left>
-            <img src="assets/player-photo/player_photo.jpg">
-          </ion-thumbnail>
-        </div-->
-        <div class="msg-box left">
-          {{ chat.content }}
-        </div>
-      </ion-item>
+      <div *ngIf="isSystem">
+        <ion-item class="chat-room-msg-item">
+          <div class="msg-box center">
+            {{ chat.content }}
+          </div>
+        </ion-item>
+      </div>
 
-      <!-- self -->
-      <ion-item *ngIf="chat.isFromSelf" class="chat-room-msg-item">
-        <div class="msg-box right">
-          {{ chat.content }}
-        </div>
-      </ion-item>
+      <!-- other -->
+      <div *ngIf="!isSystem">
+        <ion-item *ngIf="!chat.isFromSelf" class="chat-room-msg-item">
+          <!--div class="chat-room-avatar-div">
+            <ion-thumbnail item-left>
+              <img src="assets/player-photo/player_photo.jpg">
+            </ion-thumbnail>
+          </div-->
+          <div class="msg-box left">
+            {{ chat.content }}
+          </div>
+        </ion-item>
+
+        <!-- self -->
+        <ion-item *ngIf="chat.isFromSelf" class="chat-room-msg-item">
+          <div class="msg-box right">
+            {{ chat.content }}
+          </div>
+        </ion-item>
+      </div>
     </div>
   </ion-list>
 </ion-content>
@@ -50,7 +60,7 @@
   </ion-toolbar>
 </ion-footer-->
 
-<ion-footer class="chat-room-footer">
+<ion-footer class="chat-room-footer" *ngIf="!isSystem">
   <ion-toolbar text-center>
     <input #input type="text" class="text-input" [(ngModel)]="newMessage">
     <ion-buttons right>

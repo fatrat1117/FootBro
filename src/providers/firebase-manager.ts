@@ -115,6 +115,7 @@ export class FirebaseManager {
     })
 
     this.af.database.object(`/chats/${this.auth.uid}/basic-info/${userId}`).set({
+      isSystem: false,
       isUnread: false,
       lastContent: content,
       lastTimestamp: firebase.database.ServerValue.TIMESTAMP,
@@ -128,6 +129,7 @@ export class FirebaseManager {
     })
 
     this.af.database.object(`/chats/${userId}/basic-info/${this.auth.uid}`).set({
+      isSystem: false,
       isUnread: true,
       lastContent: content,
       lastTimestamp: firebase.database.ServerValue.TIMESTAMP,

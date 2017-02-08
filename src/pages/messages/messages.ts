@@ -52,8 +52,9 @@ export class MessagesPage {
     slidingItem.close();
   }
 
-  enterChatPage(userId: string, isUnread: boolean) {
+  enterChatPage(userId: string, isSystem: boolean, isUnread: boolean) {
     this.navCtrl.push(ChatPage, {
+      isSystem: isSystem,
       isUnread: isUnread,
       user: this.watchListMap[userId]
     });

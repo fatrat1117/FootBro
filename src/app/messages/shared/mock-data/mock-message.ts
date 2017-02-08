@@ -5,6 +5,7 @@ export const MESSAGES: Message[] = [
     userId: "0",
     lastContent: "Sjs",
     lastTimestamp: 1484473313198,
-    isUnread: true
+    isUnread: true,
+    isSystem: false
   },
 ];
