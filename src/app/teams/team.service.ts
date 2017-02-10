@@ -11,7 +11,6 @@ export class TeamService {
     document.addEventListener('teamready', e => {
       let teamId = e['detail'];
       let team = this.fm.getTeam(teamId);
-      //console.log(team);
 
       if (team) {
         let teamData = this.findOrCreateTeam(team.$key);

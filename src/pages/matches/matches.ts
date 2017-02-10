@@ -57,11 +57,8 @@ export class MatchesPage {
         iToday = i;
       }
 
-      //console.log('today index', iToday, this.today);
-
       if (iToday != -1) {
         let closeToToday = this.dates[iToday];
-        console.log('date close to today', closeToToday);
         this.showMatches(closeToToday, iToday);
         let scrollableDiv = document.getElementById("sketchElement");
         
@@ -71,7 +68,6 @@ export class MatchesPage {
           
           if (scrollableItem.length > 0) {
             scrollableDiv.scrollTop += scrollableItem[0].clientHeight * iToday;
-            console.log(scrollableItem[0].clientHeight, iToday, scrollableDiv, scrollableDiv.scrollTop);
           }
         }
       }

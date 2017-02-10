@@ -53,7 +53,7 @@ export class MyTeamPage {
       //console.log(teamId, this.id);
       if (teamId === this.id) {
         this.players = this.teamPlayersService.getTeamPlayers(teamId);
-        console.log(this.players);
+        //console.log(this.players);
       }
     });
   }

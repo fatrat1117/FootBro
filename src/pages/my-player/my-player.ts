@@ -71,7 +71,7 @@ export class MyPlayerPage {
 
   share() {
     Screenshot.save('jpg', 80, 'myscreenshot').then((res) => {
-      console.log(res);
+      //console.log(res);
       this.sharePhoto(res.filePath);
     },
       () => {
@@ -82,7 +82,7 @@ export class MyPlayerPage {
   facebookShare() {
       Screenshot.URI(80)
         .then((res) => {
-            console.log(res);
+            //console.log(res);
             SocialSharing.shareViaFacebook(null, res.URI, null)
               .then(() => {},
                 err => {

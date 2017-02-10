@@ -209,7 +209,7 @@ export class FirebaseManager {
   }
 
   getPublicTeams(orderby, count) {
-    console.log('getPublicTeams', orderby, count);
+    //console.log('getPublicTeams', orderby, count);
     //if (!this.afSortedPublicTeams) {
     //  console.log('subscribe sorted public teams')
     this.afSortedPublicTeams = this.af.database.list(`/public/teams/`, {
@@ -482,13 +482,13 @@ export class FirebaseManager {
   }
   //Fire document events 
   FireEvent(name) {
-    console.log(name);
+    //console.log(name);
     var event = new Event(name);
     document.dispatchEvent(event);
   }
 
   FireCustomEvent(name, data) {
-    console.log(name, data);
+    //console.log(name, data);
     var event = new CustomEvent(name, { detail: data });
     document.dispatchEvent(event);
   }

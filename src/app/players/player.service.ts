@@ -11,7 +11,6 @@ export class PlayerService {
       let id = e['detail'];
       
       let playerData = this.fm.getPlayer(id);
-      //console.log(playerData);
       let player = new Player();
       player.id = playerData.$key;
       player.name = playerData['basic-info'].displayName || "John Doe" ;
@@ -26,6 +25,10 @@ export class PlayerService {
         player.height = playerData['detail-info'].height;
       if (playerData['detail-info'] && 'weight' in playerData['detail-info'])
         player.weight = playerData['detail-info'].weight;
+      if (playerData['detail-info'] && 'foot' in playerData['detail-info'])
+        player.foot = playerData['detail-info'].foot;
+      if (playerData['detail-info'] && 'description' in playerData['detail-info'])
+        player.description = playerData['detail-info'].description;
         
       this.playersMap[id] = player;
       this.fm.getPlayerPublicAsync(id);

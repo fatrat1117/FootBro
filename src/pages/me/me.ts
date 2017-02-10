@@ -44,12 +44,10 @@ export class MePage {
   addEventListeners() {
     document.addEventListener('serviceplayerready', e => {
       let playerId = e['detail'];
-      //console.log(teamId, this.id);
       if (playerId === this.playerService.selfId()) {
         this.player = this.playerService.getPlayer(playerId);
         if (this.player.teamId)
           this.teamService.getTeamAsync(this.player.teamId);
-        //console.log(this.team);
       }
     });
 

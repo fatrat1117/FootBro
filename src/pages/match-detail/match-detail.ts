@@ -37,7 +37,6 @@ export class MatchDetailPage {
       //获取当前地理位置
       navigator.geolocation.getCurrentPosition(function (position) {
           var coords = position.coords;
-          //console.log(position);
           //指定一个google地图上的坐标点，同时指定该坐标点的横坐标和纵坐标
           var latlng = new google.maps.LatLng(coords.latitude, coords.longitude);
           var myOptions = {

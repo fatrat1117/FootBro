@@ -55,7 +55,6 @@ export class RankService {
 
     document.addEventListener('publicplayerschanged', e => {
       let sortedPublicPlayers = this.fm.sortedPublicPlayers;
-      //console.log(sortedPublicPlayers); 
       this.playerRanks = [];
       for (let i = 0; i < sortedPublicPlayers.length; ++i) {
         let playerRank = new PlayerRank();

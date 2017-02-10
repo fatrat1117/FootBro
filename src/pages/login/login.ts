@@ -73,7 +73,6 @@ export class LoginPage {
         let self = this;
 
         this.busy = true;
-        //console.log(this.cordovaOauth);
         this.cordovaOauth.logInVia(this.facebookProvider).then(fb => {
             console.log("Facebook success: " + JSON.stringify(fb));
             try {
@@ -90,7 +89,6 @@ export class LoginPage {
             
             this.af.auth.login(creds, providerConfig).then((value) => {
                 console.log('firebase success');
-                //console.log(value);
                 this.dismiss();
             }).catch((error) => {
                 this.error = error;
@@ -142,7 +140,6 @@ export class LoginPage {
         }).catch((error) => {
             this.error = error
             self.busy = false;
-            //console.log(error)
         });
     }
 
