@@ -32,15 +32,21 @@ $alert-input-text-color:#fff;
 $alert-radio-border-color-on:#fff;
 $alert-radio-border-color-off:#888;
 $alert-button-text-color:#888;
-$alert-button-background-color-activated:#0f0;
+//$alert-button-background-color-activated:#0f0;
 $alert-input-border-color:#0f0;
 $alert-radio-label-text-color-checked:#fff;
+$alert-ios-background: #444;
+$alert-md-background-color: #444;
 
 // divider
 $item-md-divider-background: #222;
 $item-ios-divider-background: #222;
 $item-md-divider-color: #fff;
 $item-ios-divider-color: #fff;
+$alert-ios-message-text-color: $text-color;
+$alert-md-message-text-color: $text-color;
+$alert-md-input-border-color: #888;
+$alert-ios-input-border-color: #888;
 
 // list
 $list-md-activated-background-color: #222;

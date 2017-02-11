@@ -56,7 +56,7 @@ export class CheeringTeamStatsPage {
 
   showConfirm() {
     let confirm = this.alertCtrl.create({
-      title: 'Unlock 夏一天',
+      title: '5 points needed',
       message: 'You will be able to message her once unlocked.',
       buttons: [
         {
