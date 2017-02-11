@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ViewController, AlertController, NavParams} from 'ionic-angular';
 
+import { Player } from '../../app/players/player.model'
+import { PlayerService } from '../../app/players/player.service'
 
 @Component({
   template: `
@@ -38,15 +40,19 @@ import { ViewController, AlertController, NavParams} from 'ionic-angular';
   `
 })
 export class CheeringTeamStatsPage {
+  player: Player;
   responseRate: number;
-  constructor(private viewCtrl: ViewController, private alertCtrl: AlertController, private navParams: NavParams) {
+  constructor(private viewCtrl: ViewController, private alertCtrl: AlertController, 
+              private navParams: NavParams, private playerService: PlayerService) {
     this.responseRate = 40;
   }
 
   ionViewDidLoad() {
+    this.player = this.navParams.get("player");
   }
 
   unlock() {
+    //this.showWarning();
     this.showConfirm();
   }
 
@@ -54,14 +60,25 @@ export class CheeringTeamStatsPage {
     this.viewCtrl.dismiss();
   }
 
+  showWarning() {
+    this.alertCtrl.create({
+      title: 'Not enough points',
+      subTitle: 'Balance: ' + this.player.points,
+      message: 'You need at least 5 points to unlock her.',
+      buttons: ['OK']
+    }).present();
+  }
+
   showConfirm() {
     let confirm = this.alertCtrl.create({
       title: '5 points needed',
+      subTitle: 'Balance: ' + this.player.points,
       message: 'You will be able to message her once unlocked.',
       buttons: [
         {
           text: 'Ok',
           handler: () => {
+            this.playerService.updatePoints('2qJEDrRMODbPOafc3cts4jbgS7z2', 5, this.player.points - 5);
             this.dismiss();
           }
         },

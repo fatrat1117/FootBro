@@ -3,17 +3,36 @@ import {NavController, ModalController} from 'ionic-angular'
 
 import { CheeringTeamStatsPage } from './cheering-team-stats'
 
+import { Player } from '../../app/players/player.model'
+import { PlayerService } from '../../app/players/player.service'
+
 @Component({
   selector: 'page-cheering-team',
   templateUrl: 'cheering-team.html',
 })
 export class CheeringTeamPage {
+  selfId: string;
+  player : Player;
+  watchListMap : {};
   who = "baby";
   colorArray = [-1,-1,-1,-1];
 
+  constructor(private nav: NavController, private modalCtrl: ModalController, private playerService: PlayerService) {
+    this.selfId = this.playerService.selfId()
+  }
 
-  constructor(private nav: NavController, private modalCtrl: ModalController) {
+  ionViewDidLoad() {
+    this.addEventListeners();
+    this.playerService.getPlayerAsync(this.selfId);
+  }
 
+  addEventListeners() {
+    document.addEventListener('serviceplayerready', e => {
+      let playerId = e['detail'];
+      if (playerId === this.selfId) {
+        this.player = this.playerService.getPlayer(playerId);
+      }
+    });
   }
 
   highLight(index:number){
@@ -35,7 +54,9 @@ export class CheeringTeamPage {
   }
 
   unlockBaby() {
-    this.modalCtrl.create(CheeringTeamStatsPage).present();
+    this.modalCtrl.create(CheeringTeamStatsPage, {
+      player: this.player,
+    }).present();
   }
 
 }

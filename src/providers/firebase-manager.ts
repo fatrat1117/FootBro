@@ -627,6 +627,23 @@ export class FirebaseManager {
     })
   }
 
+
+
+
+
+  /****************************** Points ******************************/
+  updatePoints(targetId: string, usedPoint: number, newPoints: number) {
+    console.log(this.auth);
+    
+    this.af.database.object(`/players/${this.auth.uid}/points`).update({ total: newPoints });
+    this.af.database.object(`/players/${this.auth.uid}/points/to/${targetId}`).set(usedPoint);
+    this.af.database.object(`/players/${targetId}/points/from/${this.auth.uid}`).set(usedPoint);
+  }
+
+
+
+
+
   /****************************** Misc ******************************/
   postNotification(senderId: string, targetId: string) {
     let notificationObj = {
