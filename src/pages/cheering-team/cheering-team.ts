@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular'
+import {NavController, ModalController} from 'ionic-angular'
+
+import { CheeringTeamStatsPage } from './cheering-team-stats'
 
 @Component({
   selector: 'page-cheering-team',
@@ -10,7 +12,7 @@ export class CheeringTeamPage {
   colorArray = [-1,-1,-1,-1];
 
 
-  constructor(private nav: NavController) {
+  constructor(private nav: NavController, private modalCtrl: ModalController) {
 
   }
 
@@ -30,6 +32,10 @@ export class CheeringTeamPage {
     }else{
       return "#999";
     }
+  }
+
+  unlockBaby() {
+    this.modalCtrl.create(CheeringTeamStatsPage).present();
   }
 
 }
