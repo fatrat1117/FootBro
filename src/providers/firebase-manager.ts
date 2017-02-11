@@ -529,6 +529,7 @@ export class FirebaseManager {
 
   afTournamentList() {
     if (!this._afTournamentList)
+      this._afTournamentList = this.af.database.list('/tournaments/list');
     return this._afTournamentList;
   }
 
