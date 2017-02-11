@@ -8,7 +8,7 @@
 
 <ion-content class="login-content" padding>
   <div padding>
-    <button [disabled]="busy" class="login-connect-btn login-connect-btn-fb" block (click)="registerUserWithFacebook($event)">
+    <button ion-button [disabled]="busy" class="login-connect-btn login-connect-btn-fb" block (click)="registerUserWithFacebook($event)">
             <ion-icon name="logo-facebook"></ion-icon>
         {{'ConnectWithFacebook' | trans}}</button>
   </div>

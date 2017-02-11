@@ -25,6 +25,7 @@ export class FirebaseManager {
   matchDatesMap = {};
   matchesByDateMap = {};
   cashedMatchesMap = {};
+  _afTournamentList;
 
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,
@@ -326,11 +327,9 @@ export class FirebaseManager {
               popularity: 1
             });
           this.FireCustomEvent('createteamsucceeded', newTeamId);
-          //success();
-        });//.catch(err => error(err));
+        });
       } else {
         this.FireCustomEvent('createteamfailed', 'Teamexists');
-        //error(this.loc.getString("Teamexists"));
       }
     });
   }
@@ -529,7 +528,9 @@ export class FirebaseManager {
   }
 
   afTournamentList() {
-    return this.af.database.list('/tournaments/list');
+    if (!this._afTournamentList)
+      this._afTournamentList = this.af.database.list('/tournaments/list');
+    return this._afTournamentList;
   }
 
   afMatch(id) {

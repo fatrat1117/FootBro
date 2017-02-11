@@ -119,4 +119,8 @@ export class MatchService {
   getTeamMatchesAsync(id) {
     this.fm.getTeamMatchesAsync(id);
   }
+
+  afTournamentList() {
+    return this.fm.afTournamentList();
+  }
 }

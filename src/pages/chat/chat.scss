@@ -1,4 +1,10 @@
 page-chat {
+
+  ion-title{
+    .toolbar-title{
+      padding:0;
+    }
+  }
   .chat-room-avatar {
     float: left;
     margin-right: 10px;
@@ -10,7 +16,8 @@ page-chat {
     float: left;
     text-align: center;
     margin: 0 auto;
-    padding: 0.6rem;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
   }
 
   .chat-room-time-item {
@@ -25,13 +32,21 @@ page-chat {
       font-size: 0.7em;
     }
   }
+
+  .chat-room-msg-item-admin{
+    ion-label{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
   .chat-room-msg-item {
     background-color: transparent;
     ion-label {
       white-space: normal;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      //display: flex;
+      //align-items: center;
+      //justify-content: center;
     }
     .msg-box {
       min-width: 25px;
