@@ -4,20 +4,21 @@ import { MatchStanding } from './match.model';
 import { MATCHBASICS } from './shared/mock-data/mock-match-basic';
 import { MATCHSTANDINGS } from './shared/mock-data/mock-match-standing';
 import { FirebaseManager } from '../../providers/firebase-manager';
-import { TeamService} from '../teams/team.service';
-import { Team} from '../teams/team.model';
+import { TeamService } from '../teams/team.service';
+import { Team } from '../teams/team.model';
 
 @Injectable()
 export class MatchService {
   matchesMap = {};
   teamsMap = {};
+  teamMatchesMap = {};
 
   constructor(private fm: FirebaseManager,
-  private teamService : TeamService) {
+    private teamService: TeamService) {
     document.addEventListener('matchready', e => {
       let id = e['detail'];
       let fmMatch = this.fm.getMatch(id);
-      let match = new Match();
+      let match = this.findOrCreateMatch(id);
       match.id = fmMatch.$key;
       match.tournamentId = fmMatch.tournamentId;
       match.homeId = fmMatch.homeId;
@@ -41,7 +42,6 @@ export class MatchService {
       }
       match.home = home;
       match.away = away;
-      this.matchesMap[id] = match;
       this.teamService.getTeamAsync(match.homeId);
       this.teamService.getTeamAsync(match.awayId);
       this.fm.FireCustomEvent('servicematchready', id);
@@ -54,8 +54,31 @@ export class MatchService {
         let fmTeam = this.teamService.getTeam(id);
         team.name = fmTeam.name;
         team.logo = fmTeam.logo;
-      } 
+      }
     });
+
+    document.addEventListener('teammatchesready', e => {
+      let result = e['detail'];
+      let matches = [];
+      this.teamMatchesMap[result.id] = matches;
+      result.matches.forEach(m => {
+        let match = this.findOrCreateMatch(m.$key);
+        matches.push(match);
+        this.fm.getMatchAsync(m.$key);
+      });
+      this.fm.FireCustomEvent('serviceteammatchesready', result.id);
+    })
+  }
+
+  findOrCreateMatch(id) {
+    let match;
+    if (this.matchesMap[id])
+      match = this.matchesMap[id];
+    else {
+      match = new Match();
+      this.matchesMap[id] = match;
+    }
+    return match;
   }
 
   getMatchStandings(leagueId: string): Promise<MatchStanding[]> {
@@ -87,5 +110,13 @@ export class MatchService {
       this.fm.FireCustomEvent('servicematchready', id);
     else
       this.fm.getMatchAsync(id);
+  }
+  
+  getTeamMatches(id) {
+    return this.teamMatchesMap[id];
+  }
+
+  getTeamMatchesAsync(id) {
+    this.fm.getTeamMatchesAsync(id);
   }
 }

@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { TeamService } from '../../app/teams/team.service'
 import { Team, TeamStat } from '../../app/teams/team.model'
 import { TeamPlayersService } from '../../app/teams/teamplayers.service'
+import { MatchService } from '../../app/matches/match.service'
 
 @Component({
   selector: 'page-my-team',
@@ -15,11 +16,13 @@ export class MyTeamPage {
   currTeamStat;
   selectedStatIndex = 0;
   players;
+  matches;
 
   constructor(public navCtrl: NavController,
     private navParams: NavParams,
     private service: TeamService,
-    private teamPlayersService: TeamPlayersService) {
+    private teamPlayersService: TeamPlayersService,
+    private matchService : MatchService) {
     this.first = [
       {
         'win': '7',
@@ -34,6 +37,7 @@ export class MyTeamPage {
     this.id = this.navParams.get('id');
     this.service.increasePopularity(this.id);
     this.service.getTeamAsync(this.id, true);
+    this.matchService.getTeamMatchesAsync(this.id);
   }
 
   addEventListeners() {
@@ -54,6 +58,13 @@ export class MyTeamPage {
       if (teamId === this.id) {
         this.players = this.teamPlayersService.getTeamPlayers(teamId);
         //console.log(this.players);
+      }
+    });
+
+    document.addEventListener('serviceteammatchesready', e=> {
+      let teamId = e['detail'];
+      if (teamId === this.id) {
+        this.matches = this.matchService.getTeamMatches(teamId);
       }
     });
   }

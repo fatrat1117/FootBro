@@ -5,8 +5,8 @@ import { MyApp } from './app.component';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { RankPage } from '../pages/rank/rank';
 import { ContactPage } from '../pages/contact/contact';
-import { HomePage} from '../pages/home/home';
-import { ModalContentPage} from '../pages/home/place-selection';
+import { HomePage } from '../pages/home/home';
+import { ModalContentPage } from '../pages/home/place-selection';
 import { TabsPage } from '../pages/tabs/tabs';
 import { MePage } from "../pages/me/me";
 import { MessagesPage } from "../pages/messages/messages";
@@ -26,19 +26,19 @@ import { MatchesPage } from "../pages/matches/matches";
 import { CheeringTeamPage } from "../pages/cheering-team/cheering-team";
 import { MyTeamPage } from "../pages/my-team/my-team";
 import { LoginPage } from '../pages/login/login';
-import {GameSchedulePage} from "../pages/game-schedule/game-schedule";
-import {NewGamePage} from "../pages/new-game/new-game";
-import {CreateTeamPage} from '../pages/create-team/create-team';
-import {SearchTeamPage} from '../pages/search-team/search-team';
+import { GameSchedulePage } from "../pages/game-schedule/game-schedule";
+import { NewGamePage } from "../pages/new-game/new-game";
+import { CreateTeamPage } from '../pages/create-team/create-team';
+import { SearchTeamPage } from '../pages/search-team/search-team';
 
 // services
 import { AngularFireModule } from 'angularfire2';
-import { FirebaseManager} from '../providers/firebase-manager';
+import { FirebaseManager } from '../providers/firebase-manager';
 import { PlayerService } from './players/player.service';
 import { TeamService } from './teams/team.service';
 import { TeamPlayersService } from './teams/teamplayers.service'
 import { MiscService } from './misc/misc.service'
-
+import { MatchService } from './matches/match.service'
 // pipes
 import { TransPipe, Localization } from '../providers/localization';
 import { StringToDatePipe, NumberToTimePipe, MomentPipe } from '../pipes/moment.pipe';
@@ -50,15 +50,15 @@ import { SbLoadingComponent } from './common/loading.component';
 import { SbModalNavbarComponent } from './common/modal.navbar.component';
 import { SbMatchBasicComponent } from './matches/match-basic.component';
 import { MatchDetailPage } from "../pages/match-detail/match-detail";
-import {GameRatingPage} from "../pages/game-rating/game-rating";
+import { GameRatingPage } from "../pages/game-rating/game-rating";
 
 export const firebaseConfig = {
-    apiKey: "AIzaSyCrhL6g6rHs7-X09jw5Oq8I_g0fspD8bf8",
-    authDomain: "project-3416565325366537224.firebaseapp.com",
-    databaseURL: "https://project-3416565325366537224.firebaseio.com",
-    storageBucket: "project-3416565325366537224.appspot.com",
-    messagingSenderId: "149844388984"
-  };
+  apiKey: "AIzaSyCrhL6g6rHs7-X09jw5Oq8I_g0fspD8bf8",
+  authDomain: "project-3416565325366537224.firebaseapp.com",
+  databaseURL: "https://project-3416565325366537224.firebaseio.com",
+  storageBucket: "project-3416565325366537224.appspot.com",
+  messagingSenderId: "149844388984"
+};
 
 @NgModule({
   declarations: [
@@ -148,12 +148,13 @@ export const firebaseConfig = {
     CreateTeamPage,
     SearchTeamPage
   ],
-  providers: [ { provide: ErrorHandler, useClass: IonicErrorHandler },
-  FirebaseManager,
-  Localization,
-  PlayerService,
-  TeamService,
-  TeamPlayersService ]
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
+    FirebaseManager,
+    Localization,
+    PlayerService,
+    TeamService,
+    MatchService,
+    TeamPlayersService]
 })
 export class AppModule {
 }
