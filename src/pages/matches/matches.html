@@ -2,7 +2,8 @@
   <ion-navbar no-border-bottom>
     <ion-title>
       <ion-select [(ngModel)]="selectedId" (ngModelChange)="onSelectionChange()">
-        <ion-option *ngFor="let league of leagueBasics" [value]="league.id">{{ league.name }}</ion-option>
+        <ion-option [value]="0">{{ 'FriendlyMatches' | trans }}</ion-option>
+        <ion-option *ngFor="let league of afTournamentList | async" [value]="league.$key">{{ league.name }}</ion-option>
       </ion-select>
     </ion-title>
     <ion-buttons right>

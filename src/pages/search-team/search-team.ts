@@ -59,5 +59,4 @@ export class SearchTeamPage {
   createTeam() {
     this.modalCtrl.create(CreateTeamPage).present();
   }
-
 }
