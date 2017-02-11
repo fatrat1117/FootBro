@@ -33,11 +33,11 @@ export class MyTeamPage {
     this.addEventListeners();
     this.id = this.navParams.get('id');
     this.service.increasePopularity(this.id);
-    this.service.getTeamAsync(this.id);
+    this.service.getTeamAsync(this.id, true);
   }
 
   addEventListeners() {
-    document.addEventListener('serviceteamready', e => {
+    document.addEventListener('teamstatsdataready', e => {
       //console.log(e);
       let teamId = e['detail'];
       //console.log(teamId, this.id);

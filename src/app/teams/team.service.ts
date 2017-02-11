@@ -28,8 +28,8 @@ export class TeamService {
         }
         else
           this.fm.getTeamPublicAsync(teamId);
-
-        this.fm.getTeamStatsAsync(teamId);
+        this.fm.FireCustomEvent('serviceteamready', teamId);
+        //this.fm.getTeamStatsAsync(teamId);
       }
     }
     );
@@ -54,7 +54,6 @@ export class TeamService {
         teamData.last_30 = teamStats.last_30;
         teamData.overall = teamStats.overall;
       }
-      this.fm.FireCustomEvent('serviceteamready', teamId);
     });
 
     document.addEventListener('allpublicteamsready', e => {
@@ -82,11 +81,14 @@ export class TeamService {
     return team;
   }
 
-  getTeamAsync(id) {
+  getTeamAsync(id, pullStats = false) {
     if (this.getTeam(id))
       this.fm.FireCustomEvent('serviceteamready', id);
     else
       this.fm.getTeamAsync(id);
+
+    if(pullStats)
+      this.fm.getTeamStatsAsync(id);
   }
 
   getTeam(id): Team {
