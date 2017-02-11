@@ -1,7 +1,10 @@
 <ion-header>
   <ion-navbar no-border-bottom>
     <ion-title>
-      <ion-select [(ngModel)]="selectedId" (ngModelChange)="onSelectionChange()">
+      <ion-select [(ngModel)]="selectedId" 
+      (ngModelChange)="onSelectionChange()" 
+      [okText]="'OK' | trans" 
+      [cancelText]="'Cancel' | trans">
         <ion-option [value]="0">{{ 'FriendlyMatches' | trans }}</ion-option>
         <ion-option *ngFor="let league of afTournamentList | async" [value]="league.$key">{{ league.name }}</ion-option>
       </ion-select>

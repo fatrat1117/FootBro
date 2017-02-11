@@ -93,8 +93,11 @@ export class MatchesPage {
   }
 
   onSelectionChange() {
-    if (this.selectedId == "0")
+    if (this.selectedId == "0") {
       this.selectedInfo = "schedule";
+      this.matchService.getMatchDatesAsync("all");
+    } else 
+      this.matchService.getMatchDatesAsync(this.selectedId);
   }
 
   enterNewGame() {
