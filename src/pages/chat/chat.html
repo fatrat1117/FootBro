@@ -19,7 +19,7 @@
       </ion-item>
 
       <div *ngIf="isSystem">
-        <ion-item class="chat-room-msg-item">
+        <ion-item class="chat-room-msg-item" [ngClass] = "['chat-room-msg-item-admin']">
           <div class="msg-box center">
             {{ chat.content }}
           </div>
