@@ -528,6 +528,10 @@ export class FirebaseManager {
     return this.af.database.list('/tournaments/list/' + id + '/dates');
   }
 
+  afTournamentList() {
+    return this.af.database.list('/tournaments/list');
+  }
+
   afMatch(id) {
     return this.af.database.object('/matches/list/' + id);
   }
@@ -606,6 +610,20 @@ export class FirebaseManager {
         this.FireCustomEvent('matchready', id);
       }); 
     }
+  }
+
+  getTeamMatchesAsync(id) {
+    let sub = this.af.database.list('/teams_matches/' + id + '/matches', {
+      query: {
+        orderByChild: 'date'
+    }}).subscribe(snapshots => {
+      sub.unsubscribe();
+      let result = {
+        id : id,
+        matches: snapshots.reverse()
+      };
+      this.FireCustomEvent('teammatchesready', result);
+    })
   }
 
   /****************************** Misc ******************************/
@@ -1535,9 +1553,6 @@ export class FirebaseManager {
 
 
 //   /********** All Tournament Operations ***********/
-//   getTournamentList() {
-//     return this.af.database.list('/tournaments/list');
-//   }
 
 //   getTournamentTable(id) {
 //     return this.af.database.object('/tournaments/list/' + id + '/table');

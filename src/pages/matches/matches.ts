@@ -13,7 +13,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'page-matches',
   templateUrl: 'matches.html',
-  providers: [ MatchService, LeagueService ]
+  providers: [LeagueService ]
 })
 
 export class MatchesPage {

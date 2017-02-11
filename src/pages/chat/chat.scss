@@ -10,6 +10,7 @@ page-chat {
     float: left;
     text-align: center;
     margin: 0 auto;
+    padding: 0.6rem;
   }
 
   .chat-room-time-item {
@@ -28,6 +29,9 @@ page-chat {
     background-color: transparent;
     ion-label {
       white-space: normal;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .msg-box {
       min-width: 25px;
