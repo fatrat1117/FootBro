@@ -5,6 +5,8 @@ import { Player } from '../../app/players/player.model'
 import { Screenshot, SocialSharing} from 'ionic-native';
 declare var Wechat: any;
 
+import { ChatPage } from '../chat/chat'
+
 @Component({
   selector: 'page-my-player',
   templateUrl: 'my-player.html',
@@ -18,9 +20,7 @@ export class MyPlayerPage {
   PercentOfLikes: number;
   PercentOfUnLikes: number;
 
-  constructor(private nav: NavController,
-    private service: PlayerService,
-    private navParams: NavParams) {
+  constructor(private navCtrl: NavController, private service: PlayerService, private navParams: NavParams) {
     var fromDBLikes = 213;
     var fromDBUnLikes = 67;
     this.NumOfLikes = fromDBLikes;
@@ -92,6 +92,14 @@ export class MyPlayerPage {
           err => {
             alert(err);
           });
+  }
+
+  enterChatPage() {
+    this.navCtrl.push(ChatPage, {
+      isSystem: false,
+      isUnread: false,
+      user: this.player
+    });
   }
  
 }
