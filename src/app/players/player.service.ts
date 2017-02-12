@@ -29,6 +29,9 @@ export class PlayerService {
         player.foot = playerData['detail-info'].foot;
       if (playerData['detail-info'] && 'description' in playerData['detail-info'])
         player.description = playerData['detail-info'].description;
+
+      if (playerData['points'] && 'total' in playerData['points'])
+        player.points = playerData['points'].total;
         
       this.playersMap[id] = player;
       this.fm.getPlayerPublicAsync(id);
@@ -76,5 +79,9 @@ export class PlayerService {
 
   selfId() {
     return this.fm.selfId();
+  }
+
+  updatePoints(targetId: string, usedPoint: number, newPoints: number) {
+    this.fm.updatePoints(targetId, usedPoint, newPoints)
   }
 }

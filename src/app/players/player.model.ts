@@ -14,4 +14,5 @@ export class Player {
   role: string;
   teams: string[];
   popularity;
+  points: number;
 }

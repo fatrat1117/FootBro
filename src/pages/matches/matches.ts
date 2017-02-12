@@ -4,16 +4,12 @@ import { NavController, ModalController } from 'ionic-angular';
 import { MatchBasic } from '../../app/matches/shared/match.model'
 import { MatchStanding } from '../../app/matches/match.model'
 import { MatchService } from '../../app/matches/match.service'
-
-import { LeagueBasic } from '../../app/leagues/shared/league.model'
-import { LeagueService } from '../../app/leagues/shared/league.service'
 import { NewGamePage } from "../new-game/new-game";
 import * as moment from 'moment';
 
 @Component({
   selector: 'page-matches',
-  templateUrl: 'matches.html',
-  providers: [LeagueService ]
+  templateUrl: 'matches.html'
 })
 
 export class MatchesPage {
@@ -21,15 +17,18 @@ export class MatchesPage {
   selectedDate: number;
   matches;
   matchStandings: MatchStanding[];
-  leagueBasics: LeagueBasic[];
   today;
   selectedInfo: string;
   selectedId: string;
   tournamentId;
+  afTournamentList;
 
-  constructor(public navCtrl: NavController, private modalCtrl: ModalController, private matchService: MatchService, private leagueService: LeagueService) {
+  constructor(public navCtrl: NavController,
+    private modalCtrl: ModalController,
+    private matchService: MatchService) {
     this.selectedInfo = "schedule";
     this.selectedId = "0";
+    this.afTournamentList = this.matchService.afTournamentList();
   }
 
   ionViewDidLoad() {
@@ -40,49 +39,45 @@ export class MatchesPage {
     this.matchService.getMatchStandings("test_league_id").then(matchStandings => {
       this.matchStandings = matchStandings;
     });
-
-    this.leagueService.getLeagueBasics("test_league_id").then(leagueBasics => {
-      this.leagueBasics = leagueBasics;
-    });
   }
 
-    scrollToToday() {
-      let iToday = -1;
-      if (this.dates.length > 0)
-        iToday = 0;
-      for (let i = 1; i < this.dates.length; ++i) {
-        if (Number(this.dates[i]) > this.today) {
-          break;
-        }
-        iToday = i;
+  scrollToToday() {
+    let iToday = -1;
+    if (this.dates.length > 0)
+      iToday = 0;
+    for (let i = 1; i < this.dates.length; ++i) {
+      if (Number(this.dates[i]) > this.today) {
+        break;
       }
+      iToday = i;
+    }
 
-      if (iToday != -1) {
-        let closeToToday = this.dates[iToday];
-        this.showMatches(closeToToday, iToday);
-        let scrollableDiv = document.getElementById("sketchElement");
-        
-        if (scrollableDiv) {
-          scrollableDiv.scrollTop = 0;
-          let scrollableItem = scrollableDiv.getElementsByTagName("ion-item");
-          
-          if (scrollableItem.length > 0) {
-            scrollableDiv.scrollTop += scrollableItem[0].clientHeight * iToday;
-          }
+    if (iToday != -1) {
+      let closeToToday = this.dates[iToday];
+      this.showMatches(closeToToday, iToday);
+      let scrollableDiv = document.getElementById("sketchElement");
+
+      if (scrollableDiv) {
+        scrollableDiv.scrollTop = 0;
+        let scrollableItem = scrollableDiv.getElementsByTagName("ion-item");
+
+        if (scrollableItem.length > 0) {
+          scrollableDiv.scrollTop += scrollableItem[0].clientHeight * iToday;
         }
       }
+    }
   }
 
   addEventListeners() {
-    document.addEventListener('matchdatesready', e=> {
+    document.addEventListener('matchdatesready', e => {
       let id = e['detail'];
       this.dates = this.matchService.getMatchDates(id);
       if (!this.selectedDate) {
         let self = this;
-        setTimeout( () => {
-        self.scrollToToday()
+        setTimeout(() => {
+          self.scrollToToday()
         },
-        1000);
+          1000);
       }
     });
 
@@ -98,11 +93,14 @@ export class MatchesPage {
   }
 
   onSelectionChange() {
-    if (this.selectedId == "0")
+    if (this.selectedId == "0") {
       this.selectedInfo = "schedule";
+      this.matchService.getMatchDatesAsync("all");
+    } else 
+      this.matchService.getMatchDatesAsync(this.selectedId);
   }
 
-  enterNewGame(){
-    this.modalCtrl.create(NewGamePage, {tournamentId: this.tournamentId}).present();
+  enterNewGame() {
+    this.modalCtrl.create(NewGamePage, { tournamentId: this.tournamentId }).present();
   }
 }
