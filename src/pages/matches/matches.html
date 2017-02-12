@@ -29,9 +29,9 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div [ngSwitch]="selectedInfo">
+  <div [ngSwitch]="selectedInfo" [ngStyle]="{'height':'100%'}">
     <!-- schedule -->
-    <div *ngSwitchCase="'schedule'">
+    <div *ngSwitchCase="'schedule'" [ngStyle]="{'height':'100%'}">
       <div class="left-scrollview matches-date-tab-col" id="sketchElement">
         <ion-list class="date-tab-list">
           <ion-item *ngFor="let date of dates;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (click)="showMatches(date)"

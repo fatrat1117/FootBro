@@ -40,17 +40,25 @@ page-matches {
     overflow-y: scroll;
   }
   .left-scrollview {
+    //width: 15%;
+    //height: 100%;
+    //overflow: scroll;
+    //position: fixed;
+    //position: fixed;
     width: 15%;
-    height: 100%;
-    overflow: scroll;
+    height: calc(100% - 168px);
+    left: 0;
+    right: 0;
+    overflow-y: scroll;
+    position: fixed;
   }
   .right-scrollview {
-    display: inline-block;
     width: 85%;
     left: 15%;
-    overflow: scroll;
-    position: absolute;
-    top: 0px;
+    overflow-y: scroll;
+    //position: absolute;
+    height: calc(100% - 168px);
+    position: fixed;
   }
   .mvp-avatar {
     height: 80%;
