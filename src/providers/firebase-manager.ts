@@ -701,7 +701,6 @@ export class FirebaseManager {
     let self = this;
     let options = {
       quality: 75,
-      allowEdit: true,
       encodingType: Camera.EncodingType.JPEG,
       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
       destinationType: Camera.DestinationType.DATA_URL,
