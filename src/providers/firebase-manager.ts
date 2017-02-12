@@ -27,6 +27,9 @@ export class FirebaseManager {
   matchesByDateMap = {};
   cashedMatchesMap = {};
   _afTournamentList;
+  //cheerleader
+  cachedPendingCheerleaders;
+  cachedApprovedCheerleaders;
 
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,
@@ -325,7 +328,8 @@ export class FirebaseManager {
           this.af.database.object(this.publicTeamRef(newTeamId)).update(
             {
               name: teamObj.name,
-              popularity: 1
+              popularity: 1,
+              ability: 1000
             });
           this.FireCustomEvent('createteamsucceeded', newTeamId);
         });
@@ -696,16 +700,15 @@ export class FirebaseManager {
     return blob;
   }
 
-  selectImgGetData(success, error) {
+  selectImgGetData(width, height, success, error) {
     let self = this;
     let options = {
       quality: 75,
-      allowEdit: true,
       encodingType: Camera.EncodingType.JPEG,
       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
       destinationType: Camera.DestinationType.DATA_URL,
-      targetWidth: 256,
-      targetHeight: 256
+      targetWidth: width,
+      targetHeight: height
     };
 
     Camera.getPicture(options).then(imageData => {
@@ -715,7 +718,7 @@ export class FirebaseManager {
     });
   }
 
-  updateImgGetUrl(imageData, imgId, success, error) {
+  updateImgGetUrl(imageData, imgId, width, height, success, error) {
     let self = this;
     let options = {
       quality: 75,
@@ -723,8 +726,8 @@ export class FirebaseManager {
       encodingType: Camera.EncodingType.JPEG,
       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
       destinationType: Camera.DestinationType.DATA_URL,
-      targetWidth: 256,
-      targetHeight: 256
+      targetWidth: width,
+      targetHeight: height
     };
 
     // imageData is either a base64 encoded string or a file URI
@@ -732,7 +735,7 @@ export class FirebaseManager {
     let contentType = 'image/jpg';
     let b64Data = imageData;
 
-    let blob = this.b64toBlob(b64Data, contentType, 256);
+    let blob = this.b64toBlob(b64Data, contentType, width);
 
     let metadata = {
       contentType: 'image/jpeg',
@@ -748,6 +751,11 @@ export class FirebaseManager {
       console.log('upload image done', downloadURL);
       success(downloadURL);
     });
+  }
+
+  //cheerleader
+  submitCheerleaderInfo(url) {
+    this.af.database.object('/cheerleaders/pending/' + this.auth.uid).set({photo: url});
   }
 }
 

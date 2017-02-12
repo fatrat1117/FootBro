@@ -199,6 +199,7 @@ export class Localization {
             Recent30matches: 'Recent 30 matches',
             All: 'all',
             BecomeCheerleader: 'Become Cheerleader',
+            ApplicationSubmited: 'Your application is submitted. We will process it within 1 working day'
         },
 
         zh: {
@@ -378,7 +379,8 @@ export class Localization {
             Recent15matches: '最近15场',
             Recent30matches: '最近30场',
             All: '全部',
-            BecomeCheerleader: '成为宝贝'
+            BecomeCheerleader: '成为宝贝',
+            ApplicationSubmited: '你的申请已经提交，我们会在一个工作日之内处理你的请求'
         }
     }
 }

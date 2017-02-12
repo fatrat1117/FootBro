@@ -9,7 +9,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <div class="cheering-team-segment">
+  <!--<div class="cheering-team-segment">
     <ion-segment [(ngModel)]="who">
       <ion-segment-button no-padding value="baby">
         <ion-icon name="md-football" class="football-icon"><span>{{'宝贝' | trans}}</span></ion-icon>
@@ -21,10 +21,9 @@
         <ion-icon name="md-body" class="player-icon"><span>{{'球员' | trans}}</span></ion-icon>
       </ion-segment-button>
     </ion-segment>
-  </div>
-  <div class="cheering-team-type" [ngSwitch]="who">
-    <div *ngSwitchCase="'baby'">
-      <ion-row class="baby-type-row">
+  </div>-->
+  <div class="cheering-team-type">
+      <!--<ion-row class="baby-type-row">
         <ion-col width-25 tabindex="0">
           <div class="TabbedPanelsTab" [ngStyle]="{'color':getColor(0),
           'border-color': getColor(0)}" (click)="highLight(0)">
@@ -49,17 +48,17 @@
             <ion-label no-margin class="label label-md">团体</ion-label>
           </div>
         </ion-col>
-      </ion-row>
+      </ion-row>-->
       <ion-row class="baby-become-row">
         <ion-col width-75 no-margin>
           <div class="speaker">
             <span><img src="assets/img/cheering-team/speaker.png"/>全国共有2313位宝贝可约</span>
           </div>
         </ion-col>
-        <ion-col class="become-col" width-25 no-margin>
-          <button class="become" *ngIf='selfId' (click) = "becomeCheerleader()">
+        <ion-col *ngIf='selfId' class="become-col" width-25 no-margin>
+          <div class="become" (click) = "becomeCheerleader()">
             <ion-icon name="md-football" class="football-icon"><span>{{'BecomeCheerleader' | trans}}</span></ion-icon>
-          </button>
+          </div>
         </ion-col>
       </ion-row>
       <ion-row class="baby-row baby-row-1">
@@ -155,12 +154,11 @@
           </ion-row>
         </ion-col>
       </ion-row>
-    </div>
-    <div *ngSwitchCase="'judge'">
+    <!--<div *ngSwitchCase="'judge'">
       裁判
     </div>
     <div *ngSwitchCase="'player'">
       球员
-    </div>
+    </div>-->
   </div>
 </ion-content>

@@ -35,11 +35,14 @@ import { SearchTeamPage } from '../pages/search-team/search-team';
 // services
 import { AngularFireModule } from 'angularfire2';
 import { FirebaseManager } from '../providers/firebase-manager';
+import { UIHelper } from '../providers/uihelper';
 import { PlayerService } from './players/player.service';
 import { TeamService } from './teams/team.service';
 import { TeamPlayersService } from './teams/teamplayers.service'
 import { MiscService } from './misc/misc.service'
 import { MatchService } from './matches/match.service'
+import { CheerleaderService} from './cheerleaders/cheerleader.service'
+
 // pipes
 import { TransPipe, Localization } from '../providers/localization';
 import { StringToDatePipe, NumberToTimePipe, MomentPipe } from '../pipes/moment.pipe';
@@ -155,10 +158,12 @@ export const firebaseConfig = {
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
     FirebaseManager,
     Localization,
+    UIHelper,
     PlayerService,
     TeamService,
     MatchService,
-    TeamPlayersService]
+    TeamPlayersService,
+    CheerleaderService]
 })
 export class AppModule {
 }
