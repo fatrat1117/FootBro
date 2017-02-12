@@ -13,7 +13,8 @@ declare var Wechat: any;
         <ion-icon name="logo-facebook" color="fBlue"></ion-icon>
       </button>
       <button ion-fab color="light" (click)="onWeChatClick()">
-        <ion-icon name="logo-twitter" color="wGreen"></ion-icon>
+        <img src="assets/icon/wechat.png">
+        <!--ion-icon name="logo-twitter" color="wGreen"></ion-icon-->
       </button>
     </ion-fab-list>
   </ion-fab>
@@ -40,9 +41,9 @@ export class SbShareButtonComponent {
 
   // WeChat
   onWeChatClick() {
-    Screenshot.save('jpg', 80, 'myscreenshot').then((res) => {
-      //console.log(res);
-      this.sharePhoto(res.filePath);
+    Screenshot.URI(80).then((res) => {
+      this.sharePhoto(res.URI);
+      console.log(res);
     },
       () => {
         alert('Screenshot failed');
@@ -57,6 +58,7 @@ export class SbShareButtonComponent {
     var params = {
       scene: 1//0：对话 1：朋友圈
     };
+
     params['message'] = {
       title: "绿荫兄弟-图片分享",
       description: "这是图片描述",
