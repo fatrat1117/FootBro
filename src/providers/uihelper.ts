@@ -8,11 +8,14 @@ export class UIHelper {
   private loc : Localization) {
   }
 
-  presentToast(msgId, duraiton = 3000) {
+  presentToast(msgId, dur = 3000) {
       let msg = this.loc.getString(msgId);
+    console.log(msg, this.toastCtrl);
+    
     let toast = this.toastCtrl.create({
       message: msg,
-      duration: duraiton
+      duration: dur,
+      position: 'top'
     });
     toast.present();
   }

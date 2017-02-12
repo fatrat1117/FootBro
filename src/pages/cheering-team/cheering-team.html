@@ -56,10 +56,10 @@
             <span><img src="assets/img/cheering-team/speaker.png"/>全国共有2313位宝贝可约</span>
           </div>
         </ion-col>
-        <ion-col class="become-col" width-25 no-margin>
-          <button class="become" *ngIf='selfId' (click) = "becomeCheerleader()">
+        <ion-col *ngIf='selfId' class="become-col" width-25 no-margin>
+          <div class="become" (click) = "becomeCheerleader()">
             <ion-icon name="md-football" class="football-icon"><span>{{'BecomeCheerleader' | trans}}</span></ion-icon>
-          </button>
+          </div>
         </ion-col>
       </ion-row>
       <ion-row class="baby-row baby-row-1">
