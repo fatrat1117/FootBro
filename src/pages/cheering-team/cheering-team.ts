@@ -17,7 +17,9 @@ export class CheeringTeamPage {
   who = "baby";
   colorArray = [-1,-1,-1,-1];
 
-  constructor(private nav: NavController, private modalCtrl: ModalController, private playerService: PlayerService) {
+  constructor(private nav: NavController, 
+  private modalCtrl: ModalController, 
+  private playerService: PlayerService) {
     this.selfId = this.playerService.selfId()
   }
 
