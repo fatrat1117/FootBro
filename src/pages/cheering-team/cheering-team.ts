@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {NavController, ModalController} from 'ionic-angular'
+import { Component } from '@angular/core';
+import { NavController, ModalController } from 'ionic-angular'
 
 import { CheeringTeamStatsPage } from './cheering-team-stats'
 
@@ -12,14 +12,14 @@ import { PlayerService } from '../../app/players/player.service'
 })
 export class CheeringTeamPage {
   selfId: string;
-  player : Player;
-  watchListMap : {};
+  player: Player;
+  watchListMap: {};
   who = "baby";
-  colorArray = [-1,-1,-1,-1];
+  colorArray = [-1, -1, -1, -1];
 
-  constructor(private nav: NavController, 
-  private modalCtrl: ModalController, 
-  private playerService: PlayerService) {
+  constructor(private nav: NavController,
+    private modalCtrl: ModalController,
+    private playerService: PlayerService) {
     this.selfId = this.playerService.selfId()
   }
 
@@ -37,20 +37,20 @@ export class CheeringTeamPage {
     });
   }
 
-  highLight(index:number){
-    if (index < this.colorArray.length){
-     this.colorArray[index] = this.colorArray[index] * -1;
+  highLight(index: number) {
+    if (index < this.colorArray.length) {
+      this.colorArray[index] = this.colorArray[index] * -1;
     }
   }
 
-  getColor(index:number){
-    if (index < this.colorArray.length){
-        if (this.colorArray[index] == 1){
-           return "#00ef00";
-        }else{
-            return "#999";
-        }
-    }else{
+  getColor(index: number) {
+    if (index < this.colorArray.length) {
+      if (this.colorArray[index] == 1) {
+        return "#00ef00";
+      } else {
+        return "#999";
+      }
+    } else {
       return "#999";
     }
   }
@@ -61,5 +61,8 @@ export class CheeringTeamPage {
     }).present();
   }
 
+  becomeCheerleader() {
+    
+  }
 }
 

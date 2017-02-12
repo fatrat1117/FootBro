@@ -4,6 +4,7 @@ import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'a
 import { LoginPage } from '../pages/login/login';
 import { NavController, ModalController, Platform } from 'ionic-angular';
 import { Subject } from 'rxjs/Subject';
+import { Camera } from 'ionic-native';
 import * as firebase from 'firebase';
 
 @Injectable()
@@ -569,7 +570,7 @@ export class FirebaseManager {
       }
     }
   }
-  
+
   getMatchDates(id) {
     return this.matchDatesMap[id];
   }
@@ -583,7 +584,8 @@ export class FirebaseManager {
       query: {
         orderByChild: 'date',
         equalTo: date
-    }});
+      }
+    });
 
     let sub = afQuery.subscribe(snapshots => {
       sub.unsubscribe();
@@ -604,12 +606,11 @@ export class FirebaseManager {
   getMatchAsync(id) {
     if (this.getMatch(id))
       this.FireCustomEvent('matchready', id);
-    else 
-    {
+    else {
       this.afMatch(id).subscribe(snapshot => {
         this.cashedMatchesMap[id] = snapshot;
         this.FireCustomEvent('matchready', id);
-      }); 
+      });
     }
   }
 
@@ -617,10 +618,11 @@ export class FirebaseManager {
     let sub = this.af.database.list('/teams_matches/' + id + '/matches', {
       query: {
         orderByChild: 'date'
-    }}).subscribe(snapshots => {
+      }
+    }).subscribe(snapshots => {
       sub.unsubscribe();
       let result = {
-        id : id,
+        id: id,
         matches: snapshots.reverse()
       };
       this.FireCustomEvent('teammatchesready', result);
@@ -634,7 +636,7 @@ export class FirebaseManager {
   /****************************** Points ******************************/
   updatePoints(targetId: string, usedPoint: number, newPoints: number) {
     console.log(this.auth);
-    
+
     this.af.database.object(`/players/${this.auth.uid}/points`).update({ total: newPoints });
     this.af.database.object(`/players/${this.auth.uid}/points/to/${targetId}`).set(usedPoint);
     this.af.database.object(`/players/${targetId}/points/from/${this.auth.uid}`).set(usedPoint);
@@ -662,6 +664,84 @@ export class FirebaseManager {
       creatorId: this.auth.uid,
       timestamp: firebase.database.ServerValue.TIMESTAMP
     })
+  }
+
+  b64toBlob(b64Data, contentType, sliceSize) {
+    contentType = contentType || '';
+    sliceSize = sliceSize || 512;
+
+    var byteCharacters = atob(b64Data);
+    var byteArrays = [];
+
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+      var byteNumbers = new Array(slice.length);
+      for (var i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      var byteArray = new Uint8Array(byteNumbers);
+
+      byteArrays.push(byteArray);
+    }
+
+    var blob = new Blob(byteArrays, { type: contentType });
+    return blob;
+  }
+
+  selectImgGetData(success, error) {
+    let self = this;
+    let options = {
+      quality: 75,
+      allowEdit: true,
+      encodingType: Camera.EncodingType.JPEG,
+      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: Camera.DestinationType.DATA_URL,
+      targetWidth: 256,
+      targetHeight: 256
+    };
+
+    Camera.getPicture(options).then(imageData => {
+      success(imageData);
+    }, (err) => {
+      error(err);
+    });
+  }
+
+  updateImgGetUrl(imageData, imgId, success, error) {
+    let self = this;
+    let options = {
+      quality: 75,
+      allowEdit: true,
+      encodingType: Camera.EncodingType.JPEG,
+      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: Camera.DestinationType.DATA_URL,
+      targetWidth: 256,
+      targetHeight: 256
+    };
+
+    // imageData is either a base64 encoded string or a file URI
+    // If it's base64:
+    let contentType = 'image/jpg';
+    let b64Data = imageData;
+
+    let blob = this.b64toBlob(b64Data, contentType, 256);
+
+    let metadata = {
+      contentType: 'image/jpeg',
+    };
+    let storageRef = firebase.storage().ref();
+    let uploadTask = storageRef.child('images/' + imgId + '.jpg').put(blob, metadata);;
+    uploadTask.on('state_changed', function (snapshot) {
+      // Observe state change events such as progress, pause, and resume
+      // See below for more detail
+    }, error, function () {
+      // Handle successful uploads on complete
+      var downloadURL = uploadTask.snapshot.downloadURL;
+      console.log('upload image done', downloadURL);
+      success(downloadURL);
+    });
   }
 }
 

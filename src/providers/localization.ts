@@ -197,7 +197,8 @@ export class Localization {
             Records: 'Records',
             Recent15matches: 'Recent 15 matches',
             Recent30matches: 'Recent 30 matches',
-            All: 'all'
+            All: 'all',
+            BecomeCheerleader: 'Become Cheerleader',
         },
 
         zh: {
@@ -376,7 +377,8 @@ export class Localization {
             Records: '记录',
             Recent15matches: '最近15场',
             Recent30matches: '最近30场',
-            All: '全部'
+            All: '全部',
+            BecomeCheerleader: '成为宝贝'
         }
     }
 }
