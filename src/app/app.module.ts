@@ -49,6 +49,7 @@ import { ReversePipe } from '../pipes/utilities.pipe'
 // components
 import { SbLoadingComponent } from './common/loading.component';
 import { SbModalNavbarComponent } from './common/modal.navbar.component';
+import { SbShareButtonComponent } from './common/share.button.component';
 import { SbMatchBasicComponent } from './matches/match-basic.component';
 import { MatchDetailPage } from "../pages/match-detail/match-detail";
 import { GameRatingPage } from "../pages/game-rating/game-rating";
@@ -105,8 +106,8 @@ export const firebaseConfig = {
     // components
     SbLoadingComponent,
     SbModalNavbarComponent,
+    SbShareButtonComponent,
     SbMatchBasicComponent,
-
   ],
   imports: [
     IonicModule.forRoot(MyApp, {

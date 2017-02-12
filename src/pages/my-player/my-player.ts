@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { PlayerService } from '../../app/players/player.service'
 import { Player } from '../../app/players/player.model'
-import { Screenshot, SocialSharing} from 'ionic-native';
-declare var Wechat: any;
+//import { Screenshot, SocialSharing} from 'ionic-native';
+//declare var Wechat: any;
 
 import { ChatPage } from '../chat/chat'
 
@@ -41,6 +41,7 @@ export class MyPlayerPage {
     this.service.increasePopularity(this.id);
   }
 
+/*
   sharePhoto(picAddress) {
     if (typeof Wechat === "undefined") {
       alert("Wechat plugin is not installed.");
@@ -93,6 +94,7 @@ export class MyPlayerPage {
             alert(err);
           });
   }
+*/
 
   enterChatPage() {
     this.navCtrl.push(ChatPage, {
