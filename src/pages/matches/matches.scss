@@ -59,7 +59,7 @@
             right: -9px;
             border-style: solid;
             border-width: 15px 15px 15px 15px;
-            border-color: transparent #40444D transparent transparent;
+            border-color: transparent #2D2E32 transparent transparent;
             z-index: 0;
           }
         }
@@ -73,7 +73,9 @@
         }
         margin-top: -1px;
         ion-item {
-          max-height: 88px;
+          margin: 0.7rem;
+           background: #585F6F;
+            
         }
         ion-label {
           margin-right: 0.3em;
@@ -99,6 +101,7 @@
         right: 0;
         overflow-y: scroll;
         position: fixed;
+             background: #2D2E32;
       }
       .right-scrollview {
         width: 85%;
@@ -107,6 +110,7 @@
         //position: absolute;
         height: calc(100% - 168px);
         position: fixed;
+          background: #2D2E32;
       }
       .mvp-avatar {
         height: 80%;

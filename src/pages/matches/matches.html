@@ -39,14 +39,14 @@
       <div class="left-scrollview matches-date-tab-col" id="sketchElement">
         <ion-list class="date-tab-list">
           <ion-item *ngFor="let date of dates;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (click)="showMatches(date)"
-            [style.background]="selectedDate == date ? '#585F6F' : 'none'"
+            [style.background]="selectedDate == date ? '#585F6F' : '#40444D'"
             [style.color]="selectedDate == date ? '#00ef00' : '#F2EDE7'">
             {{date | stringToDatePipe}}
           </ion-item>
         </ion-list>
       </div>
       <div class="right-scrollview matches-match-info-col" ><!--[ngStyle]="{'top': rightViewTop+'px'}"-->
-        <ion-item *ngFor="let match of matches; let i = index">
+        <ion-item class="ionitem" *ngFor="let match of matches; let i = index">
           <sb-match-basic [matchObj]="match"></sb-match-basic>
         </ion-item>
       </div>
