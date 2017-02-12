@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular'
-
 import { CheeringTeamStatsPage } from './cheering-team-stats'
-
 import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
+import { CheerleaderService } from '../../app/cheerleaders/cheerleader.service'
+import { UIHelper} from '../../providers/uihelper'
 
 @Component({
   selector: 'page-cheering-team',
@@ -19,7 +19,9 @@ export class CheeringTeamPage {
 
   constructor(private nav: NavController,
     private modalCtrl: ModalController,
-    private playerService: PlayerService) {
+    private playerService: PlayerService,
+    private cheerleaderService : CheerleaderService,
+    private uiHelper : UIHelper) {
     this.selfId = this.playerService.selfId()
   }
 
@@ -62,7 +64,8 @@ export class CheeringTeamPage {
   }
 
   becomeCheerleader() {
-    
+    this.cheerleaderService.submitInfo();
+    this.uiHelper.presentToast('ApplicationSubmited');
   }
 }
 
