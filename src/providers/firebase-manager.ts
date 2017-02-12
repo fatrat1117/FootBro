@@ -354,6 +354,11 @@ export class FirebaseManager {
     });
   }
 
+
+
+
+
+
   /****************************** Players ******************************/
   publicPlayersRef() {
     return '/public/players/';
@@ -447,6 +452,7 @@ export class FirebaseManager {
     return this.cachedPlayersMap[id];
   }
 
+  // public
   queryPublicPlayers(orderby, count) {
     console.log('queryPublicPlayers', orderby, count);
     let afQuery = this.af.database.list(this.publicPlayersRef(), {

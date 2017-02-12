@@ -1,28 +1,30 @@
-<ion-header>
+<!--ion-header>
   <ion-navbar>
     <ion-title>
       {{'CreateTeam' | trans}}
     </ion-title>
   </ion-navbar>
+</ion-header-->
+<ion-header>
+  <sb-modal-navbar title="Add New Team" buttonName="Create" [isEnabled]="teamName.trim().length > 0 && !busy" (onFinish)="doCreateTeam()"></sb-modal-navbar>
 </ion-header>
-
 <ion-content padding>
   <ion-list>
     <ion-item>
-      <ion-label primary>{{'TeamName' | trans}}</ion-label>
+      <ion-label fixed>{{'TeamName' | trans}}</ion-label>
       <ion-input type="text" placeholder="" [(ngModel)]="teamName" maxlength="32"></ion-input>
     </ion-item>
     <ion-item>
-    <ion-label>{{'Default' | trans}}</ion-label>
-    <ion-toggle [(ngModel)]="isDefault"></ion-toggle>
-  </ion-item>
+      <ion-label>{{'Default' | trans}}</ion-label>
+      <ion-toggle [(ngModel)]="isDefault"></ion-toggle>
+    </ion-item>
     <!--<ion-item>
       <ion-label>Region</ion-label>
       <ion-select [(ngModel)]="location">
         <ion-option value="SG">Singapore</ion-option>
       </ion-select>
     </ion-item>-->
-    <button (click)="doCreateTeam()" [disabled]="!teamName.trim().length || busy" ion-button block>{{'Create' | trans}}</button>
-    <button (click)="doCancel()" [disabled]="busy" ion-button block color='lightGrey'>{{'Cancel' | trans}}</button>
+    <!--button (click)="doCreateTeam()" [disabled]="!teamName.trim().length || busy" ion-button block>{{'Create' | trans}}</button>
+    <button (click)="doCancel()" [disabled]="busy" ion-button block color='lightGrey'>{{'Cancel' | trans}}</button-->
   </ion-list>
 </ion-content>

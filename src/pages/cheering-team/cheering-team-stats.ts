@@ -63,7 +63,7 @@ export class CheeringTeamStatsPage {
   showWarning() {
     this.alertCtrl.create({
       title: 'Not enough points',
-      subTitle: 'Balance: ' + this.player.points,
+      subTitle: 'Current balance: ' + this.player.points,
       message: 'You need at least 5 points to unlock her.',
       buttons: ['OK']
     }).present();
