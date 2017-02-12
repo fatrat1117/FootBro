@@ -27,6 +27,9 @@ export class FirebaseManager {
   matchesByDateMap = {};
   cashedMatchesMap = {};
   _afTournamentList;
+  //cheerleader
+  cachedPendingCheerleaders;
+  cachedApprovedCheerleaders;
 
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,
