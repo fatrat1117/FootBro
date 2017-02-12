@@ -27,6 +27,9 @@ export class FirebaseManager {
   matchesByDateMap = {};
   cashedMatchesMap = {};
   _afTournamentList;
+  //cheerleader
+  cachedPendingCheerleaders;
+  cachedApprovedCheerleaders;
 
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,
@@ -701,7 +704,6 @@ export class FirebaseManager {
     let self = this;
     let options = {
       quality: 75,
-      allowEdit: true,
       encodingType: Camera.EncodingType.JPEG,
       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
       destinationType: Camera.DestinationType.DATA_URL,
