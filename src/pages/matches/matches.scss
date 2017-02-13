@@ -87,6 +87,29 @@
             .item-inner{
                 border-bottom:none !important;
             }
+            .matches-info{
+                ion-item{
+                    margin:0.2rem;
+                    min-height: 1.8rem;
+                    img{
+                        max-width: 2rem !important;
+                        max-height: 2rem !important;
+                    }
+                }
+            }
+            .matches-time{
+                ion-item{
+                    margin:0.2rem;
+                    min-height: inherit !important;
+                    height: 1.8rem;
+                    p{
+                        font-size: 1.2rem;
+                    }
+                    .detail-button{
+                       font-size: 1rem;
+                    }
+                }
+            }
         }
         ion-label {
           margin-right: 0.3em;

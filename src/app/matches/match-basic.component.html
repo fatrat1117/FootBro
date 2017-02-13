@@ -39,12 +39,17 @@
         </ion-item>
         <ion-item>
           <button class="detail-button" text-center ion-button clear (click)="goMatchDetailPage()">Details</button>
+            
           <!-->
           <button class="detail-button" text-center (click)="popupMatchResult(match,$event)" clear>{{'Details' | trans}}</button>
           <button class="update-button" *ngIf="(match.homeId | teamBasicPipe | async)?.captain === selfId ||
             (match.awayId | teamBasicPipe | async)?.captain === selfId ||
             (afTournamentAdmin | async)?.$value" text-center (click)="popupUpdateSchedulePage(match,$event)" clear>{{'Update' | trans}}</button>
           <-->
+        </ion-item>
+          <ion-item>
+          <button class="detail-button" text-center ion-button clear (click)="goMatchDetailPage()">Update</button>
+     
         </ion-item>
       </div>
     </ion-col>
