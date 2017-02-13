@@ -35,6 +35,7 @@ import { SearchTeamPage } from '../pages/search-team/search-team';
 // services
 import { AngularFireModule } from 'angularfire2';
 import { FirebaseManager } from '../providers/firebase-manager';
+import { OneSignalManager } from '../providers/onesignal-manager';
 import { UIHelper } from '../providers/uihelper';
 import { PlayerService } from './players/player.service';
 import { TeamService } from './teams/team.service';
@@ -157,6 +158,7 @@ export const firebaseConfig = {
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
     FirebaseManager,
+    OneSignalManager,
     Localization,
     UIHelper,
     PlayerService,

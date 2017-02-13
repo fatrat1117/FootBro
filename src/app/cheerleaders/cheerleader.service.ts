@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FirebaseManager } from '../../providers/firebase-manager';
+import { OneSignalManager } from '../../providers/onesignal-manager';
 import { Cheerleader } from './cheerleader.model';
 import { PlayerService } from '../players/player.service'
 import { UIHelper } from '../../providers/uihelper'
@@ -10,9 +11,8 @@ export class CheerleaderService {
   pendingCheerleaders;
   approvedCheerleaders;
 
-  constructor(private fm: FirebaseManager,
-    private playerService: PlayerService,
-    private uiHelper : UIHelper) {
+  constructor(private fm: FirebaseManager, private osm: OneSignalManager, 
+              private playerService: PlayerService, private uiHelper : UIHelper) {
       document.addEventListener('pendingcheerleadersready', e=> {
         this.pendingCheerleaders = [];
         this.fm.cachedPendingCheerleaders.forEach(fmCheerleader => {
@@ -88,5 +88,6 @@ export class CheerleaderService {
 
   approve(id) {
     this.fm.approveCheerleader(this.cheerleadersMap[id]);
+    this.osm.cheerleaderApproved(id);
   }
 }
