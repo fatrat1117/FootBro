@@ -1,4 +1,7 @@
     page-matches {
+    $selected-date-color:#585F6F;
+    $unselected-date-color:#40444D;
+        $darker-backgroud:#2D2E32;
 
       ion-navbar{
         ion-select{
@@ -41,8 +44,10 @@
         .date-tab-list {
           ion-item {
             padding-left: 0;
+            min-height: 2.8rem;
             .item-inner {
               padding-right: 0;
+              border-bottom: 1px solid $darker-backgroud;
               ion-label {
                 font-size: 1rem;
                 margin: 0 auto;
@@ -59,9 +64,12 @@
             right: -9px;
             border-style: solid;
             border-width: 15px 15px 15px 15px;
-            border-color: transparent #2D2E32 transparent transparent;
+            border-color: transparent transparent transparent transparent;
             z-index: 0;
           }
+            .ion-item-selected::before{
+                border-color: transparent $darker-backgroud transparent transparent;
+            }
         }
       }
       .matches-match-info-col {
@@ -74,8 +82,11 @@
         margin-top: -1px;
         ion-item {
           margin: 0.7rem;
-           background: #585F6F;
-            
+        width: initial;
+           background: $unselected-date-color;
+            .item-inner{
+                border-bottom:none !important;
+            }
         }
         ion-label {
           margin-right: 0.3em;
@@ -101,7 +112,7 @@
         right: 0;
         overflow-y: scroll;
         position: fixed;
-             background: #2D2E32;
+             background: $darker-backgroud;
       }
       .right-scrollview {
         width: 85%;
@@ -110,7 +121,7 @@
         //position: absolute;
         height: calc(100% - 168px);
         position: fixed;
-          background: #2D2E32;
+          background: $darker-backgroud;
       }
       .mvp-avatar {
         height: 80%;
