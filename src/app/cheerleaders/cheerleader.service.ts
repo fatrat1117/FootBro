@@ -75,6 +75,17 @@ export class CheerleaderService {
       this.fm.getPendingCheerleadersAsync();
   }
 
+  getApprovedCheerleaders() {
+    return this.approvedCheerleaders;
+  }
+
+  getApprovedCheerleadersAsync() {
+    if (this.getApprovedCheerleaders())
+      this.fm.FireEvent('approvedcheerleadersready');
+    else 
+      this.fm.getApprovedCheerleadersAsync();
+  }
+
   approve(id) {
     this.fm.approveCheerleader(this.cheerleadersMap[id]);
   }
