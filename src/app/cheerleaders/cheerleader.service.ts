@@ -25,6 +25,18 @@ export class CheerleaderService {
         this.fm.FireEvent('servicependingcheerleadersready');
       });
 
+      document.addEventListener('approvedcheerleadersready', e=> {
+        this.approvedCheerleaders = [];
+        this.fm.cachedApprovedCheerleaders.forEach(fmCheerleader => {
+          let cheerleader = this.findOrCreateCheerleader(fmCheerleader.$key);
+          cheerleader.photoMedium = fmCheerleader.photo;
+          this.approvedCheerleaders.push(cheerleader);
+          this.playerService.getPlayerAsync(fmCheerleader.$key);
+        });
+
+        this.fm.FireEvent('serviceapprovedcheerleadersready');
+      });
+
       document.addEventListener('serviceplayerready', e=> {
         let id = e['detail'];
         let cheerleader = this.findOrCreateCheerleader(id);

@@ -30,6 +30,7 @@ export class FirebaseManager {
   //cheerleader
   cachedPendingCheerleaders;
   cachedApprovedCheerleaders;
+  sortedPublicCheerleadersMap = {};
   //admins
   admins;
 
@@ -819,6 +820,21 @@ export class FirebaseManager {
     //console.log(cheerleaderPublic);
     this.af.database.object(this.cheerleaderPublicRef(id)).set({popularity: cheerleaderPublic.popularity || 1});
     this.af.database.object(this.playerPublicRef(id)).remove();
+  }
+
+  getCheerleaderPublic(id) {
+    return this.sortedPublicCheerleadersMap[id];
+  }
+
+  getCheerleaderPublicAsync(id) {
+    if (this.sortedPublicCheerleadersMap[id])
+      this.FireCustomEvent('cheerleaderpublicready', id);
+    else {
+      this.af.database.object(`/public/cheerleaders/${id}`).subscribe(snapshot => {
+        this.sortedPublicCheerleadersMap[id] = snapshot;
+        this.FireCustomEvent('cheerleaderpublicready', id);
+      });
+    }
   }
 
   //admins 

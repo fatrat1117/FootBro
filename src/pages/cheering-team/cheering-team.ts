@@ -30,6 +30,7 @@ export class CheeringTeamPage {
     this.playerService.getPlayerAsync(this.selfId);
     if (this.playerService.isAdmin())
       this.cheerleaderService.getPendingCheerleadersAsync();
+    this.cheerleaderService.getApprovedCheerleadersAsync();
   }
 
   addEventListeners() {
@@ -43,6 +44,10 @@ export class CheeringTeamPage {
     document.addEventListener('servicependingcheerleadersready', e => {
       this.pendingCheerleaders = this.cheerleaderService.getPendingCheerleaders();
     });
+
+    document.addEventListener('serviceapprovedcheerleadersready', e=> {
+      this.approvedCheerleaders = this.cheerleaderService.getApprovedCheerleaders();
+    })
   }
 
   highLight(index: number) {

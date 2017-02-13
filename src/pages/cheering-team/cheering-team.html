@@ -52,7 +52,7 @@
     <ion-row class="baby-become-row">
       <ion-col width-75 no-margin>
         <div class="speaker">
-          <span><img src="assets/img/cheering-team/speaker.png"/>全国共有2313位宝贝可约</span>
+          <span><img src="assets/img/cheering-team/speaker.png"/>全国共有{{approvedCheerleaders?.length}}位宝贝可约</span>
         </div>
       </ion-col>
       <ion-col *ngIf='selfId' class="become-col" width-25 no-margin>
@@ -76,10 +76,27 @@
             <ion-row>
               <h3>{{cl.name}}</h3>
             </ion-row>
+          </div>
+        </ion-row>
+      </ion-col>
+      <ion-col *ngFor ='let cl of approvedCheerleaders' width-50 no-margin>
+        <ion-row>
+          <div class="baby-img-frame">
+            <button ion-button icon-only clear class="chat-logo" color="lightGrey" (click)="approve(cl.id)">
+                <ion-icon name="lock"></ion-icon>
+              </button>
+            <img class="img" [src]="cl.photoMedium">
+          </div>
+        </ion-row>
+        <ion-row>
+          <div class="baby-status">
             <ion-row>
-              <!--<ion-col class="eyes" width-40>
+              <h3>{{cl.name}}</h3>
+            </ion-row>
+            <ion-row>
+              <ion-col class="eyes" width-40>
                 <img src="assets/img/cheering-team/eye.png" />5754
-              </ion-col>-->
+              </ion-col>
               <!--<ion-col class="prize" width-60>$299/小时</ion-col>-->
             </ion-row>
           </div>
