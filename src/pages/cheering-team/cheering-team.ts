@@ -28,7 +28,8 @@ export class CheeringTeamPage {
   ionViewDidLoad() {
     this.addEventListeners();
     this.playerService.getPlayerAsync(this.selfId);
-    this.cheerleaderService.getPendingCheerleadersAsync();
+    if (this.playerService.isAdmin())
+      this.cheerleaderService.getPendingCheerleadersAsync();
   }
 
   addEventListeners() {
@@ -70,6 +71,10 @@ export class CheeringTeamPage {
 
   becomeCheerleader() {
     this.cheerleaderService.submitInfo();
+  }
+
+  approve(id) {
+    this.cheerleaderService.approve(id);
   }
 }
 

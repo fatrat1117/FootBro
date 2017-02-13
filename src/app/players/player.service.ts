@@ -36,7 +36,7 @@ export class PlayerService {
       this.playersMap[id] = player;
       if (player.role && player.role === 'cheerleader') 
       {
-        
+
       }
       else 
         this.fm.getPlayerPublicAsync(id);
@@ -88,5 +88,11 @@ export class PlayerService {
 
   updatePoints(targetId: string, usedPoint: number, newPoints: number) {
     this.fm.updatePoints(targetId, usedPoint, newPoints)
+  }
+
+  isAdmin() {
+    if (this.fm.admins && this.selfId() && true === this.fm.admins[this.selfId()])
+      return true;
+    return false;
   }
 }

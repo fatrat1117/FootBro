@@ -30,6 +30,8 @@ export class FirebaseManager {
   //cheerleader
   cachedPendingCheerleaders;
   cachedApprovedCheerleaders;
+  //admins
+  admins;
 
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,
@@ -40,6 +42,8 @@ export class FirebaseManager {
         this.registerPlayer();
       }
     });
+
+    this.getAdminsAsync();
   }
 
   initialize() {
@@ -381,6 +385,9 @@ export class FirebaseManager {
     return `public/players/${id}`;
   }
 
+  cheerleaderPublicRef(id) {
+    return `public/cheerleaders/${id}`;
+  }
   //af
   afPlayerBasic(id) {
     return this.af.database.object(this.playerBasicRef(id));
@@ -758,6 +765,10 @@ export class FirebaseManager {
     return '/cheerleaders/pending/';
   }
 
+  approvedCheerleadersRef() {
+    return '/cheerleaders/approved/';
+  }
+
   submitCheerleaderInfo(url) {
     this.af.database.object(this.pendingCheerleadersRef() + this.auth.uid).set({photo: url});
   }
@@ -765,6 +776,7 @@ export class FirebaseManager {
   getPendingCheerleaders() {
     return this.cachedPendingCheerleaders;
   }
+
   getPendingCheerleadersAsync() {
     if (this.getPendingCheerleaders()) 
       this.FireEvent('pendingcheerleadersready');
@@ -773,6 +785,44 @@ export class FirebaseManager {
         this.cachedPendingCheerleaders = snapshots;
         this.FireEvent('pendingcheerleadersready');
       })
+    }
+  }
+
+  getApprovedCheerleaders() {
+    return this.cachedApprovedCheerleaders;
+  }
+
+  getApprovedCheerleadersAsync() {
+    if (this.getApprovedCheerleaders()) 
+      this.FireEvent('approvedcheerleadersready');
+    else {
+      this.af.database.list(this.approvedCheerleadersRef()).subscribe(snapshots => {
+        this.cachedApprovedCheerleaders = snapshots;
+        this.FireEvent('approvedcheerleadersready');
+      })
+    }
+  }
+
+  approveCheerleader(cheerleader) {
+    let id = cheerleader.id;
+    this.af.database.object(this.playerRef(id)).update({
+      role : 'cheerleader', 
+      photoMedium: cheerleader.photoMedium});
+    this.af.database.object(this.pendingCheerleadersRef() + id).remove();
+    this.af.database.object(this.approvedCheerleadersRef() + id).set(true);
+    
+    let cheerleaderPublic = this.getPlayerPublic(id);
+    //console.log(cheerleaderPublic);
+    this.af.database.object(this.cheerleaderPublicRef(id)).set({popularity: cheerleaderPublic.popularity || 1});
+    this.af.database.object(this.playerPublicRef(id)).remove();
+  }
+
+  //admins 
+  getAdminsAsync() {
+    if (!this.admins) {
+      this.af.database.object('/tournaments/whitelist/').subscribe(snapshot => {
+        this.admins = snapshot;
+      });
     }
   }
 }
@@ -1707,10 +1757,6 @@ export class FirebaseManager {
 
 //   removeTournament(id) {
 //     this.getTournament(id).remove();
-//   }
-
-//   getTournamentsAdmin(id) {
-//     return this.af.database.object('/tournaments/whitelist/' + id);
 //   }
 
 //   getTournamentAdmin(id) {
