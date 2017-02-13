@@ -22,6 +22,7 @@ export class MatchesPage {
   selectedId: string;
   tournamentId;
   afTournamentList;
+  thisYear:string;
 
   constructor(public navCtrl: NavController,
     private modalCtrl: ModalController,
@@ -102,5 +103,22 @@ export class MatchesPage {
 
   enterNewGame() {
     this.modalCtrl.create(NewGamePage, { tournamentId: this.tournamentId }).present();
+  }
+  
+  isChangeYear(index,date){
+     let t = Number(date);
+    //console.log(t);
+     let year = moment(t).format('YYYY');
+    if (null == this.thisYear){
+        this.thisYear = year;
+        return true;
+    }else{
+        if (this.thisYear != year){
+            this.thisYear = year;
+            return true;
+        }
+    }
+    return false;
+    
   }
 }

@@ -48,6 +48,19 @@ export class StringToDatePipe implements PipeTransform {
 }
 
 @Pipe({
+  name: 'stringToYearOnlyPipe'
+})
+
+export class StringToYearOnlyPipe implements PipeTransform {
+
+  transform(timestamp: string) {
+    let t = Number(timestamp);
+    //console.log(t);
+    return moment(t).format('YYYY');
+  }
+}
+
+@Pipe({
   name: 'numberToTimePipe'
 })
 

@@ -38,11 +38,18 @@
     <div *ngSwitchCase="'schedule'" [ngStyle]="{'height':'100%'}">
       <div class="left-scrollview matches-date-tab-col" id="sketchElement">
         <ion-list class="date-tab-list">
-          <ion-item *ngFor="let date of dates;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (click)="showMatches(date)"
+          <ion-item *ngFor="let date of dates;let i = index;trackBy:isChangeYear" #list_item [id]="'matches-scroll-target-'+i" (click)="showMatches(date)"
             [style.background]="selectedDate == date ? '#585F6F' : '#40444D'"
             [style.color]="selectedDate == date ? '#00ef00' : '#F2EDE7'"
                     [ngClass]="selectedDate == date ? ['ion-item-selected'] : ['ion-item-unselected']">
-            {{date | stringToDatePipe}}
+              <div *ngIf = "isChangeYear(i,date) == true">
+                  <div>{{thisYear}}</div>
+              
+              </div>
+                   {{date | stringToDatePipe}}
+        
+<!--            {{date | stringToDatePipe}}-->
+<!--              {{date | stringToYearOnlyPipe}}-->
           </ion-item>
         </ion-list>
       </div>
