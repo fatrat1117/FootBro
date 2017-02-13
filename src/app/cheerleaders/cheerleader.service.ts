@@ -36,8 +36,8 @@ export class CheerleaderService {
   }
 
   submitInfo() {
-    let width = 1024;
-    let height = 1024;
+    let width = 512;
+    let height = 512;
 
     this.fm.selectImgGetData(width, height, imgData => {
       this.fm.updateImgGetUrl(imgData, this.playerService.selfId() + 'medium', width, height,
