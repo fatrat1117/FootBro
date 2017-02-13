@@ -54,6 +54,7 @@ export class TeamService {
         teamData.last_30 = teamStats.last_30;
         teamData.overall = teamStats.overall;
       }
+      this.fm.FireCustomEvent('serviceteamstatsdataready', teamId);
     });
 
     document.addEventListener('allpublicteamsready', e => {

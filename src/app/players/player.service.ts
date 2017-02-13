@@ -34,7 +34,12 @@ export class PlayerService {
         player.points = playerData['points'].total;
         
       this.playersMap[id] = player;
-      this.fm.getPlayerPublicAsync(id);
+      if (player.role && player.role === 'cheerleader') 
+      {
+        
+      }
+      else 
+        this.fm.getPlayerPublicAsync(id);
 
       this.fm.FireCustomEvent('serviceplayerready', id);
     });

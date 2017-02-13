@@ -492,13 +492,13 @@ export class FirebaseManager {
   }
   //Fire document events 
   FireEvent(name) {
-    //console.log(name);
+    console.log(name);
     var event = new Event(name);
     document.dispatchEvent(event);
   }
 
   FireCustomEvent(name, data) {
-    //console.log(name, data);
+    console.log(name, data);
     var event = new CustomEvent(name, { detail: data });
     document.dispatchEvent(event);
   }
@@ -754,8 +754,26 @@ export class FirebaseManager {
   }
 
   //cheerleader
+  pendingCheerleadersRef(){
+    return '/cheerleaders/pending/';
+  }
+
   submitCheerleaderInfo(url) {
-    this.af.database.object('/cheerleaders/pending/' + this.auth.uid).set({photo: url});
+    this.af.database.object(this.pendingCheerleadersRef() + this.auth.uid).set({photo: url});
+  }
+
+  getPendingCheerleaders() {
+    return this.cachedPendingCheerleaders;
+  }
+  getPendingCheerleadersAsync() {
+    if (this.getPendingCheerleaders()) 
+      this.FireEvent('pendingcheerleadersready');
+    else {
+      this.af.database.list(this.pendingCheerleadersRef()).subscribe(snapshots => {
+        this.cachedPendingCheerleaders = snapshots;
+        this.FireEvent('pendingcheerleadersready');
+      })
+    }
   }
 }
 

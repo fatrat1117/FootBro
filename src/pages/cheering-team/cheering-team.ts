@@ -15,6 +15,8 @@ export class CheeringTeamPage {
   watchListMap: {};
   who = "baby";
   colorArray = [-1, -1, -1, -1];
+  pendingCheerleaders;
+  approvedCheerleaders;
 
   constructor(private nav: NavController,
     private modalCtrl: ModalController,
@@ -26,6 +28,7 @@ export class CheeringTeamPage {
   ionViewDidLoad() {
     this.addEventListeners();
     this.playerService.getPlayerAsync(this.selfId);
+    this.cheerleaderService.getPendingCheerleadersAsync();
   }
 
   addEventListeners() {
@@ -34,6 +37,10 @@ export class CheeringTeamPage {
       if (playerId === this.selfId) {
         this.player = this.playerService.getPlayer(playerId);
       }
+    });
+
+    document.addEventListener('servicependingcheerleadersready', e => {
+      this.pendingCheerleaders = this.cheerleaderService.getPendingCheerleaders();
     });
   }
 
