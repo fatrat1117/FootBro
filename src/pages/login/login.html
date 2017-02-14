@@ -9,24 +9,26 @@
 <ion-content class="login-content" padding>
   <div padding>
     <button ion-button [disabled]="busy" class="login-connect-btn login-connect-btn-fb" block (click)="registerUserWithFacebook($event)">
-            <ion-icon name="logo-facebook"></ion-icon>
-        {{'ConnectWithFacebook' | trans}}</button>
+            <ion-icon name="logo-facebook"></ion-icon>&nbsp;<b>
+        {{'ConnectWithFacebook' | trans}}</b></button>
   </div>
   <p>{{'UsingSBAccount' | trans}}</p>
   <ion-list>
     <ion-item>
-      <ion-input type="text" [placeholder]="'Email' | trans" [(ngModel)]="_credentials.email" required clearInput></ion-input>
+      <ion-label floating>{{'Email' | trans}}</ion-label>
+      <ion-input type="text" [(ngModel)]="_credentials.email" required clearInput></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="password" [placeholder]="'Password' | trans" [(ngModel)]="_credentials.password" required clearInput></ion-input>
+      <ion-label floating>{{'Password' | trans}}</ion-label>
+      <ion-input type="password" [(ngModel)]="_credentials.password" required clearInput></ion-input>
     </ion-item>
   </ion-list>
 
   <div class="login-connect" padding>
-    <button type="submit" [disabled]="busy || !_credentials.email.length || !_credentials.password.length" (click)="login(_credentials, $event)" block>{{ 'Login' | trans }}</button>
-    <button type="submit" [disabled]="busy || !_credentials.email.length || !_credentials.password.length" (click)="registerUser($event)" block>{{ 'CreateAccount' | trans }}</button>
-    <button type="submit" [disabled]="busy || !_credentials.email.length" (click)="ResetPassword()" block>{{ 'ResetPwd' | trans }}</button>
-    <button [disabled]="busy" (click)="dismiss()" block danger>{{'Cancel' | trans}}</button>
+    <button ion-button type="submit" [disabled]="busy || !_credentials.email.length || !_credentials.password.length" (click)="login(_credentials, $event)" block><b>{{ 'Login' | trans }}</b></button>
+    <button ion-button type="submit" [disabled]="busy || !_credentials.email.length || !_credentials.password.length" (click)="registerUser($event)" block><b>{{ 'CreateAccount' | trans }}</b></button>
+    <button ion-button type="submit" [disabled]="busy || !_credentials.email.length" (click)="ResetPassword()" block><b>{{ 'ResetPwd' | trans }}</b></button>
+    <button ion-button [disabled]="busy" (click)="dismiss()" block danger class="cancel"><b>{{'Cancel' | trans}}</b></button>
   </div>
   <div padding>
     <p *ngIf="error" danger>{{error}}</p>
