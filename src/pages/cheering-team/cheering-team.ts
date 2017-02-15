@@ -12,7 +12,6 @@ import { CheerleaderService } from '../../app/cheerleaders/cheerleader.service'
 export class CheeringTeamPage {
   selfId: string;
   player: Player;
-  watchListMap: {};
   who = "baby";
   colorArray = [-1, -1, -1, -1];
   pendingCheerleaders;
