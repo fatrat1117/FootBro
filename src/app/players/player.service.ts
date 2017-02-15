@@ -35,6 +35,12 @@ export class PlayerService {
       if (playerData['points'] && 'total' in playerData['points'])
         player.points = playerData['points'].total;
 
+      if (playerData.teams) {
+        player.teams = [];
+        for (let tId in player.teams)
+          player.teams.push(tId);
+      }
+
       this.playersMap[id] = player;
       if (player.role && player.role === 'cheerleader') {
         this.fm. getCheerleaderPublicAsync(id);
