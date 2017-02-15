@@ -49,6 +49,7 @@ export class CheerleaderService {
     document.addEventListener('cheerleaderpublicready', e => {
       let id = e['detail'];
       let cheerleaderPublic = this.fm.getCheerleaderPublic(id);
+      
       let cheerleader = this.findOrCreateCheerleader(id);
       if (cheerleader) {
         cheerleader.popularity = cheerleaderPublic.popularity;
@@ -114,5 +115,9 @@ export class CheerleaderService {
   approve(id) {
     this.fm.approveCheerleader(this.cheerleadersMap[id]);
     this.osm.cheerleaderApproved(id);
+  }
+
+  isCheerleader(id) {
+    return this.cheerleadersMap[id] && this.cheerleadersMap[id].photoMedium;
   }
 }
