@@ -49,7 +49,7 @@ export class CheeringTeamStatsPage {
   }
 
   ionViewDidLoad() {
-    this.selfPlayer = this.playerService
+    this.selfPlayer = this.playerService.getSelfPlayer();
     this.player = this.navParams.get("player");
   }
 

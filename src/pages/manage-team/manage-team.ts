@@ -6,6 +6,9 @@ import { CreateTeamPage } from '../create-team/create-team'
 import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
 
+import { Team } from '../../app/teams/team.model'
+import { TeamService } from '../../app/teams/team.service'
+
 
 @Component({
   selector: 'page-manage-team',
@@ -13,21 +16,31 @@ import { PlayerService } from '../../app/players/player.service'
 })
 export class ManageTeamPage {
   player: Player;
-  teams: string[];
-  constructor(private viewCtrl: ViewController, private modalCtrl: ModalController, private playerService: PlayerService) {
-
+  watchListMap : {};
+  constructor(private viewCtrl: ViewController, private modalCtrl: ModalController, 
+              private playerService: PlayerService, private teamService: TeamService) {
   }
 
   ionViewDidLoad() {
-    // this.playerService.getSelfBasic().then(playerBasic => {
-    //   this.playerBasic = playerBasic;
-    // })
+    this.watchListMap = {}
+    this.addEventListeners();
 
-    // this.playerService.getSelfTeams().then(teams => {
-    //   this.teams = teams;
-    // });
+    for (let id of this.player.teams) {
+      this.teamService.getTeamAsync(id);
+      this.watchListMap[id] = {}
+    }
+  }
+
+  addEventListeners() {
+    document.addEventListener('serviceteamready', e => {
+      let id = e['detail'];
+      if (this.watchListMap[id]) {
+        this.watchListMap[id] = this.teamService.getTeam(id);
+      }
+    })
   }
   
+  /*
   setDefaultTeam(index: number, slidingItem) {
     slidingItem.close();
     this.updateSelfBasic(this.teams[index]);
@@ -48,6 +61,7 @@ export class ManageTeamPage {
     else
       this.viewCtrl.dismiss();
   }
+  */
 
   adddNewTeam() {
     this.modalCtrl.create(CreateTeamPage).present();
