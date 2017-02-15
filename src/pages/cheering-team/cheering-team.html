@@ -55,33 +55,49 @@
           <span><img src="assets/img/cheering-team/speaker.png"/>全国共有{{approvedCheerleaders?.length}}位宝贝可约</span>
         </div>
       </ion-col>
-      <ion-col *ngIf='selfId' class="become-col" width-25 no-margin>
+      <ion-col *ngIf="!amICheerleader" class="become-col" width-25 no-margin>
         <div class="become" (click)="becomeCheerleader()">
-          <ion-icon name="md-football" class="football-icon"><span>{{'BecomeCheerleader' | trans}}</span></ion-icon>
+          <ion-icon name="football" class="football-icon"><span>{{'BecomeCheerleader' | trans}}</span></ion-icon>
         </div>
       </ion-col>
     </ion-row>
     <ion-row class="baby-row baby-row-1">
-      <ion-col *ngFor ='let cl of pendingCheerleaders' width-50 no-margin>
+      <ion-col *ngIf='(afPendingSelf | async)?.$exists()' width-50 no-margin>
         <ion-row>
           <div class="baby-img-frame">
-            <button ion-button icon-only clear class="chat-logo" color="lightGrey" (click)="approve(cl.id)">
-                <ion-icon name="lock"></ion-icon>
-              </button>
-            <img class="img" [src]="cl.photoMedium">
+            <img class="img" [src]="(afPendingSelf | async)?.photo">
           </div>
         </ion-row>
         <ion-row>
           <div class="baby-status">
             <ion-row>
-              <h3>{{cl.name}}</h3>
+              <h3>{{'PendingforReview' | trans}}</h3>
             </ion-row>
           </div>
         </ion-row>
       </ion-col>
+      <div *ngIf='playerService.isAdmin()'>
+        <ion-col *ngFor='let cl of pendingCheerleaders' width-50 no-margin>
+          <ion-row>
+            <div class="baby-img-frame">
+              <button ion-button icon-only clear class="chat-logo" color="lightGrey" (click)="approve(cl.id)">
+                <ion-icon name="lock"></ion-icon>
+              </button>
+              <img class="img" [src]="cl.photoMedium">
+            </div>
+          </ion-row>
+          <ion-row>
+            <div class="baby-status">
+              <ion-row>
+                <h3>{{cl.name}}</h3>
+              </ion-row>
+            </div>
+          </ion-row>
+        </ion-col>
+      </div>
     </ion-row>
     <ion-row class="baby-row baby-row-1">
-      <ion-col *ngFor ='let cl of approvedCheerleaders' width-50 no-margin>
+      <ion-col *ngFor='let cl of approvedCheerleaders' width-50 no-margin>
         <ion-row>
           <div class="baby-img-frame">
             <button ion-button icon-only clear class="chat-logo" color="lightGrey" (click)="approve(cl.id)">
@@ -97,7 +113,7 @@
             </ion-row>
             <ion-row>
               <ion-col class="eyes" width-40>
-                <img src="assets/img/cheering-team/eye.png" />5754
+                <img src="assets/img/cheering-team/eye.png" />{{cl.popularity}}
               </ion-col>
               <!--<ion-col class="prize" width-60>$299/小时</ion-col>-->
             </ion-row>

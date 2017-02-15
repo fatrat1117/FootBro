@@ -17,12 +17,16 @@ export class CheeringTeamPage {
   colorArray = [-1, -1, -1, -1];
   pendingCheerleaders;
   approvedCheerleaders;
+  amICheerleader = true;
+  afPendingSelf;
 
   constructor(private nav: NavController,
     private modalCtrl: ModalController,
     private playerService: PlayerService,
     private cheerleaderService : CheerleaderService) {
-    this.selfId = this.playerService.selfId()
+    this.selfId = this.playerService.selfId();
+    this.afPendingSelf = this.cheerleaderService.afPendingCheerleaderSelf();
+    //this.afPendingSelf.subscribe(s =>{console.log(s);})
   }
 
   ionViewDidLoad() {
@@ -43,10 +47,15 @@ export class CheeringTeamPage {
 
     document.addEventListener('servicependingcheerleadersready', e => {
       this.pendingCheerleaders = this.cheerleaderService.getPendingCheerleaders();
+      //console.log(this.pendingCheerleaders, this.pendingCheerleaders[this.selfId]);
     });
 
     document.addEventListener('serviceapprovedcheerleadersready', e=> {
       this.approvedCheerleaders = this.cheerleaderService.getApprovedCheerleaders();
+      if (this.approvedCheerleaders[this.selfId])
+        this.amICheerleader = true;
+      else 
+        this.amICheerleader = false;
     })
   }
 
