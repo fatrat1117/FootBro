@@ -102,4 +102,10 @@ export class PlayerService {
       return true;
     return false;
   }
+
+  getSelfPlayer() : Player {
+    if (this.selfId())
+      return this.playersMap[this.selfId()];
+    return null;
+  }
 }

@@ -837,6 +837,10 @@ export class FirebaseManager {
     }
   }
 
+  afPendingCheerleaderSelf() {
+    return this.af.database.object(this.pendingCheerleadersRef() + this.selfId());
+  }
+
   //admins 
   getAdminsAsync() {
     if (!this.admins) {

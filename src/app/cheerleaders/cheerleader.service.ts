@@ -11,40 +11,49 @@ export class CheerleaderService {
   pendingCheerleaders;
   approvedCheerleaders;
 
-  constructor(private fm: FirebaseManager, private osm: OneSignalManager, 
-              private playerService: PlayerService, private uiHelper : UIHelper) {
-      document.addEventListener('pendingcheerleadersready', e=> {
-        this.pendingCheerleaders = [];
-        this.fm.cachedPendingCheerleaders.forEach(fmCheerleader => {
-          let cheerleader = this.findOrCreateCheerleader(fmCheerleader.$key);
-          cheerleader.photoMedium = fmCheerleader.photo;
-          this.pendingCheerleaders.push(cheerleader);
-          this.playerService.getPlayerAsync(fmCheerleader.$key);
-        });
-
-        this.fm.FireEvent('servicependingcheerleadersready');
+  constructor(private fm: FirebaseManager, private osm: OneSignalManager,
+    private playerService: PlayerService, private uiHelper: UIHelper) {
+    document.addEventListener('pendingcheerleadersready', e => {
+      this.pendingCheerleaders = [];
+      this.fm.cachedPendingCheerleaders.forEach(fmCheerleader => {
+        let cheerleader = this.findOrCreateCheerleader(fmCheerleader.$key);
+        cheerleader.photoMedium = fmCheerleader.photo;
+        this.pendingCheerleaders.push(cheerleader);
+        this.playerService.getPlayerAsync(fmCheerleader.$key);
       });
 
-      document.addEventListener('approvedcheerleadersready', e=> {
-        this.approvedCheerleaders = [];
-        this.fm.cachedApprovedCheerleaders.forEach(fmCheerleader => {
-          let cheerleader = this.findOrCreateCheerleader(fmCheerleader.$key);
-          cheerleader.photoMedium = fmCheerleader.photo;
-          this.approvedCheerleaders.push(cheerleader);
-          this.playerService.getPlayerAsync(fmCheerleader.$key);
-        });
+      this.fm.FireEvent('servicependingcheerleadersready');
+    });
 
-        this.fm.FireEvent('serviceapprovedcheerleadersready');
+    document.addEventListener('approvedcheerleadersready', e => {
+      this.approvedCheerleaders = [];
+      this.fm.cachedApprovedCheerleaders.forEach(fmCheerleader => {
+        let cheerleader = this.findOrCreateCheerleader(fmCheerleader.$key);
+        cheerleader.photoMedium = fmCheerleader.photo;
+        this.approvedCheerleaders.push(cheerleader);
+        this.playerService.getPlayerAsync(fmCheerleader.$key);
       });
 
-      document.addEventListener('serviceplayerready', e=> {
-        let id = e['detail'];
-        let cheerleader = this.findOrCreateCheerleader(id);
-        let p = this.playerService.getPlayer(id);
-        cheerleader.name = p.name;
-        if (p.photoMedium)
-          cheerleader.photoMedium = p.photoMedium;
-      })
+      this.fm.FireEvent('serviceapprovedcheerleadersready');
+    });
+
+    document.addEventListener('serviceplayerready', e => {
+      let id = e['detail'];
+      let cheerleader = this.findOrCreateCheerleader(id);
+      let p = this.playerService.getPlayer(id);
+      cheerleader.name = p.name;
+      if (p.photoMedium)
+        cheerleader.photoMedium = p.photoMedium;
+    });
+
+    document.addEventListener('cheerleaderpublicready', e => {
+      let id = e['detail'];
+      let cheerleaderPublic = this.fm.getCheerleaderPublic(id);
+      let cheerleader = this.findOrCreateCheerleader(id);
+      if (cheerleader) {
+        cheerleader.popularity = cheerleaderPublic.popularity;
+      }
+    });
   }
 
   submitInfo() {
@@ -64,7 +73,7 @@ export class CheerleaderService {
     });
   }
 
-  findOrCreateCheerleader(id) : Cheerleader {
+  findOrCreateCheerleader(id): Cheerleader {
     let cheerleader;
     if (!this.cheerleadersMap[id]) {
       cheerleader = new Cheerleader();
@@ -83,7 +92,7 @@ export class CheerleaderService {
   getPendingCheerleadersAsync() {
     if (this.getPendingCheerleaders())
       this.fm.FireEvent('pendingcheerleadersready');
-    else 
+    else
       this.fm.getPendingCheerleadersAsync();
   }
 
@@ -94,8 +103,12 @@ export class CheerleaderService {
   getApprovedCheerleadersAsync() {
     if (this.getApprovedCheerleaders())
       this.fm.FireEvent('approvedcheerleadersready');
-    else 
+    else
       this.fm.getApprovedCheerleadersAsync();
+  }
+
+  afPendingCheerleaderSelf() {
+    return this.fm.afPendingCheerleaderSelf();
   }
 
   approve(id) {
