@@ -106,8 +106,8 @@ export class PlayerService {
     this.fm.placeOrder(toId, amount);
   }
 
-  unlockCheerleader(playerId: string, newPoints: number, selfNewPoints: number) {
-    this.fm.unlockCheerleader(playerId, newPoints, selfNewPoints);
+  unlockCheerleader(playerId: string, newPoints: number, newUnlockPoints: number, selfNewPoints: number) {
+    this.fm.unlockCheerleader(playerId, newPoints, newUnlockPoints, selfNewPoints);
   }
 
   isAdmin() {

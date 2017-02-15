@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController, AlertController, NavParams} from 'ionic-angular';
+import { ViewController, AlertController, ToastController, NavParams} from 'ionic-angular';
 
 import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
@@ -44,7 +44,8 @@ export class CheeringTeamStatsPage {
   player: Player;
   responseRate: number;
   constructor(private viewCtrl: ViewController, private alertCtrl: AlertController, 
-              private navParams: NavParams, private playerService: PlayerService) {
+              private navParams: NavParams, private playerService: PlayerService, 
+              private toastCtrl: ToastController) {
     this.responseRate = 40;
   }
 
@@ -80,7 +81,7 @@ export class CheeringTeamStatsPage {
         {
           text: 'Ok',
           handler: () => {
-            //this.unlockCheerleader()
+            this.unlockCheerleader()
             //this.playerService.placeOrder('2qJEDrRMODbPOafc3cts4jbgS7z2', 5);
             this.dismiss();
           }
@@ -96,10 +97,18 @@ export class CheeringTeamStatsPage {
   }
 
   unlockCheerleader() {
-    let amount = this.player.unlockPoints;
+    let amount = Math.floor(this.player.unlockPoints / 10) * 10;
     if (this.selfPlayer.points >= amount) {
       this.playerService.placeOrder(this.player.id, amount);
-      this.playerService.unlockCheerleader(this.player.id, this.player.points + amount, this.selfPlayer.points - amount);
+      this.playerService.unlockCheerleader(
+        this.player.id, this.player.points + amount, this.player.unlockPoints + 1, this.selfPlayer.points - amount);
+    }
+    else {
+      this.toastCtrl.create({
+        message: 'Not enough points.',
+        duration: 2000,
+        position: 'top'
+      }).present();
     }
   }
 }
