@@ -16,4 +16,5 @@ export class Player {
   teams: string[];
   popularity;
   points: number;
+  unlockPoints: number;
 }

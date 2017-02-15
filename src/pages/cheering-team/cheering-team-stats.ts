@@ -40,6 +40,7 @@ import { PlayerService } from '../../app/players/player.service'
   `
 })
 export class CheeringTeamStatsPage {
+  selfPlayer: Player;
   player: Player;
   responseRate: number;
   constructor(private viewCtrl: ViewController, private alertCtrl: AlertController, 
@@ -48,6 +49,7 @@ export class CheeringTeamStatsPage {
   }
 
   ionViewDidLoad() {
+    this.selfPlayer = this.playerService
     this.player = this.navParams.get("player");
   }
 
@@ -78,7 +80,8 @@ export class CheeringTeamStatsPage {
         {
           text: 'Ok',
           handler: () => {
-            this.playerService.updatePoints('2qJEDrRMODbPOafc3cts4jbgS7z2', 5, this.player.points - 5);
+            //this.unlockCheerleader()
+            //this.playerService.placeOrder('2qJEDrRMODbPOafc3cts4jbgS7z2', 5);
             this.dismiss();
           }
         },
@@ -90,5 +93,13 @@ export class CheeringTeamStatsPage {
       ]
     });
     confirm.present();
+  }
+
+  unlockCheerleader() {
+    let amount = this.player.unlockPoints;
+    if (this.selfPlayer.points >= amount) {
+      this.playerService.placeOrder(this.player.id, amount);
+      this.playerService.unlockCheerleader(this.player.id, this.player.points + amount, this.selfPlayer.points - amount);
+    }
   }
 }

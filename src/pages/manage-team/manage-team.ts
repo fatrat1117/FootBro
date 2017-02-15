@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ViewController, ModalController } from 'ionic-angular';
 
-import { NewTeamPage } from './new-team'
+import { CreateTeamPage } from '../create-team/create-team'
 
 import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
@@ -50,7 +50,7 @@ export class ManageTeamPage {
   }
 
   adddNewTeam() {
-    this.modalCtrl.create(NewTeamPage).present();
+    this.modalCtrl.create(CreateTeamPage).present();
   }
 
   updateSelfBasic(teamId: string) {

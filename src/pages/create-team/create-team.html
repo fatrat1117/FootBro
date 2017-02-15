@@ -9,7 +9,14 @@
   <sb-modal-navbar title="Add New Team" buttonName="Create" [isEnabled]="teamName.trim().length > 0 && !busy" (onFinish)="doCreateTeam()"></sb-modal-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-list>
+  <ion-item-group>
+    <ion-item (click)="changeLogo()">
+        <h2>{{'Logo' | trans}}</h2>
+        <ion-thumbnail item-right>
+        <img src="assets/img/none.png">
+      </ion-thumbnail>
+    </ion-item>
+
     <ion-item>
       <ion-label fixed>{{'TeamName' | trans}}</ion-label>
       <ion-input type="text" placeholder="" [(ngModel)]="teamName" maxlength="32"></ion-input>
@@ -26,5 +33,5 @@
     </ion-item>-->
     <!--button (click)="doCreateTeam()" [disabled]="!teamName.trim().length || busy" ion-button block>{{'Create' | trans}}</button>
     <button (click)="doCancel()" [disabled]="busy" ion-button block color='lightGrey'>{{'Cancel' | trans}}</button-->
-  </ion-list>
+  </ion-item-group>
 </ion-content>

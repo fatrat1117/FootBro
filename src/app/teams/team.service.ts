@@ -120,4 +120,12 @@ export class TeamService {
     // else 
     //   this.fm.getAllPublicTeams();
   }
+
+  quiteTeam(id) {
+    alert("TODO: quite team");
+  }
+
+  setDefaultTeam(id) {
+    alert("TODO: change default team");
+  }
 }

@@ -50,4 +50,8 @@ export class CreateTeamPage {
     let self = this;
     this.service.createTeam(teamObj, this.isDefault);
   }
+
+  changeLogo() {
+    alert("TODO: change logo");
+  }
 }

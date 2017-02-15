@@ -10,6 +10,8 @@ import { EditPlayerDescriptionPage } from './edit-player-description'
 
 import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
+import { Team } from '../../app/teams/team.model'
+import { TeamService } from '../../app/teams/team.service'
 
 
 @Component({
@@ -18,9 +20,10 @@ import { PlayerService } from '../../app/players/player.service'
 })
 export class EditPlayerPage {
   selfId: string;
-  player : Player;
+  player: Player;
+  team: Team;
   isSavable: boolean;
-  constructor(private modalCtrl: ModalController, private playerService: PlayerService) {
+  constructor(private modalCtrl: ModalController, private playerService: PlayerService, private teamService: TeamService) {
     this.selfId = this.playerService.selfId();
   }
 
@@ -31,10 +34,21 @@ export class EditPlayerPage {
   }
 
   addEventListeners() {
+    // player
     document.addEventListener('serviceplayerready', e => {
       let playerId = e['detail'];
       if (playerId === this.selfId) {
         this.player = this.playerService.getPlayer(playerId);
+        if (this.player.teamId)
+          this.teamService.getTeamAsync(this.player.teamId);
+      }
+    });
+
+    // team
+    document.addEventListener('serviceteamready', e => {
+      let teamId = e['detail'];
+      if (this.player && teamId === this.player.teamId) {
+        this.team = this.teamService.getTeam(teamId);
       }
     });
   }
@@ -73,6 +87,10 @@ export class EditPlayerPage {
     this.modalCtrl.create(EditPlayerDescriptionPage, {
       description: this.player.description
     }).present();
+  }
+
+  manageTeams() {
+
   }
 }
 

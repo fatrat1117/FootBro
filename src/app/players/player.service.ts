@@ -13,6 +13,7 @@ export class PlayerService {
       let playerData = this.fm.getPlayer(id);
       let player = new Player();
       player.id = playerData.$key;
+      player.points = playerData.points;
       player.name = playerData['basic-info'].displayName || "John Doe";
       player.photo = playerData['basic-info'].photoURL || "assets/img/none.png";
       player.teamId = playerData['basic-info'].teamId;
@@ -93,8 +94,12 @@ export class PlayerService {
     return this.fm.selfId();
   }
 
-  updatePoints(targetId: string, usedPoint: number, newPoints: number) {
-    this.fm.updatePoints(targetId, usedPoint, newPoints)
+  placeOrder(toId: string, amount: number) {
+    this.fm.placeOrder(toId, amount);
+  }
+
+  unlockCheerleader(playerId: string, newPoints: number, selfNewPoints: number) {
+    this.fm.unlockCheerleader(playerId, newPoints, selfNewPoints);
   }
 
   isAdmin() {
