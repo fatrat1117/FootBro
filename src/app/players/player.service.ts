@@ -42,6 +42,8 @@ export class PlayerService {
           player.teams.push(tId);
       }
 
+      if (playerData.role)
+        player.role = playerData.role;
       this.playersMap[id] = player;
       if (player.role && player.role === 'cheerleader') {
         this.fm. getCheerleaderPublicAsync(id);

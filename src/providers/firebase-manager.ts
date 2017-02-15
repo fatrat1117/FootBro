@@ -504,13 +504,13 @@ export class FirebaseManager {
   }
   //Fire document events 
   FireEvent(name) {
-    console.log(name);
+  //  console.log(name);
     var event = new Event(name);
     document.dispatchEvent(event);
   }
 
   FireCustomEvent(name, data) {
-    //console.log(name, data);
+   // console.log(name, data);
     var event = new CustomEvent(name, { detail: data });
     document.dispatchEvent(event);
   }
