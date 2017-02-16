@@ -4,6 +4,11 @@ export class TeamStat {
   rate;
   total_matches;
   win;
+  GA;
+  GF;
+  AvgGA;
+  AvgGF;
+  Year;
 }
 
 export class Team {
@@ -15,7 +20,8 @@ export class Team {
   totalPlayers;
   last_5 = [];
   players = [];
-  last_15 = new TeamStat();
-  last_30 = new TeamStat();
-  overall = new TeamStat();
+  last_15;
+  last_30;
+  overall;
+  yearlyHistory = [];
 }

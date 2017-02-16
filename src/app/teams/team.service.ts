@@ -36,7 +36,7 @@ export class TeamService {
 
     document.addEventListener('teampublicready', e => {
       let teamId = e['detail'];
-      let teamData = this.teamDataMap[teamId];
+      let teamData = this.findOrCreateTeam(teamId);
       let teamPublic = this.fm.getTeamPublic(teamId);
       if (teamData && teamPublic) {
         teamData.ability = teamPublic.ability;
@@ -46,14 +46,23 @@ export class TeamService {
 
     document.addEventListener('teamstatsdataready', e => {
       let teamId = e['detail'];
-      let teamData = this.teamDataMap[teamId];
+      let teamData = this.findOrCreateTeam(teamId);
       let teamStats = this.fm.getTeamStats(teamId);
       if (teamData && teamStats) {
         teamData.last_5 = teamStats.last_5;
         teamData.last_15 = teamStats.last_15;
         teamData.last_30 = teamStats.last_30;
         teamData.overall = teamStats.overall;
+        teamData.yearlyHistory = [];
+        for (let i = 2006; i <= new Date().getFullYear(); ++i) {
+          if (teamStats[i]) {
+            let history = teamStats[i];
+            history['year'] = i;
+            teamData.yearlyHistory.push(history);
+          }
+        }
       }
+      console.log(teamData);
       this.fm.FireCustomEvent('serviceteamstatsdataready', teamId);
     });
 
@@ -71,7 +80,7 @@ export class TeamService {
     })
   }
 
-  findOrCreateTeam(id) {
+  findOrCreateTeam(id) : Team{
     let team;
     if (this.teamDataMap[id])
       team = this.teamDataMap[id];
