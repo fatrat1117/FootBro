@@ -6,8 +6,11 @@ export class TeamStat {
   win;
   GA;
   GF;
-  AvgGA;
-  AvgGF;
+  // AvgGA () {
+  //   return  this.GA / this.total_matches;
+  // }
+  avgGA;
+  avgGF;
   Year;
 }
 

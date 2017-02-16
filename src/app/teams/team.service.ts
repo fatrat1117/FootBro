@@ -51,8 +51,14 @@ export class TeamService {
       if (teamData && teamStats) {
         teamData.last_5 = teamStats.last_5;
         teamData.last_15 = teamStats.last_15;
+        if (teamData.last_15 && teamData.last_15.GA)
+          teamData.last_15['avgGA'] = teamData.last_15.total_matches > 0 ? teamData.last_15.GA / teamData.last_15.total_matches : 0;
         teamData.last_30 = teamStats.last_30;
+        if (teamData.last_30 && teamData.last_30.GA)
+          teamData.last_30['avgGA'] = teamData.last_30.total_matches > 0 ? teamData.last_30.GA / teamData.last_30.total_matches : 0;
         teamData.overall = teamStats.overall;
+        if (teamData.overall && teamData.overall.GA)
+          teamData.overall['avgGA'] = teamData.overall.total_matches > 0 ? teamData.overall.GA / teamData.overall.total_matches : 0;
         teamData.yearlyHistory = [];
         for (let i = 2006; i <= new Date().getFullYear(); ++i) {
           if (teamStats[i]) {
