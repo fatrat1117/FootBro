@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController} from 'ionic-angular'
+import { NavController, ModalController } from 'ionic-angular'
 import { CheeringTeamStatsPage } from './cheering-team-stats'
 import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
@@ -11,7 +11,6 @@ import { CheerleaderService } from '../../app/cheerleaders/cheerleader.service'
 })
 export class CheeringTeamPage {
   selfId: string;
-  player: Player;
   who = "baby";
   colorArray = [-1, -1, -1, -1];
   pendingCheerleaders;
@@ -22,8 +21,7 @@ export class CheeringTeamPage {
   constructor(private nav: NavController,
     private modalCtrl: ModalController,
     private playerService: PlayerService,
-    private cheerleaderService : CheerleaderService) {
-    this.selfId = this.playerService.selfId();
+    private cheerleaderService: CheerleaderService) {
     this.afPendingSelf = this.cheerleaderService.afPendingCheerleaderSelf();
     //this.afPendingSelf.subscribe(s =>{console.log(s);})
   }
@@ -37,23 +35,16 @@ export class CheeringTeamPage {
   }
 
   addEventListeners() {
-    document.addEventListener('serviceplayerready', e => {
-      let playerId = e['detail'];
-      if (playerId === this.selfId) {
-        this.player = this.playerService.getPlayer(playerId);
-      }
-    });
-
     document.addEventListener('servicependingcheerleadersready', e => {
       this.pendingCheerleaders = this.cheerleaderService.getPendingCheerleaders();
       //console.log(this.pendingCheerleaders, this.pendingCheerleaders[this.selfId]);
     });
 
-    document.addEventListener('serviceapprovedcheerleadersready', e=> {
+    document.addEventListener('serviceapprovedcheerleadersready', e => {
       this.approvedCheerleaders = this.cheerleaderService.getApprovedCheerleaders();
       if (this.cheerleaderService.isCheerleader(this.selfId))
         this.amICheerleader = true;
-      else 
+      else
         this.amICheerleader = false;
     })
   }
@@ -77,13 +68,20 @@ export class CheeringTeamPage {
   }
 
   unlockBaby() {
-    this.modalCtrl.create(CheeringTeamStatsPage, {
-      player: this.player,
-    }).present();
+    // if (this.playerService.isAuthenticated()) {
+    //   this.modalCtrl.create(CheeringTeamStatsPage, {
+    //     player: this.playerService.getSelfPlayer(),
+    //   }).present();
+    // }
+    // else
+    //   this.playerService.checkLogin();
   }
 
   becomeCheerleader() {
-    this.cheerleaderService.submitInfo();
+    if (this.playerService.isAuthenticated())
+      this.cheerleaderService.submitInfo();
+    else
+      this.playerService.checkLogin();
   }
 
   approve(id) {

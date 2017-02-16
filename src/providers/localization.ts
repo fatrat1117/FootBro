@@ -200,7 +200,9 @@ export class Localization {
             All: 'all',
             BecomeCheerleader: 'Become Cheerleader',
             ApplicationSubmited: 'Your application is submitted. We will process it within 1 working day',
-            PendingforReview: 'Pending for Review'
+            PendingforReview: 'Pending for Review',
+            Cheerleadersavailable: 'Cheerleaders available',
+            Cheerleaders: 'Cheerleaders'
         },
 
         zh: {
@@ -382,7 +384,9 @@ export class Localization {
             All: '全部',
             BecomeCheerleader: '成为宝贝',
             ApplicationSubmited: '你的申请已经提交，我们会在一个工作日之内处理你的请求',
-            PendingforReview: '审核中'
+            PendingforReview: '审核中',
+            Cheerleadersavailable: '拉拉队员可约',
+            Cheerleaders: '拉拉队'
         }
     }
 }

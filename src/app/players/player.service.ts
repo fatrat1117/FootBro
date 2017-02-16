@@ -121,4 +121,12 @@ export class PlayerService {
       return this.playersMap[this.selfId()];
     return null;
   }
+
+  isAuthenticated() {
+    return this.fm.auth && this.fm.auth.uid;
+  }
+
+  checkLogin() {
+    this.fm.checkLogin();
+  }
 }
