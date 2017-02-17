@@ -146,6 +146,7 @@ page-my-player{
         padding: 0.5rem 0rem;
         .player-position{
           color: #00ff00;
+          font-weight: bold;
         }
         .player-at{
           color: #757575;
@@ -153,6 +154,7 @@ page-my-player{
 
         .player-team-name{
           color:#fff;
+          font-weight: bold;
         }
       }
 
@@ -187,6 +189,7 @@ page-my-player{
           margin: 0;
           position: absolute;
           top: 0;
+          font-weight: bold;
         }
       }
     }
@@ -207,9 +210,10 @@ page-my-player{
         }
         .data{
           color: #fff;
-          font-size: 2.3rem;
+          font-size: 2.7rem;
           line-height: 5rem;
           min-width: 4rem;
+          font-weight: bold;
         }
 
         .unit{
@@ -243,6 +247,15 @@ page-my-player{
           }
         }
       }
+      .flex-start{
+          color: #fff;
+          font-size:1.7rem;
+          b{
+            font-size: 2rem;
+          }
+          min-width: 4rem;
+          font-weight: bold;
+      }
       .height{
         border-bottom: 4px solid #00ffac;
         margin-left: 0;
@@ -269,20 +282,33 @@ page-my-player{
     background: #171717;
     font-size: 2.3rem;
     color: #ababab;
+    .subtitle{
+      font-weight: bold;
+    }
+
   }
   .personal-data-header{
     background-image: url("/../../assets/img/my-player/bg3@3x.png");
     font-size: 1.8rem;
     color: #ababab;
+    font-weight: bold;
   }
   .main-font{
-    font-size: 1.8rem;
-    color: #ababab;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
   }
   .personal-data{
     background: #41444d;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     color: #ffffff;
+    font-weight: bold;
+    .description{
+      font-size: 1.5rem;
+      font-weight: bold;
+      line-height: 2.5rem;
+      margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+    }
   }
   .separate{
     height: 2.2px;
@@ -314,6 +340,8 @@ page-my-player{
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 2rem;
+      font-weight: bold;
     }
     .col-right{
       display: flex;
@@ -327,9 +355,10 @@ page-my-player{
     .progressTxt {
       text-align: center;
       color: #f8f8f8;
-      font-size: 1.4rem;
+      font-size: 2rem;
       padding: 1rem 0rem;
       margin:0;
+      font-weight: bold;
     }
     .proBar{
       position:relative;
@@ -338,10 +367,11 @@ page-my-player{
         position: absolute;
       }
       .win-rate-text{
-        padding-top: 40%;
-        font-size: 2rem;
+        padding-top: 35%;
+        font-size: 5rem;
         text-align: center;
         padding-bottom: 40%;
+        font-weight: bold;
       }
 
     }
@@ -417,6 +447,7 @@ page-my-player{
     font-size: 1.5rem;
     .picText{
       color:#ababab;
+       font-weight: bold;
     }
   }
   .feedBack {
@@ -426,7 +457,10 @@ page-my-player{
     .totalText {
       padding: .9rem 0 1.25rem 0;
       h1,h2{
-        font-size: 1.5rem;
+        font-size: 1.8rem;
+        color: #ffffff;
+        font-weight: bold;
+
       }
     }
 
@@ -631,6 +665,7 @@ page-my-player{
     color: #ababab;
     font-size: 1.5rem;
     padding-top: .2rem;
+    font-weight: bold;
   }
   .setOne .ballpic {
     width: 3rem;
@@ -641,15 +676,17 @@ page-my-player{
     color: #ffffff;
     font-size: 1.7rem;
     line-height: 1.475rem;
+    font-weight: bold;
   }
   .setOne .ball {
     margin-bottom: .9rem;
   }
   .setOne .booSet p {
     color: #ffffff;
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     line-height: 1.5;
     padding-bottom: .74rem;
+    font-weight: bold;
   }
   .setOne .like {
     background: url(../../assets/img/my-player/defunlike.png) no-repeat;
@@ -659,6 +696,7 @@ page-my-player{
     background-size: 100% 100%;
     margin-right: .5rem;
     vertical-align: middle;
+    font-weight: bold;
   }
   .setOne .unlike {
     background: url(../../assets/img/my-player/deflike.png) no-repeat;
@@ -671,9 +709,10 @@ page-my-player{
     border-radius: 15px;
     border: 1px solid #bdbdbe;
     text-align: center;
-    padding: 0rem 1.2rem;
+    padding: 0.2rem 1.2rem;
     margin-left: .425rem;
     text-decoration: none;
+    font-weight: bold;
   }
   .setOne .activeLike {
     color: #00ff00 !important;
@@ -694,9 +733,10 @@ page-my-player{
     border-radius: 15px;
     border: 1px solid #bdbdbe;
     text-align: center;
-    padding: 0rem 1.2rem;
+    padding: 0.2rem 1.2rem;
     margin-left: .425rem;
     text-decoration: none;
+    font-weight: bold;
   }
   .setOne .tabMain{
     position: relative;
