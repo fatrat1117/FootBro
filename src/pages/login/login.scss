@@ -1,24 +1,32 @@
-.login-content scroll-content{
-  // background-image: url("../../img/test_me_bg.png");
-  background-size:100% auto;
-}
-
-.login-connect{
-  padding: 1.5rem;
-}
-
-
-.login-connect-btn{
-
-}
-
-.login-connect-btn-fb{
-
-}
-
-.login-connect-btn-wc{
-  margin-top: 1.4rem;
-}
 page-login{
+  .login-content scroll-content{
+    // background-image: url("../../img/test_me_bg.png");
+    background-size:100% auto;
+  }
 
+  .login-connect{
+    padding: 1.5rem;
+  }
+  .login-connect .signin{
+    color: #ffffff;
+  }
+
+
+  .login-connect-btn{
+
+  }
+
+  .login-connect-btn-fb{
+    background-color: #3b5998;
+  }
+
+  .login-connect-btn-wc{
+    margin-top: 1.4rem;
+  }
+  .login-connect .dark_green{
+    background-color: #20bd16;
+  }
+  .login-connect .cancel{
+    background-color: rgb(64,68,77);
+  }
 }
