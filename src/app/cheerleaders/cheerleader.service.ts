@@ -32,6 +32,7 @@ export class CheerleaderService {
         cheerleader.photoMedium = fmCheerleader.photo;
         this.approvedCheerleaders.push(cheerleader);
         this.playerService.getPlayerAsync(fmCheerleader.$key);
+        this.fm.getCheerleaderPublicAsync(fmCheerleader.$key);
       });
 
       this.fm.FireEvent('serviceapprovedcheerleadersready');

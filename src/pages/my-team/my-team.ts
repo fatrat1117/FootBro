@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { TeamService } from '../../app/teams/team.service'
-import { Team, TeamStat } from '../../app/teams/team.model'
+import { Team } from '../../app/teams/team.model'
 import { TeamPlayersService } from '../../app/teams/teamplayers.service'
 import { MatchService } from '../../app/matches/match.service'
 import * as moment from 'moment';
@@ -19,19 +19,13 @@ export class MyTeamPage {
   players;
   matches;
   upcomingMatch;
-
+  mostGAMatchId;
+  mostGFMatchId;
   constructor(public navCtrl: NavController,
     private navParams: NavParams,
     private service: TeamService,
     private teamPlayersService: TeamPlayersService,
     private matchService: MatchService) {
-    this.first = [
-      {
-        'win': '7',
-        'tie': '3',
-        'lose': '6',
-      }
-    ]
   }
 
   ionViewDidLoad() {
@@ -49,6 +43,14 @@ export class MyTeamPage {
       //console.log(teamId, this.id);
       if (teamId === this.id) {
         this.team = this.service.getTeam(teamId);
+        if (this.team.overall && this.team.overall.most_GA_match) {
+          for (let key in this.mostGAMatchId)
+            this.mostGAMatchId = key;
+        }
+        if (this.team.overall && this.team.overall.most_GF_match) {
+          for (let key in this.mostGFMatchId)
+            this.mostGFMatchId = key;
+        }  
         this.teamPlayersService.getTeamPlayersAsync(teamId);
         this.setChoosePosition(this.selectedStatIndex);
       }

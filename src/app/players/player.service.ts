@@ -46,7 +46,7 @@ export class PlayerService {
         player.role = playerData.role;
       this.playersMap[id] = player;
       if (player.role && player.role === 'cheerleader') {
-        this.fm. getCheerleaderPublicAsync(id);
+        //this.fm. getCheerleaderPublicAsync(id);
       }
       else
         this.fm.getPlayerPublicAsync(id);
@@ -63,14 +63,14 @@ export class PlayerService {
       }
     });
 
-    document.addEventListener('cheerleaderpublicready', e => {
-      let id = e['detail'];
-      let cheerleaderPublic = this.fm.getCheerleaderPublic(id);
-      let player = this.getPlayer(id);
-      if (player) {
-        player.popularity = cheerleaderPublic.popularity;
-      }
-    });
+    // document.addEventListener('cheerleaderpublicready', e => {
+    //   let id = e['detail'];
+    //   let cheerleaderPublic = this.fm.getCheerleaderPublic(id);
+    //   let player = this.getPlayer(id);
+    //   if (player) {
+    //     player.popularity = cheerleaderPublic.popularity;
+    //   }
+    // });
   }
 
   getPlayerAsync(id) {

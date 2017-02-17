@@ -202,7 +202,15 @@ export class Localization {
             ApplicationSubmited: 'Your application is submitted. We will process it within 1 working day',
             PendingforReview: 'Pending for Review',
             Cheerleadersavailable: 'Cheerleaders available',
-            Cheerleaders: 'Cheerleaders'
+            Cheerleaders: 'Cheerleaders',
+            avgga: 'Avg. GA',
+            avggf: 'Avg. GF',
+            maxgf: 'Max. GF',
+            maxga: 'Max. GA',
+            maxvictory: 'Max. successive victory',
+            maxlose: 'Max. successive lose',
+            mostundefeated: 'Most consecutive undefeated',
+            mostcleansheets: 'Most consecutive clean sheets'
         },
 
         zh: {
@@ -386,7 +394,15 @@ export class Localization {
             ApplicationSubmited: '你的申请已经提交，我们会在一个工作日之内处理你的请求',
             PendingforReview: '审核中',
             Cheerleadersavailable: '拉拉队员可约',
-            Cheerleaders: '拉拉队'
+            Cheerleaders: '拉拉队',
+            avgga: '场均进球',
+            avggf: '场均失球',
+            maxgf: '进球最多的比赛',
+            maxga: '失球最多的比赛',
+            maxvictory: '最长的连续胜利',
+            maxlose: '最长的连续失利',
+            mostundefeated: '最长的不败',
+            mostcleansheets: '最长的不失球'
         }
     }
 }

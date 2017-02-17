@@ -12,7 +12,7 @@
 <ion-content class="content-background-page">
 
   <div class="content-top">
-    <img [src]="team.logo" class="thumbnail-img" />
+    <img [src]="team?.logo" class="thumbnail-img" />
     <h6 class="team-name default-font-size-h6">{{team.name}}</h6>
     <!--<p class="team-place default-font-size-p">阿根廷&nbsp;|&nbsp;纪念碑球场</p>-->
     <p class="team-place default-font-size-p">&nbsp;&nbsp;</p>
@@ -128,7 +128,7 @@
   <div class="team-member-info">
     <ion-row class="team-member-display">
       <ion-col *ngFor="let p of players?.slice(0,3)">
-        <img [src]="p.photo" class="team-member-img">
+        <img [src]="p?.photo" class="team-member-img">
         <p class="team-member-name">{{p.name}}</p>
       </ion-col>
     </ion-row>
@@ -181,53 +181,53 @@
   </ion-row>
 
   <ion-row>
-    <ion-col class="recent-game-result-name">参赛</ion-col>
-    <ion-col class="recent-game-result-name">胜利</ion-col>
-    <ion-col class="recent-game-result-name">平局</ion-col>
-    <ion-col class="recent-game-result-name">失败</ion-col>
-    <ion-col class="recent-game-result-name">平均进球</ion-col>
-    <ion-col class="recent-game-result-name">平均失球</ion-col>
+    <ion-col class="recent-game-result-name">{{'Played' | trans}}</ion-col>
+    <ion-col class="recent-game-result-name">{{'W' | trans}}</ion-col>
+    <ion-col class="recent-game-result-name">{{'D' | trans}}</ion-col>
+    <ion-col class="recent-game-result-name">{{'L' | trans}}</ion-col>
+    <ion-col class="recent-game-result-name">{{'avgga' | trans}}</ion-col>
+    <ion-col class="recent-game-result-name">{{'avggf' | trans}}</ion-col>
   </ion-row>
 </div>
 
 
 <ion-list no-lines="true" class="game-data-assist">
   <ion-item class="game-data-assist-item">
-    <div item-left class="goal-title">进球最多的比赛</div>
+    <div item-left class="goal-title">{{'maxgf' | trans}}</div>
     <div item-right>
-      <p class="goal-data">90%</p>
-      <p class="goal-data-detail">{{first.win}}胜{{first.win}}平{{first.win}}负</p>
+      <p class="goal-data">{{team?.overall?.win_streak}}</p>
+      <p class="goal-data-detail"></p>
+    </div>
+  </ion-item>
+  <ion-item *ngIf='matches && mostGAMatchId' class="game-data-assist-item">
+    <div item-left class="goal-title">{{'maxga' | trans}}</div>
+    <div item-right>
+      <p class="goal-data">{{matches[mostGAMatchId].homeScore}} : {{matches[mostGAMatchId].awayScore}}</p>
+      <p class="goal-data-detail"></p>
     </div>
   </ion-item>
   <ion-item class="game-data-assist-item">
-    <div item-left class="goal-title">失球最多的比赛</div>
+    <div item-left class="goal-title-2">{{'maxvictory' | trans}}</div>
     <div item-right>
-      <p class="goal-data">90%</p>
-      <p class="goal-data-detail">{{first.win}}胜{{first.win}}平{{first.win}}负</p>
+      <p class="goal-data">{{team?.overall?.win_streak}}</p>
     </div>
   </ion-item>
   <ion-item class="game-data-assist-item">
-    <div item-left class="goal-title-2">最长的连续胜利</div>
+    <div item-left class="goal-title-2">{{'maxlose' | trans}}</div>
     <div item-right>
-      <p class="goal-data">90</p>
+      <p class="goal-data">{{team?.overall?.lose_streak}}</p>
     </div>
   </ion-item>
   <ion-item class="game-data-assist-item">
-    <div item-left class="goal-title-2">最长的连续失败</div>
+    <div item-left class="goal-title-2">{{'mostundefeated' | trans}}</div>
     <div item-right>
-      <p class="goal-data">90</p>
-    </div>
-  </ion-item>
-  <ion-item class="game-data-assist-item">
-    <div item-left class="goal-title-2">最长的连续不败</div>
-    <div item-right>
-      <p class="goal-data">90</p>
+      <p class="goal-data">{{team?.overall?.draw_streak}}</p>
     </div>
   </ion-item>
   <ion-item class="game-data-assist-item no-margin">
-    <div item-left class="goal-title-2 no-margin">最长的连续不失球</div>
+    <div item-left class="goal-title-2 no-margin">{{'mostcleansheets' | trans}}</div>
     <div item-right class="no-margin">
-      <p class="goal-data no-margin">90</p>
+      <p class="goal-data no-margin">{{team?.overall?.noGA_streak}}</p>
     </div>
   </ion-item>
 </ion-list>
@@ -237,8 +237,6 @@
       最佳球员排名
     </button>
 </div>
-
-
 <ion-list no-lines="true" class="team-best-member-info no-margin no-padding">
 
   <ion-item class="team-best-member-award-title">
