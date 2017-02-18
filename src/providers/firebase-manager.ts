@@ -605,7 +605,7 @@ export class FirebaseManager {
     return this.matchesByDateMap[date];
   }
 
-  getMatchesByDateAsync(date) {
+  getMatchesByDateAsync(date, tournamentId) {
     let afQuery = this.af.database.list(this.matchListRef(), {
       query: {
         orderByChild: 'date',
@@ -615,12 +615,15 @@ export class FirebaseManager {
 
     let sub = afQuery.subscribe(snapshots => {
       sub.unsubscribe();
-      snapshots.forEach(snapshot => {
+      var matches = snapshots.filter(m => {
+        return tournamentId === 'all' || m.tournamentId === tournamentId;
+      });
+
+      matches.forEach(snapshot => {
         //monitor match change
         this.getMatchAsync(snapshot.$key);
-        //this.cashedMatchesMap[snapshot.$key] = snapshot;
       });
-      this.matchesByDateMap[date] = snapshots;
+      this.matchesByDateMap[date] = matches;
       this.FireCustomEvent('matchesbydateready', date);
     });
   }
