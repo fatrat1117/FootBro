@@ -14,9 +14,9 @@
   <ion-list [virtualScroll]="filteredPlayers">
     <ion-item *virtualItem="let player" (click)="selectPlayer(player.id)">
       <ion-avatar item-left>
-        <ion-img [src] = "player.photoURL"></ion-img>
+        <ion-img [src] = "player.photo"></ion-img>
       </ion-avatar>
-      {{ player.displayName }}
+      {{ player.name }}
     </ion-item>
   </ion-list>
 </ion-content>

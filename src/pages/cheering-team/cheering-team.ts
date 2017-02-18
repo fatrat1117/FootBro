@@ -41,7 +41,7 @@ export class CheeringTeamPage {
 
     document.addEventListener('serviceapprovedcheerleadersready', e => {
       this.approvedCheerleaders = this.cheerleaderService.getApprovedCheerleaders();
-      if (this.cheerleaderService.isCheerleader(this.selfId))
+      if (this.cheerleaderService.isCheerleader(this.playerService.selfId()))
         this.amICheerleader = true;
       else
         this.amICheerleader = false;
