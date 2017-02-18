@@ -25,8 +25,9 @@ export class FirebaseManager {
   //matches 
   matchDatesMap = {};
   matchesByDateMap = {};
-  cashedMatchesMap = {};
+  cachedMatchesMap = {};
   _afTournamentList;
+  cachedTournamentTablesMap = {};
   //cheerleader
   cachedPendingCheerleaders;
   cachedApprovedCheerleaders;
@@ -629,7 +630,7 @@ export class FirebaseManager {
   }
 
   getMatch(id) {
-    return this.cashedMatchesMap[id];
+    return this.cachedMatchesMap[id];
   }
 
   getMatchAsync(id) {
@@ -637,7 +638,7 @@ export class FirebaseManager {
       this.FireCustomEvent('matchready', id);
     else {
       this.afMatch(id).subscribe(snapshot => {
-        this.cashedMatchesMap[id] = snapshot;
+        this.cachedMatchesMap[id] = snapshot;
         this.FireCustomEvent('matchready', id);
       });
     }
@@ -658,10 +659,25 @@ export class FirebaseManager {
     })
   }
 
+  getTournamentTableList(id) {
+    return this.af.database.list('/tournaments/list/' + id + '/table',
+      { query: { orderByChild: 'rank' } });
+  }
 
+  getTournamentTable(id) {
+    return this.cachedTournamentTablesMap[id];
+  }
 
-
-
+  getTournamentTableAsync(id) {
+    if (this.getTournamentTable(id))
+      this.FireCustomEvent('tournamenttableready', id);
+    else {
+      this.getTournamentTableList(id).subscribe(snapshots => {
+        this.cachedTournamentTablesMap[id] = snapshots;    
+        this.FireCustomEvent('tournamenttableready', id);
+      }); 
+    }
+  }
   /****************************** Points ******************************/
   /*
   updatePoints(targetId: string, usedPoint: number, newPoints: number) {

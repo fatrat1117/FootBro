@@ -123,4 +123,12 @@ export class MatchService {
   afTournamentList() {
     return this.fm.afTournamentList();
   }
+
+  getTournamentTable(id) {
+    return this.fm.getTournamentTable(id);
+  }
+
+  getTournamentTableAsync(id) {
+    this.fm.getTournamentTableAsync(id);
+  }
 }

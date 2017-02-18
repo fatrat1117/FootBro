@@ -16,7 +16,7 @@ export class MatchesPage {
   dates: number[];
   selectedDate: number;
   matches;
-  matchStandings: MatchStanding[];
+  matchStandings;
   today;
   selectedInfo: string;
   selectedId: string;
@@ -88,6 +88,14 @@ export class MatchesPage {
       let date = e['detail'];
       this.matches = this.matchService.getMatchesByDate(date);
     });
+
+    document.addEventListener('tournamenttableready', e=>{
+      let tournamentId = e['detail'];
+      if (tournamentId === this.selectedId)
+        //console.log(tournamentId);
+        this.matchStandings = this.matchService.getTournamentTable(tournamentId);
+        //console.log(this.matchStandings);
+    });
   }
 
   addYears() {
@@ -105,8 +113,10 @@ export class MatchesPage {
     if (this.selectedId == "all") {
       this.selectedInfo = "schedule";
       this.matchService.getMatchDatesAsync("all");
-    } else
+    } else {
       this.matchService.getMatchDatesAsync(this.selectedId);
+      this.matchService.getTournamentTableAsync(this.selectedId);
+    }
   }
 
   enterNewGame() {

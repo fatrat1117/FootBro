@@ -1,10 +1,7 @@
 <ion-header>
   <ion-navbar no-border-bottom>
     <ion-title>
-      <ion-select no-padding [(ngModel)]="selectedId"
-      (ngModelChange)="onSelectionChange()"
-      [okText]="'OK' | trans"
-      [cancelText]="'Cancel' | trans">
+      <ion-select no-padding [(ngModel)]="selectedId" (ngModelChange)="onSelectionChange()" [okText]="'OK' | trans" [cancelText]="'Cancel' | trans">
         <ion-option value="all">{{ 'FriendlyMatches' | trans }}</ion-option>
         <ion-option *ngFor="let league of afTournamentList | async" [value]="league.$key">{{ league.name }}</ion-option>
       </ion-select>
@@ -16,7 +13,7 @@
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar no-border-top>
-    <ion-segment  *ngIf="selectedId == 'all'" [(ngModel)]="selectedInfo">
+    <ion-segment *ngIf="selectedId == 'all'" [(ngModel)]="selectedInfo">
       <ion-segment-button value="schedule">
         Schedule
       </ion-segment-button>
@@ -39,18 +36,17 @@
       <div class="left-scrollview matches-date-tab-col" id="sketchElement">
         <ion-list class="date-tab-list">
           <ion-item *ngFor="let date of dates;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (click)="showMatches(date)"
-            [style.background]="selectedDate == date ? '#585F6F' : '#40444D'"
-            [style.color]="selectedDate == date ? '#00ef00' : '#F2EDE7'">
-              <ion-item *ngIf = "changeYear == true" class="year">
-                  -{{thisYear}}-         
-              </ion-item>
-              <div class="date-inner">
-                  {{date | stringToDatePipe}}
-              </div>
+            [style.background]="selectedDate == date ? '#585F6F' : '#40444D'" [style.color]="selectedDate == date ? '#00ef00' : '#F2EDE7'">
+            <ion-item *ngIf="changeYear == true" class="year">
+              -{{thisYear}}-
+            </ion-item>
+            <div class="date-inner">
+              {{date | stringToDatePipe}}
+            </div>
           </ion-item>
         </ion-list>
       </div>
-      <div class="right-scrollview matches-match-info-col" >
+      <div class="right-scrollview matches-match-info-col">
         <ion-item *ngFor="let match of matches; let i = index" class="ionitem">
           <sb-match-basic [matchObj]="match"></sb-match-basic>
         </ion-item>
@@ -95,26 +91,26 @@
               </ion-thumbnail>
               <p text-left>
                 <ion-badge color="sky">{{ i+1 }}</ion-badge>
-                <label>{{ s.teamId }}</label>
+                <label>{{ s.id }}</label>
               </p>
             </ion-col>
             <ion-col class="data-column">
-              <p><label>{{s.matchesPlayed}}</label></p>
+              <p><label>{{s.P}}</label></p>
             </ion-col>
             <ion-col class="data-column">
-              <p><label>{{s.wins}}</label></p>
+              <p><label>{{s.W}}</label></p>
             </ion-col>
             <ion-col class="data-column">
-              <p><label>{{s.draws}}</label></p>
+              <p><label>{{s.D}}</label></p>
             </ion-col>
             <ion-col class="data-column">
-              <p><label>{{s.losses}}</label></p>
+              <p><label>{{s.L}}</label></p>
             </ion-col>
             <ion-col class="data-column-broad">
-              <p><label>{{s.goalsFor}}/{{s.goalsAgainst}}</label></p>
+              <p><label>{{s.GS}}/{{s.GA}}</label></p>
             </ion-col>
             <ion-col class="data-column">
-              <p><label>{{s.points}}</label></p>
+              <p><label>{{s.PTS}}</label></p>
             </ion-col>
           </ion-row>
         </ion-grid>
