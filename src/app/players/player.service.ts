@@ -19,7 +19,7 @@ export class PlayerService {
       player.teamId = playerData['basic-info'].teamId;
       if (playerData.photoMedium)
         player.photoMedium = playerData.photoMedium;
-      if (playerData.points)
+      if ('points' in playerData)
         player.points = playerData.points;
 
       if (playerData['detail-info'] && 'position' in playerData['detail-info'])
