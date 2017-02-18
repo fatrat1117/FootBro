@@ -38,9 +38,9 @@ export class MatchesPage {
     this.addEventListeners();
     this.matchService.getMatchDatesAsync("all");
 
-    this.matchService.getMatchStandings("test_league_id").then(matchStandings => {
-      this.matchStandings = matchStandings;
-    });
+    // this.matchService.getMatchStandings("test_league_id").then(matchStandings => {
+    //   this.matchStandings = matchStandings;
+    // });
   }
 
   scrollToToday() {
@@ -53,7 +53,7 @@ export class MatchesPage {
       }
       iToday = i;
     }
-
+    
     if (iToday != -1) {
       let closeToToday = this.dates[iToday];
       this.showMatches(closeToToday, iToday);
@@ -95,11 +95,13 @@ export class MatchesPage {
   }
 
   showMatches(date, index) {
+    //console.log('showMatches', date, index);
     this.selectedDate = date;
-    this.matchService.getMatchesByDateAsync(date);
+    this.matchService.getMatchesByDateAsync(date, this.selectedId);
   }
 
   onSelectionChange() {
+    this.selectedDate = null;
     if (this.selectedId == "all") {
       this.selectedInfo = "schedule";
       this.matchService.getMatchDatesAsync("all");

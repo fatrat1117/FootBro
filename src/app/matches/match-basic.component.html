@@ -1,5 +1,5 @@
 <ion-grid no-padding>
-  <ion-row>
+  <ion-row (click)="goMatchDetailPage()">
     <ion-col class="matches-info" no-padding>
       <ion-item class="team-bar">
         <ion-thumbnail item-left>
@@ -38,8 +38,6 @@
           <p>{{ match?.time | numberToTimePipe }}</p>
         </ion-item>
         <ion-item>
-          <button class="detail-button" text-center ion-button clear (click)="goMatchDetailPage()">Details</button>
-            
           <!-->
           <button class="detail-button" text-center (click)="popupMatchResult(match,$event)" clear>{{'Details' | trans}}</button>
           <button class="update-button" *ngIf="(match.homeId | teamBasicPipe | async)?.captain === selfId ||

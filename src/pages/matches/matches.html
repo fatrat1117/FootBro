@@ -51,7 +51,7 @@
         </ion-list>
       </div>
       <div class="right-scrollview matches-match-info-col" >
-        <ion-item class="ionitem" *ngFor="let match of matches; let i = index">
+        <ion-item *ngFor="let match of matches; let i = index" class="ionitem">
           <sb-match-basic [matchObj]="match"></sb-match-basic>
         </ion-item>
       </div>

@@ -97,8 +97,8 @@ export class MatchService {
     return this.fm.getMatchesByDate(date);
   }
 
-  getMatchesByDateAsync(date) {
-    this.fm.getMatchesByDateAsync(date);
+  getMatchesByDateAsync(date, tournamentId) {
+    this.fm.getMatchesByDateAsync(date, tournamentId);
   }
 
   getMatch(id) {
