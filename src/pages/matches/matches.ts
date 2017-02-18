@@ -22,8 +22,8 @@ export class MatchesPage {
   selectedId: string;
   tournamentId;
   afTournamentList;
-  thisYear:string;
-  changeYear:boolean;
+  thisYear: string;
+  changeYear: boolean;
 
   constructor(public navCtrl: NavController,
     private modalCtrl: ModalController,
@@ -77,7 +77,8 @@ export class MatchesPage {
       if (!this.selectedDate) {
         let self = this;
         setTimeout(() => {
-          self.scrollToToday()
+          self.scrollToToday();
+          self.addYears();
         },
           1000);
       }
@@ -89,6 +90,10 @@ export class MatchesPage {
     });
   }
 
+  addYears() {
+      
+  }
+
   showMatches(date, index) {
     this.selectedDate = date;
     this.matchService.getMatchesByDateAsync(date);
@@ -98,40 +103,37 @@ export class MatchesPage {
     if (this.selectedId == "all") {
       this.selectedInfo = "schedule";
       this.matchService.getMatchDatesAsync("all");
-    } else 
+    } else
       this.matchService.getMatchDatesAsync(this.selectedId);
   }
 
   enterNewGame() {
     this.modalCtrl.create(NewGamePage, { tournamentId: this.tournamentId }).present();
   }
-  
-  isChangeYear(index,date){
-     let t = Number(date);
-    //console.log(t);
-     let year = moment(t).format('YYYY');
-    if (null == this.thisYear){
+
+  isChangeYear(index, date) {
+    let t = Number(date);
+    let year = moment(t).format('YYYY');
+    console.log(t, year);
+    if (null == this.thisYear) {
+      this.thisYear = year;
+      this.changeYear = true;
+      return true;
+    } else {
+      if (this.thisYear != year) {
         this.thisYear = year;
         this.changeYear = true;
         return true;
-    }else{
-        if (this.thisYear != year){
-            this.thisYear = year;
-            this.changeYear = true;
-            return true;
-        }
+      }
     }
     this.changeYear = false;
     return false;
-    
   }
-  
-  addDateSelectNgClass(i,date){
-  
-        
-    let class1 = this.selectedDate == date ? "ion-item-selected" : "ion-item-unselected"
-    let class2 = this.isChangeYear(i,date) == true ? "ion-item-changeYear" : "ion-item-unchangeYear"
-    
+
+  addDateSelectNgClass(i, date) {
+    let class1 = this.selectedDate == date ? "ion-item-selected" : "ion-item-unselected";
+    let class2 = this.isChangeYear(i, date) == true ? "ion-item-changeYear" : "ion-item-unchangeYear"
+
     return class1 + ' ' + class2;
   }
 }
