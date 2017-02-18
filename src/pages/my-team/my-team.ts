@@ -4,6 +4,7 @@ import { TeamService } from '../../app/teams/team.service'
 import { Team } from '../../app/teams/team.model'
 import { TeamPlayersService } from '../../app/teams/teamplayers.service'
 import { MatchService } from '../../app/matches/match.service'
+import { SearchPlayerPage } from '../search-player/search-player'
 import * as moment from 'moment';
 
 @Component({
@@ -21,7 +22,7 @@ export class MyTeamPage {
   upcomingMatch;
   mostGAMatchId;
   mostGFMatchId;
-  constructor(public navCtrl: NavController,
+  constructor(public nav: NavController,
     private navParams: NavParams,
     private service: TeamService,
     private teamPlayersService: TeamPlayersService,
@@ -104,7 +105,7 @@ export class MyTeamPage {
 
   //查看更多球队成员
   seeMoreTeamMember() {
-    alert("see more team member");
+    this.nav.push(SearchPlayerPage, { teamId: this.id, showDetail: true, showClose: false });
   }
 
   //切换函数

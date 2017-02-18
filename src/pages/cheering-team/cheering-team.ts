@@ -28,7 +28,6 @@ export class CheeringTeamPage {
 
   ionViewDidLoad() {
     this.addEventListeners();
-    this.playerService.getPlayerAsync(this.selfId);
     if (this.playerService.isAdmin())
       this.cheerleaderService.getPendingCheerleadersAsync();
     this.cheerleaderService.getApprovedCheerleadersAsync();
