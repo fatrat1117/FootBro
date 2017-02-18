@@ -5,7 +5,7 @@
       (ngModelChange)="onSelectionChange()"
       [okText]="'OK' | trans"
       [cancelText]="'Cancel' | trans">
-        <ion-option [value]="0">{{ 'FriendlyMatches' | trans }}</ion-option>
+        <ion-option value="all">{{ 'FriendlyMatches' | trans }}</ion-option>
         <ion-option *ngFor="let league of afTournamentList | async" [value]="league.$key">{{ league.name }}</ion-option>
       </ion-select>
     </ion-title>
@@ -16,13 +16,13 @@
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar no-border-top>
-    <ion-segment  *ngIf="selectedId == '0'" [(ngModel)]="selectedInfo">
+    <ion-segment  *ngIf="selectedId == 'all'" [(ngModel)]="selectedInfo">
       <ion-segment-button value="schedule">
         Schedule
       </ion-segment-button>
     </ion-segment>
 
-    <ion-segment *ngIf="selectedId != '0'" [(ngModel)]="selectedInfo">
+    <ion-segment *ngIf="selectedId != 'all'" [(ngModel)]="selectedInfo">
       <ion-segment-button value="schedule">
         Schedule
       </ion-segment-button>
@@ -41,24 +41,17 @@
           <ion-item *ngFor="let date of dates;let i = index;trackBy:isChangeYear" #list_item [id]="'matches-scroll-target-'+i" (click)="showMatches(date)"
             [style.background]="selectedDate == date ? '#585F6F' : '#40444D'"
             [style.color]="selectedDate == date ? '#00ef00' : '#F2EDE7'"
-            [ngClass]="addDateSelectNgClass(i,date)"
-            >
-              <!--selectedDate == date ? ['ion-item-selected'] : ['ion-item-unselected']
-                       + ' ' + isChangeYear(i,date) == true ? ['ion-item-changeYear']:['ion-item-unchangeYear']-->
+            [ngClass]="addDateSelectNgClass(i,date)">
               <ion-item *ngIf = "changeYear == true" class="year">
                   -{{thisYear}}-         
               </ion-item>
               <div class="date-inner">
                   {{date | stringToDatePipe}}
               </div>
-                   
-        
-<!--            {{date | stringToDatePipe}}-->
-<!--              {{date | stringToYearOnlyPipe}}-->
           </ion-item>
         </ion-list>
       </div>
-      <div class="right-scrollview matches-match-info-col" ><!--[ngStyle]="{'top': rightViewTop+'px'}"-->
+      <div class="right-scrollview matches-match-info-col" >
         <ion-item class="ionitem" *ngFor="let match of matches; let i = index">
           <sb-match-basic [matchObj]="match"></sb-match-basic>
         </ion-item>

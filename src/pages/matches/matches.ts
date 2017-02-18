@@ -29,7 +29,7 @@ export class MatchesPage {
     private modalCtrl: ModalController,
     private matchService: MatchService) {
     this.selectedInfo = "schedule";
-    this.selectedId = "0";
+    this.selectedId = "all";
     this.afTournamentList = this.matchService.afTournamentList();
   }
 
@@ -95,7 +95,7 @@ export class MatchesPage {
   }
 
   onSelectionChange() {
-    if (this.selectedId == "0") {
+    if (this.selectedId == "all") {
       this.selectedInfo = "schedule";
       this.matchService.getMatchDatesAsync("all");
     } else 
