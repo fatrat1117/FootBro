@@ -191,19 +191,19 @@
 </div>
 
 
-<ion-list no-lines="true" class="game-data-assist">
+<ion-list *ngIf='matches && mostGFMatchId' no-lines="true" class="game-data-assist">
   <ion-item class="game-data-assist-item">
     <div item-left class="goal-title">{{'maxgf' | trans}}</div>
     <div item-right>
-      <p class="goal-data">{{team?.overall?.win_streak}}</p>
-      <p class="goal-data-detail"></p>
+      <p class="goal-data">{{matchService.getMatch(mostGFMatchId)?.homeScore}} : {{matchService.getMatch(mostGFMatchId)?.awayScore}}</p>
+      <p class="goal-data-detail">{{matchService.getMatch(mostGFMatchId)?.home?.name}} VS {{matchService.getMatch(mostGFMatchId)?.away?.name}} / {{matchService.getMatch(mostGFMatchId)?.date | date:'mediumDate'}}</p>
     </div>
   </ion-item>
   <ion-item *ngIf='matches && mostGAMatchId' class="game-data-assist-item">
     <div item-left class="goal-title">{{'maxga' | trans}}</div>
     <div item-right>
-      <p class="goal-data">{{matches[mostGAMatchId].homeScore}} : {{matches[mostGAMatchId].awayScore}}</p>
-      <p class="goal-data-detail"></p>
+      <p class="goal-data">{{matchService.getMatch(mostGAMatchId)?.homeScore}} : {{matchService.getMatch(mostGAMatchId)?.awayScore}}</p>
+      <p class="goal-data-detail">{{matchService.getMatch(mostGAMatchId)?.home?.name}} VS {{matchService.getMatch(mostGAMatchId)?.away?.name}} / {{matchService.getMatch(mostGAMatchId)?.date | date:'mediumDate'}}</p>
     </div>
   </ion-item>
   <ion-item class="game-data-assist-item">

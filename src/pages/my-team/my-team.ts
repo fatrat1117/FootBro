@@ -44,11 +44,11 @@ export class MyTeamPage {
       if (teamId === this.id) {
         this.team = this.service.getTeam(teamId);
         if (this.team.overall && this.team.overall.most_GA_match) {
-          for (let key in this.mostGAMatchId)
+          for (let key in this.team.overall.most_GA_match)
             this.mostGAMatchId = key;
         }
         if (this.team.overall && this.team.overall.most_GF_match) {
-          for (let key in this.mostGFMatchId)
+          for (let key in this.team.overall.most_GF_match)
             this.mostGFMatchId = key;
         }  
         this.teamPlayersService.getTeamPlayersAsync(teamId);
