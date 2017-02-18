@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar no-padding>
-    <ion-title text-center>约</ion-title>
+    <ion-title text-center>{{'Cheerleaders' | trans}}</ion-title>
     <ion-buttons end>
       <button class="my-player-btn-right" ion-button>
         <img class="share-icon" src="assets/img/cheering-team/share.png"/>
@@ -52,7 +52,7 @@
     <ion-row class="baby-become-row">
       <ion-col width-75 no-margin>
         <div class="speaker">
-          <span><img src="assets/img/cheering-team/speaker.png"/>全国共有{{approvedCheerleaders?.length}}位宝贝可约</span>
+          <span><img src="assets/img/cheering-team/speaker.png"/>{{approvedCheerleaders?.length}} {{'Cheerleadersavailable' | trans}}</span>
         </div>
       </ion-col>
       <ion-col *ngIf="!amICheerleader" class="become-col" width-25 no-margin>

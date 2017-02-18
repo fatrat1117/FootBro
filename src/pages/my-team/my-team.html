@@ -12,7 +12,7 @@
 <ion-content class="content-background-page">
 
   <div class="content-top">
-    <img [src]="team.logo" class="thumbnail-img" />
+    <img [src]="team?.logo" class="thumbnail-img" />
     <h6 class="team-name default-font-size-h6">{{team.name}}</h6>
     <!--<p class="team-place default-font-size-p">阿根廷&nbsp;|&nbsp;纪念碑球场</p>-->
     <p class="team-place default-font-size-p">&nbsp;&nbsp;</p>
@@ -50,7 +50,7 @@
     <ion-item color="dark">
       <button ion-button item-left clear class="subtitle-text">{{'UpcomingMatches' | trans}}</button>
       <button ion-button item-right icon-right clear class="subtitle-text-small" (click)="seeMoreTeamGamePlan()">
-        {{'ViewMore' | trans}}
+        {{'ViewAll' | trans}}
         <ion-icon name="ios-arrow-forward"></ion-icon>
       </button>
     </ion-item>
@@ -58,23 +58,23 @@
 
 <div *ngIf = "matches?.length > 0">
   <button ion-button full class="nearest-game-time default-font-color">
-    {{matches[0]?.time | date:'medium'}}
+    {{upcomingMatch?.time | date:'medium'}}
   </button>
 
   <div class="nearest-game-display">
     <div class="game-left">
       <div class="game-left-setting">
-        <img [src]="matches[0]?.home?.logo" class="game-left-img">
-        <p class="game-left-text">{{matches[0]?.home?.name}}</p>
+        <img [src]="upcomingMatch?.home?.logo" class="game-left-img">
+        <p class="game-left-text">{{upcomingMatch?.home?.name}}</p>
       </div>
     </div>
     <div class="game-center">
-      <p class="game-score">{{matches[0]?.homeScore}}:{{matches[0]?.awayScore}}</p>
+      <p class="game-score">{{upcomingMatch?.homeScore}}:{{upcomingMatch?.awayScore}}</p>
     </div>
     <div class="game-right">
       <div class="game-right-setting">
-        <img [src]="matches[0]?.away?.logo" class="game-right-img">
-        <p class="game-right-text">{{matches[0]?.away?.name}}</p>
+        <img [src]="upcomingMatch?.away?.logo" class="game-right-img">
+        <p class="game-right-text">{{upcomingMatch?.away?.name}}</p>
       </div>
     </div>
   </div>
@@ -96,14 +96,14 @@
     <ion-col class="team-info-title-setting">{{'GA' | trans}}</ion-col>
   </ion-row>
 
-  <ion-row class="team-info-content">
-    <ion-col class="team-info-content-setting">2016</ion-col>
-    <ion-col class="team-info-content-setting">1032</ion-col>
-    <ion-col class="team-info-content-setting">22</ion-col>
-    <ion-col class="team-info-content-setting">432</ion-col>
-    <ion-col class="team-info-content-setting">564</ion-col>
-    <ion-col class="team-info-content-setting">647</ion-col>
-    <ion-col class="team-info-content-setting">99</ion-col>
+  <ion-row *ngFor='let history of team?.yearlyHistory' class="team-info-content">
+    <ion-col class="team-info-content-setting">{{history?.year}}</ion-col>
+    <ion-col class="team-info-content-setting">{{history?.total_matches}}</ion-col>
+    <ion-col class="team-info-content-setting">{{history?.win}}</ion-col>
+    <ion-col class="team-info-content-setting">{{history?.draw}}</ion-col>
+    <ion-col class="team-info-content-setting">{{history?.lose}}</ion-col>
+    <ion-col class="team-info-content-setting">{{history?.GF}}</ion-col>
+    <ion-col class="team-info-content-setting">{{history?.GA}}</ion-col>
   </ion-row>
 
   <button ion-button full class="nearest-5-game-result-title default-font-color">
@@ -120,20 +120,20 @@
 
   <ion-list class="no-margin">
     <ion-item class="subtitle">
-      <button ion-button item-left clear class="subtitle-text">球队成员</button>
+      <button ion-button item-left clear class="subtitle-text">{{'Players' | trans}}</button>
     </ion-item>
   </ion-list>
 
 
   <div class="team-member-info">
     <ion-row class="team-member-display">
-      <ion-col *ngFor="let p of players?.slice(0,4)">
-        <img [src]="p.photo" class="team-member-img">
+      <ion-col *ngFor="let p of players?.slice(0,3)">
+        <img [src]="p?.photo" class="team-member-img">
         <p class="team-member-name">{{p.name}}</p>
       </ion-col>
     </ion-row>
     <button ion-button clear icon-right class="team-see-more-members" (click)="seeMoreTeamMember()">
-      <p class="team-see-more-member-text">查看所有队员(<a style="color: #00ff00;">{{team.totalPlayers}}</a>人)</p>
+      <p class="team-see-more-member-text">{{'ViewAll' | trans}}(<a style="color: #00ff00;">{{team.totalPlayers}} </a>{{'Players' | trans | lowercase}})</p>
 <ion-icon name="ios-arrow-forward"></ion-icon>
 </button>
 </div>
@@ -176,58 +176,58 @@
     <ion-col class="recent-game-result">{{currTeamStat?.win}}</ion-col>
     <ion-col class="recent-game-result">{{currTeamStat?.draw}}</ion-col>
     <ion-col class="recent-game-result">{{currTeamStat?.lose}}</ion-col>
-    <ion-col class="recent-game-result">10</ion-col>
-    <ion-col class="recent-game-result">11</ion-col>
+    <ion-col class="recent-game-result">{{currTeamStat?.avgGA}}</ion-col>
+    <ion-col class="recent-game-result">{{currTeamStat?.avgGF}}</ion-col>
   </ion-row>
 
   <ion-row>
-    <ion-col class="recent-game-result-name">参赛</ion-col>
-    <ion-col class="recent-game-result-name">胜利</ion-col>
-    <ion-col class="recent-game-result-name">平局</ion-col>
-    <ion-col class="recent-game-result-name">失败</ion-col>
-    <ion-col class="recent-game-result-name">平均进球</ion-col>
-    <ion-col class="recent-game-result-name">平均失球</ion-col>
+    <ion-col class="recent-game-result-name">{{'Played' | trans}}</ion-col>
+    <ion-col class="recent-game-result-name">{{'W' | trans}}</ion-col>
+    <ion-col class="recent-game-result-name">{{'D' | trans}}</ion-col>
+    <ion-col class="recent-game-result-name">{{'L' | trans}}</ion-col>
+    <ion-col class="recent-game-result-name">{{'avgga' | trans}}</ion-col>
+    <ion-col class="recent-game-result-name">{{'avggf' | trans}}</ion-col>
   </ion-row>
 </div>
 
 
-<ion-list no-lines="true" class="game-data-assist">
+<ion-list *ngIf='matches && mostGFMatchId' no-lines="true" class="game-data-assist">
   <ion-item class="game-data-assist-item">
-    <div item-left class="goal-title">进球最多的比赛</div>
+    <div item-left class="goal-title">{{'maxgf' | trans}}</div>
     <div item-right>
-      <p class="goal-data">90%</p>
-      <p class="goal-data-detail">{{first.win}}胜{{first.win}}平{{first.win}}负</p>
+      <p class="goal-data">{{matchService.getMatch(mostGFMatchId)?.homeScore}} : {{matchService.getMatch(mostGFMatchId)?.awayScore}}</p>
+      <p class="goal-data-detail">{{matchService.getMatch(mostGFMatchId)?.home?.name}} VS {{matchService.getMatch(mostGFMatchId)?.away?.name}} / {{matchService.getMatch(mostGFMatchId)?.date | date:'mediumDate'}}</p>
+    </div>
+  </ion-item>
+  <ion-item *ngIf='matches && mostGAMatchId' class="game-data-assist-item">
+    <div item-left class="goal-title">{{'maxga' | trans}}</div>
+    <div item-right>
+      <p class="goal-data">{{matchService.getMatch(mostGAMatchId)?.homeScore}} : {{matchService.getMatch(mostGAMatchId)?.awayScore}}</p>
+      <p class="goal-data-detail">{{matchService.getMatch(mostGAMatchId)?.home?.name}} VS {{matchService.getMatch(mostGAMatchId)?.away?.name}} / {{matchService.getMatch(mostGAMatchId)?.date | date:'mediumDate'}}</p>
     </div>
   </ion-item>
   <ion-item class="game-data-assist-item">
-    <div item-left class="goal-title">失球最多的比赛</div>
+    <div item-left class="goal-title-2">{{'maxvictory' | trans}}</div>
     <div item-right>
-      <p class="goal-data">90%</p>
-      <p class="goal-data-detail">{{first.win}}胜{{first.win}}平{{first.win}}负</p>
+      <p class="goal-data">{{team?.overall?.win_streak}}</p>
     </div>
   </ion-item>
   <ion-item class="game-data-assist-item">
-    <div item-left class="goal-title-2">最长的连续胜利</div>
+    <div item-left class="goal-title-2">{{'maxlose' | trans}}</div>
     <div item-right>
-      <p class="goal-data">90</p>
+      <p class="goal-data">{{team?.overall?.lose_streak}}</p>
     </div>
   </ion-item>
   <ion-item class="game-data-assist-item">
-    <div item-left class="goal-title-2">最长的连续失败</div>
+    <div item-left class="goal-title-2">{{'mostundefeated' | trans}}</div>
     <div item-right>
-      <p class="goal-data">90</p>
-    </div>
-  </ion-item>
-  <ion-item class="game-data-assist-item">
-    <div item-left class="goal-title-2">最长的连续不败</div>
-    <div item-right>
-      <p class="goal-data">90</p>
+      <p class="goal-data">{{team?.overall?.draw_streak}}</p>
     </div>
   </ion-item>
   <ion-item class="game-data-assist-item no-margin">
-    <div item-left class="goal-title-2 no-margin">最长的连续不失球</div>
+    <div item-left class="goal-title-2 no-margin">{{'mostcleansheets' | trans}}</div>
     <div item-right class="no-margin">
-      <p class="goal-data no-margin">90</p>
+      <p class="goal-data no-margin">{{team?.overall?.noGA_streak}}</p>
     </div>
   </ion-item>
 </ion-list>
@@ -237,8 +237,6 @@
       最佳球员排名
     </button>
 </div>
-
-
 <ion-list no-lines="true" class="team-best-member-info no-margin no-padding">
 
   <ion-item class="team-best-member-award-title">

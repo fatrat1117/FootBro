@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { TeamService } from '../../app/teams/team.service'
-import { Team, TeamStat } from '../../app/teams/team.model'
+import { Team } from '../../app/teams/team.model'
 import { TeamPlayersService } from '../../app/teams/teamplayers.service'
 import { MatchService } from '../../app/matches/match.service'
+import * as moment from 'moment';
 
 @Component({
   selector: 'page-my-team',
@@ -17,19 +18,14 @@ export class MyTeamPage {
   selectedStatIndex = 0;
   players;
   matches;
-
+  upcomingMatch;
+  mostGAMatchId;
+  mostGFMatchId;
   constructor(public navCtrl: NavController,
     private navParams: NavParams,
     private service: TeamService,
     private teamPlayersService: TeamPlayersService,
-    private matchService : MatchService) {
-    this.first = [
-      {
-        'win': '7',
-        'tie': '3',
-        'lose': '6',
-      }
-    ]
+    private matchService: MatchService) {
   }
 
   ionViewDidLoad() {
@@ -47,6 +43,14 @@ export class MyTeamPage {
       //console.log(teamId, this.id);
       if (teamId === this.id) {
         this.team = this.service.getTeam(teamId);
+        if (this.team.overall && this.team.overall.most_GA_match) {
+          for (let key in this.team.overall.most_GA_match)
+            this.mostGAMatchId = key;
+        }
+        if (this.team.overall && this.team.overall.most_GF_match) {
+          for (let key in this.team.overall.most_GF_match)
+            this.mostGFMatchId = key;
+        }  
         this.teamPlayersService.getTeamPlayersAsync(teamId);
         this.setChoosePosition(this.selectedStatIndex);
       }
@@ -61,12 +65,26 @@ export class MyTeamPage {
       }
     });
 
-    document.addEventListener('serviceteammatchesready', e=> {
+    document.addEventListener('serviceteammatchesready', e => {
       let teamId = e['detail'];
       if (teamId === this.id) {
         this.matches = this.matchService.getTeamMatches(teamId);
+        this.updateUpcomingMatch();
       }
     });
+  }
+
+  updateUpcomingMatch() {
+    if (this.matches.length) {
+      let index = 0;
+      let now = moment().unix() * 1000;
+      for (let i = 1; i < this.matches.length; ++i) {
+        if (this.matches[i].time < now)
+          break;
+        index = i;
+      }
+      this.upcomingMatch = this.matches[index];
+    }
   }
 
   //打开邀请

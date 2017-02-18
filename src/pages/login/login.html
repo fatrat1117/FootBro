@@ -13,21 +13,21 @@
         {{'ConnectWithFacebook' | trans}}</b></button>
   </div>
   <p>{{'UsingSBAccount' | trans}}</p>
-  <ion-list>
+  <div class="list">
     <ion-item>
-      <ion-label floating>{{'Email' | trans}}</ion-label>
+      <ion-label floating><b class="signin">{{'Email' | trans}}</b></ion-label>
       <ion-input type="text" [(ngModel)]="_credentials.email" required clearInput></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label floating>{{'Password' | trans}}</ion-label>
+      <ion-label floating><b class="signin">{{'Password' | trans}}</b></ion-label>
       <ion-input type="password" [(ngModel)]="_credentials.password" required clearInput></ion-input>
     </ion-item>
-  </ion-list>
+  </div>
 
   <div class="login-connect" padding>
-    <button ion-button type="submit" [disabled]="busy || !_credentials.email.length || !_credentials.password.length" (click)="login(_credentials, $event)" block><b>{{ 'Login' | trans }}</b></button>
-    <button ion-button type="submit" [disabled]="busy || !_credentials.email.length || !_credentials.password.length" (click)="registerUser($event)" block><b>{{ 'CreateAccount' | trans }}</b></button>
-    <button ion-button type="submit" [disabled]="busy || !_credentials.email.length" (click)="ResetPassword()" block><b>{{ 'ResetPwd' | trans }}</b></button>
+    <button ion-button type="submit" class="dark_green" [disabled]="busy || !_credentials.email.length || !_credentials.password.length" (click)="login(_credentials, $event)" block><b>{{ 'Login' | trans }}</b></button>
+    <button ion-button type="submit" class="dark_green" [disabled]="busy || !_credentials.email.length || !_credentials.password.length" (click)="registerUser($event)" block><b>{{ 'CreateAccount' | trans }}</b></button>
+    <button ion-button type="submit" class="dark_green" [disabled]="busy || !_credentials.email.length" (click)="ResetPassword()" block><b>{{ 'ResetPwd' | trans }}</b></button>
     <button ion-button [disabled]="busy" (click)="dismiss()" block danger class="cancel"><b>{{'Cancel' | trans}}</b></button>
   </div>
   <div padding>
