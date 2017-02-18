@@ -841,7 +841,13 @@ export class FirebaseManager {
     
     let cheerleaderPublic = this.getPlayerPublic(id);
     //console.log(cheerleaderPublic);
-    this.af.database.object(this.cheerleaderPublicRef(id)).set({popularity: cheerleaderPublic.popularity || 1});
+    this.af.database.object(this.cheerleaderPublicRef(id)).set({
+      popularity: cheerleaderPublic.popularity || 1,
+      unlockPoints: 100,
+      received: 0,
+      responsed: 0,
+      responseRate: 0
+    });
     this.af.database.object(this.playerPublicRef(id)).remove();
   }
 

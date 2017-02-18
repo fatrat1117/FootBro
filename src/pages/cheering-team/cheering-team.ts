@@ -10,7 +10,8 @@ import { CheerleaderService } from '../../app/cheerleaders/cheerleader.service'
   templateUrl: 'cheering-team.html',
 })
 export class CheeringTeamPage {
-  selfId: string;
+  selfPlayer: Player;
+  //selfId: string;
   who = "baby";
   colorArray = [-1, -1, -1, -1];
   pendingCheerleaders;
@@ -27,6 +28,7 @@ export class CheeringTeamPage {
   }
 
   ionViewDidLoad() {
+    this.selfPlayer = this.playerService.getSelfPlayer();
     this.addEventListeners();
     if (this.playerService.isAdmin())
       this.cheerleaderService.getPendingCheerleadersAsync();
@@ -66,14 +68,14 @@ export class CheeringTeamPage {
     }
   }
 
-  unlockBaby() {
-    // if (this.playerService.isAuthenticated()) {
-    //   this.modalCtrl.create(CheeringTeamStatsPage, {
-    //     player: this.playerService.getSelfPlayer(),
-    //   }).present();
-    // }
-    // else
-    //   this.playerService.checkLogin();
+  unlockCheerleader(cheerleader: Player) {
+    if (this.playerService.isAuthenticated()) {
+      this.modalCtrl.create(CheeringTeamStatsPage, {
+        cheerleader: cheerleader,
+      }).present();
+    }
+    else
+      this.playerService.checkLogin();
   }
 
   becomeCheerleader() {

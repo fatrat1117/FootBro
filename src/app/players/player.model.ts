@@ -14,7 +14,7 @@ export class Player {
   weight: number;
   role: string;
   teams: string[];
+  cheerleaders: string[];
   popularity;
   points: number;
-  unlockPoints: number;
 }

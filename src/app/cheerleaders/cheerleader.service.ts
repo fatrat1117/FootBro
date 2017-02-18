@@ -54,6 +54,10 @@ export class CheerleaderService {
       let cheerleader = this.findOrCreateCheerleader(id);
       if (cheerleader) {
         cheerleader.popularity = cheerleaderPublic.popularity;
+        cheerleader.unlockPoints = cheerleaderPublic.unlockPoints;
+        cheerleader.received = cheerleaderPublic.received;
+        cheerleader.responsed = cheerleaderPublic.responsed;
+        cheerleader.responseRate = cheerleaderPublic.responseRate;
       }
     });
   }

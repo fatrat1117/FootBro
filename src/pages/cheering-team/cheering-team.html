@@ -100,7 +100,7 @@
       <ion-col *ngFor='let cl of approvedCheerleaders' width-50 no-margin>
         <ion-row>
           <div class="baby-img-frame">
-            <button ion-button icon-only clear class="chat-logo" color="lightGrey" (click)="approve(cl.id)">
+            <button ion-button icon-only clear class="chat-logo" color="lightGrey" (click)="unlockCheerleader(cl)">
                 <ion-icon name="lock"></ion-icon>
               </button>
             <img class="img" [src]="cl.photoMedium">

@@ -16,4 +16,9 @@ export class Cheerleader {
   teams: string[];
   popularity;
   points: number;
+  // Cheerleader specific
+  unlockPoints: number;
+  received: number;
+  responsed: number;
+  responseRate: number;
 }

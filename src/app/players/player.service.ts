@@ -19,6 +19,8 @@ export class PlayerService {
       player.teamId = playerData['basic-info'].teamId;
       if (playerData.photoMedium)
         player.photoMedium = playerData.photoMedium;
+      if (playerData.points)
+        player.points = playerData.points;
 
       if (playerData['detail-info'] && 'position' in playerData['detail-info'])
         player.position = playerData['detail-info'].position;
@@ -33,13 +35,16 @@ export class PlayerService {
       if (playerData['detail-info'] && 'description' in playerData['detail-info'])
         player.description = playerData['detail-info'].description;
 
-      if (playerData['points'] && 'total' in playerData['points'])
-        player.points = playerData['points'].total;
-
       if (playerData.teams) {
         player.teams = [];
-        for (let tId in player.teams)
+        for (let tId in playerData.teams)
           player.teams.push(tId);
+      }
+
+      if (playerData.cheerleaders) {
+        player.cheerleaders = [];
+        for (let id in playerData.cheerleaders)
+          player.cheerleaders.push(id);
       }
 
       if (playerData.role)
