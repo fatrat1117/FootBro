@@ -120,30 +120,34 @@ export class FirebaseManager {
     });
   }
 
-  addChatToUser(userId: string, content: string) {
-    // add to self
-    this.af.database.list(`/chats/${this.auth.uid}/${userId}`).push({
-      createdAt: firebase.database.ServerValue.TIMESTAMP,
-      content: content,
-      isFromSelf: true
-    })
+  addChatToUser(userId: string, content: string, isSystem: boolean = false) {
+    if (!isSystem)
+    {
+      // add to self
+      this.af.database.list(`/chats/${this.auth.uid}/${userId}`).push({
+        createdAt: firebase.database.ServerValue.TIMESTAMP,
+        content: content,
+        isFromSelf: true
+      })
 
-    this.af.database.object(`/chats/${this.auth.uid}/basic-info/${userId}`).set({
-      isSystem: false,
-      isUnread: false,
-      lastContent: content,
-      lastTimestamp: firebase.database.ServerValue.TIMESTAMP,
-    })
+      this.af.database.object(`/chats/${this.auth.uid}/basic-info/${userId}`).set({
+        isSystem: false,
+        isUnread: false,
+        lastContent: content,
+        lastTimestamp: firebase.database.ServerValue.TIMESTAMP,
+      })
+    }
 
     // add to other
-    this.af.database.list(`/chats/${userId}/${this.auth.uid}`).push({
+    let fromId = isSystem ? "0" : this.auth.uid;
+    this.af.database.list(`/chats/${userId}/${fromId}`).push({
       createdAt: firebase.database.ServerValue.TIMESTAMP,
       content: content,
       isFromSelf: false
     })
 
-    this.af.database.object(`/chats/${userId}/basic-info/${this.auth.uid}`).set({
-      isSystem: false,
+    this.af.database.object(`/chats/${userId}/basic-info/${fromId}`).set({
+      isSystem: isSystem,
       isUnread: true,
       lastContent: content,
       lastTimestamp: firebase.database.ServerValue.TIMESTAMP,

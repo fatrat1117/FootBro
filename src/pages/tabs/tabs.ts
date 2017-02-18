@@ -5,6 +5,7 @@ import { RankPage } from '../rank/rank';
 import { MatchesPage } from '../matches/matches';
 import { MePage } from '../me/me';
 import {FirebaseManager} from '../../providers/firebase-manager';
+import { OneSignalManager } from '../../providers/onesignal-manager';
 
 @Component({
   selector: 'page-tabs',
@@ -20,7 +21,7 @@ export class TabsPage {
   tab3Root: any = MatchesPage;
   tab4Root: any = null;
 
-  constructor(private fm: FirebaseManager) {
+  constructor(private fm: FirebaseManager, private osm: OneSignalManager) {
   }
 
   ionViewDidLoad() {
@@ -34,6 +35,7 @@ export class TabsPage {
     });
 
     this.fm.initialize();
+    this.osm.initialize();
   }
 
   checkLogin() {

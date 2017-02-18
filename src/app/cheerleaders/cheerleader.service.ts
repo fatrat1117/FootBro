@@ -45,6 +45,8 @@ export class CheerleaderService {
       cheerleader.name = p.name;
       if (p.photoMedium)
         cheerleader.photoMedium = p.photoMedium;
+      if (p.pushId)
+        cheerleader.pushId = p.pushId;
     });
 
     document.addEventListener('cheerleaderpublicready', e => {
@@ -119,7 +121,7 @@ export class CheerleaderService {
 
   approve(id) {
     this.fm.approveCheerleader(this.cheerleadersMap[id]);
-    this.osm.cheerleaderApproved(id);
+    this.osm.cheerleaderApproved(id, this.cheerleadersMap[id].pushId);
   }
 
   isCheerleader(id) {
