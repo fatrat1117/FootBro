@@ -21,16 +21,15 @@ import { TeamService } from '../../app/teams/team.service'
 export class EditPlayerPage {
   selfId: string;
   player: Player;
-  team: Team;
-  isSavable: boolean;
+  watchListMap: {};
   constructor(private modalCtrl: ModalController, private playerService: PlayerService, private teamService: TeamService) {
     this.selfId = this.playerService.selfId();
   }
 
   ionViewDidLoad() {
+    this.watchListMap = {}
     this.addEventListeners();
     this.playerService.getPlayerAsync(this.selfId);
-    this.isSavable = false;
   }
 
   addEventListeners() {
@@ -39,18 +38,24 @@ export class EditPlayerPage {
       let playerId = e['detail'];
       if (playerId === this.selfId) {
         this.player = this.playerService.getPlayer(playerId);
-        if (this.player.teamId)
-          this.teamService.getTeamAsync(this.player.teamId);
+        
+        this.watchListMap = {}
+        for (let id of this.player.teams) {
+          this.watchListMap[id] = {}
+          this.teamService.getTeamAsync(id);
+          
+        }
       }
     });
 
-    // team
     document.addEventListener('serviceteamready', e => {
-      let teamId = e['detail'];
-      if (this.player && teamId === this.player.teamId) {
-        this.team = this.teamService.getTeam(teamId);
+      let id = e['detail'];
+      if (this.watchListMap[id]) {
+        this.watchListMap[id] = this.teamService.getTeam(id);
       }
     });
+
+
   }
 
   editName() {

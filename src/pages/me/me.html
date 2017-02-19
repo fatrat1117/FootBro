@@ -23,12 +23,14 @@
       </ion-thumbnail>
       <h2>{{ player?.name }}</h2>
     </ion-item>
+    <!-->
     <ion-item (click)="goSwitchTeamPage()" *ngIf="(player)?.teamId" detail-push>
       <ion-thumbnail item-left>
         <img [src]="(team)?.logo">
       </ion-thumbnail>
       <h2>{{ team?.name }}</h2>
     </ion-item>
+    <-->
 
     <!-- show pages -->
     <ion-item-divider></ion-item-divider>

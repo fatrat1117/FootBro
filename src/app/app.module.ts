@@ -49,7 +49,7 @@ import { CheerleaderService} from './cheerleaders/cheerleader.service'
 import { TransPipe, Localization } from '../providers/localization';
 import { StringToDatePipe, NumberToTimePipe, MomentPipe,StringToYearOnlyPipe} from '../pipes/moment.pipe';
 import { TeamBasicPipe } from '../pipes/team.pipe'
-import { ReversePipe } from '../pipes/utilities.pipe'
+import { ReversePipe, MapToArrayPipe } from '../pipes/utilities.pipe'
 
 // components
 import { SbLoadingComponent } from './common/loading.component';
@@ -110,6 +110,7 @@ export const firebaseConfig = {
     MomentPipe,
     TeamBasicPipe,
     ReversePipe,
+    MapToArrayPipe,
     StringToYearOnlyPipe,
     // components
     SbLoadingComponent,

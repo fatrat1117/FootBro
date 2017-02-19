@@ -1,14 +1,7 @@
-<!--ion-header>
-  <ion-navbar>
-    <ion-title>
-      {{'CreateTeam' | trans}}
-    </ion-title>
-  </ion-navbar>
-</ion-header-->
 <ion-header>
-  <sb-modal-navbar title="Add New Team" buttonName="Create" [isEnabled]="teamName.trim().length > 0 && !busy" (onFinish)="doCreateTeam()"></sb-modal-navbar>
+    <sb-modal-navbar title="Add New Team" buttonName="Create" [isEnabled]="teamName.trim().length > 0 && !busy" (onFinish)="doCreateTeam()"></sb-modal-navbar>
 </ion-header>
-<ion-content padding>
+<ion-content no-padding>
   <ion-item-group>
     <ion-item (click)="changeLogo()">
         <h2>{{'Logo' | trans}}</h2>

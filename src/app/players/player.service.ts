@@ -136,4 +136,12 @@ export class PlayerService {
   checkLogin() {
     this.fm.checkLogin();
   }
+
+  setDefaultTeam(id: string) {
+    this.fm.setDefaultTeam(id);
+  }
+
+  quitTeam(id: string) {
+    this.fm.quitTeam(id);
+  }
 }

@@ -14,3 +14,26 @@ export class ReversePipe implements PipeTransform {
     }
   }
 }
+
+@Pipe({
+  name: 'mapToArrayPipe'
+})
+
+export class MapToArrayPipe implements PipeTransform {
+  constructor() {
+  }
+
+  transform(map) {
+    if (map)
+    {
+      let arr = [];
+      for (let key in map)
+      {
+        arr.push(map[key])
+      }
+
+      console.log(arr);
+      return arr;
+    }
+  }
+}

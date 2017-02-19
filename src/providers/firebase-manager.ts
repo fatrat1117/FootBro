@@ -359,7 +359,7 @@ export class FirebaseManager {
     let player = this.cachedPlayersMap[this.auth.uid];
     //set default team if no team
     if (isDefault || !this.selfTeamId())
-      this.afPlayerBasic(this.selfId()).update({ teamId: id });
+      this.setDefaultTeam(id);
 
     let afTeamBasic = this.afTeamBasic(id);
     let sub = afTeamBasic.subscribe(snapshot => {
@@ -372,6 +372,28 @@ export class FirebaseManager {
         250);
     });
   }
+
+  quitTeam(id) {
+    // update team total
+    let afTeamBasic = this.afTeamBasic(id);
+    let sub = afTeamBasic.subscribe(snapshot => {
+      setTimeout(() => {
+        sub.unsubscribe();
+        //increase total by 1
+        //trade-off: performance is better than updateTotalPlayers but might have bug when 2 players join at same time
+        afTeamBasic.update({ totalPlayers: snapshot.totalPlayers - 1 });
+      },
+        250);
+    });
+    // remove from self teams
+    this.af.database.list(`players/${this.selfId()}/teams`).remove(id);
+    this.af.database.list(`teams/${id}/players`).remove(this.selfId());
+  }
+
+  setDefaultTeam(id) {
+    this.afPlayerBasic(this.selfId()).update({ teamId: id });
+  }
+
 
 
 
