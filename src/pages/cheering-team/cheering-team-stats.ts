@@ -55,8 +55,11 @@ export class CheeringTeamStatsPage {
   }
 
   unlock() {
-    //this.showWarning();
-    this.showConfirm();
+    let amount = Math.floor(this.cheerleader.unlockPoints / 10) * 10;
+    if (this.selfPlayer.points >= amount)
+      this.showConfirm(amount);
+    else
+      this.showWarning();
   }
 
   dismiss() {
@@ -66,22 +69,22 @@ export class CheeringTeamStatsPage {
   showWarning() {
     this.alertCtrl.create({
       title: 'Not enough points',
-      subTitle: 'Current balance: ' + this.cheerleader.points,
-      message: 'You need at least 5 points to unlock her.',
+      subTitle: 'Current balance: ' + this.selfPlayer.points,
+      message: `You need at least ${this.cheerleader.unlockPoints} points to unlock her.`,
       buttons: ['OK']
     }).present();
   }
 
-  showConfirm() {
+  showConfirm(amount: number) {
     let confirm = this.alertCtrl.create({
-      title: '5 points needed',
-      subTitle: 'Balance: ' + this.cheerleader.points,
+      title: `${amount} points needed`,
+      subTitle: 'Balance: ' + this.selfPlayer.points,
       message: 'You will be able to message her once unlocked.',
       buttons: [
         {
           text: 'Ok',
           handler: () => {
-            this.unlockCheerleader()
+            this.unlockCheerleader(amount)
             //this.playerService.placeOrder('2qJEDrRMODbPOafc3cts4jbgS7z2', 5);
             this.dismiss();
           }
@@ -96,8 +99,8 @@ export class CheeringTeamStatsPage {
     confirm.present();
   }
 
-  unlockCheerleader() {
-    let amount = Math.floor(this.cheerleader.unlockPoints / 10) * 10;
+  unlockCheerleader(amount: number) {
+    //let amount = Math.floor(this.cheerleader.unlockPoints / 10) * 10;
     if (this.selfPlayer.points >= amount) {
       this.playerService.placeOrder(this.cheerleader.id, amount);
       this.playerService.unlockCheerleader(

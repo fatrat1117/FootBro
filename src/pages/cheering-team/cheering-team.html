@@ -96,13 +96,17 @@
         </ion-col>
       </div>
     </ion-row>
+
     <ion-row class="baby-row baby-row-1">
       <ion-col *ngFor='let cl of approvedCheerleaders' width-50 no-margin>
         <ion-row>
           <div class="baby-img-frame">
-            <button ion-button icon-only clear class="chat-logo" color="lightGrey" (click)="unlockCheerleader(cl)">
-                <ion-icon name="lock"></ion-icon>
-              </button>
+            <button *ngIf="isUnlocked(cl.id)" ion-button icon-only clear class="chat-logo" color="primary" (click)="enterChatPage(cl)">
+                <ion-icon name="md-chatbubbles"></ion-icon>
+            </button>
+            <button *ngIf="!isUnlocked(cl.id)" ion-button icon-only clear class="chat-logo" color="lightGrey" (click)="unlockCheerleader(cl)">
+                <ion-icon name="md-chatbubbles"></ion-icon>
+            </button>
             <img class="img" [src]="cl.photoMedium">
           </div>
         </ion-row>
@@ -120,6 +124,7 @@
           </div>
         </ion-row>
       </ion-col>
+
       <!--<ion-col width-50 no-margin>
         <ion-row>
           <div class="baby-img-frame">

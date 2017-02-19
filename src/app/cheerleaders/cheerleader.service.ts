@@ -47,6 +47,11 @@ export class CheerleaderService {
         cheerleader.photoMedium = p.photoMedium;
       if (p.pushId)
         cheerleader.pushId = p.pushId;
+
+      if ('points' in p)
+        cheerleader.points = p.points;
+      else
+        cheerleader.points = 0;
     });
 
     document.addEventListener('cheerleaderpublicready', e => {

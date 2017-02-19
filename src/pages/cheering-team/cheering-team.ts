@@ -4,6 +4,7 @@ import { CheeringTeamStatsPage } from './cheering-team-stats'
 import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
 import { CheerleaderService } from '../../app/cheerleaders/cheerleader.service'
+import { ChatPage } from '../chat/chat'
 
 @Component({
   selector: 'page-cheering-team',
@@ -28,11 +29,12 @@ export class CheeringTeamPage {
   }
 
   ionViewDidLoad() {
-    this.selfPlayer = this.playerService.getSelfPlayer();
+    //this.selfPlayer = this.playerService.getSelfPlayer();
     this.addEventListeners();
     if (this.playerService.isAdmin())
       this.cheerleaderService.getPendingCheerleadersAsync();
     this.cheerleaderService.getApprovedCheerleadersAsync();
+    this.playerService.getPlayerAsync(this.playerService.selfId());
   }
 
   addEventListeners() {
@@ -43,11 +45,19 @@ export class CheeringTeamPage {
 
     document.addEventListener('serviceapprovedcheerleadersready', e => {
       this.approvedCheerleaders = this.cheerleaderService.getApprovedCheerleaders();
+      
       if (this.cheerleaderService.isCheerleader(this.playerService.selfId()))
         this.amICheerleader = true;
       else
         this.amICheerleader = false;
-    })
+    });
+
+    document.addEventListener('serviceplayerready', e => {
+      let playerId = e['detail'];
+      if (playerId === this.playerService.selfId()) {
+        this.selfPlayer = this.playerService.getPlayer(playerId);
+      }
+    });
   }
 
   highLight(index: number) {
@@ -87,6 +97,21 @@ export class CheeringTeamPage {
 
   approve(id) {
     this.cheerleaderService.approve(id);
+  }
+
+  isUnlocked(id) {
+    if (this.selfPlayer)
+      return this.selfPlayer.cheerleaders.indexOf(id) >= 0;
+
+     return false;
+  }
+
+  enterChatPage(cl) {
+    this.nav.push(ChatPage, {
+      isSystem: false,
+      isUnread: false,
+      user: cl
+    });
   }
 }
 

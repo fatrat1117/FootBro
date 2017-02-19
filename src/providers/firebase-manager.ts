@@ -707,7 +707,7 @@ export class FirebaseManager {
   }
 
   updatePoints(playerId: string, newPoints: number) {
-    this.af.database.object(`/players/${this.auth.uid}/points`).set(newPoints);
+    this.af.database.object(`/players/${playerId}/points`).set(newPoints);
   }
 
 
