@@ -39,23 +39,25 @@
       <p item-right style="margin-left: 20%">{{ player?.description }}</p>
     </ion-item>
     <!-- Teams -->
-    <ion-item-divider></ion-item-divider>
-      <ion-item-sliding #slidingItem>
-        <ion-item>
-          <ion-thumbnail item-left>
-            <img [src]="(team)?.logo">
-          </ion-thumbnail>
-          <h2>{{ team?.name }}</h2>
-        </ion-item>
-        <ion-item-options side="right">
-          <button ion-button color="primary" text-capitalize (click)="setDefaultTeam(i, slidingItem)">
-            Set Default
-          </button>
-          <button ion-button color="danger" text-capitalize (click)="quitTeam(i)">
-            Quit
-          </button>
-        </ion-item-options>
-      </ion-item-sliding>
+    <div *ngIf="team">
+      <ion-item-divider></ion-item-divider>
+        <ion-item-sliding #slidingItem>
+          <ion-item>
+            <ion-thumbnail item-left>
+              <img [src]="(team)?.logo">
+            </ion-thumbnail>
+            <h2>{{ team?.name }}</h2>
+          </ion-item>
+          <ion-item-options side="right">
+            <button ion-button color="primary" text-capitalize (click)="setDefaultTeam(i, slidingItem)">
+              Set Default
+            </button>
+            <button ion-button color="danger" text-capitalize (click)="quitTeam(i)">
+              Quit
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </div>
    </ion-item-group>
    <!-->
    <ion-item-sliding *ngFor="let t of teams; let i = index;" #slidingItem>
