@@ -21,6 +21,8 @@ export class PlayerService {
         player.photoMedium = playerData.photoMedium;
       if ('points' in playerData)
         player.points = playerData.points;
+      else
+        player.points = 0;
 
       if (playerData['detail-info'] && 'position' in playerData['detail-info'])
         player.position = playerData['detail-info'].position;

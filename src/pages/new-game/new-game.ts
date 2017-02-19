@@ -1,6 +1,7 @@
-import {Component} from '@angular/core';
-import {NavController, ModalController} from 'ionic-angular';
-import {SearchTeamPage} from '../search-team/search-team';
+import { Component } from '@angular/core';
+import { NavController, ModalController } from 'ionic-angular';
+import { SearchTeamPage } from '../search-team/search-team';
+import { Team } from '../../app/teams/team.model'
 
 @Component({
     selector: 'page-new-game',
@@ -8,10 +9,11 @@ import {SearchTeamPage} from '../search-team/search-team';
 })
 export class NewGamePage {
     players = [];
+    home: Team;
+    away: Team;
 
-
-    constructor(public navCtrl : NavController,
-    private modalCtrl : ModalController) {
+    constructor(public navCtrl: NavController,
+        private modalCtrl: ModalController) {
         for (var i = 0; i < 4; i++) {
             this.players[i] = {
                 name: i,
@@ -26,25 +28,25 @@ export class NewGamePage {
                         name: "进球",
                         number: 5,
                         icon: "assets/icon/b2.png",
-                        color:"light"
+                        color: "light"
                     },
                     {
                         name: "助攻",
                         number: 1,
                         icon: "assets/icon/b3.png",
-                        color:"light"
+                        color: "light"
                     },
                     {
                         name: "红牌",
                         number: 2,
                         icon: "assets/icon/b2.png",
-                        color:"light"
+                        color: "light"
                     },
                     {
                         name: "黄牌",
                         number: 4,
                         icon: "assets/icon/b2.png",
-                        color:"light"
+                        color: "light"
                     },
 
                 ];
@@ -87,11 +89,11 @@ export class NewGamePage {
         if (player.hidden) {
             player.showExpandableIcon = "ios-arrow-up";
             for (var i = 0; i < this.players.length; i++) {
-                for(var j=0;j<this.players[i].items.length;j++){
-                    if(this.players[i].items[j].number<=0){
-                        this.players[i].items[j].color="light";
-                    }else{
-                        this.players[i].items[j].color="secondary";
+                for (var j = 0; j < this.players[i].items.length; j++) {
+                    if (this.players[i].items[j].number <= 0) {
+                        this.players[i].items[j].color = "light";
+                    } else {
+                        this.players[i].items[j].color = "secondary";
                     }
                 }
             }
@@ -110,31 +112,40 @@ export class NewGamePage {
         }
     }
     //减少得分
-    minusScore(item){
-        if(item.number>0) {
+    minusScore(item) {
+        if (item.number > 0) {
             item.number = item.number - 1;
-            if(item.number == 0){
-                item.color="light";
-            }else{
-                item.color="secondary";
+            if (item.number == 0) {
+                item.color = "light";
+            } else {
+                item.color = "secondary";
             }
         }
     }
     //增加得分
-    addScore(item){
-        item.number = item.number+1;
-        item.color="secondary";
+    addScore(item) {
+        item.number = item.number + 1;
+        item.color = "secondary";
     }
     //更新数据
-    openUpdate(){
+    openUpdate() {
         alert("update");
     }
     //右上角删除
-    openDelete(){
+    openDelete() {
         alert("delete");
     }
 
-    searchTeam() {
-        this.modalCtrl.create(SearchTeamPage).present();
+    searchTeam(teamType) {
+        let searchTeamModal = this.modalCtrl.create(SearchTeamPage);
+    searchTeamModal.onDidDismiss(data => {
+      if (data) {
+        if (1 == teamType)
+          this.home = data.team;
+        else
+          this.away = data.team;
+      }
+    });
+    searchTeamModal.present();
     }
 }

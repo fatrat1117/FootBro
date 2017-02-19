@@ -100,7 +100,7 @@ page-my-player{
               color: #fff;
               text-align: center;
               padding: 0.3rem 0rem;
-              font-size: 1.7rem;
+              font-size: 2.5rem;
             }
           }
 
@@ -115,7 +115,7 @@ page-my-player{
             }
             .label-word{
               color: #fff;
-              font-size: 1.2rem;
+              font-size: 2rem;
             }
           }
 
@@ -128,7 +128,7 @@ page-my-player{
           position: absolute;
           right: 0;
           max-width: 70%;
-          font-size: 1.7rem;
+          font-size: 2.3rem;
         }
       }
     }
@@ -141,7 +141,7 @@ page-my-player{
       h1{
         text-align: center;
         color: #ffffff;
-        font-size: 1.4rem;
+        font-size: 2rem;
         font-weight: 100 !important;
         padding: 0.5rem 0rem;
         .player-position{
@@ -183,7 +183,7 @@ page-my-player{
         }
         h4{
           color: #858585;
-          font-size: 1.2rem;
+          font-size: 1.5rem;
           width: 100%;
           text-align: center;
           margin: 0;
@@ -210,20 +210,20 @@ page-my-player{
         }
         .data{
           color: #fff;
-          font-size: 2.7rem;
+          font-size: 4rem;
           line-height: 5rem;
           min-width: 4rem;
-          font-weight: bold;
+          font-weight: normal;
         }
 
         .unit{
           color: #fff;
           .unit-first{
-            font-size: 1em;
+            font-size: 1.8rem;
           }
           .unit-second{
             color: #a7a8ac;
-            font-size: 0.8em;
+            font-size: 2rem;
           }
         }
 
@@ -249,12 +249,7 @@ page-my-player{
       }
       .flex-start{
           color: #fff;
-          font-size:1.7rem;
-          b{
-            font-size: 2rem;
-          }
-          min-width: 4rem;
-          font-weight: bold;
+          font-weight: normal;
       }
       .height{
         border-bottom: 4px solid #00ffac;
@@ -283,30 +278,34 @@ page-my-player{
     font-size: 2.3rem;
     color: #ababab;
     .subtitle{
-      font-weight: bold;
+      font-weight: normal;
+      line-height: 2.5rem;
     }
+
 
   }
   .personal-data-header{
     background-image: url("/../../assets/img/my-player/bg3@3x.png");
-    font-size: 1.8rem;
+    font-size: 2rem;
     color: #ababab;
-    font-weight: bold;
+    font-weight: normal;
+    line-height: 2rem;
   }
   .main-font{
     font-size: 2rem;
-    font-weight: bold;
+    font-weight: normal;
     color: #ffffff;
   }
   .personal-data{
     background: #41444d;
-    font-size: 1.7rem;
+    font-size: 2rem;
+    line-height: 2rem;
     color: #ffffff;
-    font-weight: bold;
+    font-weight: normal;
     .description{
-      font-size: 1.5rem;
-      font-weight: bold;
-      line-height: 2.5rem;
+      font-size: 1.7rem;
+      font-weight: normal;
+      line-height: 2rem;
       margin: 0.5rem 0.5rem 0.5rem 0.5rem;
     }
   }
@@ -355,10 +354,10 @@ page-my-player{
     .progressTxt {
       text-align: center;
       color: #f8f8f8;
-      font-size: 2rem;
+      font-size: 2.2rem;
       padding: 1rem 0rem;
       margin:0;
-      font-weight: bold;
+      font-weight: normal;
     }
     .proBar{
       position:relative;
@@ -447,7 +446,8 @@ page-my-player{
     font-size: 1.5rem;
     .picText{
       color:#ababab;
-       font-weight: bold;
+      font-weight:normal;
+      font-size: 2rem;
     }
   }
   .feedBack {
@@ -457,9 +457,9 @@ page-my-player{
     .totalText {
       padding: .9rem 0 1.25rem 0;
       h1,h2{
-        font-size: 1.8rem;
+        font-size: 2rem;
         color: #ffffff;
-        font-weight: bold;
+        font-weight: normal;
 
       }
     }
@@ -665,7 +665,7 @@ page-my-player{
     color: #ababab;
     font-size: 1.5rem;
     padding-top: .2rem;
-    font-weight: bold;
+    font-weight: normal;
   }
   .setOne .ballpic {
     width: 3rem;
@@ -674,9 +674,9 @@ page-my-player{
     margin-top: 0.75rem;
     margin-left: 1rem;
     color: #ffffff;
-    font-size: 1.7rem;
+    font-size: 2rem;
     line-height: 1.475rem;
-    font-weight: bold;
+    font-weight: normal;
   }
   .setOne .ball {
     margin-bottom: .9rem;
@@ -686,7 +686,7 @@ page-my-player{
     font-size: 1.8rem;
     line-height: 1.5;
     padding-bottom: .74rem;
-    font-weight: bold;
+    font-weight: normal;
   }
   .setOne .like {
     background: url(../../assets/img/my-player/defunlike.png) no-repeat;
@@ -696,7 +696,7 @@ page-my-player{
     background-size: 100% 100%;
     margin-right: .5rem;
     vertical-align: middle;
-    font-weight: bold;
+    font-weight: normal;
   }
   .setOne .unlike {
     background: url(../../assets/img/my-player/deflike.png) no-repeat;
