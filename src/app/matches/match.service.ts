@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatchBasic, Match } from './match.model';
-import { MatchStanding } from './match.model';
+import { Match } from './match.model';
 import { MATCHBASICS } from './shared/mock-data/mock-match-basic';
 import { MATCHSTANDINGS } from './shared/mock-data/mock-match-standing';
 import { FirebaseManager } from '../../providers/firebase-manager';
@@ -76,15 +75,12 @@ export class MatchService {
       match = this.matchesMap[id];
     else {
       match = new Match();
+      match.$key = id;
       this.matchesMap[id] = match;
     }
     return match;
   }
-
-  getMatchStandings(leagueId: string): Promise<MatchStanding[]> {
-    return Promise.resolve(MATCHSTANDINGS);
-  }
-
+  
   getMatchDatesAsync(id) {
     this.fm.getMatchDatesAsync(id);
   }

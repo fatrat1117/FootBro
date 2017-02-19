@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
-
-import { MatchBasic } from '../../app/matches/shared/match.model'
-import { MatchStanding } from '../../app/matches/match.model'
+import { Match } from '../../app/matches/match.model'
 import { MatchService } from '../../app/matches/match.service'
 import { NewGamePage } from "../new-game/new-game";
 import * as moment from 'moment';

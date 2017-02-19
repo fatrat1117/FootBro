@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { TeamService } from '../../app/teams/team.service'
 import { Team } from '../../app/teams/team.model'
 import { TeamPlayersService } from '../../app/teams/teamplayers.service'
 import { MatchService } from '../../app/matches/match.service'
+import { Match } from '../../app/matches/match.model'
 import { SearchPlayerPage } from '../search-player/search-player'
+import { SearchMatchPage } from '../search-match/search-match'
+import { MatchDetailPage } from '../match-detail/match-detail'
 import * as moment from 'moment';
 
 @Component({
@@ -19,14 +22,15 @@ export class MyTeamPage {
   selectedStatIndex = 0;
   players;
   matches;
-  upcomingMatch;
+  upcomingMatch : Match;
   mostGAMatchId;
   mostGFMatchId;
   constructor(public nav: NavController,
     private navParams: NavParams,
     private service: TeamService,
     private teamPlayersService: TeamPlayersService,
-    private matchService: MatchService) {
+    private matchService: MatchService,
+    private modalCtrl : ModalController) {
   }
 
   ionViewDidLoad() {
@@ -100,7 +104,7 @@ export class MyTeamPage {
 
   //查看更多球队赛程
   seeMoreTeamGamePlan() {
-    alert("see more team game plan");
+    this.nav.push(SearchMatchPage, {matches: this.matches});
   }
 
   //查看更多球队成员
@@ -232,5 +236,12 @@ export class MyTeamPage {
         break;
     }
     return style;
+  }
+
+  showUpcomingMatch() {
+    if (this.upcomingMatch) {
+      //console.log(this.upcomingMatch);
+      this.modalCtrl.create(MatchDetailPage, {match: this.upcomingMatch}).present();
+    }
   }
 }

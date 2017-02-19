@@ -42,7 +42,7 @@
             <a class="left-team-name">阿根廷男子足球国家队</a>
             <button ion-button icon-left clear full style="margin:0px;padding:0px;" color="light">
             <ion-icon name="flag" color="danger"></ion-icon>
-            主队
+            {{'HomeTeam' | trans}}
             </button>
             <!--<div class="left-team-info">-->
                 <!--<img src="assets/img/icon1.jpg" class="left-team-flag">-->
@@ -68,11 +68,11 @@
             </ion-row>
         </ion-col>
 
-        <ion-col class="right-team">
-            <a class="right-team-name" (click) = "searchTeam()">墨西哥男子足球国家队</a>
+        <ion-col class="right-team" (click) = "searchTeam(2)">
+            <a class="right-team-name">{{away?.name}}</a>
             <button ion-button icon-left clear full style="margin:0px;padding:0px;"color="light">
             <ion-icon name="flag" color="primary"></ion-icon>
-            客队
+            {{'AwayTeam' | trans}}
             </button>
             <!--<div class="right-team-info">-->
                 <!--<img src="assets/img/icon1.jpg" class="right-team-flag">-->

@@ -32,18 +32,20 @@
       </div>
     </div>
 
-    <ion-row>
+    <div class="team-brief-info">
+        <ion-row >
       <ion-col class="default-font-color default-font-size-col">{{'YearBuilt' | trans | uppercase}}</ion-col>
-      <!--<ion-col class="default-font-color default-font-size-col">平均年龄</ion-col>-->
-      <!--<ion-col class="default-font-color default-font-size-col">年龄跨度</ion-col>
-      <ion-col class="default-font-color default-font-size-col">队服颜色</ion-col>-->
+      <ion-col class="hidden age-label default-font-color default-font-size-col">平均年龄</ion-col>
+      <ion-col class="hidden age-gap-label default-font-color default-font-size-col">年龄跨度</ion-col>
+      <ion-col class="hidden clothes-color-label default-font-color default-font-size-col">队服颜色</ion-col>
     </ion-row>
     <ion-row>
       <ion-col class="white default-font-size-col">{{team?.yearBuilt}}</ion-col>
-      <!--<ion-col class="white default-font-size-col">27</ion-col>
-      <ion-col class="white default-font-size-col">6</ion-col>
-      <ion-col class="white default-font-size-col">蓝</ion-col>-->
+      <ion-col class="hidden age white default-font-size-col">27</ion-col>
+      <ion-col class="hidden age-gap white default-font-size-col">6</ion-col>
+      <ion-col class="hidden clothes-color white default-font-size-col">蓝</ion-col>
     </ion-row>
+        </div>
   </div>
 
   <ion-list class="subtitle no-margin">
@@ -56,7 +58,7 @@
     </ion-item>
   </ion-list>
 
-<div *ngIf = "matches?.length > 0">
+<div *ngIf = "matches?.length > 0" (click) = "showUpcomingMatch()">
   <button ion-button full class="nearest-game-time default-font-color">
     {{upcomingMatch?.time | date:'medium'}}
   </button>
@@ -163,9 +165,11 @@
 <div class="team-success-fail-data">
   <ion-row>
     <ion-col class="col-30"></ion-col>
-    <ion-col class="col-40">
+    <ion-col class="col-40 round-progress-container">
       <round-progress [current]="currTeamStat?.rate * 100" [max]=100 [color]="'#'+'00ff00'" [background]="'#'+'a0a0a0'" [radius]="125"
-        [stroke]="20" [semicircle]="false" [rounded]="true" [clockwise]="false" [responsive]="true"></round-progress>
+        [stroke]="20" [semicircle]="false" [rounded]="true" [clockwise]="false" [responsive]="true"> </round-progress>
+        <span class="circle-text">65%</span>
+       
       <!--<div text-center class="win-rate-text">{{currTeamStat?.rate * 100}}</div>-->
     </ion-col>
     <ion-col class="col-30"></ion-col>
