@@ -58,7 +58,7 @@
     </ion-item>
   </ion-list>
 
-<div *ngIf = "matches?.length > 0">
+<div *ngIf = "matches?.length > 0" (click) = "showUpcomingMatch()">
   <button ion-button full class="nearest-game-time default-font-color">
     {{upcomingMatch?.time | date:'medium'}}
   </button>
