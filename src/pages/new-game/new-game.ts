@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, ViewController } from 'ionic-angular';
 import { SearchTeamPage } from '../search-team/search-team';
 import { Team } from '../../app/teams/team.model'
 import { Match } from '../../app/matches/match.model'
@@ -19,7 +19,8 @@ export class NewGamePage {
     matchTime;
 
     constructor(public navCtrl: NavController,
-        private modalCtrl: ModalController) {
+        private modalCtrl: ModalController,
+        private viewCtrl: ViewController) {
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
         this.matchDate = moment().format("YYYY-MM-DD");
         this.matchTime = "15:00";
@@ -62,6 +63,20 @@ export class NewGamePage {
                 ];
             }
         }
+    }
+
+    ionViewDidLoad() {
+        let input = document.getElementById('autocompleteInput');
+        //console.log(google);    
+        let autocomplete = new google.maps.places.Autocomplete(input);
+        //console.log(autocomplete);
+
+        //let autocomplete = new google.maps.places.Autocomplete(document.getElementById("autocompleteInput"), {});
+        autocomplete.addListener('place_changed', () => {
+            let place = autocomplete.getPlace();
+            this.match.location.name = place.name;
+            this.match.location.address = place.formatted_address;
+        });
     }
 
     //根据胜率设置图像例如90%
@@ -162,17 +177,11 @@ export class NewGamePage {
         return Number(s);
     }
 
-    ionViewDidLoad() {
-        let input = document.getElementById('autocompleteInput');
-        console.log(google);    
-        let autocomplete = new google.maps.places.Autocomplete(input);
-        console.log(autocomplete);
+    scheduleMatch() {
 
-        //let autocomplete = new google.maps.places.Autocomplete(document.getElementById("autocompleteInput"), {});
-        autocomplete.addListener('place_changed', () => {
-            let place = autocomplete.getPlace();
-            this.match.location.name = place.name;
-            this.match.location.address = place.formatted_address;
-        });
+    }
+
+    close() {
+        this.viewCtrl.dismiss();
     }
 }
