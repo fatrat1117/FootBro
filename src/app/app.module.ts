@@ -124,7 +124,7 @@ export const firebaseConfig = {
       backButtonText: ''
     }),
     RoundProgressModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
   ],
   bootstrap: [IonicApp],
   entryComponents: [

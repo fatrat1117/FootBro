@@ -168,20 +168,14 @@
     <ion-col class="col-40 round-progress-container">
       <round-progress [current]="currTeamStat?.rate * 100" [max]=100 [color]="'#'+'00ff00'" [background]="'#'+'a0a0a0'" [radius]="125"
         [stroke]="20" [semicircle]="false" [rounded]="true" [clockwise]="false" [responsive]="true"> </round-progress>
-        <span class="circle-text">65%</span>
+        <span class="circle-text">
+            <div class="win-ratio-label">胜率</div>
+            <div class="win-ratio">65%</div>
+        </span>
        
       <!--<div text-center class="win-rate-text">{{currTeamStat?.rate * 100}}</div>-->
     </ion-col>
     <ion-col class="col-30"></ion-col>
-  </ion-row>
-
-  <ion-row>
-    <ion-col class="recent-game-result">{{currTeamStat?.total_matches}}</ion-col>
-    <ion-col class="recent-game-result">{{currTeamStat?.win}}</ion-col>
-    <ion-col class="recent-game-result">{{currTeamStat?.draw}}</ion-col>
-    <ion-col class="recent-game-result">{{currTeamStat?.lose}}</ion-col>
-    <ion-col class="recent-game-result">{{currTeamStat?.avgGA}}</ion-col>
-    <ion-col class="recent-game-result">{{currTeamStat?.avgGF}}</ion-col>
   </ion-row>
 
   <ion-row>
@@ -192,23 +186,43 @@
     <ion-col class="recent-game-result-name">{{'avgga' | trans}}</ion-col>
     <ion-col class="recent-game-result-name">{{'avggf' | trans}}</ion-col>
   </ion-row>
+    
+    <ion-row>
+    <ion-col class="recent-game-result">{{currTeamStat?.total_matches}}</ion-col>
+    <ion-col class="recent-game-result">{{currTeamStat?.win}}</ion-col>
+    <ion-col class="recent-game-result">{{currTeamStat?.draw}}</ion-col>
+    <ion-col class="recent-game-result">{{currTeamStat?.lose}}</ion-col>
+    <ion-col class="recent-game-result">{{currTeamStat?.avgGA}}</ion-col>
+    <ion-col class="recent-game-result">{{currTeamStat?.avgGF}}</ion-col>
+  </ion-row>
 </div>
 
 
 <ion-list *ngIf='matches && mostGFMatchId' no-lines="true" class="game-data-assist">
   <ion-item class="game-data-assist-item">
-    <div item-left class="goal-title">{{'maxgf' | trans}}</div>
-    <div item-right>
-      <p class="goal-data">{{matchService.getMatch(mostGFMatchId)?.homeScore}} : {{matchService.getMatch(mostGFMatchId)?.awayScore}}</p>
+      <ion-row>
+       <div item-left class="goal-title">{{'maxgf' | trans}}</div>
+        <p  item-right class="goal-data">{{matchService.getMatch(mostGFMatchId)?.homeScore}} : {{matchService.getMatch(mostGFMatchId)?.awayScore}}</p>
+      </ion-row>
+      <ion-row>
+        <div item-right class="goal-data-detail-wrapper">
       <p class="goal-data-detail">{{matchService.getMatch(mostGFMatchId)?.home?.name}} VS {{matchService.getMatch(mostGFMatchId)?.away?.name}} / {{matchService.getMatch(mostGFMatchId)?.date | date:'mediumDate'}}</p>
     </div>
+      </ion-row>
+   
+  
   </ion-item>
   <ion-item *ngIf='matches && mostGAMatchId' class="game-data-assist-item">
+      <ion-row>
     <div item-left class="goal-title">{{'maxga' | trans}}</div>
-    <div item-right>
-      <p class="goal-data">{{matchService.getMatch(mostGAMatchId)?.homeScore}} : {{matchService.getMatch(mostGAMatchId)?.awayScore}}</p>
+           <p class="goal-data">{{matchService.getMatch(mostGAMatchId)?.homeScore}} : {{matchService.getMatch(mostGAMatchId)?.awayScore}}</p>
+      </ion-row>
+      <ion-row>
+    <div item-right class="goal-data-detail-wrapper">
+     
       <p class="goal-data-detail">{{matchService.getMatch(mostGAMatchId)?.home?.name}} VS {{matchService.getMatch(mostGAMatchId)?.away?.name}} / {{matchService.getMatch(mostGAMatchId)?.date | date:'mediumDate'}}</p>
     </div>
+          </ion-row>
   </ion-item>
   <ion-item class="game-data-assist-item">
     <div item-left class="goal-title-2">{{'maxvictory' | trans}}</div>

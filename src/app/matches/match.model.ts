@@ -1,4 +1,10 @@
 import { Team} from '../teams/team.model';
+export class MatchLocation {
+  name;
+  address;
+  latitude;
+  longitude;
+} 
 
 export class Match {
   $key;
@@ -11,6 +17,7 @@ export class Match {
   away : Team;
   homeScore;
   awayScore;
-  type;
+  type = 11;
   tournamentId;
+  location = new MatchLocation();
 }

@@ -1,24 +1,5 @@
-<!--
 <ion-header>
-    <ion-navbar color="dark">
-        <ion-buttons left style=": #161616;">
-            <button ion-button icon-only clear>
-                <ion-icon name="ios-arrow-back"></ion-icon>
-            </button>
-        </ion-buttons>
-        <ion-title text-center>
-            新球赛
-        </ion-title>
-        <ion-buttons right>
-            <button ion-button icon-only clear (click)="openDelete()" >
-                <ion-icon name="ios-trash"></ion-icon>
-            </button>
-        </ion-buttons>
-    </ion-navbar>
-</ion-header>
--->
-<ion-header>
-    <sb-modal-navbar title="新球赛" buttonName="Save" isEnabled="true" (onFinish)="openUpdate()"></sb-modal-navbar>
+    <sb-modal-navbar [title]="'NewMatch' | trans" buttonName="Save" isEnabled="true" (onFinish)="openUpdate()"></sb-modal-navbar>
 </ion-header>
 <!--主体内容区-->
 <ion-content>
@@ -38,180 +19,163 @@
     </div>-->
     <ion-row class="content-fight">
 
-        <ion-col class="left-team">
-            <a class="left-team-name">阿根廷男子足球国家队</a>
+        <ion-col class="left-team" (click)="searchTeam(1)">
+            <a class="left-team-name">{{match?.home?.name}}</a>
             <button ion-button icon-left clear full style="margin:0px;padding:0px;" color="light">
-            <ion-icon name="flag" color="danger"></ion-icon>
-            {{'HomeTeam' | trans}}
-            </button>
-            <!--<div class="left-team-info">-->
-                <!--<img src="assets/img/icon1.jpg" class="left-team-flag">-->
-                <!--<a class="left-team-position">主队</a>-->
-            <!--</div>-->
-        </ion-col>
+<ion-icon name="flag" color="danger"></ion-icon>
+{{'HomeTeam' | trans}}
+</button>
+<!--<div class="left-team-info">-->
+<!--<img src="assets/img/icon1.jpg" class="left-team-flag">-->
+<!--<a class="left-team-position">主队</a>-->
+<!--</div>-->
+</ion-col>
 
-        <ion-col class="center-score" width-25>
-            <ion-row class="no-margin no-padding">
-                <ion-col class="left-number">
-                    <div class="back-top"></div>
-                    <div class="back-bottom"></div>
-                    <div class="top-score">4</div>
-                </ion-col>
-                <ion-col class="center-compare">
-                    :
-                </ion-col>
-                <ion-col class="right-number">
-                    <div class="back-top"></div>
-                    <div class="back-bottom"></div>
-                    <div class="top-score">1</div>
-                </ion-col>
-            </ion-row>
+<ion-col class="center-score" width-25>
+    <ion-row class="no-margin no-padding">
+        <ion-col class="left-number">
+            <div class="back-top"></div>
+            <div class="back-bottom"></div>
+            <div class="top-score">4</div>
         </ion-col>
-
-        <ion-col class="right-team" (click) = "searchTeam(2)">
-            <a class="right-team-name">{{away?.name}}</a>
-            <button ion-button icon-left clear full style="margin:0px;padding:0px;"color="light">
-            <ion-icon name="flag" color="primary"></ion-icon>
-            {{'AwayTeam' | trans}}
-            </button>
-            <!--<div class="right-team-info">-->
-                <!--<img src="assets/img/icon1.jpg" class="right-team-flag">-->
-                <!--<a class="right-team-position">客队</a>-->
-            <!--</div>-->
+        <ion-col class="center-compare">
+            :
+        </ion-col>
+        <ion-col class="right-number">
+            <div class="back-top"></div>
+            <div class="back-bottom"></div>
+            <div class="top-score">1</div>
         </ion-col>
     </ion-row>
+</ion-col>
+
+<ion-col class="right-team" (click)="searchTeam(2)">
+    <a class="right-team-name">{{match?.away?.name}}</a>
+    <button ion-button icon-left clear full style="margin:0px;padding:0px;"color="light">
+<ion-icon name="flag" color="primary"></ion-icon>
+{{'AwayTeam' | trans}}
+</button>
+<!--<div class="right-team-info">-->
+<!--<img src="assets/img/icon1.jpg" class="right-team-flag">-->
+<!--<a class="right-team-position">客队</a>-->
+<!--</div>-->
+</ion-col>
+</ion-row>
 
 
-    <ion-list no-lines class="content-game-info">
-        <ion-item class="game-info-item">
-            <button ion-button clear full class="game-info-item-left" item-left>场地类型</button>
-            <div class="game-info-item-right" item-right>
-                <button ion-button clear icon-right color="light" class="right-button">
-                    11 V 11
-                    <ion-icon name="arrow-dropdown"></ion-icon>
-                </button>
-            </div>
-        </ion-item>
+<ion-list no-lines class="content-game-info">
+    <ion-item class="game-info-item">
+        <button ion-button clear full class="game-info-item-left" item-left>{{'Type' | trans}}</button>
+        <div class="game-info-item-right" item-right>
+            <ion-select text-center [ngModel]="match.type" (ngModelChange)="match.type=toNumber($event)">
+                <ion-option value="5">5 v 5</ion-option>
+                <ion-option value="7">7 v 7</ion-option>
+                <ion-option value="11">11 v 11</ion-option>
+            </ion-select>
+        </div>
+    </ion-item>
 
-        <ion-item class="game-info-item-light">
-            <button ion-button clear full class="game-info-item-left" item-left>球赛地点</button>
-            <div class="game-info-item-right-gray" item-right>
-                <button ion-button clear color="light" class="right-button">
-                    纪念碑球场
-                </button>
-            </div>
-        </ion-item>
+    <ion-item class="game-info-item-light">
+        <button ion-button clear full class="game-info-item-left" item-left>{{'Location' | trans}}</button>
+        <div class="game-info-item-right-gray" item-right>
+            <input id="autocompleteInput" [(ngModel)]="match.location.name" style="width:100%; border:none; text-align:center;" />
+        </div>
+    </ion-item>
 
-        <ion-item class="game-info-item">
-            <button ion-button clear full class="game-info-item-left" item-left>日&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;期</button>
-            <div class="game-info-item-right" item-right>
-                <button ion-button clear color="light" class="right-button">
-                    2016-12-12
-                </button>
-            </div>
-        </ion-item>
+    <ion-item class="game-info-item">
+        <button ion-button clear full class="game-info-item-left" item-left>{{'Date' | trans}}</button>
+        <div class="game-info-item-right" item-right>
+            <ion-datetime text-center displayFormat="YYYY-MM-DD" [min]="minDate" [(ngModel)]="matchDate"></ion-datetime>
+        </div>
+    </ion-item>
 
-        <ion-item class="game-info-item-light">
-            <button ion-button clear full class="game-info-item-left" item-left>比赛时间</button>
-            <div class="game-info-item-right-gray" item-right>
-                <button ion-button clear color="light" class="right-button">
-                    3:00 PM
-                </button>
-            </div>
-        </ion-item>
+    <ion-item class="game-info-item-light">
+        <button ion-button clear full class="game-info-item-left" item-left>{{'Time' | trans}}</button>
+        <div class="game-info-item-right-gray" item-right>
+            <ion-datetime text-center displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="matchTime"></ion-datetime>
+        </div>
+    </ion-item>
 
-        <ion-item class="game-info-item-dark">
-            <button ion-button clear color="light" icon-left item-left>
+    <ion-item class="game-info-item-dark">
+        <button ion-button clear color="light" icon-left item-left>
             <ion-icon name="flag" color="danger"></ion-icon>
             主队
             </button>
-            <!--<div class="game-info-position">-->
-                <!--<img src="assets/img/icon1.jpg" class="game-info-position-img">-->
-                <!--<a class="game-info-position-text">客队</a>-->
-            <!--</div>-->
-        </ion-item>
+        <!--<div class="game-info-position">-->
+        <!--<img src="assets/img/icon1.jpg" class="game-info-position-img">-->
+        <!--<a class="game-info-position-text">客队</a>-->
+        <!--</div>-->
+    </ion-item>
 
-        <ion-item class="game-info-item-team-title">
-            <button ion-button class="game-info-team-title-button">阿根廷男子足球国家队
+    <ion-item class="game-info-item-team-title">
+        <button ion-button class="game-info-team-title-button">阿根廷男子足球国家队
             </button>
-        </ion-item>
+    </ion-item>
 
-        <ion-item class="game-info-item">
-            <button ion-button item-left clear class="item-game-info-left-text">队员</button>
-            <button ion-button item-right clear icon-right class="item-game-info-right-text">
+    <ion-item class="game-info-item">
+        <button ion-button item-left clear class="item-game-info-left-text">队员</button>
+        <button ion-button item-right clear icon-right class="item-game-info-right-text">
                 参赛球员
                 <ion-icon name="add-circle"></ion-icon>
             </button>
-        </ion-item>
+    </ion-item>
 
-        <div class="content-expandable" *ngFor="let player of players">
-            <!--样式一-->
-            <ion-item class="expandable-member-name" (click)="clickTeamMember(player)">
-                <button ion-button item-left icon-only clear (click)="deleteTeamPlayer(player)">
+    <div class="content-expandable" *ngFor="let player of players">
+        <!--样式一-->
+        <ion-item class="expandable-member-name" (click)="clickTeamMember(player)">
+            <button ion-button item-left icon-only clear (click)="deleteTeamPlayer(player)">
                     <ion-icon name="remove-circle" color="danger"></ion-icon>
                 </button>
-                <img src="assets/img/icon1.jpg" class="member-img"/>
-                <button ion-button item-right icon-right clear color="light">
+            <img src="assets/img/icon1.jpg" class="member-img" />
+            <button ion-button item-right icon-right clear color="light">
                     梅西{{player.name}}
                     <ion-icon [name]="player.showExpandableIcon"></ion-icon>
                 </button>
-            </ion-item>
+        </ion-item>
 
-            <!--样式二-->
-            <ion-item class="expandable-member-property" *ngFor="let item of player.items" [hidden]="player.hidden">
-                <img [src]="item.icon" class="desc-img" item-left/>
-                <button ion-button clear color="light">{{item.name}}</button>
-                <div item-right>
-                    <button ion-button icon-only clear (click)="minusScore(item)" [color]="item.color">
+        <!--样式二-->
+        <ion-item class="expandable-member-property" *ngFor="let item of player.items" [hidden]="player.hidden">
+            <img [src]="item.icon" class="desc-img" item-left/>
+            <button ion-button clear color="light">{{item.name}}</button>
+            <div item-right>
+                <button ion-button icon-only clear (click)="minusScore(item)" [color]="item.color">
                         <ion-icon name="arrow-dropleft"></ion-icon>
                     </button>
 
-                    <button ion-button clear color="secondary">
+                <button ion-button clear color="secondary">
                         {{item.number}}
                     </button>
 
-                    <button ion-button icon-only clear (click)="addScore(item)">
+                <button ion-button icon-only clear (click)="addScore(item)">
                         <ion-icon name="arrow-dropright" color="secondary"></ion-icon>
                     </button>
-                </div>
-                <!--<button ion-button item-right icon-left icon-right clear color="green">-->
-                <!--<ion-icon name="arrow-dropleft"></ion-icon>-->
-                <!--5-->
-                <!--<ion-icon name="arrow-dropright"></ion-icon>-->
-                <!--</button>-->
-            </ion-item>
-        </div>
+            </div>
+            <!--<button ion-button item-right icon-left icon-right clear color="green">-->
+            <!--<ion-icon name="arrow-dropleft"></ion-icon>-->
+            <!--5-->
+            <!--<ion-icon name="arrow-dropright"></ion-icon>-->
+            <!--</button>-->
+        </ion-item>
+    </div>
 
-        <!--裁判-->
-        <ion-item class="game-info-item-dark">
-            <button ion-button clear color="light" icon-left item-left="">
+    <!--裁判-->
+    <ion-item class="game-info-item-dark">
+        <button ion-button clear color="light" icon-left item-left="">
             <ion-icon name="star"></ion-icon>
               裁判
             </button>
-            <!--<div class="game-info-position">-->
-                <!--<img src="assets/img/icon1.jpg" class="game-info-position-img">-->
-                <!--<a class="game-info-position-text">裁判</a>-->
-            <!--</div>-->
-        </ion-item>
+        <!--<div class="game-info-position">-->
+        <!--<img src="assets/img/icon1.jpg" class="game-info-position-img">-->
+        <!--<a class="game-info-position-text">裁判</a>-->
+        <!--</div>-->
+    </ion-item>
 
-        <ion-item class="game-info-item-light" style="margin-bottom: 0px;">
-            <button ion-button clear full class="game-info-item-left" item-left>姓&nbsp;&nbsp;&nbsp;&nbsp;
+    <ion-item class="game-info-item-light" style="margin-bottom: 0px;">
+<button ion-button clear full class="game-info-item-left" item-left>姓&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;名
             </button>
-            <ion-input type="text" style="height:100%;width: 100px;" item-right></ion-input>
+<ion-input type="text" style="height:100%;width: 100px;" item-right></ion-input>
 
-        </ion-item>
-    </ion-list>
-
-    <!--div class="content-bottom">
-        <button ion-button full clear
-                class="update-button" (click)="openUpdate()">更新
-        </button>
-    </div-->
-
-
+</ion-item>
+</ion-list>
 </ion-content>
-
-
-
-

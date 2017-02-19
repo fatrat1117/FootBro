@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { SearchTeamPage } from '../search-team/search-team';
 import { Team } from '../../app/teams/team.model'
+import { Match } from '../../app/matches/match.model'
+//import {MapsAPILoader} from 'angular2-google-maps/core';
+import * as moment from 'moment';
+declare var google: any;
 
 @Component({
     selector: 'page-new-game',
@@ -9,11 +13,17 @@ import { Team } from '../../app/teams/team.model'
 })
 export class NewGamePage {
     players = [];
-    home: Team;
-    away: Team;
+    match = new Match();
+    minDate;
+    matchDate;
+    matchTime;
 
     constructor(public navCtrl: NavController,
         private modalCtrl: ModalController) {
+        this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
+        this.matchDate = moment().format("YYYY-MM-DD");
+        this.matchTime = "15:00";
+
         for (var i = 0; i < 4; i++) {
             this.players[i] = {
                 name: i,
@@ -53,7 +63,6 @@ export class NewGamePage {
             }
         }
     }
-
 
     //根据胜率设置图像例如90%
     setSuccessRate(successRate) {
@@ -138,14 +147,32 @@ export class NewGamePage {
 
     searchTeam(teamType) {
         let searchTeamModal = this.modalCtrl.create(SearchTeamPage);
-    searchTeamModal.onDidDismiss(data => {
-      if (data) {
-        if (1 == teamType)
-          this.home = data.team;
-        else
-          this.away = data.team;
-      }
-    });
-    searchTeamModal.present();
+        searchTeamModal.onDidDismiss(data => {
+            if (data) {
+                if (1 == teamType)
+                    this.match.home = data.team;
+                else
+                    this.match.away = data.team;
+            }
+        });
+        searchTeamModal.present();
+    }
+
+    toNumber(s) {
+        return Number(s);
+    }
+
+    ionViewDidLoad() {
+        let input = document.getElementById('autocompleteInput');
+        console.log(google);    
+        let autocomplete = new google.maps.places.Autocomplete(input);
+        console.log(autocomplete);
+
+        //let autocomplete = new google.maps.places.Autocomplete(document.getElementById("autocompleteInput"), {});
+        autocomplete.addListener('place_changed', () => {
+            let place = autocomplete.getPlace();
+            this.match.location.name = place.name;
+            this.match.location.address = place.formatted_address;
+        });
     }
 }
