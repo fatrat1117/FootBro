@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { PlayerService } from '../../app/players/player.service'
 import { Player } from '../../app/players/player.model'
+import { PlayerService } from '../../app/players/player.service'
 //import { Screenshot, SocialSharing} from 'ionic-native';
 //declare var Wechat: any;
 
@@ -97,11 +97,16 @@ export class MyPlayerPage {
 */
 
   enterChatPage() {
-    this.navCtrl.push(ChatPage, {
-      isSystem: false,
-      isUnread: false,
-      user: this.player
-    });
+    if (this.service.isAuthenticated()) {
+      this.navCtrl.push(ChatPage, {
+        isSystem: false,
+        isUnread: false,
+        user: this.player
+      })
+    }
+    else
+      this.service.checkLogin();
+    ;
   }
  
 }
