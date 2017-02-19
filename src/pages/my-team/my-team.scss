@@ -188,13 +188,14 @@ page-my-team {
       margin-bottom: 0px;
       //左边战队
       .game-left {
-        width: 30%;
+        width: 40%;
         height: 100%;
         float: left;
         .game-left-setting {
           float: right;
           color: white;
           text-align: center;
+          width: 100%;
           //左边战队头像
           .game-left-img {
             width: 40px;
@@ -204,19 +205,23 @@ page-my-team {
           .game-left-text{
             font-size:1.2rem;
             text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
           }
         }
 
       }
       //中间比分
       .game-center {
-        width: 30%;
+        float: left;
+        width: 20%;
         height: 100%;
         margin: 0 auto;
         background: #27282d;
         .game-score {
           text-align: center;
-          font-size: 3.0rem;
+          font-size: 2rem;
           color: white;
           background: #27282d;
           margin: 0px;
@@ -225,23 +230,28 @@ page-my-team {
       }
       //右边战队
       .game-right {
-        width: 30%;
+          display: block;
+        width: 40%;
         height: 0%;
-        float: right;
+        float: left;
         //右边战队数据总设置
         .game-right-setting {
           float: left;
-          margin-top: -85px;
           color: white;
+          width: 100%;
           text-align: center;
           //右边战队头像
           .game-right-img {
             width: 40px;
             height: 40px;
+              margin-top: 15px;
           }
           .game-right-text{
             font-size:1.2rem;
             text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
           }
         }
       }
