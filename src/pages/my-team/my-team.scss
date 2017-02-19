@@ -410,13 +410,17 @@ page-my-team {
       //background: red;
       padding-top: 10px;
       margin-top: 0px;
-            //圆圈里的百分比
+        .round-progress-container{
+            position: relative;
+             //圆圈里的百分比
             .circle-text{
                 position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%,-50%);
-                    }   
+                    } 
+        }
+             
         
         
       //胜率图
