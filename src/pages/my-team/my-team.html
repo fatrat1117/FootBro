@@ -32,18 +32,20 @@
       </div>
     </div>
 
-    <ion-row>
+    <div class="team-brief-info">
+        <ion-row >
       <ion-col class="default-font-color default-font-size-col">{{'YearBuilt' | trans | uppercase}}</ion-col>
-      <!--<ion-col class="default-font-color default-font-size-col">平均年龄</ion-col>-->
-      <!--<ion-col class="default-font-color default-font-size-col">年龄跨度</ion-col>
-      <ion-col class="default-font-color default-font-size-col">队服颜色</ion-col>-->
+      <ion-col class="hidden age-label default-font-color default-font-size-col">平均年龄</ion-col>
+      <ion-col class="hidden age-gap-label default-font-color default-font-size-col">年龄跨度</ion-col>
+      <ion-col class="hidden clothes-color-label default-font-color default-font-size-col">队服颜色</ion-col>
     </ion-row>
     <ion-row>
       <ion-col class="white default-font-size-col">{{team?.yearBuilt}}</ion-col>
-      <!--<ion-col class="white default-font-size-col">27</ion-col>
-      <ion-col class="white default-font-size-col">6</ion-col>
-      <ion-col class="white default-font-size-col">蓝</ion-col>-->
+      <ion-col class="hidden age white default-font-size-col">27</ion-col>
+      <ion-col class="hidden age-gap white default-font-size-col">6</ion-col>
+      <ion-col class="hidden clothes-color white default-font-size-col">蓝</ion-col>
     </ion-row>
+        </div>
   </div>
 
   <ion-list class="subtitle no-margin">

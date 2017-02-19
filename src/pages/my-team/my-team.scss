@@ -97,9 +97,9 @@ page-my-team {
     //顶部图片样式 ionic plugin add cordova-plugin-whitelist
     .content-top {
       //background: #a5a5a5;
-      background-image: url("/../../assets/img/my-player/bg3@3x.png");
-      height: 200px;
-      background-size: 100% 200px;
+      background-image: url("/../../assets/img/team/court.png");
+      max-height: 200px;
+      background-size: cover;
       //球队图标
       .thumbnail-img {
         width: 60px;
@@ -155,6 +155,12 @@ page-my-team {
           }
         }
       }
+      //球队简单描述
+        .team-brief-info{
+            .hidden{
+                visibility: hidden;
+            }
+        }
 
     }
     //subtitle
