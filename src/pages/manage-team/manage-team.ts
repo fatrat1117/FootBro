@@ -17,27 +17,38 @@ import { TeamService } from '../../app/teams/team.service'
 export class ManageTeamPage {
   player: Player;
   watchListMap : {};
+  teams;
   constructor(private viewCtrl: ViewController, private modalCtrl: ModalController, 
               private playerService: PlayerService, private teamService: TeamService) {
   }
 
   ionViewDidLoad() {
-    this.watchListMap = {}
+    //this.watchListMap = {}
     this.addEventListeners();
-
-    for (let id of this.player.teams) {
-      this.teamService.getTeamAsync(id);
-      this.watchListMap[id] = {}
-    }
+    console.log(this.player);
+    
+    this.teamService.getPlayerTeamsAsync(this.player.id);
+    // for (let id of this.player.teams) {
+    //   this.teamService.getTeamAsync(id);
+    //   this.watchListMap[id] = {}
+    // }
   }
 
   addEventListeners() {
-    document.addEventListener('serviceteamready', e => {
-      let id = e['detail'];
-      if (this.watchListMap[id]) {
-        this.watchListMap[id] = this.teamService.getTeam(id);
-      }
-    })
+    // document.addEventListener('serviceteamready', e => {
+    //   let id = e['detail'];
+    //   if (this.watchListMap[id]) {
+    //     this.watchListMap[id] = this.teamService.getTeam(id);
+    //   }
+    // });
+
+    // document.addEventListener('serviceplayerteamsready', e=> {
+    //   let id = e['detail'];
+    //   if (id === this.player.id) {
+    //     this.teams = this.teamService.getPlayerTeams(id);
+    //     console.log(this.teams);
+    //   }
+    // });
   }
   
   /*
