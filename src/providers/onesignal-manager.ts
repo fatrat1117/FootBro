@@ -19,9 +19,7 @@ export class OneSignalManager {
       this.platform.is('core'))
       return;
 
-    let notificationOpenedCallback = jsonData => {
-      console.log('didReceiveRemoteNotificationCallBack:', jsonData);
-    };
+    
 
     /*
     window["plugins"].OneSignal.startInit("f6268d9c-3503-4696-8e4e-a6cf2c028fc6",
@@ -39,24 +37,24 @@ export class OneSignalManager {
 
     OneSignal.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.None);
 
+    /*
     OneSignal.handleNotificationReceived().subscribe(() => {
       console.log("received");
     });
 
     OneSignal.handleNotificationOpened().subscribe(() => {
-      // do something when a notification is opened
       //this.navCtrl.push(MessagesPage);
-      console.log("opened");
-      
+      //console.log("opened");
       //this.modalCtrl.create(MessagesPage).present();
     });
+    */
 
     OneSignal.endInit();
   }
 
   postNotification(messageObj, pushIds, success) {
     let notificationObj = {
-      heading: {"en": "Soccer Bro", "zh-Hans": "足球兄弟"},
+      heading: {"en": "SoccerBro", "zh-Hans": "足球兄弟"},
       contents: messageObj,
       include_player_ids: pushIds
     };

@@ -8,6 +8,10 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 
 
+import { FirebaseManager } from '../providers/firebase-manager';
+import { OneSignalManager } from '../providers/onesignal-manager';
+
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -16,14 +20,18 @@ export class MyApp {
 
   constructor(private platform: Platform,
     modalCtrl: ModalController,
-    loc: Localization) {
+    loc: Localization,
+    fm: FirebaseManager,
+    osm: OneSignalManager) {
     loc.setLang(navigator.language);
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
-      this.registerForPushNotifications();
+      //this.registerForPushNotifications();
+      fm.initialize();
+      osm.initialize();
       // tutorial
       localforage.getItem('notFirstTime').then(val => {
         if (!val) {
@@ -33,6 +41,7 @@ export class MyApp {
     });
   }
 
+/*
   registerForPushNotifications() {
     if (this.platform.is('mobileweb') ||
       this.platform.is('core'))
@@ -56,6 +65,7 @@ export class MyApp {
       // this gives you back the new userId and pushToken associated with the device. Helpful.
     });
   }
+  */
   /*
   // Enable to debug issues.
   window["plugins"].OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});

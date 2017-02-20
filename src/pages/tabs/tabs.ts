@@ -22,6 +22,7 @@ export class TabsPage {
   tab4Root: any = null;
 
   constructor(private fm: FirebaseManager, private osm: OneSignalManager) {
+    
   }
 
   ionViewDidLoad() {
@@ -34,8 +35,8 @@ export class TabsPage {
       this.tab4Root = null;
     });
 
-    this.fm.initialize();
-    this.osm.initialize();
+    //this.fm.initialize();
+    //this.osm.initialize();
   }
 
   checkLogin() {
