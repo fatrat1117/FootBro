@@ -8,7 +8,7 @@ import { FirebaseListObservable } from 'angularfire2';
 
 import { Localization } from '../../providers/localization';
 import { Chat } from '../../app/chats/shared/chat.model'
-import { ChatService } from '../../app/chats/shared/chat.service'
+import { ChatService } from '../../app/chats/chat.service'
 import { Player } from '../../app/players/player.model';
 
 @Component({
@@ -58,7 +58,7 @@ export class ChatPage {
   }
 
   sendMessage(input) {
-    this.chatService.sendChat(this.user.id, this.newMessage);
+    this.chatService.sendChat(this.user.id, this.user.pushId, this.user.name, this.newMessage);
     input.focus();
     this.newMessage = '';
     //input.setFocus();

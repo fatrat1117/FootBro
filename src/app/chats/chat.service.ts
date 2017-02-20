@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
-import { FirebaseManager } from '../../../providers/firebase-manager'
+import { FirebaseManager } from '../../providers/firebase-manager'
+import { OneSignalManager } from '../../providers/onesignal-manager'
 
 import { Chat } from './chat.model';
 import { CHATS } from './mock-data/mock-chat';
@@ -11,7 +12,7 @@ export class ChatService {
   sizeSubject: Subject<any>;
   currentSize: number;
 
-  constructor(private fm: FirebaseManager) {
+  constructor(private fm: FirebaseManager, private osm: OneSignalManager) {
     this.sizeSubject = new Subject();
     this.currentSize = 0;
   }
@@ -28,8 +29,9 @@ export class ChatService {
     this.sizeSubject.next(this.currentSize)
   }
 
-  sendChat(userId: string, content: string) {
-    this.fm.addChatToUser(userId, content);
+  sendChat(id: string, pushId: string, name: string, content: string) {
+    //this.fm.addChatToUser(userId, content);
+    this.osm.sendNewChat(id, pushId, name, content)
   }
 
 }

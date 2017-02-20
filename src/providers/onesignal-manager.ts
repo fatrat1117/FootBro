@@ -37,7 +37,7 @@ export class OneSignalManager {
 
     OneSignal.startInit('f6268d9c-3503-4696-8e4e-a6cf2c028fc6', '63493717987');
 
-    OneSignal.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.InAppAlert);
+    OneSignal.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.None);
 
     OneSignal.handleNotificationReceived().subscribe(() => {
       console.log("received");
@@ -56,6 +56,7 @@ export class OneSignalManager {
 
   postNotification(messageObj, pushIds, success) {
     let notificationObj = {
+      heading: {"en": "Soccer Bro", "zh-Hans": "足球兄弟"},
       contents: messageObj,
       include_player_ids: pushIds
     };
@@ -72,6 +73,26 @@ export class OneSignalManager {
     );
 
   }
+
+
+
+
+
+  /****************************** Cheerleaders ******************************/
+  sendNewChat(id: string, pushId: string, name: string, content: string) {
+    let message = {
+      'en': `${name} sent you a new message.`,
+      'zh-Hans': `${name} 向你发送了一条新信息.`
+    };
+
+    let self = this;
+    let success = function (fm: FirebaseManager) {
+      self.fm.addChatToUser(id, content);
+    }
+
+    this.postNotification(message, [pushId], success)
+  }
+
 
 
 
