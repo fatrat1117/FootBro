@@ -50,8 +50,18 @@ export class CheeringTeamStatsPage {
   }
 
   ionViewDidLoad() {
-    this.selfPlayer = this.playerService.getSelfPlayer();
+    //this.selfPlayer = this.playerService.getSelfPlayer();
     this.cheerleader = this.navParams.get("cheerleader");
+    this.playerService.getPlayerAsync(this.playerService.selfId());
+  }
+
+  addEventListeners() {
+    document.addEventListener('serviceplayerready', e => {
+      let playerId = e['detail'];
+      if (playerId === this.playerService.selfId()) {
+        this.selfPlayer = this.playerService.getPlayer(playerId);
+      }
+    });
   }
 
   unlock() {

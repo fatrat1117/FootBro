@@ -100,7 +100,7 @@ export class CheeringTeamPage {
   }
 
   isUnlocked(id) {
-    if (this.selfPlayer)
+    if (this.selfPlayer && this.selfPlayer.cheerleaders)
       return this.selfPlayer.cheerleaders.indexOf(id) >= 0;
 
      return false;

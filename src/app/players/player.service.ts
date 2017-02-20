@@ -153,11 +153,14 @@ export class PlayerService {
     return false;
   }
 
+  /* 
+  // To be removed
   getSelfPlayer() : Player {
     if (this.selfId())
       return this.playersMap[this.selfId()];
     return null;
   }
+  */
 
   isAuthenticated() {
     return this.fm.auth && this.fm.auth.uid;
