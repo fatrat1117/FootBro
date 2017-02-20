@@ -5,13 +5,15 @@ import { Player } from './player.model';
 @Injectable()
 export class PlayerService {
   playersMap = {};
+  teamPlayersMap = {};
+  bRefreshTeamPlayers = false;
 
   constructor(private fm: FirebaseManager) {
     document.addEventListener('playerready', e => {
       let id = e['detail'];
 
       let playerData = this.fm.getPlayer(id);
-      let player = new Player();
+      let player = this.findOrCreatePlayer(id);
       player.id = playerData.$key;
       player.points = playerData.points;
       player.name = playerData['basic-info'].displayName || "John Doe";
@@ -70,14 +72,42 @@ export class PlayerService {
       }
     });
 
-    // document.addEventListener('cheerleaderpublicready', e => {
-    //   let id = e['detail'];
-    //   let cheerleaderPublic = this.fm.getCheerleaderPublic(id);
-    //   let player = this.getPlayer(id);
-    //   if (player) {
-    //     player.popularity = cheerleaderPublic.popularity;
-    //   }
-    // });
+    document.addEventListener('teamready', e => {
+      if (this.bRefreshTeamPlayers) {
+        let id = e['detail'];
+        let team = this.fm.getTeam(id);
+        console.log(team);
+        
+        let players;
+        if (this.teamPlayersMap[id]) {
+          players = this.teamPlayersMap[id];
+          players = [];
+        }
+        else {
+          players = [];
+          this.teamPlayersMap[id] = players;
+        }
+
+        for (let pId in team.players) {
+          let player = this.findOrCreatePlayer(pId);
+          players.push(player);
+          this.fm.getPlayerAsync(pId);
+        }
+        this.bRefreshTeamPlayers = false;
+        this.fm.FireCustomEvent('serviceteamplayersready', id);
+      }
+    });
+  }
+
+  findOrCreatePlayer(id) : Player{
+    let player;
+    if (this.playersMap[id])
+      player = this.playersMap[id];
+    else {
+      player = new Player();
+      this.playersMap[id] = player;
+    }
+    return player;
   }
 
   getPlayerAsync(id) {
@@ -143,5 +173,18 @@ export class PlayerService {
 
   quitTeam(id: string) {
     this.fm.quitTeam(id);
+  }
+
+  getTeamPlayers(id) {
+    return this.teamPlayersMap[id];
+  }
+
+  getTeamPlayersAsync(id) {
+    this.bRefreshTeamPlayers = true;
+
+    if (this.getTeamPlayers(id))
+      this.fm.FireCustomEvent('serviceteamplayersready', id);
+    else
+      this.fm.getTeamAsync(id);
   }
 }

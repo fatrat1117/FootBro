@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
-import { TeamPlayersService } from '../../app/teams/teamplayers.service';
+import { PlayerService } from '../../app/players/player.service';
 import { MyPlayerPage } from '../my-player/my-player';
 
 @Component({
@@ -15,7 +15,7 @@ export class SearchPlayerPage {
   showClose: boolean;
   constructor(private nav: NavController, 
   private navParams: NavParams, 
-  private teamPlayersService: TeamPlayersService, 
+  private teamPlayersService: PlayerService, 
   private viewCtrl: ViewController) {
     this.teamId = this.navParams.get('teamId');
     this.showDetail = this.navParams.get('showDetail');

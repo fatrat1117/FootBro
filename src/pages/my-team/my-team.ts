@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 import { TeamService } from '../../app/teams/team.service'
 import { Team } from '../../app/teams/team.model'
-import { TeamPlayersService } from '../../app/teams/teamplayers.service'
+import { PlayerService } from '../../app/players/player.service'
 import { MatchService } from '../../app/matches/match.service'
 import { Match } from '../../app/matches/match.model'
 import { SearchPlayerPage } from '../search-player/search-player'
@@ -28,7 +28,7 @@ export class MyTeamPage {
   constructor(public nav: NavController,
     private navParams: NavParams,
     private service: TeamService,
-    private teamPlayersService: TeamPlayersService,
+    private teamPlayersService: PlayerService,
     private matchService: MatchService,
     private modalCtrl : ModalController) {
   }

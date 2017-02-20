@@ -40,7 +40,6 @@ import { OneSignalManager } from '../providers/onesignal-manager';
 import { UIHelper } from '../providers/uihelper';
 import { PlayerService } from './players/player.service';
 import { TeamService } from './teams/team.service';
-import { TeamPlayersService } from './teams/teamplayers.service'
 import { MiscService } from './misc/misc.service'
 import { MatchService } from './matches/match.service'
 import { CheerleaderService} from './cheerleaders/cheerleader.service'
@@ -171,7 +170,6 @@ export const firebaseConfig = {
     PlayerService,
     TeamService,
     MatchService,
-    TeamPlayersService,
     CheerleaderService]
 })
 export class AppModule {
