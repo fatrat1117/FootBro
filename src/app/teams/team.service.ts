@@ -6,6 +6,8 @@ import { Team } from './team.model';
 export class TeamService {
   teamDataMap = {};
   allTeams = [];
+  playerTeamsMap = {};
+  bRefreshPlayerTeams = false;
 
   constructor(private fm: FirebaseManager) {
     document.addEventListener('teamready', e => {
@@ -14,7 +16,7 @@ export class TeamService {
 
       if (team) {
         let teamData = this.findOrCreateTeam(team.$key);
-        
+
         teamData.id = team.$key;
         teamData.logo = team['basic-info'].logo;
         teamData.name = team['basic-info'].name;
@@ -29,7 +31,6 @@ export class TeamService {
         else
           this.fm.getTeamPublicAsync(teamId);
         this.fm.FireCustomEvent('serviceteamready', teamId);
-        //this.fm.getTeamStatsAsync(teamId);
       }
     }
     );
@@ -80,17 +81,43 @@ export class TeamService {
       });
 
       this.fm.FireEvent('serviceallteamsready');
-    })
+    });
+
+    document.addEventListener('playerready', e => {
+      if (this.bRefreshPlayerTeams) {
+        let id = e['detail'];
+        let player = this.fm.getPlayer(id);
+        console.log(player);
+        let teams;
+        if (this.playerTeamsMap[id]) {
+          teams = this.playerTeamsMap[id];
+          teams = [];
+        }
+        else {
+          teams = [];
+          this.playerTeamsMap[id] = teams;
+        }
+
+        for (let tId in player.teams) {
+          let team = this.findOrCreateTeam(tId);
+          console.log(tId);     
+          teams.push(team);
+          this.fm.getTeamAsync(tId);
+        }
+        this.bRefreshPlayerTeams = false;
+        this.fm.FireCustomEvent('serviceplayerteamsready', id);
+      }
+    });
   }
 
   updateAvg(obj) {
-    if (obj && obj.GA) 
+    if (obj && obj.GA)
       obj['avgGA'] = obj.total_matches > 0 ? (obj.GA / obj.total_matches).toFixed(2) : 0;
     if (obj && obj.GF)
       obj['avgGF'] = obj.total_matches > 0 ? (obj.GF / obj.total_matches).toFixed(2) : 0;
   }
 
-  findOrCreateTeam(id) : Team{
+  findOrCreateTeam(id): Team {
     let team;
     if (this.teamDataMap[id])
       team = this.teamDataMap[id];
@@ -107,7 +134,7 @@ export class TeamService {
     else
       this.fm.getTeamAsync(id);
 
-    if(pullStats)
+    if (pullStats)
       this.fm.getTeamStatsAsync(id);
   }
 
@@ -146,5 +173,18 @@ export class TeamService {
 
   setDefaultTeam(id) {
     alert("TODO: change default team");
+  }
+
+  getPlayerTeams(id) {
+    return this.playerTeamsMap[id];
+  }
+
+  getPlayerTeamsAsync(id) {
+    this.bRefreshPlayerTeams = true;
+
+    if (this.getPlayerTeams(id))
+      this.fm.FireCustomEvent('serviceplayerteamsready', id);
+    else
+      this.fm.getPlayerAsync(id);
   }
 }

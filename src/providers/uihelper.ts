@@ -1,6 +1,7 @@
 import { Injectable} from '@angular/core';
 import { ToastController } from 'ionic-angular';
-import { Localization} from './localization'
+import { Localization} from './localization';
+import * as moment from 'moment';
 
 @Injectable()
 export class UIHelper {
@@ -18,5 +19,18 @@ export class UIHelper {
       position: 'top'
     });
     toast.present();
+  }
+
+  //time converter
+  numberToDateString(date) {
+    return moment(date).format("YYYY-MM-DD");
+  }
+
+  numberToTimeString(time) {
+    return moment(time).format('HH:mm');
+  }
+
+  dateTimeStringToNumber(time) {
+    return moment(time).unix() * 1000;
   }
 }

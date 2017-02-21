@@ -76,7 +76,7 @@ export class PlayerService {
       if (this.bRefreshTeamPlayers) {
         let id = e['detail'];
         let team = this.fm.getTeam(id);
-        console.log(team);
+        //console.log(team);
         
         let players;
         if (this.teamPlayersMap[id]) {

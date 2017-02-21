@@ -22,6 +22,7 @@ export class EditPlayerPage {
   selfId: string;
   player: Player;
   watchListMap: {};
+  teams;
   constructor(private modalCtrl: ModalController, private playerService: PlayerService, private teamService: TeamService) {
     this.selfId = this.playerService.selfId();
   }
@@ -30,6 +31,7 @@ export class EditPlayerPage {
     this.watchListMap = {}
     this.addEventListeners();
     this.playerService.getPlayerAsync(this.selfId);
+    this.teamService.getPlayerTeamsAsync(this.playerService.selfId());
   }
 
   addEventListeners() {
@@ -55,7 +57,13 @@ export class EditPlayerPage {
       }
     });
 
-
+    document.addEventListener('serviceplayerteamsready', e=> {
+      let id = e['detail'];
+      if (id === this.player.id) {
+        this.teams = this.teamService.getPlayerTeams(id);
+        //console.log(this.teams);
+      }
+    });
   }
 
   editName() {

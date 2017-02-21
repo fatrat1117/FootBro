@@ -7,7 +7,8 @@
       </button>
         </ion-buttons>
         <ion-buttons right>
-            <button (click)="scheduleMatch()" ion-button icon-only clear>
+            <button [disabled]="!(match.home && match.away &&  match.type && matchDate && matchTime && match.location.name)" (click)="scheduleMatch()"
+                color="primary" ion-button icon-only clear>
         {{'Save' | trans}}
       </button>
         </ion-buttons>
@@ -17,37 +18,39 @@
 <ion-content>
     <ion-row class="content-fight">
         <ion-col class="left-team" (click)="searchTeam(1)">
-            <a class="left-team-name">{{match?.home?.name}}</a>
             <button ion-button icon-left clear full style="margin:0px;padding:0px;" color="light">
 <ion-icon name="flag" color="danger"></ion-icon>
 {{'HomeTeam' | trans}}
 </button>
+<a class="left-team-name">{{match?.home?.name}}</a>
+
 </ion-col>
 
-<!--<ion-col class="center-score" width-25>
+<ion-col class="center-score" width-25>
     <ion-row class="no-margin no-padding">
-        <ion-col class="left-number">
+        <!--<ion-col class="left-number">
             <div class="back-top"></div>
             <div class="back-bottom"></div>
             <div class="top-score">4</div>
-        </ion-col>
+        </ion-col>-->
         <ion-col class="center-compare">
-            :
+            VS
         </ion-col>
-        <ion-col class="right-number">
+        <!--<ion-col class="right-number">
             <div class="back-top"></div>
             <div class="back-bottom"></div>
             <div class="top-score">1</div>
-        </ion-col>
+        </ion-col>-->
     </ion-row>
-</ion-col>-->
+</ion-col>
 
 <ion-col class="right-team" (click)="searchTeam(2)">
-    <a class="right-team-name">{{match?.away?.name}}</a>
     <button ion-button icon-left clear full style="margin:0px;padding:0px;"color="light">
 <ion-icon name="flag" color="primary"></ion-icon>
 {{'AwayTeam' | trans}}
 </button>
+<a class="right-team-name">{{match?.away?.name}}</a>
+
 </ion-col>
 </ion-row>
 
@@ -66,7 +69,7 @@
     <ion-item class="game-info-item-light">
         <button ion-button clear full class="game-info-item-left" item-left>{{'Location' | trans}}</button>
         <div class="game-info-item-right-gray" item-right>
-            <img src="assets/img/powered_by_google_on_non_white.png"/>
+            <img src="assets/img/powered_by_google_on_non_white.png" />
             <input id="autocompleteInput" [(ngModel)]="match.location.name" style="width:100%; border:none; text-align:center;" />
 </div>
 </ion-item>

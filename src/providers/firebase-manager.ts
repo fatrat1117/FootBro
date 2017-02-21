@@ -681,6 +681,43 @@ export class FirebaseManager {
     })
   }
 
+  afMatchList() {
+    return this.af.database.list('/matches/list');
+  }
+
+  afMatchDate(day) {
+    return this.af.database.object('/matches/dates/' + day);
+  }
+
+  scheduleMatch(matchObj) {
+    console.log('scheduleMatch', matchObj);
+    this.afMatchList().push(matchObj);
+    this.afMatchDate(matchObj.date).set(true);
+    //  .then(newMatch => {
+    //    this.afMatchDate(matchObj.date).set(true);
+        // if (matchObj.tournamentId)
+        //   this.getTournamentMatchDate(matchObj.tournamentId, matchObj.date).set(true);
+
+        // // add to team match
+        // let matchId = newMatch["key"];
+        // let teamData = {
+        //   time: matchObj.time,
+        //   locationName: matchObj.locationName,
+        //   locationAddress: matchObj.locationAddress,
+        //   isPosted: false
+        // };
+        // // add to home team
+        // teamData["opponentId"] = matchObj.awayId;
+        // this.updateTeamMatch(matchId, teamData, matchObj.homeId);
+        // // add to away team
+        // teamData["opponentId"] = matchObj.homeId;
+        // this.updateTeamMatch(matchId, teamData, matchObj.awayId);
+
+        // success();
+    //  });
+      //.catch(err => error(err));
+  }
+
   getTournamentTableList(id) {
     return this.af.database.list('/tournaments/list/' + id + '/table',
       { query: { orderByChild: 'rank' } });

@@ -2,8 +2,8 @@ import { Team} from '../teams/team.model';
 export class MatchLocation {
   name;
   address;
-  latitude;
-  longitude;
+  lat = 0;
+  lng = 0;
 } 
 
 export class Match {
@@ -20,4 +20,5 @@ export class Match {
   type = 11;
   tournamentId;
   location = new MatchLocation();
+  createBy;
 }
