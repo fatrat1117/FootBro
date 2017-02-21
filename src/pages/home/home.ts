@@ -2,6 +2,7 @@ import {Component,ElementRef} from '@angular/core';
 import {NavController, ModalController, NavParams, ViewController, Platform} from 'ionic-angular';
 import {Localization} from '../../providers/localization';
 import {CheeringTeamPage} from '../cheering-team/cheering-team';
+import {RankPage} from '../rank/rank';
 import {GameSchedulePage} from "../game-schedule/game-schedule";
 import {ModalContentPage} from "../home/place-selection";
 import {GameRatingPage} from "../game-rating/game-rating";
@@ -57,6 +58,10 @@ export class HomePage {
 
   enterCheeringTeam(){
     this.navCtrl.push(CheeringTeamPage);
+  }
+
+  enterRankPage(){
+    this.navCtrl.push(RankPage);
   }
 
   enterGameSchedule(){

@@ -18,9 +18,9 @@ export class TabsPage {
   // should be each tab's root Page
   @ViewChild('mainTabs') tabRef: Tabs;
 
-  //tab1Root: any = HomePage;
-  tab0Root: any = MatchesPage;
-  tab1Root: any = RankPage;
+  tab0Root: any = HomePage;
+  tab1Root: any = MatchesPage;
+  //tab1Root: any = RankPage;
   tab2Root: any = null;
   tab3Root: any = null;
 
