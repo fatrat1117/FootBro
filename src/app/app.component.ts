@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen, OneSignal } from 'ionic-native';
-import { ModalController } from 'ionic-angular';
+import { ModalController, App } from 'ionic-angular';
 import { Localization } from '../providers/localization';
 import * as localforage from "localforage";
 import { TabsPage } from '../pages/tabs/tabs';
@@ -22,7 +22,8 @@ export class MyApp {
     modalCtrl: ModalController,
     loc: Localization,
     fm: FirebaseManager,
-    osm: OneSignalManager) {
+    osm: OneSignalManager,
+    app: App) {
     loc.setLang(navigator.language);
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -31,7 +32,7 @@ export class MyApp {
       Splashscreen.hide();
       //this.registerForPushNotifications();
       fm.initialize();
-      osm.initialize();
+      osm.initialize(app.getRootNav().getActiveChildNav());
       // tutorial
       localforage.getItem('notFirstTime').then(val => {
         if (!val) {

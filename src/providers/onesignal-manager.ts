@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { OneSignal } from 'ionic-native';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
-import { Platform, ModalController } from 'ionic-angular';
+import { Platform } from 'ionic-angular';
 import { MessagesPage } from "../pages/messages/messages";
 
 import * as firebase from 'firebase';
@@ -10,11 +10,11 @@ import { FirebaseManager } from './firebase-manager';
 
 @Injectable()
 export class OneSignalManager {
-  constructor(private platform: Platform, private modalCtrl: ModalController, private fm: FirebaseManager) {
+  constructor(private platform: Platform, private fm: FirebaseManager) {
 
   }
 
-  initialize() {
+  initialize(tabRef) {
     if (this.platform.is('mobileweb') ||
       this.platform.is('core'))
       return;
@@ -37,17 +37,16 @@ export class OneSignalManager {
 
     OneSignal.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.None);
 
-    /*
-    OneSignal.handleNotificationReceived().subscribe(() => {
-      console.log("received");
-    });
+    //OneSignal.handleNotificationReceived().subscribe(() => {
+      //console.log("received");
+    //});
 
     OneSignal.handleNotificationOpened().subscribe(() => {
+      tabRef.select(2);
       //this.navCtrl.push(MessagesPage);
       //console.log("opened");
       //this.modalCtrl.create(MessagesPage).present();
     });
-    */
 
     OneSignal.endInit();
   }

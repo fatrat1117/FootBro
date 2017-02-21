@@ -11,7 +11,7 @@ import { FeedbackPage } from "../feedback/feedback";
 import { MessagesPage } from "../messages/messages";
 import { PlayerService } from '../../app/players/player.service'
 import { TeamService } from '../../app/teams/team.service'
-import { MessageService } from '../../app/messages/shared/message.service'
+import { MessageService } from '../../app/messages/message.service'
 import { CreateTeamPage } from '../create-team/create-team'
 
 @Component({

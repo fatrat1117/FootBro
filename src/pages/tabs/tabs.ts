@@ -1,10 +1,11 @@
 import { Component, ViewChild} from '@angular/core';
+import { OneSignal } from 'ionic-native';
 import {Tabs} from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { RankPage } from '../rank/rank';
 import { MatchesPage } from '../matches/matches';
 import { MePage } from '../me/me';
-import {FirebaseManager} from '../../providers/firebase-manager';
+import { FirebaseManager } from '../../providers/firebase-manager';
 import { OneSignalManager } from '../../providers/onesignal-manager';
 
 @Component({
@@ -36,7 +37,7 @@ export class TabsPage {
     });
 
     //this.fm.initialize();
-    //this.osm.initialize();
+    //this.osm.initialize(this.tabRef);
   }
 
   checkLogin() {

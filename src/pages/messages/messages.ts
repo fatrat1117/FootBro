@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { ChatPage } from '../chat/chat'
-import { Message } from '../../app/messages/shared/message.model'
-import { MessageService } from '../../app/messages/shared/message.service'
+import { Message } from '../../app/messages/message.model'
+import { MessageService } from '../../app/messages/message.service'
 import { Player } from '../../app/players/player.model';
 import { PlayerService } from '../../app/players/player.service';
 
