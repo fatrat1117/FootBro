@@ -68,8 +68,8 @@
         <div item-left class="title-left">
           <img src="assets/icon/icon_address.png" class="title-left-img">
         </div>
-        <p class="map-district">阿根廷</p>
-        <p class="map-place">纪念碑球场</p>
+        <p class="map-district">{{match?.location?.name}}</p>
+        <p class="map-place">{{match?.location?.address}}</p>
       </ion-item>
     </ion-list>
     <!--地图-->
@@ -83,9 +83,9 @@
         <img src="assets/img/icon1.jpg" class="map-car"/>
       </div>
       <!--地图右下角“到这里”文字-->
-      <div class="map-to-here">
+      <!--<div class="map-to-here">
         <span class="map-to-here-text">到这里</span>
-      </div>
+      </div>-->
     </div>
   </div>
 
