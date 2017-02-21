@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, ViewController } from 'ionic-angular';
+import { NavController, ModalController, ViewController, NavParams } from 'ionic-angular';
 import { SearchTeamPage } from '../search-team/search-team';
 import { Team } from '../../app/teams/team.model'
 import { Match } from '../../app/matches/match.model'
@@ -26,7 +26,9 @@ export class NewGamePage {
         private viewCtrl: ViewController,
         private matchService: MatchService,
         private helper: UIHelper,
-        private playerService: PlayerService) {
+        private playerService: PlayerService,
+        params: NavParams) {
+        this.tournamentId = params.get('tournamentId');
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
         this.matchDate = moment().format("YYYY-MM-DD");
         this.matchTime = "15:00";
@@ -76,12 +78,17 @@ export class NewGamePage {
         //console.log(google);    
         let autocomplete = new google.maps.places.Autocomplete(input);
         //console.log(autocomplete);
-
         //let autocomplete = new google.maps.places.Autocomplete(document.getElementById("autocompleteInput"), {});
         autocomplete.addListener('place_changed', () => {
             let place = autocomplete.getPlace();
+            //console.log(place);
             this.match.location.name = place.name;
             this.match.location.address = place.formatted_address;
+            if (place.geometry) {
+                this.match.location.lat = place.geometry.location.lat();
+                this.match.location.lng = place.geometry.location.lng();
+            }
+            console.log(this.match.location);
         });
     }
 
@@ -197,6 +204,11 @@ export class NewGamePage {
             type: this.match.type,
             createBy: this.playerService.selfId()
         }
+
+        if (this.match.location.lat)
+            matchData['lat'] = this.match.location.lat;
+        if (this.match.location.lng)
+            matchData['lng'] = this.match.location.lng;
         if (this.tournamentId)
             matchData["tournamentId"] = this.tournamentId;
 
