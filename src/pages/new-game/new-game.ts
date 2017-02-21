@@ -201,6 +201,7 @@ export class NewGamePage {
             matchData["tournamentId"] = this.tournamentId;
 
         this.matchService.scheduleMatch(matchData);
+        this.close();
     }
 
     close() {
