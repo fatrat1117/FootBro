@@ -20,7 +20,7 @@
       <p class="team-right-item-text">{{team.popularity}}</p>
       <div class="team-right-item-bottom">
         <img src="assets/icon/fire.png" class="team-right-item-bottom-img">
-<!--        <a class="team-right-item-bottom-text">{{'Popularity' | trans}}</a>-->
+        <!--        <a class="team-right-item-bottom-text">{{'Popularity' | trans}}</a>-->
       </div>
     </div>
 
@@ -28,24 +28,24 @@
       <p class="team-right-item-text">{{team.ability}}</p>
       <div class="team-right-item-bottom">
         <ion-icon ios="ios-podium" md="md-podium" class="team-right-item-bottom-img"></ion-icon>
-<!--        <a class="team-right-item-bottom-text">{{'Ability' | trans}}</a>-->
+        <!--        <a class="team-right-item-bottom-text">{{'Ability' | trans}}</a>-->
       </div>
     </div>
 
     <div class="team-brief-info">
-        <ion-row >
-      <ion-col class="default-font-color default-font-size-col">{{'YearBuilt' | trans | uppercase}}</ion-col>
-      <ion-col class="hidden age-label default-font-color default-font-size-col">平均年龄</ion-col>
-      <ion-col class="hidden age-gap-label default-font-color default-font-size-col">年龄跨度</ion-col>
-      <ion-col class="hidden clothes-color-label default-font-color default-font-size-col">队服颜色</ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col class="white default-font-size-col">{{team?.yearBuilt}}</ion-col>
-      <ion-col class="hidden age white default-font-size-col">27</ion-col>
-      <ion-col class="hidden age-gap white default-font-size-col">6</ion-col>
-      <ion-col class="hidden clothes-color white default-font-size-col">蓝</ion-col>
-    </ion-row>
-        </div>
+      <ion-row>
+        <ion-col class="hidden default-font-color default-font-size-col">{{'YearBuilt' | trans | uppercase}}</ion-col>
+        <ion-col class="hidden age-label default-font-color default-font-size-col">平均年龄</ion-col>
+        <ion-col class="hidden age-gap-label default-font-color default-font-size-col">年龄跨度</ion-col>
+        <ion-col class="hidden clothes-color-label default-font-color default-font-size-col">队服颜色</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="hidden white default-font-size-col">{{team?.yearBuilt}}</ion-col>
+        <ion-col class="hidden age white default-font-size-col">27</ion-col>
+        <ion-col class="hidden age-gap white default-font-size-col">6</ion-col>
+        <ion-col class="hidden clothes-color white default-font-size-col">蓝</ion-col>
+      </ion-row>
+    </div>
   </div>
 
   <ion-list class="subtitle no-margin">
@@ -58,29 +58,29 @@
     </ion-item>
   </ion-list>
 
-<div *ngIf = "matches?.length > 0" (click) = "showUpcomingMatch()">
-  <button ion-button full class="nearest-game-time default-font-color">
+  <div *ngIf="matches?.length > 0" (click)="showUpcomingMatch()">
+    <button ion-button full class="nearest-game-time default-font-color">
     {{upcomingMatch?.time | date:'medium'}}
   </button>
 
-  <div class="nearest-game-display">
-    <div class="game-left">
-      <div class="game-left-setting">
-        <img [src]="upcomingMatch?.home?.logo" class="game-left-img">
-        <p class="game-left-text">{{upcomingMatch?.home?.name}}</p>
+    <div class="nearest-game-display">
+      <div class="game-left">
+        <div class="game-left-setting">
+          <img [src]="upcomingMatch?.home?.logo" class="game-left-img">
+          <p class="game-left-text">{{upcomingMatch?.home?.name}}</p>
+        </div>
       </div>
-    </div>
-    <div class="game-center">
-      <p class="game-score">{{upcomingMatch?.homeScore}}:{{upcomingMatch?.awayScore}}</p>
-    </div>
-    <div class="game-right">
-      <div class="game-right-setting">
-        <img [src]="upcomingMatch?.away?.logo" class="game-right-img">
-        <p class="game-right-text">{{upcomingMatch?.away?.name}}</p>
+      <div class="game-center">
+        <p class="game-score">{{upcomingMatch?.homeScore}}:{{upcomingMatch?.awayScore}}</p>
+      </div>
+      <div class="game-right">
+        <div class="game-right-setting">
+          <img [src]="upcomingMatch?.away?.logo" class="game-right-img">
+          <p class="game-right-text">{{upcomingMatch?.away?.name}}</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   <ion-list class="no-margin">
     <ion-item class="subtitle">
@@ -168,11 +168,11 @@
     <ion-col class="col-40 round-progress-container">
       <round-progress [current]="currTeamStat?.rate * 100" [max]=100 [color]="'#'+'00ff00'" [background]="'#'+'a0a0a0'" [radius]="125"
         [stroke]="20" [semicircle]="false" [rounded]="true" [clockwise]="false" [responsive]="true"> </round-progress>
-        <span class="circle-text">
-            <div class="win-ratio-label">胜率</div>
-            <div class="win-ratio">65%</div>
+      <span class="circle-text">
+            <div class="win-ratio-label">{{'winningrate' | trans}}</div>
+            <div class="win-ratio">{{currTeamStat?.rate}}%</div>
         </span>
-       
+
       <!--<div text-center class="win-rate-text">{{currTeamStat?.rate * 100}}</div>-->
     </ion-col>
     <ion-col class="col-30"></ion-col>
@@ -186,8 +186,8 @@
     <ion-col class="recent-game-result-name">{{'avgga' | trans}}</ion-col>
     <ion-col class="recent-game-result-name">{{'avggf' | trans}}</ion-col>
   </ion-row>
-    
-    <ion-row>
+
+  <ion-row>
     <ion-col class="recent-game-result">{{currTeamStat?.total_matches}}</ion-col>
     <ion-col class="recent-game-result">{{currTeamStat?.win}}</ion-col>
     <ion-col class="recent-game-result">{{currTeamStat?.draw}}</ion-col>
@@ -200,29 +200,31 @@
 
 <ion-list *ngIf='matches && mostGFMatchId' no-lines="true" class="game-data-assist">
   <ion-item class="game-data-assist-item">
-      <ion-row>
-       <div item-left class="goal-title">{{'maxgf' | trans}}</div>
-        <p  item-right class="goal-data">{{matchService.getMatch(mostGFMatchId)?.homeScore}} : {{matchService.getMatch(mostGFMatchId)?.awayScore}}</p>
-      </ion-row>
-      <ion-row>
-        <div item-right class="goal-data-detail-wrapper">
-      <p class="goal-data-detail">{{matchService.getMatch(mostGFMatchId)?.home?.name}} VS {{matchService.getMatch(mostGFMatchId)?.away?.name}} / {{matchService.getMatch(mostGFMatchId)?.date | date:'mediumDate'}}</p>
-    </div>
-      </ion-row>
-   
-  
+    <ion-row>
+      <div item-left class="goal-title">{{'maxgf' | trans}}</div>
+      <p item-right class="goal-data">{{matchService.getMatch(mostGFMatchId)?.homeScore}} : {{matchService.getMatch(mostGFMatchId)?.awayScore}}</p>
+    </ion-row>
+    <ion-row>
+      <div item-right class="goal-data-detail-wrapper">
+        <p class="goal-data-detail">{{matchService.getMatch(mostGFMatchId)?.home?.name}} VS {{matchService.getMatch(mostGFMatchId)?.away?.name}} / {{matchService.getMatch(mostGFMatchId)?.date
+          | date:'mediumDate'}}</p>
+      </div>
+    </ion-row>
+
+
   </ion-item>
   <ion-item *ngIf='matches && mostGAMatchId' class="game-data-assist-item">
-      <ion-row>
-    <div item-left class="goal-title">{{'maxga' | trans}}</div>
-           <p class="goal-data">{{matchService.getMatch(mostGAMatchId)?.homeScore}} : {{matchService.getMatch(mostGAMatchId)?.awayScore}}</p>
-      </ion-row>
-      <ion-row>
-    <div item-right class="goal-data-detail-wrapper">
-     
-      <p class="goal-data-detail">{{matchService.getMatch(mostGAMatchId)?.home?.name}} VS {{matchService.getMatch(mostGAMatchId)?.away?.name}} / {{matchService.getMatch(mostGAMatchId)?.date | date:'mediumDate'}}</p>
-    </div>
-          </ion-row>
+    <ion-row>
+      <div item-left class="goal-title">{{'maxga' | trans}}</div>
+      <p class="goal-data">{{matchService.getMatch(mostGAMatchId)?.homeScore}} : {{matchService.getMatch(mostGAMatchId)?.awayScore}}</p>
+    </ion-row>
+    <ion-row>
+      <div item-right class="goal-data-detail-wrapper">
+
+        <p class="goal-data-detail">{{matchService.getMatch(mostGAMatchId)?.home?.name}} VS {{matchService.getMatch(mostGAMatchId)?.away?.name}} / {{matchService.getMatch(mostGAMatchId)?.date
+          | date:'mediumDate'}}</p>
+      </div>
+    </ion-row>
   </ion-item>
   <ion-item class="game-data-assist-item">
     <div item-left class="goal-title-2">{{'maxvictory' | trans}}</div>
