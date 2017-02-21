@@ -1,6 +1,7 @@
 <ion-tabs #mainTabs>
-  <ion-tab [root]="tab1Root" tabTitle="{{'Home' | trans}}" tabIcon="md-home"></ion-tab>
-  <ion-tab [root]="tab2Root" tabTitle="{{'Rank' | trans}}" tabIcon="md-stats"></ion-tab>
-  <ion-tab [root]="tab3Root" tabTitle="Matches" tabIcon="md-football"></ion-tab>
-  <ion-tab [root]="tab4Root" tabTitle="{{'Settings' | trans}}" tabIcon="md-person" (ionSelect)="checkLogin()"></ion-tab>
+  <ion-tab [root]="tab0Root" tabTitle="{{'Matches' | trans}}" tabIcon="md-football"></ion-tab>
+  <!--ion-tab [root]="tab1Root" tabTitle="{{'Home' | trans}}" tabIcon="md-home"></ion-tab-->
+  <ion-tab [root]="tab1Root" tabTitle="{{'Rank' | trans}}" tabIcon="md-stats"></ion-tab>
+  <ion-tab [root]="tab2Root" tabTitle="{{'Messages' | trans}}" tabIcon="md-chatbubbles" tabBadge="5" tabBadgeStyle="danger" (ionSelect)="checkLogin()"></ion-tab>
+  <ion-tab [root]="tab3Root" tabTitle="{{'Settings' | trans}}" tabIcon="md-person" (ionSelect)="checkLogin()"></ion-tab>
 </ion-tabs>

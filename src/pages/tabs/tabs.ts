@@ -4,6 +4,7 @@ import {Tabs} from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { RankPage } from '../rank/rank';
 import { MatchesPage } from '../matches/matches';
+import { MessagesPage } from '../messages/messages';
 import { MePage } from '../me/me';
 import { FirebaseManager } from '../../providers/firebase-manager';
 import { OneSignalManager } from '../../providers/onesignal-manager';
@@ -17,10 +18,11 @@ export class TabsPage {
   // should be each tab's root Page
   @ViewChild('mainTabs') tabRef: Tabs;
 
-  tab1Root: any = HomePage;
-  tab2Root: any = RankPage;
-  tab3Root: any = MatchesPage;
-  tab4Root: any = null;
+  //tab1Root: any = HomePage;
+  tab0Root: any = MatchesPage;
+  tab1Root: any = RankPage;
+  tab2Root: any = null;
+  tab3Root: any = null;
 
   constructor(private fm: FirebaseManager, private osm: OneSignalManager) {
     
@@ -28,12 +30,14 @@ export class TabsPage {
 
   ionViewDidLoad() {
     document.addEventListener('userlogin', e => {
-      this.tab4Root = MePage;
+      this.tab2Root = MessagesPage;
+      this.tab3Root = MePage;
     });
 
     document.addEventListener('userlogout', e => {
       this.tabRef.select(0);
-      this.tab4Root = null;
+      this.tab2Root = null;
+      this.tab3Root = null;
     });
 
     //this.fm.initialize();
