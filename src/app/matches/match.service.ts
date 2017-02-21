@@ -127,4 +127,8 @@ export class MatchService {
   getTournamentTableAsync(id) {
     this.fm.getTournamentTableAsync(id);
   }
+
+  scheduleMatch(matchObj) {
+    this.fm.scheduleMatch(matchObj);
+  }
 }

@@ -3,7 +3,9 @@ import { NavController, ModalController, ViewController } from 'ionic-angular';
 import { SearchTeamPage } from '../search-team/search-team';
 import { Team } from '../../app/teams/team.model'
 import { Match } from '../../app/matches/match.model'
-//import {MapsAPILoader} from 'angular2-google-maps/core';
+import { MatchService } from '../../app/matches/match.service'
+import { PlayerService } from '../../app/players/player.service'
+import { UIHelper } from '../../providers/uihelper'
 import * as moment from 'moment';
 declare var google: any;
 
@@ -17,10 +19,14 @@ export class NewGamePage {
     minDate;
     matchDate;
     matchTime;
+    tournamentId;
 
     constructor(public navCtrl: NavController,
         private modalCtrl: ModalController,
-        private viewCtrl: ViewController) {
+        private viewCtrl: ViewController,
+        private matchService: MatchService,
+        private helper: UIHelper,
+        private playerService: PlayerService) {
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
         this.matchDate = moment().format("YYYY-MM-DD");
         this.matchTime = "15:00";
@@ -178,7 +184,23 @@ export class NewGamePage {
     }
 
     scheduleMatch() {
+        let t = this.helper.dateTimeStringToNumber(this.matchDate + " " + this.matchTime);
+        let tDate = this.helper.dateTimeStringToNumber(this.matchDate);
 
+        let matchData = {
+            homeId: this.match.home.id,
+            awayId: this.match.away.id,
+            date: tDate,
+            time: t,
+            locationName: this.match.location.name,
+            locationAddress: this.match.location.address,
+            type: this.match.type,
+            createBy: this.playerService.selfId()
+        }
+        if (this.tournamentId)
+            matchData["tournamentId"] = this.tournamentId;
+
+        this.matchService.scheduleMatch(matchData);
     }
 
     close() {

@@ -20,4 +20,5 @@ export class Match {
   type = 11;
   tournamentId;
   location = new MatchLocation();
+  createBy;
 }
