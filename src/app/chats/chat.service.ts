@@ -34,4 +34,8 @@ export class ChatService {
     this.osm.sendNewChat(id, pushId, name, content)
   }
 
+  updateUnread(userId: string, isUnread: boolean) {
+    this.fm.updateUnread(userId, isUnread);
+  }
+
 }

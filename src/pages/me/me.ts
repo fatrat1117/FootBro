@@ -36,9 +36,11 @@ export class MePage {
     this.addEventListeners();
     this.playerService.getPlayerAsync(this.playerService.selfId());
 
+    /*
     this.messageService.getAllUnreadMessages().subscribe(messages => {
       this.messageCount = messages.length;
     })
+    */
   }
 
   addEventListeners() {

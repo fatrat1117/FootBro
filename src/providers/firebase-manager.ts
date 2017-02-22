@@ -93,6 +93,7 @@ export class FirebaseManager {
     })
   }
 
+  /*
   getAllUnreadMessages() {
     return this.af.database.list(`/chats/${this.auth.uid}/basic-info/`, {
       query: {
@@ -101,17 +102,22 @@ export class FirebaseManager {
       }
     })
   }
+  */
 
 
 
 
 
   /****************************** Chat Room ******************************/
+  updateUnread(userId: string, isUnread: boolean) {
+    this.af.database.object(`/chats/${this.auth.uid}/basic-info/${userId}`).update({
+        isUnread: isUnread,
+    })
+  }
+
   getChatsWithUser(userId: string, subject: any, isUnread: boolean) {
     if (isUnread) {
-      this.af.database.object(`/chats/${this.auth.uid}/basic-info/${userId}`).update({
-        isUnread: false,
-      })
+      this.updateUnread(userId, false);
     }
 
     return this.af.database.list(`/chats/${this.auth.uid}/${userId}`, {

@@ -1,6 +1,6 @@
 import { Component, ViewChild} from '@angular/core';
 import { OneSignal } from 'ionic-native';
-import {Tabs} from 'ionic-angular';
+import { Tabs } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { RankPage } from '../rank/rank';
 import { MatchesPage } from '../matches/matches';
@@ -9,9 +9,12 @@ import { MePage } from '../me/me';
 import { FirebaseManager } from '../../providers/firebase-manager';
 import { OneSignalManager } from '../../providers/onesignal-manager';
 
+import { MessageService } from '../../app/messages/message.service'
+
 @Component({
   selector: 'page-tabs',
-  templateUrl: 'tabs.html'
+  templateUrl: 'tabs.html',
+  providers: [MessageService]
 })
 export class TabsPage {
   // this tells the tabs component which Pages
@@ -24,7 +27,9 @@ export class TabsPage {
   tab2Root: any = null;
   tab3Root: any = null;
 
-  constructor(private fm: FirebaseManager, private osm: OneSignalManager) {
+  unreadCount: number;
+
+  constructor(private fm: FirebaseManager, private osm: OneSignalManager, private messageService: MessageService) {
     
   }
 
@@ -32,6 +37,7 @@ export class TabsPage {
     document.addEventListener('userlogin', e => {
       this.tab2Root = MessagesPage;
       this.tab3Root = MePage;
+      this.messageService.prepareAllMessages();
     });
 
     document.addEventListener('userlogout', e => {
@@ -40,8 +46,9 @@ export class TabsPage {
       this.tab3Root = null;
     });
 
-    //this.fm.initialize();
-    //this.osm.initialize(this.tabRef);
+    document.addEventListener('servicemessageready', e => {
+      this.unreadCount = e['detail'];
+    });
   }
 
   checkLogin() {

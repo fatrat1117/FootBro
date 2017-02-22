@@ -15,7 +15,7 @@ export class PlayerService {
       let playerData = this.fm.getPlayer(id);
       let player = this.findOrCreatePlayer(id);
       player.id = playerData.$key;
-      player.points = playerData.points;
+      //player.points = playerData.points;
       player.name = playerData['basic-info'].displayName || "John Doe";
       player.photo = playerData['basic-info'].photoURL || "assets/img/none.png";
       player.teamId = playerData['basic-info'].teamId;

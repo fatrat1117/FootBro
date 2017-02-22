@@ -11,6 +11,7 @@ import { Chat } from '../../app/chats/shared/chat.model'
 import { ChatService } from '../../app/chats/chat.service'
 import { Player } from '../../app/players/player.model';
 
+
 @Component({
   selector: 'page-chat',
   templateUrl: 'chat.html',
@@ -43,6 +44,10 @@ export class ChatPage {
     })
 
     this.chatService.loadMoreChats();
+  }
+
+  ionViewWillLeave() {
+    this.chatService.updateUnread(this.user.id, false);
   }
 
   scrollView() {
