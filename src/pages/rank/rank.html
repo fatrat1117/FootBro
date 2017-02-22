@@ -1,5 +1,18 @@
 <ion-header>
   <ion-navbar>
+    <ion-title>{{'Ranks' | trans}}</ion-title>
+    <!--ion-segment [(ngModel)]="stats">
+      <ion-segment-button value="teams">
+        {{'Teams' | trans}}
+      </ion-segment-button>
+      <ion-segment-button value="players">
+        {{'Players' | trans}}
+      </ion-segment-button>
+    </ion-segment-->
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <div padding>
     <ion-segment [(ngModel)]="stats">
       <ion-segment-button value="teams">
         {{'Teams' | trans}}
@@ -8,9 +21,7 @@
         {{'Players' | trans}}
       </ion-segment-button>
     </ion-segment>
-  </ion-navbar>
-</ion-header>
-<ion-content>
+  </div>
   <div class="rank-stats" [ngSwitch]="stats">
     <div *ngSwitchCase="'teams'">
       <ion-item style="margin-bottom: 10px">

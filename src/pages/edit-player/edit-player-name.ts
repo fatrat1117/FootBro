@@ -31,7 +31,6 @@ export class EditPlayerNamePage {
   ionViewDidLoad() {
     this.oldValue = this.navParams.get("name");
     this.newValue = this.oldValue;
-
     this.valueInput.setFocus();
   }
 

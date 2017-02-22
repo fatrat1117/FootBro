@@ -23,7 +23,7 @@ export class EditPlayerPage {
   player: Player;
   watchListMap: {};
   teams;
-  constructor(private modalCtrl: ModalController, private playerService: PlayerService, private teamService: TeamService) {
+  constructor(private navCtrl: NavController, private modalCtrl: ModalController, private playerService: PlayerService, private teamService: TeamService) {
     this.selfId = this.playerService.selfId();
   }
 
