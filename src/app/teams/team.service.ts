@@ -115,6 +115,8 @@ export class TeamService {
       obj['avgGA'] = obj.total_matches > 0 ? (obj.GA / obj.total_matches).toFixed(2) : 0;
     if (obj && obj.GF)
       obj['avgGF'] = obj.total_matches > 0 ? (obj.GF / obj.total_matches).toFixed(2) : 0;
+    if (obj && obj.rate)
+      obj.rate = Math.round(obj.rate * 100);
   }
 
   findOrCreateTeam(id): Team {

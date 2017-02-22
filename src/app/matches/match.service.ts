@@ -41,6 +41,13 @@ export class MatchService {
       }
       match.home = home;
       match.away = away;
+
+      match.location.lat = fmMatch.lat || 0;
+      match.location.lng = fmMatch.lng || 0;
+      match.location.name = fmMatch.locationName;
+      match.location.address = fmMatch.locationAddress;
+      //console.log(match);
+      
       this.teamService.getTeamAsync(match.homeId);
       this.teamService.getTeamAsync(match.awayId);
       this.fm.FireCustomEvent('servicematchready', id);
@@ -69,7 +76,7 @@ export class MatchService {
     })
   }
 
-  findOrCreateMatch(id) {
+  findOrCreateMatch(id) : Match{
     let match;
     if (this.matchesMap[id])
       match = this.matchesMap[id];

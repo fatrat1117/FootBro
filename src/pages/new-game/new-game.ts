@@ -88,7 +88,7 @@ export class NewGamePage {
                 this.match.location.lat = place.geometry.location.lat();
                 this.match.location.lng = place.geometry.location.lng();
             }
-            console.log(this.match.location);
+            //console.log(this.match.location);
         });
     }
 
@@ -211,7 +211,8 @@ export class NewGamePage {
             matchData['lng'] = this.match.location.lng;
         if (this.tournamentId)
             matchData["tournamentId"] = this.tournamentId;
-
+        //console.log(matchData);
+        
         this.matchService.scheduleMatch(matchData);
         this.close();
     }
