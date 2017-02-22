@@ -21,14 +21,12 @@ import { TeamService } from '../../app/teams/team.service'
 export class EditPlayerPage {
   selfId: string;
   player: Player;
-  watchListMap: {};
-  teams;
+  teams: Team[];
   constructor(private navCtrl: NavController, private modalCtrl: ModalController, private playerService: PlayerService, private teamService: TeamService) {
     this.selfId = this.playerService.selfId();
   }
 
   ionViewDidLoad() {
-    this.watchListMap = {}
     this.addEventListeners();
     this.playerService.getPlayerAsync(this.selfId);
     this.teamService.getPlayerTeamsAsync(this.playerService.selfId());
@@ -40,30 +38,25 @@ export class EditPlayerPage {
       let playerId = e['detail'];
       if (playerId === this.selfId) {
         this.player = this.playerService.getPlayer(playerId);
-        
-        this.watchListMap = {}
-        for (let id of this.player.teams) {
-          this.watchListMap[id] = {}
-          this.teamService.getTeamAsync(id);
-          
-        }
-      }
-    });
-
-    document.addEventListener('serviceteamready', e => {
-      let id = e['detail'];
-      if (this.watchListMap[id]) {
-        this.watchListMap[id] = this.teamService.getTeam(id);
       }
     });
 
     document.addEventListener('serviceplayerteamsready', e=> {
       let id = e['detail'];
       if (id === this.player.id) {
-        this.teams = this.teamService.getPlayerTeams(id);
-        //console.log(this.teams);
+        this.updatePlayerTeams();
       }
     });
+  }
+
+  updatePlayerTeams() {
+    this.teams = [];
+    for(var t of this.teamService.getPlayerTeams(this.player.id)) {
+      if (t.id == this.player.teamId)
+        this.teams.unshift(t);
+      else
+        this.teams.push(t);
+    }
   }
 
   editName() {
@@ -102,8 +95,15 @@ export class EditPlayerPage {
     }).present();
   }
 
-  manageTeams() {
+  setDefaultTeam(id: string, slidingItem) {
+    slidingItem.close();
+    this.playerService.setDefaultTeam(id);
+    this.updatePlayerTeams();
+  }
 
+  quitTeam(id: string, slidingItem) {
+    slidingItem.close();
+    this.playerService.quitTeam(id);
   }
 }
 

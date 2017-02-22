@@ -169,14 +169,6 @@ export class TeamService {
     //   this.fm.getAllPublicTeams();
   }
 
-  quiteTeam(id) {
-    alert("TODO: quite team");
-  }
-
-  setDefaultTeam(id) {
-    alert("TODO: change default team");
-  }
-
   getPlayerTeams(id) {
     return this.playerTeamsMap[id];
   }

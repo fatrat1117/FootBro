@@ -42,7 +42,7 @@
   <!-- Teams -->
   <ion-list>
     <ion-item-divider></ion-item-divider>
-    <ion-item-sliding *ngFor="let t of watchListMap | mapToArrayPipe; let i = index;" #slidingItem>
+    <ion-item-sliding *ngFor="let t of teams" #slidingItem>
       <ion-item>
         <ion-thumbnail item-left>
           <img [src]="t.logo">
@@ -50,10 +50,10 @@
         <h2 ion-text [color]="player.teamId == t.id ? 'primary' : 'none'">{{ t.name }}</h2>
       </ion-item>
       <ion-item-options side="right">
-        <button *ngIf="player.teamId != t.id" ion-button color="primary" text-capitalize (click)="setDefaultTeam(i, slidingItem)">
+        <button *ngIf="player.teamId != t.id" ion-button color="primary" text-capitalize (click)="setDefaultTeam(t.id, slidingItem)">
           Set Default
         </button>
-        <button ion-button color="danger" text-capitalize (click)="quitTeam(i)">
+        <button [disabled]="player.teamId == t.id" ion-button color="danger" text-capitalize (click)="quitTeam(t.id, slidingItem)">
           Quit
         </button>
       </ion-item-options>
