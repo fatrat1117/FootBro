@@ -9,9 +9,9 @@
     <ion-item-sliding *ngFor="let msg of messages | reversePipe" #slidingItem>
       <ion-item (click)="enterChatPage(msg)">
         <ion-thumbnail item-left>
-          <img [src]="getPlayerInfo(msg.userId)?.photo">
+          <img [src]="getPlayerInfo(msg.playerId)?.photo">
         </ion-thumbnail>
-        <h2>{{ getPlayerInfo(msg.userId)?.name }}</h2>
+        <h2>{{ getPlayerInfo(msg.playerId)?.name }}</h2>
         <p>{{ msg.lastContent }}</p>
         <ion-note item-right text-right>
           <p>{{ msg.lastTimestamp | momentPipe }}</p>
@@ -19,10 +19,7 @@
         </ion-note>
       </ion-item>
       <ion-item-options side="right">
-        <button ion-button color="lightGrey" text-capitalize (click)="markAsRead(slidingItem)">
-          Mark as Unread
-        </button>
-        <button ion-button color="danger" text-capitalize>
+        <button ion-button color="danger" text-capitalize  (click)="deleteMessage(msg.playerId, slidingItem)">
           Delete
         </button>
       </ion-item-options>

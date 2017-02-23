@@ -98,16 +98,11 @@ export class FirebaseManager {
     })
   }
 
-  /*
-  getAllUnreadMessages() {
-    return this.af.database.list(`/chats/${this.auth.uid}/basic-info/`, {
-      query: {
-        orderByChild: 'isUnread',
-        equalTo: true
-      }
-    })
+  deleteMessage(playerId: string) {
+    this.af.database.object(`/chats/${this.auth.uid}/basic-info/${playerId}`).remove();
+    this.af.database.object(`/chats/${this.auth.uid}/${playerId}`).remove();
   }
-  */
+
 
 
 

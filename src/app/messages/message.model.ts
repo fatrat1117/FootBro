@@ -1,5 +1,5 @@
 export class Message {
-  userId: string
+  playerId: string
   lastContent: string;
   lastTimestamp: number;
   isUnread: boolean;

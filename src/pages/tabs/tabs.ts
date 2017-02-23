@@ -46,7 +46,7 @@ export class TabsPage {
     });
 
     document.addEventListener('servicemessageready', e => {
-      this.unreadCount = e['detail'];
+      this.unreadCount = e['detail'] > 0 ? e['detail'] : null;
     });
   }
 

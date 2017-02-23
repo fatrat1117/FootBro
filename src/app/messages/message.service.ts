@@ -21,7 +21,7 @@ export class MessageService {
           unreadCount++;
 
         let m = new Message();
-        m.userId = msg.$key;
+        m.playerId = msg.$key;
         m.isUnread = msg.isUnread;
         m.isSystem = msg.isSystem;
         m.lastContent = msg.lastContent;
@@ -35,6 +35,9 @@ export class MessageService {
 
   getAllMessages() {
     return this.messages;
-    //return this.fm.getAllMessages();
+  }
+
+  deleteMessage(playerId: string) {
+    this.fm.deleteMessage(playerId);
   }
 }

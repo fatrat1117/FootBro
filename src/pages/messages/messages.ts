@@ -47,8 +47,8 @@ export class MessagesPage {
   getPlayerAsync() {
     this.watchListMap = {};
     this.messages.forEach(msg => {
-      this.watchListMap[msg.userId] = {};
-      this.playerService.getPlayerAsync(msg.userId);
+      this.watchListMap[msg.playerId] = {};
+      this.playerService.getPlayerAsync(msg.playerId);
     })
   }
 
@@ -60,8 +60,9 @@ export class MessagesPage {
       return null;
   }
 
-  markAsRead(slidingItem) {
+  deleteMessage(playerId: string, slidingItem) {
     slidingItem.close();
+    this.messageService.deleteMessage(playerId);
   }
 
   //enterChatPage(userId: string, isSystem: boolean, isUnread: boolean) {
@@ -69,7 +70,7 @@ export class MessagesPage {
     this.navCtrl.push(ChatPage, {
       isSystem: msg.isSystem,
       isUnread: msg.isUnread,
-      user: this.watchListMap[msg.userId]
+      user: this.watchListMap[msg.playerId]
     });
   }
 }
