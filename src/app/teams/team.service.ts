@@ -25,7 +25,7 @@ export class TeamService {
 
         let teamPublic = this.fm.getTeamPublic(teamId);
         if (teamPublic) {
-          teamData.ability = teamPublic.ability;
+          teamData.ability = teamPublic.ability || 1000;
           teamData.popularity = teamPublic.popularity;
         }
         else
@@ -40,7 +40,7 @@ export class TeamService {
       let teamData = this.findOrCreateTeam(teamId);
       let teamPublic = this.fm.getTeamPublic(teamId);
       if (teamData && teamPublic) {
-        teamData.ability = teamPublic.ability;
+        teamData.ability = teamPublic.ability || 1000;
         teamData.popularity = teamPublic.popularity;
       }
     });
