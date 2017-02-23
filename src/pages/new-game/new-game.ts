@@ -29,6 +29,8 @@ export class NewGamePage {
         private playerService: PlayerService,
         params: NavParams) {
         this.tournamentId = params.get('tournamentId');
+        console.log(this.tournamentId);
+        
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
         this.matchDate = moment().format("YYYY-MM-DD");
         this.matchTime = "15:00";

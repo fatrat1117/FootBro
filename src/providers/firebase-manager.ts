@@ -46,6 +46,7 @@ export class FirebaseManager {
     });
 
     this.getAdminsAsync();
+    this.getAllPublicTeamsAsync();
   }
 
   initialize() {
@@ -61,6 +62,10 @@ export class FirebaseManager {
       }
     }
     );
+  }
+
+  afTournamentMatchDate(id, day) {
+    return this.af.database.object('/tournaments/list/' + id + '/dates/' + day);
   }
 
 
@@ -224,13 +229,15 @@ export class FirebaseManager {
   }
 
   getAllPublicTeamsAsync() {
-    let sub = this.af.database.list(`/public/teams/`, {
-      query: { orderByChild: 'name' }
-    }).subscribe(snapshots => {
-      sub.unsubscribe();
-      this.cachedAllPublicTeams = snapshots;
-      this.FireEvent('allpublicteamsready');
-    });
+    if (!this.getAllPublicTeams()) {
+      let sub = this.af.database.list(`/public/teams/`, {
+        query: { orderByChild: 'name' }
+      }).subscribe(snapshots => {
+        //sub.unsubscribe();
+        this.cachedAllPublicTeams = snapshots;
+        //console.log('allpublicteamsready');
+      });
+    }
   }
 
   getPublicTeams(orderby, count) {
@@ -701,9 +708,8 @@ export class FirebaseManager {
     this.afMatchDate(matchObj.date).set(true);
     //  .then(newMatch => {
     //    this.afMatchDate(matchObj.date).set(true);
-        // if (matchObj.tournamentId)
-        //   this.getTournamentMatchDate(matchObj.tournamentId, matchObj.date).set(true);
-
+    if (matchObj.tournamentId)
+      this.afTournamentMatchDate(matchObj.tournamentId, matchObj.date).set(true);
         // // add to team match
         // let matchId = newMatch["key"];
         // let teamData = {

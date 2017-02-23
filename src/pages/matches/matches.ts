@@ -18,7 +18,6 @@ export class MatchesPage {
   today;
   selectedInfo: string;
   selectedId: string;
-  tournamentId;
   afTournamentList;
   thisYear: string;
   changeYear: boolean;
@@ -140,7 +139,7 @@ export class MatchesPage {
   }
 
   enterNewGame() {
-    this.modalCtrl.create(NewGamePage, { tournamentId: this.tournamentId }).present();
+    this.modalCtrl.create(NewGamePage, { tournamentId: this.selectedId }).present();
   }
 
   isChangeYear(index) {
