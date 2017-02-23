@@ -11,6 +11,7 @@ export class MatchService {
   matchesMap = {};
   teamsMap = {};
   teamMatchesMap = {};
+  tournamentTableMap = {};
 
   constructor(private fm: FirebaseManager,
     private teamService: TeamService) {
@@ -47,7 +48,7 @@ export class MatchService {
       match.location.name = fmMatch.locationName;
       match.location.address = fmMatch.locationAddress;
       //console.log(match);
-      
+
       this.teamService.getTeamAsync(match.homeId);
       this.teamService.getTeamAsync(match.awayId);
       this.fm.FireCustomEvent('servicematchready', id);
@@ -73,10 +74,22 @@ export class MatchService {
         this.fm.getMatchAsync(m.$key);
       });
       this.fm.FireCustomEvent('serviceteammatchesready', result.id);
-    })
+    });
+
+    document.addEventListener('tournamenttableready', e => {
+      let id = e['detail'];
+      let table = this.fm.getTournamentTable(id);
+      table.forEach(r => {
+        let rank = r;
+        rank['team'] = this.teamService.findOrCreateTeam(r.id);
+        this.fm.getTeamAsync(r.id);
+      });
+      this.tournamentTableMap[id] = table;
+      this.fm.FireCustomEvent('servicetournamenttableready', id);
+    });
   }
 
-  findOrCreateMatch(id) : Match{
+  findOrCreateMatch(id): Match {
     let match;
     if (this.matchesMap[id])
       match = this.matchesMap[id];
@@ -87,7 +100,7 @@ export class MatchService {
     }
     return match;
   }
-  
+
   getMatchDatesAsync(id) {
     this.fm.getMatchDatesAsync(id);
   }
@@ -114,7 +127,7 @@ export class MatchService {
     else
       this.fm.getMatchAsync(id);
   }
-  
+
   getTeamMatches(id) {
     return this.teamMatchesMap[id];
   }
@@ -128,11 +141,14 @@ export class MatchService {
   }
 
   getTournamentTable(id) {
-    return this.fm.getTournamentTable(id);
+    return this.tournamentTableMap[id];
   }
 
   getTournamentTableAsync(id) {
-    this.fm.getTournamentTableAsync(id);
+    if (this.getTournamentTable(id))
+      this.fm.FireCustomEvent('servicetournamenttableready', id);
+    else
+      this.fm.getTournamentTableAsync(id);
   }
 
   scheduleMatch(matchObj) {

@@ -20,6 +20,19 @@
 //most_GA_match;
 //most_GF_match;
 // }
+export class TeamTable {
+  D;
+  GA;
+  GS;
+  L;
+  P;
+  PTS;
+  W;
+  id;
+  rank;
+  winList;
+  team: Team;
+}
 
 export class Team {
   id;

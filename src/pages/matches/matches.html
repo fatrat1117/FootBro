@@ -88,11 +88,11 @@
             </ion-col-->
             <ion-col width-50>
               <ion-thumbnail>
-                <img src="assets/team-logo/team_logo.jpg">
+                <img [src]="s?.team?.logo">
               </ion-thumbnail>
               <p text-left>
                 <ion-badge color="sky">{{ i+1 }}</ion-badge>
-                <label>{{ s.id }}</label>
+                <label>{{ s?.team?.name }}</label>
               </p>
             </ion-col>
             <ion-col class="data-column">

@@ -545,7 +545,7 @@ export class FirebaseManager {
   }
 
   FireCustomEvent(name, data) {
-   // console.log(name, data);
+    console.log(name, data);
     var event = new CustomEvent(name, { detail: data });
     document.dispatchEvent(event);
   }

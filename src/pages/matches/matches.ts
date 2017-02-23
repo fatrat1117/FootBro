@@ -87,7 +87,7 @@ export class MatchesPage {
       this.matches = this.matchService.getMatchesByDate(date);
     });
 
-    document.addEventListener('tournamenttableready', e=>{
+    document.addEventListener('servicetournamenttableready', e=>{
       let tournamentId = e['detail'];
       if (tournamentId === this.selectedId)
         //console.log(tournamentId);
