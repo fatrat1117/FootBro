@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>{{'NewMatch' | trans}}</ion-title>
+        <ion-title>{{'updatematch' | trans}}</ion-title>
         <ion-buttons left>
             <button (click)="close()" color='danger' ion-button icon-only clear>
         <ion-icon name="close"></ion-icon>
@@ -86,6 +86,75 @@
     <div class="game-info-item-right-gray" item-right>
         <ion-datetime text-center displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="matchTime"></ion-datetime>
     </div>
+</ion-item>
+
+<ion-item class="game-info-item-dark">
+    <button ion-button clear color="light" icon-left item-left>
+            <ion-icon name="flag" color="danger"></ion-icon>
+            主队
+            </button>
+</ion-item>
+
+<ion-item class="game-info-item-team-title">
+    <button ion-button class="game-info-team-title-button">阿根廷男子足球国家队
+            </button>
+</ion-item>
+
+<ion-item class="game-info-item">
+    <button ion-button item-left clear class="item-game-info-left-text">队员</button>
+    <button ion-button item-right clear icon-right class="item-game-info-right-text">
+                参赛球员
+                <ion-icon name="add-circle"></ion-icon>
+            </button>
+</ion-item>
+
+<div class="content-expandable" *ngFor="let player of players">
+    <ion-item class="expandable-member-name" (click)="clickTeamMember(player)">
+        <button ion-button item-left icon-only clear (click)="deleteTeamPlayer(player)">
+                    <ion-icon name="remove-circle" color="danger"></ion-icon>
+                </button>
+        <img src="assets/img/icon1.jpg" class="member-img" />
+        <button ion-button item-right icon-right clear color="light">
+                    梅西{{player.name}}
+                    <ion-icon [name]="player.showExpandableIcon"></ion-icon>
+                </button>
+    </ion-item>
+
+    <ion-item class="expandable-member-property" *ngFor="let item of player.items" [hidden]="player.hidden">
+        <img [src]="item.icon" class="desc-img" item-left/>
+        <button ion-button clear color="light">{{item.name}}</button>
+        <div item-right>
+            <button ion-button icon-only clear (click)="minusScore(item)" [color]="item.color">
+                        <ion-icon name="arrow-dropleft"></ion-icon>
+                    </button>
+
+            <button ion-button clear color="secondary">
+                        {{item.number}}
+                    </button>
+
+            <button ion-button icon-only clear (click)="addScore(item)">
+                        <ion-icon name="arrow-dropright" color="secondary"></ion-icon>
+                    </button>
+        </div>
+
+    </ion-item>
+</div>
+
+
+<ion-item class="game-info-item-dark">
+    <button ion-button clear color="light" icon-left item-left="">
+            <ion-icon name="star"></ion-icon>
+              裁判
+            </button>
+
+</ion-item>
+
+<ion-item class="game-info-item-light" style="margin-bottom: 0px;">
+<button ion-button clear full class="game-info-item-left" item-left>姓&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;名
+            </button>
+<ion-input type="text" style="height:100%;width: 100px;" item-right></ion-input>
+
 </ion-item>
 </ion-list>
 </ion-content>

@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatchDetailPage } from '../../pages/match-detail/match-detail'
 import { NavController, ModalController } from "ionic-angular";
 import { MatchService } from '../matches/match.service';
 import { Match} from '../matches/match.model';
+import { UpdateGamePage } from '../../pages/update-game/update-game'
 
 @Component({
   selector: 'sb-match-basic',
@@ -34,7 +34,8 @@ export class SbMatchBasicComponent implements OnInit {
     this.matchService.getMatchAsync(this.matchObj.$key);
   }
 
-  goMatchDetailPage() {
-    this.modalCtrl.create(MatchDetailPage, {match: this.match}).present();
+  goMatchDetailPage(e) {
+    e.stopPropagation();
+    this.modalCtrl.create(UpdateGamePage, {id: this.match.id}).present();
   }
 }

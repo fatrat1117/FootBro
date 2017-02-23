@@ -213,7 +213,8 @@ export class Localization {
             maxlose: 'Max. successive lose',
             mostundefeated: 'Most consecutive undefeated',
             mostcleansheets: 'Most consecutive clean sheets',
-            winningrate: 'Winning rate'
+            winningrate: 'Winning rate',
+            updatematch: 'Update Match'
         },
 
         zh: {
@@ -408,7 +409,8 @@ export class Localization {
             maxlose: '最长的连续失利',
             mostundefeated: '最长的不败',
             mostcleansheets: '最长的不失球',
-            winningrate: '胜率'
+            winningrate: '胜率',
+            updatematch: '更新比赛'
         }
     }
 }
