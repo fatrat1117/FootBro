@@ -84,29 +84,29 @@ export class TeamService {
     });
 
     document.addEventListener('playerready', e => {
-      if (this.bRefreshPlayerTeams) {
-        let id = e['detail'];
-        let player = this.fm.getPlayer(id);
-        console.log(player);
-        let teams;
-        if (this.playerTeamsMap[id]) {
-          teams = this.playerTeamsMap[id];
-          teams = [];
-        }
-        else {
-          teams = [];
-          this.playerTeamsMap[id] = teams;
-        }
-
-        for (let tId in player.teams) {
-          let team = this.findOrCreateTeam(tId);
-          console.log(tId);     
-          teams.push(team);
-          this.fm.getTeamAsync(tId);
-        }
-        this.bRefreshPlayerTeams = false;
-        this.fm.FireCustomEvent('serviceplayerteamsready', id);
+      //if (this.bRefreshPlayerTeams) {
+      let id = e['detail'];
+      let player = this.fm.getPlayer(id);
+      // console.log(player);
+      // let teams;
+      // if (this.playerTeamsMap[id]) {
+      //   teams = this.playerTeamsMap[id];
+      //   teams = [];
+      // }
+      // else {
+      //   teams = [];
+      this.playerTeamsMap[id] = [];
+      //}
+      for (let tId in player.teams) {
+        let team = this.findOrCreateTeam(tId);
+        //console.log(tId);     
+        this.playerTeamsMap[id].push(team);
+        this.fm.getTeamAsync(tId);
       }
+      console.log(this.playerTeamsMap[id]);
+      this.bRefreshPlayerTeams = false;
+      this.fm.FireCustomEvent('serviceplayerteamsready', id);
+      //}
     });
   }
 
