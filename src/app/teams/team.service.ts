@@ -70,43 +70,43 @@ export class TeamService {
       this.fm.FireCustomEvent('serviceteamstatsdataready', teamId);
     });
 
-    document.addEventListener('allpublicteamsready', e => {
-      let allPublicTeams = this.fm.getAllPublicTeams();
-      this.allTeams = [];
-      allPublicTeams.forEach(publicTeam => {
-        let id = publicTeam.$key;
-        let team = this.findOrCreateTeam(id);
-        this.allTeams.push(team);
-        this.fm.getTeamAsync(id);
-      });
+    // document.addEventListener('allpublicteamsready', e => {
+    //   let allPublicTeams = this.fm.getAllPublicTeams();
+    //   this.allTeams = [];
+    //   allPublicTeams.forEach(publicTeam => {
+    //     let id = publicTeam.$key;
+    //     let team = this.findOrCreateTeam(id);
+    //     this.allTeams.push(team);
+    //     this.fm.getTeamAsync(id);
+    //   });
 
-      this.fm.FireEvent('serviceallteamsready');
-    });
+    //   this.fm.FireEvent('serviceallteamsready');
+    // });
 
     document.addEventListener('playerready', e => {
-      //if (this.bRefreshPlayerTeams) {
-      let id = e['detail'];
-      let player = this.fm.getPlayer(id);
-      // console.log(player);
-      // let teams;
-      // if (this.playerTeamsMap[id]) {
-      //   teams = this.playerTeamsMap[id];
-      //   teams = [];
-      // }
-      // else {
-      //   teams = [];
-      this.playerTeamsMap[id] = [];
-      //}
-      for (let tId in player.teams) {
-        let team = this.findOrCreateTeam(tId);
-        //console.log(tId);     
-        this.playerTeamsMap[id].push(team);
-        this.fm.getTeamAsync(tId);
+      if (this.bRefreshPlayerTeams) {
+        let id = e['detail'];
+        let player = this.fm.getPlayer(id);
+        // console.log(player);
+        // let teams;
+        // if (this.playerTeamsMap[id]) {
+        //   teams = this.playerTeamsMap[id];
+        //   teams = [];
+        // }
+        // else {
+        //   teams = [];
+        this.playerTeamsMap[id] = [];
+        //}
+        for (let tId in player.teams) {
+          let team = this.findOrCreateTeam(tId);
+          //console.log(tId);     
+          this.playerTeamsMap[id].push(team);
+          this.fm.getTeamAsync(tId);
+        }
+        //console.log(this.playerTeamsMap[id]);
+        this.bRefreshPlayerTeams = false;
+        this.fm.FireCustomEvent('serviceplayerteamsready', id);
       }
-      console.log(this.playerTeamsMap[id]);
-      this.bRefreshPlayerTeams = false;
-      this.fm.FireCustomEvent('serviceplayerteamsready', id);
-      //}
     });
   }
 
@@ -157,17 +157,28 @@ export class TeamService {
   }
 
   getAllTeams() {
+    let allPublicTeams = this.fm.getAllPublicTeams();
+      this.allTeams = [];
+      allPublicTeams.forEach(publicTeam => {
+        let id = publicTeam.$key;
+        let teamNotCached = !this.teamDataMap[id]; 
+        let team = this.findOrCreateTeam(id);
+        this.allTeams.push(team);
+        if (teamNotCached)
+          this.fm.getTeamAsync(id);
+      });
+
     return this.allTeams;
   }
 
-  getAllTeamsAsync() {
-    this.fm.getAllPublicTeamsAsync();
+ // getAllTeamsAsync() {
+ //   this.fm.getAllPublicTeamsAsync();
     // if (this.getAllTeams()) {
     //   this.fm.FireEvent('allteamsready');
     // }
     // else 
     //   this.fm.getAllPublicTeams();
-  }
+ // }
 
   getPlayerTeams(id) {
     return this.playerTeamsMap[id];

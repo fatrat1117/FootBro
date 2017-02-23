@@ -46,6 +46,7 @@ export class FirebaseManager {
     });
 
     this.getAdminsAsync();
+    this.getAllPublicTeamsAsync();
   }
 
   initialize() {
@@ -224,13 +225,15 @@ export class FirebaseManager {
   }
 
   getAllPublicTeamsAsync() {
-    let sub = this.af.database.list(`/public/teams/`, {
-      query: { orderByChild: 'name' }
-    }).subscribe(snapshots => {
-      sub.unsubscribe();
-      this.cachedAllPublicTeams = snapshots;
-      this.FireEvent('allpublicteamsready');
-    });
+    if (!this.getAllPublicTeams()) {
+      let sub = this.af.database.list(`/public/teams/`, {
+        query: { orderByChild: 'name' }
+      }).subscribe(snapshots => {
+        //sub.unsubscribe();
+        this.cachedAllPublicTeams = snapshots;
+        console.log('allpublicteamsready');
+      });
+    }
   }
 
   getPublicTeams(orderby, count) {

@@ -104,6 +104,7 @@ export class EditPlayerPage {
   quitTeam(id: string, slidingItem) {
     slidingItem.close();
     this.playerService.quitTeam(id);
+    this.teamService.getPlayerTeamsAsync(this.playerService.selfId());
   }
 }
 

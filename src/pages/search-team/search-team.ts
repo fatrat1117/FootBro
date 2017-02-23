@@ -17,12 +17,12 @@ export class SearchTeamPage {
   }
 
   ionViewDidLoad() {
-    document.addEventListener('serviceallteamsready', e => {
+    //document.addEventListener('serviceallteamsready', e => {
       this.totalTeams = this.service.getAllTeams();
       this.resetFilter();
-    });
+   // });
 
-    this.service.getAllTeamsAsync();
+    //this.service.getAllTeamsAsync();
   }
 
   resetFilter() {
