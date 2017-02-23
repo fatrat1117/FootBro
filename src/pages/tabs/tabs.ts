@@ -14,7 +14,6 @@ import { MessageService } from '../../app/messages/message.service'
 @Component({
   selector: 'page-tabs',
   templateUrl: 'tabs.html',
-  providers: [MessageService]
 })
 export class TabsPage {
   // this tells the tabs component which Pages

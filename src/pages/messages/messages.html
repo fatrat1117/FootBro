@@ -7,11 +7,11 @@
 <ion-content>
   <ion-list>
     <ion-item-sliding *ngFor="let msg of messages | reversePipe" #slidingItem>
-      <ion-item (click)="enterChatPage(msg.$key, msg.isSystem, msg.isUnread)">
+      <ion-item (click)="enterChatPage(msg)">
         <ion-thumbnail item-left>
-          <img [src]="getPlayerInfo(msg.$key)?.photo">
+          <img [src]="getPlayerInfo(msg.userId)?.photo">
         </ion-thumbnail>
-        <h2>{{ getPlayerInfo(msg.$key)?.name }}</h2>
+        <h2>{{ getPlayerInfo(msg.userId)?.name }}</h2>
         <p>{{ msg.lastContent }}</p>
         <ion-note item-right text-right>
           <p>{{ msg.lastTimestamp | momentPipe }}</p>

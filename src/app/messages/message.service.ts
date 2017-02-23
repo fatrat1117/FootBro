@@ -29,14 +29,11 @@ export class MessageService {
         this.messages.push(m);
       })
 
-      console.log(this.messages);
       this.fm.FireCustomEvent("servicemessageready", unreadCount);
     })
   }
 
   getAllMessages() {
-    console.log(this.messages);
-    
     return this.messages;
     //return this.fm.getAllMessages();
   }

@@ -11,7 +11,6 @@ import { PlayerService } from '../../app/players/player.service';
 @Component({
   selector: 'page-messages',
   templateUrl: 'messages.html',
-  providers: [ MessageService ]
 })
 export class MessagesPage {
   messages: Message[];
@@ -22,38 +21,18 @@ export class MessagesPage {
 
   ionViewDidLoad() {
     this.addEventListeners();
-
-    this.messages = this.messageService.getAllMessages();
-    console.log(this.messages);
-    
-
-
-/*
-    this.messageService.getAllMessages().subscribe(messages => {
-      this.messages = messages;
-      this.watchListMap = {};
-      messages.forEach(msg => {
-        this.watchListMap[msg.$key] = {};
-        this.playerService.getPlayerAsync(msg.$key);
-      })
-    })
-    */
-
     document.addEventListener('servicemessageready', e => {
       this.messages = this.messageService.getAllMessages();
     });
 
+    this.messages = this.messageService.getAllMessages();
+    this.getPlayerAsync();
   }
-
 
   addEventListeners() {
     document.addEventListener('servicemessageready', e => {
       this.messages = this.messageService.getAllMessages();
-      this.watchListMap = {};
-      this.messages.forEach(msg => {
-        this.watchListMap[msg.userId] = {};
-        this.playerService.getPlayerAsync(msg.userId);
-      })
+      this.getPlayerAsync();
     });
 
     document.addEventListener('serviceplayerready', e => {
@@ -65,19 +44,32 @@ export class MessagesPage {
     });
   }
 
+  getPlayerAsync() {
+    this.watchListMap = {};
+    this.messages.forEach(msg => {
+      this.watchListMap[msg.userId] = {};
+      this.playerService.getPlayerAsync(msg.userId);
+    })
+  }
+
   getPlayerInfo(playerId: string) {
-    return this.watchListMap[playerId];
+    
+    if (playerId)
+      return this.watchListMap[playerId];
+    else
+      return null;
   }
 
   markAsRead(slidingItem) {
     slidingItem.close();
   }
 
-  enterChatPage(userId: string, isSystem: boolean, isUnread: boolean) {
+  //enterChatPage(userId: string, isSystem: boolean, isUnread: boolean) {
+  enterChatPage(msg: Message) {
     this.navCtrl.push(ChatPage, {
-      isSystem: isSystem,
-      isUnread: isUnread,
-      user: this.watchListMap[userId]
+      isSystem: msg.isSystem,
+      isUnread: msg.isUnread,
+      user: this.watchListMap[msg.userId]
     });
   }
 }
