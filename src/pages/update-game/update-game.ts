@@ -20,6 +20,7 @@ export class UpdateGamePage {
     matchDate;
     matchTime;
     tournamentId;
+    id;
 
     constructor(public navCtrl: NavController,
         private modalCtrl: ModalController,
@@ -28,6 +29,7 @@ export class UpdateGamePage {
         private helper: UIHelper,
         private playerService: PlayerService,
         params: NavParams) {
+        this.id = params.get('id');
         this.tournamentId = params.get('tournamentId');
         //console.log(this.tournamentId);
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
