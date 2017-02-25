@@ -605,22 +605,20 @@ export class FirebaseManager {
     } else {
       if (id == "all") {
         let sub = this.afMatchDates().subscribe(snapshots => {
-          let dates = [];
+          this.matchDatesMap[id] = [];
           snapshots.forEach(snapshot => {
-            dates.push(Number(snapshot.$key));
-          })
-          this.matchDatesMap[id] = dates;
+            this.matchDatesMap[id].push(Number(snapshot.$key));
+          });
           //sub.unsubscribe();
           this.FireCustomEvent('matchdatesready', id);
         });
       }
       else {
         let sub = this.afTournamentDates(id).subscribe(snapshots => {
-          let dates = [];
+          this.matchDatesMap[id] = [];
           snapshots.forEach(snapshot => {
-            dates.push(Number(snapshot.$key));
-          })
-          this.matchDatesMap[id] = dates;
+            this.matchDatesMap[id].push(Number(snapshot.$key));
+          });
           //sub.unsubscribe();
           this.FireCustomEvent('matchdatesready', id);
         });

@@ -215,10 +215,14 @@ export class NewGamePage {
         //console.log(matchData);
         
         this.matchService.scheduleMatch(matchData);
-        this.close();
+        this.dismiss(tDate);
     }
 
     close() {
         this.viewCtrl.dismiss();
+    }
+
+    dismiss(date) {
+      this.viewCtrl.dismiss({date: date});      
     }
 }
