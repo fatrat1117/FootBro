@@ -645,16 +645,17 @@ export class FirebaseManager {
     });
 
     let sub = afQuery.subscribe(snapshots => {
+      //console.log('pull', snapshots);
       sub.unsubscribe();
-      var matches = snapshots.filter(m => {
+      this.matchesByDateMap[date] = snapshots.filter(m => {
         return tournamentId === 'all' || m.tournamentId === tournamentId;
       });
 
-      matches.forEach(snapshot => {
+      this.matchesByDateMap[date].forEach(snapshot => {
         //monitor match change
         this.getMatchAsync(snapshot.$key);
       });
-      this.matchesByDateMap[date] = matches;
+      //this.matchesByDateMap[date] = matches;
       this.FireCustomEvent('matchesbydateready', date);
     });
   }
@@ -966,7 +967,7 @@ export class FirebaseManager {
   //admins 
   getAdminsAsync() {
     if (!this.admins) {
-      this.af.database.object('/tournaments/whitelist/').subscribe(snapshot => {
+      this.af.database.object('/admins/').subscribe(snapshot => {
         this.admins = snapshot;
       });
     }

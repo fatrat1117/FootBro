@@ -31,6 +31,8 @@ export class UpdateGamePage {
         params: NavParams) {
         this.id = params.get('id');
         this.match = this.matchService.getMatch(this.id);
+        console.log(this.match);
+
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
         this.matchDate = moment().format("YYYY-MM-DD");
         this.matchTime = "15:00";
@@ -214,7 +216,7 @@ export class UpdateGamePage {
         if (this.tournamentId)
             matchData["tournamentId"] = this.tournamentId;
         //console.log(matchData);
-        
+
         this.matchService.scheduleMatch(matchData);
         this.close();
     }
@@ -224,10 +226,13 @@ export class UpdateGamePage {
     }
 
     deleteMatch() {
-        console.log('beforedeleteMatch', this.match);
+        //console.log('beforedeleteMatch', this.match);
+        //save temp date and tournamentId
+        let date = this.match.date;
+        let tournamentId = this.match.tournamentId || 'all';
         this.matchService.deleteMatch(this.id);
-        console.log('deleteMatch', this.match);
-        this.matchService.getMatchesByDateAsync(this.match.date, this.match.tournamentId || 'all');
+        // console.log('deleteMatch', this.match);
+        this.matchService.getMatchesByDateAsync(date, tournamentId);
         this.close();
     }
 }
