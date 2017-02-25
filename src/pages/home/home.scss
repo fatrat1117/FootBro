@@ -29,8 +29,8 @@ page-home {
     }
 
     .home-title{
-      width: 50%;
-      height: 50%;
+      width: 60%;
+      height: 70%;
       overflow: auto;
       margin: auto;
       position: absolute;
@@ -39,12 +39,18 @@ page-home {
       bottom: 0;
       right: 0;
       text-align: center;
-      .toolbar-title{
-        padding:0;
-        color: white;
-        font-family: 'U.S.S. Dallas Bold';
-        font-size: 1.7rem;
-      }
+      img{
+         object-fit: contain;
+         min-height: 1rem;
+         max-height: 1.5rem;
+       }
+//      .toolbar-title{
+//        padding:0;
+//        color: white;
+//        font-family: 'U.S.S. Dallas Bold';
+//        font-size: 1.7rem;
+//      }
+        
     }
   }
 
