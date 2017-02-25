@@ -3,6 +3,8 @@ import { NavController, ModalController } from "ionic-angular";
 import { MatchService } from '../matches/match.service';
 import { Match} from '../matches/match.model';
 import { UpdateGamePage } from '../../pages/update-game/update-game'
+import { MatchDetailPage } from '../../pages/match-detail/match-detail'
+import { PlayerService } from '../players/player.service'
 
 @Component({
   selector: 'sb-match-basic',
@@ -19,8 +21,8 @@ export class SbMatchBasicComponent implements OnInit {
 
   constructor(private navCtrl: NavController,
     private matchService: MatchService,
-    private modalCtrl: ModalController) {
-
+    private modalCtrl: ModalController,
+    private PlayerService : PlayerService) {
   }
 
   ngOnInit() {
@@ -34,8 +36,17 @@ export class SbMatchBasicComponent implements OnInit {
     this.matchService.getMatchAsync(this.matchObj.$key);
   }
 
-  goMatchDetailPage(e) {
+  goUpdateMatchPage(e) {
     e.stopPropagation();
     this.modalCtrl.create(UpdateGamePage, {id: this.match.id}).present();
+  }
+
+  goMatchDetailPage() {
+    this.modalCtrl.create(MatchDetailPage, {match: this.match}).present();
+  }
+
+  canUpdate() {
+    return this.PlayerService.isCaptain(this.PlayerService.selfId(), this.matchObj.homeId) ||
+      this.PlayerService.isCaptain(this.PlayerService.selfId(), this.matchObj.awayId);
   }
 }

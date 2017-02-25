@@ -41,12 +41,12 @@ export class MatchesPage {
     // });
   }
 
-  scrollToToday() {
+  scrollToDate(date) {
     let iToday = -1;
     if (this.dates.length > 0)
       iToday = 0;
     for (let i = 1; i < this.dates.length; ++i) {
-      if (Number(this.dates[i]) > this.today) {
+      if (Number(this.dates[i]) > date) {
         break;
       }
       iToday = i;
@@ -68,6 +68,10 @@ export class MatchesPage {
     }
   }
 
+  scrollToToday() {
+    this.scrollToDate(this.today);
+  }
+
   addEventListeners() {
     document.addEventListener('matchdatesready', e => {
       let id = e['detail'];
@@ -85,37 +89,41 @@ export class MatchesPage {
     document.addEventListener('matchesbydateready', e => {
       let date = e['detail'];
       this.matches = this.matchService.getMatchesByDate(date);
-      console.log(this.matches);
+      //console.log(this.matches);
     });
 
-    document.addEventListener('servicetournamenttableready', e=>{
+    document.addEventListener('servicetournamenttableready', e => {
       let tournamentId = e['detail'];
       if (tournamentId === this.selectedId)
         //console.log(tournamentId);
         this.matchStandings = this.matchService.getTournamentTable(tournamentId);
-        //console.log(this.matchStandings);
+      //console.log(this.matchStandings);
     });
+
+    document.addEventListener('matcheschanged', e => {
+      this.scrollToDate(this.selectedDate);
+    })
   }
 
   addYears() {
     this.addDateToYearDictionary();
-    setTimeout(this.addYearCss(),3000);
+    setTimeout(this.addYearCss(), 3000);
   }
 
-  addDateToYearDictionary(){
-    for (let i = 0 ; i < this.dates.length; i++){
+  addDateToYearDictionary() {
+    for (let i = 0; i < this.dates.length; i++) {
       let currentYear = this.getYearStringFromDate(this.dates[i]);
-      if (!(currentYear in this.years)){
+      if (!(currentYear in this.years)) {
         this.years[currentYear] = i;
       }
     }
   }
 
-  addYearCss(){
-    for (let key in this.years){
+  addYearCss() {
+    for (let key in this.years) {
       let item_id = this.years[key];
-      let item =  document.getElementById("matches-scroll-target-"+String(item_id));
-      if (item != null){
+      let item = document.getElementById("matches-scroll-target-" + String(item_id));
+      if (item != null) {
         item.className += " ion-item-changeYear";
       }
 
@@ -140,20 +148,27 @@ export class MatchesPage {
   }
 
   enterNewGame() {
-    this.modalCtrl.create(NewGamePage, { tournamentId: this.selectedId }).present();
+    let modal = this.modalCtrl.create(NewGamePage, { tournamentId: 'all' === this.selectedId ? null : this.selectedId});
+    modal.onDidDismiss(e => {
+      if (e && e['date']) {
+        let date = e['date'];
+        this.scrollToDate(date);
+      }
+    })
+    modal.present();
   }
 
   isChangeYear(index) {
 
-    for (let key in this.years){
-      if (index == this.years[key]){
+    for (let key in this.years) {
+      if (index == this.years[key]) {
         return true;
       }
     }
     return false;
   }
 
-  getYearStringFromDate(date){
+  getYearStringFromDate(date) {
     let t = Number(date);
     let year = moment(t).format('YYYY');
     return year;
@@ -163,6 +178,6 @@ export class MatchesPage {
     let class1 = this.selectedDate == date ? "ion-item-selected" : "ion-item-unselected";
     //let class2 = this.isChangeYear(i, date) == true ? "ion-item-changeYear" : "ion-item-unchangeYear"
 
-    return class1 ;
+    return class1;
   }
 }
