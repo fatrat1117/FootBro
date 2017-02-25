@@ -112,7 +112,7 @@ export class CheeringTeamStatsPage {
   unlockCheerleader(amount: number) {
     //let amount = Math.floor(this.cheerleader.unlockPoints / 10) * 10;
     if (this.selfPlayer.points >= amount) {
-      this.playerService.placeOrder(this.cheerleader.id, amount);
+      //this.playerService.placeOrder(this.cheerleader.id, amount);
       this.playerService.unlockCheerleader(
         this.cheerleader.id, this.cheerleader.points + amount, this.cheerleader.unlockPoints + 1, this.selfPlayer.points - amount);
     }

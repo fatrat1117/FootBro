@@ -139,12 +139,14 @@ export class PlayerService {
     return this.fm.selfId();
   }
 
+/*
   placeOrder(toId: string, amount: number) {
-    this.fm.placeOrder(toId, amount);
+    this.fm.placeOrder(this.selfId(), toId, amount);
   }
+*/
 
-  unlockCheerleader(playerId: string, newPoints: number, newUnlockPoints: number, selfNewPoints: number) {
-    this.fm.unlockCheerleader(playerId, newPoints, newUnlockPoints, selfNewPoints);
+  unlockCheerleader(cheerleaderId: string, newPoints: number, newUnlockPoints: number, selfNewPoints: number) {
+    this.fm.unlockCheerleader(cheerleaderId, newPoints, newUnlockPoints, selfNewPoints);
   }
 
   isAdmin() {

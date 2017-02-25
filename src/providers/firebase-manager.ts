@@ -751,7 +751,7 @@ export class FirebaseManager {
   }
   /****************************** Points ******************************/
   /*
-  updatePoints(targetId: string, usedPoint: number, newPoints: number) {
+  updatePlayerPoints(targetId: string, usedPoint: number, newPoints: number) {
     console.log(this.auth);
 
     this.af.database.object(`/players/${this.auth.uid}/points`).update({ total: newPoints });
@@ -760,25 +760,32 @@ export class FirebaseManager {
   }
   */
 
-  placeOrder(toId: string, amount: number) {
+  placeOrder(fromId: string, toId: string, amount: number) {
     this.af.database.list(`/orders`).push({
-      from: this.auth.uid,
+      from: fromId,
       to: toId,
       amount: amount,
       timestamp: firebase.database.ServerValue.TIMESTAMP
     })
   }
 
-  unlockCheerleader(playerId: string, newPoints: number, newUnlockPoints: number, selfNewPoints: number) {
-    this.updatePoints(playerId, newPoints);
-    this.af.database.object(`/players/${playerId}/unlockPoints`).set(newUnlockPoints);
+  unlockCheerleader(cheerleaderId: string, newPoints: number, newUnlockPoints: number, selfNewPoints: number) {
+    this.updatePlayerPoints(cheerleaderId, newPoints);
+    this.af.database.object(`/players/${cheerleaderId}/unlockPoints`).set(newUnlockPoints);
 
-    this.updatePoints(this.auth.uid, selfNewPoints);
-    this.af.database.object(`/players/${this.auth.uid}/cheerleaders/${playerId}`).set(true);
+    this.updatePlayerPoints(this.auth.uid, selfNewPoints);
+    this.af.database.object(`/players/${this.auth.uid}/cheerleaders/${cheerleaderId}`).set(true);
   }
 
-  updatePoints(playerId: string, newPoints: number) {
+  playerEarnPoints(playerId: string, amount: number, newPoints: number) {
     this.af.database.object(`/players/${playerId}/points`).set(newPoints);
+  }
+
+  updatePlayerPoints(playerId: string, newPoints: number) {
+  }
+
+  updateTeamPoints(teamId: string, newPoints: number) {
+    this.af.database.object(`/teams/${teamId}/points`).set(newPoints);
   }
 
 
