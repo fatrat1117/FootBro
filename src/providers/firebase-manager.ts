@@ -966,7 +966,7 @@ export class FirebaseManager {
   //admins 
   getAdminsAsync() {
     if (!this.admins) {
-      this.af.database.object('/tournaments/whitelist/').subscribe(snapshot => {
+      this.af.database.object('/admins/').subscribe(snapshot => {
         this.admins = snapshot;
       });
     }
