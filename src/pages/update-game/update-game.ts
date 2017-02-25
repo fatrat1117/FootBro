@@ -31,7 +31,7 @@ export class UpdateGamePage {
         params: NavParams) {
         this.id = params.get('id');
         this.match = this.matchService.getMatch(this.id);
-        console.log(this.match);
+        //console.log(this.match);
 
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
         this.matchDate = moment().format("YYYY-MM-DD");

@@ -153,15 +153,6 @@ export class PlayerService {
     return false;
   }
 
-  /* 
-  // To be removed
-  getSelfPlayer() : Player {
-    if (this.selfId())
-      return this.playersMap[this.selfId()];
-    return null;
-  }
-  */
-
   isAuthenticated() {
     return this.fm.auth && this.fm.auth.uid;
   }
@@ -189,5 +180,17 @@ export class PlayerService {
       this.fm.FireCustomEvent('serviceteamplayersready', id);
     else
       this.fm.getTeamAsync(id);
+  }
+
+  isCaptain(pId, tId) {
+    //console.log('isCaptain', pId, tId);
+    if (!pId || !tId)
+      return false;
+
+    let fmTeam = this.fm.getTeam(tId);
+    if (fmTeam && 'basic-info' in fmTeam)
+      return pId === fmTeam['basic-info'].captain;
+
+    return false;
   }
 }

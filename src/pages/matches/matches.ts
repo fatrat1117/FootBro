@@ -148,7 +148,7 @@ export class MatchesPage {
   }
 
   enterNewGame() {
-    let modal = this.modalCtrl.create(NewGamePage, { tournamentId: this.selectedId });
+    let modal = this.modalCtrl.create(NewGamePage, { tournamentId: 'all' === this.selectedId ? null : this.selectedId});
     modal.onDidDismiss(e => {
       if (e && e['date']) {
         let date = e['date'];
