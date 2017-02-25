@@ -29,8 +29,8 @@ page-home {
     }
 
     .home-title{
-      width: 50%;
-      height: 50%;
+      width: 60%;
+      height: 70%;
       overflow: auto;
       margin: auto;
       position: absolute;
@@ -41,7 +41,8 @@ page-home {
       text-align: center;
       img{
          object-fit: contain;
-         max-height: 1rem;
+         min-height: 1rem;
+         max-height: 1.5rem;
        }
 //      .toolbar-title{
 //        padding:0;
