@@ -15,6 +15,7 @@ declare var jQuery:any;
 })
 export class HomePage {
 
+  title = "assets/img/home/title.png";
   slides: any[];
   adSlideOptions: any;
   items = ["item1","item2","item3"];

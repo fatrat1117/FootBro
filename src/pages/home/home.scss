@@ -39,12 +39,17 @@ page-home {
       bottom: 0;
       right: 0;
       text-align: center;
-      .toolbar-title{
-        padding:0;
-        color: white;
-        font-family: 'U.S.S. Dallas Bold';
-        font-size: 1.7rem;
-      }
+      img{
+         object-fit: contain;
+         max-height: 1rem;
+       }
+//      .toolbar-title{
+//        padding:0;
+//        color: white;
+//        font-family: 'U.S.S. Dallas Bold';
+//        font-size: 1.7rem;
+//      }
+        
     }
   }
 
