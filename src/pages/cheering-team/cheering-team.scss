@@ -87,6 +87,19 @@ page-cheering-team{
               justify-content: center;
             }
         }
+        .baby-admin{
+            width: 100%;
+            border-bottom: solid 1px #ffffff;
+        }
+        .baby-self{
+            width: 100%;
+            border-bottom: solid 1px #ffffff;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            .self-row{
+                justify-content: center;
+            }
+        }
       .baby-img-frame{
         position:relative;
         height: 15rem;
@@ -136,6 +149,8 @@ page-cheering-team{
         }
       }
     }
+      
+    
 
   }
 

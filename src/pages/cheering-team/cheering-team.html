@@ -61,47 +61,56 @@
         </div>
       </ion-col>
     </ion-row>
-    <ion-row class="baby-row baby-row-1">
-      <ion-col *ngIf='(afPendingSelf | async)?.$exists()' width-50 no-margin>
-        <ion-row>
+    <ion-row class="baby-row">
+        
+        <div *ngIf='playerService.isAdmin()' class="baby-admin">
+        <ion-row *ngFor='let clrow of buildCheerleaderRowArray(pendingCheerleaders);let i = index' no-margin>
+            <ion-col class="cheerleader-item" width-50 *ngFor='let clItem of clrow; let j = index'>
+                <div *ngIf = 'clItem'>
+                  <ion-row class="item-row">
+                    <div class="baby-img-frame">
+                      <button ion-button icon-only clear class="chat-logo" color="lightGrey" (click)="approve(clItem.id)">
+                        <ion-icon name="lock"></ion-icon>
+                      </button>
+
+                            <img class="img" [src]="clItem.photoMedium">
+
+                    </div>
+                  </ion-row>
+                  <ion-row class="item-row">
+                    <div class="baby-status">
+                      <ion-row>
+                        <h3>{{clItem.name}}</h3>
+                      </ion-row>
+                    </div>
+                  </ion-row>
+                   </div>
+            </ion-col>
+        </ion-row>
+      </div>
+        
+     
+      
+    </ion-row>
+      
+      <div class="baby-row">
+       <div *ngIf='(afPendingSelf | async)?.$exists()' class="baby-self" width-50 no-margin>
+        <ion-row class="self-row">
           <div class="baby-img-frame">
             <img class="img" [src]="(afPendingSelf | async)?.photo">
           </div>
         </ion-row>
-        <ion-row>
+        <ion-row class="self-row">
           <div class="baby-status">
             <ion-row>
               <h3>{{'PendingforReview' | trans}}</h3>
             </ion-row>
           </div>
         </ion-row>
-      </ion-col>
-      <div *ngIf='playerService.isAdmin()'>
-        <ion-col *ngFor='let cl of pendingCheerleaders' width-50 no-margin>
-            <div *ngIf='(cl | json) != ({} | json)'>
-          <ion-row>
-            <div class="baby-img-frame">
-              <button ion-button icon-only clear class="chat-logo" color="lightGrey" (click)="approve(cl.id)">
-                <ion-icon name="lock"></ion-icon>
-              </button>
-                
-                    <img class="img" [src]="cl.photoMedium">
-              
-            </div>
-          </ion-row>
-          <ion-row>
-            <div class="baby-status">
-              <ion-row>
-                <h3>{{cl.name}}</h3>
-              </ion-row>
-            </div>
-          </ion-row>
-                   </div>
-        </ion-col>
       </div>
-    </ion-row>
+      </div>
 
-    <div class="baby-row baby-row-1">
+    <div class="baby-row">
       <ion-row *ngFor='let clrow of buildCheerleaderRowArray(approvedCheerleaders);let i = index' no-margin>
         <ion-col class="cheerleader-item" width-50 *ngFor='let clItem of clrow; let j = index'>
        
