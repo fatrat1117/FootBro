@@ -30,7 +30,7 @@ page-home {
 
     .home-title{
       width: 60%;
-      height: 70%;
+      height: 100%;
       overflow: auto;
       margin: auto;
       position: absolute;
@@ -40,9 +40,8 @@ page-home {
       right: 0;
       text-align: center;
       img{
-         object-fit: contain;
-         min-height: 1rem;
-         max-height: 1.5rem;
+         object-fit: fill;
+     
        }
 //      .toolbar-title{
 //        padding:0;
