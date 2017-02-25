@@ -31,7 +31,7 @@ export class UpdateGamePage {
         params: NavParams) {
         this.id = params.get('id');
         this.match = this.matchService.getMatch(this.id);
-        console.log(this.match);
+        //console.log(this.match);
 
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
         this.matchDate = moment().format("YYYY-MM-DD");
@@ -229,10 +229,10 @@ export class UpdateGamePage {
         //console.log('beforedeleteMatch', this.match);
         //save temp date and tournamentId
         let date = this.match.date;
-        let tournamentId = this.match.tournamentId || 'all';
+        //let tournamentId = this.match.tournamentId || 'all';
         this.matchService.deleteMatch(this.id);
         // console.log('deleteMatch', this.match);
-        this.matchService.getMatchesByDateAsync(date, tournamentId);
+        //this.matchService.getMatchesByDateAsync(date, tournamentId);
         this.close();
     }
 }

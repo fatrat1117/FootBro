@@ -11,7 +11,7 @@
               color="danger" ion-button icon-only clear>
         <ion-icon name="trash"></ion-icon>
       </button>
-      <button [disabled]="!(match.home && match.away &&  match.type && matchDate && matchTime && match.location.address)" (click)="updateMatch()"
+      <button [disabled]="!(match.type && matchDate && matchTime && match.location.address)" (click)="updateMatch()"
               color="primary" ion-button icon-only clear>
         <ion-icon name="cloud-upload"></ion-icon>
       </button>
@@ -23,7 +23,7 @@
   <ion-row class="content-fight">
     <ion-col class="left-team">
       <button ion-button icon-left clear full style="margin:0px;padding:0px;" color="light">
-        <ion-icon name="flag" color="danger"></ion-icon>
+        <ion-icon name="flag" color="danger"></ion-icon>  
         {{'HomeTeam' | trans}}
       </button>
       <a class="left-team-name">{{match?.home?.name}}</a>
@@ -35,7 +35,7 @@
         <ion-col class="left-number">
             <div class="back-top"></div>
             <div class="back-bottom"></div>
-            <ion-input class="top-score"></ion-input>
+            <ion-input class="top-score" [ngModel] = "match.homeScore" (ngModelChange)="match.homeScore=toNumber($event)"></ion-input>
         </ion-col>
         <ion-col class="center-compare">
                 :
@@ -43,7 +43,7 @@
         <ion-col class="right-number">
             <div class="back-top"></div>
             <div class="back-bottom"></div>
-            <ion-input class="top-score"></ion-input>
+            <ion-input class="top-score" [ngModel] = "match.awayScore" (ngModelChange)="match.awayScore=toNumber($event)"></ion-input>
         </ion-col>
       </ion-row>
     </ion-col>
@@ -143,12 +143,10 @@
 
       </ion-item>
     </div>
-
-
-    <ion-item class="game-info-item-dark">
+    <!--<ion-item class="game-info-item-dark">
       <button ion-button clear color="light" icon-left item-left="">
         <ion-icon name="star"></ion-icon>
-        裁判
+        {{Re}}
       </button>
 
     </ion-item>
@@ -159,6 +157,6 @@
       </button>
       <ion-input type="text" style="height:100%;width: 100px;" item-right></ion-input>
 
-    </ion-item>
+    </ion-item>-->
   </ion-list>
 </ion-content>
