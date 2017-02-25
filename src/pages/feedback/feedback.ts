@@ -7,12 +7,24 @@ import { MiscService } from '../../app/misc/misc.service'
 @Component({
   template: `
   <ion-header>
-    <sb-modal-navbar title="Feedback" buttonName="Submit" [isEnabled]="isEnabled" (onFinish)="onSubmit()"></sb-modal-navbar>
+    <ion-navbar>
+      <ion-title>{{ 'Feedback' | trans }}</ion-title>
+      <!--ion-buttons start showWhen="ios">
+        <button (click)="dismiss()" text-center ion-button clear color="light">
+          {{ 'Cancel' | trans }}
+        </button>
+      </ion-buttons-->
+      <ion-buttons end>
+        <button [disabled] = "!isEnabled" (click)="onSubmit()" text-center ion-button clear color="primary">
+          {{ 'Submit' | trans }}
+        </button>
+      </ion-buttons>
+    </ion-navbar>
   </ion-header>
 
   <ion-content>
     <ion-item>
-      <ion-textarea type="text" rows="6" maxlength="200" [(ngModel)]="content" (ngModelChange)=onValueChange()>
+      <ion-textarea type="text" rows="6" maxlength="256" [(ngModel)]="content" (ngModelChange)=onValueChange()>
       </ion-textarea>
     </ion-item>
   </ion-content>

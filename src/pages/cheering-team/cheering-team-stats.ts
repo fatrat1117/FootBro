@@ -9,7 +9,19 @@ import { PlayerService } from '../../app/players/player.service'
 @Component({
   template: `
   <ion-header>
-    <sb-modal-navbar [title]="cheerleader?.name" buttonName="Unlock" isEnabled="true" (onFinish)="unlock()"></sb-modal-navbar>
+    <ion-navbar>
+      <ion-title>{{ cheerleader?.name }}</ion-title>
+      <ion-buttons start showWhen="ios">
+        <button (click)="dismiss()" text-center ion-button clear color="light">
+          {{ 'Cancel' | trans }}
+        </button>
+      </ion-buttons>
+      <ion-buttons end>
+        <button (click)="unlock()" [disabled]="selfPlayer == null" text-center ion-button clear color="primary">
+          {{ 'Unlock' | trans }}
+        </button>
+      </ion-buttons>
+    </ion-navbar>
   </ion-header>
 
   <ion-content>
@@ -50,8 +62,9 @@ export class CheeringTeamStatsPage {
   }
 
   ionViewDidLoad() {
-    //this.selfPlayer = this.playerService.getSelfPlayer();
+    this.addEventListeners();
     this.cheerleader = this.navParams.get("cheerleader");
+    
     this.playerService.getPlayerAsync(this.playerService.selfId());
   }
 

@@ -6,12 +6,24 @@ import { PlayerService } from '../../app/players/player.service'
 @Component({
   template: `
   <ion-header>
-    <sb-modal-navbar title="WeightKG" buttonName="Save" [isEnabled]="isSavable" (onFinish)="save()"></sb-modal-navbar>
+    <ion-navbar>
+      <ion-title>{{ 'WeightKG' | trans }}</ion-title>
+      <ion-buttons start showWhen="ios">
+        <button (click)="dismiss()" text-center ion-button clear color="light">
+          {{ 'Cancel' | trans }}
+        </button>
+      </ion-buttons>
+      <ion-buttons end>
+        <button [disabled] = "!isSavable" (click)="save()" text-center ion-button clear color="primary">
+          {{ 'Save' | trans }}
+        </button>
+      </ion-buttons>
+    </ion-navbar>
   </ion-header>
 
   <ion-content>
     <ion-item>
-      <ion-input #valueInput type="number" clearInput [(ngModel)]="newValue" (ngModelChange)=onValueChange()>
+      <ion-input #valueInput type="number" [(ngModel)]="newValue" (ngModelChange)=onValueChange()>
       </ion-input>
     </ion-item>
   </ion-content>
@@ -30,7 +42,10 @@ export class EditPlayerWeightPage {
   ionViewDidLoad() {
     this.oldValue = this.navParams.get("weight");
     this.newValue = this.oldValue;
-    this.valueInput.setFocus();
+
+    setTimeout(() => {
+      this.valueInput.setFocus();
+    }, 500);
   }
 
   onValueChange() {
