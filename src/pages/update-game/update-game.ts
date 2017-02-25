@@ -5,6 +5,7 @@ import { Team } from '../../app/teams/team.model'
 import { Match } from '../../app/matches/match.model'
 import { MatchService } from '../../app/matches/match.service'
 import { PlayerService } from '../../app/players/player.service'
+import { TeamService } from '../../app/teams/team.service'
 import { UIHelper } from '../../providers/uihelper'
 import * as moment from 'moment';
 declare var google: any;
@@ -21,6 +22,7 @@ export class UpdateGamePage {
     matchTime;
     tournamentId;
     id;
+    myTeam;
 
     constructor(public navCtrl: NavController,
         private modalCtrl: ModalController,
@@ -28,6 +30,7 @@ export class UpdateGamePage {
         private matchService: MatchService,
         private helper: UIHelper,
         private playerService: PlayerService,
+        private teamService: TeamService,
         params: NavParams) {
         this.id = params.get('id');
         this.match = this.matchService.getMatch(this.id);
@@ -94,8 +97,14 @@ export class UpdateGamePage {
             }
             //console.log(this.match.location);
         });
+
+        this.SetMyTeam();
     }
 
+    SetMyTeam() {
+       // if (this.playerService.isCaptain(this.playerService.selfId(), this.match.home.id))
+       //     this.myTeam = this.teamService
+    }
     //根据胜率设置图像例如90%
     setSuccessRate(successRate) {
         var backCircle1 = document.getElementById("backCircle1");
