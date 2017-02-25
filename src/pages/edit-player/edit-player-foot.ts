@@ -6,7 +6,14 @@ import { PlayerService } from '../../app/players/player.service'
 @Component({
   template: `
   <ion-header>
-    <sb-modal-navbar title="Foot" (onFinish)="save()"></sb-modal-navbar>
+    <ion-navbar>
+      <ion-title>{{ 'Foot' | trans }}</ion-title>
+      <ion-buttons start showWhen="ios">
+        <button (click)="dismiss()" text-center ion-button clear color="light">
+          {{ 'Cancel' | trans }}
+        </button>
+      </ion-buttons>
+    </ion-navbar>
   </ion-header>
 
   <ion-content>

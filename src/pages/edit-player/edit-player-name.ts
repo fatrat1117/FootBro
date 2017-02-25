@@ -1,3 +1,4 @@
+import { Keyboard } from 'ionic-native';
 import { Component, ViewChild } from '@angular/core';
 import { ViewController, NavParams} from 'ionic-angular';
 
@@ -7,12 +8,24 @@ import { PlayerService } from '../../app/players/player.service'
 @Component({
   template: `
   <ion-header>
-    <sb-modal-navbar title="Nickname" buttonName="Save" [isEnabled]="isSavable" (onFinish)="save()"></sb-modal-navbar>
+    <ion-navbar>
+      <ion-title>{{ 'NickName' | trans }}</ion-title>
+      <ion-buttons start showWhen="ios">
+        <button (click)="dismiss()" text-center ion-button clear color="light">
+          {{ 'Cancel' | trans }}
+        </button>
+      </ion-buttons>
+      <ion-buttons end>
+        <button [disabled] = "!isSavable" (click)="save()" text-center ion-button clear color="primary">
+          {{ 'Save' | trans }}
+        </button>
+      </ion-buttons>
+    </ion-navbar>
   </ion-header>
 
   <ion-content>
     <ion-item>
-      <ion-input #valueInput type="text" maxlength="32" clearInput [(ngModel)]="newValue" (ngModelChange)=onValueChange()>
+      <ion-input #valueInput type="text" maxlength="32" [(ngModel)]="newValue" (ngModelChange)=onValueChange()>
       </ion-input>
     </ion-item>
   </ion-content>
@@ -31,7 +44,9 @@ export class EditPlayerNamePage {
   ionViewDidLoad() {
     this.oldValue = this.navParams.get("name");
     this.newValue = this.oldValue;
-    this.valueInput.setFocus();
+    setTimeout(() => {
+      this.valueInput.setFocus();
+    }, 500);
   }
 
   onValueChange() {

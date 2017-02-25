@@ -214,7 +214,8 @@ export class Localization {
             mostundefeated: 'Most consecutive undefeated',
             mostcleansheets: 'Most consecutive clean sheets',
             winningrate: 'Winning rate',
-            updatematch: 'Update Match'
+            updatematch: 'Update Match',
+            CreateTeam: 'Create Team'
         },
 
         zh: {
@@ -410,7 +411,8 @@ export class Localization {
             mostundefeated: '最长的不败',
             mostcleansheets: '最长的不失球',
             winningrate: '胜率',
-            updatematch: '更新比赛'
+            updatematch: '更新比赛',
+            CreateTeam: '创建球队'
         }
     }
 }
