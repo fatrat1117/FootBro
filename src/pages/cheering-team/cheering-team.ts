@@ -113,5 +113,22 @@ export class CheeringTeamPage {
       user: cl
     });
   }
+  
+  buildCheerleaderRowArray(appCheerleaders){
+        var numPerRow = 2;
+        var rowArray = [];
+        if (!appCheerleaders){
+            return rowArray;
+        }
+        for (var i = 0; i < appCheerleaders.length; i+=numPerRow){
+            var rowItem = [];
+            for (var j = 0 ; j < numPerRow ;j ++){
+                var curr = appCheerleaders[i+j];
+                rowItem.push(curr);
+            }
+            rowArray.push(rowItem);
+        }
+        return rowArray;
+  }
 }
 

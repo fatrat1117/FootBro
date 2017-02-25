@@ -78,8 +78,19 @@ page-cheering-team{
     }
 
     .baby-row{
+        .cheerleader-item{
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            .item-row{
+              justify-content: center;
+            }
+        }
       .baby-img-frame{
         position:relative;
+        height: 15rem;
+        width: 15rem;
         .chat-shadow{
           position: absolute;
           background: grey;
@@ -96,13 +107,14 @@ page-cheering-team{
           //max-width: 1.8rem;
         }
         .img{
-          height: 256px;
-          width: 256px;
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
         }
       }
 
       .baby-status{
-        width:100%;
+        width:15rem;
         h3{
             margin:0;
             font-size:1.4rem;
