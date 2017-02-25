@@ -229,10 +229,10 @@ export class UpdateGamePage {
         //console.log('beforedeleteMatch', this.match);
         //save temp date and tournamentId
         let date = this.match.date;
-        let tournamentId = this.match.tournamentId || 'all';
+        //let tournamentId = this.match.tournamentId || 'all';
         this.matchService.deleteMatch(this.id);
         // console.log('deleteMatch', this.match);
-        this.matchService.getMatchesByDateAsync(date, tournamentId);
+        //this.matchService.getMatchesByDateAsync(date, tournamentId);
         this.close();
     }
 }

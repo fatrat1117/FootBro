@@ -697,7 +697,8 @@ export class FirebaseManager {
   }
 
   deleteMatch(id) {
-      this.afMatch(id).remove();  
+      this.afMatch(id).remove().then(() => {
+        this.FireEvent('matcheschanged')});  
   }
 
   scheduleMatch(matchObj) {

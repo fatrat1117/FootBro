@@ -99,6 +99,10 @@ export class MatchesPage {
         this.matchStandings = this.matchService.getTournamentTable(tournamentId);
       //console.log(this.matchStandings);
     });
+
+    document.addEventListener('matcheschanged', e => {
+      this.scrollToDate(this.selectedDate);
+    })
   }
 
   addYears() {
