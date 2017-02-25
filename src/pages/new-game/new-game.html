@@ -9,7 +9,7 @@
     <ion-buttons right>
       <button [disabled]="!(match.home && match.away &&  match.type && matchDate && matchTime && match.location.address)" (click)="scheduleMatch()"
               color="primary" ion-button icon-only clear>
-        {{'Save' | trans}}
+         <ion-icon name="cloud-upload"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>

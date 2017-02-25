@@ -154,4 +154,12 @@ export class MatchService {
   scheduleMatch(matchObj) {
     this.fm.scheduleMatch(matchObj);
   }
+
+  deleteMatch(id) {
+    this.fm.deleteMatch(id);
+  }
+
+  updateMatch() {
+    
+  }
 }

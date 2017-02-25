@@ -7,9 +7,13 @@
       </button>
     </ion-buttons>
     <ion-buttons right>
-      <button [disabled]="!(match.home && match.away &&  match.type && matchDate && matchTime && match.location.address)" (click)="scheduleMatch()"
+      <button (click)="deleteMatch()"
+              color="danger" ion-button icon-only clear>
+        <ion-icon name="trash"></ion-icon>
+      </button>
+      <button [disabled]="!(match.home && match.away &&  match.type && matchDate && matchTime && match.location.address)" (click)="updateMatch()"
               color="primary" ion-button icon-only clear>
-        {{'Save' | trans}}
+        <ion-icon name="cloud-upload"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -17,7 +21,7 @@
 
 <ion-content>
   <ion-row class="content-fight">
-    <ion-col class="left-team" (click)="searchTeam(1)">
+    <ion-col class="left-team">
       <button ion-button icon-left clear full style="margin:0px;padding:0px;" color="light">
         <ion-icon name="flag" color="danger"></ion-icon>
         {{'HomeTeam' | trans}}
@@ -31,7 +35,7 @@
         <ion-col class="left-number">
             <div class="back-top"></div>
             <div class="back-bottom"></div>
-            <div class="top-score">4</div>
+            <ion-input class="top-score"></ion-input>
         </ion-col>
         <ion-col class="center-compare">
                 :
@@ -39,12 +43,12 @@
         <ion-col class="right-number">
             <div class="back-top"></div>
             <div class="back-bottom"></div>
-            <div class="top-score">1</div>
+            <ion-input class="top-score"></ion-input>
         </ion-col>
       </ion-row>
     </ion-col>
 
-    <ion-col class="right-team" (click)="searchTeam(2)">
+    <ion-col class="right-team">
       <button ion-button icon-left clear full style="margin:0px;padding:0px;"color="light">
         <ion-icon name="flag" color="primary"></ion-icon>
         {{'AwayTeam' | trans}}

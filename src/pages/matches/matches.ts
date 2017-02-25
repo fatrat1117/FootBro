@@ -85,6 +85,7 @@ export class MatchesPage {
     document.addEventListener('matchesbydateready', e => {
       let date = e['detail'];
       this.matches = this.matchService.getMatchesByDate(date);
+      console.log(this.matches);
     });
 
     document.addEventListener('servicetournamenttableready', e=>{

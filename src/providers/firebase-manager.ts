@@ -697,6 +697,10 @@ export class FirebaseManager {
     return this.af.database.object('/matches/dates/' + day);
   }
 
+  deleteMatch(id) {
+      this.afMatch(id).remove();  
+  }
+
   scheduleMatch(matchObj) {
     console.log('scheduleMatch', matchObj);
     this.afMatchList().push(matchObj);

@@ -148,7 +148,7 @@ export class PlayerService {
   }
 
   isAdmin() {
-    if (this.fm.admins && this.selfId() && true === this.fm.admins[this.selfId()])
+    if (this.fm.admins && this.selfId() && this.fm.admins[this.selfId()])
       return true;
     return false;
   }
