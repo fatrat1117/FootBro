@@ -170,14 +170,12 @@
   <ion-row>
     <ion-col class="col-30"></ion-col>
     <ion-col class="col-40 round-progress-container">
-      <round-progress [current]="currTeamStat?.rate" [max]=100 [color]="'#'+'00ff00'" [background]="'#'+'a0a0a0'" [radius]="125"
+      <round-progress [current]="currTeamStat?.roundedRate" [max]=100 [color]="'#'+'00ff00'" [background]="'#'+'a0a0a0'" [radius]="125"
         [stroke]="20" [semicircle]="false" [rounded]="true" [clockwise]="false" [responsive]="true"> </round-progress>
       <span class="circle-text">
             <div class="win-ratio-label">{{'winningrate' | trans}}</div>
-            <div class="win-ratio">{{currTeamStat?.rate}}%</div>
+            <div class="win-ratio">{{currTeamStat?.roundedRate}}%</div>
         </span>
-
-      <!--<div text-center class="win-rate-text">{{currTeamStat?.rate * 100}}</div>-->
     </ion-col>
     <ion-col class="col-30"></ion-col>
   </ion-row>

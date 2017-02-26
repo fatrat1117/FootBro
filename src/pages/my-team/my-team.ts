@@ -144,7 +144,8 @@ export class MyTeamPage {
     firstLine.style.backgroundColor = "#555555";
     secondLine.style.backgroundColor = "#555555";
     thirdLine.style.backgroundColor = "#555555";
-
+    //console.log(this.team);
+    
     switch (position) {
       case 0:
         this.currTeamStat = this.team.last_15;

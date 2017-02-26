@@ -55,7 +55,7 @@ export class TeamService {
         teamData.last_15 = teamStats.last_15;
         teamData.last_30 = teamStats.last_30;
         teamData.overall = teamStats.overall;
-        console.log(teamStats);
+        //console.log(teamStats);
         this.updateAvg(teamData.last_15);
         this.updateAvg(teamData.last_30);
         this.updateAvg(teamData.overall);
@@ -113,14 +113,14 @@ export class TeamService {
   }
 
   updateAvg(obj) {
-    console.log(obj);
-    
+    //console.log(obj.rate);
     if (obj && obj.GA)
       obj['avgGA'] = obj.total_matches > 0 ? (obj.GA / obj.total_matches).toFixed(2) : 0;
     if (obj && obj.GF)
       obj['avgGF'] = obj.total_matches > 0 ? (obj.GF / obj.total_matches).toFixed(2) : 0;
-    if (obj && obj.rate)
-      obj.rate = Math.round(obj.rate * 100);
+    if (obj && 'rate' in obj)
+      obj['roundedRate'] = Math.round(obj.rate * 100);
+    console.log(obj.roundedRate);
   }
 
   findOrCreateTeam(id): Team {
