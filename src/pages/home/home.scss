@@ -6,52 +6,50 @@ page-home {
 
 
     ion-navbar.toolbar{
-      min-height: 2.5rem;
+        min-height: 2rem;
+     max-height: 3rem;
       position: relative;
-      padding: 0.8rem;
-
-    }
-    .home-location-select{
-      color: white;
-      align-items: center;
-      justify-content: flex-start;
-      display: flex;
-      h5{
-        margin:0;
-        font-size: 1rem;
-        float: left;
-        margin-right: 0.2rem;
-      }
-      ion-icon{
-        font-size: 1rem;
-        float: left;
-      }
-    }
-
+      padding: 0.5rem;
     .home-title{
-      width: 60%;
-      height: 100%;
-      overflow: auto;
-      margin: auto;
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      text-align: center;
-     
-      .toolbar-title{
+         max-height: 3rem;
+       .toolbar-title{
         padding:0;
         color: white;
-        font-family: 'U.S.S. Dallas Bold';
-        font-size: 1.7rem;
+        display: flex;
+        justify-content: center;
+           padding-left: 20%;
+           padding-right: 20%;
+           padding-top: 0.8rem;
+           padding-bottom: 0.8rem;
+           max-height: 3rem;
         img{
          object-fit: fill;
-     
+//        max-width: 14rem;
+//        max-height: 1rem;
        }
       }
         
     }
+
+    }
+//    .home-location-select{
+//      color: white;
+//      align-items: center;
+//      justify-content: flex-start;
+//      display: flex;
+//      h5{
+//        margin:0;
+//        font-size: 1rem;
+//        float: left;
+//        margin-right: 0.2rem;
+//      }
+//      ion-icon{
+//        font-size: 1rem;
+//        float: left;
+//      }
+//    }
+
+   
   }
 
   .card-background-page{
