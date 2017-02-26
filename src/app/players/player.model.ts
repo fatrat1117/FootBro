@@ -18,3 +18,11 @@ export class Player {
   popularity;
   points: number;
 }
+
+export class PlayerMatchData {
+  player: Player;
+  goal;
+  assist;
+  red;
+  yellow;
+}

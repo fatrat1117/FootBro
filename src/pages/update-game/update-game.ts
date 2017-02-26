@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, ViewController, NavParams } from 'ionic-angular';
 import { SearchTeamPage } from '../search-team/search-team';
+import { SearchPlayerPage } from '../search-player/search-player';
 import { Team } from '../../app/teams/team.model'
 import { Match } from '../../app/matches/match.model'
 import { MatchService } from '../../app/matches/match.service'
 import { PlayerService } from '../../app/players/player.service'
+import { PlayerMatchData } from '../../app/players/player.model'
 import { TeamService } from '../../app/teams/team.service'
 import { UIHelper } from '../../providers/uihelper'
 import * as moment from 'moment';
@@ -15,14 +17,15 @@ declare var google: any;
     templateUrl: 'update-game.html'
 })
 export class UpdateGamePage {
-    players = [];
+    //players = [];
     match = new Match();
     minDate;
     matchDate;
     matchTime;
     tournamentId;
     id;
-    myTeam;
+    homePlayers : PlayerMatchData[];
+    awayPlayers : PlayerMatchData[];
 
     constructor(public navCtrl: NavController,
         private modalCtrl: ModalController,
@@ -34,50 +37,48 @@ export class UpdateGamePage {
         params: NavParams) {
         this.id = params.get('id');
         this.match = this.matchService.getMatch(this.id);
-        //console.log(this.match);
-
+        console.log(this.match);
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
         this.matchDate = moment().format("YYYY-MM-DD");
         this.matchTime = "15:00";
+        // for (var i = 0; i < 4; i++) {
+        //     this.players[i] = {
+        //         name: i,
+        //         items: [],
+        //         hidden: true,
+        //         showExpandableIcon: "ios-arrow-down"
+        //     };
+        //     for (var j = 0; j < 3; j++) {
+        //         // this.players[i].items.push(i + '-' + j);
+        //         this.players[i].items = [
+        //             {
+        //                 name: "进球",
+        //                 number: 5,
+        //                 icon: "assets/icon/b2.png",
+        //                 color: "light"
+        //             },
+        //             {
+        //                 name: "助攻",
+        //                 number: 1,
+        //                 icon: "assets/icon/b3.png",
+        //                 color: "light"
+        //             },
+        //             {
+        //                 name: "红牌",
+        //                 number: 2,
+        //                 icon: "assets/icon/b2.png",
+        //                 color: "light"
+        //             },
+        //             {
+        //                 name: "黄牌",
+        //                 number: 4,
+        //                 icon: "assets/icon/b2.png",
+        //                 color: "light"
+        //             },
 
-        for (var i = 0; i < 4; i++) {
-            this.players[i] = {
-                name: i,
-                items: [],
-                hidden: true,
-                showExpandableIcon: "ios-arrow-down"
-            };
-            for (var j = 0; j < 3; j++) {
-                // this.players[i].items.push(i + '-' + j);
-                this.players[i].items = [
-                    {
-                        name: "进球",
-                        number: 5,
-                        icon: "assets/icon/b2.png",
-                        color: "light"
-                    },
-                    {
-                        name: "助攻",
-                        number: 1,
-                        icon: "assets/icon/b3.png",
-                        color: "light"
-                    },
-                    {
-                        name: "红牌",
-                        number: 2,
-                        icon: "assets/icon/b2.png",
-                        color: "light"
-                    },
-                    {
-                        name: "黄牌",
-                        number: 4,
-                        icon: "assets/icon/b2.png",
-                        color: "light"
-                    },
-
-                ];
-            }
-        }
+        //         ];
+        //     }
+        // }
     }
 
     ionViewDidLoad() {
@@ -97,14 +98,8 @@ export class UpdateGamePage {
             }
             //console.log(this.match.location);
         });
-
-        this.SetMyTeam();
     }
 
-    SetMyTeam() {
-       // if (this.playerService.isCaptain(this.playerService.selfId(), this.match.home.id))
-       //     this.myTeam = this.teamService
-    }
     //根据胜率设置图像例如90%
     setSuccessRate(successRate) {
         var backCircle1 = document.getElementById("backCircle1");
@@ -135,32 +130,34 @@ export class UpdateGamePage {
         return len;
     }
     //显示或关闭队员得分详情
-    clickTeamMember(player) {
-        if (player.hidden) {
-            player.showExpandableIcon = "ios-arrow-up";
-            for (var i = 0; i < this.players.length; i++) {
-                for (var j = 0; j < this.players[i].items.length; j++) {
-                    if (this.players[i].items[j].number <= 0) {
-                        this.players[i].items[j].color = "light";
-                    } else {
-                        this.players[i].items[j].color = "secondary";
-                    }
-                }
-            }
-        } else {
-            player.showExpandableIcon = "ios-arrow-down";
-        }
-        player.hidden = !player.hidden;
-    }
-    //删除球员
-    deleteTeamPlayer(player) {
-        for (var i = 0; i < this.players.length; i++) {
-            if (this.players[i] == player) {
-                this.players.splice(i, 1);
-                break;
-            }
-        }
-    }
+    // clickTeamMember(player) {
+    //     if (player.hidden) {
+    //         player.showExpandableIcon = "ios-arrow-up";
+    //         for (var i = 0; i < this.players.length; i++) {
+    //             for (var j = 0; j < this.players[i].items.length; j++) {
+    //                 if (this.players[i].items[j].number <= 0) {
+    //                     this.players[i].items[j].color = "light";
+    //                 } else {
+    //                     this.players[i].items[j].color = "secondary";
+    //                 }
+    //             }
+    //         }
+    //     } else {
+    //         player.showExpandableIcon = "ios-arrow-down";
+    //     }
+    //     player.hidden = !player.hidden;
+    // }
+
+    // //删除球员
+    // deleteTeamPlayer(player) {
+    //     for (var i = 0; i < this.players.length; i++) {
+    //         if (this.players[i] == player) {
+    //             this.players.splice(i, 1);
+    //             break;
+    //         }
+    //     }
+    // }
+
     //减少得分
     minusScore(item) {
         if (item.number > 0) {
@@ -243,5 +240,15 @@ export class UpdateGamePage {
         // console.log('deleteMatch', this.match);
         //this.matchService.getMatchesByDateAsync(date, tournamentId);
         this.close();
+    }
+
+    choosePlayers(id) {
+        let modal = this.modalCtrl.create(SearchPlayerPage, {teamId: id, 
+            showClose: true,
+            selectPlayersMode: true});
+        modal.onDidDismiss(e => {
+
+        });
+        modal.present();
     }
 }

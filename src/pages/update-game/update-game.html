@@ -7,12 +7,11 @@
       </button>
     </ion-buttons>
     <ion-buttons right>
-      <button (click)="deleteMatch()"
-              color="danger" ion-button icon-only clear>
+      <button (click)="deleteMatch()" color="danger" ion-button icon-only clear>
         <ion-icon name="trash"></ion-icon>
       </button>
-      <button [disabled]="!(match.type && matchDate && matchTime && match.location.address)" (click)="updateMatch()"
-              color="primary" ion-button icon-only clear>
+      <button [disabled]="!(match.type && matchDate && matchTime && match.location.address)" (click)="updateMatch()" color="primary"
+        ion-button icon-only clear>
         <ion-icon name="cloud-upload"></ion-icon>
       </button>
     </ion-buttons>
@@ -23,127 +22,127 @@
   <ion-row class="content-fight">
     <ion-col class="left-team">
       <button ion-button icon-left clear full style="margin:0px;padding:0px;" color="light">
-        <ion-icon name="flag" color="danger"></ion-icon>  
-        {{'HomeTeam' | trans}}
-      </button>
-      <a class="left-team-name">{{match?.home?.name}}</a>
+<ion-icon name="flag" color="danger"></ion-icon>
+{{'HomeTeam' | trans}}
+</button>
+<a class="left-team-name">{{match?.home?.name}}</a>
 
+</ion-col>
+
+<ion-col class="center-score" width-25>
+  <ion-row class="no-margin no-padding">
+    <ion-col class="left-number">
+      <div class="back-top"></div>
+      <div class="back-bottom"></div>
+      <ion-input class="top-score" [ngModel]="match.homeScore" (ngModelChange)="match.homeScore=toNumber($event)"></ion-input>
     </ion-col>
-
-    <ion-col class="center-score" width-25>
-      <ion-row class="no-margin no-padding">
-        <ion-col class="left-number">
-            <div class="back-top"></div>
-            <div class="back-bottom"></div>
-            <ion-input class="top-score" [ngModel] = "match.homeScore" (ngModelChange)="match.homeScore=toNumber($event)"></ion-input>
-        </ion-col>
-        <ion-col class="center-compare">
-                :
-        </ion-col>
-        <ion-col class="right-number">
-            <div class="back-top"></div>
-            <div class="back-bottom"></div>
-            <ion-input class="top-score" [ngModel] = "match.awayScore" (ngModelChange)="match.awayScore=toNumber($event)"></ion-input>
-        </ion-col>
-      </ion-row>
+    <ion-col class="center-compare">
+      :
     </ion-col>
-
-    <ion-col class="right-team">
-      <button ion-button icon-left clear full style="margin:0px;padding:0px;"color="light">
-        <ion-icon name="flag" color="primary"></ion-icon>
-        {{'AwayTeam' | trans}}
-      </button>
-      <a class="right-team-name">{{match?.away?.name}}</a>
-
+    <ion-col class="right-number">
+      <div class="back-top"></div>
+      <div class="back-bottom"></div>
+      <ion-input class="top-score" [ngModel]="match.awayScore" (ngModelChange)="match.awayScore=toNumber($event)"></ion-input>
     </ion-col>
   </ion-row>
+</ion-col>
 
-  <ion-list no-lines class="content-game-info">
-    <ion-item class="game-info-item">
-      <button ion-button clear full class="game-info-item-left" item-left>{{'Type' | trans}}</button>
-      <div class="game-info-item-right" item-right>
-        <ion-select text-center [ngModel]="match.type" (ngModelChange)="match.type=toNumber($event)">
-          <ion-option value="5">5 v 5</ion-option>
-          <ion-option value="7">7 v 7</ion-option>
-          <ion-option value="11">11 v 11</ion-option>
-        </ion-select>
-      </div>
-    </ion-item>
+<ion-col class="right-team">
+  <button ion-button icon-left clear full style="margin:0px;padding:0px;"color="light">
+<ion-icon name="flag" color="primary"></ion-icon>
+{{'AwayTeam' | trans}}
+</button>
+<a class="right-team-name">{{match?.away?.name}}</a>
 
-    <ion-item class="game-info-item-light">
-      <button ion-button clear full class="game-info-item-left" item-left>{{'Location' | trans}}</button>
-      <div class="game-info-item-right-gray" item-right>
-        <img src="assets/img/powered_by_google_on_non_white.png" style="margin-left: 10%"/>
-        <input id="autocompleteInput" [(ngModel)]="match.location.name" style="margin-left:10%;width:80%; border:none; text-align:center;" />
-      </div>
-    </ion-item>
+</ion-col>
+</ion-row>
 
-    <ion-item class="game-info-item">
-      <button ion-button clear full class="game-info-item-left" item-left>{{'Date' | trans}}</button>
-      <div class="game-info-item-right" item-right>
-        <ion-datetime text-center displayFormat="YYYY-MM-DD" [min]="minDate" [(ngModel)]="matchDate"></ion-datetime>
-      </div>
-    </ion-item>
+<ion-list no-lines class="content-game-info">
+  <ion-item class="game-info-item">
+    <button ion-button clear full class="game-info-item-left" item-left>{{'Type' | trans}}</button>
+    <div class="game-info-item-right" item-right>
+      <ion-select text-center [ngModel]="match.type" (ngModelChange)="match.type=toNumber($event)">
+        <ion-option value="5">5 v 5</ion-option>
+        <ion-option value="7">7 v 7</ion-option>
+        <ion-option value="11">11 v 11</ion-option>
+      </ion-select>
+    </div>
+  </ion-item>
 
-    <ion-item class="game-info-item-light">
-      <button ion-button clear full class="game-info-item-left" item-left>{{'Time' | trans}}</button>
-      <div class="game-info-item-right-gray" item-right>
-        <ion-datetime text-center displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="matchTime"></ion-datetime>
-      </div>
-    </ion-item>
+  <ion-item class="game-info-item-light">
+    <button ion-button clear full class="game-info-item-left" item-left>{{'Location' | trans}}</button>
+    <div class="game-info-item-right-gray" item-right>
+      <img src="assets/img/powered_by_google_on_non_white.png" style="margin-left: 10%"/>
+<input id="autocompleteInput" [(ngModel)]="match.location.name" style="margin-left:10%;width:80%; border:none; text-align:center;" />
+</div>
+</ion-item>
 
-    <ion-item class="game-info-item-dark">
+<ion-item class="game-info-item">
+  <button ion-button clear full class="game-info-item-left" item-left>{{'Date' | trans}}</button>
+  <div class="game-info-item-right" item-right>
+    <ion-datetime text-center displayFormat="YYYY-MM-DD" [min]="minDate" [(ngModel)]="matchDate"></ion-datetime>
+  </div>
+</ion-item>
+
+<ion-item class="game-info-item-light">
+  <button ion-button clear full class="game-info-item-left" item-left>{{'Time' | trans}}</button>
+  <div class="game-info-item-right-gray" item-right>
+    <ion-datetime text-center displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="matchTime"></ion-datetime>
+  </div>
+</ion-item>
+
+<!--<ion-item class="game-info-item-dark">
       <button ion-button clear color="light" icon-left item-left>
         <ion-icon name="flag" color="danger"></ion-icon>
         {{'HomeTeam' | trans}}
       </button>
-    </ion-item>
-
-    <ion-item class="game-info-item-team-title">
-      <button ion-button class="game-info-team-title-button">阿根廷男子足球国家队
+    </ion-item>-->
+<div>
+  <ion-item class="game-info-item-team-title">
+    <button ion-button class="game-info-team-title-button">{{match?.home?.name}}
       </button>
-    </ion-item>
+  </ion-item>
 
-    <ion-item class="game-info-item">
-      <button ion-button item-left clear class="item-game-info-left-text">队员</button>
-      <button ion-button item-right clear icon-right class="item-game-info-right-text">
-        参赛球员
+  <ion-item class="game-info-item">
+    <button ion-button item-left clear class="item-game-info-left-text">{{'participants' | trans}}</button>
+    <button ion-button item-right clear icon-right class="item-game-info-right-text" (click)='choosePlayers(match.homeId)'>
         <ion-icon name="add-circle"></ion-icon>
       </button>
-    </ion-item>
+  </ion-item>
 
-    <div class="content-expandable" *ngFor="let player of players">
-      <ion-item class="expandable-member-name" (click)="clickTeamMember(player)">
-        <button ion-button item-left icon-only clear (click)="deleteTeamPlayer(player)">
+  <div class="content-expandable" *ngFor="let player of homePlayers">
+    <ion-item class="expandable-member-name" (click)="clickTeamMember(player)">
+      <button ion-button item-left icon-only clear (click)="deleteTeamPlayer(player)">
           <ion-icon name="remove-circle" color="danger"></ion-icon>
         </button>
-        <img src="assets/img/icon1.jpg" class="member-img" />
-        <button ion-button item-right icon-right clear color="light">
-          梅西{{player.name}}
+      <img [src]="player?.player?.photo" class="member-img" />
+      <button ion-button item-right icon-right clear color="light">
+          {{player?.player?.name}}
           <ion-icon [name]="player.showExpandableIcon"></ion-icon>
         </button>
-      </ion-item>
+    </ion-item>
 
-      <ion-item class="expandable-member-property" *ngFor="let item of player.items" [hidden]="player.hidden">
-        <img [src]="item.icon" class="desc-img" item-left/>
-        <button ion-button clear color="light">{{item.name}}</button>
-        <div item-right>
-          <button ion-button icon-only clear (click)="minusScore(item)" [color]="item.color">
+    <!--<ion-item class="expandable-member-property" *ngFor="let item of player.items" [hidden]="player.hidden">
+      <img [src]="item.icon" class="desc-img" item-left/>
+      <button ion-button clear color="light">{{item.name}}</button>
+      <div item-right>
+        <button ion-button icon-only clear (click)="minusScore(item)" [color]="item.color">
             <ion-icon name="arrow-dropleft"></ion-icon>
           </button>
 
-          <button ion-button clear color="secondary">
+        <button ion-button clear color="secondary">
             {{item.number}}
           </button>
 
-          <button ion-button icon-only clear (click)="addScore(item)">
+        <button ion-button icon-only clear (click)="addScore(item)">
             <ion-icon name="arrow-dropright" color="secondary"></ion-icon>
           </button>
-        </div>
+      </div>
 
-      </ion-item>
-    </div>
-    <!--<ion-item class="game-info-item-dark">
+    </ion-item>-->
+  </div>
+</div>
+<!--<ion-item class="game-info-item-dark">
       <button ion-button clear color="light" icon-left item-left="">
         <ion-icon name="star"></ion-icon>
         {{Re}}
@@ -158,5 +157,5 @@
       <ion-input type="text" style="height:100%;width: 100px;" item-right></ion-input>
 
     </ion-item>-->
-  </ion-list>
+</ion-list>
 </ion-content>
