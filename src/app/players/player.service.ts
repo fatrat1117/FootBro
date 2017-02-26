@@ -53,6 +53,8 @@ export class PlayerService {
 
       if (playerData.role)
         player.role = playerData.role;
+      player.joinTime = playerData.joinTime;
+
       this.playersMap[id] = player;
       if (player.role && player.role === 'cheerleader') {
         //this.fm. getCheerleaderPublicAsync(id);
