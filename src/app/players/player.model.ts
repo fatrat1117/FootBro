@@ -17,6 +17,7 @@ export class Player {
   cheerleaders: string[];
   popularity;
   points: number;
+  joinTime;
 }
 
 export class PlayerMatchData {
