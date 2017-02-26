@@ -21,6 +21,7 @@ export class TeamService {
         teamData.logo = team['basic-info'].logo;
         teamData.name = team['basic-info'].name;
         teamData.totalPlayers = team['basic-info'].totalPlayers;
+        teamData.captain = team['basic-info'].captain;
         teamData.players = team.players;
 
         let teamPublic = this.fm.getTeamPublic(teamId);
@@ -54,6 +55,7 @@ export class TeamService {
         teamData.last_15 = teamStats.last_15;
         teamData.last_30 = teamStats.last_30;
         teamData.overall = teamStats.overall;
+        console.log(teamStats);
         this.updateAvg(teamData.last_15);
         this.updateAvg(teamData.last_30);
         this.updateAvg(teamData.overall);
@@ -111,6 +113,8 @@ export class TeamService {
   }
 
   updateAvg(obj) {
+    console.log(obj);
+    
     if (obj && obj.GA)
       obj['avgGA'] = obj.total_matches > 0 ? (obj.GA / obj.total_matches).toFixed(2) : 0;
     if (obj && obj.GF)

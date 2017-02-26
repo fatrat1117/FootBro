@@ -47,4 +47,5 @@ export class Team {
   last_30;
   overall;
   yearlyHistory = [];
+  captain;
 }
