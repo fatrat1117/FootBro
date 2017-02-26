@@ -113,7 +113,7 @@
     <div class="baby-row">
       <ion-row *ngFor='let clrow of buildCheerleaderRowArray(approvedCheerleaders);let i = index' no-margin>
         <ion-col class="cheerleader-item" width-50 *ngFor='let clItem of clrow; let j = index'>
-       
+        <div *ngIf = 'clItem'>
             <ion-row class="item-row">
           <div class="baby-img-frame">
             <button *ngIf="isUnlocked(clItem.id)" ion-button icon-only clear class="chat-logo" color="primary" (click)="enterChatPage(clItem)">
@@ -138,6 +138,7 @@
             </ion-row>
           </div>
         </ion-row>
+            </div>
         </ion-col>
       </ion-row>
 
