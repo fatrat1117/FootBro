@@ -77,7 +77,12 @@ export class SearchPlayerPage {
   }
 
   dismiss() {
-    console.log(this.selectedPlayersMap);
+    let playerIds = [];
+    for (let key in this.selectedPlayersMap) {
+      if (this.selectedPlayersMap[key])
+        playerIds.push(key);
+    }
+    this.viewCtrl.dismiss({playerIds: playerIds});
   }
 
   onSelectionChange(playerId, e) {

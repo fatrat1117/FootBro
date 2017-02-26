@@ -247,7 +247,10 @@ export class UpdateGamePage {
             showClose: true,
             selectPlayersMode: true});
         modal.onDidDismiss(e => {
-
+            if (e && e['playerIds']) {
+                let playerIds = e['playerIds'];
+                console.log(playerIds);
+            }
         });
         modal.present();
     }
