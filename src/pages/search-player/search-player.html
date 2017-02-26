@@ -2,10 +2,15 @@
   <ion-navbar>
     <ion-title>{{'Players' | trans}}</ion-title>
     <ion-buttons left *ngIf="showClose">
-      <button (click)="close()">
+      <button (click)="close()" color='danger' ion-button icon-only clear>
         <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
+    <ion-buttons *ngIf='selectPlayersMode' right>
+      <button color='primary' (click) = 'dismiss()' ion-button clear>
+        {{'OK' | trans}}
+      </button>
+    </ion-buttons> 
   </ion-navbar>
 </ion-header>
 
@@ -13,6 +18,9 @@
   <ion-searchbar (ionInput)="filterPlayers($event)"></ion-searchbar>
   <ion-list [virtualScroll]="filteredPlayers">
     <ion-item *virtualItem="let player" (click)="selectPlayer(player.id)">
+      <ion-label *ngIf='selectPlayersMode'>{{ player.name }}</ion-label>
+      <ion-checkbox *ngIf='selectPlayersMode' mode ='ios' color="primary" 
+      (ionChange)="onSelectionChange(player.id, $event)"></ion-checkbox>
       <ion-avatar item-left>
         <ion-img [src] = "player.photo"></ion-img>
       </ion-avatar>

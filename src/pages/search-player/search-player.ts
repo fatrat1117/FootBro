@@ -13,13 +13,18 @@ export class SearchPlayerPage {
   totalPlayers: any[];
   filteredPlayers: any[];
   showClose: boolean;
+  selectPlayersMode = false;
+  selectedPlayersMap = {};
+
   constructor(private nav: NavController, 
-  private navParams: NavParams, 
+  navParams: NavParams, 
   private teamPlayersService: PlayerService, 
   private viewCtrl: ViewController) {
-    this.teamId = this.navParams.get('teamId');
-    this.showDetail = this.navParams.get('showDetail');
-    this.showClose = this.navParams.get('showClose');
+    this.teamId = navParams.get('teamId');
+    //console.log(this.teamId);
+    this.showDetail = navParams.get('showDetail');
+    this.showClose = navParams.get('showClose');
+    this.selectPlayersMode = navParams.get('selectPlayersMode');
     this.totalPlayers = [];
   }
 
@@ -58,6 +63,9 @@ export class SearchPlayerPage {
   }
 
   selectPlayer(id: string) {
+    if (this.selectPlayersMode)
+      return;
+
     if (this.showDetail === true)
       this.nav.push(MyPlayerPage, { pId: id });
     else
@@ -66,5 +74,13 @@ export class SearchPlayerPage {
 
   close() {
     this.viewCtrl.dismiss();
+  }
+
+  dismiss() {
+    console.log(this.selectedPlayersMap);
+  }
+
+  onSelectionChange(playerId, e) {
+    this.selectedPlayersMap[playerId] = e.checked;
   }
 }
