@@ -6,31 +6,15 @@ page-home {
 
 
     ion-navbar.toolbar{
-        min-height: 2rem;
-     max-height: 3rem;
-      position: relative;
-      padding: 0.5rem;
-    .home-title{
-         max-height: 3rem;
-       .toolbar-title{
-        padding:0;
-        color: white;
-        display: flex;
-        justify-content: center;
-           padding-left: 20%;
-           padding-right: 20%;
-           padding-top: 0.8rem;
-           padding-bottom: 0.8rem;
-           max-height: 3rem;
-        img{
-         object-fit: fill;
-//        max-width: 14rem;
-//        max-height: 1rem;
-       }
-      }
-        
-    }
-
+       min-height: 2rem;
+        .home-title{
+                display: flex;
+                justify-content: center;
+            .toolbar-title{
+              max-width: 20rem;
+            } 
+        }
+      
     }
 //    .home-location-select{
 //      color: white;
