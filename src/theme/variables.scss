@@ -36,7 +36,7 @@ $alert-radio-border-color-off:#888;
 $alert-button-text-color:#888;
 //$alert-button-background-color-activated:#0f0;
 $alert-input-border-color:#0f0;
-$alert-radio-label-text-color-checked:#fff;
+//$alert-radio-label-text-color-checked:#fff;
 $alert-ios-background: #444;
 $alert-md-background-color: #444;
 
@@ -49,6 +49,9 @@ $alert-ios-message-text-color: $text-color;
 $alert-md-message-text-color: $text-color;
 $alert-md-input-border-color: #888;
 $alert-ios-input-border-color: #888;
+$alert-radio-label-text-color: $text-color;
+$alert-md-radio-label-text-color: $text-color;
+$alert-ios-radio-label-text-color: $text-color;
 
 // list
 $list-md-activated-background-color: #222;

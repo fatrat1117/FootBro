@@ -808,6 +808,7 @@ export class FirebaseManager {
 
 
   /****************************** Misc ******************************/
+  /*
   postNotification(senderId: string, targetId: string) {
     let notificationObj = {
       app_id: "f6268d9c-3503-4696-8e4e-a6cf2c028fc6",
@@ -818,6 +819,7 @@ export class FirebaseManager {
     OneSignal.postNotification(notificationObj);
 
   }
+  */
 
   sendFeedback(content: string) {
     this.af.database.list(`misc/feedbacks/`).push({
