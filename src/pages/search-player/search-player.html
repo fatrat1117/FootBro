@@ -20,6 +20,7 @@
     <ion-item *virtualItem="let player" (click)="selectPlayer(player.id)">
       <ion-label *ngIf='selectPlayersMode'>{{ player.name }}</ion-label>
       <ion-checkbox *ngIf='selectPlayersMode' mode ='ios' color="primary" 
+      [checked] = 'selectedPlayersMap[player.id]'
       (ionChange)="onSelectionChange(player.id, $event)"></ion-checkbox>
       <ion-avatar item-left>
         <ion-img [src] = "player.photo"></ion-img>
