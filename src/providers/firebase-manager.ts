@@ -489,10 +489,16 @@ export class FirebaseManager {
     else {
       this.af.database.object(`/players/${id}`).subscribe(snapshot => {
         if (snapshot && snapshot['basic-info']) {
-          if ('img/none.png' === snapshot['basic-info'].photoURL)
-            snapshot['basic-info'].photoURL = 'assets/img/none.png';
-          this.cachedPlayersMap[id] = snapshot;
-          this.FireCustomEvent('playerready', id);
+          if ('joinTime' in snapshot) {
+            if ('img/none.png' === snapshot['basic-info'].photoURL)
+              snapshot['basic-info'].photoURL = 'assets/img/none.png';
+            this.cachedPlayersMap[id] = snapshot;
+            this.FireCustomEvent('playerready', id);
+          }
+          else {
+            //fix all missing properties
+            this.af.database.object(`/players/${id}`).update({joinTime: firebase.database.ServerValue.TIMESTAMP});
+          }
         }
         else
           this.FireCustomEvent('playernotregistered', id);
