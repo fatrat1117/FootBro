@@ -22,8 +22,9 @@ export class Player {
 
 export class PlayerMatchData {
   player: Player;
-  goal;
-  assist;
-  red;
-  yellow;
+  goals = 0;
+  assists = 0;
+  reds = 0;
+  yellows = 0;
+  expanded = false; //UI use
 }

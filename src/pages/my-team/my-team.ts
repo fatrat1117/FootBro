@@ -25,10 +25,12 @@ export class MyTeamPage {
   upcomingMatch : Match;
   mostGAMatchId;
   mostGFMatchId;
+  captain;
+
   constructor(public nav: NavController,
     private navParams: NavParams,
     private service: TeamService,
-    private teamPlayersService: PlayerService,
+    private playerService: PlayerService,
     private matchService: MatchService,
     private modalCtrl : ModalController) {
   }
@@ -56,7 +58,7 @@ export class MyTeamPage {
           for (let key in this.team.overall.most_GF_match)
             this.mostGFMatchId = key;
         }  
-        this.teamPlayersService.getTeamPlayersAsync(teamId);
+        this.playerService.getTeamPlayersAsync(teamId);
         this.setChoosePosition(this.selectedStatIndex);
       }
     });
@@ -65,8 +67,9 @@ export class MyTeamPage {
       let teamId = e['detail'];
       //console.log(teamId, this.id);
       if (teamId === this.id) {
-        this.players = this.teamPlayersService.getTeamPlayers(teamId);
-        //console.log(this.players);
+        this.players = this.playerService.getTeamPlayers(teamId);
+        this.captain = this.playerService.getPlayer(this.team.captain);
+        //console.log(this.team.captain, this.captain);
       }
     });
 
@@ -141,7 +144,8 @@ export class MyTeamPage {
     firstLine.style.backgroundColor = "#555555";
     secondLine.style.backgroundColor = "#555555";
     thirdLine.style.backgroundColor = "#555555";
-
+    //console.log(this.team);
+    
     switch (position) {
       case 0:
         this.currTeamStat = this.team.last_15;

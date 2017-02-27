@@ -24,8 +24,8 @@ export class UpdateGamePage {
     matchTime;
     tournamentId;
     id;
-    homePlayers : PlayerMatchData[];
-    awayPlayers : PlayerMatchData[];
+    homePlayers: PlayerMatchData[];
+    awayPlayers: PlayerMatchData[];
 
     constructor(public navCtrl: NavController,
         private modalCtrl: ModalController,
@@ -41,6 +41,8 @@ export class UpdateGamePage {
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
         this.matchDate = moment().format("YYYY-MM-DD");
         this.matchTime = "15:00";
+        this.homePlayers = [];
+        this.awayPlayers = [];
         // for (var i = 0; i < 4; i++) {
         //     this.players[i] = {
         //         name: i,
@@ -130,51 +132,64 @@ export class UpdateGamePage {
         return len;
     }
     //显示或关闭队员得分详情
-    // clickTeamMember(player) {
-    //     if (player.hidden) {
-    //         player.showExpandableIcon = "ios-arrow-up";
-    //         for (var i = 0; i < this.players.length; i++) {
-    //             for (var j = 0; j < this.players[i].items.length; j++) {
-    //                 if (this.players[i].items[j].number <= 0) {
-    //                     this.players[i].items[j].color = "light";
-    //                 } else {
-    //                     this.players[i].items[j].color = "secondary";
-    //                 }
-    //             }
-    //         }
-    //     } else {
-    //         player.showExpandableIcon = "ios-arrow-down";
-    //     }
-    //     player.hidden = !player.hidden;
-    // }
+    clickTeamMember(player) {
+        player.expanded = !player.expanded;
+        // if (player.hidden) {
+        //     player.showExpandableIcon = "ios-arrow-up";
+        //     for (var i = 0; i < this.players.length; i++) {
+        //         for (var j = 0; j < this.players[i].items.length; j++) {
+        //             if (this.players[i].items[j].number <= 0) {
+        //                 this.players[i].items[j].color = "light";
+        //             } else {
+        //                 this.players[i].items[j].color = "secondary";
+        //             }
+        //         }
+        //     }
+        // } else {
+        //     player.showExpandableIcon = "ios-arrow-down";
+        // }
+        // player.hidden = !player.hidden;
+    }
 
     // //删除球员
-    // deleteTeamPlayer(player) {
-    //     for (var i = 0; i < this.players.length; i++) {
-    //         if (this.players[i] == player) {
-    //             this.players.splice(i, 1);
-    //             break;
+    deleteTeamPlayer(player, e, tag) {
+        e.stopPropagation();
+         let players = (1 === tag ? this.homePlayers : this.awayPlayers);
+         players.splice(players.indexOf(player), 1);
+        // for (var i = 0; i < this.players.length; i++) {
+        //     if (this.players[i] == player) {
+        //         this.players.splice(i, 1);
+        //         break;
+        //     }
+        // }
+    }
+
+    //减少得分
+    // minusScore(item) {
+    //     if (item.number > 0) {
+    //         item.number = item.number - 1;
+    //         if (item.number == 0) {
+    //             item.color = "light";
+    //         } else {
+    //             item.color = "secondary";
     //         }
     //     }
     // }
-
-    //减少得分
-    minusScore(item) {
-        if (item.number > 0) {
-            item.number = item.number - 1;
-            if (item.number == 0) {
-                item.color = "light";
-            } else {
-                item.color = "secondary";
-            }
-        }
-    }
-    //增加得分
-    addScore(item) {
-        item.number = item.number + 1;
-        item.color = "secondary";
-    }
+    // //增加得分
+    // addScore(item) {
+    //     item.number = item.number + 1;
+    //     item.color = "secondary";
+    // }
     //更新数据
+
+    minus(player, key) {
+        --player[key];
+    }
+
+    plus(player, key) {
+        ++player[key];
+    }
+
     openUpdate() {
         alert("update");
     }
@@ -200,31 +215,8 @@ export class UpdateGamePage {
         return Number(s);
     }
 
-    scheduleMatch() {
-        let t = this.helper.dateTimeStringToNumber(this.matchDate + " " + this.matchTime);
-        let tDate = this.helper.dateTimeStringToNumber(this.matchDate);
-
-        let matchData = {
-            homeId: this.match.home.id,
-            awayId: this.match.away.id,
-            date: tDate,
-            time: t,
-            locationName: this.match.location.name,
-            locationAddress: this.match.location.address,
-            type: this.match.type,
-            createBy: this.playerService.selfId()
-        }
-
-        if (this.match.location.lat)
-            matchData['lat'] = this.match.location.lat;
-        if (this.match.location.lng)
-            matchData['lng'] = this.match.location.lng;
-        if (this.tournamentId)
-            matchData["tournamentId"] = this.tournamentId;
-        //console.log(matchData);
-
-        this.matchService.scheduleMatch(matchData);
-        this.close();
+    updateMatch() {
+        console.log(this.homePlayers);
     }
 
     close() {
@@ -234,7 +226,7 @@ export class UpdateGamePage {
     deleteMatch() {
         //console.log('beforedeleteMatch', this.match);
         //save temp date and tournamentId
-        let date = this.match.date;
+        //let date = this.match.date;
         //let tournamentId = this.match.tournamentId || 'all';
         this.matchService.deleteMatch(this.id);
         // console.log('deleteMatch', this.match);
@@ -242,16 +234,38 @@ export class UpdateGamePage {
         this.close();
     }
 
-    choosePlayers(id) {
-        let modal = this.modalCtrl.create(SearchPlayerPage, {teamId: id, 
+    choosePlayers(id, tag) {
+        let players = (1 === tag ? this.homePlayers : this.awayPlayers);
+        let existingPlayers = [];
+        players.forEach(p => {
+            existingPlayers.push(p.player.id);
+        });
+
+        let modal = this.modalCtrl.create(SearchPlayerPage, {
+            teamId: id,
             showClose: true,
-            selectPlayersMode: true});
+            selectPlayersMode: true,
+            selectedIds: existingPlayers
+        });
+
         modal.onDidDismiss(e => {
-            if (e && e['playerIds']) {
-                let playerIds = e['playerIds'];
-                console.log(playerIds);
+            if (e && e['selectedIds']) {
+                let selectedIds = e['selectedIds'];
+                console.log(selectedIds);
+                   
+                players = (1 === tag ? this.homePlayers : this.awayPlayers);
+                players.splice(0);
+                for (let id in selectedIds) {
+                    if (selectedIds[id]) {
+                        let data = new PlayerMatchData();
+                        data.player = this.playerService.getPlayer(id);
+                        players.push(data);
+                    }
+                }
+                console.log(this.homePlayers);
             }
         });
+
         modal.present();
     }
 }
