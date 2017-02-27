@@ -65,11 +65,12 @@
       </ion-item>
       <!--地图 标题-->
       <ion-item class="map-title">
-        <div item-left class="title-left">
+        <!--div item-left class="title-left">
           <img src="assets/icon/icon_address.png" class="title-left-img">
-        </div>
-        <p class="map-district">{{match?.location?.name}}</p>
-        <p class="map-place">{{match?.location?.address}}</p>
+        </div-->
+        <ion-icon item-left name="md-pin" color="iPrimary"></ion-icon>
+        {{match?.location?.name}}
+        <p>{{match?.location?.address}}</p>
       </ion-item>
     </ion-list>
     <!--地图-->
