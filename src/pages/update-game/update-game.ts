@@ -41,6 +41,8 @@ export class UpdateGamePage {
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
         this.matchDate = moment().format("YYYY-MM-DD");
         this.matchTime = "15:00";
+        this.homePlayers = [];
+        this.awayPlayers = [];
         // for (var i = 0; i < 4; i++) {
         //     this.players[i] = {
         //         name: i,
@@ -234,7 +236,7 @@ export class UpdateGamePage {
     deleteMatch() {
         //console.log('beforedeleteMatch', this.match);
         //save temp date and tournamentId
-        let date = this.match.date;
+        //let date = this.match.date;
         //let tournamentId = this.match.tournamentId || 'all';
         this.matchService.deleteMatch(this.id);
         // console.log('deleteMatch', this.match);
@@ -242,14 +244,23 @@ export class UpdateGamePage {
         this.close();
     }
 
-    choosePlayers(id) {
+    choosePlayers(id, tag) {
         let modal = this.modalCtrl.create(SearchPlayerPage, {teamId: id, 
             showClose: true,
             selectPlayersMode: true});
         modal.onDidDismiss(e => {
-            if (e && e['playerIds']) {
-                let playerIds = e['playerIds'];
-                console.log(playerIds);
+            if (e && e['selectedIds']) {
+                let selectedIds = e['selectedIds'];
+                let players = (1 === tag ? this.homePlayers : this.awayPlayers);
+                players = [];
+                for (let id in selectedIds) {
+                    if (selectedIds[id]) {
+                        let data = new PlayerMatchData();
+                        data.player = this.playerService.getPlayer(id);
+                        players.push(data);
+                    }
+                }
+                //console.log(this.homePlayers);
             }
         });
         modal.present();

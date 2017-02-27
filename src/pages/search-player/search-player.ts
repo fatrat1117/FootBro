@@ -57,7 +57,7 @@ export class SearchPlayerPage {
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
       this.filteredPlayers = this.filteredPlayers.filter((player) => {
-        return (player.displayName.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        return (player.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
   }
@@ -77,12 +77,12 @@ export class SearchPlayerPage {
   }
 
   dismiss() {
-    let playerIds = [];
-    for (let key in this.selectedPlayersMap) {
-      if (this.selectedPlayersMap[key])
-        playerIds.push(key);
-    }
-    this.viewCtrl.dismiss({playerIds: playerIds});
+    // let playerIds = [];
+    // for (let key in this.selectedPlayersMap) {
+    //   if (this.selectedPlayersMap[key])
+    //     playerIds.push(key);
+    // }
+    this.viewCtrl.dismiss({selectedIds: this.selectedPlayersMap});
   }
 
   onSelectionChange(playerId, e) {

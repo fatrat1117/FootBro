@@ -105,12 +105,12 @@
 
   <ion-item class="game-info-item">
     <button ion-button item-left clear class="item-game-info-left-text">{{'participants' | trans}}</button>
-    <button ion-button item-right clear icon-right class="item-game-info-right-text" (click)='choosePlayers(match.homeId)'>
+    <button ion-button item-right clear icon-right class="item-game-info-right-text" (click)='choosePlayers(match.homeId, 1)'>
         <ion-icon name="add-circle"></ion-icon>
       </button>
   </ion-item>
 
-  <div class="content-expandable" *ngFor="let player of homePlayers">
+  <div class="content-expandable" *ngFor="let player of homePlayers" >
     <ion-item class="expandable-member-name" (click)="clickTeamMember(player)">
       <button ion-button item-left icon-only clear (click)="deleteTeamPlayer(player)">
           <ion-icon name="remove-circle" color="danger"></ion-icon>
@@ -118,7 +118,7 @@
       <img [src]="player?.player?.photo" class="member-img" />
       <button ion-button item-right icon-right clear color="light">
           {{player?.player?.name}}
-          <ion-icon [name]="player.showExpandableIcon"></ion-icon>
+          <!--<ion-icon [name]="player.showExpandableIcon"></ion-icon>-->
         </button>
     </ion-item>
 
