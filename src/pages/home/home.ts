@@ -7,37 +7,20 @@ import {GameSchedulePage} from "../game-schedule/game-schedule";
 import {ModalContentPage} from "../home/place-selection";
 import {GameRatingPage} from "../game-rating/game-rating";
 
-declare var jQuery:any;
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-
-  title = "assets/img/home/title.png";
   slides: any[];
-  adSlideOptions: any;
   items = ["item1","item2","item3"];
 
   constructor(public navCtrl: NavController, local: Localization,private elRef: ElementRef,public modalCtrl: ModalController  ) {
-
     this.slides = [];
     this.loadSlides(local.langCode, 4);
-
-    this.adSlideOptions = {
-      autoplay: 3000,
-      loop: true
-    };
-    console.log(local.langCode);
-
-
   }
 
   ionViewDidLoad() :any{
-    jQuery(this.elRef.nativeElement).find('.test-button').on('click',function(){
-        alert("jQuery works");
-    });
   }
 
   loadSlides(langCode: string, total: number) {

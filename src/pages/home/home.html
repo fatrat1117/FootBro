@@ -20,7 +20,7 @@
 
 <ion-content>
   <ion-row>
-    <ion-slides [options]="adSlideOptions">
+    <ion-slides autoplay="3000" loop="true">
       <ion-slide *ngFor="let slide of slides">
         <img [src]="slide.image"/>
       </ion-slide>
