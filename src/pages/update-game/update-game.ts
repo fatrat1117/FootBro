@@ -215,8 +215,8 @@ export class UpdateGamePage {
         return Number(s);
     }
 
-    scheduleMatch() {
-        this.close();
+    updateMatch() {
+        console.log(this.homePlayers);
     }
 
     close() {

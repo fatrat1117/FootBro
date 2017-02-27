@@ -162,7 +162,7 @@
         <button ion-button clear color="secondary">
             {{player.yellows}}
           </button>
-        <button ion-button icon-only clear (click)="plus(player, 'yellows')">
+        <button [disabled]="player.yellows > 1" ion-button icon-only clear (click)="plus(player, 'yellows')">
             <ion-icon name="arrow-dropright" color="secondary"></ion-icon>
           </button>
       </div>
@@ -177,7 +177,7 @@
         <button ion-button clear color="secondary">
             {{player.reds}}
           </button>
-        <button ion-button icon-only clear (click)="plus(player, 'reds')">
+        <button [disabled]="player.reds > 0" ion-button icon-only clear (click)="plus(player, 'reds')">
             <ion-icon name="arrow-dropright" color="secondary"></ion-icon>
           </button>
       </div>
