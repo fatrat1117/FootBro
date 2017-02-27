@@ -182,12 +182,12 @@ export class UpdateGamePage {
     // }
     //更新数据
 
-    minusGoals(player) {
-        --player.goals;
+    minus(player, key) {
+        --player[key];
     }
 
-    plusGoals(player) {
-        ++player.goals;
+    plus(player, key) {
+        ++player[key];
     }
 
     openUpdate() {

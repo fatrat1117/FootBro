@@ -126,15 +126,58 @@
       <img src="assets/icon/b2.png" class="desc-img" item-left/>
       <button ion-button clear color="light">{{'Goals' | trans}}</button>
       <div item-right>
-        <button [disabled]="player.goals <= 0" ion-button icon-only clear (click)="minusGoals(player)" color="light">
+        <button [disabled]="player.goals <= 0" ion-button icon-only clear (click)="minus(player, 'goals')" color="light">
             <ion-icon name="arrow-dropleft"></ion-icon>
           </button>
-
         <button ion-button clear color="secondary">
             {{player.goals}}
           </button>
-
-        <button ion-button icon-only clear (click)="plusGoals(player)">
+        <button ion-button icon-only clear (click)="plus(player, 'goals')">
+            <ion-icon name="arrow-dropright" color="secondary"></ion-icon>
+          </button>
+      </div>
+    </ion-item>
+     <ion-item class="expandable-member-property" [hidden]="!player.expanded">
+      <img src="assets/icon/b3.png" class="desc-img" item-left/>
+      <button ion-button clear color="light">{{'Assists' | trans}}</button>
+      <div item-right>
+        <button [disabled]="player.assets <= 0" ion-button icon-only clear (click)="minus(player, 'assists')" color="light">
+            <ion-icon name="arrow-dropleft"></ion-icon>
+          </button>
+        <button ion-button clear color="secondary">
+            {{player.assists}}
+          </button>
+        <button ion-button icon-only clear (click)="plus(player,  'assists')">
+            <ion-icon name="arrow-dropright" color="secondary"></ion-icon>
+          </button>
+      </div>
+    </ion-item>
+     <ion-item class="expandable-member-property" [hidden]="!player.expanded">
+      <img src="assets/img/match_detail/yellowcard.png" class="desc-img" item-left/>
+      <button ion-button clear color="light">{{'Yellowcard' | trans}}</button>
+      <div item-right>
+        <button [disabled]="player.yellows <= 0" ion-button icon-only clear (click)="minus(player, 'yellows')" color="light">
+            <ion-icon name="arrow-dropleft"></ion-icon>
+          </button>
+        <button ion-button clear color="secondary">
+            {{player.yellows}}
+          </button>
+        <button ion-button icon-only clear (click)="plus(player, 'yellows')">
+            <ion-icon name="arrow-dropright" color="secondary"></ion-icon>
+          </button>
+      </div>
+    </ion-item>
+     <ion-item class="expandable-member-property" [hidden]="!player.expanded">
+      <img src="assets/img/match_detail/redcard.png" class="desc-img" item-left/>
+      <button ion-button clear color="light">{{'Redcard' | trans}}</button>
+      <div item-right>
+        <button [disabled]="player.reds <= 0" ion-button icon-only clear (click)="minus(player, 'reds')" color="light">
+            <ion-icon name="arrow-dropleft"></ion-icon>
+          </button>
+        <button ion-button clear color="secondary">
+            {{player.reds}}
+          </button>
+        <button ion-button icon-only clear (click)="plus(player, 'reds')">
             <ion-icon name="arrow-dropright" color="secondary"></ion-icon>
           </button>
       </div>
