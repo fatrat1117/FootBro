@@ -20,9 +20,12 @@ export class TeamService {
         teamData.id = team.$key;
         teamData.logo = team['basic-info'].logo;
         teamData.name = team['basic-info'].name;
-        teamData.totalPlayers = team['basic-info'].totalPlayers;
         teamData.captain = team['basic-info'].captain;
         teamData.players = team.players;
+        if (team.players)
+          teamData.totalPlayers = Object.keys(team.players).length;
+        else 
+          teamData.totalPlayers = 0;
 
         let teamPublic = this.fm.getTeamPublic(teamId);
         if (teamPublic) {

@@ -370,30 +370,20 @@ export class FirebaseManager {
       this.setDefaultTeam(id);
 
     let afTeamBasic = this.afTeamBasic(id);
-    let sub = afTeamBasic.subscribe(snapshot => {
-      setTimeout(() => {
-        sub.unsubscribe();
-        //increase total by 1
-        //trade-off: performance is better than updateTotalPlayers but might have bug when 2 players join at same time
-        afTeamBasic.update({ totalPlayers: snapshot.totalPlayers + 1 });
-      },
-        250);
-    });
+    //totalPlayer = player.length
+    // let sub = afTeamBasic.subscribe(snapshot => {
+    //   setTimeout(() => {
+    //     sub.unsubscribe();
+    //     //increase total by 1
+    //     //trade-off: performance is better than updateTotalPlayers but might have bug when 2 players join at same time
+    //     afTeamBasic.update({ totalPlayers: snapshot.totalPlayers + 1 });
+    //   },
+    //     250);
+    // });
   }
 
   quitTeam(id) {
-    // update team total
-    let afTeamBasic = this.afTeamBasic(id);
-    let sub = afTeamBasic.subscribe(snapshot => {
-      setTimeout(() => {
-        sub.unsubscribe();
-        //increase total by 1
-        //trade-off: performance is better than updateTotalPlayers but might have bug when 2 players join at same time
-        afTeamBasic.update({ totalPlayers: snapshot.totalPlayers - 1 });
-      },
-        250);
-    });
-    // remove from self teams
+    //remove from self teams
     this.af.database.list(`players/${this.selfId()}/teams`).remove(id);
     this.af.database.list(`teams/${id}/players`).remove(this.selfId());
   }
