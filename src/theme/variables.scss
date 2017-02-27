@@ -19,6 +19,7 @@ $toolbar-text-color: #888;
 $toolbar-background: #222;
 $toolbar-md-title-text-color: #888;
 $toolbar-ios-title-text-color: #888;
+//$segment-button-ios-text-color: color-contrast(#222, #0f0);
 
 // tabs
 $tabs-background: #222;
@@ -52,6 +53,8 @@ $alert-ios-input-border-color: #888;
 $alert-radio-label-text-color: $text-color;
 $alert-md-radio-label-text-color: $text-color;
 $alert-ios-radio-label-text-color: $text-color;
+$alert-ios-button-background-color-activated: #888;
+$action-sheet-ios-button-background-activated: #888;
 
 // list
 $list-md-activated-background-color: #222;
