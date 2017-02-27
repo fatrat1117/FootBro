@@ -24,8 +24,8 @@ export class UpdateGamePage {
     matchTime;
     tournamentId;
     id;
-    homePlayers : PlayerMatchData[];
-    awayPlayers : PlayerMatchData[];
+    homePlayers: PlayerMatchData[];
+    awayPlayers: PlayerMatchData[];
 
     constructor(public navCtrl: NavController,
         private modalCtrl: ModalController,
@@ -203,29 +203,6 @@ export class UpdateGamePage {
     }
 
     scheduleMatch() {
-        let t = this.helper.dateTimeStringToNumber(this.matchDate + " " + this.matchTime);
-        let tDate = this.helper.dateTimeStringToNumber(this.matchDate);
-
-        let matchData = {
-            homeId: this.match.home.id,
-            awayId: this.match.away.id,
-            date: tDate,
-            time: t,
-            locationName: this.match.location.name,
-            locationAddress: this.match.location.address,
-            type: this.match.type,
-            createBy: this.playerService.selfId()
-        }
-
-        if (this.match.location.lat)
-            matchData['lat'] = this.match.location.lat;
-        if (this.match.location.lng)
-            matchData['lng'] = this.match.location.lng;
-        if (this.tournamentId)
-            matchData["tournamentId"] = this.tournamentId;
-        //console.log(matchData);
-
-        this.matchService.scheduleMatch(matchData);
         this.close();
     }
 
@@ -245,14 +222,25 @@ export class UpdateGamePage {
     }
 
     choosePlayers(id, tag) {
-        let modal = this.modalCtrl.create(SearchPlayerPage, {teamId: id, 
+        let players = (1 === tag ? this.homePlayers : this.awayPlayers);
+        let existingPlayers = [];
+        players.forEach(p => {
+            existingPlayers.push(p.player.id);
+        });
+
+        let modal = this.modalCtrl.create(SearchPlayerPage, {
+            teamId: id,
             showClose: true,
-            selectPlayersMode: true});
+            selectPlayersMode: true,
+            selectedIds: existingPlayers
+        });
+
         modal.onDidDismiss(e => {
             if (e && e['selectedIds']) {
                 let selectedIds = e['selectedIds'];
-                let players = (1 === tag ? this.homePlayers : this.awayPlayers);
-                players = [];
+                console.log(selectedIds);
+                   
+                players = (1 === tag ? this.homePlayers : this.awayPlayers);
                 for (let id in selectedIds) {
                     if (selectedIds[id]) {
                         let data = new PlayerMatchData();
@@ -260,9 +248,10 @@ export class UpdateGamePage {
                         players.push(data);
                     }
                 }
-                //console.log(this.homePlayers);
+                console.log(this.homePlayers);
             }
         });
+        
         modal.present();
     }
 }
