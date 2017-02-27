@@ -132,51 +132,64 @@ export class UpdateGamePage {
         return len;
     }
     //显示或关闭队员得分详情
-    // clickTeamMember(player) {
-    //     if (player.hidden) {
-    //         player.showExpandableIcon = "ios-arrow-up";
-    //         for (var i = 0; i < this.players.length; i++) {
-    //             for (var j = 0; j < this.players[i].items.length; j++) {
-    //                 if (this.players[i].items[j].number <= 0) {
-    //                     this.players[i].items[j].color = "light";
-    //                 } else {
-    //                     this.players[i].items[j].color = "secondary";
-    //                 }
-    //             }
-    //         }
-    //     } else {
-    //         player.showExpandableIcon = "ios-arrow-down";
-    //     }
-    //     player.hidden = !player.hidden;
-    // }
+    clickTeamMember(player) {
+        player.expanded = !player.expanded;
+        // if (player.hidden) {
+        //     player.showExpandableIcon = "ios-arrow-up";
+        //     for (var i = 0; i < this.players.length; i++) {
+        //         for (var j = 0; j < this.players[i].items.length; j++) {
+        //             if (this.players[i].items[j].number <= 0) {
+        //                 this.players[i].items[j].color = "light";
+        //             } else {
+        //                 this.players[i].items[j].color = "secondary";
+        //             }
+        //         }
+        //     }
+        // } else {
+        //     player.showExpandableIcon = "ios-arrow-down";
+        // }
+        // player.hidden = !player.hidden;
+    }
 
     // //删除球员
-    // deleteTeamPlayer(player) {
-    //     for (var i = 0; i < this.players.length; i++) {
-    //         if (this.players[i] == player) {
-    //             this.players.splice(i, 1);
-    //             break;
+    deleteTeamPlayer(player, e, tag) {
+        e.stopPropagation();
+         let players = (1 === tag ? this.homePlayers : this.awayPlayers);
+         players.splice(players.indexOf(player), 1);
+        // for (var i = 0; i < this.players.length; i++) {
+        //     if (this.players[i] == player) {
+        //         this.players.splice(i, 1);
+        //         break;
+        //     }
+        // }
+    }
+
+    //减少得分
+    // minusScore(item) {
+    //     if (item.number > 0) {
+    //         item.number = item.number - 1;
+    //         if (item.number == 0) {
+    //             item.color = "light";
+    //         } else {
+    //             item.color = "secondary";
     //         }
     //     }
     // }
-
-    //减少得分
-    minusScore(item) {
-        if (item.number > 0) {
-            item.number = item.number - 1;
-            if (item.number == 0) {
-                item.color = "light";
-            } else {
-                item.color = "secondary";
-            }
-        }
-    }
-    //增加得分
-    addScore(item) {
-        item.number = item.number + 1;
-        item.color = "secondary";
-    }
+    // //增加得分
+    // addScore(item) {
+    //     item.number = item.number + 1;
+    //     item.color = "secondary";
+    // }
     //更新数据
+
+    minusGoals(player) {
+        --player.goals;
+    }
+
+    plusGoals(player) {
+        ++player.goals;
+    }
+
     openUpdate() {
         alert("update");
     }
@@ -241,6 +254,7 @@ export class UpdateGamePage {
                 console.log(selectedIds);
                    
                 players = (1 === tag ? this.homePlayers : this.awayPlayers);
+                players.splice(0);
                 for (let id in selectedIds) {
                     if (selectedIds[id]) {
                         let data = new PlayerMatchData();
@@ -251,7 +265,7 @@ export class UpdateGamePage {
                 console.log(this.homePlayers);
             }
         });
-        
+
         modal.present();
     }
 }
