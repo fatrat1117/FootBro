@@ -144,7 +144,7 @@ export class Localization {
             SoccerBro: 'SoccerBro',
             OK: 'OK',
             Tournaments: 'Tournaments',
-            FriendlyMatches: 'Matches',
+            FriendlyMatches: 'Friendly Matches',
             Info: 'Info',
             Table: 'Table',
             Fixtures: 'Fixtures',

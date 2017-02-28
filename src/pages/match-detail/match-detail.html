@@ -5,15 +5,19 @@
     </ion-title>
   </ion-navbar>
 </ion-header>-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'MatchDetail' | trans}}</ion-title>
+    <ion-buttons left>
+      <button (click)="dismiss()" color='danger' ion-button icon-only clear>
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 <ion-content>
   <div class="content-all">
     <ion-list no-lines class="content-list">
-      <!--右上角的X-->
-      <ion-item class="default-back-color">
-        <button ion-button clear icon-only item-left (click)="dismiss()" >
-          <ion-icon name="close" color="danger"></ion-icon>
-        </button>
-      </ion-item>
       <!--中间的对战时间-->
       <button ion-button clear color="light" class="content-center-button">
 <!--        <img src="assets/icon/icon_time.png" style="width: 20px;height: 15px;">-->

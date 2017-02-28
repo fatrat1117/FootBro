@@ -1,25 +1,25 @@
 <ion-header>
   <ion-navbar no-border-bottom>
     <ion-title>
-      <ion-select no-padding [(ngModel)]="selectedId" (ngModelChange)="onSelectionChange()" [okText]="'OK' | trans" [cancelText]="'Cancel' | trans">
+      <ion-select [(ngModel)]="selectedId" (ngModelChange)="onSelectionChange()" [okText]="'OK' | trans" [cancelText]="'Cancel' | trans">
         <ion-option value="all">{{ 'FriendlyMatches' | trans }}</ion-option>
         <ion-option *ngFor="let league of afTournamentList | async" [value]="league.$key">{{ league.name }}</ion-option>
       </ion-select>
     </ion-title>
     <ion-buttons right>
       <button (click)="enterNewGame()" ion-button icon-only clear>
-        <ion-icon name="add"></ion-icon>
+        <ion-icon name="md-add"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-toolbar no-border-top>
-    <ion-segment *ngIf="selectedId == 'all'" [(ngModel)]="selectedInfo">
+  <ion-toolbar no-border-top padding>
+    <ion-segment *ngIf="selectedId == 'all'" [(ngModel)]="selectedInfo" mode="md">
       <ion-segment-button value="schedule">
         Schedule
       </ion-segment-button>
     </ion-segment>
 
-    <ion-segment *ngIf="selectedId != 'all'" [(ngModel)]="selectedInfo">
+    <ion-segment *ngIf="selectedId != 'all'" [(ngModel)]="selectedInfo" mode="md">
       <ion-segment-button value="schedule">
         Schedule
       </ion-segment-button>
