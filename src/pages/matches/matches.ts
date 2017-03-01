@@ -42,19 +42,20 @@ export class MatchesPage {
   }
 
   scrollToDate(date) {
-    let iToday = -1;
+    let cToday = -1;
     if (this.dates.length > 0)
-      iToday = 0;
+      cToday = 0;
     for (let i = 1; i < this.dates.length; ++i) {
       if (Number(this.dates[i]) > date) {
+        cToday = i;
+      }else {
         break;
       }
-      iToday = i;
     }
 
-    if (iToday != -1) {
-      let closeToToday = this.dates[iToday];
-      this.showMatches(closeToToday, iToday);
+    if (cToday != -1) {
+      let closeToToday = this.dates[cToday];
+      this.showMatches(closeToToday, cToday);
       let scrollableDiv = document.getElementById("sketchElement");
 
       if (scrollableDiv) {
@@ -62,7 +63,7 @@ export class MatchesPage {
         let scrollableItem = scrollableDiv.getElementsByTagName("ion-item");
 
         if (scrollableItem.length > 0) {
-          scrollableDiv.scrollTop += scrollableItem[0].clientHeight * iToday;
+          scrollableDiv.scrollTop += scrollableItem[0].clientHeight * cToday;
         }
       }
     }
@@ -120,15 +121,34 @@ export class MatchesPage {
   }
 
   addYearCss() {
+    let extraHeight = 0;
     for (let key in this.years) {
       let item_id = this.years[key];
       let item = document.getElementById("matches-scroll-target-" + String(item_id));
       if (item != null) {
         item.className += " ion-item-changeYear";
+        extraHeight = item.clientHeight * 0.5;    
       }
-
+    }
+    
+    setTimeout(this.reScrolling(extraHeight),3000);
+   
+  }
+  
+  reScrolling(extraHeight){
+     let scrollableDiv = document.getElementById("sketchElement");
+     if (scrollableDiv) {
+        let currentYear = this.getYearStringFromDate(this.today);
+        let extraCount = 0;
+        for (let key in this.years){
+            if (parseInt(key) >= parseInt(currentYear)){
+                extraCount++;
+            }
+        }
+        scrollableDiv.scrollTop += extraHeight * extraCount;
     }
   }
+  
 
   showMatches(date, index) {
     //console.log('showMatches', date, index);
