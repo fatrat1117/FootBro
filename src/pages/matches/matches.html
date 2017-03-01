@@ -29,7 +29,7 @@
     </ion-segment>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content no-bounce>
   <div [ngSwitch]="selectedInfo" [ngStyle]="{'height':'100%'}">
     <!-- schedule -->
     <div *ngSwitchCase="'schedule'" [ngStyle]="{'height':'100%'}">
