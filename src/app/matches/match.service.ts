@@ -27,6 +27,8 @@ export class MatchService {
       match.awayScore = fmMatch.awayScore;
       match.date = fmMatch.date;
       match.time = fmMatch.time;
+      match.homePlayers = fmMatch.homePlayers;
+      match.awayPlayers = fmMatch.awayPlayers;
       let home, away;
       if (this.teamsMap[match.homeId])
         home = this.teamsMap[match.homeId];
@@ -159,7 +161,7 @@ export class MatchService {
     this.fm.deleteMatch(id);
   }
 
-  updateMatch() {
-    
+  updateMatch(id, matchObj) {
+    this.fm.updateMatch(id, matchObj);
   }
 }

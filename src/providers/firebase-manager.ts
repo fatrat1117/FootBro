@@ -701,28 +701,16 @@ export class FirebaseManager {
     console.log('scheduleMatch', matchObj);
     this.afMatchList().push(matchObj);
     this.afMatchDate(matchObj.date).set(true);
-    //  .then(newMatch => {
-    //    this.afMatchDate(matchObj.date).set(true);
     if (matchObj.tournamentId)
       this.afTournamentMatchDate(matchObj.tournamentId, matchObj.date).set(true);
-        // // add to team match
-        // let matchId = newMatch["key"];
-        // let teamData = {
-        //   time: matchObj.time,
-        //   locationName: matchObj.locationName,
-        //   locationAddress: matchObj.locationAddress,
-        //   isPosted: false
-        // };
-        // // add to home team
-        // teamData["opponentId"] = matchObj.awayId;
-        // this.updateTeamMatch(matchId, teamData, matchObj.homeId);
-        // // add to away team
-        // teamData["opponentId"] = matchObj.homeId;
-        // this.updateTeamMatch(matchId, teamData, matchObj.awayId);
+  }
 
-        // success();
-    //  });
-      //.catch(err => error(err));
+  updateMatch(id, matchObj) {
+    console.log('updateMatch', matchObj);
+    this.afMatch(id).update(matchObj);
+    this.afMatchDate(matchObj.date).set(true);
+    if (matchObj.tournamentId)
+      this.afTournamentMatchDate(matchObj.tournamentId, matchObj.date).set(true);
   }
 
   getTournamentTableList(id) {
@@ -1361,68 +1349,6 @@ export class FirebaseManager {
 //         equalTo: id
 //       }
 //     });
-//   }
-
-
-//   scheduleMatch(matchObj, success, error) {
-//     console.log('scheduleMatch', matchObj);
-
-//     this.getMatchList().push(matchObj)
-//       .then(newMatch => {
-//         this.getMatchDate(matchObj.date).set(true);
-//         if (matchObj.tournamentId)
-//           this.getTournamentMatchDate(matchObj.tournamentId, matchObj.date).set(true);
-
-//         // add to team match
-//         let matchId = newMatch["key"];
-//         let teamData = {
-//           time: matchObj.time,
-//           locationName: matchObj.locationName,
-//           locationAddress: matchObj.locationAddress,
-//           isPosted: false
-//         };
-//         // add to home team
-//         teamData["opponentId"] = matchObj.awayId;
-//         this.updateTeamMatch(matchId, teamData, matchObj.homeId);
-//         // add to away team
-//         teamData["opponentId"] = matchObj.homeId;
-//         this.updateTeamMatch(matchId, teamData, matchObj.awayId);
-
-//         success();
-//       })
-//       .catch(err => error(err));
-//   }
-
-//   updateMatch(tournamentId, id, matchObj, oldDate, success, error) {
-//     console.log('updateMatch', matchObj);
-//     this.getMatch(id).update(matchObj)
-//       .then(() => {
-//         console.log('match updated tournament id', tournamentId);
-
-//         this.getMatchDate(matchObj.date).set(true);
-//         if (tournamentId)
-//           this.getTournamentMatchDate(tournamentId, matchObj.date).set(true);
-//         // update team match
-//         let teamData = {
-//           time: matchObj.time,
-//           locationName: matchObj.locationName,
-//           locationAddress: matchObj.locationAddress
-//         };
-//         // update home team
-//         teamData["opponentId"] = matchObj.awayId;
-//         this.updateTeamMatch(id, teamData, matchObj.homeId);
-//         // update away team
-//         teamData["opponentId"] = matchObj.homeId;
-//         this.updateTeamMatch(id, teamData, matchObj.awayId);
-
-//         // process raw data
-//         if ("homeScore" in matchObj && "awayScore" in matchObj)
-//           this.processMatchData(id, oldDate);
-
-//         success();
-//       })
-//       .catch(err => error(err));
-
 //   }
 
 //   updateTeamMatch(matchId: string, match: any, teamId: string) {
