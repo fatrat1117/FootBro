@@ -5,16 +5,18 @@ import { MATCHSTANDINGS } from './shared/mock-data/mock-match-standing';
 import { FirebaseManager } from '../../providers/firebase-manager';
 import { TeamService } from '../teams/team.service';
 import { Team } from '../teams/team.model';
+import { PlayerMatchData } from '../players/player.model';
+import { PlayerService } from '../players/player.service';
 
 @Injectable()
 export class MatchService {
   matchesMap = {};
-  teamsMap = {};
   teamMatchesMap = {};
   tournamentTableMap = {};
 
   constructor(private fm: FirebaseManager,
-    private teamService: TeamService) {
+    private teamService: TeamService,
+    private playerService: PlayerService) {
     document.addEventListener('matchready', e => {
       let id = e['detail'];
       let fmMatch = this.fm.getMatch(id);
@@ -27,44 +29,46 @@ export class MatchService {
       match.awayScore = fmMatch.awayScore;
       match.date = fmMatch.date;
       match.time = fmMatch.time;
-      match.homePlayers = fmMatch.homePlayers;
-      match.awayPlayers = fmMatch.awayPlayers;
-      let home, away;
-      if (this.teamsMap[match.homeId])
-        home = this.teamsMap[match.homeId];
-      else {
-        home = new Team();
-        this.teamsMap[match.homeId] = home;
-      }
-      if (this.teamsMap[match.awayId])
-        away = this.teamsMap[match.awayId];
-      else {
-        away = new Team();
-        this.teamsMap[match.awayId] = away;
-      }
-      match.home = home;
-      match.away = away;
+
+      // let home, away;
+      // if (this.teamsMap[match.homeId])
+      //   home = this.teamService.findOrCreateTeam(match.homeId);
+      // else {
+      //   home = new Team();
+      //   this.teamsMap[match.homeId] = home;
+      // }
+      // if (this.teamsMap[match.awayId])
+      //   away = this.teamsMap[match.awayId];
+      // else {
+      //   away = new Team();
+      //   this.teamsMap[match.awayId] = away;
+      // }
+      match.home = this.teamService.findOrCreateTeam(match.homeId);
+      this.fm.getTeamAsync(match.homeId);
+      match.away = this.teamService.findOrCreateTeam(match.awayId);
+      this.fm.getTeamAsync(match.awayId);
 
       match.location.lat = fmMatch.lat || 0;
       match.location.lng = fmMatch.lng || 0;
       match.location.name = fmMatch.locationName;
       match.location.address = fmMatch.locationAddress;
-      //console.log(match);
 
-      this.teamService.getTeamAsync(match.homeId);
-      this.teamService.getTeamAsync(match.awayId);
+      this.copyParticipants(match.homeParticipants, fmMatch.homeParticipants);
+      this.copyParticipants(match.awayParticipants, fmMatch.awayParticipants);
+
+      //console.log(match);
       this.fm.FireCustomEvent('servicematchready', id);
     });
 
-    document.addEventListener('serviceteamready', e => {
-      let id = e['detail'];
-      let team = this.teamsMap[id];
-      if (team) {
-        let fmTeam = this.teamService.getTeam(id);
-        team.name = fmTeam.name;
-        team.logo = fmTeam.logo;
-      }
-    });
+    // document.addEventListener('serviceteamready', e => {
+    //   let id = e['detail'];
+    //   let team = this.teamService.getTeam(id);
+    //   if (team) {
+    //     let fmTeam = this.teamService.getTeam(id);
+    //     team.name = fmTeam.name;
+    //     team.logo = fmTeam.logo;
+    //   }
+    // });
 
     document.addEventListener('teammatchesready', e => {
       let result = e['detail'];
@@ -91,6 +95,18 @@ export class MatchService {
     });
   }
 
+  copyParticipants(target, source) {
+    if (source) {
+        target.splice(0);
+        source.forEach(p => {
+          let copy = Object.assign({}, p);
+          copy['player'] = this.playerService.findOrCreatePlayer(p.id);
+          target.push(copy);
+          this.fm.getPlayerAsync(p.id);
+        })
+      }
+  }
+  
   findOrCreateMatch(id): Match {
     let match;
     if (this.matchesMap[id])

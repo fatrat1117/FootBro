@@ -21,6 +21,7 @@ export class Player {
 }
 
 export class PlayerMatchData {
+  id;
   player: Player;
   goals = 0;
   assists = 0;

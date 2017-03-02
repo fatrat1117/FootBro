@@ -12,16 +12,14 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <div padding>
-    <ion-segment [(ngModel)]="stats">
-      <ion-segment-button value="teams">
-        {{'Teams' | trans}}
-      </ion-segment-button>
-      <ion-segment-button value="players">
-        {{'Players' | trans}}
-      </ion-segment-button>
-    </ion-segment>
-  </div>
+  <ion-segment padding [(ngModel)]="stats" mode="md">
+    <ion-segment-button value="teams">
+      {{'Teams' | trans}}
+    </ion-segment-button>
+    <ion-segment-button value="players">
+      {{'Players' | trans}}
+    </ion-segment-button>
+  </ion-segment>
   <div class="rank-stats" [ngSwitch]="stats">
     <div *ngSwitchCase="'teams'">
       <ion-item style="margin-bottom: 10px">

@@ -42,12 +42,14 @@ import { PlayerService } from '../../app/players/player.service'
         <ion-note item-right color="primary-text">2015-01-01</ion-note>
       </ion-item>
 
-      <ion-item-divider></ion-item-divider>
       <ion-item>
-        <ion-range min="0" max="100" [ngModel]="cheerleader?.responseRate">
-          <ion-label range-left>Response Rate</ion-label>
-          <ion-label range-right>{{ cheerleader?.responseRate }} %</ion-label>
-        </ion-range>
+        <ion-row>
+          <ion-col class="col-30"></ion-col>
+          <ion-col class="col-40">
+            <sb-rate-circle title="ResponseRate" [rate]="cheerleader?.responseRate"></sb-rate-circle>
+          </ion-col>
+          <ion-col class="col-30"></ion-col>
+        </ion-row>
       </ion-item>
     </ion-item-group>
   </ion-content>
