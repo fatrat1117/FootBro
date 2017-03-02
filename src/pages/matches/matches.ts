@@ -19,8 +19,8 @@ export class MatchesPage {
   selectedInfo: string;
   selectedId: string;
   afTournamentList;
-  thisYear: string;
-  changeYear: boolean;
+  //Key: year : String eg: 2014, 2017...
+  //Value: selectedDate'index in dates : Number eg: 0 , 5 , 27....
   years = {};
 
   constructor(public navCtrl: NavController,
@@ -42,17 +42,19 @@ export class MatchesPage {
   }
 
   scrollToDate(date) {
+    let selectedFormatDate = moment(date).format("YYYY-MM-DD");
     let cToday = -1;
     if (this.dates.length > 0)
       cToday = 0;
-    for (let i = 1; i < this.dates.length; ++i) {
-      if (Number(this.dates[i]) > date) {
+    for (let i = 0; i < this.dates.length; ++i) {
+      let currFormattedDate = moment(this.dates[i]).format("YYYY-MM-DD");
+      if (currFormattedDate >= selectedFormatDate) {
         cToday = i;
       }else {
         break;
       }
     }
-
+    console.log(cToday);
     if (cToday != -1) {
       let closeToToday = this.dates[cToday];
       this.showMatches(closeToToday, cToday);
@@ -136,17 +138,38 @@ export class MatchesPage {
   }
   
   reScrolling(extraHeight){
+
      let scrollableDiv = document.getElementById("sketchElement");
      if (scrollableDiv) {
-        let currentYear = this.getYearStringFromDate(this.today);
+        let currentYear = this.getYearStringFromDate(this.selectedDate);
+        let currentIndex = this.getIndexFromDates(this.selectedDate);
+        let isLastDayOfYear = false;
         let extraCount = 0;
         for (let key in this.years){
             if (parseInt(key) >= parseInt(currentYear)){
                 extraCount++;
             }
+             if (currentIndex == this.years[key]){
+                isLastDayOfYear = true;
+            }
+        }
+        if (isLastDayOfYear){
+            if (extraCount > 0){
+                extraCount-=1;
+            }
         }
         scrollableDiv.scrollTop += extraHeight * extraCount;
     }
+  }
+  
+  getIndexFromDates(currentDate){
+     let result = 0;
+     for (let i = 0 ; i < this.dates.length; i++){
+        if(currentDate == this.dates[i]){
+            result = i;
+        }
+     }
+     return result;
   }
   
 
