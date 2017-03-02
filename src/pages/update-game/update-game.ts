@@ -42,7 +42,7 @@ export class UpdateGamePage {
         this.matchDate = helper.numberToDateString(this.match.date);
         this.matchTime = helper.numberToTimeString(this.match.time);
         this.homePlayers = this.match.homeParticipants;
-        this.awayPlayers = this.match.homeParticipants;
+        this.awayPlayers = this.match.awayParticipants;
     }
 
     ionViewDidLoad() {
@@ -114,9 +114,8 @@ export class UpdateGamePage {
     }
 
     // //删除球员
-    deleteTeamPlayer(player, e, tag) {
+    deleteTeamPlayer(player, e, players) {
         e.stopPropagation();
-        let players = (1 === tag ? this.homePlayers : this.awayPlayers);
         players.splice(players.indexOf(player), 1);
     }
 
@@ -202,7 +201,6 @@ export class UpdateGamePage {
             updateMatchData['lat'] = this.match.location.lat;
         if (this.match.location.lng)
             updateMatchData['lng'] = this.match.location.lng;
-        //    console.log(this.match.homeScore);
             
         let homeScoreStr = this.match.homeScore.toString().trim();
         let awayScroeStr = this.match.awayScore.toString().trim();
@@ -211,7 +209,7 @@ export class UpdateGamePage {
             updateMatchData["awayScore"] = Number(this.match.awayScore);
         }
         
-        //this.matchService.updateMatch(this.id, updateMatchData);
+        this.matchService.updateMatch(this.id, updateMatchData);
         this.close();
     }
 
@@ -226,8 +224,10 @@ export class UpdateGamePage {
 
     choosePlayers(id, players) {
         let existingPlayers = [];
+        let existingPlayersMap = {};
         players.forEach(p => {
             existingPlayers.push(p.player.id);
+            existingPlayersMap[p.player.id] = true;
         });
 
         let modal = this.modalCtrl.create(SearchPlayerPage, {
@@ -240,16 +240,24 @@ export class UpdateGamePage {
         modal.onDidDismiss(e => {
             if (e && e['selectedIds']) {
                 let selectedIds = e['selectedIds'];
-                console.log(selectedIds);
-                players.splice(0);
+                //    console.log(selectedIds, players);
+                //delete not selected players
+                for (let i = players.length - 1; i >= 0; --i) {
+                    let p = players[i];
+                    if (selectedIds[p.id] != true)
+                        players.splice(i, 1);
+                }
+
                 for (let id in selectedIds) {
-                    if (selectedIds[id]) {
+                    //add only new
+                    if (selectedIds[id] && existingPlayersMap[id] != true) {
                         let data = new PlayerMatchData();
+                        data.id = id;
                         data.player = this.playerService.getPlayer(id);
                         players.push(data);
                     }
                 }
-                console.log(this.homePlayers);
+                //console.log(this.homePlayers);
             }
         });
 
