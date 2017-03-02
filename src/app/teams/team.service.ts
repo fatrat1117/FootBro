@@ -123,7 +123,7 @@ export class TeamService {
       obj['avgGF'] = obj.total_matches > 0 ? (obj.GF / obj.total_matches).toFixed(2) : 0;
     if (obj && 'rate' in obj)
       obj['roundedRate'] = Math.round(obj.rate * 100);
-    console.log(obj.roundedRate);
+    //console.log(obj.roundedRate);
   }
 
   findOrCreateTeam(id): Team {
