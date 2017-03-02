@@ -54,6 +54,7 @@ import { ReversePipe, MapToArrayPipe } from '../pipes/utilities.pipe'
 
 // components
 import { SbLoadingComponent } from './common/loading.component';
+import { SbRateCircleComponent } from './common/rate.circle.component';
 import { SbModalNavbarComponent } from './common/modal.navbar.component';
 import { SbShareButtonComponent } from './common/share.button.component';
 import { SbMatchBasicComponent } from './matches/match-basic.component';
@@ -116,6 +117,7 @@ export const firebaseConfig = {
     StringToYearOnlyPipe,
     // components
     SbLoadingComponent,
+    SbRateCircleComponent,
     SbModalNavbarComponent,
     SbShareButtonComponent,
     SbMatchBasicComponent,

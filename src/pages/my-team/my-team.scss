@@ -1,21 +1,17 @@
 page-my-team {
-  .my-team-btn-right{
+  .my-team-btn-right {
     color: #fff;
   }
-  
   //通用样式
   .center-margin {
     margin: 0px auto;
   }
-
   .width-all {
     width: 100%;
   }
-
   .no-margin {
     margin: 0px;
   }
-
   .no-padding {
     padding: 0px;
   }
@@ -25,29 +21,27 @@ page-my-team {
   .default-font-color {
     color: #959595;
   }
-  .default-font-size-p{
+  .default-font-size-p {
     font-size: 1.2rem;
   }
-  .default-font-size-col-4{
+  .default-font-size-col-4 {
     font-size: 1.2rem;
   }
-  .default-font-size-col-6{
+  .default-font-size-col-6 {
     font-size: 1.2rem;
   }
-  .default-font-size-h6{
+  .default-font-size-h6 {
     font-size: 1.5rem;
   }
-
   //标题设置
   .ion-header-setting {
     font-family: "Microsoft Yahei";
-
     //背景颜色
     background: #161616;
     //左边样式
     .head-left {
       float: left;
-      margin-top:3px;
+      margin-top: 3px;
       width: 20%;
     }
     //右边样式
@@ -84,12 +78,11 @@ page-my-team {
     .head-title {
       text-align: center;
       color: white;
-      font-size:1.8rem;
-      margin:13px 0px 0px 0px;
-      padding:0px;
+      font-size: 1.8rem;
+      margin: 13px 0px 0px 0px;
+      padding: 0px;
     }
   }
-
   //内容设置
   .content-background-page {
     background: #161817;
@@ -130,36 +123,35 @@ page-my-team {
           color: white;
           margin: 0px;
           padding: 10px 0px 5px 0px;
-          font-size:1.5rem;
+          font-size: 1.5rem;
         }
         .team-right-item-bottom {
           width: 55px;
           height: 20px;
-          background:#ff3c3c;
-          text-align:center;
-          position:relative;
-          .team-right-item-bottom-img{
+          background: #ff3c3c;
+          text-align: center;
+          position: relative;
+          .team-right-item-bottom-img {
             width: 20px;
-            height:20px;
-            padding:2px;
+            height: 20px;
+            padding: 2px;
             background: #ff3c3c;
           }
-          .team-right-item-bottom-text{
-            height:100%;
-            padding:0px;
+          .team-right-item-bottom-text {
+            height: 100%;
+            padding: 0px;
             margin: 0px;
-            color:white;
-            font-size:1.2rem;
+            color: white;
+            font-size: 1.2rem;
           }
         }
       }
       //球队简单描述
-        .team-brief-info{
-            .hidden{
-                visibility: hidden;
-            }
+      .team-brief-info {
+        .hidden {
+          visibility: hidden;
         }
-
+      }
     }
     //subtitle
     .subtitle {
@@ -174,12 +166,11 @@ page-my-team {
         color: #b6b6b6;
       }
     }
-
     //最近一场比赛显示
     .nearest-game-time {
       margin: 0px;
       background: #2c2d31;
-      font-size:1.2rem;
+      font-size: 1.2rem;
     }
     .nearest-game-display {
       background: #27282d;
@@ -201,15 +192,14 @@ page-my-team {
             height: 40px;
             margin-top: 15px;
           }
-          .game-left-text{
-            font-size:1.2rem;
+          .game-left-text {
+            font-size: 1.2rem;
             text-align: center;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
           }
         }
-
       }
       //中间比分
       .game-center {
@@ -229,7 +219,7 @@ page-my-team {
       }
       //右边战队
       .game-right {
-          display: block;
+        display: block;
         width: 40%;
         height: 0%;
         float: left;
@@ -243,10 +233,10 @@ page-my-team {
           .game-right-img {
             width: 40px;
             height: 40px;
-              margin-top: 15px;
+            margin-top: 15px;
           }
-          .game-right-text{
-            font-size:1.2rem;
+          .game-right-text {
+            font-size: 1.2rem;
             text-align: center;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -272,15 +262,14 @@ page-my-team {
         margin: 0px 2px;
         background: #41444d;
         color: white;
-        font-size:1.2rem;
+        font-size: 1.2rem;
       }
     }
-
     //最近5场平胜负
     .nearest-5-game-result-title {
       margin: 0px;
       background: #2c2d31;
-      font-size:1.2rem;
+      font-size: 1.2rem;
     }
     //最近5场比赛胜负结果
     .nearest-5-game-result-content {
@@ -339,10 +328,8 @@ page-my-team {
         .game-text-failed {
           color: #8c8c8c;
         }
-
       }
     }
-
     //球队成员信息
     .team-member-info {
       background: #26272c;
@@ -358,7 +345,7 @@ page-my-team {
         .team-member-img {
           width: 30px;
           height: 30px;
-          border-radius:10%;
+          border-radius: 10%;
         }
         //球队成员姓名
         .team-member-name {
@@ -378,7 +365,6 @@ page-my-team {
         }
       }
     }
-
     //对战记录
     //最近15场-20场-全部
     .team-all-game {
@@ -390,7 +376,7 @@ page-my-team {
         padding: 5px;
         color: #999999;
         text-align: center;
-        font-size:1.2rem;
+        font-size: 1.2rem;
       }
       .white {
         color: white;
@@ -411,36 +397,12 @@ page-my-team {
       background: #555555;
       padding: 0px;
     }
-
     //比赛胜率数据
     .team-success-fail-data {
       background: #2d2e32;
       //background: red;
       padding-top: 10px;
       margin-top: 0px;
-        .round-progress-container{
-            position: relative;
-             //圆圈里的百分比
-            .circle-text{
-                position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-                    display: flex;
-    flex-direction: column;
-                .win-ratio-label{
-                    font-size: 1rem;
-                }
-                .win-ratio{
-                   font-size: 2.8rem; 
-                    
-                }
-                    } 
-        }
-             
-        
-        
-      //胜率图
       .team-success-fail-img {
         margin: 0px auto;
         width: 150px;
@@ -462,11 +424,11 @@ page-my-team {
           width: 150px;
           height: 150px;
           transform: rotate(0deg); //超过180 0
-          clip: rect(0px, 75px, 150px, 0px); /* 这个clip属性用来绘制半圆，在clip的rect范围内的内容显示出来，使用clip属性，元素必须是absolute的 */
+          clip: rect(0px, 75px, 150px, 0px);
+          /* 这个clip属性用来绘制半圆，在clip的rect范围内的内容显示出来，使用clip属性，元素必须是absolute的 */
           border-radius: 75px;
           background-color: #00ff00;
         }
-        
         //显示百分比用的图片2
         .team-success-fail-picture-2 {
           position: absolute;
@@ -497,7 +459,7 @@ page-my-team {
             text-align: center;
             margin-top: 20px;
             color: #a5a5a5;
-            font-size:1.2rem;
+            font-size: 1.2rem;
           }
           .text-down {
             text-align: center;
@@ -510,7 +472,7 @@ page-my-team {
       //比赛参数数据
       .recent-game-result {
         color: white;
-        font-size:1.2rem;
+        font-size: 1.2rem;
       }
       //比赛结果参数
       .recent-game-result-name {
@@ -526,46 +488,42 @@ page-my-team {
       .game-data-assist-item {
         background-color: #2a2b2f;
         margin-bottom: 1px;
-
         .goal-title {
-                display: flex;
-    flex: 0 0 50%;
-    justify-content: flex-start;
-    align-items: flex-start;
-    margin: 0;
+          display: flex;
+          flex: 0 0 50%;
+          justify-content: flex-start;
+          align-items: flex-start;
+          margin: 0;
           color: #8c8c8c;
           font-size: 1.5rem;
           padding: 10px 0px 0px 0px;
-          width:90%;
+          width: 90%;
         }
         .goal-data {
-    display: flex;
-    flex: 0 0 50%;
-    max-width: 50%;
-    justify-content: flex-end;
-    align-items: flex-end;
-    margin: 0;
+          display: flex;
+          flex: 0 0 50%;
+          max-width: 50%;
+          justify-content: flex-end;
+          align-items: flex-end;
+          margin: 0;
           color: white;
-         padding: 10px 0px 0px 0px;
+          padding: 10px 0px 0px 0px;
           font-size: 1.5rem;
-        width:10%;
-
+          width: 10%;
         }
-
-          .goal-data-detail-wrapper{
-                  display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 0;
-               .goal-data-detail {
-          color: #8c8c8c;
-          font-size: 1.2rem;
-        white-space: initial;
-        }
+        .goal-data-detail-wrapper {
+          display: flex;
+          align-items: flex-end;
+          justify-content: flex-end;
+          width: 100%;
+          margin-right: 0;
+          margin-bottom: 0;
+          .goal-data-detail {
+            color: #8c8c8c;
+            font-size: 1.2rem;
+            white-space: initial;
           }
-       
+        }
         .goal-title-2 {
           color: #8c8c8c;
           font-size: 1.5rem;
@@ -607,7 +565,6 @@ page-my-team {
         margin-top: -20px;
         margin-bottom: 1px;
         background-color: #24252a;
-
         .left-image {
           width: 40px;
           height: 40px;
@@ -615,13 +572,12 @@ page-my-team {
         }
         .award-team-member-name {
           color: gray;
-          font-size:1.5rem;
+          font-size: 1.5rem;
           margin-bottom: 5px;
         }
-
         .award-team-member-score {
           color: white;
-          font-size:1.2rem;
+          font-size: 1.2rem;
         }
         .right-info {
           float: right;
@@ -640,29 +596,23 @@ page-my-team {
     ion-col {
       text-align: center;
     }
-
   }
-
-  .col-20{
-      flex: 0 0 20%;
-      max-width: 20%;
-    }
-.col-20{
-      flex: 0 0 30%;
-      max-width: 30%;
-    }
-    .col-40{
-      flex: 0 0 40%;
-      max-width: 40%;
-    }
-    // .win-rate-text{
-    //     padding-top: 40%;
-    //     font-size: 2rem;
-    //     text-align: center;
-    //     padding-bottom: 40%;
-    //   }
+  .col-20 {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+  .col-20 {
+    flex: 0 0 30%;
+    max-width: 30%;
+  }
+  .col-40 {
+    flex: 0 0 40%;
+    max-width: 40%;
+  }
+  // .win-rate-text{
+  //     padding-top: 40%;
+  //     font-size: 2rem;
+  //     text-align: center;
+  //     padding-bottom: 40%;
+  //   }
 }
-
-
-
-

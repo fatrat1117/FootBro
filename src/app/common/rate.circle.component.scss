@@ -1,0 +1,20 @@
+sb-rate-circle {
+  .round-progress-container {
+    position: relative;
+    //圆圈里的百分比
+    .circle-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      .win-ratio-label {
+        font-size: 1rem;
+      }
+      .win-ratio {
+        font-size: 2.8rem;
+      }
+    }
+  }
+}
