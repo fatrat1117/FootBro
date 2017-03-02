@@ -37,51 +37,12 @@ export class UpdateGamePage {
         params: NavParams) {
         this.id = params.get('id');
         this.match = this.matchService.getMatch(this.id);
-        console.log(this.match);
+        //console.log(this.match);
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
         this.matchDate = helper.numberToDateString(this.match.date);
         this.matchTime = helper.numberToTimeString(this.match.time);
-        this.homePlayers = this.match.homePlayers || [];
-        this.awayPlayers = this.match.awayPlayers || [];
-        
-        // for (var i = 0; i < 4; i++) {
-        //     this.players[i] = {
-        //         name: i,
-        //         items: [],
-        //         hidden: true,
-        //         showExpandableIcon: "ios-arrow-down"
-        //     };
-        //     for (var j = 0; j < 3; j++) {
-        //         // this.players[i].items.push(i + '-' + j);
-        //         this.players[i].items = [
-        //             {
-        //                 name: "进球",
-        //                 number: 5,
-        //                 icon: "assets/icon/b2.png",
-        //                 color: "light"
-        //             },
-        //             {
-        //                 name: "助攻",
-        //                 number: 1,
-        //                 icon: "assets/icon/b3.png",
-        //                 color: "light"
-        //             },
-        //             {
-        //                 name: "红牌",
-        //                 number: 2,
-        //                 icon: "assets/icon/b2.png",
-        //                 color: "light"
-        //             },
-        //             {
-        //                 name: "黄牌",
-        //                 number: 4,
-        //                 icon: "assets/icon/b2.png",
-        //                 color: "light"
-        //             },
-
-        //         ];
-        //     }
-        // }
+        this.homePlayers = this.match.homeParticipants;
+        this.awayPlayers = this.match.homeParticipants;
     }
 
     ionViewDidLoad() {
@@ -157,12 +118,6 @@ export class UpdateGamePage {
         e.stopPropagation();
         let players = (1 === tag ? this.homePlayers : this.awayPlayers);
         players.splice(players.indexOf(player), 1);
-        // for (var i = 0; i < this.players.length; i++) {
-        //     if (this.players[i] == player) {
-        //         this.players.splice(i, 1);
-        //         break;
-        //     }
-        // }
     }
 
     //减少得分
@@ -216,53 +171,48 @@ export class UpdateGamePage {
         return Number(s);
     }
 
-    updatePlayersData(players) {
+    copyAndUpdatePlayersData(players) {
+        let data = [];
         players.forEach(p => {
-            p['id'] = p.player.id;
-            delete p.player;
-        })
+            let copy = Object.assign({}, p);
+            copy['id'] = p.player.id;
+            delete copy.player;
+            data.push(copy);
+        });
+        return data;
     }
 
     updateMatch() {
         let t = this.helper.dateTimeStringToNumber(this.matchDate + " " + this.matchTime);
         let tDate = this.helper.dateTimeStringToNumber(this.matchDate);
 
-        this.updatePlayersData(this.homePlayers);
-        this.updatePlayersData(this.awayPlayers);
+        let copyHomeParticipants = this.copyAndUpdatePlayersData(this.homePlayers);
+        let copyAwayParticipants = this.copyAndUpdatePlayersData(this.awayPlayers);
         let updateMatchData = {
             date: tDate,
             time: t,
             locationName: this.match.location.name,
             locationAddress: this.match.location.address,
             type: this.match.type,
-            homePlayers: this.homePlayers,
-            awayPlayers: this.awayPlayers,
+            homeParticipants: copyHomeParticipants,
+            awayParticipants: copyAwayParticipants,
         };
 
         if (this.match.location.lat)
             updateMatchData['lat'] = this.match.location.lat;
         if (this.match.location.lng)
             updateMatchData['lng'] = this.match.location.lng;
-        if ('homeScore' in this.match && this.match.homeScore >= 0)
-            updateMatchData["homeScore"] = this.match.homeScore;
-        if ('awayScore' in this.match && this.match.awayScore >= 0)
-            updateMatchData["awayScore"] = this.match.homeScore;
+        //    console.log(this.match.homeScore);
+            
+        let homeScoreStr = this.match.homeScore.toString().trim();
+        let awayScroeStr = this.match.awayScore.toString().trim();
+        if (homeScoreStr.length > 0 && awayScroeStr.length > 0) {
+            updateMatchData["homeScore"] = Number(this.match.homeScore);
+            updateMatchData["awayScore"] = Number(this.match.awayScore);
+        }
         
-        this.matchService.updateMatch(this.id, updateMatchData);
-        
-        // let self = this;
-        // let success = () => {
-        //   //alert('update match successful');
-        //   self.dismiss();
-        // };
-        // let error = err => {
-        //   alert(err);
-        // };
-
-        // this.fm.updateMatch(this.tournamentId, this.mId, updateMatchData,
-        //   this.oldDate,
-        //   success,
-        //   error);
+        //this.matchService.updateMatch(this.id, updateMatchData);
+        this.close();
     }
 
     close() {
@@ -270,18 +220,11 @@ export class UpdateGamePage {
     }
 
     deleteMatch() {
-        //console.log('beforedeleteMatch', this.match);
-        //save temp date and tournamentId
-        //let date = this.match.date;
-        //let tournamentId = this.match.tournamentId || 'all';
         this.matchService.deleteMatch(this.id);
-        // console.log('deleteMatch', this.match);
-        //this.matchService.getMatchesByDateAsync(date, tournamentId);
         this.close();
     }
 
-    choosePlayers(id, tag) {
-        let players = (1 === tag ? this.homePlayers : this.awayPlayers);
+    choosePlayers(id, players) {
         let existingPlayers = [];
         players.forEach(p => {
             existingPlayers.push(p.player.id);
@@ -298,8 +241,6 @@ export class UpdateGamePage {
             if (e && e['selectedIds']) {
                 let selectedIds = e['selectedIds'];
                 console.log(selectedIds);
-
-                players = (1 === tag ? this.homePlayers : this.awayPlayers);
                 players.splice(0);
                 for (let id in selectedIds) {
                     if (selectedIds[id]) {

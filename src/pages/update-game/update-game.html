@@ -34,7 +34,7 @@
     <ion-col class="left-number">
       <div class="back-top"></div>
       <div class="back-bottom"></div>
-      <ion-input class="top-score" [ngModel]="match.homeScore" (ngModelChange)="match.homeScore=toNumber($event)"></ion-input>
+      <ion-input type="number"  class="top-score" [(ngModel)]="match.homeScore"></ion-input>
     </ion-col>
     <ion-col class="center-compare">
       :
@@ -42,7 +42,7 @@
     <ion-col class="right-number">
       <div class="back-top"></div>
       <div class="back-bottom"></div>
-      <ion-input class="top-score" [ngModel]="match.awayScore" (ngModelChange)="match.awayScore=toNumber($event)"></ion-input>
+      <ion-input type="number" class="top-score" [(ngModel)]="match.awayScore"></ion-input>
     </ion-col>
   </ion-row>
 </ion-col>
@@ -105,7 +105,7 @@
 
   <ion-item class="game-info-item">
     <button ion-button item-left clear class="item-game-info-left-text">{{'participants' | trans}}</button>
-    <button ion-button item-right clear icon-right class="item-game-info-right-text" (click)='choosePlayers(match.homeId, 1)'>
+    <button ion-button item-right clear icon-right class="item-game-info-right-text" (click)='choosePlayers(match.homeId, homePlayers)'>
         <ion-icon name="add-circle"></ion-icon>
       </button>
   </ion-item>
