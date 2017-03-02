@@ -216,7 +216,8 @@ export class Localization {
             winningrate: 'Winning rate',
             updatematch: 'Update Match',
             CreateTeam: 'Create Team',
-            participants: 'Participants'
+            participants: 'Participants',
+            ResponseRate: 'Response Rate'
         },
 
         zh: {
@@ -414,7 +415,8 @@ export class Localization {
             winningrate: '胜率',
             updatematch: '更新比赛',
             CreateTeam: '创建球队',
-            participants: '出场队员'
+            participants: '出场队员',
+            ResponseRate: '回复率'
         }
     }
 }
