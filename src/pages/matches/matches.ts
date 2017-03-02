@@ -54,7 +54,6 @@ export class MatchesPage {
         break;
       }
     }
-    console.log(cToday);
     if (cToday != -1) {
       let closeToToday = this.dates[cToday];
       this.showMatches(closeToToday, cToday);
