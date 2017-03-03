@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>63493717987-6r776t8se6h6ndo8kkqdqmnvcnba4i24.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.63493717987-6r776t8se6h6ndo8kkqdqmnvcnba4i24</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>63493717987-rf60j14fl7slhv1ir6dtbhd765l33r0u.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAyLijoSfsubXPvVqfrG1OQXHieNLd7qFk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>63493717987</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>LeiZeng.SoccerBro</string>
+	<key>PROJECT_ID</key>
+	<string>stk-soccer</string>
+	<key>STORAGE_BUCKET</key>
+	<string>stk-soccer.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:63493717987:ios:4787feac7adb451d</string>
+	<key>DATABASE_URL</key>
+	<string>https://stk-soccer.firebaseio.com</string>
+</dict>
+</plist>

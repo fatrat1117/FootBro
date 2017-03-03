@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "63493717987",
+    "firebase_url": "https://stk-soccer.firebaseio.com",
+    "project_id": "stk-soccer",
+    "storage_bucket": "stk-soccer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63493717987:android:61b2d5c22096c5bd",
+        "android_client_info": {
+          "package_name": "com.SoccerBro.SoccerBro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "63493717987-rf60j14fl7slhv1ir6dtbhd765l33r0u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.SoccerBro.SoccerBro",
+            "certificate_hash": "358cbc7612a9869b5e12fd07db87c0d807959dfb"
+          }
+        },
+        {
+          "client_id": "63493717987-gsucdo5ct38davne30sp25r00hok39vl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSjs8a7ZpW7og0AafMC-GMz5W5wzIXPvE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "63493717987-gsucdo5ct38davne30sp25r00hok39vl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "63493717987-6r776t8se6h6ndo8kkqdqmnvcnba4i24.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "LeiZeng.SoccerBro",
+                "app_store_id": "1118724239"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
