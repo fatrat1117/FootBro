@@ -160,7 +160,7 @@ export class UpdateGamePage {
                 {
                     text: this.loc.getString('OK'),
                     handler: () => {
-                        self.doUpdateMatch();
+                        self    .doUpdateMatch();
                     }
                 }
             ]
