@@ -8,9 +8,9 @@
     </ion-buttons>
     <ion-buttons right>
       <button (click)="deleteMatch()" color="danger" ion-button icon-only clear>
-        <ion-icon name="trash"></ion-icon>
+        <ion-icon *ngIf='0 === updateState' name="trash"></ion-icon>
       </button>
-      <button [disabled]="!(match.type && matchDate && matchTime && match.location.address)" (click)="updateMatch()" color="primary"
+      <button *ngIf='isShowSave()' [disabled]="!(match.type && matchDate && matchTime && match.location.address)" (click)="updateMatch()" color="primary"
         ion-button icon-only clear>
         <ion-icon name="cloud-upload"></ion-icon>
       </button>
