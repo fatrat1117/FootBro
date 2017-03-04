@@ -38,41 +38,11 @@
     <ion-col class="team-name" (click)="searchTeam(2)">{{match?.away?.name}}</ion-col>
   </ion-row>
 
-<!-->
-  <ion-row class="content-fight">
-    <ion-col class="left-team" (click)="searchTeam(1)">
-      <button ion-button icon-left clear full style="margin:0px;padding:0px;" color="light">
-        <ion-icon name="flag" color="danger"></ion-icon>
-        {{'HomeTeam' | trans}}
-      </button>
-      <a class="left-team-name">{{match?.home?.name}}</a>
-
-    </ion-col>
-
-    <ion-col class="center-score" width-25>
-      <ion-row class="no-margin no-padding">
-        <ion-col class="center-compare">
-          VS
-        </ion-col>
-      </ion-row>
-    </ion-col>
-
-    <ion-col class="right-team" (click)="searchTeam(2)">
-      <button ion-button icon-left clear full style="margin:0px;padding:0px;"color="light">
-        <ion-icon name="flag" color="primary"></ion-icon>
-        {{'AwayTeam' | trans}}
-      </button>
-      <a class="right-team-name">{{match?.away?.name}}</a>
-
-    </ion-col>
-  </ion-row>
-<-->
-
   <ion-list no-lines class="content-game-info">
     <ion-item class="game-info-item">
       <button ion-button clear full class="game-info-item-left" item-left>{{'Type' | trans}}</button>
       <div class="game-info-item-right" item-right>
-        <ion-select text-center [ngModel]="match.type" (ngModelChange)="match.type=toNumber($event)">
+        <ion-select style="max-width: 100%;" text-center [ngModel]="match.type" (ngModelChange)="match.type=toNumber($event)">
           <ion-option value="5">5 v 5</ion-option>
           <ion-option value="7">7 v 7</ion-option>
           <ion-option value="11">11 v 11</ion-option>
@@ -82,8 +52,8 @@
 
     <ion-item class="game-info-item-light">
       <button ion-button clear full class="game-info-item-left" item-left>{{'Location' | trans}}</button>
-      <div class="game-info-item-right-gray" item-right>
-        <input id="autocompleteInput" [ngModel]="match.location.name" style="margin-left:10%;width:80%; border:none; text-align:center;" />
+      <div class="game-info-item-right-gray" item-right text-center>
+        <input class="google-location" id="autocompleteInput" [ngModel]="match.location.name"/>
       </div>
     </ion-item>
 
