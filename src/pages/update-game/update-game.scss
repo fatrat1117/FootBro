@@ -93,10 +93,14 @@ page-update-game {
       }
     }
     //球赛信息
+    //球赛信息
     .content-game-info{
       margin: 0px;
       padding: 1px 0px 0px 0px;
       background-color: #161510;
+      .info-title {
+        width: 30%;
+      }
       .game-info-item{
         padding: 0px;
         margin: 0px 0px 1px 0px;
@@ -152,16 +156,23 @@ page-update-game {
         }
           //右边70%部分
         .game-info-item-right-gray{
-          margin: 0px;
-          padding: 0px;
+          //margin: 0px;
+          //padding: 0px;
           width: 100%;
-          height: 50px;
+          //height: 50px;
           background-color: #41444d;
           .right-button{
             float: right;
             margin-right: 0px;
             height: 100%;
             font-size:1.5rem;
+          }
+          .google-location {
+            width:100%; 
+            border:none; 
+            text-align:center;
+            //color: #222; 
+            background-color: transparent;
           }
         }
       }
@@ -207,6 +218,7 @@ page-update-game {
         }
       }
     }
+    
     .content-expandable{
       //样式一
       .expandable-member-name{
