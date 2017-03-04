@@ -16,6 +16,29 @@
 </ion-header>
 
 <ion-content>
+  <ion-row class="team-info" center>
+    <ion-col class="team-flag" (click)="searchTeam(1)">
+      <button ion-button icon-left clear full style="margin:0px;padding:0px;" color="light">
+        <ion-icon name="md-flag" color="danger"></ion-icon>
+        {{'HomeTeam' | trans}}
+      </button>
+    </ion-col>
+    <ion-col></ion-col>
+    <ion-col class="team-flag" (click)="searchTeam(2)">
+      <button ion-button icon-left clear full style="margin:0px;padding:0px;"color="light">
+        <ion-icon name="md-flag" color="primary"></ion-icon>
+        {{'AwayTeam' | trans}}
+        </button> 
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="team-info" center>
+    <ion-col class="team-name" (click)="searchTeam(1)">{{match?.home?.name}}</ion-col>
+    <ion-col class="vs-text">VS</ion-col>
+    <ion-col class="team-name" (click)="searchTeam(2)">{{match?.away?.name}}</ion-col>
+  </ion-row>
+
+<!-->
   <ion-row class="content-fight">
     <ion-col class="left-team" (click)="searchTeam(1)">
       <button ion-button icon-left clear full style="margin:0px;padding:0px;" color="light">
@@ -28,19 +51,9 @@
 
     <ion-col class="center-score" width-25>
       <ion-row class="no-margin no-padding">
-        <!--<ion-col class="left-number">
-            <div class="back-top"></div>
-            <div class="back-bottom"></div>
-            <div class="top-score">4</div>
-        </ion-col>-->
         <ion-col class="center-compare">
           VS
         </ion-col>
-        <!--<ion-col class="right-number">
-            <div class="back-top"></div>
-            <div class="back-bottom"></div>
-            <div class="top-score">1</div>
-        </ion-col>-->
       </ion-row>
     </ion-col>
 
@@ -53,6 +66,7 @@
 
     </ion-col>
   </ion-row>
+<-->
 
   <ion-list no-lines class="content-game-info">
     <ion-item class="game-info-item">

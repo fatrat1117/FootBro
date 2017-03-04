@@ -3,59 +3,57 @@
     <ion-title>{{'updatematch' | trans}}</ion-title>
     <ion-buttons left>
       <button (click)="close()" color='danger' ion-button icon-only clear>
-        <ion-icon name="close"></ion-icon>
+        <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons right>
       <button (click)="deleteMatch()" color="danger" ion-button icon-only clear>
-        <ion-icon *ngIf='0 === updateState' name="trash"></ion-icon>
+        <ion-icon *ngIf='0 === updateState' name="md-trash"></ion-icon>
       </button>
       <button *ngIf='isShowSave()' [disabled]="!(match.type && matchDate && matchTime && match.location.address)" (click)="updateMatch()" color="primary"
         ion-button icon-only clear>
-        <ion-icon name="cloud-upload"></ion-icon>
+        <ion-icon name="md-cloud-upload"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-row class="content-fight">
-    <ion-col class="left-team">
-      <button ion-button icon-left clear full style="margin:0px;padding:0px;" color="light">
-<ion-icon name="flag" color="danger"></ion-icon>
-{{'HomeTeam' | trans}}
-</button>
-<a class="left-team-name">{{match?.home?.name}}</a>
-
-</ion-col>
-
-<ion-col class="center-score" width-25>
-  <ion-row class="no-margin no-padding">
-    <ion-col class="left-number">
-      <div class="back-top"></div>
-      <div class="back-bottom"></div>
-      <ion-input type="number" class="top-score" [(ngModel)]="match.homeScore"></ion-input>
+  <ion-row class="team-info">
+    <ion-col width-33 (click)="searchTeam(1)">
+      <ion-row>
+        <button ion-button icon-left clear full style="margin:0px;padding:0px;" color="light">
+          <ion-icon name="md-flag" color="danger"></ion-icon>
+          {{'HomeTeam' | trans}}
+        </button>
+      </ion-row>
+      <ion-row><p class="team-name">{{match?.home?.name}}</p></ion-row>
     </ion-col>
-    <ion-col class="center-compare">
-      :
+
+    <ion-col width-33>
+      <ion-row center>
+      <ion-col class="team-score">
+        <ion-input class="score-input" text-center type="number" min="0" max="99"[(ngModel)]="match.homeScore"></ion-input>
+      </ion-col>
+      <ion-col class="colon" text-center>
+        :
+      </ion-col>
+      <ion-col class="team-score">
+        <ion-input class="score-input" text-center type="number" min="0" max="99"[(ngModel)]="match.awayScore"></ion-input>
+      </ion-col>
+      </ion-row>
     </ion-col>
-    <ion-col class="right-number">
-      <div class="back-top"></div>
-      <div class="back-bottom"></div>
-      <ion-input type="number" class="top-score" [(ngModel)]="match.awayScore"></ion-input>
+
+    <ion-col width-33 (click)="searchTeam(2)">
+      <ion-row>
+        <button ion-button icon-left clear full style="margin:0px;padding:0px;" color="light">
+          <ion-icon name="md-flag" color="primary"></ion-icon>
+          {{'AwayTeam' | trans}}
+        </button>
+      </ion-row>
+      <ion-row><p class="team-name">{{match?.away?.name}}</p></ion-row>
     </ion-col>
   </ion-row>
-</ion-col>
-
-<ion-col class="right-team">
-  <button ion-button icon-left clear full style="margin:0px;padding:0px;"color="light">
-<ion-icon name="flag" color="primary"></ion-icon>
-{{'AwayTeam' | trans}}
-</button>
-<a class="right-team-name">{{match?.away?.name}}</a>
-
-</ion-col>
-</ion-row>
 
 <ion-list no-lines class="content-game-info">
   <ion-item class="game-info-item-light">

@@ -7,7 +7,7 @@
       </button>
     </ion-buttons>
     <ion-buttons end>
-      <button [disabled] = "teamName.trim().length == 0 || busy" (click)="save()" text-center ion-button clear color="primary">
+      <button [disabled] = "teamName.trim().length == 0 || busy" (click)="doCreateTeam()" text-center ion-button clear color="primary">
         {{ 'Save' | trans }}
       </button>
     </ion-buttons>

@@ -73,6 +73,26 @@ page-new-game {
       }
     }
     //战队比分
+    .team-info {
+      background-color: #2c2b31;
+      .team-flag {
+        min-width: 40%;
+        max-width: 40%;
+      }
+      .vs-text {
+        text-align: center;
+        font-size: 2rem;
+        //width: 20% !important;
+      }
+      .team-name {
+        //display: block;
+        text-align: center;
+        min-width: 40%;
+        max-width: 40%;
+        //width: 40% !important;
+      }
+    }
+    /*
     .content-fight {
       background-color: #2c2b31;
       //左边战队信息
@@ -84,16 +104,16 @@ page-new-game {
           font-size: 1.2rem;
         }
         .left-team-info {
-          position: relative;
+          //position: relative;
           margin-top: 5px;
           .left-team-flag {
-            margin-left: -50px;
+            //margin-left: -50px;
             width: 15px;
             height: 15px;
           }
           .left-team-position {
-            position: absolute;
-            padding: 0px;
+            //position: absolute;
+            //padding: 0px;
             font-size: 1.3rem;
             color: gray;
           }
@@ -196,6 +216,7 @@ page-new-game {
         }
       }
     }
+    */
     //球赛信息
     .content-game-info{
       margin: 0px;
