@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavController, ModalController } from "ionic-angular";
 import { MatchService } from '../matches/match.service';
-import { Match} from '../matches/match.model';
+import { Match } from '../matches/match.model';
 import { UpdateGamePage } from '../../pages/update-game/update-game'
+import { NewGamePage } from '../../pages/new-game/new-game'
 import { MatchDetailPage } from '../../pages/match-detail/match-detail'
 import { PlayerService } from '../players/player.service'
 
@@ -17,12 +18,12 @@ export class SbMatchBasicComponent implements OnInit {
   matchObj;
   // home;
   // away;
-  match : Match;
+  match: Match;
 
   constructor(private navCtrl: NavController,
     private matchService: MatchService,
     private modalCtrl: ModalController,
-    private PlayerService : PlayerService) {
+    private PlayerService: PlayerService) {
   }
 
   ngOnInit() {
@@ -39,11 +40,14 @@ export class SbMatchBasicComponent implements OnInit {
 
   goUpdateMatchPage(e) {
     e.stopPropagation();
-    this.modalCtrl.create(UpdateGamePage, {id: this.match.id}).present();
+    if (this.match.isStarted())
+      this.modalCtrl.create(UpdateGamePage, { id: this.match.id }).present();
+    else
+      this.modalCtrl.create(NewGamePage, { id: this.match.id }).present();
   }
 
   goMatchDetailPage() {
-    this.modalCtrl.create(MatchDetailPage, {match: this.match}).present();
+    this.modalCtrl.create(MatchDetailPage, { match: this.match }).present();
   }
 
   canUpdate() {

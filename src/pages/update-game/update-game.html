@@ -34,7 +34,7 @@
     <ion-col class="left-number">
       <div class="back-top"></div>
       <div class="back-bottom"></div>
-      <ion-input type="number"  class="top-score" [(ngModel)]="match.homeScore"></ion-input>
+      <ion-input type="number" class="top-score" [(ngModel)]="match.homeScore"></ion-input>
     </ion-col>
     <ion-col class="center-compare">
       :
@@ -58,46 +58,29 @@
 </ion-row>
 
 <ion-list no-lines class="content-game-info">
-  <ion-item class="game-info-item">
-    <button ion-button clear full class="game-info-item-left" item-left>{{'Type' | trans}}</button>
-    <div class="game-info-item-right" item-right>
-      <ion-select text-center [ngModel]="match.type" (ngModelChange)="match.type=toNumber($event)">
-        <ion-option value="5">5 v 5</ion-option>
-        <ion-option value="7">7 v 7</ion-option>
-        <ion-option value="11">11 v 11</ion-option>
-      </ion-select>
-    </div>
-  </ion-item>
-
   <ion-item class="game-info-item-light">
     <button ion-button clear full class="game-info-item-left" item-left>{{'Location' | trans}}</button>
     <div class="game-info-item-right-gray" item-right>
-      <img src="assets/img/powered_by_google_on_non_white.png" style="margin-left: 10%"/>
-<input id="autocompleteInput" [(ngModel)]="match.location.name" style="margin-left:10%;width:80%; border:none; text-align:center;" />
+      {{match.location.name}}
+      <!--<img src="assets/img/powered_by_google_on_non_white.png" style="margin-left: 10%"/>
+<input id="autocompleteInput" [(ngModel)]="match.location.name" style="margin-left:10%;width:80%; border:none; text-align:center;" />-->
 </div>
 </ion-item>
 
 <ion-item class="game-info-item">
   <button ion-button clear full class="game-info-item-left" item-left>{{'Date' | trans}}</button>
   <div class="game-info-item-right" item-right>
-    <ion-datetime text-center displayFormat="YYYY-MM-DD" [min]="minDate" [(ngModel)]="matchDate"></ion-datetime>
+    <ion-datetime disabled='true' text-center displayFormat="YYYY-MM-DD" [min]="minDate" [(ngModel)]="matchDate"></ion-datetime>
   </div>
 </ion-item>
 
 <ion-item class="game-info-item-light">
   <button ion-button clear full class="game-info-item-left" item-left>{{'Time' | trans}}</button>
   <div class="game-info-item-right-gray" item-right>
-    <ion-datetime text-center displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="matchTime"></ion-datetime>
+    <ion-datetime disabled='true' text-center displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="matchTime"></ion-datetime>
   </div>
 </ion-item>
-
-<!--<ion-item class="game-info-item-dark">
-      <button ion-button clear color="light" icon-left item-left>
-        <ion-icon name="flag" color="danger"></ion-icon>
-        {{'HomeTeam' | trans}}
-      </button>
-    </ion-item>-->
-<div *ngIf = "match?.home?.captain == playerService.selfId()">
+<div *ngIf="match?.home?.captain == playerService.selfId()">
   <ion-item class="game-info-item-team-title">
     <button ion-button class="game-info-team-title-button">{{match?.home?.name}}
       </button>
@@ -137,7 +120,7 @@
           </button>
       </div>
     </ion-item>
-     <ion-item class="expandable-member-property" [hidden]="!player.expanded">
+    <ion-item class="expandable-member-property" [hidden]="!player.expanded">
       <img src="assets/icon/b3.png" class="desc-img" item-left/>
       <button ion-button clear color="light">{{'Assists' | trans}}</button>
       <div item-right>
@@ -152,7 +135,7 @@
           </button>
       </div>
     </ion-item>
-     <ion-item class="expandable-member-property" [hidden]="!player.expanded">
+    <ion-item class="expandable-member-property" [hidden]="!player.expanded">
       <img src="assets/img/match_detail/yellowcard.png" class="desc-img" item-left/>
       <button ion-button clear color="light">{{'Yellowcard' | trans}}</button>
       <div item-right>
@@ -167,7 +150,7 @@
           </button>
       </div>
     </ion-item>
-     <ion-item class="expandable-member-property" [hidden]="!player.expanded">
+    <ion-item class="expandable-member-property" [hidden]="!player.expanded">
       <img src="assets/img/match_detail/redcard.png" class="desc-img" item-left/>
       <button ion-button clear color="light">{{'Redcard' | trans}}</button>
       <div item-right>
@@ -185,7 +168,7 @@
   </div>
 </div>
 
-<div *ngIf = "match?.away?.captain == playerService.selfId()">
+<div *ngIf="match?.away?.captain == playerService.selfId()">
   <ion-item class="game-info-item-team-title">
     <button ion-button class="game-info-team-title-button">{{match?.away?.name}}
       </button>
@@ -197,7 +180,7 @@
         <ion-icon name="add-circle"></ion-icon>
       </button>
   </ion-item>
-    <!--away-->
+  <!--away-->
   <div class="content-expandable" *ngFor="let player of awayPlayers">
     <ion-item class="expandable-member-name" (click)="clickTeamMember(player)">
       <button ion-button item-left icon-only clear (click)="deleteTeamPlayer(player, $event, awayPlayers)">
@@ -224,7 +207,7 @@
           </button>
       </div>
     </ion-item>
-     <ion-item class="expandable-member-property" [hidden]="!player.expanded">
+    <ion-item class="expandable-member-property" [hidden]="!player.expanded">
       <img src="assets/icon/b3.png" class="desc-img" item-left/>
       <button ion-button clear color="light">{{'Assists' | trans}}</button>
       <div item-right>
@@ -239,7 +222,7 @@
           </button>
       </div>
     </ion-item>
-     <ion-item class="expandable-member-property" [hidden]="!player.expanded">
+    <ion-item class="expandable-member-property" [hidden]="!player.expanded">
       <img src="assets/img/match_detail/yellowcard.png" class="desc-img" item-left/>
       <button ion-button clear color="light">{{'Yellowcard' | trans}}</button>
       <div item-right>
@@ -254,7 +237,7 @@
           </button>
       </div>
     </ion-item>
-     <ion-item class="expandable-member-property" [hidden]="!player.expanded">
+    <ion-item class="expandable-member-property" [hidden]="!player.expanded">
       <img src="assets/img/match_detail/redcard.png" class="desc-img" item-left/>
       <button ion-button clear color="light">{{'Redcard' | trans}}</button>
       <div item-right>

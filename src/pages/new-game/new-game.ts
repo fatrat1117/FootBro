@@ -20,6 +20,7 @@ export class NewGamePage {
     matchDate;
     matchTime;
     tournamentId;
+    id;
 
     constructor(public navCtrl: NavController,
         private modalCtrl: ModalController,
@@ -29,49 +30,55 @@ export class NewGamePage {
         private playerService: PlayerService,
         params: NavParams) {
         this.tournamentId = params.get('tournamentId');
-        //console.log(this.tournamentId);
+        this.id = params.get('id');
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
-        this.matchDate = moment().format("YYYY-MM-DD");
-        this.matchTime = "15:00";
-
-        for (var i = 0; i < 4; i++) {
-            this.players[i] = {
-                name: i,
-                items: [],
-                hidden: true,
-                showExpandableIcon: "ios-arrow-down"
-            };
-            for (var j = 0; j < 3; j++) {
-                // this.players[i].items.push(i + '-' + j);
-                this.players[i].items = [
-                    {
-                        name: "进球",
-                        number: 5,
-                        icon: "assets/icon/b2.png",
-                        color: "light"
-                    },
-                    {
-                        name: "助攻",
-                        number: 1,
-                        icon: "assets/icon/b3.png",
-                        color: "light"
-                    },
-                    {
-                        name: "红牌",
-                        number: 2,
-                        icon: "assets/icon/b2.png",
-                        color: "light"
-                    },
-                    {
-                        name: "黄牌",
-                        number: 4,
-                        icon: "assets/icon/b2.png",
-                        color: "light"
-                    },
-
-                ];
-            }
+        if (this.id) {
+            this.match = this.matchService.getMatch(this.id);
+            this.matchDate = helper.numberToDateString(this.match.date);
+            this.matchTime = helper.numberToTimeString(this.match.time);
         }
+        else {
+            this.matchDate = moment().format("YYYY-MM-DD");
+            this.matchTime = "15:00";
+        }
+        // for (var i = 0; i < 4; i++) {
+        //     this.players[i] = {
+        //         name: i,
+        //         items: [],
+        //         hidden: true,
+        //         showExpandableIcon: "ios-arrow-down"
+        //     };
+        //     for (var j = 0; j < 3; j++) {
+        //         // this.players[i].items.push(i + '-' + j);
+        //         this.players[i].items = [
+        //             {
+        //                 name: "进球",
+        //                 number: 5,
+        //                 icon: "assets/icon/b2.png",
+        //                 color: "light"
+        //             },
+        //             {
+        //                 name: "助攻",
+        //                 number: 1,
+        //                 icon: "assets/icon/b3.png",
+        //                 color: "light"
+        //             },
+        //             {
+        //                 name: "红牌",
+        //                 number: 2,
+        //                 icon: "assets/icon/b2.png",
+        //                 color: "light"
+        //             },
+        //             {
+        //                 name: "黄牌",
+        //                 number: 4,
+        //                 icon: "assets/icon/b2.png",
+        //                 color: "light"
+        //             },
+
+        //         ];
+        //     }
+        // }
     }
 
     ionViewDidLoad() {
@@ -203,18 +210,24 @@ export class NewGamePage {
             locationName: this.match.location.name,
             locationAddress: this.match.location.address,
             type: this.match.type,
-            createBy: this.playerService.selfId()
         }
 
         if (this.match.location.lat)
             matchData['lat'] = this.match.location.lat;
         if (this.match.location.lng)
             matchData['lng'] = this.match.location.lng;
-        if (this.tournamentId)
-            matchData["tournamentId"] = this.tournamentId;
-        //console.log(matchData);
-        
-        this.matchService.scheduleMatch(matchData);
+
+        //update existinng match time, address, etc...
+        if (this.id) {
+            this.matchService.updateMatch(this.id, matchData);
+        }
+        else {
+            if (this.tournamentId)
+                matchData["tournamentId"] = this.tournamentId;
+            matchData['createBy'] = this.playerService.selfId();
+            this.matchService.scheduleMatch(matchData);
+        }
+
         this.dismiss(tDate);
     }
 
@@ -223,6 +236,6 @@ export class NewGamePage {
     }
 
     dismiss(date) {
-      this.viewCtrl.dismiss({date: date});      
+        this.viewCtrl.dismiss({ date: date });
     }
 }
