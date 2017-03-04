@@ -15,44 +15,55 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content>
+<ion-content padding>
   <div class="content-all">
-    <ion-list no-lines class="content-list">
+    <ion-list no-lines class="content-list" center>
       <!--中间的对战时间-->
-      <button ion-button clear color="light" class="content-center-button">
+      <button disabled ion-button clear color="light" class="content-center-button">
 <!--        <img src="assets/icon/icon_time.png" style="width: 20px;height: 15px;">-->
-        {{match?.time | date:'medium'}}
+        {{match?.time | date:'yyyy-MM-dd h:mma'}}
       </button>
       <!--对战信息-->
-      <ion-row class="fight-team-info">
+      <ion-row class="fight-team-info" center>
         <!--左边队伍信息-->
-        <ion-col class="fight-team-info-left">
-          <img [src]="match?.home?.logo" class="team-left-img">
-          <p class="team-left-text">{{match?.home?.name}}</p>
+        <ion-col class="fight-team-info-left" center>
+          <img [src]="match?.home?.logo" class="team-img">
+          <!--p class="team-left-text">{{match?.home?.name}}</p-->
         </ion-col>
         <!--中间比分-->
         <ion-col width-25 class="fight-score">
-          <ion-row class="no-margin no-padding">
-            <ion-col class="left-number">
+          <ion-row center>
+            <ion-col>
+              {{match?.homeScore}}
+              <!-->
               <div class="back-top"></div>
               <div class="back-bottom"></div>
               <div class="top-score">{{match?.homeScore}}</div>
+              <-->
             </ion-col>
-            <ion-col class="center-compare">
+            <ion-col>
               :
             </ion-col>
-            <ion-col class="right-number">
+            <ion-col>
+              {{match?.awayScore}}
+              <!-->
               <div class="back-top"></div>
               <div class="back-bottom"></div>
               <div class="top-score">{{match?.awayScore}}</div>
+              <-->
             </ion-col>
           </ion-row>
         </ion-col>
         <!--右边队伍信息-->
         <ion-col class="fight-team-info-right">
-          <img [src]="match?.away?.logo" class="team-right-img">
-          <p class="team-right-text">{{match?.away?.name}}</p>
+          <img [src]="match?.away?.logo" class="team-img">
+          <!--p class="team-right-text">{{match?.away?.name}}</p-->
         </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>{{match?.home?.name}}</ion-col>
+        <ion-col width-25></ion-col>
+        <ion-col>{{match?.away?.name}}</ion-col>
       </ion-row>
 
       <!--红牌 需要添加图标 todo-->

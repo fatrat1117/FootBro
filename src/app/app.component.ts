@@ -28,6 +28,15 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+
+      // Added by Tianyi that verifies
+      // window.FirebasePlugin.onTokenRefresh(function (token) {
+      //   // save this server-side and use it to push notifications to this device
+      //   console.log(token);
+      // }, function (error) {
+      //   console.error(error);
+      // });
+
       Splashscreen.hide();
       StatusBar.styleBlackOpaque();
       //this.registerForPushNotifications();
@@ -42,31 +51,31 @@ export class MyApp {
     });
   }
 
-/*
-  registerForPushNotifications() {
-    if (this.platform.is('mobileweb') ||
-      this.platform.is('core'))
-      return;
-
-    OneSignal.startInit('f6268d9c-3503-4696-8e4e-a6cf2c028fc6', '63493717987');
-
-    OneSignal.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.InAppAlert);
-    OneSignal.handleNotificationReceived().subscribe(() => {
-      // do something when notification is received
-    });
-
-    OneSignal.handleNotificationOpened().subscribe(() => {
-      // do something when a notification is opened
-    });
-
-    OneSignal.endInit();
-    OneSignal.getIds().then(data => {
-      console.log("data ", data);
-
-      // this gives you back the new userId and pushToken associated with the device. Helpful.
-    });
-  }
-  */
+  /*
+    registerForPushNotifications() {
+      if (this.platform.is('mobileweb') ||
+        this.platform.is('core'))
+        return;
+  
+      OneSignal.startInit('f6268d9c-3503-4696-8e4e-a6cf2c028fc6', '63493717987');
+  
+      OneSignal.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.InAppAlert);
+      OneSignal.handleNotificationReceived().subscribe(() => {
+        // do something when notification is received
+      });
+  
+      OneSignal.handleNotificationOpened().subscribe(() => {
+        // do something when a notification is opened
+      });
+  
+      OneSignal.endInit();
+      OneSignal.getIds().then(data => {
+        console.log("data ", data);
+  
+        // this gives you back the new userId and pushToken associated with the device. Helpful.
+      });
+    }
+    */
   /*
   // Enable to debug issues.
   window["plugins"].OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
