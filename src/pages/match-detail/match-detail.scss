@@ -23,10 +23,10 @@ page-match-detail {
           background-color: #40444d;
           //width: 100%;
           //左边战队信息
-          .team-img {
-              width: 70px;
-              height: 70px;
-              border-radius: 5%;
+          .team-logo {
+            width: 70px !important;
+            height: 70px !important;
+            border-radius: 5% !important;
           }
           //比分部分
           .fight-score {
