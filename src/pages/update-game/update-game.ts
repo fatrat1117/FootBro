@@ -10,7 +10,6 @@ import { PlayerMatchData } from '../../app/players/player.model'
 import { TeamService } from '../../app/teams/team.service'
 import { UIHelper } from '../../providers/uihelper'
 import * as moment from 'moment';
-declare var google: any;
 
 @Component({
     selector: 'page-update-game',
@@ -43,25 +42,6 @@ export class UpdateGamePage {
         this.matchTime = helper.numberToTimeString(this.match.time);
         this.homePlayers = this.match.homeParticipants;
         this.awayPlayers = this.match.awayParticipants;
-    }
-
-    ionViewDidLoad() {
-        let input = document.getElementById('autocompleteInput');
-        //console.log(google);    
-        let autocomplete = new google.maps.places.Autocomplete(input);
-        //console.log(autocomplete);
-        //let autocomplete = new google.maps.places.Autocomplete(document.getElementById("autocompleteInput"), {});
-        autocomplete.addListener('place_changed', () => {
-            let place = autocomplete.getPlace();
-            //console.log(place);
-            this.match.location.name = place.name;
-            this.match.location.address = place.formatted_address;
-            if (place.geometry) {
-                this.match.location.lat = place.geometry.location.lat();
-                this.match.location.lng = place.geometry.location.lng();
-            }
-            //console.log(this.match.location);
-        });
     }
 
     //根据胜率设置图像例如90%
@@ -182,26 +162,13 @@ export class UpdateGamePage {
     }
 
     updateMatch() {
-        let t = this.helper.dateTimeStringToNumber(this.matchDate + " " + this.matchTime);
-        let tDate = this.helper.dateTimeStringToNumber(this.matchDate);
-
         let copyHomeParticipants = this.copyAndUpdatePlayersData(this.homePlayers);
         let copyAwayParticipants = this.copyAndUpdatePlayersData(this.awayPlayers);
         let updateMatchData = {
-            date: tDate,
-            time: t,
-            locationName: this.match.location.name,
-            locationAddress: this.match.location.address,
-            type: this.match.type,
             homeParticipants: copyHomeParticipants,
             awayParticipants: copyAwayParticipants,
         };
 
-        if (this.match.location.lat)
-            updateMatchData['lat'] = this.match.location.lat;
-        if (this.match.location.lng)
-            updateMatchData['lng'] = this.match.location.lng;
-            
         let homeScoreStr = this.match.homeScore.toString().trim();
         let awayScroeStr = this.match.awayScore.toString().trim();
         if (homeScoreStr.length > 0 && awayScroeStr.length > 0) {
