@@ -32,7 +32,7 @@
     </ion-col>
   </ion-row>
 
-  <ion-row class="team-info" center>
+  <ion-row *ngIf="match?.home?.name || match?.away?.name" class="team-info" center>
     <ion-col class="team-name" (click)="searchTeam(1)">{{match?.home?.name}}</ion-col>
     <ion-col class="vs-text">VS</ion-col>
     <ion-col class="team-name" (click)="searchTeam(2)">{{match?.away?.name}}</ion-col>
