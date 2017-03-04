@@ -1,4 +1,6 @@
 import { Team} from '../teams/team.model';
+import * as moment from 'moment';
+
 export class MatchLocation {
   name;
   address;
@@ -23,4 +25,9 @@ export class Match {
   createBy;
   homeParticipants = [];
   awayParticipants = [];
+  isStarted = function() {
+    let now = moment().unix() * 1000;
+    //console.log(now, this.time);
+    return now > this.time;
+  }
 }

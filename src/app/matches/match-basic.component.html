@@ -13,6 +13,12 @@
             <ion-col no-padding width-10 class="team-score">
               {{ match?.homeScore }}
             </ion-col>
+            <!--<ion-col *ngIf="match?.isStarted()" no-padding width-10 class="team-score">
+              {{ match?.homeScore }}
+            </ion-col>
+            <ion-col *ngIf="!match?.isStarted()" no-padding width-10 class="team-score">
+              not started
+            </ion-col>-->
           </ion-row>
         </ion-grid>
       </ion-item>
@@ -25,7 +31,7 @@
             <ion-col no-padding class="team-name">
               {{ match?.away?.name }}
             </ion-col>
-            <ion-col no-padding width-20 class="team-score">
+            <ion-col *ngIf="match?.isStarted" no-padding width-20 class="team-score">
               {{match?.awayScore}}
             </ion-col>
           </ion-row>

@@ -30,6 +30,7 @@ export class SbMatchBasicComponent implements OnInit {
       let id = e['detail'];
       if (id === this.matchObj.$key) {
         this.match = this.matchService.getMatch(id);
+        //console.log(this.match);
       }
     })
 
