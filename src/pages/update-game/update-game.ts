@@ -9,6 +9,7 @@ import { PlayerService } from '../../app/players/player.service'
 import { PlayerMatchData } from '../../app/players/player.model'
 import { TeamService } from '../../app/teams/team.service'
 import { UIHelper } from '../../providers/uihelper'
+import {sprintf} from "sprintf-js";
 import * as moment from 'moment';
 
 @Component({
@@ -25,6 +26,7 @@ export class UpdateGamePage {
     id;
     homePlayers: PlayerMatchData[];
     awayPlayers: PlayerMatchData[];
+    updateState = 3; 
 
     constructor(public navCtrl: NavController,
         private modalCtrl: ModalController,
@@ -36,7 +38,7 @@ export class UpdateGamePage {
         params: NavParams) {
         this.id = params.get('id');
         this.match = this.matchService.getMatch(this.id);
-        //console.log(this.match);
+        this.updateState = this.match.updateState();
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
         this.matchDate = helper.numberToDateString(this.match.date);
         this.matchTime = helper.numberToTimeString(this.match.time);
@@ -44,35 +46,6 @@ export class UpdateGamePage {
         this.awayPlayers = this.match.awayParticipants;
     }
 
-    //根据胜率设置图像例如90%
-    setSuccessRate(successRate) {
-        var backCircle1 = document.getElementById("backCircle1");
-        var backCircle2 = document.getElementById("backCircle2");
-        if (successRate <= 50) {
-            var angle = -360 * successRate / 100;
-            backCircle2.style.transform = "rotate(" + angle + "deg)";
-            backCircle2.style.backgroundColor = "#9e9e9e";
-        } else {
-            var angle = 180 - 360 * successRate / 100;
-            backCircle2.style.transform = "rotate(" + angle + "deg)";
-            backCircle2.style.backgroundColor = "green";
-        }
-    }
-
-    //获取字符串长度
-    getByteLen(val) {
-        var len = 0;
-        for (var i = 0; i < val.length; i++) {
-            var a = val.charAt(i);
-            if (a.match(/[^\x00-\xff]/ig) != null) {
-                len += 2;
-            }
-            else {
-                len += 1;
-            }
-        }
-        return len;
-    }
     //显示或关闭队员得分详情
     clickTeamMember(player) {
         player.expanded = !player.expanded;
@@ -229,5 +202,15 @@ export class UpdateGamePage {
         });
 
         modal.present();
+    }
+
+    isShowSave() {
+        if (3 === this.updateState)
+            return false;
+        if (2 === this.updateState && this.match.home.captain === this.playerService.selfId())
+            return false;
+        if (1 === this.updateState && this.match.away.captain === this.playerService.selfId())
+            return false;
+        return true;
     }
 }

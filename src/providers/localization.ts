@@ -217,7 +217,8 @@ export class Localization {
             updatematch: 'Update Match',
             CreateTeam: 'Create Team',
             participants: 'Participants',
-            ResponseRate: 'Response Rate'
+            ResponseRate: 'Response Rate',
+            teamupdateonceandearnpoints: 'You team will earn team points'
         },
 
         zh: {
