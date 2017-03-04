@@ -218,7 +218,8 @@ export class Localization {
             CreateTeam: 'Create Team',
             participants: 'Participants',
             ResponseRate: 'Response Rate',
-            teamupdateonceandearnpoints: 'You team will earn team points'
+            warning: 'Warning',
+            teamupdateonceandearnpoints: 'Upon confirming, you can not modify the match data again. You team will earn team %d points.'
         },
 
         zh: {
@@ -417,7 +418,8 @@ export class Localization {
             updatematch: '更新比赛',
             CreateTeam: '创建球队',
             participants: '出场队员',
-            ResponseRate: '回复率'
+            ResponseRate: '回复率',
+            teamupdateonceandearnpoints: '确认之后你就不能够再修改比赛数据. 你的球队会得到%d积分'
         }
     }
 }

@@ -775,6 +775,7 @@ export class FirebaseManager {
   }
 
   teamEarnPoints(teamId: string, amount: number, newPoints: number) {
+    console.log('teamEarnPoints', teamId, amount, newPoints);
     this.placeOrder("0-to-team", teamId, amount);
     this.updateTeamPoints(teamId, newPoints);
   }
