@@ -147,8 +147,9 @@ export class UpdateGamePage {
     updateMatch() {
         let points = 100 + (0 === this.myIdentity ? this.homePlayers.length : this.awayPlayers.length) * 10;
         let msg = sprintf(this.loc.getString('teamupdateonceandearnpoints'), points);
-
+        let self = this;
         let confirm = this.alertCtrl.create({
+            title: this.loc.getString('note'),
             message: msg,
             buttons: [
                 {
@@ -159,7 +160,7 @@ export class UpdateGamePage {
                 {
                     text: this.loc.getString('OK'),
                     handler: () => {
-                        this.doUpdateMatch();
+                        self.doUpdateMatch();
                     }
                 }
             ]
