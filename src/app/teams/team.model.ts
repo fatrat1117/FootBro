@@ -48,4 +48,5 @@ export class Team {
   overall;
   yearlyHistory = [];
   captain;
+  points;
 }

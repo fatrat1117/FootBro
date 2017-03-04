@@ -22,6 +22,7 @@ export class TeamService {
         teamData.name = team['basic-info'].name;
         teamData.captain = team['basic-info'].captain;
         teamData.players = team.players;
+        teamData.points = team.points;
         if (team.players)
           teamData.totalPlayers = Object.keys(team.players).length;
         else 
@@ -198,5 +199,11 @@ export class TeamService {
       this.fm.FireCustomEvent('serviceplayerteamsready', id);
     else
       this.fm.getPlayerAsync(id);
+  }
+
+  teamEarnPoints(teamId, amount) {
+    let team = this.getTeam(teamId);
+    let newPoints = team.points ? team.points + amount : amount;
+    this.fm.teamEarnPoints(teamId, amount, newPoints);
   }
 }

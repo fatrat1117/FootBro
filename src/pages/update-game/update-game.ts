@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, ViewController, NavParams } from 'ionic-angular';
+import { NavController, ModalController, ViewController, NavParams, AlertController } from 'ionic-angular';
 import { SearchTeamPage } from '../search-team/search-team';
 import { SearchPlayerPage } from '../search-player/search-player';
 import { Team } from '../../app/teams/team.model'
@@ -9,8 +9,9 @@ import { PlayerService } from '../../app/players/player.service'
 import { PlayerMatchData } from '../../app/players/player.model'
 import { TeamService } from '../../app/teams/team.service'
 import { UIHelper } from '../../providers/uihelper'
-import {sprintf} from "sprintf-js";
+import { Localization } from '../../providers/localization'
 import * as moment from 'moment';
+declare var sprintf: any;
 
 @Component({
     selector: 'page-update-game',
@@ -26,7 +27,8 @@ export class UpdateGamePage {
     id;
     homePlayers: PlayerMatchData[];
     awayPlayers: PlayerMatchData[];
-    updateState = 3; 
+    updateState = 3;
+    myIdentity = 2; //0: home captain, 1: away captain, 2:others
 
     constructor(public navCtrl: NavController,
         private modalCtrl: ModalController,
@@ -35,15 +37,23 @@ export class UpdateGamePage {
         private helper: UIHelper,
         private playerService: PlayerService,
         private teamService: TeamService,
+        private loc: Localization,
+        private alertCtrl: AlertController,
         params: NavParams) {
         this.id = params.get('id');
         this.match = this.matchService.getMatch(this.id);
         this.updateState = this.match.updateState();
+        if (this.match.home.captain === this.playerService.selfId())
+            this.myIdentity = 0;
+        else if  (this.match.away.captain === this.playerService.selfId())
+            this.myIdentity = 1;
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
         this.matchDate = helper.numberToDateString(this.match.date);
         this.matchTime = helper.numberToTimeString(this.match.time);
         this.homePlayers = this.match.homeParticipants;
         this.awayPlayers = this.match.awayParticipants;
+        //let test = sprintf('%d sdasdf', 1);
+        //console.log(test); 
     }
 
     //显示或关闭队员得分详情
@@ -135,6 +145,30 @@ export class UpdateGamePage {
     }
 
     updateMatch() {
+        let points = 100 + (0 === this.myIdentity ? this.homePlayers.length : this.awayPlayers.length) * 10;
+        let msg = sprintf(this.loc.getString('teamupdateonceandearnpoints'), points);
+        let self = this;
+        let confirm = this.alertCtrl.create({
+            title: this.loc.getString('note'),
+            message: msg,
+            buttons: [
+                {
+                    text: this.loc.getString('Cancel'),
+                    handler: () => {
+                    }
+                },
+                {
+                    text: this.loc.getString('OK'),
+                    handler: () => {
+                        self    .doUpdateMatch();
+                    }
+                }
+            ]
+        });
+        confirm.present();
+    }
+
+    doUpdateMatch() {
         let copyHomeParticipants = this.copyAndUpdatePlayersData(this.homePlayers);
         let copyAwayParticipants = this.copyAndUpdatePlayersData(this.awayPlayers);
         let updateMatchData = {
@@ -148,7 +182,7 @@ export class UpdateGamePage {
             updateMatchData["homeScore"] = Number(this.match.homeScore);
             updateMatchData["awayScore"] = Number(this.match.awayScore);
         }
-        
+
         this.matchService.updateMatch(this.id, updateMatchData);
         this.close();
     }
