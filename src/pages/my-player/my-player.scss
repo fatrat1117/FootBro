@@ -1,4 +1,5 @@
 page-my-player{
+//图片大小固定为: 6rem 正方形
  ion-header{
 
     .toolbar-background-md{
@@ -22,6 +23,7 @@ page-my-player{
 
       .toolbar-title-md{
         color: #fff !important;
+        font-size: 1.7rem;
       }
     }
 
@@ -87,7 +89,7 @@ page-my-player{
       .banner-info{
         position: absolute;
         bottom: 1.4rem;
-        width: 76.5%;
+        width: 100%;
         padding: 0rem 2.66%;
 
 
@@ -127,10 +129,24 @@ page-my-player{
           color: #ffffff;
           bottom: 0;
           position: absolute;
-          right: 0;
+          right: 7rem;
           max-width: 70%;
-          font-size: 2.3rem;
+          font-size: 1.4rem;
+          font-weight: 500;
         }
+        .player-logo{
+            width: 6rem;
+            position: absolute;
+            right: 0.5rem;
+            border: 1px solid #cccccc;
+            z-index: 99;
+            top: 2.2rem;
+        img{
+          width: 100%;
+          display: block;
+        }
+      }
+
       }
     }
 
@@ -142,35 +158,30 @@ page-my-player{
       h1{
         text-align: center;
         color: #ffffff;
-        font-size: 2rem;
+        font-size: 1rem;
         font-weight: 100 !important;
         padding: 0.5rem 0rem;
+        margin-left: 6.5rem;
+        margin-right: 6.5rem;
+
         .player-position{
           color: #00ff00;
           font-weight: bold;
+          font-size: 1.2rem;
         }
         .player-at{
           color: #757575;
+          font-size: 1.2rem;
         }
 
         .player-team-name{
           color:#fff;
           font-weight: bold;
+           font-size: 1.2rem;
         }
       }
 
-      .player-logo{
-        width: 6rem;
-        position: absolute;
-        right: 0.8rem;
-        bottom: 0.6rem;
-        border: 1px solid #cccccc;
-        img{
-          width: 100%;
-          display: block;
-        }
-      }
-
+     
       .company-logo{
         position: absolute;
         width:33.33%;
