@@ -42,7 +42,7 @@
       <ion-row>
         <p class="match-time-text">{{ match?.time | numberToTimePipe }}</p>
       </ion-row>
-      <ion-row *ngIf="canUpdate()">
+      <ion-row *ngIf="canUpdate()" (click)="goUpdateMatchPage($event)">
         <p class="match-time-text" color="primary">Update</p>
       </ion-row>
     </ion-col>

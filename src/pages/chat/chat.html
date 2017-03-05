@@ -1,8 +1,16 @@
 <ion-header>
-  <ion-navbar >
+  <ion-navbar>
     <ion-title>
-      <img class="chat-room-avatar" [src]="user?.photo">
-      <p class="chat-room-title">{{ user?.name }}</p>
+      {{ user?.name }}
+      <!-->
+      <ion-row center style="display: inline;">
+        <ion-thumbnail>
+          <img [src]="user?.photo">
+        </ion-thumbnail>
+        <p class="chat-title-text">{{ user?.name }}</p>
+      </ion-row>
+      <-->
+      <!--p class="chat-room-title">{{ user?.name }}</p-->
     </ion-title>
   </ion-navbar>
 </ion-header>
