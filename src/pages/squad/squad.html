@@ -1,39 +1,28 @@
-<!--<ion-content no-padding>
-  <ion-card (tap)="tapEvent($event)">
-    <img src="assets/img/none.png" style="width: 20px; height: 20px">
-</ion-card>
-</ion-content>-->
-
-<ion-header>
-  <ion-navbar>
-    <ion-title>Events</ion-title>
-  </ion-navbar>
-</ion-header>
-
 <ion-content>
-<div class='parent'>
-    <label for='hy'>Move stuff between these two containers. Note how the stuff gets inserted near the mouse pointer?
-        Great stuff.</label>
-    <div class='wrapper'>
-        <div class='container' [dragula]='"first-bag"'>
-            <div>You can move these elements between these two containers</div>
-            <div>Moving them anywhere else isn't quite possible</div>
-            <div>There's also the possibility of moving elements around in the same container, changing their position
-            </div>
-        </div>
-        <div class='container' [dragula]='"first-bag"'>
-            <div>This is the default use case. You only need to specify the containers you want to use</div>
-            <div>More interactive use cases lie ahead</div>
-            <div>Make sure to check out the <a href='https://github.com/bevacqua/dragula#readme'>documentation on
-                GitHub!</a></div>
-        </div>
-    </div>
-    <pre>
-      <code>
-&lt;div [dragula]=&#039;&quot;first-bag&quot;&#039;&gt;&lt;/div&gt;
-&lt;div [dragula]=&#039;&quot;first-bag&quot;&#039;&gt;&lt;/div&gt;
-      </code>
-    </pre>
-</div>
+
+  <ion-card>
+    <ion-item>
+      Tapped: {{tap}} times
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      Pressed: {{press}} times
+    </ion-item>
+  </ion-card>
+
+  <ion-card (pan)="panEvent($event)" (tap) = "tapEvent($event)">
+    <ion-item>
+      Panned: {{pan}} times
+    </ion-item>
+    <img src='assets/img/none.png' style="width: 48px; height: 48px">
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      Swiped: {{swipe}} times
+    </ion-item>
+  </ion-card>
 
 </ion-content>
