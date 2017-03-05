@@ -60,7 +60,7 @@
 
   <div *ngIf="matches?.length > 0" (click)="showUpcomingMatch()">
     <button ion-button full class="nearest-game-time default-font-color">
-    {{upcomingMatch?.time | date:'medium'}}
+    {{upcomingMatch?.time | date:'yyyy-MM-dd h:mma'}}
   </button>
 
     <div class="nearest-game-display">
