@@ -338,6 +338,21 @@ page-my-player{
   .win-rate{
     //background-image: url("/../../assets/img/my-player/bg4@3x.png");
     //min-height: 30px;
+          .absolute-center-txt{
+            margin: 0 auto;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+           display:  flex;
+              align-items: center;
+           justify-content: center;
+              position: absolute;
+              font-size: 1.2rem;
+              max-width: 20%;
+        
+          }
+      
        .win-progress{
            position: relative;
           .winning-circle{
@@ -345,16 +360,22 @@ page-my-player{
             position: relative;
             left: 10%;
           }
-          .win-ratio-txt{
+         
+        }
+      
+      .goal-rate{
+          position: relative;   
+      }
+      .loss-rate{
+          position: relative;   
+       }
+      
+      .records{
+          ion-col{
               font-size: 1.2rem;
-              position: absolute;
-              left: 0;
-              right: 0;
-              margin: 0 auto;
-              bottom: 0;
-              top: 0;
           }
       }
+
       
     .progressbar{
       position: relative;
