@@ -19,31 +19,30 @@
     <div class="team-right-item">
       <p class="team-right-item-text">{{team.popularity}}</p>
       <div class="team-right-item-bottom">
-        <img src="assets/icon/fire.png" class="team-right-item-bottom-img">
-        <!--        <a class="team-right-item-bottom-text">{{'Popularity' | trans}}</a>-->
+        <ion-icon name="md-flame" class="team-right-item-bottom-img"></ion-icon>
       </div>
     </div>
 
     <div class="team-right-item">
       <p class="team-right-item-text">{{team.ability}}</p>
       <div class="team-right-item-bottom">
-        <ion-icon ios="ios-podium" md="md-podium" class="team-right-item-bottom-img"></ion-icon>
+        <ion-icon name="md-podium" class="team-right-item-bottom-img"></ion-icon>
         <!--        <a class="team-right-item-bottom-text">{{'Ability' | trans}}</a>-->
       </div>
     </div>
 
     <div class="team-brief-info">
       <ion-row>
-        <ion-col class="hidden default-font-color default-font-size-col">{{'YearBuilt' | trans | uppercase}}</ion-col>
-        <ion-col class="hidden age-label default-font-color default-font-size-col">平均年龄</ion-col>
-        <ion-col class="hidden age-gap-label default-font-color default-font-size-col">年龄跨度</ion-col>
-        <ion-col class="hidden clothes-color-label default-font-color default-font-size-col">队服颜色</ion-col>
+        <ion-col class="default-font-size-col">{{'YearBuilt' | trans | uppercase}}</ion-col>
+        <ion-col class="age-label default-font-size-col">平均年龄</ion-col>
+        <ion-col class="age-gap-label default-font-size-col">年龄跨度</ion-col>
+        <ion-col class="clothes-color-label default-font-size-col">队服颜色</ion-col>
       </ion-row>
       <ion-row>
-        <ion-col class="hidden white default-font-size-col">{{team?.yearBuilt}}</ion-col>
-        <ion-col class="hidden age white default-font-size-col">27</ion-col>
-        <ion-col class="hidden age-gap white default-font-size-col">6</ion-col>
-        <ion-col class="hidden clothes-color white default-font-size-col">蓝</ion-col>
+        <ion-col class="white default-font-size-col">{{team?.yearBuilt}}</ion-col>
+        <ion-col class="age white default-font-size-col">27</ion-col>
+        <ion-col class="age-gap white default-font-size-col">6</ion-col>
+        <ion-col class="clothes-color white default-font-size-col">蓝</ion-col>
       </ion-row>
     </div>
   </div>
@@ -243,10 +242,10 @@
       <p class="goal-data">{{team?.overall?.draw_streak}}</p>
     </div>
   </ion-item>
-  <ion-item class="game-data-assist-item no-margin">
-    <div item-left class="goal-title-2 no-margin">{{'mostcleansheets' | trans}}</div>
-    <div item-right class="no-margin">
-      <p class="goal-data no-margin">{{team?.overall?.noGA_streak}}</p>
+  <ion-item class="game-data-assist-item">
+    <div item-left class="goal-title-2">{{'mostcleansheets' | trans}}</div>
+    <div item-right>
+      <p class="goal-data">{{team?.overall?.noGA_streak}}</p>
     </div>
   </ion-item>
 </ion-list>
