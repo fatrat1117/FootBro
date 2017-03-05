@@ -5,11 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: 'squad.html',
 })
 export class SquadPage {
-  // tapEvent(e) {
-  //   console.log(e);
-    
-  // }
-
   public press: number = 0;
   public pan: number = 0;
   public swipe: number = 0;
@@ -21,6 +16,8 @@ export class SquadPage {
     this.press++
   }
   panEvent(e) {
+    console.log(e);
+    
     this.pan++
   }
   swipeEvent(e) {
