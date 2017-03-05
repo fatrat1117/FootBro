@@ -293,7 +293,7 @@ page-my-player{
   //lu start
   .personal-data-title{
     background: #171717;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: #ababab;
     .subtitle{
       font-weight: normal;
@@ -322,7 +322,7 @@ page-my-player{
     line-height: 2rem;
     color: #ffffff;
     .description{
-      font-size: 1.7rem;
+      font-size: 1rem;
       font-weight: normal;
       line-height: 2rem;
       margin: 0.5rem 0.5rem 0.5rem 0.5rem;
@@ -374,6 +374,10 @@ page-my-player{
           ion-col{
               font-size: 1.2rem;
           }
+      }
+      
+      .records-value{
+          
       }
 
       
@@ -498,6 +502,9 @@ page-my-player{
     display: inline-block;
     vertical-align: middle;
     margin-right: 0.5rem;
+      img{
+          max-width: 1.5rem;
+      }
   }
   .feedHead .rose {
     padding: .75rem 0;
@@ -508,7 +515,7 @@ page-my-player{
     .picText{
       color:#ababab;
       font-weight:normal;
-      font-size: 2rem;
+      font-size: 1.2rem;
     }
   }
   .feedBack {
@@ -518,7 +525,7 @@ page-my-player{
     .totalText {
       padding: .9rem 0 1.25rem 0;
       h1,h2{
-        font-size: 2rem;
+        font-size: 1.2rem;
         color: #ffffff;
         font-weight: normal;
 
@@ -735,7 +742,7 @@ page-my-player{
     margin-top: 0.75rem;
     margin-left: 1rem;
     color: #ffffff;
-    font-size: 2rem;
+    font-size: 1.2rem;
     line-height: 1.475rem;
     font-weight: normal;
   }
@@ -744,7 +751,7 @@ page-my-player{
   }
   .setOne .booSet p {
     color: #ffffff;
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     line-height: 1.5;
     padding-bottom: .74rem;
     font-weight: normal;
@@ -765,7 +772,7 @@ page-my-player{
   }
   .setOne .mainLike {
     color: #dedede;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     width: 3.45rem;
     border-radius: 15px;
     border: 1px solid #bdbdbe;
@@ -789,7 +796,7 @@ page-my-player{
   }
   .setOne .mainLikez {
     color: #dedede;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     width: 3.45rem;
     border-radius: 15px;
     border: 1px solid #bdbdbe;
