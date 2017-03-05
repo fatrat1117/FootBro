@@ -111,6 +111,7 @@ page-my-player{
             background-color: #fa3b40;
             padding: 0.2rem 0.3rem;
             zoom: 1;
+            text-align: center;
             .label-fire{
               //display: inline-block;
               width: 1.2rem;
@@ -130,9 +131,12 @@ page-my-player{
           bottom: 0;
           position: absolute;
           right: 7rem;
-          max-width: 70%;
           font-size: 1.4rem;
           font-weight: 500;
+          max-width: 50%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         .player-logo{
             width: 6rem;
@@ -757,7 +761,6 @@ page-my-player{
     font-weight: normal;
   }
   .setOne .like {
-    background: url(../../assets/img/my-player/defunlike.png) no-repeat;
     width: 1.4rem;
     height: 1.3rem;
     display: inline-block;
@@ -767,7 +770,6 @@ page-my-player{
     font-weight: normal;
   }
   .setOne .unlike {
-    background: url(../../assets/img/my-player/deflike.png) no-repeat;
     background-size: 100% 100%;
   }
   .setOne .mainLike {
@@ -787,11 +789,11 @@ page-my-player{
     border: 1px solid #00ff00 !important;
   }
   .setOne .alike {
-    background: url(../../assets/img/my-player/arrowgreenup.png) no-repeat;
+    background: url(/../../assets/img/my-player/arrowgreenup.png) no-repeat;
     background-size: 100% 100%;
   }
   .setOne .changlike {
-    background: url(../../assets/img/my-player/arrowgreedown.png) no-repeat;
+    background: url(/../../assets/img/my-player/arrowgreedown.png) no-repeat;
     background-size: 100% 100%;
   }
   .setOne .mainLikez {
