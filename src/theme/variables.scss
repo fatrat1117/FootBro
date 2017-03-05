@@ -89,6 +89,16 @@ $text-input-ios-input-clear-icon-color: rgba(136,136,136,.5);
   src: local('U.S.S. Dallas Bold'), url('../assets/fonts/ussdallasb.woff') format('woff');
 }
 
+@font-face {
+    font-family: 'CMTattooDragon';
+    src:url('../assets/fonts/webfonts_CMTattooDragon/CMTattooDragon.ttf.woff') format('woff'),
+        url('../assets/fonts/webfonts_CMTattooDragon/CMTattooDragon.ttf.svg#CMTattooDragon') format('svg'),
+        url('../assets/fonts/webfonts_CMTattooDragon/CMTattooDragon.ttf.eot'),
+        url('../assets/fonts/webfonts_CMTattooDragon/CMTattooDragon.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
 // Named Color Variables
 // --------------------------------------------------
 // Named colors makes it easy to reuse colors on various components.
