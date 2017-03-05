@@ -32,7 +32,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content no-bounce>
-  <ion-fab *ngIf="selectedId == 'all'" top right edge>
+  <ion-fab top right edge>
     <button ion-fab mini (click)="enterNewGame()"><ion-icon color="dark" name="md-add"></ion-icon></button>
   </ion-fab>
   <div [ngSwitch]="selectedInfo" [ngStyle]="{'height':'100%'}">

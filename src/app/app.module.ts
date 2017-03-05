@@ -1,6 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
+import { DragulaModule } from 'ng2-dragula';
 import { MyApp } from './app.component';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { RankPage } from '../pages/rank/rank';
@@ -34,6 +35,7 @@ import { SearchTeamPage } from '../pages/search-team/search-team';
 import { SearchPlayerPage } from '../pages/search-player/search-player';
 import { SearchMatchPage } from '../pages/search-match/search-match';
 import { UpdateGamePage } from '../pages/update-game/update-game';
+import { SquadPage } from '../pages/squad/squad';
 // services
 import { AngularFireModule } from 'angularfire2';
 import { FirebaseManager } from '../providers/firebase-manager';
@@ -106,6 +108,7 @@ export const firebaseConfig = {
     SearchPlayerPage,
     SearchMatchPage,
     UpdateGamePage,
+    SquadPage,
     // pipes
     TransPipe,
     StringToDatePipe,
@@ -129,6 +132,7 @@ export const firebaseConfig = {
     }),
     RoundProgressModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    DragulaModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -166,7 +170,8 @@ export const firebaseConfig = {
     SearchTeamPage,
     SearchPlayerPage,
     SearchMatchPage,
-    UpdateGamePage
+    UpdateGamePage,
+    SquadPage
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
     FirebaseManager,
