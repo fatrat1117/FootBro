@@ -60,13 +60,14 @@
         <img src="assets/img/forTest/messi_avatar.png">
       </div>
 -->
-      <div class="company-logo">
-        <img src="assets/img/forTest/box.png">
-        <h4 no-margin>SoccerBro</h4>
-      </div>
+      
     </div>
 
     <ion-row class="player-statistics clearfloat">
+                <div class="company-logo">
+        <img src="assets/img/forTest/box.png">
+        <h4 no-margin>SoccerBro</h4>
+      </div>
       <ion-col no-padding class="block height">
         <div class="flex-center txt height-inner">
           <ion-col no-padding width-50 class="fl flex-end data">177</ion-col>
@@ -133,6 +134,7 @@
     </ion-row>
     <hr class="separate" no-margin>
   </ion-grid>
+    
   <ion-grid class="win-rate">
 
     <ion-row>
@@ -140,9 +142,20 @@
       <ion-col width-50 class="align-center"><h4 class="progressTxt">未出席比赛胜率</h4></ion-col>
     </ion-row>
 
-    <ion-row>
-      <ion-col class="col-35">
-        <div class="proBar proBar-left">
+    <ion-row class="win-progress">
+    <ion-col width-50 class="col-35">
+    <div class="winning-circle">
+        <sb-rate-circle  [rate]="80"></sb-rate-circle>
+    </div>
+    </ion-col>
+    <ion-col class="col-20 col-center win-ratio-txt">胜率</ion-col>
+    <ion-col width-50 class="col-35">
+      <div class="winning-circle">
+        <sb-rate-circle  [rate]="80"></sb-rate-circle>
+    </div>
+    </ion-col>
+    </ion-row>
+<!--
         <round-progress [current]=80
                         [max]=100
                         [color]="'#'+'00ff00'"
@@ -171,10 +184,11 @@
                         [clockwise]="false"
                         [responsive]="true"
         ></round-progress>
+
         <div text-center class="win-rate-text">80%</div>
-      </div>
-      </ion-col>
-    </ion-row>
+-->
+<!--      </div>-->
+
 
 
     <!---->
