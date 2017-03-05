@@ -85,9 +85,10 @@
   </ion-item>
   <-->
 
+  <!-- home -->
   <ion-item class="game-info-item-team-title">
-    <button ion-button class="game-info-team-title-button">{{match?.home?.name}}
-      </button>
+    <button ion-button disabled class="game-info-team-title-button">{{match?.home?.name}}
+    </button>
   </ion-item>
 
   <ion-item class="game-info-item">
@@ -174,7 +175,7 @@
 
 <div *ngIf="match?.away?.captain == playerService.selfId()">
   <ion-item class="game-info-item-team-title">
-    <button ion-button class="game-info-team-title-button">{{match?.away?.name}}
+    <button ion-button disabled class="game-info-team-title-button">{{match?.away?.name}}
       </button>
   </ion-item>
 
