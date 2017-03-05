@@ -1,6 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
+import { DragulaModule } from 'ng2-dragula';
 import { MyApp } from './app.component';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { RankPage } from '../pages/rank/rank';
@@ -131,6 +132,7 @@ export const firebaseConfig = {
     }),
     RoundProgressModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    DragulaModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
