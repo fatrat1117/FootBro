@@ -64,6 +64,9 @@ Frontend
 `A guide to styling a ionic2 project
 <http://www.joshmorony.com/a-guide-to-styling-an-ionic-2-application/>`_
 
+`Absolute Centering
+<https://codepen.io/shshaw/full/gEiDt>`_
+
 
 * Members
 
