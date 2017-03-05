@@ -20,7 +20,8 @@ export class MyPlayerPage {
   PercentOfLikes: number;
   PercentOfUnLikes: number;
 
-  constructor(private navCtrl: NavController, private service: PlayerService, private navParams: NavParams) {
+  constructor(private navCtrl: NavController, private service: PlayerService, params: NavParams) {
+    this.id = params.get('id');
     var fromDBLikes = 213;
     var fromDBUnLikes = 67;
     this.NumOfLikes = fromDBLikes;
@@ -36,7 +37,6 @@ export class MyPlayerPage {
         this.player = this.service.getPlayer(id);
     })
 
-    this.id = this.navParams.get('id');
     this.service.getPlayerAsync(this.id);
     this.service.increasePopularity(this.id);
   }
