@@ -27,7 +27,7 @@
     "moment": "^2.17.1",
     "ng2-cordova-oauth": "0.0.7",
     "rxjs": "5.0.0-beta.12",
-    "sprintf-js": "file:node_modules\\sprintf-js",
+    "sprintf-js": "1.0.3",
     "sw-toolbox": "3.4.0",
     "zone.js": "~0.6.26"
   },

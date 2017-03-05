@@ -1,45 +1,45 @@
     page-matches {
-    $selected-date-color:#585F6F;
-    $unselected-date-color:#40444D;
-        $darker-background:#2D2E32;
-
-      ion-navbar.toolbar{
+      $selected-date-color: #585F6F;
+      $unselected-date-color: #40444D;
+      $darker-background: #2D2E32;
+      /*
+      ion-navbar.toolbar {
+        min-height: 2rem;
+        ion-buttons {
           min-height: 2rem;
-          ion-buttons{
-                  min-height: 2rem;
-    /* height: 1rem; */
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-              button{
-                height: 2rem;
-                  ion-icon{
-                          font-size: 2rem !important;
-                  }
-              }
+          // height: 1rem;
+          display: flex;
+          align-items: flex-start;
+          justify-content: flex-start;
+          button {
+            height: 2rem;
+            ion-icon {
+              font-size: 2rem !important;
+            }
           }
-          .toolbar-content{
-              .toolbar-title {
-                      display: flex;
-    align-items: center;
-    justify-content: center;
-              }
+        }
+        .toolbar-content {
+          .toolbar-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
           }
-        ion-select{
+        }
+        ion-select {
           color: white;
           padding: 0;
           display: inline-block;
           width: 100%;
           max-width: 100%;
-          .select-text{
+          .select-text {
             font-size: 1.4rem;
             display: inline-block;
             float: left;
           }
-          .select-icon{
+          .select-icon {
             float: left;
             left: 0.4rem;
-            .select-icon-inner{
+            .select-icon-inner {
               position: relative !important;
               top: 0 !important;
               left: 0 !important;
@@ -53,19 +53,19 @@
               pointer-events: none;
               font-family: "Ionicons";
             }
-            .select-icon-inner::before{
+            .select-icon-inner::before {
               content: "\f3d0";
             }
           }
-
         }
       }
-      .toolbar{
-        .segment-button{
+      .toolbar {
+        .segment-button {
           line-height: 2rem;
-          height:2rem;
+          height: 2rem;
         }
       }
+        */
       // schedule
       .matches-date-tab-col {
         .date-tab-list {
@@ -82,21 +82,21 @@
                 justify-content: center;
                 align-items: center;
                 flex-direction: column;
-                  .year{
-                      min-height: 1.4rem;
-                      background-color: $darker-background;
-                      color: #E1C61E;
-                  }
-                .date-inner{
-                    min-height: 2.8rem;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                  }
+                .year {
+                  min-height: 1.4rem;
+                  background-color: $darker-background;
+                  color: #E1C61E;
+                }
+                .date-inner {
+                  min-height: 2.8rem;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                }
               }
             }
           }
-           ion-item::before{
+          ion-item::before {
             content: " ";
             height: 0;
             width: 0;
@@ -107,12 +107,12 @@
             border-color: transparent transparent transparent transparent;
             z-index: 0;
           }
-            .ion-item-selected::before{
-                border-color: transparent $darker-background transparent transparent;
-            }
-            .ion-item-changeYear::before{
-                top:1.4rem;
-            }
+          .ion-item-selected::before {
+            border-color: transparent $darker-background transparent transparent;
+          }
+          .ion-item-changeYear::before {
+            top: 1.4rem;
+          }
         }
       }
       .matches-match-info-col {
@@ -125,34 +125,34 @@
         margin-top: -1px;
         ion-item {
           margin: 0.7rem;
-        width: initial;
-           background: $unselected-date-color;
-            .item-inner{
-                border-bottom:none !important;
+          width: initial;
+          background: $unselected-date-color;
+          .item-inner {
+            border-bottom: none !important;
+          }
+          .matches-info {
+            ion-item {
+              margin: 0.2rem;
+              min-height: 1.8rem;
+              img {
+                max-width: 2rem !important;
+                max-height: 2rem !important;
+              }
             }
-            .matches-info{
-                ion-item{
-                    margin:0.2rem;
-                    min-height: 1.8rem;
-                    img{
-                        max-width: 2rem !important;
-                        max-height: 2rem !important;
-                    }
-                }
+          }
+          .matches-time {
+            ion-item {
+              margin: 0.2rem;
+              min-height: inherit !important;
+              height: 1.8rem;
+              p {
+                font-size: 1.2rem;
+              }
+              .detail-button {
+                font-size: 1rem;
+              }
             }
-            .matches-time{
-                ion-item{
-                    margin:0.2rem;
-                    min-height: inherit !important;
-                    height: 1.8rem;
-                    p{
-                        font-size: 1.2rem;
-                    }
-                    .detail-button{
-                       font-size: 1rem;
-                    }
-                }
-            }
+          }
         }
         ion-label {
           margin-right: 0.3em;
@@ -178,7 +178,7 @@
         right: 0;
         overflow-y: scroll;
         position: fixed;
-             background: $darker-background;
+        background: $darker-background;
       }
       .right-scrollview {
         width: 85%;
@@ -187,7 +187,7 @@
         //position: absolute;
         height: calc(100% - 140px);
         position: fixed;
-          background: $darker-background;
+        background: $darker-background;
       }
       .mvp-avatar {
         height: 80%;
