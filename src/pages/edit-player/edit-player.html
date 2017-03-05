@@ -53,7 +53,7 @@
         <button *ngIf="player.teamId != t.id" ion-button color="primary" text-capitalize (click)="setDefaultTeam(t.id, slidingItem)">
           Set Default
         </button>
-        <button [disabled]="player.teamId == t.id" ion-button color="danger" text-capitalize (click)="quitTeam(t.id, slidingItem)">
+        <button [disabled]="player.teamId == t.id || t.captain === player.id" ion-button color="danger" text-capitalize (click)="quitTeam(t.id, slidingItem)">
           Quit
         </button>
       </ion-item-options>

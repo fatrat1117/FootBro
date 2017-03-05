@@ -212,6 +212,7 @@ export class FirebaseManager {
       this.FireCustomEvent('teamstatsdataready', id);
     else {
       this.af.database.object(`/teams_stats/${id}`).subscribe(snapshot => {
+        console.log('getTeamStatsAsync', snapshot);
         this.cachedTeamStatsMap[id] = snapshot;
         this.FireCustomEvent('teamstatsdataready', id);
       });
@@ -381,10 +382,23 @@ export class FirebaseManager {
     // });
   }
 
+  afTeam(teamId: string) {
+    return this.af.database.object(`/teams/${teamId}`);
+  }
+
+  afTeamPublic(teamId: string) {
+    return this.af.database.object(`public/teams/${teamId}`);
+  }
+
   quitTeam(id) {
     //remove from self teams
     this.af.database.list(`players/${this.selfId()}/teams`).remove(id);
     this.af.database.list(`teams/${id}/players`).remove(this.selfId());
+  }
+
+  deleteTeam(id) {
+    this.afTeam(id).remove();      
+    this.afTeamPublic(id).remove();
   }
 
   setDefaultTeam(id) {
@@ -540,7 +554,7 @@ export class FirebaseManager {
   }
 
   FireCustomEvent(name, data) {
-    // console.log(name, data);
+    console.log(name, data);
     var event = new CustomEvent(name, { detail: data });
     document.dispatchEvent(event);
   }
@@ -1177,14 +1191,6 @@ export class FirebaseManager {
 
 //   addSelfMember(playerId: string, memberInfo: any) {
 //     this.af.database.object(`/teams/${this.selfTeamId}/players/${playerId}}`).set(memberInfo);
-//   }
-
-//   deleteTeam(tId, success, error) {
-//     this.getTeam(tId).remove().then(_ => {
-//       this.getTeamPublic(tId).remove().then(_ => {
-//         success();
-//       }).catch(err => error(err));
-//     }).catch(err => error(err));
 //   }
 
 //   getAllTeams() {
