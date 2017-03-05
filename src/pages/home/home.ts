@@ -6,6 +6,7 @@ import {RankPage} from '../rank/rank';
 import {GameSchedulePage} from "../game-schedule/game-schedule";
 import {ModalContentPage} from "../home/place-selection";
 import {GameRatingPage} from "../game-rating/game-rating";
+import {SquadPage} from "../squad/squad"
 
 @Component({
   selector: 'page-home',
@@ -63,7 +64,8 @@ export class HomePage {
     // alert("123");
   }
 
-
-
+  testSquad() {
+    this.navCtrl.push(SquadPage);
+  }
 }
 
