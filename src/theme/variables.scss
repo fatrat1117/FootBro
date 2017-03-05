@@ -82,11 +82,24 @@ $toggle-ios-handle-background-color-on: #00ef00;
 $text-input-ios-input-clear-icon-color: rgba(136,136,136,.5);
 
 //fonts
+
+//For Main page's Title
 @font-face {
   font-family: 'U.S.S. Dallas Bold';
   font-style: normal;
   font-weight: normal;
   src: local('U.S.S. Dallas Bold'), url('../assets/fonts/ussdallasb.woff') format('woff');
+}
+
+//For Player's statistics
+@font-face {
+    font-family: 'CMTattooDragon';
+    src:url('../assets/fonts/webfonts_CMTattooDragon/CMTattooDragon.ttf.woff') format('woff'),
+        url('../assets/fonts/webfonts_CMTattooDragon/CMTattooDragon.ttf.svg#CMTattooDragon') format('svg'),
+        url('../assets/fonts/webfonts_CMTattooDragon/CMTattooDragon.ttf.eot'),
+        url('../assets/fonts/webfonts_CMTattooDragon/CMTattooDragon.ttf.eot?#iefix') format('embedded-opentype'); 
+    font-weight: normal;
+    font-style: normal;
 }
 
 // Named Color Variables
