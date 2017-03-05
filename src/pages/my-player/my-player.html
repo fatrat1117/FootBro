@@ -1,20 +1,9 @@
 <ion-header>
   <ion-navbar no-padding>
 
-    <ion-title text-center>球员信息</ion-title>
+    <ion-title text-center>{{'starcard' | trans}}</ion-title>
 
     <ion-buttons end>
-      <button class="my-player-btn-right" ion-button>
-        完善资料
-      </button>
-      <!-->
-      <button (click) = "share()">
-        <ion-icon name="share-alt"></ion-icon>
-      </button>
-      <button (click) = "facebookShare()">
-        <ion-icon name="share-alt"></ion-icon>
-      </button>
-      <-->
       <button ion-button (click) = "enterChatPage()">
         <ion-icon name="chatbubbles" color="primary"></ion-icon>
       </button>
@@ -43,12 +32,12 @@
           </div>
           <div class="pop-label clearfloat">
             <span class="fl label-fire"><img src="assets/img/forTest/fire.png"></span>
-            <h4 text-center no-margin class="label-word">人气</h4>
+            <h4 text-center no-margin class="label-word">{{'Popularity' | trans}}</h4>
           </div>
         </div>
-        <h1 class="fr info-name">梅西</h1>
+        <h1 class="fr info-name">{{player?.name}}</h1>
            <div class="player-logo">
-        <img src="assets/img/forTest/messi_avatar.png">
+        <img [src]="player?.photo">
       </div>
       </div>
     </div>
