@@ -137,7 +137,7 @@
         <sb-rate-circle  [rate]="80"></sb-rate-circle>
     </div>
     </ion-col>
-    <ion-col class="col-20 col-center win-ratio-txt">胜率</ion-col>
+    <ion-col class="absolute-center-txt">胜率</ion-col>
     <ion-col width-50 class="col-35">
       <div class="winning-circle">
         <sb-rate-circle  [rate]="80"></sb-rate-circle>
@@ -181,32 +181,36 @@
 
 
     <!---->
-    <ion-row>
-      <ion-col text-center class="col-30 col-offset-10 main-font">0.0</ion-col>
-      <ion-col width-20 text-center class="main-font">进球率</ion-col>
-      <ion-col width-30 text-center class="main-font">0.0</ion-col>
+    <ion-row class="goal-rate">
+      <ion-col width-50 class="flex-center">0.0</ion-col>
+      <ion-col class="main-font absolute-center-txt">进球率</ion-col>
+      <ion-col width-50 text-center class="flex-center">0.0</ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col width-40 text-center class="main-font">0.0</ion-col>
-      <ion-col width-20 text-center class="main-font">失球率</ion-col>
-      <ion-col width-40 text-center class="main-font">0.0</ion-col>
+    <ion-row class="loss-rate">
+     <ion-col width-50 class="flex-center">0.0</ion-col>
+      <ion-col class="main-font absolute-center-txt">失球率</ion-col>
+     <ion-col width-50 text-center class="flex-center">0.0</ion-col>
     </ion-row>
+      
     <hr class="separate" no-margin>
-    <ion-row>
-      <ion-col width-50 text-center class="main-font">最佳纪录</ion-col>
-      <ion-col width-50 text-center class="main-font">最差纪录</ion-col>
+      
+    <ion-row class="records">
+      <ion-col width-50 class="flex-center">最佳纪录</ion-col>
+      <ion-col width-50 class="flex-center">最差纪录</ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col width-50 text-center class="main-font">98.69</ion-col>
-      <ion-col width-50 text-center class="main-font">无评分</ion-col>
+      
+    <ion-row class="records-value">
+      <ion-col width-50 class="flex-center best">98.69</ion-col>
+      <ion-col width-50 class="flex-center worse">无评分</ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col width-50 text-center class="main-font">2016年12月3日</ion-col>
-      <ion-col width-50 text-center class="main-font">巴塞罗那0-0皇家马德里</ion-col>
+      
+    <ion-row class="match-time">
+      <ion-col width-50 class="flex-center best-time">2016年12月3日</ion-col>
+      <ion-col width-50 class="flex-center worst-time">2016年12月03日</ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col width-50 text-center class="main-font">2016年12月03日</ion-col>
-      <ion-col width-50 text-center class="main-font">巴塞罗那0-0皇家马德里</ion-col>
+    <ion-row class="match-duel">
+      <ion-col  width-50 class="flex-center best-duel">巴塞罗那0-0皇家马德里</ion-col>
+      <ion-col width-50 class="flex-center worst-duel">巴塞罗那0-0皇家马德里</ion-col>
     </ion-row>
   </ion-grid>
   <ion-grid>
