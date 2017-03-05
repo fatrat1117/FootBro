@@ -14,6 +14,7 @@ import { PlayerService } from '../players/player.service'
 })
 
 export class SbMatchBasicComponent implements OnInit {
+  @Input() showDate: boolean;
   @Input()
   matchObj;
   // home;

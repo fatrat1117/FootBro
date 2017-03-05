@@ -59,7 +59,7 @@
   </ion-list>
 
   <div *ngIf="matches?.length > 0" (click)="showUpcomingMatch()">
-    <button ion-button full class="nearest-game-time default-font-color">
+    <button ion-button full disabled class="nearest-game-time default-font-color">
     {{upcomingMatch?.time | date:'yyyy-MM-dd h:mma'}}
   </button>
 
@@ -71,7 +71,7 @@
         </div>
       </div>
       <div class="game-center">
-        <p class="game-score">{{upcomingMatch?.homeScore}}:{{upcomingMatch?.awayScore}}</p>
+        <p class="game-score">{{upcomingMatch?.homeScore}}&nbsp;:&nbsp;{{upcomingMatch?.awayScore}}</p>
       </div>
       <div class="game-right">
         <div class="game-right-setting">
@@ -108,12 +108,12 @@
     <ion-col class="team-info-content-setting">{{history?.GA}}</ion-col>
   </ion-row>
 
-  <button ion-button full class="nearest-5-game-result-title default-font-color">
+  <button ion-button full disabled class="nearest-5-game-result-title default-font-color">
     {{'Recent5Matches' | trans}}
   </button>
 
-  <ion-row class="nearest-5-game-result-content">
-    <ion-col *ngFor="let result of team.last_5" class="nearest-5-game-result-content-item">
+  <ion-row class="nearest-5-game-result-content" center>
+    <ion-col *ngFor="let result of team.last_5" class="nearest-5-game-result-content-item" center>
       <div class="nearest-5-game-background" [ngStyle]="getCircleBkColor(result)"></div>
       <div class="nearest-5-game-top"></div>
       <p class="nearest-5-game-result" [ngStyle]="getCircleTextColor(result)">{{result | trans}}</p>
@@ -127,7 +127,7 @@
   </ion-list>
 
   <div class="team-member-info">
-    <ion-row class="team-member-display">
+    <ion-row class="team-member-display" center>
       <ion-col>
         <img [src]="captain?.photo" class="team-member-img">
         <p class="team-member-name">{{captain?.name}}({{'Captain' | trans}})</p>
@@ -152,13 +152,13 @@
   </ion-item>
 </ion-list>
 <ion-row class="team-all-game">
-  <ion-col id="recent15" class="team-all-game-choose" (click)="setChoosePosition(0)">
+  <ion-col width-33 id="recent15" class="team-all-game-choose" (click)="setChoosePosition(0)">
     <p id="btn-recent-15" class="recent-tab-button white">{{'Recent15matches' | trans}}</p>
   </ion-col>
-  <ion-col id="recent20" class="team-all-game-unchoose" (click)="setChoosePosition(1)">
+  <ion-col width-33 id="recent20" class="team-all-game-unchoose" (click)="setChoosePosition(1)">
     <p id="btn-recent-20" class="recent-tab-button">{{'Recent30matches' | trans}}</p>
   </ion-col>
-  <ion-col id="all" class="team-all-game-unchoose" (click)="setChoosePosition(2)">
+  <ion-col width-33 id="all" class="team-all-game-unchoose" (click)="setChoosePosition(2)">
     <p id="btn-all" class="recent-tab-button">{{'all' | trans}}</p>
   </ion-col>
 </ion-row>

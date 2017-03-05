@@ -17,7 +17,7 @@
       <ion-icon item-left primary name="cog"></ion-icon>
       {{'Guide' | trans}}
     </ion-item>-->
-    <ion-item (click)="goEditPlayerPage()">
+    <ion-item (click)="goEditPlayerPage()" detail-push>
       <ion-thumbnail item-left>
         <img [src]="player?.photo">
       </ion-thumbnail>

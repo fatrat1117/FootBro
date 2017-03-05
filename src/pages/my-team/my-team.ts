@@ -107,7 +107,7 @@ export class MyTeamPage {
 
   //查看更多球队赛程
   seeMoreTeamGamePlan() {
-    this.nav.push(SearchMatchPage, {matches: this.matches});
+    this.nav.push(SearchMatchPage, {matches: this.matches, showDate: true});
   }
 
   //查看更多球队成员

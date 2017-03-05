@@ -39,6 +39,9 @@
       </ion-item>
     </ion-col>
     <ion-col center>
+      <ion-row *ngIf="showDate">
+        <p class="match-time-text">{{ match?.time | date:'yyyy-MM-dd' }}</p>
+      </ion-row>
       <ion-row>
         <p class="match-time-text">{{ match?.time | numberToTimePipe }}</p>
       </ion-row>

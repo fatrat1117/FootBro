@@ -8,12 +8,16 @@ import {MatchService} from '../../app/matches/match.service';
 })
 export class SearchMatchPage {
   matches;
+  showDate: boolean;
 
   constructor(private viewCtrl: ViewController,
   private service : MatchService,
   private modalCtrl: ModalController,
   params : NavParams) {
     this.matches = params.get('matches');
+    this.showDate = params.get('showDate');
+    console.log(this.showDate);
+    
   }
 
   ionViewDidLoad() {
