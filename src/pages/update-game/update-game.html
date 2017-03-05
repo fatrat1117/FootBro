@@ -56,18 +56,7 @@
   </ion-row>
 
 <ion-list no-lines class="content-game-info">
-  <ion-item class="game-info-item">
-      <button ion-button clear full class="game-info-item-left" item-left>{{'Type' | trans}}</button>
-      <div class="game-info-item-right" item-right>
-        <ion-select style="max-width: 100%;" text-center [ngModel]="match.type" (ngModelChange)="match.type=toNumber($event)">
-          <ion-option value="5">5 v 5</ion-option>
-          <ion-option value="7">7 v 7</ion-option>
-          <ion-option value="11">11 v 11</ion-option>
-        </ion-select>
-      </div>
-    </ion-item>
-
-    <ion-item class="game-info-item-light">
+    <!--<ion-item class="game-info-item-light">
       <button ion-button clear full class="game-info-item-left" item-left>{{'Location' | trans}}</button>
       <div class="game-info-item-right-gray" item-right text-center>
         <input class="google-location" id="autocompleteInput" [ngModel]="match.location.name"/>
@@ -86,7 +75,7 @@
       <div class="game-info-item-right-gray" item-right>
         <ion-datetime text-center displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="matchTime"></ion-datetime>
       </div>
-    </ion-item>
+    </ion-item>-->
     
   <div *ngIf="match?.home?.captain == playerService.selfId()">
   <!-->
@@ -96,13 +85,16 @@
   </ion-item>
   <-->
 
-  <ion-item-divider>{{match?.home?.name}}</ion-item-divider>
-  <ion-item>
-    <!--button ion-button item-left clear class="item-game-info-left-text">{{'participants' | trans}}</button-->
-    {{'participants' | trans}}
-    <button ion-button item-right clear icon-right (click)='choosePlayers(match.homeId, homePlayers)'>
-      <ion-icon name="md-add-circle"></ion-icon>
-    </button>
+  <ion-item class="game-info-item-team-title">
+    <button ion-button class="game-info-team-title-button">{{match?.home?.name}}
+      </button>
+  </ion-item>
+
+  <ion-item class="game-info-item">
+    <button ion-button item-left clear class="item-game-info-left-text">{{'participants' | trans}}</button>
+    <button ion-button item-right clear icon-right class="item-game-info-right-text" (click)='choosePlayers(match.homeId, homePlayers)'>
+        <ion-icon name="md-add-circle"></ion-icon>
+      </button>
   </ion-item>
 
   <div class="content-expandable" *ngFor="let player of homePlayers">

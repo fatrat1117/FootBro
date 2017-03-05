@@ -1,9 +1,9 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{ 'CreateTeam' | trans }}</ion-title>
-    <ion-buttons start showWhen="ios">
-      <button (click)="dismiss()" text-center ion-button clear color="light">
-        {{ 'Cancel' | trans }}
+    <ion-buttons left>
+      <button (click)="dismiss()" color='danger' ion-button icon-only clear>
+        <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons end>

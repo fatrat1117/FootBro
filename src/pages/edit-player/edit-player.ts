@@ -24,6 +24,7 @@ export class EditPlayerPage {
   teams: Team[];
   constructor(private navCtrl: NavController, private modalCtrl: ModalController, private playerService: PlayerService, private teamService: TeamService) {
     this.selfId = this.playerService.selfId();
+    this.teams = [];
   }
 
   ionViewDidLoad() {
@@ -50,7 +51,7 @@ export class EditPlayerPage {
   }
 
   updatePlayerTeams() {
-    this.teams = [];
+    this.teams.splice(0);
     for(var t of this.teamService.getPlayerTeams(this.player.id)) {
       if (t.id == this.player.teamId)
         this.teams.unshift(t);

@@ -111,7 +111,7 @@ export class FirebaseManager {
   /****************************** Chat Room ******************************/
   updateUnread(userId: string, isUnread: boolean) {
     this.af.database.object(`/chats/${this.auth.uid}/basic-info/${userId}`).update({
-        isUnread: isUnread,
+      isUnread: isUnread,
     })
   }
 
@@ -128,8 +128,7 @@ export class FirebaseManager {
   }
 
   addChatToUser(userId: string, content: string, isSystem: boolean = false) {
-    if (!isSystem)
-    {
+    if (!isSystem) {
       // add to self
       this.af.database.list(`/chats/${this.auth.uid}/${userId}`).push({
         createdAt: firebase.database.ServerValue.TIMESTAMP,
@@ -213,6 +212,7 @@ export class FirebaseManager {
       this.FireCustomEvent('teamstatsdataready', id);
     else {
       this.af.database.object(`/teams_stats/${id}`).subscribe(snapshot => {
+        console.log('getTeamStatsAsync', snapshot);
         this.cachedTeamStatsMap[id] = snapshot;
         this.FireCustomEvent('teamstatsdataready', id);
       });
@@ -382,10 +382,23 @@ export class FirebaseManager {
     // });
   }
 
+  afTeam(teamId: string) {
+    return this.af.database.object(`/teams/${teamId}`);
+  }
+
+  afTeamPublic(teamId: string) {
+    return this.af.database.object(`public/teams/${teamId}`);
+  }
+
   quitTeam(id) {
     //remove from self teams
     this.af.database.list(`players/${this.selfId()}/teams`).remove(id);
     this.af.database.list(`teams/${id}/players`).remove(this.selfId());
+  }
+
+  deleteTeam(id) {
+    this.afTeam(id).remove();      
+    this.afTeamPublic(id).remove();
   }
 
   setDefaultTeam(id) {
@@ -487,7 +500,7 @@ export class FirebaseManager {
           }
           else {
             //fix all missing properties
-            this.af.database.object(`/players/${id}`).update({joinTime: firebase.database.ServerValue.TIMESTAMP});
+            this.af.database.object(`/players/${id}`).update({ joinTime: firebase.database.ServerValue.TIMESTAMP });
           }
         }
         else
@@ -535,13 +548,13 @@ export class FirebaseManager {
   }
   //Fire document events 
   FireEvent(name) {
-  //  console.log(name);
+    //  console.log(name);
     var event = new Event(name);
     document.dispatchEvent(event);
   }
 
   FireCustomEvent(name, data) {
-   // console.log(name, data);
+    console.log(name, data);
     var event = new CustomEvent(name, { detail: data });
     document.dispatchEvent(event);
   }
@@ -693,8 +706,9 @@ export class FirebaseManager {
   }
 
   deleteMatch(id) {
-      this.afMatch(id).remove().then(() => {
-        this.FireEvent('matcheschanged')});  
+    this.afMatch(id).remove().then(() => {
+      this.FireEvent('matcheschanged')
+    });
   }
 
   scheduleMatch(matchObj) {
@@ -708,9 +722,11 @@ export class FirebaseManager {
   updateMatch(id, matchObj) {
     console.log('updateMatch', matchObj);
     this.afMatch(id).update(matchObj);
-    this.afMatchDate(matchObj.date).set(true);
-    if (matchObj.tournamentId)
-      this.afTournamentMatchDate(matchObj.tournamentId, matchObj.date).set(true);
+    if (matchObj.date) {
+      this.afMatchDate(matchObj.date).set(true);
+      if (matchObj.tournamentId)
+        this.afTournamentMatchDate(matchObj.tournamentId, matchObj.date).set(true);
+    }
   }
 
   getTournamentTableList(id) {
@@ -727,9 +743,9 @@ export class FirebaseManager {
       this.FireCustomEvent('tournamenttableready', id);
     else {
       this.getTournamentTableList(id).subscribe(snapshots => {
-        this.cachedTournamentTablesMap[id] = snapshots;    
+        this.cachedTournamentTablesMap[id] = snapshots;
         this.FireCustomEvent('tournamenttableready', id);
-      }); 
+      });
     }
   }
   /****************************** Points ******************************/
@@ -780,7 +796,7 @@ export class FirebaseManager {
     this.updateTeamPoints(teamId, newPoints);
   }
 
-  
+
 
 
 
@@ -886,7 +902,7 @@ export class FirebaseManager {
   }
 
   //cheerleader
-  pendingCheerleadersRef(){
+  pendingCheerleadersRef() {
     return '/cheerleaders/pending/';
   }
 
@@ -895,7 +911,7 @@ export class FirebaseManager {
   }
 
   submitCheerleaderInfo(url) {
-    this.af.database.object(this.pendingCheerleadersRef() + this.auth.uid).set({photo: url});
+    this.af.database.object(this.pendingCheerleadersRef() + this.auth.uid).set({ photo: url });
   }
 
   getPendingCheerleaders() {
@@ -903,7 +919,7 @@ export class FirebaseManager {
   }
 
   getPendingCheerleadersAsync() {
-    if (this.getPendingCheerleaders()) 
+    if (this.getPendingCheerleaders())
       this.FireEvent('pendingcheerleadersready');
     else {
       this.af.database.list(this.pendingCheerleadersRef()).subscribe(snapshots => {
@@ -918,7 +934,7 @@ export class FirebaseManager {
   }
 
   getApprovedCheerleadersAsync() {
-    if (this.getApprovedCheerleaders()) 
+    if (this.getApprovedCheerleaders())
       this.FireEvent('approvedcheerleadersready');
     else {
       this.af.database.list(this.approvedCheerleadersRef()).subscribe(snapshots => {
@@ -931,11 +947,12 @@ export class FirebaseManager {
   approveCheerleader(cheerleader) {
     let id = cheerleader.id;
     this.af.database.object(this.playerRef(id)).update({
-      role : 'cheerleader', 
-      photoMedium: cheerleader.photoMedium});
+      role: 'cheerleader',
+      photoMedium: cheerleader.photoMedium
+    });
     this.af.database.object(this.pendingCheerleadersRef() + id).remove();
     this.af.database.object(this.approvedCheerleadersRef() + id).set(true);
-    
+
     let cheerleaderPublic = this.getPlayerPublic(id);
     //console.log(cheerleaderPublic);
     this.af.database.object(this.cheerleaderPublicRef(id)).set({
@@ -1174,14 +1191,6 @@ export class FirebaseManager {
 
 //   addSelfMember(playerId: string, memberInfo: any) {
 //     this.af.database.object(`/teams/${this.selfTeamId}/players/${playerId}}`).set(memberInfo);
-//   }
-
-//   deleteTeam(tId, success, error) {
-//     this.getTeam(tId).remove().then(_ => {
-//       this.getTeamPublic(tId).remove().then(_ => {
-//         success();
-//       }).catch(err => error(err));
-//     }).catch(err => error(err));
 //   }
 
 //   getAllTeams() {

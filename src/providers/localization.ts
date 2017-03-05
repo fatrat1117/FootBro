@@ -220,6 +220,7 @@ export class Localization {
             ResponseRate: 'Response Rate',
             warning: 'Warning',
             note: 'Please Note',
+            starcard: 'Star Card',
             teamupdateonceandearnpoints: 'Upon confirming, you can not modify the match data again. You team will earn team %d points.'
         },
 
@@ -422,6 +423,7 @@ export class Localization {
             ResponseRate: '回复率',
             warning: '警告',
             note: '请注意',
+            starcard: '球星卡',
             teamupdateonceandearnpoints: '确认之后你就不能够再修改比赛数据. 你的球队会得到%d积分'
         }
     }

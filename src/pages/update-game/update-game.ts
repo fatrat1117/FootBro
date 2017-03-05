@@ -56,26 +56,6 @@ export class UpdateGamePage {
         //let test = sprintf('%d sdasdf', 1);
         //console.log(test); 
     }
-
-    ionViewDidLoad() {
-        let input = document.getElementById('autocompleteInput');
-        //console.log(google);    
-        let autocomplete = new google.maps.places.Autocomplete(input);
-        //console.log(autocomplete);
-        //let autocomplete = new google.maps.places.Autocomplete(document.getElementById("autocompleteInput"), {});
-        autocomplete.addListener('place_changed', () => {
-            let place = autocomplete.getPlace();
-            //console.log(place);
-            this.match.location.name = place.name;
-            this.match.location.address = place.formatted_address;
-            if (place.geometry) {
-                this.match.location.lat = place.geometry.location.lat();
-                this.match.location.lng = place.geometry.location.lng();
-            }
-            console.log(this.match);
-        });
-    }
-
     //显示或关闭队员得分详情
     clickTeamMember(player) {
         player.expanded = !player.expanded;
@@ -180,7 +160,7 @@ export class UpdateGamePage {
                 {
                     text: this.loc.getString('OK'),
                     handler: () => {
-                        self    .doUpdateMatch();
+                        self.doUpdateMatch();
                     }
                 }
             ]

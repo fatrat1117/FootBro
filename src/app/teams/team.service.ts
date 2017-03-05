@@ -93,21 +93,17 @@ export class TeamService {
       if (this.bRefreshPlayerTeams) {
         let id = e['detail'];
         let player = this.fm.getPlayer(id);
-        // console.log(player);
-        // let teams;
-        // if (this.playerTeamsMap[id]) {
-        //   teams = this.playerTeamsMap[id];
-        //   teams = [];
-        // }
-        // else {
-        //   teams = [];
-        this.playerTeamsMap[id] = [];
-        //}
+        if (this.getPlayerTeams(id))
+          this.playerTeamsMap[id].splice(0);
+        else 
+          this.playerTeamsMap[id] = [];
         for (let tId in player.teams) {
+          let teamExist = this.isTeamExist(tId);
           let team = this.findOrCreateTeam(tId);
           //console.log(tId);     
           this.playerTeamsMap[id].push(team);
-          this.fm.getTeamAsync(tId);
+          if (!teamExist)
+            this.fm.getTeamAsync(tId);
         }
         //console.log(this.playerTeamsMap[id]);
         this.bRefreshPlayerTeams = false;
@@ -194,16 +190,19 @@ export class TeamService {
 
   getPlayerTeamsAsync(id) {
     this.bRefreshPlayerTeams = true;
-
-    if (this.getPlayerTeams(id))
-      this.fm.FireCustomEvent('serviceplayerteamsready', id);
-    else
-      this.fm.getPlayerAsync(id);
+    // if (this.getPlayerTeams(id))
+    //   this.fm.FireCustomEvent('serviceplayerteamsready', id);
+    // else
+    this.fm.getPlayerAsync(id);
   }
 
   teamEarnPoints(teamId, amount) {
     let team = this.getTeam(teamId);
     let newPoints = team.points ? team.points + amount : amount;
     this.fm.teamEarnPoints(teamId, amount, newPoints);
+  }
+
+  isTeamExist(id) {
+    return this.teamDataMap[id] && 'id' in this.teamDataMap[id]; 
   }
 }
