@@ -1,28 +1,7 @@
 <ion-content>
-
-  <ion-card>
-    <ion-item>
-      Tapped: {{tap}} times
-    </ion-item>
-  </ion-card>
-
-  <ion-card>
-    <ion-item>
-      Pressed: {{press}} times
-    </ion-item>
-  </ion-card>
-
-  <ion-card (pan)="panEvent($event)" (tap) = "tapEvent($event)">
-    <ion-item>
-      Panned: {{pan}} times
-    </ion-item>
-    <img src='assets/img/none.png' [ngStyle]="style">
-  </ion-card>
-
-  <ion-card>
-    <ion-item>
-      Swiped: {{swipe}} times
-    </ion-item>
-  </ion-card>
-
+    <!--<img id="imgTest" class="playerImg" (pan)="panEvent($event)" (press)="pressEvent($event)" 
+    (tap)="tapEvent($event)" (swipe)="swipeEvent($event)"  src='assets/img/none.png' 
+    [ngStyle]="{'left.px':style.left, 'top.px': style.top}">-->
+    <img *ngFor = "let p of players" class="playerImg" [src] = "p.photo" 
+    [ngStyle]="{'left.px':p.left, 'top.px': p.top}" (pan)="panEvent($event, p)">
 </ion-content>
