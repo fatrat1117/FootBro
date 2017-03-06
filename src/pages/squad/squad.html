@@ -1,7 +1,13 @@
 <ion-content>
-    <!--<img id="imgTest" class="playerImg" (pan)="panEvent($event)" (press)="pressEvent($event)" 
+  <!--<img id="imgTest" class="playerImg" (pan)="panEvent($event)" (press)="pressEvent($event)" 
     (tap)="tapEvent($event)" (swipe)="swipeEvent($event)"  src='assets/img/none.png' 
-    [ngStyle]="{'left.px':style.left, 'top.px': style.top}">-->
-    <img *ngFor = "let p of players" class="playerImg" [src] = "p.photo" 
-    [ngStyle]="{'left.px':p.left, 'top.px': p.top}" (pan)="panEvent($event, p)">
+    [ngStyle]="{'left.px':style.left, 'top.px': style.top}"  (pan)="panEvent($event, p)>-->
+  <ion-grid style="height: 100%">
+    <ion-row class='board'>
+      <img *ngFor="let p of players" class="playerImg" [src]="p.photo" [ngStyle]="{'left.px':p.left, 'top.px': p.top}" (touchmove)="onTouchMove($event, p)">
+    </ion-row>
+    <ion-row>
+      test
+    </ion-row>
+  </ion-grid>
 </ion-content>

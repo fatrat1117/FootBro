@@ -11,16 +11,21 @@ export class SquadPage {
   public tap: number = 0;
   players = [];
   constructor() {
-    this.players.push({left: 0, top: 0, photo: 'assets/img/none.png'});
-    this.players.push({left: 100, top: 100, photo: 'assets/img/none.png'});
-    this.players.push({left: 200, top: 200, photo: 'assets/img/none.png'});
+    this.players.push({ left: 0, top: 0, photo: 'assets/img/none.png' });
+    this.players.push({ left: 100, top: 100, photo: 'assets/img/none.png' });
+    this.players.push({ left: 200, top: 200, photo: 'assets/img/none.png' });
   }
-  pressEvent(e) {
+
+  onTouchMove(e, p) {
     console.log(e);
-    
+    if (1 === e.touches.length) {
+      p.left = e.touches[0].pageX - 24;// - this.left;
+      p.top = e.touches[0].pageY - 24;
+    }
   }
+
   panEvent(e, p) {
-    console.log(e);
+    //console.log(e);
     if (e.isFinal === false) {
       p.left = e.center.x - 24;// - this.left;
       p.top = e.center.y - 24;
@@ -30,11 +35,5 @@ export class SquadPage {
     //this.style.top = e.deltaY - this.top;
     //console.log(e, this.style);
     //this.pan++
-  }
-  swipeEvent(e) {
-    console.log(e);
-  }
-  tapEvent(e) {
-    console.log(e);
   }
 }
