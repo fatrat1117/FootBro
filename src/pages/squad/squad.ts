@@ -9,43 +9,31 @@ export class SquadPage {
   public pan: number = 0;
   public swipe: number = 0;
   public tap: number = 0;
-  style: any = {};
+  players = [];
   constructor() {
-    this.style.left = '0px';
-    this.style.right = '0px';
-    this.style.width = '48px';
-    this.style.height = '48px';
-    this.style.position = 'absolute';
-  }
-  pressEvent(e) {
-    this.press++
-  }
-  panEvent(e) {
-    this.style.left = e.center.x + e.deltaX + 'px';
-    this.style.top = e.center.y + e.deltaY + 'px';
-    console.log(e, this.style);
-    this.pan++
-  }
-  swipeEvent(e) {
-    this.swipe++
-  }
-  tapEvent(e) {
-    this.tap++
+    this.players.push({ left: 0, top: 0, photo: 'assets/img/none.png' });
+    this.players.push({ left: 100, top: 100, photo: 'assets/img/none.png' });
+    this.players.push({ left: 200, top: 200, photo: 'assets/img/none.png' });
   }
 
-  getCircleBkColor(result) {
-    let style: any = {};
-    switch (result) {
-      case 'W':
-        style.background = '#00ff00';
-        break;
-      case 'L':
-        style.background = '#8c8c8c';
-        break;
-      default:
-        style.background = '#01c5ff';
-        break;
+  onTouchMove(e, p) {
+    console.log(e);
+    if (1 === e.touches.length) {
+      p.left = e.touches[0].pageX - 24;// - this.left;
+      p.top = e.touches[0].pageY - 24;
     }
-    return style;
+  }
+
+  panEvent(e, p) {
+    //console.log(e);
+    if (e.isFinal === false) {
+      p.left = e.center.x - 24;// - this.left;
+      p.top = e.center.y - 24;
+    }
+    //this.style.top = e.deltaY - this.top;
+    //this.style.left = e.deltaX - this.left;
+    //this.style.top = e.deltaY - this.top;
+    //console.log(e, this.style);
+    //this.pan++
   }
 }
