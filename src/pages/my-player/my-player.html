@@ -14,21 +14,24 @@
 
 
 <ion-content>
-  <sb-share-button></sb-share-button>
-  <!--ion-fab bottom right>
+  <ion-fab bottom right>
     <button ion-fab mini color="light"><ion-icon name="md-share"></ion-icon></button>
     <ion-fab-list side="left">
-      <button ion-fab color="light"><ion-icon name="logo-facebook" color="fBlue"></ion-icon></button>
-      <button ion-fab color="light"><ion-icon name="logo-twitter" color="wGreen"></ion-icon></button>
+      <sb-fb-share-button></sb-fb-share-button>
+      <sb-wechat-share-button></sb-wechat-share-button>
     </ion-fab-list>
-  </ion-fab-->
+  </ion-fab>
+
+  <!-->
+  <sb-share-button></sb-share-button>
+  <-->
   <ion-card no-margin class="my-player-header-card">
     <div class="banner">
       <img src="assets/img/forTest/messi_banner.png">
       <div class="banner-info clearfloat">
         <div class="fl info-pop">
           <div class="pop-number">
-            <h3 no-margin>{{player.popularity}}</h3>
+            <h3 no-margin>{{player?.popularity}}</h3>
           </div>
         
             <div class="pop-label clearfloat">

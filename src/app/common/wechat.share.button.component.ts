@@ -4,40 +4,18 @@ import { Screenshot, SocialSharing } from 'ionic-native';
 declare var Wechat: any;
 
 @Component({
-  selector: 'sb-share-button',
+  selector: 'sb-wechat-share-button',
   template: `
-  <ion-fab bottom right>
-    <button ion-fab mini color="light"><ion-icon name="md-share"></ion-icon></button>
-    <ion-fab-list side="left">
-      <button ion-fab color="light" (click)="onFaceBookClick()">
-        <ion-icon name="logo-facebook" color="fBlue"></ion-icon>
-      </button>
-      <button ion-fab color="light" (click)="onWeChatClick()">
-        <img src="assets/icon/wechat.png">
-      </button>
-    </ion-fab-list>
-  </ion-fab>
+  <button ion-fab mini color="light" (click)="onWeChatClick()">
+    <img src="assets/icon/wechat.png">
+  </button>
   `
 })
 
-export class SbShareButtonComponent {
+export class SbWechatShareButtonComponent {
   constructor() {
   }
-
-  // Facebook
-  onFaceBookClick() {
-    Screenshot.URI(80).then((res) => {
-      //console.log(res);
-      SocialSharing.shareViaFacebook(null, res.URI, null)
-        .then(() => { },
-        err => {
-          alert(err);
-        });
-    }, err => {
-      alert(err);
-    });
-  }
-
+ 
   // WeChat
   onWeChatClick() {
     Screenshot.URI(80).then((res) => {
@@ -77,5 +55,4 @@ export class SbShareButtonComponent {
       alert("Share Failed: " + reason);
     });
   }
-
 }

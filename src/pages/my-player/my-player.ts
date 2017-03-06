@@ -22,6 +22,7 @@ export class MyPlayerPage {
 
   constructor(private navCtrl: NavController, private service: PlayerService, params: NavParams) {
     this.id = params.get('id');
+    
     var fromDBLikes = 213;
     var fromDBUnLikes = 67;
     this.NumOfLikes = fromDBLikes;
