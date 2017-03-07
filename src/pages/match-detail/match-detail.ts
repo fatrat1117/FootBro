@@ -11,6 +11,7 @@ declare var google: any;
 export class MatchDetailPage {
   map;
   match: Match;
+  matchSegments = 'info';
 
   constructor(private viewCtrl: ViewController,
     navParams: NavParams) {

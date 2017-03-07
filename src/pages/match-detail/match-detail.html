@@ -1,10 +1,3 @@
-<!--<ion-header>
-  <ion-navbar color="dark">
-    <ion-title text-center class="default-font-size">
-      比赛详情
-    </ion-title>
-  </ion-navbar>
-</ion-header>-->
 <ion-header>
   <ion-navbar>
     <ion-title>{{'MatchDetail' | trans}}</ion-title>
@@ -14,9 +7,18 @@
       </button>
     </ion-buttons>
   </ion-navbar>
+  <ion-segment [(ngModel)]="matchSegments">
+      <ion-segment-button value="info">
+        {{'Info' | trans}}
+      </ion-segment-button>
+      <ion-segment-button value="squad">
+        {{'squad' | trans}}
+      </ion-segment-button>
+    </ion-segment>
 </ion-header>
-<ion-content padding>
-  <div class="content-all">
+
+<ion-content padding [ngSwitch]="matchSegments">
+  <div class="content-all" *ngSwitchCase="'info'">
     <ion-list no-lines class="content-list" center>
       <!--中间的对战时间-->
       <button disabled ion-button clear color="light" class="content-center-button">
@@ -35,22 +37,12 @@
           <ion-row center>
             <ion-col>
               {{match?.homeScore}}
-              <!-->
-              <div class="back-top"></div>
-              <div class="back-bottom"></div>
-              <div class="top-score">{{match?.homeScore}}</div>
-              <-->
             </ion-col>
             <ion-col>
               :
             </ion-col>
             <ion-col>
               {{match?.awayScore}}
-              <!-->
-              <div class="back-top"></div>
-              <div class="back-bottom"></div>
-              <div class="top-score">{{match?.awayScore}}</div>
-              <-->
             </ion-col>
           </ion-row>
         </ion-col>
@@ -66,18 +58,16 @@
         <ion-col width-33>{{match?.away?.name}}</ion-col>
       </ion-row>
 
-      <!--红牌 需要添加图标 todo-->
-      <ion-item class="red-style">
+      <!--<ion-item class="red-style">
         <button ion-button clear item-left color="light" class="default-font-size">0</button>
         <img class="center-img no-padding" style="background-color: red;">
         <button ion-button clear item-right color="light" class="default-font-size">0</button>
       </ion-item>
-      <!--黄牌  需要添加图标 todo-->
       <ion-item class="yellow-style">
         <button ion-button clear item-left color="light" class="default-font-size">0</button>
         <img class="center-img no-padding" style="background-color: yellow;">
         <button ion-button clear item-right color="light" class="default-font-size">0</button>
-      </ion-item>
+      </ion-item>-->
       <!--地图 标题-->
       <ion-item class="map-title">
         <!--div item-left class="title-left">
@@ -96,7 +86,7 @@
       <div class="map-right-bottom-back" (click)="openHere()"></div>
       <!--地图右下角 汽车-->
       <div class="map-car-back">
-        <img src="assets/img/icon1.jpg" class="map-car"/>
+        <img src="assets/img/icon1.jpg" class="map-car" />
       </div>
       <!--地图右下角“到这里”文字-->
       <!--<div class="map-to-here">
@@ -105,6 +95,7 @@
     </div>
   </div>
 
+  <div class="content-all" *ngSwitchCase="'squad'">
+    <page-squad></page-squad>
+  </div>
 </ion-content>
-
-
