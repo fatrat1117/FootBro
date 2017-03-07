@@ -7,7 +7,7 @@ declare var Wechat: any;
   selector: 'sb-wechat-share-button',
   template: `
   <button ion-fab mini color="light" (click)="onWeChatClick()">
-    <img src="assets/icon/wechat.png">
+    <img class="wechat-icon" src="assets/icon/wechat.png">
   </button>
   `
 })
@@ -15,7 +15,7 @@ declare var Wechat: any;
 export class SbWechatShareButtonComponent {
   constructor() {
   }
- 
+
   // WeChat
   onWeChatClick() {
     Screenshot.URI(80).then((res) => {
