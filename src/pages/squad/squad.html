@@ -1,7 +1,7 @@
 <div class="playerItem" *ngFor="let p of players" [ngStyle]="{'left.px':p.left, 'top.px': p.top}">
   <!--<img id="imgTest" class="playerImg" (pan)="panEvent($event)" (press)="pressEvent($event)" 
     (tap)="tapEvent($event)" (swipe)="swipeEvent($event)"  src='assets/img/none.png' 
-    [ngStyle]="{'left.px':style.left, 'top.px': style.top}"  (pan)="panEvent($event, p)>-->
+    [ngStyle]="{'left.px':style.left, 'top.px': style.top}"  (pan)="panEvent($event, p)">-->
       <img class="playerImg" [src]="p.photo" (touchmove)="onTouchMove($event, p)">
       <label class="playerName">{{p.name}}</label>
 </div>
