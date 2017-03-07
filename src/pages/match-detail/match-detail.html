@@ -8,13 +8,13 @@
     </ion-buttons>
   </ion-navbar>
   <ion-segment [(ngModel)]="matchSegments">
-      <ion-segment-button value="info">
-        {{'Info' | trans}}
-      </ion-segment-button>
-      <ion-segment-button value="squad">
-        {{'squad' | trans}}
-      </ion-segment-button>
-    </ion-segment>
+    <ion-segment-button value="info">
+      {{'Info' | trans}}
+    </ion-segment-button>
+    <ion-segment-button value="squad">
+      {{'squad' | trans}}
+    </ion-segment-button>
+  </ion-segment>
 </ion-header>
 
 <ion-content padding [ngSwitch]="matchSegments">
