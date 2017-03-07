@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'page-squad',
   templateUrl: 'squad.html',
 })
 export class SquadPage {
+  @Input()
+  settings;
+
   public press: number = 0;
   public pan: number = 0;
   public swipe: number = 0;
@@ -17,10 +20,10 @@ export class SquadPage {
   }
 
   onTouchMove(e, p) {
-    console.log(e);
+    //console.log(e, this.settings);
     if (1 === e.touches.length) {
       p.left = e.touches[0].pageX - 24;// - this.left;
-      p.top = e.touches[0].pageY - 24;
+      p.top = e.touches[0].pageY - 24 - this.settings.offsetY;
     }
   }
 

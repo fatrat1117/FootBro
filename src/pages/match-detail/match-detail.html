@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header #pageHeader>
   <ion-navbar>
     <ion-title>{{'MatchDetail' | trans}}</ion-title>
     <ion-buttons left>
@@ -17,7 +17,7 @@
   </ion-segment>
 </ion-header>
 
-<ion-content padding [ngSwitch]="matchSegments">
+<ion-content padding [ngSwitch]="matchSegments" style="height: 100%">
   <div class="content-all" *ngSwitchCase="'info'">
     <ion-list no-lines class="content-list" center>
       <!--中间的对战时间-->
@@ -96,6 +96,7 @@
   </div>
 
   <div class="content-all" *ngSwitchCase="'squad'">
-    <page-squad></page-squad>
+    <page-squad *ngIf="squadSettings && squadSettings.offsetY" [settings]="squadSettings"
+    style="width: 100px; height: 100px"></page-squad>
   </div>
 </ion-content>

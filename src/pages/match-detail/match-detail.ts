@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { ViewController, NavParams } from 'ionic-angular';
 import { Match } from '../../app/matches/match.model'
 
@@ -9,14 +9,18 @@ declare var google: any;
   templateUrl: 'match-detail.html'
 })
 export class MatchDetailPage {
+  @ViewChild('pageHeader') pageHeader;
+
   map;
   match: Match;
   matchSegments = 'info';
+  squadSettings: any;
 
   constructor(private viewCtrl: ViewController,
     navParams: NavParams) {
     this.match = navParams.get('match');
-    //console.log(this.match);
+    
+    //this.settings.offsetX = 32;
   }
 
   dismiss() {
@@ -32,6 +36,9 @@ export class MatchDetailPage {
   }
 
   ionViewDidLoad() {
+    this.squadSettings = {};
+    this.squadSettings.offsetY = this.pageHeader.nativeElement.clientHeight;
+    console.log(this.pageHeader, this.squadSettings);
     this.showCurrentPositionInGoogleMap();
   }
 

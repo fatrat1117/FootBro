@@ -2,6 +2,8 @@ page-match-detail {
   ion-content {
     //给整个内容区调整背景及边距
     .content-all {
+      height: 100%;
+      width: 100%;
       //padding: 15px 10px 15px 10px;
       background-color: #171717;
       //数据显示区域
