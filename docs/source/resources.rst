@@ -4,8 +4,7 @@ resources
 
 .. note::
 
-  This page is built for knowledge sharing.
-
+  This page is built for knowledge sharing. https://goo.gl/QlAH7A。加油改兄弟们
 
 General
 -------
