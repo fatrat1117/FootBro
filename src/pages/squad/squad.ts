@@ -11,9 +11,9 @@ export class SquadPage {
   public tap: number = 0;
   players = [];
   constructor() {
-    this.players.push({ left: 0, top: 0, photo: 'assets/img/none.png' });
-    this.players.push({ left: 100, top: 100, photo: 'assets/img/none.png' });
-    this.players.push({ left: 200, top: 200, photo: 'assets/img/none.png' });
+    this.players.push({ left: 0, top: 0, photo: 'assets/img/none.png', name:'lihao' });
+    this.players.push({ left: 100, top: 100, photo: 'assets/img/none.png', name: 'wang tianyi' });
+    this.players.push({ left: 200, top: 200, photo: 'assets/img/none.png', name: 'li ji xiang' });
   }
 
   onTouchMove(e, p) {

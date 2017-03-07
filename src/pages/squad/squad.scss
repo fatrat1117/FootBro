@@ -1,14 +1,21 @@
 page-squad {
+    .playerItem {
+        width: 48px;
+    height: 48px;
+    position: absolute;
+    }
 .playerImg {
     width: 48px;
     height: 48px;
-    position: absolute;
     border-radius: 50%;
 }
-
-.board {
-    min-height: 80%;
-    max-height: 80%;
-    height: 80%;
+.playerName {
+    color: white;
 }
+
+// .board {
+//     min-height: 80%;
+//     max-height: 80%;
+//     height: 80%;
+// }
 }
