@@ -7,6 +7,7 @@ import { Player} from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
 
 @Component({
+  selector: 'page-cheering-team-stats',
   template: `
   <ion-header>
     <ion-navbar>
@@ -43,7 +44,7 @@ import { PlayerService } from '../../app/players/player.service'
       </ion-item>
 
       <ion-item>
-        <ion-row>
+        <ion-row class="ResponseRateRow">
           <ion-col class="col-30"></ion-col>
           <ion-col class="col-40">
             <sb-rate-circle title="ResponseRate" [rate]="cheerleader?.responseRate"></sb-rate-circle>
@@ -58,15 +59,15 @@ import { PlayerService } from '../../app/players/player.service'
 export class CheeringTeamStatsPage {
   selfPlayer: Player;
   cheerleader: Cheerleader;
-  constructor(private viewCtrl: ViewController, private alertCtrl: AlertController, 
-              private navParams: NavParams, private playerService: PlayerService, 
+  constructor(private viewCtrl: ViewController, private alertCtrl: AlertController,
+              private navParams: NavParams, private playerService: PlayerService,
               private toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {
     this.addEventListeners();
     this.cheerleader = this.navParams.get("cheerleader");
-    
+
     this.playerService.getPlayerAsync(this.playerService.selfId());
   }
 
