@@ -26,6 +26,7 @@ export class FirebaseManager {
   matchDatesMap = {};
   matchesByDateMap = {};
   cachedMatchesMap = {};
+  cachedMatchSquadMap = {};
   _afTournamentList;
   cachedTournamentTablesMap = {};
   //cheerleader
@@ -679,6 +680,21 @@ export class FirebaseManager {
         this.cachedMatchesMap[id] = snapshot;
         this.FireCustomEvent('matchready', id);
       });
+    }
+  }
+
+  getMatchSquad(matchId) {
+    return this.cachedMatchSquadMap[matchId];
+  }
+
+  getMatchSquadAsync(matchId) {
+    if (this.getMatchSquad(matchId)) 
+      this.FireCustomEvent('matchsquadready', matchId);
+    else {
+      this.af.database.object('/matchs_squads/' + matchId).subscribe(snapshot=> {
+        this.cachedMatchSquadMap[matchId] = snapshot;
+        this.FireCustomEvent('matchsquadready', matchId);
+      })
     }
   }
 

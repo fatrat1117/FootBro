@@ -60,16 +60,6 @@ export class MatchService {
       this.fm.FireCustomEvent('servicematchready', id);
     });
 
-    // document.addEventListener('serviceteamready', e => {
-    //   let id = e['detail'];
-    //   let team = this.teamService.getTeam(id);
-    //   if (team) {
-    //     let fmTeam = this.teamService.getTeam(id);
-    //     team.name = fmTeam.name;
-    //     team.logo = fmTeam.logo;
-    //   }
-    // });
-
     document.addEventListener('teammatchesready', e => {
       let result = e['detail'];
       let matches = [];
@@ -93,6 +83,14 @@ export class MatchService {
       this.tournamentTableMap[id] = table;
       this.fm.FireCustomEvent('servicetournamenttableready', id);
     });
+
+    document.addEventListener('matchsquadready', e=> {
+      let matchId = e['detail'];
+      let match = this.getMatch(matchId); 
+      match.homeSquad = this.fm.getMatchSquad(matchId)[match.homeId];
+      match.awaySquad = this.fm.getMatchSquad(matchId)[match.awayId];
+      this.fm.FireCustomEvent('servicematchsquadready', matchId);
+    })
   }
 
   copyParticipants(target, source) {
@@ -135,7 +133,7 @@ export class MatchService {
     this.fm.getMatchesByDateAsync(date, tournamentId);
   }
 
-  getMatch(id) {
+  getMatch(id) : Match {
     return this.matchesMap[id];
   }
 
@@ -179,5 +177,9 @@ export class MatchService {
 
   updateMatch(id, matchObj) {
     this.fm.updateMatch(id, matchObj);
+  }
+
+  getMatchSquadAsync(matchId) {
+    this.fm.getMatchSquadAsync(matchId);
   }
 }

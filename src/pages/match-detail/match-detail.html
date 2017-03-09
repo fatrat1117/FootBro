@@ -7,7 +7,7 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-  <ion-segment [(ngModel)]="matchSegments">
+  <ion-segment [ngModel]="matchSegments" (ngModelChange)="segmentChange($event)">
     <ion-segment-button value="info">
       {{'Info' | trans}}
     </ion-segment-button>
@@ -96,7 +96,7 @@
   </div>
 
   <div class="content-all" *ngSwitchCase="'squad'">
-    <page-squad *ngIf="squadSettings && squadSettings.offsetY" [settings]="squadSettings"
+    <page-squad *ngIf="homeSquadSettings && homeSquadSettings.offsetY" [settings]="homeSquadSettings"
     style="width: 100px; height: 100px"></page-squad>
   </div>
 </ion-content>

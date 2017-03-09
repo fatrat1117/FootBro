@@ -1,17 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'page-squad',
   templateUrl: 'squad.html',
 })
-export class SquadPage {
+export class SquadPage implements OnInit {
   @Input()
   settings;
 
-  public press: number = 0;
-  public pan: number = 0;
-  public swipe: number = 0;
-  public tap: number = 0;
   players = [];
   constructor() {
     this.players.push({ left: 0, top: 0, photo: 'assets/img/none.png', name:'lihao' });
@@ -38,5 +34,9 @@ export class SquadPage {
     //this.style.top = e.deltaY - this.top;
     //console.log(e, this.style);
     //this.pan++
+  }
+
+  ngOnInit() {
+    
   }
 }
