@@ -6,6 +6,11 @@
         <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
+    <ion-buttons right>
+      <button color='primaryYellow' (click)="edit()" ion-button icon-only clear>
+          <ion-icon name="create"></ion-icon>
+        </button>
+    </ion-buttons>
   </ion-navbar>
   <ion-segment [ngModel]="matchSegments" (ngModelChange)="segmentChange($event)">
     <ion-segment-button value="info">
@@ -18,47 +23,47 @@
 </ion-header>
 
 <ion-content padding [ngSwitch]="matchSegments" style="height: 100%">
-  <div class="content-all" *ngSwitchCase="'info'">
-    <ion-list no-lines class="content-list" center>
-      <!--中间的对战时间-->
-      <button disabled ion-button clear color="light" class="content-center-button">
+<div class="content-all" *ngSwitchCase="'info'">
+  <ion-list no-lines class="content-list" center>
+    <!--中间的对战时间-->
+    <button disabled ion-button clear color="light" class="content-center-button">
 <!--        <img src="assets/icon/icon_time.png" style="width: 20px;height: 15px;">-->
         {{match?.time | date:'yyyy-MM-dd h:mma'}}
       </button>
-      <!--对战信息-->
-      <ion-row class="fight-team-info" center>
-        <!--左边队伍信息-->
-        <ion-col width-33>
-          <img [src]="match?.home?.logo" class="team-logo">
-          <!--p class="team-left-text">{{match?.home?.name}}</p-->
-        </ion-col>
-        <!--中间比分-->
-        <ion-col width-33 class="fight-score">
-          <ion-row center>
-            <ion-col>
-              {{match?.homeScore}}
-            </ion-col>
-            <ion-col>
-              :
-            </ion-col>
-            <ion-col>
-              {{match?.awayScore}}
-            </ion-col>
-          </ion-row>
-        </ion-col>
-        <!--右边队伍信息-->
-        <ion-col width-33>
-          <img [src]="match?.away?.logo" class="team-logo">
-          <!--p class="team-right-text">{{match?.away?.name}}</p-->
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col width-33>{{match?.home?.name}}</ion-col>
-        <ion-col width-33></ion-col>
-        <ion-col width-33>{{match?.away?.name}}</ion-col>
-      </ion-row>
+    <!--对战信息-->
+    <ion-row class="fight-team-info" center>
+      <!--左边队伍信息-->
+      <ion-col width-33>
+        <img [src]="match?.home?.logo" class="team-logo">
+        <!--p class="team-left-text">{{match?.home?.name}}</p-->
+      </ion-col>
+      <!--中间比分-->
+      <ion-col width-33 class="fight-score">
+        <ion-row center>
+          <ion-col>
+            {{match?.homeScore}}
+          </ion-col>
+          <ion-col>
+            :
+          </ion-col>
+          <ion-col>
+            {{match?.awayScore}}
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <!--右边队伍信息-->
+      <ion-col width-33>
+        <img [src]="match?.away?.logo" class="team-logo">
+        <!--p class="team-right-text">{{match?.away?.name}}</p-->
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col width-33>{{match?.home?.name}}</ion-col>
+      <ion-col width-33></ion-col>
+      <ion-col width-33>{{match?.away?.name}}</ion-col>
+    </ion-row>
 
-      <!--<ion-item class="red-style">
+    <!--<ion-item class="red-style">
         <button ion-button clear item-left color="light" class="default-font-size">0</button>
         <img class="center-img no-padding" style="background-color: red;">
         <button ion-button clear item-right color="light" class="default-font-size">0</button>
@@ -68,39 +73,38 @@
         <img class="center-img no-padding" style="background-color: yellow;">
         <button ion-button clear item-right color="light" class="default-font-size">0</button>
       </ion-item>-->
-      <!--地图 标题-->
-      <ion-item class="map-title">
-        <!--div item-left class="title-left">
+    <!--地图 标题-->
+    <ion-item class="map-title">
+      <!--div item-left class="title-left">
           <img src="assets/icon/icon_address.png" class="title-left-img">
         </div-->
-        <ion-icon item-left name="md-pin" color="iPrimary"></ion-icon>
-        {{match?.location?.name}}
-        <p>{{match?.location?.address}}</p>
-      </ion-item>
-    </ion-list>
-    <!--地图-->
-    <div class="map-back">
-      <!--地图需要点击才显示 todo-->
-      <div id="map" class="map"></div>
-      <!--地图右下角图标 背景-->
-      <div class="map-right-bottom-back" (click)="openHere()"></div>
-      <!--地图右下角 汽车-->
-      <div class="map-car-back">
-        <img src="assets/img/icon1.jpg" class="map-car" />
-      </div>
-      <!--地图右下角“到这里”文字-->
-      <!--<div class="map-to-here">
+      <ion-icon item-left name="md-pin" color="iPrimary"></ion-icon>
+      {{match?.location?.name}}
+      <p>{{match?.location?.address}}</p>
+    </ion-item>
+  </ion-list>
+  <!--地图-->
+  <div class="map-back">
+    <!--地图需要点击才显示 todo-->
+    <div id="map" class="map"></div>
+    <!--地图右下角图标 背景-->
+    <div class="map-right-bottom-back" (click)="openHere()"></div>
+    <!--地图右下角 汽车-->
+    <div class="map-car-back">
+      <img src="assets/img/icon1.jpg" class="map-car" />
+    </div>
+    <!--地图右下角“到这里”文字-->
+    <!--<div class="map-to-here">
         <span class="map-to-here-text">到这里</span>
       </div>-->
-    </div>
   </div>
+</div>
 
-  <div class="content-all" *ngSwitchCase="'squad'">
-    <page-squad *ngIf="homeSquadSettings && homeSquadSettings.offsetY" [settings]="homeSquadSettings"
-    style="width: 100px; height: 100px"></page-squad>
-  </div>
+<div class="content-all" *ngSwitchCase="'squad'">
+  <page-squad *ngIf="homeSquadSettings && homeSquadSettings.offsetY" [settings]="homeSquadSettings" style="width: 100px; height: 100px"></page-squad>
+</div>
 
-  <button ion-fab mini color ='primaryYellow' (click)="edit()">
-          <ion-icon name="create"></ion-icon>
-        </button>
+<!--<button ion-fab mini color ='primaryYellow' (click)="edit()">
+          <ion-icon name="edit"></ion-icon>
+        </button>-->
 </ion-content>

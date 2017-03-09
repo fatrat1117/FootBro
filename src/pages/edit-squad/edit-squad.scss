@@ -1,0 +1,130 @@
+page-match-detail {
+  ion-content {
+    //给整个内容区调整背景及边距
+    .content-all {
+      height: 100%;
+      width: 100%;
+      //padding: 15px 10px 15px 10px;
+      background-color: #171717;
+      //数据显示区域
+      .content-list {
+        margin: 0px;
+        background: #40444d;
+        text-align: center;
+        //居中对战时间按钮
+        .content-center-button {
+          margin-top: 10px;
+          height: 30px;
+          border-radius: 15px;
+          background-color: #2e3138;
+          text-align: center;
+          opacity: 1;
+        }
+        //对战信息
+        .fight-team-info {
+          background-color: #40444d;
+          //width: 100%;
+          //左边战队信息
+          .team-logo {
+            width: 70px !important;
+            height: 70px !important;
+            border-radius: 5% !important;
+          }
+          //比分部分
+          .fight-score {
+            font-size: 3.0rem;
+            color: white;
+            text-align: center;
+            //width: 20%;
+          }
+        }
+
+        //红牌
+        .red-style {
+          text-align: center;
+          background: #2d2e32;
+          .center-img {
+            width: 10px;
+            height: 15px;
+          }
+        }
+        //黄牌
+        .yellow-style {
+          text-align: center;
+          background: #40444d;
+          .center-img {
+            width: 10px;
+            height: 15px;
+          }
+        }
+        //地图--标题
+        .map-title {
+          background: #2d2e32;
+        }
+      }
+      //地图
+      .map-back {
+        padding: 0px 10px 10px 10px;
+        height: 200px;
+        width: 100%;
+        background-color: #2d2e32;
+        position: relative;
+        //地图控件
+        .map {
+          width: 100%;
+          height: 100%;
+          position: relative;
+        }
+        //右下角背景
+        .map-right-bottom-back {
+          border-radius: 50%;
+          width: 50px;
+          height: 50px;
+          background-color: #a0a0a0;
+          position: absolute;
+          right: 20px;
+          bottom: 20px;
+        }
+        //车背景
+        .map-car-back {
+          width: 30px;
+          height: 18px;
+          position: absolute;
+          right: 30px;
+          bottom: 45px;
+          .map-car {
+            width: 100%;
+            height: 100%;
+          }
+        }
+        //到这里
+        .map-to-here {
+          width: 50px;
+          height: 25px;
+          text-align: center;
+          position: absolute;
+          right: 20px;
+          bottom: 20px;
+          //文字 到这里
+          .map-to-here-text {
+            font-size: 0.7rem;
+          }
+        }
+      }
+    }
+  }
+
+  //通用
+  .no-margin {
+    margin: 0px;
+  }
+  .no-padding {
+    padding: 0px;
+  }
+  .default-back-color {
+    background-color: #40444d;
+  }
+  .default-font-size {
+    font-size: 1.2rem;
+  }
+}

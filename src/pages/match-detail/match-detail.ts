@@ -1,6 +1,7 @@
 import { Component, ViewChild } from "@angular/core";
-import { ViewController, NavParams } from 'ionic-angular';
-import { Match } from '../../app/matches/match.model'
+import { ViewController, NavParams, ModalController} from 'ionic-angular';
+import { Match } from '../../app/matches/match.model';
+import { EditSquadPage } from '../edit-squad/edit-squad'
 
 declare var google: any;
 
@@ -17,6 +18,7 @@ export class MatchDetailPage {
   homeSquadSettings: any;
 
   constructor(private viewCtrl: ViewController,
+    private modal: ModalController,
     navParams: NavParams) {
     this.match = navParams.get('match');
     //this.settings.offsetX = 32;
@@ -39,7 +41,7 @@ export class MatchDetailPage {
     this.homeSquadSettings.matchId = this.match.id;
     this.homeSquadSettings.teamId = this.match.homeId;
     this.homeSquadSettings.offsetY = this.pageHeader.nativeElement.clientHeight;
-    console.log(this.pageHeader, this.homeSquadSettings);
+    //console.log(this.pageHeader, this.homeSquadSettings);
     this.showCurrentPositionInGoogleMap();
   }
 
@@ -64,7 +66,7 @@ export class MatchDetailPage {
     // };
     // let mapDiv = document.getElementById("map");
     // console.log(mapDiv);
-    
+
     // //创建地图，并在页面map中显示
     // var map = new google.maps.Map(document.getElementById("map"), myOptions);
     // //在地图上创建标记
@@ -103,7 +105,7 @@ export class MatchDetailPage {
 
   edit() {
     if ('squad' === this.matchSegments) {
-      
+      this.modal.create(EditSquadPage, {match: this.match}).present();
     }
   }
- }
+}
