@@ -19,8 +19,10 @@ export class SquadPage implements OnInit {
 
     document.addEventListener('servicematchsquadready', e => {
       let matchId = e['detail'];
-      this.match = this.match = this.matchService.getMatch(this.settings.matchId);
-      this.squad = this.settings.teamId === this.match.homeId ? this.match.homeSquad : this.match.awaySquad;
+      if (matchId === this.settings.matchId) {
+        this.match = this.match = this.matchService.getMatch(this.settings.matchId);
+        this.squad = this.settings.teamId === this.match.homeId ? this.match.homeSquad : this.match.awaySquad;
+      }
     })
   }
 
@@ -45,6 +47,6 @@ export class SquadPage implements OnInit {
   }
 
   ngOnInit() {
-    this.matchService.getMatchSquadAsync(this.settings.matchId)
+    this.matchService.getMatchSquadAsync(this.settings.matchId);
   }
 }

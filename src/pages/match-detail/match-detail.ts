@@ -105,7 +105,8 @@ export class MatchDetailPage {
 
   edit() {
     if ('squad' === this.matchSegments) {
-      this.modal.create(EditSquadPage, {match: this.match}).present();
+      let teamId = this.match.homeId;
+      this.modal.create(EditSquadPage, {match: this.match, teamId: teamId}).present();
     }
   }
 }
