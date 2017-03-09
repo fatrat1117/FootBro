@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'EditPlayer' | trans}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+  <ion-item-group>
+    <ion-item (click)="changeLogo()">
+      <h2>{{'Logo' | trans}}</h2>
+      <ion-thumbnail item-right>
+        <img [src]="team?.logo">
+      </ion-thumbnail>
+    </ion-item>
+    <ion-item detail-push (click)="editName()">
+      <h2>{{'TeamName' | trans}}</h2>
+      <p item-right>{{ team?.name }}</p>
+    </ion-item>
+    <ion-item-divider></ion-item-divider>
+    <ion-item tappable (click)="choosePlayer()">
+      <ion-icon item-left name="md-alert" color="danger"></ion-icon>
+      {{'PromoteToCaptain' | trans}}
+    </ion-item>
+
+  </ion-item-group>
+  
+  <!-->
+  <ion-list *ngIf="team">
+    <ion-item-divider></ion-item-divider>
+    <ion-item-sliding #slidingItem>
+      <ion-item>
+        <ion-thumbnail item-left>
+          <img [src]="(team)?.logo">
+        </ion-thumbnail>
+        <h2>{{ team?.name }}</h2>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="primary" text-capitalize (click)="setDefaultTeam(i, slidingItem)">
+             Set Default
+           </button>
+        <button ion-button color="danger" text-capitalize (click)="quitTeam(i)">
+             Quit
+           </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-item-sliding *ngFor="let t of teams; let i = index;" #slidingItem>
+    <ion-item>
+      <ion-thumbnail item-left>
+        <img [src]="(t | teamBasicPipe | async)?.logo">
+      </ion-thumbnail>
+      <h2 ion-text [color]="(playerBasic)?.teamId == t ? 'primary' : 'none'">{{ (t | teamBasicPipe | async)?.name }}</h2>
+    </ion-item>
+    <ion-item-options side="right">
+      <button *ngIf="(playerBasic)?.teamId != t" ion-button color="primary" text-capitalize (click)="setDefaultTeam(i, slidingItem)">
+          Set Default
+        </button>
+      <button ion-button color="danger" text-capitalize (click)="quitTeam(i)">
+          Quit
+        </button>
+    </ion-item-options>
+  </ion-item-sliding>
+  <-->
+</ion-content>

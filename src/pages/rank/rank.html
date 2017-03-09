@@ -22,8 +22,7 @@
   </ion-segment>
   <div class="rank-stats" [ngSwitch]="stats">
     <div *ngSwitchCase="'teams'">
-      <ion-list>
-        <ion-item class="sortby">
+      <ion-item style="margin-bottom: 10px" class="sortby">
         <ion-label>{{'SortBy' | trans}}</ion-label>
         <ion-select [ngModel]="teamSortByStr" (ngModelChange)="sortTeamBy($event)" text-center>
           <ion-option value="ability">
@@ -34,6 +33,7 @@
           </ion-option>
         </ion-select>
       </ion-item>
+      <ion-list>
         <ion-item *ngFor="let t of teamRanks; let i = index;" style="margin-bottom:10px" text-wrap (click)='goTeamPage(t.id)'>
           <ion-thumbnail item-left>
             <img [src]="t.logo">

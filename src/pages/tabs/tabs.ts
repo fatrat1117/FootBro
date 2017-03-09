@@ -43,6 +43,7 @@ export class TabsPage {
       this.tabRef.select(0);
       this.tab2Root = null;
       this.tab3Root = null;
+      this.unreadCount = null;
     });
 
     document.addEventListener('servicemessageready', e => {

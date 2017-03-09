@@ -19,6 +19,8 @@ import { EditPlayerWeightPage } from "../pages/edit-player/edit-player-weight";
 import { EditPlayerPositionPage } from "../pages/edit-player/edit-player-position";
 import { EditPlayerFootPage } from "../pages/edit-player/edit-player-foot";
 import { EditPlayerDescriptionPage } from "../pages/edit-player/edit-player-description";
+import { EditTeamPage } from "../pages/edit-team/edit-team";
+import { EditTeamNamePage } from "../pages/edit-team/edit-team-name";
 import { ManageTeamPage } from "../pages/manage-team/manage-team";
 import { NewTeamPage } from "../pages/manage-team/new-team";
 import { MyPlayerPage } from "../pages/my-player/my-player";
@@ -91,6 +93,8 @@ export const firebaseConfig = {
     EditPlayerPositionPage,
     EditPlayerFootPage,
     EditPlayerDescriptionPage,
+    EditTeamPage,
+    EditTeamNamePage,
     ManageTeamPage,
     NewTeamPage,
     MyPlayerPage,
@@ -156,6 +160,8 @@ export const firebaseConfig = {
     EditPlayerPositionPage,
     EditPlayerFootPage,
     EditPlayerDescriptionPage,
+    EditTeamPage,
+    EditTeamNamePage,
     ManageTeamPage,
     NewTeamPage,
     MyPlayerPage,

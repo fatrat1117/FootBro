@@ -205,4 +205,12 @@ export class TeamService {
   isTeamExist(id) {
     return this.teamDataMap[id] && 'id' in this.teamDataMap[id]; 
   }
+
+  updateTeamName(id: string, name: string) {
+    this.fm.updateTeamName(id, name);
+  }
+
+  promoteNewCaptain(teamId: string, playerId: string) {
+    this.fm.promoteNewCaptain(teamId, playerId);
+  }
 }

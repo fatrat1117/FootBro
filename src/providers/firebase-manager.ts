@@ -406,6 +406,14 @@ export class FirebaseManager {
     this.afPlayerBasic(this.selfId()).update({ teamId: id });
   }
 
+  updateTeamName(id: string, name: string) {
+    this.af.database.object(`teams/${id}/basic-info/name`).set(name);
+  }
+
+  promoteNewCaptain(teamId: string, playerId: string) {
+    this.af.database.object(`teams/${teamId}/basic-info/captain`).set(playerId);
+  }
+
 
 
 
