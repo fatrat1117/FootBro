@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatchService } from '../../app/matches/match.service'
 
 @Component({
   selector: 'page-squad',
@@ -9,13 +10,25 @@ export class SquadPage implements OnInit {
   settings;
 
   players = [];
-  constructor() {
-    this.players.push({ left: 0, top: 0, photo: 'assets/img/none.png', name:'lihao' });
+  match;
+  squad;
+  constructor(private matchService: MatchService) {
+    this.players.push({ left: 0, top: 0, photo: 'assets/img/none.png', name: 'lihao' });
     this.players.push({ left: 100, top: 100, photo: 'assets/img/none.png', name: 'wang tianyi' });
     this.players.push({ left: 200, top: 200, photo: 'assets/img/none.png', name: 'li ji xiang' });
+
+    document.addEventListener('servicematchsquadready', e => {
+      let matchId = e['detail'];
+      if (matchId === this.settings.matchId) {
+        this.match = this.match = this.matchService.getMatch(this.settings.matchId);
+        this.squad = this.settings.teamId === this.match.homeId ? this.match.homeSquad : this.match.awaySquad;
+      }
+    })
   }
 
   onTouchMove(e, p) {
+    if (!this.settings.editMode)
+      return;
     //console.log(e, this.settings);
     if (1 === e.touches.length) {
       p.left = e.touches[0].pageX - 24;// - this.left;
@@ -24,19 +37,16 @@ export class SquadPage implements OnInit {
   }
 
   panEvent(e, p) {
+    if (!this.settings.editMode)
+      return;
     //console.log(e);
     if (e.isFinal === false) {
       p.left = e.center.x - 24;// - this.left;
       p.top = e.center.y - 24;
     }
-    //this.style.top = e.deltaY - this.top;
-    //this.style.left = e.deltaX - this.left;
-    //this.style.top = e.deltaY - this.top;
-    //console.log(e, this.style);
-    //this.pan++
   }
 
   ngOnInit() {
-    
+    this.matchService.getMatchSquadAsync(this.settings.matchId);
   }
 }

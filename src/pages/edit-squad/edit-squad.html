@@ -1,0 +1,30 @@
+<ion-header #pageHeader>
+  <ion-navbar>
+    <ion-buttons left>
+      <button (click)="dismiss()" color='danger' ion-button icon-only clear>
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button color="primary" ion-button icon-only clear>
+         <ion-icon name="md-cloud-upload"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding style="height: 100%">
+<ion-grid style="height: 100%">
+<ion-row style="max-height: 85%; min-height: 85%">
+<page-squad *ngIf="squadSettings && squadSettings.offsetY" [settings]="squadSettings"></page-squad>
+</ion-row>
+<ion-row class='playersRow'>
+  <div class='playersDiv'>
+    <div *ngFor="let p of players" style="display: inline">
+      <img class="playerImg" [src]="p.photo" (touchmove)="onTouchMove($event, p)">
+      <label class="playerName">{{p.name}}</label>
+    </div>
+  </div>
+</ion-row>
+</ion-grid>
+</ion-content>

@@ -1,0 +1,21 @@
+page-edit-squad {
+  .playerImg {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+.playerName {
+    color: white;
+    font-size: 0.75rem;
+}
+
+.playersRow {
+  overflow-y: hidden;
+}
+
+.playersDiv {
+  width: 30em;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+}

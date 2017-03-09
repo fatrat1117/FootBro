@@ -38,6 +38,7 @@ import { SearchPlayerPage } from '../pages/search-player/search-player';
 import { SearchMatchPage } from '../pages/search-match/search-match';
 import { UpdateGamePage } from '../pages/update-game/update-game';
 import { SquadPage } from '../pages/squad/squad';
+import { EditSquadPage } from '../pages/edit-squad/edit-squad';
 // services
 import { AngularFireModule } from 'angularfire2';
 import { FirebaseManager } from '../providers/firebase-manager';
@@ -115,6 +116,7 @@ export const firebaseConfig = {
     SearchMatchPage,
     UpdateGamePage,
     SquadPage,
+    EditSquadPage,
     // pipes
     TransPipe,
     StringToDatePipe,
@@ -181,7 +183,8 @@ export const firebaseConfig = {
     SearchPlayerPage,
     SearchMatchPage,
     UpdateGamePage,
-    SquadPage
+    SquadPage,
+    EditSquadPage
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
     FirebaseManager,
