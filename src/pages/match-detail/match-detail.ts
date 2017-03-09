@@ -100,4 +100,10 @@ export class MatchDetailPage {
     //   alert("你的浏览器不支持HTML5来获取地理位置信息。");
     // }
   }
-}
+
+  edit() {
+    if ('squad' === this.matchSegments) {
+      
+    }
+  }
+ }
