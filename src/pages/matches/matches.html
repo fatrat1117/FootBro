@@ -13,6 +13,11 @@
       </button>
     </ion-buttons>
     <-->
+    <ion-buttons left>
+      <button (click)="showLeagueInfo()" ion-button icon-only clear>
+        <ion-icon name="md-bug" color="danger"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
   <ion-toolbar>
     <ion-segment *ngIf="selectedId == 'all'" [(ngModel)]="selectedInfo" mode="md">
