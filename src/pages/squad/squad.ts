@@ -13,9 +13,9 @@ export class SquadPage implements OnInit {
   match;
   squad;
   constructor(private matchService: MatchService) {
-    this.players.push({ left: 0, top: 0, photo: 'assets/img/none.png', name: 'lihao' });
-    this.players.push({ left: 100, top: 100, photo: 'assets/img/none.png', name: 'wang tianyi' });
-    this.players.push({ left: 200, top: 200, photo: 'assets/img/none.png', name: 'li ji xiang' });
+    // this.players.push({ left: 0, top: 0, photo: 'assets/img/none.png', name: 'lihao' });
+    // this.players.push({ left: 100, top: 100, photo: 'assets/img/none.png', name: 'wang tianyi' });
+    // this.players.push({ left: 200, top: 200, photo: 'assets/img/none.png', name: 'li ji xiang' });
 
     document.addEventListener('servicematchsquadready', e => {
       let matchId = e['detail'];
@@ -29,11 +29,12 @@ export class SquadPage implements OnInit {
   onTouchMove(e, p) {
     if (!this.settings.editMode)
       return;
-    //console.log(e, this.settings);
+    //console.log(e, this.settings, p);
     if (1 === e.touches.length) {
-      p.left = e.touches[0].pageX - 24;// - this.left;
-      p.top = e.touches[0].pageY - 24 - this.settings.offsetY;
+      p.x = e.touches[0].pageX - 24;// - this.left;
+      p.y = e.touches[0].pageY - 24 - this.settings.offsetY;
     }
+    //console.log(p);
   }
 
   panEvent(e, p) {

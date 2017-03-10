@@ -19,6 +19,10 @@ export class EditSquadPage {
     navParams: NavParams) {
     this.match = navParams.get('match');
     this.teamId = navParams.get('teamId');
+    this.squadSettings = {};
+    this.squadSettings.editMode = true;
+    this.squadSettings.matchId = this.match.id;
+    this.squadSettings.teamId = this.match.homeId;
   }
 
   dismiss() {
@@ -32,13 +36,7 @@ export class EditSquadPage {
         this.players = this.playerService.getTeamPlayers(teamId);
       }
     })
-
-    this.squadSettings = {};
-    this.squadSettings.editMode = true;
-    this.squadSettings.matchId = this.match.id;
-    this.squadSettings.teamId = this.match.homeId;
     this.squadSettings.offsetY = this.pageHeader.nativeElement.clientHeight;
-
     this.playerService.getTeamPlayersAsync(this.teamId);
   }
 
@@ -53,6 +51,6 @@ export class EditSquadPage {
 
   load11() {
     this.squadSettings.squads = PREDEFINEDSQUAD['442'];
-    console.log(this.squadSettings.squads);
+    //console.log(this.squadSettings.squads);
   }
  }
