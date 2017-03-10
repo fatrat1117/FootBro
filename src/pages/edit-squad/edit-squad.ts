@@ -1,6 +1,6 @@
 import { Component, ViewChild } from "@angular/core";
 import { ViewController, NavParams } from 'ionic-angular';
-import { Match } from '../../app/matches/match.model';
+import { Match, PREDEFINEDSQUAD } from '../../app/matches/match.model';
 import { PlayerService} from '../../app/players/player.service';
 
 @Component({
@@ -45,5 +45,14 @@ export class EditSquadPage {
   onTouchMove(e, p) {
     console.log(e, p);
     
+  }
+
+  load7() {
+
+  }
+
+  load11() {
+    this.squadSettings.squads = PREDEFINEDSQUAD['442'];
+    console.log(this.squadSettings.squads);
   }
  }
