@@ -5,4 +5,9 @@
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row *ngFor="let ts of teams | groupThreePipe" text-center>
+      <ion-col *ngFor="let t of ts" width-33 text-center>{{ t.name }}</ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
