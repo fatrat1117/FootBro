@@ -21,7 +21,9 @@ export class MatchDetailPage {
     private modal: ModalController,
     navParams: NavParams) {
     this.match = navParams.get('match');
-    //this.settings.offsetX = 32;
+    this.homeSquadSettings = {};
+    this.homeSquadSettings.matchId = this.match.id;
+    this.homeSquadSettings.teamId = this.match.homeId;
   }
 
   dismiss() {
@@ -37,9 +39,6 @@ export class MatchDetailPage {
   }
 
   ionViewDidLoad() {
-    this.homeSquadSettings = {};
-    this.homeSquadSettings.matchId = this.match.id;
-    this.homeSquadSettings.teamId = this.match.homeId;
     this.homeSquadSettings.offsetY = this.pageHeader.nativeElement.clientHeight;
     //console.log(this.pageHeader, this.homeSquadSettings);
     this.showCurrentPositionInGoogleMap();
