@@ -42,7 +42,8 @@
       </div>
       <!--            <div class="fix-bottom-btn" style="margin-bottom:56px;"></div>-->
       <div class="application-button">
-        <button ion-button full (click)="registerTeam()">立即报名</button>
+        <button *ngIf="isRegistered() < 0" ion-button full (click)="registerTeam()">立即报名</button>
+        <button *ngIf="isRegistered() >= 0" disabled ion-button full>已报名</button>
       </div>
     </div>
     <div *ngSwitchCase="'rule'" class="rule-panel">

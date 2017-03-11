@@ -19,6 +19,7 @@ export class LeagueInfoPage {
   registerTeams: Team[];
   teams: Team[];
   leagueInfo = "info";
+
   constructor(private viewCtrl: ViewController, private navParams: NavParams, 
               private toastCtrl: ToastController, private alertCtrl: AlertController,
               private playerService: PlayerService, private teamService: TeamService, private matchService: MatchService) {
@@ -93,5 +94,10 @@ export class LeagueInfoPage {
         position: 'top'
       }).present();
     }
+  }
+
+  isRegistered() {
+    if (this.registerTeams)
+      return this.registerTeams.indexOf(this.selfTeam);
   }
 }
