@@ -46,7 +46,35 @@
              保证金:20000<br>
              --------------------------------------------------------------------------------
              ----------------------<br>
-             具体规程出台后公布<br>    
+             具体规程出台后公布<br>
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>
+                 具体规程出台后公布<br>    
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>
+                 具体规程出台后公布<br>    
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>
+                 具体规程出台后公布<br>    
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>    
+               具体规程出台后公布<br>
            
 
 <!--
@@ -72,11 +100,23 @@
 </div>
 
     </div>
-    <div *ngSwitchCase="'teams'">
+    <div *ngSwitchCase="'teams'" class="teams-panel">
       参赛队伍页面
       <ion-grid>
         <ion-row *ngFor="let ts of teams | groupThreePipe" text-center>
-          <ion-col *ngFor="let t of ts" width-33 text-center>{{ t.name }}</ion-col>
+          <ion-col *ngFor="let t of ts;let i = index;" width-33 text-center>
+              <div class="team-item">
+                
+                <img *ngIf="i == 0" class="status" src="assets/img/league-info/passed_trans.png"/>
+                <img *ngIf="i == 1" class="status" src="assets/img/league-info/pending.png"/>
+                <img *ngIf="i == 2" class="status" src="assets/img/league-info/failed_trans.png"/>
+                <img class="team-logo" src="assets/img/league-info/club.jpeg"/>
+                <div class="team-name">
+                        {{ t.name }}
+                </div>
+                 
+              </div>
+          </ion-col>
         </ion-row>
       </ion-grid>
     </div>

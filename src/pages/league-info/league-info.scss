@@ -9,7 +9,6 @@ page-league-info {
     .league-info-content{
         display: block;
         position: relative;
-        background-color: rgb(84, 81, 121);
         height: calc(100% - 162px);
         .info-panel{
             display: flex;
@@ -32,8 +31,28 @@ page-league-info {
                 margin-bottom: auto;
                 position: relative;
              }
-        }
+            }
             
+        }
+        
+        
+        .teams-panel{
+            background-color: rgb(84, 81, 121);
+            .team-name{
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
+            .team-item{
+                position: relative;
+                .status{
+                    max-width: 4rem;
+                    position: absolute;
+                    left: 0;
+                    top:0;
+                }
+            }
         }
        
        

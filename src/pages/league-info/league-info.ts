@@ -19,7 +19,7 @@ export class LeagueInfoPage {
     this.teams = [];
     for (let i = 0; i < 10; ++i) {
       let t = new Team();
-      t.name = i;
+      t.name = "宇宙第一超级无敌DDDDDDDDDDiao之巴塞罗那"+i;
       this.teams.push(t);
     }
     this.slides = [];
