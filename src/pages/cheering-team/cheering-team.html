@@ -62,9 +62,9 @@
       </ion-col>
     </ion-row>
     <ion-row class="baby-row">
-        
+
         <div *ngIf='playerService.isAdmin()' class="baby-admin">
-        <ion-row *ngFor='let clrow of buildCheerleaderRowArray(pendingCheerleaders);let i = index' no-margin>
+        <ion-row *ngFor='let clrow of buildCheerleaderRowArray(pendingCheerleaders,2);let i = index' no-margin>
             <ion-col class="cheerleader-item" width-50 *ngFor='let clItem of clrow; let j = index'>
                 <div *ngIf = 'clItem'>
                   <ion-row class="item-row">
@@ -88,11 +88,11 @@
             </ion-col>
         </ion-row>
       </div>
-        
-     
-      
+
+
+
     </ion-row>
-      
+
       <div class="baby-row">
        <div *ngIf='(afPendingSelf | async)?.$exists()' class="baby-self" width-50 no-margin>
         <ion-row class="self-row">
@@ -111,7 +111,7 @@
       </div>
 
     <div class="baby-row">
-      <ion-row *ngFor='let clrow of buildCheerleaderRowArray(approvedCheerleaders);let i = index' no-margin>
+      <ion-row *ngFor='let clrow of buildCheerleaderRowArray(approvedCheerleaders,2);let i = index' no-margin>
         <ion-col class="cheerleader-item" width-50 *ngFor='let clItem of clrow; let j = index'>
         <div *ngIf = 'clItem'>
             <ion-row class="item-row">

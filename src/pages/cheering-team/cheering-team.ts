@@ -45,7 +45,7 @@ export class CheeringTeamPage {
 
     document.addEventListener('serviceapprovedcheerleadersready', e => {
       this.approvedCheerleaders = this.cheerleaderService.getApprovedCheerleaders();
-      
+
       if (this.cheerleaderService.isCheerleader(this.playerService.selfId()))
         this.amICheerleader = true;
       else
@@ -113,20 +113,32 @@ export class CheeringTeamPage {
       user: cl
     });
   }
-  
-  buildCheerleaderRowArray(appCheerleaders){
-        var numPerRow = 2;
+
+  buildCheerleaderRowArray(appCheerleaders,numPerRow){
+        // var numPerRow = 2;
+        // var rowArray = [];
+        // if (!appCheerleaders){
+        //     return rowArray;
+        // }
+        // for (var i = 0; i < appCheerleaders.length; i+=numPerRow){
+        //     var rowItem = [];
+        //     for (var j = 0 ; j < numPerRow ;j ++){
+        //         var curr = appCheerleaders[i+j];
+        //         rowItem.push(curr);
+        //     }
+        //     rowArray.push(rowItem);
+        // }
         var rowArray = [];
-        if (!appCheerleaders){
-            return rowArray;
-        }
-        for (var i = 0; i < appCheerleaders.length; i+=numPerRow){
-            var rowItem = [];
-            for (var j = 0 ; j < numPerRow ;j ++){
-                var curr = appCheerleaders[i+j];
-                rowItem.push(curr);
-            }
-            rowArray.push(rowItem);
+        if (appCheerleaders){
+           var rowItem = [];
+           for (var i = 0; i < appCheerleaders.length ; i++){
+             var curr = appCheerleaders[i];
+             rowItem.push(curr);
+             if ((i + 1) % numPerRow == 0){
+                rowArray.push(rowItem);
+                rowItem = [];
+             }
+           }
         }
         return rowArray;
   }
