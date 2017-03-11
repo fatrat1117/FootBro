@@ -5,6 +5,41 @@
 </ion-header>
 
 <ion-content>
+
+  <ion-row class="league-info-slides">
+    <ion-slides autoplay="null" loop="true">
+      <ion-slide *ngFor="let slide of slides">
+        <img [src]="slide.image"/>
+      </ion-slide>
+    </ion-slides>
+  </ion-row>
+
+  <ion-row class="league-info-segments">
+  <ion-segment padding [(ngModel)]="leagueInfo" mode="md">
+    <ion-segment-button value="info">
+      报名须知
+    </ion-segment-button>
+    <ion-segment-button value="rule">
+      赛事章程
+    </ion-segment-button>
+    <ion-segment-button value="teams">
+      参赛队伍
+    </ion-segment-button>
+  </ion-segment>
+  </ion-row>
+
+  <div class="league-info-content" [ngSwitch]="leagueInfo">
+    <div *ngSwitchCase="'info'">
+       报名须知页面
+    </div>
+    <div *ngSwitchCase="'rule'">
+      赛事章程页面
+    </div>
+    <div *ngSwitchCase="'teams'">
+      参赛队伍页面
+    </div>
+  </div>
+
   <ion-grid>
     <ion-row *ngFor="let ts of teams | groupThreePipe" text-center>
       <ion-col *ngFor="let t of ts" width-33 text-center>{{ t.name }}</ion-col>
