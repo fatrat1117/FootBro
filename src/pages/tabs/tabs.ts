@@ -4,6 +4,7 @@ import { Tabs } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { RankPage } from '../rank/rank';
 import { MatchesPage } from '../matches/matches';
+import { MatchListPage } from '../match-list/match-list';
 import { MessagesPage } from '../messages/messages';
 import { MePage } from '../me/me';
 import { FirebaseManager } from '../../providers/firebase-manager';
@@ -21,7 +22,7 @@ export class TabsPage {
   @ViewChild('mainTabs') tabRef: Tabs;
 
   tab0Root: any = HomePage;
-  tab1Root: any = MatchesPage;
+  tab1Root: any = MatchListPage;
   //tab1Root: any = RankPage;
   tab2Root: any = null;
   tab3Root: any = null;
