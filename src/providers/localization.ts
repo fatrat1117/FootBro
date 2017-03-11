@@ -304,7 +304,7 @@ export class Localization {
             Message: '信息',
             Messages: '消息',
             Played: '出场',
-            Matches: '比赛',
+            Matches: '赛事',
             Popularity: '人气',
             MyPage: '我的主页',
             Notifications: '通知',

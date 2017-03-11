@@ -27,6 +27,7 @@ import { LeagueInfoPage } from "../pages/league-info/league-info";
 import { MyPlayerPage } from "../pages/my-player/my-player";
 import { FeedbackPage } from "../pages/feedback/feedback";
 import { MatchesPage } from "../pages/matches/matches";
+import { MatchListPage } from "../pages/match-list/match-list";
 import { CheeringTeamPage } from "../pages/cheering-team/cheering-team";
 import { CheeringTeamStatsPage } from "../pages/cheering-team/cheering-team-stats";
 import { MyTeamPage } from "../pages/my-team/my-team";
@@ -103,6 +104,7 @@ export const firebaseConfig = {
     MyPlayerPage,
     FeedbackPage,
     MatchesPage,
+    MatchListPage,
     MatchDetailPage,
     CheeringTeamPage,
     CheeringTeamStatsPage,
@@ -173,6 +175,7 @@ export const firebaseConfig = {
     MyPlayerPage,
     FeedbackPage,
     MatchesPage,
+    MatchListPage,
     MatchDetailPage,
     CheeringTeamPage,
     CheeringTeamStatsPage,
