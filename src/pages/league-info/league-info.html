@@ -1,6 +1,11 @@
 <ion-header>
   <ion-navbar>
     <ion-title>League Info</ion-title>
+    <ion-buttons end>
+      <button ion-button>
+        <ion-icon name="share" color="primary"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -33,10 +38,6 @@
        
       
            <div class="content">
-<!--
-            <div id="div1" style="height: 500px;position:relative;">
-            <div id="div3" style="height:1500px;border:5px solid yellow;">
--->
              报名开始时间: 2017-02-15<br>
              报名截止时间: 2017-03-10<br>
              每队最大报名人数: 30<br>
@@ -47,65 +48,22 @@
              --------------------------------------------------------------------------------
              ----------------------<br>
              具体规程出台后公布<br>
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>
-                 具体规程出台后公布<br>    
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>
-                 具体规程出台后公布<br>    
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>
-                 具体规程出台后公布<br>    
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>    
-               具体规程出台后公布<br>
-           
-
-<!--
-                </div>
-        </div>
--->
+       
            </div>
-
 <!--            <div class="fix-bottom-btn" style="margin-bottom:56px;"></div>-->
          <div class="application-button">
                 <button color="secondary" ion-button full large>立即报名</button>
         </div>
 
     </div>
-    <div *ngSwitchCase="'rule'">
-      赛事章程页面
-        <div id="div1" style="height: 500px;position:relative;">
-    <div id="div2" style="max-height:100%;overflow:auto;border:1px solid red;">
-        <div id="div3" style="height:1500px;border:5px solid yellow;">
+    <div *ngSwitchCase="'rule'" class="rule-panel">
           具体规程出台后公布<br>
-        </div>
-    </div>
-</div>
-
     </div>
     <div *ngSwitchCase="'teams'" class="teams-panel">
-      参赛队伍页面
       <ion-grid>
         <ion-row *ngFor="let ts of teams | groupThreePipe" text-center>
           <ion-col *ngFor="let t of ts;let i = index;" width-33 text-center>
-              <div class="team-item">
+              <div *ngIf="t" class="team-item">
                 
                 <img *ngIf="i == 0" class="status" src="assets/img/league-info/passed_trans.png"/>
                 <img *ngIf="i == 1" class="status" src="assets/img/league-info/pending.png"/>

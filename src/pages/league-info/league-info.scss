@@ -1,4 +1,10 @@
 page-league-info {
+    
+    ion-navbar{
+        ion-title{
+            text-align: center;
+        }
+    }
 
     .league-info-slides{
         ion-slides{
@@ -35,9 +41,17 @@ page-league-info {
             
         }
         
+        .rule-panel{
+                height: 100%;
+                 overflow: auto;
+              background-color: rgb(84, 81, 121);
+        }
+        
         
         .teams-panel{
             background-color: rgb(84, 81, 121);
+               height: 100%;
+                 overflow: auto;
             .team-name{
                 white-space: nowrap;
                 overflow: hidden;
