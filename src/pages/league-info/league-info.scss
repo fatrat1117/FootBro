@@ -10,19 +10,22 @@ page-league-info {
         display: block;
         position: relative;
         background-color: rgb(84, 81, 121);
-        min-height: 70%;
+        height: calc(100% - 162px);
         .info-panel{
             display: flex;
             flex-direction: column;
             overflow: auto;
             position: relative;
+            background-color: rgb(84, 81, 121);
+            height: 100%;
             .content{
                 margin: 0.5rem;
             }
             
             .application-button{
                 z-index: 99;
-                margin-bottom: auto;
+                margin-top: auto;
+                margin-bottom: 0;
                 width: 100%;
                 bottom:0;
              button{
