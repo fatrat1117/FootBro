@@ -24,7 +24,7 @@ export class LeagueInfoPage {
               private playerService: PlayerService, private teamService: TeamService, private matchService: MatchService) {
     // dummy data
     this.teams = [];
-    for (let i = 0; i < 30; ++i) {
+    for (let i = 0; i < 10; ++i) {
       let t = new Team();
       t.name = "宇宙第一超级无敌DDDDDDDDDDiao之巴塞罗那"+i;
       this.teams.push(t);

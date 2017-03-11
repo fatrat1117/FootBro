@@ -50,7 +50,7 @@
     </div>
     <div *ngSwitchCase="'teams'" class="teams-panel">
       <ion-grid>
-        <ion-row *ngFor="let ts of registerTeams | groupThreePipe" text-center>
+        <ion-row *ngFor="let ts of registerTeams | groupNPipe:3" text-center>
           <ion-col *ngFor="let t of ts;let i = index;" width-33 text-center>
             <div *ngIf="t" class="team-item">
               <!-->

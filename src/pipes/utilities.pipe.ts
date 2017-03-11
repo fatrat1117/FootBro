@@ -47,18 +47,51 @@ export class GroupThreePipe implements PipeTransform {
 
   transform(arr) {
     
+    let newArr = [];
     if (arr) {
-      let newArr = [];
       let a = [];
       for (let i = 1; i <= arr.length; ++i) {
-        a.push(arr[i]);
+        a.push(arr[i-1]);
         if (i % 3 == 0) {
           newArr.push(a);
-          a = []
+          a = [];
         }
+      }
+      if (a.length > 0){
+        newArr.push(a);
       }
     console.log(newArr);
       return newArr;
     }
   }
 }
+
+@Pipe({
+  name: 'groupNPipe'
+})
+
+export class GroupNPipe implements PipeTransform {
+  constructor() {
+  }
+
+  transform(arr,numPerRow) {
+    
+    let rowArray = [];
+    if (arr) {
+     let rowItem = [];
+      for (let i = 0; i < arr.length; i++) {
+        rowItem.push(arr[i]);
+        if (( i + 1) % numPerRow == 0) {
+          rowArray.push(rowItem);
+          rowItem = [];
+        }
+      }
+      if(rowItem.length > 0){
+         rowArray.push(rowItem);
+      }
+    }
+    return rowArray;
+  }
+}
+  
+

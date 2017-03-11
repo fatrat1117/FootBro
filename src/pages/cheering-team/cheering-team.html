@@ -64,7 +64,7 @@
     <ion-row class="baby-row">
 
         <div *ngIf='playerService.isAdmin()' class="baby-admin">
-        <ion-row *ngFor='let clrow of buildCheerleaderRowArray(pendingCheerleaders,2);let i = index' no-margin>
+        <ion-row *ngFor='let clrow of pendingCheerleaders | groupNPipe:2;let i = index' no-margin>
             <ion-col class="cheerleader-item" width-50 *ngFor='let clItem of clrow; let j = index'>
                 <div *ngIf = 'clItem'>
                   <ion-row class="item-row">
@@ -111,7 +111,7 @@
       </div>
 
     <div class="baby-row">
-      <ion-row *ngFor='let clrow of buildCheerleaderRowArray(approvedCheerleaders,2);let i = index' no-margin>
+      <ion-row *ngFor='let clrow of approvedCheerleaders |groupNPipe:2 ;let i = index' no-margin>
         <ion-col class="cheerleader-item" width-50 *ngFor='let clItem of clrow; let j = index'>
         <div *ngIf = 'clItem'>
             <ion-row class="item-row">
