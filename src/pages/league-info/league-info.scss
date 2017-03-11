@@ -16,22 +16,18 @@ page-league-info {
             flex-direction: column;
             overflow: auto;
             position: relative;
-            height: 400px;
-
             .content{
                 margin: 0.5rem;
-                flex: 1;
             }
             
             .application-button{
-                position: fixed;
+                z-index: 99;
+                margin-bottom: auto;
                 width: 100%;
                 bottom:0;
-                flex: 1;
              button{
                 margin-bottom: auto;
                 position: relative;
-                bottom: 0;
              }
         }
             
