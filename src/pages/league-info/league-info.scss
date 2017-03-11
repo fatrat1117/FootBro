@@ -1,8 +1,42 @@
 page-league-info {
 
-  .league-info-slides{
-    ion-slides{
-       height: 12rem;
+    .league-info-slides{
+        ion-slides{
+           height: 12rem;
+        }
     }
-  }
+
+    .league-info-content{
+        display: block;
+        position: relative;
+        background-color: rgb(84, 81, 121);
+        min-height: 70%;
+        .info-panel{
+            display: flex;
+            flex-direction: column;
+            overflow: auto;
+            position: relative;
+            height: 400px;
+
+            .content{
+                margin: 0.5rem;
+                flex: 1;
+            }
+            
+            .application-button{
+                position: fixed;
+                width: 100%;
+                bottom:0;
+                flex: 1;
+             button{
+                margin-bottom: auto;
+                position: relative;
+                bottom: 0;
+             }
+        }
+            
+        }
+       
+       
+    }
 }

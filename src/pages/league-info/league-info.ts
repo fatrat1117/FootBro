@@ -33,5 +33,6 @@ export class LeagueInfoPage {
       });
     }
   }
+  
 
 }
