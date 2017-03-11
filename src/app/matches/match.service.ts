@@ -13,6 +13,7 @@ export class MatchService {
   matchesMap = {};
   teamMatchesMap = {};
   tournamentTableMap = {};
+  registeredTeamsMap = {};
 
   constructor(private fm: FirebaseManager,
     private teamService: TeamService,
@@ -82,6 +83,23 @@ export class MatchService {
       });
       this.tournamentTableMap[id] = table;
       this.fm.FireCustomEvent('servicetournamenttableready', id);
+    });
+
+    document.addEventListener('registeredteamsready', e => {
+      let id = e['detail'];
+      let teams = this.fm.getRegisteredTeams(id);
+      let registeredTeams = [];
+      teams.forEach(t => {
+        //let team = t;
+        let team = this.teamService.findOrCreateTeam(t.$key);
+        this.fm.getTeamAsync(t.$key);
+        registeredTeams.push(team);
+      });
+      
+      console.log(registeredTeams);
+      
+      this.registeredTeamsMap[id] = registeredTeams;
+      this.fm.FireCustomEvent('serviceregisteredteamsready', id);
     });
 
     document.addEventListener('matchsquadready', e=> {
@@ -181,5 +199,20 @@ export class MatchService {
 
   getMatchSquadAsync(matchId) {
     this.fm.getMatchSquadAsync(matchId);
+  }
+
+  registerLeague(teamId: string, leagueId: string) {
+    this.fm.registerLeague(teamId, leagueId);
+  }
+
+  getRegisteredTeams(leagueId: string) {
+    return this.registeredTeamsMap[leagueId];
+  }
+
+  getRegisteredTeamsAsync(leagueId: string) {
+    if (this.getRegisteredTeams(leagueId))
+      this.fm.FireCustomEvent('serviceregisteredteamsready', leagueId);
+    else
+      this.fm.getRegisteredTeamsAsync(leagueId);
   }
 }

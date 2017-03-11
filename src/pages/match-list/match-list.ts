@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Match } from '../../app/matches/match.model'
-import { MatchService } from '../../app/matches/match.service'
 import { NewGamePage } from "../new-game/new-game";
 import { LeagueInfoPage } from "../league-info/league-info";
 import * as moment from 'moment';
+
+import { PlayerService } from '../../app/players/player.service'
+import { MatchService } from '../../app/matches/match.service'
 
 @Component({
   selector: 'page-match-list',
@@ -13,13 +15,17 @@ import * as moment from 'moment';
 
 export class MatchListPage {
 
-  constructor(public navCtrl: NavController, private matchService: MatchService) {
+  constructor(public navCtrl: NavController, private playerService: PlayerService, private matchService: MatchService) {
   }
 
   ionViewDidLoad() {
   }
 
   goLeaguePage() {
-    this.navCtrl.push(LeagueInfoPage);
+    if (this.playerService.isAuthenticated()) {
+      this.navCtrl.push(LeagueInfoPage);
+    }
+    else
+      this.playerService.checkLogin();
   }
 }

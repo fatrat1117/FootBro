@@ -1,74 +1,86 @@
 page-league-info {
-    
-    ion-navbar{
-        ion-title{
-            text-align: center;
-        }
+  ion-navbar {
+    ion-title {
+      text-align: center;
     }
-
-    .league-info-slides{
-        ion-slides{
-           height: 12rem;
-        }
+  }
+  .card-background-page {
+    ion-card {
+      background-image: url("/assets/img/match/background.png");
+      background-size: cover;
+      background-position: center center;
+      position: relative;
+      text-align: center;
+      height: 12rem;
+      border-radius: 0px;
+      margin: 0px;
     }
-
-    .league-info-content{
-        display: block;
+    .card-title {
+      position: absolute;
+      top: 20%;
+      font-size: 2.0em;
+      width: 100%;
+      font-weight: bold;
+      color: #fff;
+    }
+  }
+    .league-info-slides {
+      ion-slides {
+        height: 12rem;
+      }
+    }
+    .league-info-segments {
+      background-color: #222;
+    }
+    .league-info-content {
+      display: block;
+      position: relative;
+      height: calc(100% - 162px);
+      .info-panel {
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
         position: relative;
-        height: calc(100% - 162px);
-        .info-panel{
-            display: flex;
-            flex-direction: column;
-            overflow: auto;
+        background-color: #444; //rgb(84, 81, 121);
+        height: 100%;
+        .content {
+          margin: 0.5rem;
+        }
+        .application-button {
+          z-index: 99;
+          margin-top: auto;
+          margin-bottom: 0;
+          width: 100%;
+          bottom: 0;
+          button {
+            margin-bottom: auto;
             position: relative;
-            background-color: rgb(84, 81, 121);
-            height: 100%;
-            .content{
-                margin: 0.5rem;
-            }
-            
-            .application-button{
-                z-index: 99;
-                margin-top: auto;
-                margin-bottom: 0;
-                width: 100%;
-                bottom:0;
-             button{
-                margin-bottom: auto;
-                position: relative;
-             }
-            }
-            
+          }
         }
-        
-        .rule-panel{
-                height: 100%;
-                 overflow: auto;
-              background-color: rgb(84, 81, 121);
+      }
+      .rule-panel {
+        height: 100%;
+        overflow: auto;
+        background-color: #444; //rgb(84, 81, 121);
+      }
+      .teams-panel {
+        background-color: #444; //rgb(84, 81, 121);
+        height: 100%;
+        overflow: auto;
+        .team-name {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
-        
-        
-        .teams-panel{
-            background-color: rgb(84, 81, 121);
-               height: 100%;
-                 overflow: auto;
-            .team-name{
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            
-            .team-item{
-                position: relative;
-                .status{
-                    max-width: 4rem;
-                    position: absolute;
-                    left: 0;
-                    top:0;
-                }
-            }
+        .team-item {
+          position: relative;
+          .status {
+            max-width: 4rem;
+            position: absolute;
+            left: 0;
+            top: 0;
+          }
         }
-       
-       
+      }
     }
-}
+  }

@@ -107,7 +107,5 @@ export class MyPlayerPage {
     }
     else
       this.service.checkLogin();
-    ;
   }
- 
 }

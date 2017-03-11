@@ -29,6 +29,7 @@ export class FirebaseManager {
   cachedMatchSquadMap = {};
   _afTournamentList;
   cachedTournamentTablesMap = {};
+  cachedRegisteredTeamsMap = {};
   //cheerleader
   cachedPendingCheerleaders;
   cachedApprovedCheerleaders;
@@ -594,7 +595,11 @@ export class FirebaseManager {
     this.af.database.object(this.playerPublicRef(this.auth.uid)).update({ popularity: 1 });
   }
 
-  //matches
+
+
+
+
+  /****************************** Matches ******************************/
   afMatchDates() {
     return this.af.database.list('/matches/dates');
   }
@@ -772,6 +777,37 @@ export class FirebaseManager {
       });
     }
   }
+
+  registerLeague(teamId: string, leagueId: string) {
+    this.af.database.object(`/tournaments/list/${leagueId}/registered/${teamId}`).set({
+      timestamp: firebase.database.ServerValue.TIMESTAMP
+    })
+  }
+
+  getRegisteredTeamList(leagueId: string) {
+    return this.af.database.list('/tournaments/list/' + leagueId + '/registered',
+      { query: { orderByChild: 'timestamp' } });
+  }
+
+  getRegisteredTeams(leagueId: string) {
+    return this.cachedRegisteredTeamsMap[leagueId];
+  }
+
+  getRegisteredTeamsAsync(leagueId: string) {
+    if (this.getRegisteredTeams(leagueId))
+      this.FireCustomEvent('registeredteamsready', leagueId);
+    else {
+      this.getRegisteredTeamList(leagueId).subscribe(snapshots => {
+        this.cachedRegisteredTeamsMap[leagueId] = snapshots;
+        this.FireCustomEvent('registeredteamsready', leagueId);
+      });
+    }
+  }
+
+
+
+
+
   /****************************** Points ******************************/
   /*
   updatePlayerPoints(targetId: string, usedPoint: number, newPoints: number) {
