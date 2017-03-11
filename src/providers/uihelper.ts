@@ -33,4 +33,17 @@ export class UIHelper {
   dateTimeStringToNumber(time) {
     return moment(time).unix() * 1000;
   }
+
+  squadPercentToPx(squads, width, height) {
+    let results = [];
+    squads.forEach(s => {
+      let r = {
+        x: s.x * width / 100,
+        y: s.y * height / 100,
+      };
+      results.push(r);
+    });
+
+    return results;
+  }
 }

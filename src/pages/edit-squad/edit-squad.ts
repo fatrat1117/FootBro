@@ -2,13 +2,15 @@ import { Component, ViewChild } from "@angular/core";
 import { ViewController, NavParams } from 'ionic-angular';
 import { Match, PREDEFINEDSQUAD } from '../../app/matches/match.model';
 import { PlayerService} from '../../app/players/player.service';
-
+import { UIHelper } from  '../../providers/uihelper'
 @Component({
   selector: 'page-edit-squad',
   templateUrl: 'edit-squad.html'
 })
 export class EditSquadPage {
   @ViewChild('pageHeader') pageHeader;
+  @ViewChild('squadCtrl') squadCtrl;
+
   match: Match;
   squadSettings: any;
   players;
@@ -16,6 +18,7 @@ export class EditSquadPage {
 
   constructor(private viewCtrl: ViewController,
     private playerService: PlayerService,
+    private uiHelper: UIHelper,
     navParams: NavParams) {
     this.match = navParams.get('match');
     this.teamId = navParams.get('teamId');
@@ -50,7 +53,8 @@ export class EditSquadPage {
   }
 
   load11() {
-    this.squadSettings.squads = PREDEFINEDSQUAD['442'];
+    console.log(this.squadCtrl);
+    this.squadSettings.squads = this.uiHelper.squadPercentToPx(PREDEFINEDSQUAD['442'], this.squadCtrl.nativeElement.clientWidth, this.squadCtrl.nativeElement.clientHeight);
     //console.log(this.squadSettings.squads);
   }
  }
