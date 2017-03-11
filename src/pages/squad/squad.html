@@ -7,6 +7,6 @@
 </div>-->
 
 <div class="playerItem" *ngFor="let p of settings.squads" [ngStyle]="{'left.px':p.x, 'top.px': p.y}">
-      <img class="playerImg" src="assets/img/none.png" (touchmove)="onTouchMove($event, p)">
-      <label class="playerName">test</label>
+      <img class="playerImg" [src]="p.photo || 'assets/img/none.png'" (click) = "choosePlayer($event, p)" (touchmove)="onTouchMove($event, p)" >
+      <label class="playerName">{{p.name}}</label>
 </div>

@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ModalController } from 'ionic-angular'
 import { MatchService } from '../../app/matches/match.service'
+import { SearchPlayerPage } from '../search-player/search-player'
+import { PlayerService } from '../../app/players/player.service'
 
 @Component({
   selector: 'page-squad',
@@ -12,17 +15,16 @@ export class SquadPage implements OnInit {
   players = [];
   match;
   squad;
-  constructor(private matchService: MatchService) {
-    // this.players.push({ left: 0, top: 0, photo: 'assets/img/none.png', name: 'lihao' });
-    // this.players.push({ left: 100, top: 100, photo: 'assets/img/none.png', name: 'wang tianyi' });
-    // this.players.push({ left: 200, top: 200, photo: 'assets/img/none.png', name: 'li ji xiang' });
-
+  constructor(private matchService: MatchService,
+    private modal: ModalController,
+    private playerService: PlayerService) {
     document.addEventListener('servicematchsquadready', e => {
       let matchId = e['detail'];
-      if (matchId === this.settings.matchId) {
-        this.match = this.match = this.matchService.getMatch(this.settings.matchId);
-        this.squad = this.settings.teamId === this.match.homeId ? this.match.homeSquad : this.match.awaySquad;
-      }
+      this.match = this.match = this.matchService.getMatch(this.settings.matchId);
+      //f (matchId === this.settings.matchId) {
+      //  this.match = this.match = this.matchService.getMatch(this.settings.matchId);
+      //this.squad = this.settings.teamId === this.match.homeId ? this.match.homeSquad : this.match.awaySquad;
+      //}
     })
   }
 
@@ -48,6 +50,25 @@ export class SquadPage implements OnInit {
   }
 
   ngOnInit() {
-    this.matchService.getMatchSquadAsync(this.settings.matchId);
+    //this.matchService.getMatchSquadAsync(this.settings.matchId);
+  }
+
+  choosePlayer(e, p) {
+    e.stopPropagation();
+    let modal = this.modal.create(SearchPlayerPage, {
+      teamId: this.settings.teamId,
+      showClose: true
+    });
+
+    modal.onDidDismiss(e => {
+      console.log(e);
+      if (e && e.playerId) {
+        p.id = e.playerId;
+        let player = this.playerService.getPlayer(p.id);
+        p.name = player.name;
+        p.photo = player.photo;
+      }
+    });
+    modal.present();
   }
 }

@@ -9,6 +9,8 @@ export class UIHelper {
   private loc : Localization) {
   }
 
+  squadImageSize = 16;
+
   presentToast(msgId, dur = 3000) {
       let msg = this.loc.getString(msgId);
     console.log(msg, this.toastCtrl);
@@ -32,5 +34,18 @@ export class UIHelper {
 
   dateTimeStringToNumber(time) {
     return moment(time).unix() * 1000;
+  }
+
+  squadPercentToPx(squads, width, height) {
+    let results = [];
+    squads.forEach(s => {
+      let r = {
+        x: s.x * width / 100 - this.squadImageSize,
+        y: s.y * height / 100 - this.squadImageSize,
+      };
+      results.push(r);
+    });
+
+    return results;
   }
 }
