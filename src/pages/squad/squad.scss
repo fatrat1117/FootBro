@@ -1,45 +1,67 @@
 page-squad {
-    .squadCtrl {
-     background-image: url('../assets/img/soccer-field-background.jpg');
-    background-size:     cover;                     
-    background-repeat:   no-repeat;
-    background-position: center center;  
-    max-height: 85%; 
-    min-height: 85%; 
-    height: 85%
+  .squadCtrl {
+    background-image: url('../assets/img/soccer-field-background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    max-height: 100%;
+    min-height: 100%;
+    height: 100%
+  }
+  .bench {
+    ion-row {
+      background-color: #41444d;
     }
-    .playerItem {
-        width: 48px;
+  }
+  .bench-button {
+    border-radius: 20px;
+    //background-color: #303136;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 5px auto;
+  }
+  .playerItem {
+    width: 48px;
     height: 48px;
     position: absolute;
-    }
-.playerImg {
+  }
+  .playerImg {
     width: 48px;
     height: 48px;
     border-radius: 50%;
-}
-.playerName {
+  }
+  .playerName {
     color: white;
-}
-
-
-.playerImgSmall {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-}
-.playerNameSmall {
-    color: white;
-    font-size: 0.75rem;
-}
-
-.playersRow {
-  overflow-y: hidden;
-}
-
-.playersDiv {
-  width: 30em;
-    overflow-x: auto;
-    white-space: nowrap;
-}
+    font-weight: bold;
+    margin: 0px;
+    width: 100%;
+    text-align: center;
+  }
+  .playersRow {
+    background-color: #2D2E32;
+    overflow-x: hidden;
+    height: 10%;
+  }
+  .playersDiv {
+    margin-bottom: 10px;
+    text-align: center;
+    max-width: 25%;
+    .image {
+      //width: 35px;
+      //height: 35px;
+      max-width: 4rem;
+      max-height: 4rem;
+      border-radius: 50%;
+    }
+    .name {
+      color: white;
+      font-size: 0.75rem;
+      margin: 0px;
+      //width: 100%;
+      //max-width: 45px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
 }

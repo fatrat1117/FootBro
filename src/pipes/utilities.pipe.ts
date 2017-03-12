@@ -67,7 +67,8 @@ export class GroupThreePipe implements PipeTransform {
 }
 
 @Pipe({
-  name: 'groupNPipe'
+  name: 'groupNPipe',
+  pure: false
 })
 
 export class GroupNPipe implements PipeTransform {
@@ -75,7 +76,6 @@ export class GroupNPipe implements PipeTransform {
   }
 
   transform(arr,numPerRow) {
-    
     let rowArray = [];
     if (arr) {
      let rowItem = [];
