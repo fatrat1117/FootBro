@@ -219,6 +219,6 @@ export class TeamService {
   }
 
   getMatchSquadAsync(teamId, matchId) {
-
+    this.fm.getMatchSquadAsync(teamId, matchId);
   }
 }

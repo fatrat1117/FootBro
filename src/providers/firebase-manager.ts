@@ -403,7 +403,7 @@ export class FirebaseManager {
   }
 
   deleteTeam(id) {
-    this.afTeam(id).remove();      
+    this.afTeam(id).remove();
     this.afTeamPublic(id).remove();
   }
 
@@ -768,13 +768,23 @@ export class FirebaseManager {
   }
 
   getMatchSquad(teamId, matchId) {
-    
+    if (this.cachedSquads.teamId)
+      return this.cachedSquads.teamId.matchId;
+    return null;
   }
 
   getMatchSquadAsync(teamId, matchId) {
-    this.af.database.object(`/team_squads/${teamId}/matches/${matchId}`).subscribe(snapshot => {
+    if (this.getMatchSquad(teamId, matchId)) {
 
-    });
+    }
+    else {
+      this.af.database.object(`/team_squads/${teamId}/matches/${matchId}`).subscribe(snapshot => {
+        this.cachedSquads[teamId] = {};
+        this.cachedSquads[teamId][matchId] = snapshot;
+        console.log(snapshot);
+        
+      });
+    }
   }
 
   getTournamentTableList(id) {

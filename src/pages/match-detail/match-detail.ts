@@ -41,7 +41,6 @@ export class MatchDetailPage {
 
   ionViewDidLoad() {
     this.homeSquadSettings.offsetY = this.pageHeader.nativeElement.clientHeight;
-    this.squadCtrl.loadSquad();
     //console.log(this.pageHeader, this.homeSquadSettings);
     //this.showCurrentPositionInGoogleMap();
   }
@@ -51,6 +50,8 @@ export class MatchDetailPage {
     this.matchSegments = e;
     if ('info' === e)
       this.showCurrentPositionInGoogleMap();
+    else if ('squad' === e) 
+      console.log(this.squadCtrl);   
   }
 
   showCurrentPositionInGoogleMap() {
