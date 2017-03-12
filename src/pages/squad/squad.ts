@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { ModalController } from 'ionic-angular'
+import { ModalController, Content } from 'ionic-angular'
 import { MatchService } from '../../app/matches/match.service'
 import { SearchPlayerPage } from '../search-player/search-player'
 import { PlayerService } from '../../app/players/player.service'
@@ -10,15 +10,16 @@ import { UIHelper } from  '../../providers/uihelper'
   templateUrl: 'squad.html',
 })
 export class SquadPage implements OnInit {
-  @Input()
-  settings;
+  @Input() settings;
 
+  @ViewChild(Content) content: Content;
   @ViewChild('squadCtrl') squadCtrl;
 
   players;
   match;
   squads = [];
   substitutes = [];
+  overflowMode = 'auto';
 
   constructor(private matchService: MatchService,
     private modal: ModalController,
@@ -35,11 +36,11 @@ export class SquadPage implements OnInit {
   }
 
   onTouchStart() {
-
+    this.overflowMode = 'hidden';
   }
 
   onTouchEnd() {
-
+    this.overflowMode = 'auto';
   }
   
   onTouchMove(e, p) {

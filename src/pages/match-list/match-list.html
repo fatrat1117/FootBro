@@ -6,9 +6,31 @@
 
 <ion-content>
   <div class="card-background-page">
-    <ion-card (click) = "goLeaguePage()">
+    <ion-card (click) = "goMatchesPage()">
       <!--img src="assets/img/match/background.png"/-->
       <div class="card-title">{{'FriendlyMatches' | trans}}</div>
+      <div class="card-bottom-banner">
+        <ion-row>
+          <ion-col class="left" center>
+            <ion-row class="title">
+              2017年新加坡足球超级联赛
+            </ion-row>
+            <ion-row class="info">
+              <ion-icon name="md-calendar"></ion-icon>
+              2017-04-10
+            </ion-row>
+          </ion-col>
+          <ion-col class="right">
+            点击报名
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-card>
+  </div>
+  <div class="card-background-page">
+    <ion-card (click) = "goLeaguePage()">
+      <!--img src="assets/img/match/background.png"/-->
+      <div class="card-title">超级联赛</div>
       <div class="card-bottom-banner">
         <ion-row>
           <ion-col class="left" center>

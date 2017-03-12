@@ -224,7 +224,7 @@ export class Localization {
             note: 'Please Note',
             starcard: 'Star Card',
             teamupdateonceandearnpoints: 'Upon confirming, you can not modify the match data again. You team will earn team %d points.',
-            bench: 'Bench'
+            bench: 'Substitutes'
         },
 
         zh: {
