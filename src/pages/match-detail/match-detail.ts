@@ -1,7 +1,7 @@
 import { Component, ViewChild } from "@angular/core";
 import { ViewController, NavParams, ModalController} from 'ionic-angular';
 import { Match } from '../../app/matches/match.model';
-import { EditSquadPage } from '../edit-squad/edit-squad'
+import { EditSquadPage } from '../edit-squad/edit-squad';
 
 declare var google: any;
 
@@ -11,6 +11,7 @@ declare var google: any;
 })
 export class MatchDetailPage {
   @ViewChild('pageHeader') pageHeader;
+  @ViewChild('squadCtrl') squadCtrl;
 
   map;
   match: Match;
@@ -40,8 +41,9 @@ export class MatchDetailPage {
 
   ionViewDidLoad() {
     this.homeSquadSettings.offsetY = this.pageHeader.nativeElement.clientHeight;
+    this.squadCtrl.loadSquad();
     //console.log(this.pageHeader, this.homeSquadSettings);
-    this.showCurrentPositionInGoogleMap();
+    //this.showCurrentPositionInGoogleMap();
   }
 
   segmentChange(e) {

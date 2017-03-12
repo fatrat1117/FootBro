@@ -34,6 +34,14 @@ export class SquadPage implements OnInit {
     // })
   }
 
+  onTouchStart() {
+
+  }
+
+  onTouchEnd() {
+
+  }
+  
   onTouchMove(e, p) {
     if (!this.settings.editMode)
       return;
@@ -43,16 +51,6 @@ export class SquadPage implements OnInit {
       p.y = e.touches[0].pageY - 24 - this.settings.offsetY;
     }
     //console.log(p);
-  }
-
-  panEvent(e, p) {
-    if (!this.settings.editMode)
-      return;
-    //console.log(e);
-    if (e.isFinal === false) {
-      p.left = e.center.x - 24;// - this.left;
-      p.top = e.center.y - 24;
-    }
   }
 
   ngOnInit() {
@@ -139,5 +137,9 @@ export class SquadPage implements OnInit {
 
   removeSubstitute(p) {
     this.substitutes.splice(this.substitutes.indexOf(p), 1);
+  }
+
+  loadSquad() {
+
   }
 }

@@ -26,16 +26,20 @@ export class FirebaseManager {
   matchDatesMap = {};
   matchesByDateMap = {};
   cachedMatchesMap = {};
-  cachedMatchSquadMap = {};
+  //cachedMatchSquadMap = {};
   _afTournamentList;
   cachedTournamentTablesMap = {};
   cachedRegisteredTeamsMap = {};
+  //squads
+  cachedSquads: any = {};
+
   //cheerleader
   cachedPendingCheerleaders;
   cachedApprovedCheerleaders;
   sortedPublicCheerleadersMap = {};
   //admins
   admins;
+
 
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,
@@ -696,20 +700,20 @@ export class FirebaseManager {
     }
   }
 
-  getMatchSquad(matchId) {
-    return this.cachedMatchSquadMap[matchId];
-  }
+  // getMatchSquad(matchId) {
+  //   return this.cachedMatchSquadMap[matchId];
+  // }
 
-  getMatchSquadAsync(matchId) {
-    if (this.getMatchSquad(matchId)) 
-      this.FireCustomEvent('matchsquadready', matchId);
-    else {
-      this.af.database.object('/matchs_squads/' + matchId).subscribe(snapshot=> {
-        this.cachedMatchSquadMap[matchId] = snapshot;
-        this.FireCustomEvent('matchsquadready', matchId);
-      })
-    }
-  }
+  // getMatchSquadAsync(matchId) {
+  //   if (this.getMatchSquad(matchId)) 
+  //     this.FireCustomEvent('matchsquadready', matchId);
+  //   else {
+  //     this.af.database.object('/matchs_squads/' + matchId).subscribe(snapshot=> {
+  //       this.cachedMatchSquadMap[matchId] = snapshot;
+  //       this.FireCustomEvent('matchsquadready', matchId);
+  //     })
+  //   }
+  // }
 
   getTeamMatchesAsync(id) {
     let sub = this.af.database.list('/teams_matches/' + id + '/matches', {
@@ -761,6 +765,16 @@ export class FirebaseManager {
   saveMatchSquad(teamId, matchId, squadObj) {
     console.log('updateMatch', teamId, matchId, squadObj);
     this.af.database.object(`/team_squads/${teamId}/matches/${matchId}`).set(squadObj);
+  }
+
+  getMatchSquad(teamId, matchId) {
+    
+  }
+
+  getMatchSquadAsync(teamId, matchId) {
+    this.af.database.object(`/team_squads/${teamId}/matches/${matchId}`).subscribe(snapshot => {
+
+    });
   }
 
   getTournamentTableList(id) {

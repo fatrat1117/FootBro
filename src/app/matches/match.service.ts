@@ -105,8 +105,8 @@ export class MatchService {
     document.addEventListener('matchsquadready', e=> {
       let matchId = e['detail'];
       let match = this.getMatch(matchId); 
-      match.homeSquad = this.fm.getMatchSquad(matchId)[match.homeId];
-      match.awaySquad = this.fm.getMatchSquad(matchId)[match.awayId];
+      //match.homeSquad = this.fm.getMatchSquad(matchId)[match.homeId];
+      //match.awaySquad = this.fm.getMatchSquad(matchId)[match.awayId];
       this.fm.FireCustomEvent('servicematchsquadready', matchId);
     })
   }
@@ -197,9 +197,9 @@ export class MatchService {
     this.fm.updateMatch(id, matchObj);
   }
 
-  getMatchSquadAsync(matchId) {
-    this.fm.getMatchSquadAsync(matchId);
-  }
+  // getMatchSquadAsync(matchId) {
+  //   this.fm.getMatchSquadAsync(matchId);
+  // }
 
   registerLeague(teamId: string, leagueId: string) {
     this.fm.registerLeague(teamId, leagueId);

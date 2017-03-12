@@ -217,4 +217,8 @@ export class TeamService {
   saveMatchSquad(teamId, matchId, squadObj) {
     this.fm.saveMatchSquad(teamId, matchId, squadObj);
   }
+
+  getMatchSquadAsync(teamId, matchId) {
+
+  }
 }
