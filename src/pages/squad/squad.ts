@@ -24,14 +24,14 @@ export class SquadPage implements OnInit {
     private modal: ModalController,
     private playerService: PlayerService,
     private uiHelper: UIHelper) {
-    document.addEventListener('servicematchsquadready', e => {
-      let matchId = e['detail'];
-      this.match = this.match = this.matchService.getMatch(this.settings.matchId);
-      //f (matchId === this.settings.matchId) {
-      //  this.match = this.match = this.matchService.getMatch(this.settings.matchId);
-      //this.squad = this.settings.teamId === this.match.homeId ? this.match.homeSquad : this.match.awaySquad;
-      //}
-    })
+    // document.addEventListener('servicematchsquadready', e => {
+    //   let matchId = e['detail'];
+    //   this.match = this.match = this.matchService.getMatch(this.settings.matchId);
+    //   //f (matchId === this.settings.matchId) {
+    //   //  this.match = this.match = this.matchService.getMatch(this.settings.matchId);
+    //   //this.squad = this.settings.teamId === this.match.homeId ? this.match.homeSquad : this.match.awaySquad;
+    //   //}
+    // })
   }
 
   onTouchMove(e, p) {
@@ -93,8 +93,21 @@ export class SquadPage implements OnInit {
     modal.present();
   }
 
-  setSquads(squads) {
+  setSquad(squads) {
     this.squads = this.uiHelper.squadPercentToPx(squads, this.squadCtrl.nativeElement.clientWidth, this.squadCtrl.nativeElement.clientHeight);
+  }
+
+  getSquad() {
+    let lineup = this.uiHelper.squadPxToPercent(this.squads, this.squadCtrl.nativeElement.clientWidth, this.squadCtrl.nativeElement.clientHeight);
+    let substitues = [];
+    this.substitutes.forEach(s => {
+      substitues.push(s.id);
+    });
+    let squadObj = {
+      lineup: lineup,
+      substitues: substitues
+    };
+    return squadObj;
   }
 
   addSubstitues() {

@@ -3,6 +3,7 @@ import { ViewController, NavParams } from 'ionic-angular';
 import { Match, PREDEFINEDSQUAD } from '../../app/matches/match.model';
 import { PlayerService} from '../../app/players/player.service';
 import { UIHelper } from  '../../providers/uihelper'
+import { TeamService } from '../../app/teams/team.service'
 
 @Component({
   selector: 'page-edit-squad',
@@ -20,7 +21,8 @@ export class EditSquadPage {
   constructor(private viewCtrl: ViewController,
     private playerService: PlayerService,
     private uiHelper: UIHelper,
-    navParams: NavParams) {
+    navParams: NavParams,
+    private teamService: TeamService) {
     this.match = navParams.get('match');
     this.teamId = navParams.get('teamId');
     this.squadSettings = {};
@@ -54,9 +56,13 @@ export class EditSquadPage {
   }
 
   load11() {
-    console.log(this.squadCtrl);
-    this.squadCtrl.setSquads(PREDEFINEDSQUAD['442']);
-    //this.squadSettings.squads = this.uiHelper.squadPercentToPx(PREDEFINEDSQUAD['442'], this.squadCtrl.nativeElement.clientWidth, this.squadCtrl.nativeElement.clientHeight);
-    //console.log(this.squadSettings.squads);
+    //console.log(this.squadCtrl);
+    this.squadCtrl.setSquad(PREDEFINEDSQUAD['442']);
+  }
+
+  saveSquad() {
+    let squad = this.squadCtrl.getSquad();
+    this.teamService.saveMatchSquad(this.teamId, this.match.id, squad);
+    this.dismiss();
   }
  }

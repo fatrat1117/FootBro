@@ -758,6 +758,11 @@ export class FirebaseManager {
     }
   }
 
+  saveMatchSquad(teamId, matchId, squadObj) {
+    console.log('updateMatch', teamId, matchId, squadObj);
+    this.af.database.object(`/team_squads/${teamId}/matches/${matchId}`).set(squadObj);
+  }
+
   getTournamentTableList(id) {
     return this.af.database.list('/tournaments/list/' + id + '/table',
       { query: { orderByChild: 'rank' } });

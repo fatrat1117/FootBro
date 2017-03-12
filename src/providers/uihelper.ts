@@ -48,4 +48,18 @@ export class UIHelper {
 
     return results;
   }
+
+  squadPxToPercent(squad, width, height) {
+    let results = [];
+    squad.forEach(s => {
+      let r : any = {
+        x: Math.round((s.x + this.squadImageSize) * 100 / width),
+        y: Math.round((s.y + this.squadImageSize) * 100 / height),
+      };
+      if ('id' in s) 
+        r.id = s.id;
+      results.push(r);
+    });
+    return results;
+  }
 }
