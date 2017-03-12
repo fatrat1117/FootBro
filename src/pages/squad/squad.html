@@ -1,18 +1,18 @@
 <ion-grid style="height: 100%">
 <ion-row #squadCtrl class='squadCtrl'>
-<div class="playerItem" *ngFor="let p of squads" [ngStyle]="{'left.px':p.x, 'top.px': p.y}">
-      <img class="playerImg" [src]="p.photo || 'assets/img/none.png'" (click)="choosePlayer($event, p)" (touchmove)="onTouchMove($event, p)">
-      <label class="playerName">{{p.name}}</label>
-</div>
+      <div class="playerItem" *ngFor="let p of squads" [ngStyle]="{'left.px':p.x, 'top.px': p.y}">
+            <img class="playerImg" [src]="p.photo || 'assets/img/none.png'" (click)="choosePlayer($event, p)" (touchmove)="onTouchMove($event, p)">
+            <label class="playerName">{{p.name}}</label>
+      </div>
 </ion-row>
 <ion-row class='playersRow'>
       <div class='playersDiv'>
-            <div *ngFor="let p of players" style="display: inline-block">
-<img class="playerImgSmall" [src]="p.photo" (touchmove)="onTouchMove($event, p)">
+            <button (click)='addSubstitues()'><ion-icon name='add'></ion-icon></button>
+            <div *ngFor="let p of substitutes" style="display: inline-block">
+<img class="playerImgSmall" [src]="p.photo" (click)="removeSubstitute(p)">
 <label class="playerNameSmall">{{p.name}}</label>
 </div>
-<button><ion-icon name='add'></ion-icon></button>
-<button><ion-icon name='remove'></ion-icon></button>
+<!--<button><ion-icon name='remove'></ion-icon></button>-->
 </div>
 </ion-row>
 </ion-grid>

@@ -17,7 +17,8 @@ export class SquadPage implements OnInit {
 
   players;
   match;
-  squads;
+  squads = [];
+  substitutes = [];
 
   constructor(private matchService: MatchService,
     private modal: ModalController,
@@ -58,13 +59,21 @@ export class SquadPage implements OnInit {
     //this.matchService.getMatchSquadAsync(this.settings.matchId);
   }
 
-  choosePlayer(e, p) {
-    e.stopPropagation();
+  getAddedPlayerIds() {
     let existingPlayers = [];
     this.squads.forEach(p => {
       if ('id' in p)
         existingPlayers.push(p.id);
     });
+    this.substitutes.forEach(p => {
+      existingPlayers.push(p.id);
+    })
+    return existingPlayers;
+  }
+
+  choosePlayer(e, p) {
+    e.stopPropagation();
+    let existingPlayers = this.getAddedPlayerIds();
 
     let modal = this.modal.create(SearchPlayerPage, {
       teamId: this.settings.teamId,
@@ -86,5 +95,36 @@ export class SquadPage implements OnInit {
 
   setSquads(squads) {
     this.squads = this.uiHelper.squadPercentToPx(squads, this.squadCtrl.nativeElement.clientWidth, this.squadCtrl.nativeElement.clientHeight);
+  }
+
+  addSubstitues() {
+    let existingPlayers = this.getAddedPlayerIds();
+
+    let modal = this.modal.create(SearchPlayerPage, {
+      teamId: this.settings.teamId,
+      showClose: true,
+      selectPlayersMode: true,
+      selectedIds: existingPlayers
+    });
+
+    modal.onDidDismiss(e => {
+      console.log(e);
+      if (e && e.selectedIds) {
+        for (let id in e.selectedIds) {
+          let player = this.playerService.getPlayer(id);
+          let substitue = {
+            id: id,
+            photo: player.photo,
+            name: player.name,
+          }
+          this.substitutes.push(substitue);
+        }
+      }
+    });
+    modal.present();
+  }
+
+  removeSubstitute(p) {
+    this.substitutes.splice(this.substitutes.indexOf(p), 1);
   }
 }

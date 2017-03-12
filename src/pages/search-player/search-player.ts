@@ -15,6 +15,7 @@ export class SearchPlayerPage {
   showClose: boolean;
   selectPlayersMode = false;
   selectedPlayersMap = {};
+  addedPlayerMap = {};
 
   constructor(private nav: NavController, 
   navParams: NavParams, 
@@ -28,7 +29,7 @@ export class SearchPlayerPage {
     //if (this.selectPlayersMode) {
       let selectedIds = navParams.get('selectedIds');
       selectedIds.forEach(id => {
-        this.selectedPlayersMap[id] = true;
+        this.addedPlayerMap[id] = true;
       });
     //}
     this.totalPlayers = [];
@@ -49,7 +50,7 @@ export class SearchPlayerPage {
     //skip added players
     this.filteredPlayers = this.totalPlayers.slice();
     this.filteredPlayers = this.filteredPlayers.filter((player) => {
-        return !this.selectedPlayersMap[player.id];
+        return !this.addedPlayerMap[player.id];
       });
   }
 
