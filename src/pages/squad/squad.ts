@@ -60,9 +60,16 @@ export class SquadPage implements OnInit {
 
   choosePlayer(e, p) {
     e.stopPropagation();
+    let existingPlayers = [];
+    this.squads.forEach(p => {
+      if ('id' in p)
+        existingPlayers.push(p.id);
+    });
+
     let modal = this.modal.create(SearchPlayerPage, {
       teamId: this.settings.teamId,
-      showClose: true
+      showClose: true,
+      selectedIds: existingPlayers
     });
 
     modal.onDidDismiss(e => {
