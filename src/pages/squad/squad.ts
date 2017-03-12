@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from 'ionic-angular'
 import { MatchService } from '../../app/matches/match.service'
 import { SearchPlayerPage } from '../search-player/search-player'
 import { PlayerService } from '../../app/players/player.service'
+import { UIHelper } from  '../../providers/uihelper'
 
 @Component({
   selector: 'page-squad',
@@ -12,12 +13,16 @@ export class SquadPage implements OnInit {
   @Input()
   settings;
 
-  players = [];
+  @ViewChild('squadCtrl') squadCtrl;
+
+  players;
   match;
-  squad;
+  squads;
+
   constructor(private matchService: MatchService,
     private modal: ModalController,
-    private playerService: PlayerService) {
+    private playerService: PlayerService,
+    private uiHelper: UIHelper) {
     document.addEventListener('servicematchsquadready', e => {
       let matchId = e['detail'];
       this.match = this.match = this.matchService.getMatch(this.settings.matchId);
@@ -70,5 +75,9 @@ export class SquadPage implements OnInit {
       }
     });
     modal.present();
+  }
+
+  setSquads(squads) {
+    this.squads = this.uiHelper.squadPercentToPx(squads, this.squadCtrl.nativeElement.clientWidth, this.squadCtrl.nativeElement.clientHeight);
   }
 }

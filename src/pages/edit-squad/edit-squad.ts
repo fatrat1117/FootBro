@@ -3,6 +3,7 @@ import { ViewController, NavParams } from 'ionic-angular';
 import { Match, PREDEFINEDSQUAD } from '../../app/matches/match.model';
 import { PlayerService} from '../../app/players/player.service';
 import { UIHelper } from  '../../providers/uihelper'
+
 @Component({
   selector: 'page-edit-squad',
   templateUrl: 'edit-squad.html'
@@ -54,7 +55,8 @@ export class EditSquadPage {
 
   load11() {
     console.log(this.squadCtrl);
-    this.squadSettings.squads = this.uiHelper.squadPercentToPx(PREDEFINEDSQUAD['442'], this.squadCtrl.nativeElement.clientWidth, this.squadCtrl.nativeElement.clientHeight);
+    this.squadCtrl.setSquads(PREDEFINEDSQUAD['442']);
+    //this.squadSettings.squads = this.uiHelper.squadPercentToPx(PREDEFINEDSQUAD['442'], this.squadCtrl.nativeElement.clientWidth, this.squadCtrl.nativeElement.clientHeight);
     //console.log(this.squadSettings.squads);
   }
  }

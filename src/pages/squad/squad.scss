@@ -1,8 +1,13 @@
 page-squad {
+    .squadCtrl {
      background-image: url('../assets/img/soccer-field-background.jpg');
     background-size:     cover;                     
     background-repeat:   no-repeat;
     background-position: center center;  
+    max-height: 85%; 
+    min-height: 85%; 
+    height: 85%
+    }
     .playerItem {
         width: 48px;
     height: 48px;
@@ -15,5 +20,26 @@ page-squad {
 }
 .playerName {
     color: white;
+}
+
+
+.playerImgSmall {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+.playerNameSmall {
+    color: white;
+    font-size: 0.75rem;
+}
+
+.playersRow {
+  overflow-y: hidden;
+}
+
+.playersDiv {
+  width: 30em;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 }

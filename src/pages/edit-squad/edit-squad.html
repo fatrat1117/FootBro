@@ -16,17 +16,5 @@
 </ion-header>
 
 <ion-content style="height: 100%">
-<ion-grid style="height: 100%">
-<ion-row #squadCtrl style="max-height: 85%; min-height: 85%; height: 85%">
-<page-squad [settings]="squadSettings" style="width: 100%; height: 100%"></page-squad>
-</ion-row>
-<ion-row class='playersRow'>
-  <div class='playersDiv'>
-    <div *ngFor="let p of players" style="display: inline">
-      <img class="playerImg" [src]="p.photo" (touchmove)="onTouchMove($event, p)">
-      <label class="playerName">{{p.name}}</label>
-    </div>
-  </div>
-</ion-row>
-</ion-grid>
+  <page-squad [settings]="squadSettings" style="width: 100%; height: 100%" #squadCtrl></page-squad>
 </ion-content>

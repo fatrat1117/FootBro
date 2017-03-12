@@ -1,12 +1,23 @@
-  <!--<img id="imgTest" class="playerImg" (pan)="panEvent($event)" (press)="pressEvent($event)" 
-    (tap)="tapEvent($event)" (swipe)="swipeEvent($event)"  src='assets/img/none.png' 
-    [ngStyle]="{'left.px':style.left, 'top.px': style.top}"  (pan)="panEvent($event, p)">-->
-<!--<div class="playerItem" *ngFor="let p of players" [ngStyle]="{'left.px':p.left, 'top.px': p.top}">
-      <img class="playerImg" [src]="p.photo" (touchmove)="onTouchMove($event, p)">
-      <label class="playerName">{{p.name}}</label>
-</div>-->
-
-<div class="playerItem" *ngFor="let p of settings.squads" [ngStyle]="{'left.px':p.x, 'top.px': p.y}">
-      <img class="playerImg" [src]="p.photo || 'assets/img/none.png'" (click) = "choosePlayer($event, p)" (touchmove)="onTouchMove($event, p)" >
+<ion-grid style="height: 100%">
+<ion-row #squadCtrl class='squadCtrl'>
+<div class="playerItem" *ngFor="let p of squads" [ngStyle]="{'left.px':p.x, 'top.px': p.y}">
+      <img class="playerImg" [src]="p.photo || 'assets/img/none.png'" (click)="choosePlayer($event, p)" (touchmove)="onTouchMove($event, p)">
       <label class="playerName">{{p.name}}</label>
 </div>
+</ion-row>
+<ion-row class='playersRow'>
+      <div class='playersDiv'>
+            <div *ngFor="let p of players" style="display: inline-block">
+<img class="playerImgSmall" [src]="p.photo" (touchmove)="onTouchMove($event, p)">
+<label class="playerNameSmall">{{p.name}}</label>
+</div>
+<button><ion-icon name='add'></ion-icon></button>
+<button><ion-icon name='remove'></ion-icon></button>
+</div>
+</ion-row>
+</ion-grid>
+
+<!--<div class="playerItem" *ngFor="let p of settings.squads" [ngStyle]="{'left.px':p.x, 'top.px': p.y}">
+      <img class="playerImg" [src]="p.photo || 'assets/img/none.png'" (click) = "choosePlayer($event, p)" (touchmove)="onTouchMove($event, p)" >
+      <label class="playerName">{{p.name}}</label>
+</div>-->
