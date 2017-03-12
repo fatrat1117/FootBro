@@ -3,7 +3,6 @@ import { NavController, ModalController } from 'ionic-angular';
 import { Match } from '../../app/matches/match.model'
 import { MatchService } from '../../app/matches/match.service'
 import { NewGamePage } from "../new-game/new-game";
-import { LeagueInfoPage } from "../league-info/league-info";
 import * as moment from 'moment';
 
 @Component({
@@ -222,9 +221,5 @@ export class MatchesPage {
     //let class2 = this.isChangeYear(i, date) == true ? "ion-item-changeYear" : "ion-item-unchangeYear"
 
     return class1;
-  }
-
-  showLeagueInfo() {
-    this.navCtrl.push(LeagueInfoPage);
   }
 }

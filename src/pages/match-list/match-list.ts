@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Match } from '../../app/matches/match.model'
 import { NewGamePage } from "../new-game/new-game";
+import { MatchesPage } from '../matches/matches';
 import { LeagueInfoPage } from "../league-info/league-info";
 import * as moment from 'moment';
 
@@ -19,6 +20,10 @@ export class MatchListPage {
   }
 
   ionViewDidLoad() {
+  }
+
+  goMatchesPage() {
+    this.navCtrl.push(MatchesPage);
   }
 
   goLeaguePage() {

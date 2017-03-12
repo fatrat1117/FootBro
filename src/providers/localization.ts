@@ -224,7 +224,8 @@ export class Localization {
             note: 'Please Note',
             starcard: 'Star Card',
             teamupdateonceandearnpoints: 'Upon confirming, you can not modify the match data again. You team will earn team %d points.',
-            bench: 'Substitutes'
+            bench: 'Substitutes',
+            schedule: 'Schedule'
         },
 
         zh: {
@@ -430,7 +431,8 @@ export class Localization {
             note: '请注意',
             starcard: '球星卡',
             teamupdateonceandearnpoints: '确认之后你就不能够再修改比赛数据. 你的球队会得到%d积分',
-            bench: '替补席'
+            bench: '替补席',
+            schedule: '赛程表'
         }
     }
 }

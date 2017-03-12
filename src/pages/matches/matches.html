@@ -1,24 +1,13 @@
 <ion-header>
   <ion-navbar>
-    <ion-title style="padding-left:12px; padding-right:12px">
-      <ion-select style="max-width: 100%;" text-center [(ngModel)]="selectedId" (ngModelChange)="onSelectionChange()" [okText]="'OK' | trans" [cancelText]="'Cancel' | trans">
-        <ion-option value="all">{{ 'FriendlyMatches' | trans }}</ion-option>
-        <ion-option *ngFor="let league of afTournamentList | async" [value]="league.$key">{{ league.name }}</ion-option>
-      </ion-select>
-    </ion-title>
-    <!-->
-    <ion-buttons right>
-      <button (click)="enterNewGame()" ion-button icon-only clear>
-        <ion-icon name="md-add"></ion-icon>
-      </button>
-    </ion-buttons>
-    <-->
-    <ion-buttons left>
-      <button (click)="showLeagueInfo()" ion-button icon-only clear>
-        <ion-icon name="md-bug" color="danger"></ion-icon>
+    <ion-title>{{ 'schedule' | trans }}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="enterNewGame()">
+        <ion-icon name="md-add" color="primary"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
+  <!-->
   <ion-toolbar>
     <ion-segment *ngIf="selectedId == 'all'" [(ngModel)]="selectedInfo" mode="md">
       <ion-segment-button value="schedule">
@@ -35,11 +24,14 @@
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
+  <-->
 </ion-header>
 <ion-content no-bounce>
+  <!-->
   <ion-fab top right edge>
     <button ion-fab mini (click)="enterNewGame()"><ion-icon color="dark" name="md-add"></ion-icon></button>
   </ion-fab>
+  <-->
   <div [ngSwitch]="selectedInfo" [ngStyle]="{'height':'100%'}">
     <!-- schedule -->
     <div *ngSwitchCase="'schedule'" [ngStyle]="{'height':'100%'}">
