@@ -286,16 +286,18 @@ export class FirebaseManager {
   getTeamAsync(teamId) {
     if (!this.cachedTeamsMap[teamId]) {
       this.af.database.object(`/teams/${teamId}`).subscribe(snapshot => {
-        //console.log(snapshot);
-        if ('$value' in snapshot && null == snapshot.$value) {
-          //team deleted
-          delete this.cachedTeamsMap[teamId];
-        }
-        else {
-          if ('img/none.png' === snapshot['basic-info'].logo)
-            snapshot['basic-info'].logo = 'assets/img/none.png';
-          this.cachedTeamsMap[teamId] = snapshot;
-          this.FireCustomEvent('teamready', teamId);
+        if (snapshot.$exists()) {
+          //console.log(snapshot);
+          if ('$value' in snapshot && null == snapshot.$value) {
+            //team deleted
+            delete this.cachedTeamsMap[teamId];
+          }
+          else {
+            if ('img/none.png' === snapshot['basic-info'].logo)
+              snapshot['basic-info'].logo = 'assets/img/none.png';
+            this.cachedTeamsMap[teamId] = snapshot;
+            this.FireCustomEvent('teamready', teamId);
+          }
         }
       })
     }
@@ -505,20 +507,22 @@ export class FirebaseManager {
     }
     else {
       this.af.database.object(`/players/${id}`).subscribe(snapshot => {
-        if (snapshot && snapshot['basic-info']) {
-          if ('joinTime' in snapshot) {
-            if ('img/none.png' === snapshot['basic-info'].photoURL)
-              snapshot['basic-info'].photoURL = 'assets/img/none.png';
-            this.cachedPlayersMap[id] = snapshot;
-            this.FireCustomEvent('playerready', id);
+        if (snapshot.$exists()) {
+          if (snapshot['basic-info']) {
+            if ('joinTime' in snapshot) {
+              if ('img/none.png' === snapshot['basic-info'].photoURL)
+                snapshot['basic-info'].photoURL = 'assets/img/none.png';
+              this.cachedPlayersMap[id] = snapshot;
+              this.FireCustomEvent('playerready', id);
+            }
+            else {
+              //fix all missing properties
+              this.af.database.object(`/players/${id}`).update({ joinTime: firebase.database.ServerValue.TIMESTAMP });
+            }
           }
-          else {
-            //fix all missing properties
-            this.af.database.object(`/players/${id}`).update({ joinTime: firebase.database.ServerValue.TIMESTAMP });
-          }
+          else
+            this.FireCustomEvent('playernotregistered', id);
         }
-        else
-          this.FireCustomEvent('playernotregistered', id);
       });
     }
   }
@@ -694,8 +698,10 @@ export class FirebaseManager {
       this.FireCustomEvent('matchready', id);
     else {
       this.afMatch(id).subscribe(snapshot => {
-        this.cachedMatchesMap[id] = snapshot;
-        this.FireCustomEvent('matchready', id);
+        if (snapshot.$exists()) {
+          this.cachedMatchesMap[id] = snapshot;
+          this.FireCustomEvent('matchready', id);
+        }
       });
     }
   }
@@ -768,21 +774,26 @@ export class FirebaseManager {
   }
 
   getMatchSquad(teamId, matchId) {
-    if (this.cachedSquads.teamId)
-      return this.cachedSquads.teamId.matchId;
+    if (this.cachedSquads[teamId])
+      return this.cachedSquads[teamId][matchId];
     return null;
   }
 
   getMatchSquadAsync(teamId, matchId) {
+    let detail = {
+      teamId: teamId,
+      matchId: matchId
+    };
     if (this.getMatchSquad(teamId, matchId)) {
-
+      this.FireCustomEvent('matchsquadready', detail);
     }
     else {
       this.af.database.object(`/team_squads/${teamId}/matches/${matchId}`).subscribe(snapshot => {
-        this.cachedSquads[teamId] = {};
-        this.cachedSquads[teamId][matchId] = snapshot;
-        console.log(snapshot);
-        
+        if (snapshot.$exists()) {
+          this.cachedSquads[teamId] = {};
+          this.cachedSquads[teamId][matchId] = snapshot;
+          this.FireCustomEvent('matchsquadready', detail);
+        }
       });
     }
   }

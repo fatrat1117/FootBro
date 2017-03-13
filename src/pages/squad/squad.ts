@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ModalController, Content } from 'ionic-angular'
 import { MatchService } from '../../app/matches/match.service'
+import { TeamService} from '../../app/teams/team.service'
 import { SearchPlayerPage } from '../search-player/search-player'
 import { PlayerService } from '../../app/players/player.service'
 import { UIHelper } from  '../../providers/uihelper'
@@ -16,7 +17,6 @@ export class SquadPage implements OnInit {
   @ViewChild('squadCtrl') squadCtrl;
 
   players;
-  match;
   squads = [];
   substitutes = [];
   overflowMode = 'auto';
@@ -24,15 +24,19 @@ export class SquadPage implements OnInit {
   constructor(private matchService: MatchService,
     private modal: ModalController,
     private playerService: PlayerService,
-    private uiHelper: UIHelper) {
-    // document.addEventListener('servicematchsquadready', e => {
-    //   let matchId = e['detail'];
-    //   this.match = this.match = this.matchService.getMatch(this.settings.matchId);
-    //   //f (matchId === this.settings.matchId) {
-    //   //  this.match = this.match = this.matchService.getMatch(this.settings.matchId);
-    //   //this.squad = this.settings.teamId === this.match.homeId ? this.match.homeSquad : this.match.awaySquad;
-    //   //}
-    // })
+    private uiHelper: UIHelper,
+    private teamService: TeamService) {
+    document.addEventListener('servicematchsquadready', e => {
+      let detail = e['detail'];
+      if (detail.teamId === this.settings.teamId && detail.matchId === this.settings.matchId) {
+        let squad = this.teamService.getMatchSquad(detail.teamId, detail.matchId);
+        console.log(squad);
+      // this.match = this.match = this.matchService.getMatch(this.settings.matchId);
+      // //f (matchId === this.settings.matchId) {
+      // //  this.match = this.match = this.matchService.getMatch(this.settings.matchId);
+      // //this.squad = this.settings.teamId === this.match.homeId ? this.match.homeSquad : this.match.awaySquad;
+      }
+    })
   }
 
   onTouchStart() {
@@ -55,6 +59,7 @@ export class SquadPage implements OnInit {
   }
 
   ngOnInit() {
+    this.loadSquad();
     //this.matchService.getMatchSquadAsync(this.settings.matchId);
   }
 
@@ -141,6 +146,6 @@ export class SquadPage implements OnInit {
   }
 
   loadSquad() {
-
+    this.teamService.getMatchSquadAsync(this.settings.teamId, this.settings.matchId);
   }
 }

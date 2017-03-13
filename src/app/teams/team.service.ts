@@ -25,7 +25,7 @@ export class TeamService {
         teamData.points = team.points;
         if (team.players)
           teamData.totalPlayers = Object.keys(team.players).length;
-        else 
+        else
           teamData.totalPlayers = 0;
 
         let teamPublic = this.fm.getTeamPublic(teamId);
@@ -76,18 +76,15 @@ export class TeamService {
       this.fm.FireCustomEvent('serviceteamstatsdataready', teamId);
     });
 
-    // document.addEventListener('allpublicteamsready', e => {
-    //   let allPublicTeams = this.fm.getAllPublicTeams();
-    //   this.allTeams = [];
-    //   allPublicTeams.forEach(publicTeam => {
-    //     let id = publicTeam.$key;
-    //     let team = this.findOrCreateTeam(id);
-    //     this.allTeams.push(team);
-    //     this.fm.getTeamAsync(id);
-    //   });
-
-    //   this.fm.FireEvent('serviceallteamsready');
-    // });
+    document.addEventListener('matchsquadready', e => {
+      let detail = e['detail'];
+      let squad = this.fm.getMatchSquad(detail.teamId, detail.matchId);
+      let team = this.getTeam(detail.teamId);
+      if (team) {
+        team.matchSquads[detail.matchId] = squad;
+        this.fm.FireCustomEvent('servicematchsquadready', detail);
+      }
+    });
 
     document.addEventListener('playerready', e => {
       if (this.bRefreshPlayerTeams) {
@@ -95,7 +92,7 @@ export class TeamService {
         let player = this.fm.getPlayer(id);
         if (this.getPlayerTeams(id))
           this.playerTeamsMap[id].splice(0);
-        else 
+        else
           this.playerTeamsMap[id] = [];
         for (let tId in player.teams) {
           let teamExist = this.isTeamExist(tId);
@@ -162,27 +159,27 @@ export class TeamService {
 
   getAllTeams() {
     let allPublicTeams = this.fm.getAllPublicTeams();
-      this.allTeams = [];
-      allPublicTeams.forEach(publicTeam => {
-        let id = publicTeam.$key;
-        let teamNotCached = !this.teamDataMap[id]; 
-        let team = this.findOrCreateTeam(id);
-        this.allTeams.push(team);
-        if (teamNotCached)
-          this.fm.getTeamAsync(id);
-      });
+    this.allTeams = [];
+    allPublicTeams.forEach(publicTeam => {
+      let id = publicTeam.$key;
+      let teamNotCached = !this.teamDataMap[id];
+      let team = this.findOrCreateTeam(id);
+      this.allTeams.push(team);
+      if (teamNotCached)
+        this.fm.getTeamAsync(id);
+    });
 
     return this.allTeams;
   }
 
- // getAllTeamsAsync() {
- //   this.fm.getAllPublicTeamsAsync();
-    // if (this.getAllTeams()) {
-    //   this.fm.FireEvent('allteamsready');
-    // }
-    // else 
-    //   this.fm.getAllPublicTeams();
- // }
+  // getAllTeamsAsync() {
+  //   this.fm.getAllPublicTeamsAsync();
+  // if (this.getAllTeams()) {
+  //   this.fm.FireEvent('allteamsready');
+  // }
+  // else 
+  //   this.fm.getAllPublicTeams();
+  // }
 
   getPlayerTeams(id) {
     return this.playerTeamsMap[id];
@@ -203,7 +200,7 @@ export class TeamService {
   }
 
   isTeamExist(id) {
-    return this.teamDataMap[id] && 'id' in this.teamDataMap[id]; 
+    return this.teamDataMap[id] && 'id' in this.teamDataMap[id];
   }
 
   updateTeamName(id: string, name: string) {
@@ -218,7 +215,20 @@ export class TeamService {
     this.fm.saveMatchSquad(teamId, matchId, squadObj);
   }
 
+  getMatchSquad(teamId, matchId) {
+    return this.getTeam(teamId).matchSquads[matchId];
+  }
+
   getMatchSquadAsync(teamId, matchId) {
-    this.fm.getMatchSquadAsync(teamId, matchId);
+    if (this.getMatchSquad(teamId, matchId)) {
+      let detail = {
+        teamId: teamId,
+        matchId: matchId
+      };
+      this.fm.FireCustomEvent('servicematchsquadready', detail);
+    }
+    else {
+      this.fm.getMatchSquadAsync(teamId, matchId);
+    }
   }
 }

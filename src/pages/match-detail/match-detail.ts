@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, ViewChild} from "@angular/core";
 import { ViewController, NavParams, ModalController} from 'ionic-angular';
 import { Match } from '../../app/matches/match.model';
 import { EditSquadPage } from '../edit-squad/edit-squad';
@@ -9,9 +9,9 @@ declare var google: any;
   selector: 'page-match-detail',
   templateUrl: 'match-detail.html'
 })
-export class MatchDetailPage {
+export class MatchDetailPage{
   @ViewChild('pageHeader') pageHeader;
-  @ViewChild('squadCtrl') squadCtrl;
+  //@ViewChild('squadCtrl') squadCtrl;
 
   map;
   match: Match;
@@ -31,27 +31,22 @@ export class MatchDetailPage {
     this.viewCtrl.dismiss();
   }
 
-  openHere() {
-    alert("here");
-  }
-
-  openDelete() {
-    alert("delete");
-  }
-
   ionViewDidLoad() {
     this.homeSquadSettings.offsetY = this.pageHeader.nativeElement.clientHeight;
-    //console.log(this.pageHeader, this.homeSquadSettings);
-    //this.showCurrentPositionInGoogleMap();
   }
 
   segmentChange(e) {
     //console.log(e);
     this.matchSegments = e;
-    if ('info' === e)
-      this.showCurrentPositionInGoogleMap();
-    else if ('squad' === e) 
-      console.log(this.squadCtrl);   
+    if ('info' === e) {
+    //  this.showCurrentPositionInGoogleMap();
+    }
+    else if ('squad' === e) {
+      // let self = this;
+      // setTimeout(function() {
+      //   console.log(self.squadCtrl);
+      // }, 2000);
+    }   
   }
 
   showCurrentPositionInGoogleMap() {

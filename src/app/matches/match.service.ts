@@ -101,14 +101,6 @@ export class MatchService {
       this.registeredTeamsMap[id] = registeredTeams;
       this.fm.FireCustomEvent('serviceregisteredteamsready', id);
     });
-
-    document.addEventListener('matchsquadready', e=> {
-      let matchId = e['detail'];
-      let match = this.getMatch(matchId); 
-      //match.homeSquad = this.fm.getMatchSquad(matchId)[match.homeId];
-      //match.awaySquad = this.fm.getMatchSquad(matchId)[match.awayId];
-      this.fm.FireCustomEvent('servicematchsquadready', matchId);
-    })
   }
 
   copyParticipants(target, source) {
