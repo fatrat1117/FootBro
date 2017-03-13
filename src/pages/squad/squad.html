@@ -1,6 +1,6 @@
 <ion-grid style="height: 85%" no-padding>
   <ion-row #squadCtrl class='squadCtrl'>
-    <div class="playerItem" *ngFor="let p of squads" [ngStyle]="{'left.px':p.x, 'top.px': p.y}">
+    <div class="playerItem" *ngFor="let p of lineup" [ngStyle]="{'left.px':p.x, 'top.px': p.y}">
       <img class="playerImg" [src]="p.photo || 'assets/img/none.png'" (click)="choosePlayer($event, p)" (touchstart)="onTouchStart()"
         (touchend)="onTouchEnd()" (touchmove)="onTouchMove($event, p)">
       <p class="playerName">{{p.name}}</p>
@@ -10,7 +10,7 @@
 
 <ion-grid *ngIf="settings.editMode" class="bench" style="height: 15%" no-padding>
   <ion-row class="button-row" center>
-    <button class="bench-button" ion-button icon-right clear small (click)='addSubstitues()'>
+    <button class="bench-button" ion-button icon-right clear small (click)='addSubstitutes()'>
       {{ 'bench' | trans}}
       <ion-icon name="md-add-circle" color="primary"></ion-icon>
     </button>

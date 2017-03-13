@@ -17,7 +17,7 @@ export class SquadPage implements OnInit {
   @ViewChild('squadCtrl') squadCtrl;
 
   players;
-  squads = [];
+  lineup = [];
   substitutes = [];
   overflowMode = 'auto';
 
@@ -30,14 +30,37 @@ export class SquadPage implements OnInit {
       let detail = e['detail'];
       if (detail.teamId === this.settings.teamId && detail.matchId === this.settings.matchId) {
         let squad = this.teamService.getMatchSquad(detail.teamId, detail.matchId);
-        console.log(squad);
-      // this.match = this.match = this.matchService.getMatch(this.settings.matchId);
-      // //f (matchId === this.settings.matchId) {
-      // //  this.match = this.match = this.matchService.getMatch(this.settings.matchId);
-      // //this.squad = this.settings.teamId === this.match.homeId ? this.match.homeSquad : this.match.awaySquad;
+        //console.log(squad);
+        this.setSquad(squad.lineup);
+        console.log(this.lineup);
+        this.lineup.forEach(l => {
+          if ('id' in l) {
+            let player = this.playerService.getPlayer(l.id);
+            console.log(player);
+            l.photo = player.photo;
+            l.name = player.name;
+          }
+        });
+        
+        if (squad.substitutes) {
+        squad.substitutes.forEach(s => {
+          let id = s.id;
+          this.addSubstitute(id);
+        });
+        }
       }
     })
   }
+
+  addSubstitute(id) {
+    let player = this.playerService.getPlayer(id);
+          let substitue = {
+            id: id,
+            photo: player.photo,
+            name: player.name,
+          }
+          this.substitutes.push(substitue);
+  } 
 
   onTouchStart() {
     this.overflowMode = 'hidden';
@@ -65,7 +88,7 @@ export class SquadPage implements OnInit {
 
   getAddedPlayerIds() {
     let existingPlayers = [];
-    this.squads.forEach(p => {
+    this.lineup.forEach(p => {
       if ('id' in p)
         existingPlayers.push(p.id);
     });
@@ -97,24 +120,25 @@ export class SquadPage implements OnInit {
     modal.present();
   }
 
-  setSquad(squads) {
-    this.squads = this.uiHelper.squadPercentToPx(squads, this.squadCtrl.nativeElement.clientWidth, this.squadCtrl.nativeElement.clientHeight);
+  setSquad(squad) {
+    if (squad)
+      this.lineup = this.uiHelper.squadPercentToPx(squad, this.squadCtrl.nativeElement.clientWidth, this.squadCtrl.nativeElement.clientHeight);
   }
 
   getSquad() {
-    let lineup = this.uiHelper.squadPxToPercent(this.squads, this.squadCtrl.nativeElement.clientWidth, this.squadCtrl.nativeElement.clientHeight);
-    let substitues = [];
+    let lineup = this.uiHelper.squadPxToPercent(this.lineup, this.squadCtrl.nativeElement.clientWidth, this.squadCtrl.nativeElement.clientHeight);
+    let substitutes = [];
     this.substitutes.forEach(s => {
-      substitues.push(s.id);
+      substitutes.push(s.id);
     });
     let squadObj = {
       lineup: lineup,
-      substitues: substitues
+      substitutes: substitutes
     };
     return squadObj;
   }
 
-  addSubstitues() {
+  addSubstitutes() {
     let existingPlayers = this.getAddedPlayerIds();
 
     let modal = this.modal.create(SearchPlayerPage, {
@@ -128,13 +152,7 @@ export class SquadPage implements OnInit {
       console.log(e);
       if (e && e.selectedIds) {
         for (let id in e.selectedIds) {
-          let player = this.playerService.getPlayer(id);
-          let substitue = {
-            id: id,
-            photo: player.photo,
-            name: player.name,
-          }
-          this.substitutes.push(substitue);
+          this.addSubstitute(id);
         }
       }
     });
