@@ -36,9 +36,10 @@ export class UIHelper {
     return moment(time).unix() * 1000;
   }
 
-  squadPercentToPx(squads, width, height) {
+  squadPercentToPx(squad, width, height) {
+    console.log('squadPercentToPx', squad, width, height);
     let results = [];
-    squads.forEach(s => {
+    squad.forEach(s => {
       let r : any = {
         x: s.x * width / 100 - this.squadImageSize,
         y: s.y * height / 100 - this.squadImageSize,
@@ -52,6 +53,7 @@ export class UIHelper {
   }
 
   squadPxToPercent(squad, width, height) {
+    console.log('squadPxToPercent', squad, width, height);
     let results = [];
     squad.forEach(s => {
       let r : any = {

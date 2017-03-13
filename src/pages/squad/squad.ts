@@ -123,11 +123,13 @@ export class SquadPage implements OnInit {
   }
 
   setSquad(squad) {
+    console.log(this.squadCtrl);
     if (squad)
       this.lineup = this.uiHelper.squadPercentToPx(squad, this.squadCtrl.nativeElement.clientWidth, this.squadCtrl.nativeElement.clientHeight);
   }
 
   getSquad() {
+    console.log(this.squadCtrl);
     let lineup = this.uiHelper.squadPxToPercent(this.lineup, this.squadCtrl.nativeElement.clientWidth, this.squadCtrl.nativeElement.clientHeight);
     let substitutes = [];
     this.substitutes.forEach(s => {
