@@ -6,9 +6,17 @@ declare var Wechat: any;
 @Component({
   selector: 'sb-share-button',
   template: `
-  <button ion-button icon-only (click)="showShare()">
-    <ion-icon name="md-share" color="primary"></ion-icon>
-  </button>
+  <ion-fab bottom right>
+    <button ion-fab mini color="light"><ion-icon name="md-share"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button ion-fab color="light" (click)="onFaceBookClick()">
+        <ion-icon name="logo-facebook" color="fBlue"></ion-icon>
+      </button>
+      <button ion-fab color="light" (click)="onWeChatClick()">
+        <img src="assets/icon/wechat.png">
+      </button>
+    </ion-fab-list>
+  </ion-fab>
   `
 })
 
@@ -70,8 +78,4 @@ export class SbShareButtonComponent {
     });
   }
 
-  showShare() {
-    console.log("share");
-    
-  }
 }

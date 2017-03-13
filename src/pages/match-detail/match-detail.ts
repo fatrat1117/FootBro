@@ -1,5 +1,5 @@
-import { Component, ViewChild} from "@angular/core";
-import { ViewController, NavParams, ModalController} from 'ionic-angular';
+import { Component, ViewChild } from "@angular/core";
+import { ViewController, NavParams, ModalController } from 'ionic-angular';
 import { Match } from '../../app/matches/match.model';
 import { EditSquadPage } from '../edit-squad/edit-squad';
 
@@ -17,6 +17,7 @@ export class MatchDetailPage{
   match: Match;
   matchSegments = 'info';
   homeSquadSettings: any;
+  showShareFooter = false;
 
   constructor(private viewCtrl: ViewController,
     private modal: ModalController,
@@ -106,4 +107,11 @@ export class MatchDetailPage{
       this.modal.create(EditSquadPage, {match: this.match, teamId: teamId}).present();
     }
   }
+
+  showShare() {
+    this.showShareFooter = true;
+
+  }
+
+  
 }

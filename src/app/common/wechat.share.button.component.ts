@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Screenshot, SocialSharing } from 'ionic-native';
 
 declare var Wechat: any;
@@ -7,12 +7,14 @@ declare var Wechat: any;
   selector: 'sb-wechat-share-button',
   template: `
   <button ion-fab mini color="light" (click)="onWeChatClick()">
-    <img style="max-width: 3rem;" src="assets/icon/wechat.png">
+    <img style="max-width: 3rem;" [src]=" type == 0 ? 'assets/icon/wechat.png' : 'assets/icon/moments.png'">
   </button>
   `
 })
 
 export class SbWechatShareButtonComponent {
+  @Input() type: number; //0: 对话 1: 朋友圈
+  @Input() msg: string
   constructor() {
   }
 
@@ -33,7 +35,7 @@ export class SbWechatShareButtonComponent {
       return false;
     }
     var params = {
-      scene: 1//0：对话 1：朋友圈
+      scene: this.type
     };
 
     params['message'] = {
@@ -41,8 +43,8 @@ export class SbWechatShareButtonComponent {
       description: "这是图片描述",
       mediaTagName: "媒体标签",
       messageExt: "消息字段",
-      messageAction: "<action>dotalist</action>",//消息行为
-      media: {}//媒体内容
+      messageAction: "<action>Intent.ACTION_SEND</action>",//消息行为
+      media: {picAddress}//媒体内容
     };
     params['message'].media.type = Wechat.Type.IMAGE;//媒体类型
     params['message'].media.image = picAddress;//图片文件地址
