@@ -20,6 +20,7 @@ export class SquadPage implements OnInit {
   lineup = [];
   substitutes = [];
   overflowMode = 'auto';
+  uiPlayerMap = {};
 
   constructor(private matchService: MatchService,
     private modal: ModalController,
@@ -33,25 +34,37 @@ export class SquadPage implements OnInit {
         this.setSquad(squad.lineup);
         this.lineup.forEach(l => {
           if ('id' in l) {
-            let player = this.playerService.findOrCreatePlayerAndPull(l.id);
-            l.photo = player.photo;
-            l.name = player.name;
+            this.uiPlayerMap[l.id] = l;
+            let player = this.playerService.getPlayerAsync(l.id);
+            //l.photo = player.photo;
+            //l.name = player.name;
           }
         });
         this.substitutes.splice(0);
         if (squad.substitutes) {
           squad.substitutes.forEach(id => {
-              let player = this.playerService.findOrCreatePlayerAndPull(id);
-              let substitue = {
+            let substitue = {
                 id: id,
-                photo: player.photo,
-                name: player.name,
+                // photo: player.photo,
+                // name: player.name,
               }
+              this.uiPlayerMap[id] = substitue;
               this.substitutes.push(substitue);
+              let player = this.playerService.getPlayerAsync(id);
           });
         }
       }
-    })
+    });
+
+    document.addEventListener('serviceplayerready', e => {
+      let playerId = e['detail'];
+      let uiPlayer = this.uiPlayerMap[playerId];
+      if (uiPlayer) {
+        let player = this.playerService.getPlayer(playerId);
+        uiPlayer.photo = player.photo;
+        uiPlayer.name = player.name;
+      }
+    });
   }
 
   addSubstitute(id) {
