@@ -682,7 +682,7 @@ export class FirebaseManager {
 
       this.matchesByDateMap[date].forEach(snapshot => {
         //monitor match change
-        this.getMatchAsync(snapshot.$key);
+        //this.getMatchAsync(snapshot.$key);
       });
       //this.matchesByDateMap[date] = matches;
       this.FireCustomEvent('matchesbydateready', date);

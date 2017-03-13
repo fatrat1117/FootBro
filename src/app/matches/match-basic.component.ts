@@ -34,7 +34,7 @@ export class SbMatchBasicComponent implements OnInit {
         this.match = this.matchService.getMatch(id);
         //console.log(this.match);
       }
-    })
+    });
 
     this.matchService.getMatchAsync(this.matchObj.$key);
   }

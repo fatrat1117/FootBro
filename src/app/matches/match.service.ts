@@ -31,19 +31,6 @@ export class MatchService {
       match.date = fmMatch.date;
       match.time = fmMatch.time;
 
-      // let home, away;
-      // if (this.teamsMap[match.homeId])
-      //   home = this.teamService.findOrCreateTeam(match.homeId);
-      // else {
-      //   home = new Team();
-      //   this.teamsMap[match.homeId] = home;
-      // }
-      // if (this.teamsMap[match.awayId])
-      //   away = this.teamsMap[match.awayId];
-      // else {
-      //   away = new Team();
-      //   this.teamsMap[match.awayId] = away;
-      // }
       match.home = this.teamService.findOrCreateTeam(match.homeId);
       this.fm.getTeamAsync(match.homeId);
       match.away = this.teamService.findOrCreateTeam(match.awayId);
@@ -54,9 +41,8 @@ export class MatchService {
       match.location.name = fmMatch.locationName;
       match.location.address = fmMatch.locationAddress;
 
-      this.copyParticipants(match.homeParticipants, fmMatch.homeParticipants);
-      this.copyParticipants(match.awayParticipants, fmMatch.awayParticipants);
-
+      //this.copyParticipants(match.homeParticipants, fmMatch.homeParticipants);
+      //this.copyParticipants(match.awayParticipants, fmMatch.awayParticipants);
       //console.log(match);
       this.fm.FireCustomEvent('servicematchready', id);
     });
