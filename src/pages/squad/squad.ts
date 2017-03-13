@@ -97,8 +97,8 @@ export class SquadPage implements OnInit {
   }
 
   ngOnInit() {
-    this.loadSquad();
-    //this.matchService.getMatchSquadAsync(this.settings.matchId);
+    if (!this.settings.editMode)
+      this.loadSquad();
   }
 
   getAddedPlayerIds() {
@@ -136,11 +136,11 @@ export class SquadPage implements OnInit {
   }
 
   setSquad(squad) {
-    console.log(this.squadCtrl);
+    console.log('setSquad', this.squadCtrl);
     if (squad)
       this.lineup = this.uiHelper.squadPercentToPx(squad, this.squadCtrl.nativeElement.clientWidth, this.squadCtrl.nativeElement.clientHeight);
   }
-
+  
   getSquad() {
     console.log(this.squadCtrl);
     let lineup = this.uiHelper.squadPxToPercent(this.lineup, this.squadCtrl.nativeElement.clientWidth, this.squadCtrl.nativeElement.clientHeight);

@@ -15,7 +15,6 @@ export class EditSquadPage {
 
   match: Match;
   squadSettings: any;
-  players;
   teamId;
 
   constructor(private viewCtrl: ViewController,
@@ -36,19 +35,9 @@ export class EditSquadPage {
   }
 
   ionViewDidLoad() {
-    document.addEventListener('serviceteamplayersready', e => {
-      let teamId = e['detail'];
-      if (teamId === this.teamId) {
-        this.players = this.playerService.getTeamPlayers(teamId);
-      }
-    })
     this.squadSettings.offsetY = this.pageHeader.nativeElement.clientHeight;
-    this.playerService.getTeamPlayersAsync(this.teamId);
-  }
-
-  onTouchMove(e, p) {
-    console.log(e, p);
-    
+    console.log('editsquadloaded', this.squadCtrl);
+    //this.squadCtrl.loadSquad();
   }
 
   load7() {
