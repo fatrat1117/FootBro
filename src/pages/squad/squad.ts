@@ -1,10 +1,10 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ModalController, Content } from 'ionic-angular'
 import { MatchService } from '../../app/matches/match.service'
-import { TeamService} from '../../app/teams/team.service'
+import { TeamService } from '../../app/teams/team.service'
 import { SearchPlayerPage } from '../search-player/search-player'
 import { PlayerService } from '../../app/players/player.service'
-import { UIHelper } from  '../../providers/uihelper'
+import { UIHelper } from '../../providers/uihelper'
 
 @Component({
   selector: 'page-squad',
@@ -30,23 +30,25 @@ export class SquadPage implements OnInit {
       let detail = e['detail'];
       if (detail.teamId === this.settings.teamId && detail.matchId === this.settings.matchId) {
         let squad = this.teamService.getMatchSquad(detail.teamId, detail.matchId);
-        //console.log(squad);
         this.setSquad(squad.lineup);
-        console.log(this.lineup);
         this.lineup.forEach(l => {
           if ('id' in l) {
-            let player = this.playerService.getPlayer(l.id);
-            console.log(player);
+            let player = this.playerService.findOrCreatePlayerAndPull(l.id);
             l.photo = player.photo;
             l.name = player.name;
           }
         });
-        
+        this.substitutes.splice(0);
         if (squad.substitutes) {
-        squad.substitutes.forEach(s => {
-          let id = s.id;
-          this.addSubstitute(id);
-        });
+          squad.substitutes.forEach(id => {
+              let player = this.playerService.findOrCreatePlayerAndPull(id);
+              let substitue = {
+                id: id,
+                photo: player.photo,
+                name: player.name,
+              }
+              this.substitutes.push(substitue);
+          });
         }
       }
     })
@@ -54,13 +56,13 @@ export class SquadPage implements OnInit {
 
   addSubstitute(id) {
     let player = this.playerService.getPlayer(id);
-          let substitue = {
-            id: id,
-            photo: player.photo,
-            name: player.name,
-          }
-          this.substitutes.push(substitue);
-  } 
+    let substitue = {
+      id: id,
+      photo: player.photo,
+      name: player.name,
+    }
+    this.substitutes.push(substitue);
+  }
 
   onTouchStart() {
     this.overflowMode = 'hidden';
@@ -69,7 +71,7 @@ export class SquadPage implements OnInit {
   onTouchEnd() {
     this.overflowMode = 'auto';
   }
-  
+
   onTouchMove(e, p) {
     if (!this.settings.editMode)
       return;

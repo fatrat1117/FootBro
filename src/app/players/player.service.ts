@@ -112,6 +112,18 @@ export class PlayerService {
     return player;
   }
 
+  findOrCreatePlayerAndPull(id) : Player{
+    let player;
+    if (this.playersMap[id])
+      player = this.playersMap[id];
+    else {
+      player = new Player();
+      this.playersMap[id] = player;
+      this.fm.getPlayerAsync(id);
+    }
+    return player;
+  }
+
   getPlayerAsync(id) {
     if (this.getPlayer(id)) {
       this.fm.FireCustomEvent('serviceplayerready', id);
