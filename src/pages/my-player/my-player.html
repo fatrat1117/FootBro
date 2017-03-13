@@ -4,8 +4,8 @@
     <ion-title text-center>{{'starcard' | trans}}</ion-title>
 
     <ion-buttons end>
-      <button ion-button (click) = "enterChatPage()">
-        <ion-icon name="chatbubbles" color="primary"></ion-icon>
+      <button ion-button icon-only (click) = "enterChatPage()">
+        <ion-icon name="md-chatbubbles" color="primary"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -18,7 +18,8 @@
     <button ion-fab mini color="light"><ion-icon name="md-share"></ion-icon></button>
     <ion-fab-list side="left">
       <sb-fb-share-button></sb-fb-share-button>
-      <sb-wechat-share-button></sb-wechat-share-button>
+      <sb-wechat-share-button [type]=1></sb-wechat-share-button>
+      <sb-wechat-share-button [type]=0></sb-wechat-share-button>
     </ion-fab-list>
   </ion-fab>
 
