@@ -8,27 +8,27 @@
   </ion-row>
 </ion-grid>
 
-<ion-grid *ngIf="settings.editMode" class="bench" style="height: 15%" no-padding>
+<ion-grid  style="height: 15%" no-padding>
   <ion-row class="button-row" center>
     <button class="bench-button" ion-button icon-right clear small (click)='addSubstitutes()'>
       {{ 'bench' | trans}}
-      <ion-icon name="md-add-circle" color="primary"></ion-icon>
+      <ion-icon *ngIf="settings.editMode" name="md-add-circle" color="primary"></ion-icon>
     </button>
   </ion-row>
   <ion-row class="playersRow" center>
     <div class="playersDiv" *ngFor="let p of substitutes" no-margin text-center>
       <img class="image" [src]="p.photo" (click)="removeSubstitute(p)">
       <p class="name">{{p.name}}</p>
-      <ion-icon name="md-remove-circle" color="danger" (click)="removeSubstitute(p)"></ion-icon>
+      <ion-icon *ngIf="settings.editMode" name="md-remove-circle" color="danger" (click)="removeSubstitute(p)"></ion-icon>
     </div>
   </ion-row>
 </ion-grid>
 
-<ion-grid *ngIf="!settings.editMode" class="bench" no-padding>
+<!--ion-grid *ngIf="!settings.editMode" class="bench" no-padding>
   <ion-row *ngFor="let ps of substitutes | groupNPipe:5" text-center>
     <ion-col class="playersDiv" *ngFor="let p of ps" text-center>
       <img class="image" [src]="p.photo">
       <p class="name">{{p.name}}</p>
     </ion-col>
   </ion-row>
-</ion-grid>
+</ion-grid-->

@@ -191,6 +191,9 @@ export class SquadPage implements OnInit, OnDestroy {
   }
 
   addSubstitutes() {
+    if (!this.settings.editMode)
+      return;
+      
     let existingPlayers = this.getAddedPlayerIds();
 
     let modal = this.modal.create(SearchPlayerPage, {
@@ -213,6 +216,8 @@ export class SquadPage implements OnInit, OnDestroy {
 
   removeSubstitute(p) {
     //console.log('removeSubstitute', p, this.substitutes);
+    if (!this.settings.editMode)
+      return;
 
     this.substitutes.splice(this.substitutes.indexOf(p), 1);
   }
