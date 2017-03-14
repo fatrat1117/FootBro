@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Events } from 'ionic-angular';
 import { FirebaseManager } from '../../providers/firebase-manager';
 import { Team } from './team.model';
 
@@ -9,7 +10,8 @@ export class TeamService {
   playerTeamsMap = {};
   bRefreshPlayerTeams = false;
 
-  constructor(private fm: FirebaseManager) {
+  constructor(private fm: FirebaseManager,
+  public events: Events) {
     document.addEventListener('teamready', e => {
       let teamId = e['detail'];
       let team = this.fm.getTeam(teamId);
@@ -82,7 +84,8 @@ export class TeamService {
       let team = this.getTeam(detail.teamId);
       if (team) {
         team.matchSquads[detail.matchId] = squad;
-        this.fm.FireCustomEvent('servicematchsquadready', detail);
+        events.publish('servicematchsquadready', detail.teamId, detail.matchId);
+        //this.fm.FireCustomEvent('servicematchsquadready', detail);
       }
     });
 
@@ -221,11 +224,12 @@ export class TeamService {
 
   getMatchSquadAsync(teamId, matchId) {
     if (this.getMatchSquad(teamId, matchId)) {
-      let detail = {
-        teamId: teamId,
-        matchId: matchId
-      };
-      this.fm.FireCustomEvent('servicematchsquadready', detail);
+      this.events.publish('servicematchsquadready', teamId, matchId);
+      // let detail = {
+      //   teamId: teamId,
+      //   matchId: matchId
+      // };
+      //this.fm.FireCustomEvent('servicematchsquadready', detail);
     }
     else {
       this.fm.getMatchSquadAsync(teamId, matchId);
