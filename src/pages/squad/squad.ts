@@ -21,16 +21,16 @@ export class SquadPage implements OnInit {
   substitutes = [];
   overflowMode = 'auto';
   uiPlayerMap = {};
+  onTeamMatchReady;
 
   constructor(private matchService: MatchService,
     private modal: ModalController,
     private playerService: PlayerService,
     private uiHelper: UIHelper,
     private teamService: TeamService,
-    events: Events) {
-    events.subscribe('servicematchsquadready', (teamId, matchId) => {
-      console.log('events.subscribe');
-      
+    public events: Events) {
+    this.onTeamMatchReady = (teamId, matchId) => {
+      //console.log(teamId, matchId, this);
       if (teamId === this.settings.teamId && matchId === this.settings.matchId) {
         let squad = this.teamService.getMatchSquad(teamId, matchId);
         this.setSquad(squad.lineup);
@@ -56,36 +56,9 @@ export class SquadPage implements OnInit {
           });
         }
       }
-    });
+    }
 
-    // document.addEventListener('servicematchsquadready', e => {
-    //   let detail = e['detail'];
-    //   if (detail.teamId === this.settings.teamId && detail.matchId === this.settings.matchId) {
-    //     let squad = this.teamService.getMatchSquad(detail.teamId, detail.matchId);
-    //     this.setSquad(squad.lineup);
-    //     this.lineup.forEach(l => {
-    //       if ('id' in l) {
-    //         this.uiPlayerMap[l.id] = l;
-    //         let player = this.playerService.getPlayerAsync(l.id);
-    //         //l.photo = player.photo;
-    //         //l.name = player.name;
-    //       }
-    //     });
-    //     this.substitutes.splice(0);
-    //     if (squad.substitutes) {
-    //       squad.substitutes.forEach(id => {
-    //         let substitue = {
-    //             id: id,
-    //             // photo: player.photo,
-    //             // name: player.name,
-    //           }
-    //           this.uiPlayerMap[id] = substitue;
-    //           this.substitutes.push(substitue);
-    //           let player = this.playerService.getPlayerAsync(id);
-    //       });
-    //     }
-    //   }
-    // });
+    events.subscribe('servicematchsquadready', this.onTeamMatchReady);
 
     document.addEventListener('serviceplayerready', e => {
       let playerId = e['detail'];
@@ -97,6 +70,36 @@ export class SquadPage implements OnInit {
       }
     });
   }
+
+  // onTeamMatchReady(teamId, matchId) {
+  //     console.log(teamId, matchId);
+
+  //     if (teamId === this.settings.teamId && matchId === this.settings.matchId) {
+  //       let squad = this.teamService.getMatchSquad(teamId, matchId);
+  //       this.setSquad(squad.lineup);
+  //       this.lineup.forEach(l => {
+  //         if ('id' in l) {
+  //           this.uiPlayerMap[l.id] = l;
+  //           let player = this.playerService.getPlayerAsync(l.id);
+  //           //l.photo = player.photo;
+  //           //l.name = player.name;
+  //         }
+  //       });
+  //       this.substitutes.splice(0);
+  //       if (squad.substitutes) {
+  //         squad.substitutes.forEach(id => {
+  //           let substitue = {
+  //             id: id,
+  //             // photo: player.photo,
+  //             // name: player.name,
+  //           }
+  //           this.uiPlayerMap[id] = substitue;
+  //           this.substitutes.push(substitue);
+  //           let player = this.playerService.getPlayerAsync(id);
+  //         });
+  //       }
+  //     }
+  // }
 
   addSubstitute(id) {
     let player = this.playerService.getPlayer(id);
@@ -217,5 +220,11 @@ export class SquadPage implements OnInit {
 
   loadSquad() {
     this.teamService.getMatchSquadAsync(this.settings.teamId, this.settings.matchId);
+  }
+
+  unsubscribeEvents() {
+    console.log('unsubscribeEvents', 'servicematchsquadready');
+
+    this.events.unsubscribe('servicematchsquadready', this.onTeamMatchReady);
   }
 }
