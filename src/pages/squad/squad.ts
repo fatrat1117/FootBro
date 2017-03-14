@@ -10,7 +10,7 @@ import { UIHelper } from '../../providers/uihelper'
   selector: 'page-squad',
   templateUrl: 'squad.html',
 })
-export class SquadPage implements OnInit , OnDestroy{
+export class SquadPage implements OnInit, OnDestroy {
   @Input() settings;
 
   @ViewChild(Content) content: Content;
@@ -92,24 +92,41 @@ export class SquadPage implements OnInit , OnDestroy{
     this.overflowMode = 'auto';
   }
 
+  isImageInBoundary(x, y) {
+    //console.log(x, this.squadCtrl.clientWidth - this.uiHelper.squadHalfImageSize * 2); 
+    if (x < 0 ||
+      x > this.squadCtrl.nativeElement.clientWidth - this.uiHelper.squadHalfImageSize * 2 ||
+      y < 0 ||
+      y > this.squadCtrl.nativeElement.clientHeight - this.uiHelper.squadHalfImageSize * 2)
+      return false;
+
+    return true;
+  }
+
   onTouchMove(e, p) {
     if (!this.settings.editMode)
       return;
     //console.log(e, this.settings, p);
     if (1 === e.touches.length) {
-      p.x = e.touches[0].pageX - 24;// - this.left;
-      p.y = e.touches[0].pageY - 24 - this.settings.offsetY;
+      let x = e.touches[0].pageX - this.uiHelper.squadHalfImageSize;
+      let y = e.touches[0].pageY - this.uiHelper.squadHalfImageSize - this.settings.offsetY;
+      if (this.isImageInBoundary(x, y)) {
+        p.x = x;
+        p.y = y;
+      }
     }
-    //console.log(p);
   }
 
   ngOnInit() {
-    //if (!this.settings.editMode)
-    let self = this;
-    setTimeout(function () {
-      self.loadSquad();
-    }, 1000);
-    //this.loadSquad();
+    if (!this.settings.editMode)
+      this.loadSquad();
+    else {
+      //ionic 2 bug, need to waitfor height
+      let self = this;
+      setTimeout(function () {
+        self.loadSquad();
+      }, 1000);
+    }
   }
 
   ngOnDestroy() {
@@ -132,7 +149,7 @@ export class SquadPage implements OnInit , OnDestroy{
     e.stopPropagation();
     if (!this.settings.editMode)
       return;
-      
+
     let existingPlayers = this.getAddedPlayerIds();
 
     let modal = this.modal.create(SearchPlayerPage, {
@@ -196,7 +213,7 @@ export class SquadPage implements OnInit , OnDestroy{
 
   removeSubstitute(p) {
     //console.log('removeSubstitute', p, this.substitutes);
-    
+
     this.substitutes.splice(this.substitutes.indexOf(p), 1);
   }
 
@@ -209,4 +226,6 @@ export class SquadPage implements OnInit , OnDestroy{
     this.events.unsubscribe('servicematchsquadready', this.onTeamMatchReady);
     document.removeEventListener('serviceplayerready', this.onPlayerReady);
   }
+
+
 }

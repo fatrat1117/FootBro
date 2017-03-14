@@ -9,7 +9,7 @@ export class UIHelper {
   private loc : Localization) {
   }
 
-  squadImageSize = 16;
+  squadHalfImageSize = 24;
 
   presentToast(msgId, dur = 3000) {
       let msg = this.loc.getString(msgId);
@@ -41,8 +41,8 @@ export class UIHelper {
     let results = [];
     squad.forEach(s => {
       let r : any = {
-        x: s.x * width / 100 - this.squadImageSize,
-        y: s.y * height / 100 - this.squadImageSize,
+        x: s.x * width / 100 - this.squadHalfImageSize,
+        y: s.y * height / 100 - this.squadHalfImageSize,
       };
       if ('id' in s) 
         r.id = s.id;
@@ -57,8 +57,8 @@ export class UIHelper {
     let results = [];
     squad.forEach(s => {
       let r : any = {
-        x: Math.round((s.x + this.squadImageSize) * 100 / width),
-        y: Math.round((s.y + this.squadImageSize) * 100 / height),
+        x: Math.round((s.x + this.squadHalfImageSize) * 100 / width),
+        y: Math.round((s.y + this.squadHalfImageSize) * 100 / height),
       };
       if ('id' in s) 
         r.id = s.id;
