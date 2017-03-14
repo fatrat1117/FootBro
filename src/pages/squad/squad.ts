@@ -97,8 +97,12 @@ export class SquadPage implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.settings.editMode)
-      this.loadSquad();
+    //if (!this.settings.editMode)
+    let self = this;
+    setTimeout(function() {
+      self.loadSquad();
+    }, 1000);
+    //this.loadSquad();
   }
 
   getAddedPlayerIds() {
