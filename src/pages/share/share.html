@@ -1,0 +1,22 @@
+<ion-content>
+  <ion-item-group>
+    <ion-item-divider>{{ 'share' | trans }}</ion-item-divider>
+    <ion-row>
+      <ion-col width-33>
+        <button ion-fab mini color="light" class="center-button" (click)="onWeChatClick(0)">
+          <img style="max-width: 3rem;" src="assets/icon/wechat.png">
+        </button>
+      </ion-col>
+      <ion-col width-33>
+        <button ion-fab mini color="light" class="center-button" (click)="onWeChatClick(1)">
+          <img style="max-width: 3rem;" src="assets/icon/moments.png">
+        </button>
+      </ion-col>
+      <ion-col width-33>
+        <button ion-fab mini color="light" class="center-button" (click)="onFaceBookClick()">
+          <ion-icon name="logo-facebook" color="fBlue"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-item-group>
+</ion-content>

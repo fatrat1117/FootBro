@@ -2,6 +2,7 @@ import { Component, ViewChild } from "@angular/core";
 import { ViewController, NavParams, ModalController } from 'ionic-angular';
 import { Match } from '../../app/matches/match.model';
 import { EditSquadPage } from '../edit-squad/edit-squad';
+import { SharePage } from '../share/share';
 
 declare var google: any;
 
@@ -17,7 +18,6 @@ export class MatchDetailPage{
   match: Match;
   matchSegments = 'info';
   homeSquadSettings: any;
-  showShareFooter = false;
 
   constructor(private viewCtrl: ViewController,
     private modal: ModalController,
@@ -108,7 +108,5 @@ export class MatchDetailPage{
     }
   }
 
-  showShare() {
-    this.showShareFooter = true;
-  }
+  
 }
