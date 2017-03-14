@@ -19,7 +19,7 @@
     <div class="playersDiv" *ngFor="let p of substitutes" no-margin text-center>
       <img class="image" [src]="p.photo" (click)="removeSubstitute(p)">
       <p class="name">{{p.name}}</p>
-      <ion-icon name="md-remove-circle" color="danger"></ion-icon>
+      <ion-icon name="md-remove-circle" color="danger" (click)="removeSubstitute(p)"></ion-icon>
     </div>
   </ion-row>
 </ion-grid>
@@ -27,7 +27,7 @@
 <ion-grid *ngIf="!settings.editMode" class="bench" no-padding>
   <ion-row *ngFor="let ps of substitutes | groupNPipe:5" text-center>
     <ion-col class="playersDiv" *ngFor="let p of ps" text-center>
-      <img class="image" [src]="p.photo" (click)="removeSubstitute(p)">
+      <img class="image" [src]="p.photo">
       <p class="name">{{p.name}}</p>
     </ion-col>
   </ion-row>

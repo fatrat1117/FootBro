@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { NavController, ModalController } from "ionic-angular";
 import { MatchService } from '../matches/match.service';
 import { Match } from '../matches/match.model';
@@ -13,13 +13,12 @@ import { PlayerService } from '../players/player.service'
   styleUrls: ['/app/matches/match-basic.component.scss']
 })
 
-export class SbMatchBasicComponent implements OnInit {
+export class SbMatchBasicComponent implements OnInit, OnDestroy {
   @Input() showDate: boolean;
   @Input()
   matchObj;
-  // home;
-  // away;
   match: Match;
+  onMatchReady;
 
   constructor(private navCtrl: NavController,
     private matchService: MatchService,
@@ -28,15 +27,21 @@ export class SbMatchBasicComponent implements OnInit {
   }
 
   ngOnInit() {
-    document.addEventListener('servicematchready', e => {
+    this.onMatchReady = e => {
       let id = e['detail'];
       if (id === this.matchObj.$key) {
         this.match = this.matchService.getMatch(id);
         //console.log(this.match);
       }
-    });
+    };
+
+    document.addEventListener('servicematchready', this.onMatchReady);
 
     this.matchService.getMatchAsync(this.matchObj.$key);
+  }
+
+  ngOnDestroy() {
+    document.removeEventListener('servicematchready', this.onMatchReady);
   }
 
   goUpdateMatchPage(e) {
