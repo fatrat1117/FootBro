@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ModalController, Content, Events } from 'ionic-angular'
 import { MatchService } from '../../app/matches/match.service'
 import { TeamService } from '../../app/teams/team.service'
@@ -10,7 +10,7 @@ import { UIHelper } from '../../providers/uihelper'
   selector: 'page-squad',
   templateUrl: 'squad.html',
 })
-export class SquadPage implements OnInit {
+export class SquadPage implements OnInit , OnDestroy{
   @Input() settings;
 
   @ViewChild(Content) content: Content;
@@ -22,6 +22,7 @@ export class SquadPage implements OnInit {
   overflowMode = 'auto';
   uiPlayerMap = {};
   onTeamMatchReady;
+  onPlayerReady;
 
   constructor(private matchService: MatchService,
     private modal: ModalController,
@@ -60,7 +61,7 @@ export class SquadPage implements OnInit {
 
     events.subscribe('servicematchsquadready', this.onTeamMatchReady);
 
-    document.addEventListener('serviceplayerready', e => {
+    this.onPlayerReady = e => {
       let playerId = e['detail'];
       let uiPlayer = this.uiPlayerMap[playerId];
       if (uiPlayer) {
@@ -68,38 +69,10 @@ export class SquadPage implements OnInit {
         uiPlayer.photo = player.photo;
         uiPlayer.name = player.name;
       }
-    });
+    };
+
+    document.addEventListener('serviceplayerready', this.onPlayerReady);
   }
-
-  // onTeamMatchReady(teamId, matchId) {
-  //     console.log(teamId, matchId);
-
-  //     if (teamId === this.settings.teamId && matchId === this.settings.matchId) {
-  //       let squad = this.teamService.getMatchSquad(teamId, matchId);
-  //       this.setSquad(squad.lineup);
-  //       this.lineup.forEach(l => {
-  //         if ('id' in l) {
-  //           this.uiPlayerMap[l.id] = l;
-  //           let player = this.playerService.getPlayerAsync(l.id);
-  //           //l.photo = player.photo;
-  //           //l.name = player.name;
-  //         }
-  //       });
-  //       this.substitutes.splice(0);
-  //       if (squad.substitutes) {
-  //         squad.substitutes.forEach(id => {
-  //           let substitue = {
-  //             id: id,
-  //             // photo: player.photo,
-  //             // name: player.name,
-  //           }
-  //           this.uiPlayerMap[id] = substitue;
-  //           this.substitutes.push(substitue);
-  //           let player = this.playerService.getPlayerAsync(id);
-  //         });
-  //       }
-  //     }
-  // }
 
   addSubstitute(id) {
     let player = this.playerService.getPlayer(id);
@@ -137,6 +110,10 @@ export class SquadPage implements OnInit {
       self.loadSquad();
     }, 1000);
     //this.loadSquad();
+  }
+
+  ngOnDestroy() {
+    this.unsubscribeEvents();
   }
 
   getAddedPlayerIds() {
@@ -223,8 +200,8 @@ export class SquadPage implements OnInit {
   }
 
   unsubscribeEvents() {
-    console.log('unsubscribeEvents', 'servicematchsquadready');
-
+    //console.log('unsubscribeEvents', 'servicematchsquadready');
     this.events.unsubscribe('servicematchsquadready', this.onTeamMatchReady);
+    document.removeEventListener('serviceplayerready', this.onPlayerReady);
   }
 }
