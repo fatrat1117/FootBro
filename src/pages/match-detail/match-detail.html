@@ -106,29 +106,18 @@
       </ion-item>-->
       <!--地图 标题-->
       <ion-item class="map-title">
-        <!--div item-left class="title-left">
-          <img src="assets/icon/icon_address.png" class="title-left-img">
-        </div-->
-        <ion-icon item-left name="md-pin" color="iPrimary"></ion-icon>
         {{match?.location?.name}}
         <p>{{match?.location?.address}}</p>
       </ion-item>
+         <p><a href="geo:50,10">Location 50/10</a></p>
+        <p><a href="geo:Vienna">Location Vienna</a></p>
+        <p><a href="geo:?z=5&q=New+York">Zoom 5, Search for New York</a></p>
+        <p><a href="geo:?q=San+Francisco&z=15">Zoom 15, Search for San Francisco</a></p>
+        <p><a href="google.navigation:q=San+Francisco">Navigation to San Francisco</a></p>
+        <p><a href="google.navigation:q=50,10">Navigation to 50/10</a></p>
+        <p><a href="http://maps.google.com/maps?saddr=New+York&daddr=San+Francisco">Route New York --> San Francisco</a></p>
+        <p><a href="http://maps.google.com/maps?saddr=50,10&daddr=50,20">Route 50/10 --> 50/20</a></p>
     </ion-list>
-    <!--地图-->
-    <div class="map-back">
-      <!--地图需要点击才显示 todo-->
-      <div id="map" class="map"></div>
-      <!--地图右下角图标 背景-->
-      <div class="map-right-bottom-back" (click)="openHere()"></div>
-      <!--地图右下角 汽车-->
-      <div class="map-car-back">
-        <img src="assets/img/icon1.jpg" class="map-car" />
-      </div>
-      <!--地图右下角“到这里”文字-->
-      <!--<div class="map-to-here">
-        <span class="map-to-here-text">到这里</span>
-      </div>-->
-    </div>
   </div>
 
   <div class="content-all" *ngSwitchCase="'squad'" style="width: 100%; height: 100%">

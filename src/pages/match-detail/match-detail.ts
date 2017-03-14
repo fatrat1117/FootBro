@@ -110,8 +110,5 @@ export class MatchDetailPage{
 
   showShare() {
     this.showShareFooter = true;
-
   }
-
-  
 }
