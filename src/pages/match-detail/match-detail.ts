@@ -4,8 +4,8 @@ import { Match } from '../../app/matches/match.model';
 import { EditSquadPage } from '../edit-squad/edit-squad';
 import { SharePage } from '../share/share';
 import { PlayerService } from '../../app/players/player.service'
-
-declare var google: any;
+import { UpdateGamePage } from '../../pages/update-game/update-game'
+import { NewGamePage } from '../../pages/new-game/new-game'
 
 @Component({
   selector: 'page-match-detail',
@@ -27,7 +27,7 @@ export class MatchDetailPage {
     this.match = navParams.get('match');
     this.squadSettings = {};
     this.squadSettings.matchId = this.match.id;
-    
+
     //only show captain's team
     if (this.playerService.isAuthenticated()) {
       if (this.playerService.isCaptain(this.playerService.selfId(), this.match.homeId))
@@ -112,8 +112,13 @@ export class MatchDetailPage {
   }
 
   edit() {
-    if ('squad' === this.matchSegments) {
-      this.modal.create(EditSquadPage, { match: this.match, teamId: this.squadSettings.teamId }).present();
+    switch (this.matchSegments) {
+      case 'info':
+        this.goUpdateMatchPage();
+        break;
+      case 'squad':
+        this.modal.create(EditSquadPage, { match: this.match, teamId: this.squadSettings.teamId }).present();
+        break;
     }
   }
 
@@ -162,5 +167,12 @@ export class MatchDetailPage {
     }
 
     return false;
+  }
+
+  goUpdateMatchPage() {
+    if (this.match.isStarted())
+      this.modal.create(UpdateGamePage, { id: this.match.id }).present();
+    else
+      this.modal.create(NewGamePage, { id: this.match.id }).present();
   }
 }
