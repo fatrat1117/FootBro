@@ -23,16 +23,16 @@ import { TeamService } from '../../app/teams/team.service'
 export class EditPlayerPage {
   selfId: string;
   player: Player;
-  teams: Team[];
+  //teams: Team[];
   constructor(private navCtrl: NavController, private modalCtrl: ModalController, private playerService: PlayerService, private teamService: TeamService) {
     this.selfId = this.playerService.selfId();
-    this.teams = [];
+    //this.teams = [];
   }
 
   ionViewDidLoad() {
     this.addEventListeners();
     this.playerService.getPlayerAsync(this.selfId);
-    this.teamService.getPlayerTeamsAsync(this.playerService.selfId());
+    //this.teamService.getPlayerTeamsAsync(this.playerService.selfId());
   }
 
   addEventListeners() {
@@ -44,14 +44,17 @@ export class EditPlayerPage {
       }
     });
 
+    /*
     document.addEventListener('serviceplayerteamsready', e=> {
       let id = e['detail'];
       if (id === this.player.id) {
         this.updatePlayerTeams();
       }
     });
+    */
   }
 
+  /*
   updatePlayerTeams() {
     this.teams.splice(0);
     for(var t of this.teamService.getPlayerTeams(this.player.id)) {
@@ -61,6 +64,7 @@ export class EditPlayerPage {
         this.teams.push(t);
     }
   }
+  */
 
   editName() {
     this.modalCtrl.create(EditPlayerNamePage, {
@@ -98,6 +102,7 @@ export class EditPlayerPage {
     }).present();
   }
 
+/*
   setDefaultTeam(id: string, slidingItem) {
     slidingItem.close();
     this.playerService.setDefaultTeam(id);
@@ -116,6 +121,7 @@ export class EditPlayerPage {
       teamId: teamId
     }).present();
   }
+  */
 }
 
 

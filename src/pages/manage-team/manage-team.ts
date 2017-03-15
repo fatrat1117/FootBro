@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ViewController, ModalController } from 'ionic-angular';
 
 import { CreateTeamPage } from '../create-team/create-team'
+import { EditTeamPage } from '../edit-team/edit-team'
 
 import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
@@ -15,40 +16,76 @@ import { TeamService } from '../../app/teams/team.service'
   templateUrl: 'manage-team.html'
 })
 export class ManageTeamPage {
+  selfId: string;
   player: Player;
-  watchListMap : {};
-  teams;
+  teams: Team[];
   constructor(private viewCtrl: ViewController, private modalCtrl: ModalController, 
               private playerService: PlayerService, private teamService: TeamService) {
+
+    this.selfId = this.playerService.selfId();
+    this.teams = [];
   }
 
   ionViewDidLoad() {
-    //this.watchListMap = {}
     this.addEventListeners();
-    console.log(this.player);
-    
-    this.teamService.getPlayerTeamsAsync(this.player.id);
-    // for (let id of this.player.teams) {
-    //   this.teamService.getTeamAsync(id);
-    //   this.watchListMap[id] = {}
-    // }
+    this.playerService.getPlayerAsync(this.selfId);
+    this.teamService.getPlayerTeamsAsync(this.selfId);
   }
 
   addEventListeners() {
-    // document.addEventListener('serviceteamready', e => {
-    //   let id = e['detail'];
-    //   if (this.watchListMap[id]) {
-    //     this.watchListMap[id] = this.teamService.getTeam(id);
-    //   }
-    // });
+    document.addEventListener('serviceplayerready', e => {
+      let playerId = e['detail'];
+      if (playerId === this.selfId) {
+        this.player = this.playerService.getPlayer(playerId);
+      }
+    });
 
-    // document.addEventListener('serviceplayerteamsready', e=> {
-    //   let id = e['detail'];
-    //   if (id === this.player.id) {
-    //     this.teams = this.teamService.getPlayerTeams(id);
-    //     console.log(this.teams);
-    //   }
-    // });
+    document.addEventListener('serviceplayerteamsready', e=> {
+      let id = e['detail'];
+      if (id === this.selfId) {
+        this.updatePlayerTeams();
+      }
+    });
+  }
+
+  setDefaultTeam(id: string, slidingItem) {
+    slidingItem.close();
+    this.playerService.setDefaultTeam(id);
+    this.updatePlayerTeams();
+  }
+
+  quitTeam(id: string, slidingItem) {
+    slidingItem.close();
+    this.playerService.quitTeam(id);
+    this.teamService.getPlayerTeamsAsync(this.playerService.selfId());
+  }
+
+  editTeam(teamId: string, slidingItem) {
+    slidingItem.close();
+    this.modalCtrl.create(EditTeamPage, {
+      teamId: teamId
+    }).present();
+  }
+
+  updatePlayerTeams() {
+    this.teams = [];
+    for(var t of this.teamService.getPlayerTeams(this.selfId)) {
+      if (t.id == this.player.teamId)
+        this.teams.unshift(t);
+      else
+        this.teams.push(t);
+    }
+  }
+
+  createTeam() {
+    this.modalCtrl.create(CreateTeamPage).present();
+    /*
+    let model = this.modalCtrl.create(CreateTeamPage);
+    model.onDidDismiss (() => {
+      this.updatePlayerTeams();
+    })
+    model.present();
+    */
   }
   
   /*
@@ -72,7 +109,6 @@ export class ManageTeamPage {
     else
       this.viewCtrl.dismiss();
   }
-  */
 
   adddNewTeam() {
     this.modalCtrl.create(CreateTeamPage).present();
@@ -82,4 +118,5 @@ export class ManageTeamPage {
     // this.playerBasic.teamId = teamId;
     // this.playerService.saveSelfBasic(this.playerBasic);
   }
+  */
 }
