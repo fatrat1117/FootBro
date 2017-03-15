@@ -23,7 +23,7 @@ export class SharePage {
   }
 
   shareToFacebook() {
-    Screenshot.URI(80).then((res) => {
+    Screenshot.URI(10).then((res) => {
       //console.log(res);
       SocialSharing.shareViaFacebook(null, res.URI, null)
         .then(() => { },
@@ -46,7 +46,7 @@ export class SharePage {
 
   shareToWeChat(type: number) {
     this.viewCtrl.dismiss();
-    Screenshot.URI(80).then((res) => {
+    Screenshot.URI(10).then((res) => {
       this.sharePhoto(res.URI, type);
       console.log(res, type);
     },
@@ -69,6 +69,7 @@ export class SharePage {
       description: "",
       mediaTagName: "",
       messageExt: "",
+      thumb: picAddress,
       messageAction: "<action>Intent.ACTION_SEND</action>",
       media: {picAddress}
     };
