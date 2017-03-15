@@ -162,7 +162,7 @@ export class TeamService {
 
   getAllTeams() {
     let allPublicTeams = this.fm.getAllPublicTeams();
-    this.allTeams = [];
+    this.allTeams.splice(0);
     allPublicTeams.forEach(publicTeam => {
       let id = publicTeam.$key;
       let teamNotCached = !this.teamDataMap[id];

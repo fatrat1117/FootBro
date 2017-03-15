@@ -57,6 +57,7 @@ export class FirebaseManager {
 
   initialize() {
     this.af.auth.subscribe(auth => {
+      //console.log(auth);
       this.auth = auth;
       if (auth) {
         this.getPlayerAsync(auth.uid);
@@ -507,22 +508,20 @@ export class FirebaseManager {
     }
     else {
       this.af.database.object(`/players/${id}`).subscribe(snapshot => {
-        if (snapshot.$exists()) {
-          if (snapshot['basic-info']) {
-            if ('joinTime' in snapshot) {
-              if ('img/none.png' === snapshot['basic-info'].photoURL)
-                snapshot['basic-info'].photoURL = 'assets/img/none.png';
-              this.cachedPlayersMap[id] = snapshot;
-              this.FireCustomEvent('playerready', id);
-            }
-            else {
-              //fix all missing properties
-              this.af.database.object(`/players/${id}`).update({ joinTime: firebase.database.ServerValue.TIMESTAMP });
-            }
+        if (snapshot && snapshot['basic-info']) {
+          if ('joinTime' in snapshot) {
+            if ('img/none.png' === snapshot['basic-info'].photoURL)
+              snapshot['basic-info'].photoURL = 'assets/img/none.png';
+            this.cachedPlayersMap[id] = snapshot;
+            this.FireCustomEvent('playerready', id);
           }
-          else
-            this.FireCustomEvent('playernotregistered', id);
+          else {
+            //fix all missing properties
+            this.af.database.object(`/players/${id}`).update({ joinTime: firebase.database.ServerValue.TIMESTAMP });
+          }
         }
+        else
+          this.FireCustomEvent('playernotregistered', id);
       });
     }
   }

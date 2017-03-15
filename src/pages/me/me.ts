@@ -23,6 +23,9 @@ export class MePage {
   player: Player;
   team: Team;
   messageCount: number;
+  onPlayerReady;
+  onTeamReady;
+
   constructor(private navCtrl: NavController,
     private modalCtrl: ModalController,
     private playerService: PlayerService,
@@ -33,31 +36,37 @@ export class MePage {
   }
 
   ionViewDidLoad() {
+    //console.log('MePage Loaded');
     this.addEventListeners();
     this.playerService.getPlayerAsync(this.playerService.selfId());
+  }
 
-    /*
-    this.messageService.getAllUnreadMessages().subscribe(messages => {
-      this.messageCount = messages.length;
-    })
-    */
+  ionViewWillUnload() {
+    //console.log('MePage unload');
+    document.removeEventListener('serviceplayerready', this.onPlayerReady);
+    document.removeEventListener('serviceteamready', this.onTeamReady);
   }
 
   addEventListeners() {
-    document.addEventListener('serviceplayerready', e => {
+    this.onPlayerReady = e => {
       let playerId = e['detail'];
+      //console.log(playerId, this.playerService.selfId());
       if (playerId === this.playerService.selfId()) {
         this.player = this.playerService.getPlayer(playerId);
+        //console.log(this.player);
         if (this.player.teamId)
           this.teamService.getTeamAsync(this.player.teamId);
       }
-    });
+    };
 
-    document.addEventListener('serviceteamready', e => {
+    document.addEventListener('serviceplayerready', this.onPlayerReady);
+
+    this.onTeamReady = e => {
       let teamId = e['detail'];
       if (this.player && this.player.teamId === teamId)
         this.team = this.teamService.getTeam(teamId);
-    });
+    };
+    document.addEventListener('serviceteamready', this.onTeamReady);
   }
 
   goEditPlayerPage() {

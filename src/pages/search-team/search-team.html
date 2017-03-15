@@ -12,9 +12,9 @@
       </button>
     </ion-buttons>
   </ion-navbar>
+  <ion-searchbar (ionInput)="filterTeams($event)"></ion-searchbar>
 </ion-header>
 <ion-content>
-  <ion-searchbar (ionInput)="filterTeams($event)"></ion-searchbar>
   <ion-list [virtualScroll]="filteredTeams">
     <ion-item *virtualItem="let team" tappable (click)="dismiss(team)">
       <ion-avatar item-left>
