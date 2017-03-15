@@ -2,8 +2,6 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { NavController, ModalController } from "ionic-angular";
 import { MatchService } from '../matches/match.service';
 import { Match } from '../matches/match.model';
-import { UpdateGamePage } from '../../pages/update-game/update-game'
-import { NewGamePage } from '../../pages/new-game/new-game'
 import { MatchDetailPage } from '../../pages/match-detail/match-detail'
 import { PlayerService } from '../players/player.service'
 
@@ -44,14 +42,6 @@ export class SbMatchBasicComponent implements OnInit, OnDestroy {
     document.removeEventListener('servicematchready', this.onMatchReady);
   }
 
-  goUpdateMatchPage(e) {
-    e.stopPropagation();
-    if (this.match.isStarted())
-      this.modalCtrl.create(UpdateGamePage, { id: this.match.id }).present();
-    else
-      this.modalCtrl.create(NewGamePage, { id: this.match.id }).present();
-  }
-
   goMatchDetailPage() {
     this.modalCtrl.create(MatchDetailPage, { match: this.match }).present();
   }
@@ -59,5 +49,9 @@ export class SbMatchBasicComponent implements OnInit, OnDestroy {
   canUpdate() {
     return this.PlayerService.isCaptain(this.PlayerService.selfId(), this.matchObj.homeId) ||
       this.PlayerService.isCaptain(this.PlayerService.selfId(), this.matchObj.awayId);
+  }
+
+  deleteMatch(e) {
+    
   }
 }
