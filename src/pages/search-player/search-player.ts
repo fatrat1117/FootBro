@@ -17,26 +17,27 @@ export class SearchPlayerPage {
   selectedPlayersMap = {};
   addedPlayerMap = {};
 
-  constructor(private nav: NavController, 
-  navParams: NavParams, 
-  private teamPlayersService: PlayerService, 
-  private viewCtrl: ViewController) {
+  constructor(private nav: NavController,
+    navParams: NavParams,
+    private teamPlayersService: PlayerService,
+    private viewCtrl: ViewController) {
     this.teamId = navParams.get('teamId');
     //console.log(this.teamId);
     this.showDetail = navParams.get('showDetail');
     this.showClose = navParams.get('showClose');
     this.selectPlayersMode = navParams.get('selectPlayersMode');
     //if (this.selectPlayersMode) {
-      let selectedIds = navParams.get('selectedIds');
+    let selectedIds = navParams.get('selectedIds');
+    if (selectedIds) {
       selectedIds.forEach(id => {
         this.addedPlayerMap[id] = true;
       });
-    //}
+    }
     this.totalPlayers = [];
   }
 
   ionViewDidLoad() {
-    document.addEventListener('serviceteamplayersready', e=>{
+    document.addEventListener('serviceteamplayersready', e => {
       let id = e['detail'];
       if (id === this.teamId)
         this.totalPlayers = this.teamPlayersService.getTeamPlayers(id);
@@ -50,8 +51,8 @@ export class SearchPlayerPage {
     //skip added players
     this.filteredPlayers = this.totalPlayers.slice();
     this.filteredPlayers = this.filteredPlayers.filter((player) => {
-        return !this.addedPlayerMap[player.id];
-      });
+      return !this.addedPlayerMap[player.id];
+    });
   }
 
   trackByName(player) {
@@ -93,7 +94,7 @@ export class SearchPlayerPage {
     //   if (this.selectedPlayersMap[key])
     //     playerIds.push(key);
     // }
-    this.viewCtrl.dismiss({selectedIds: this.selectedPlayersMap});
+    this.viewCtrl.dismiss({ selectedIds: this.selectedPlayersMap });
   }
 
   onSelectionChange(playerId, e) {

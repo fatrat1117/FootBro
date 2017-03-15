@@ -91,7 +91,7 @@ export class MePage {
     let searchTeamModal = this.modalCtrl.create(SearchTeamPage);
     searchTeamModal.onDidDismiss(data => {
       if (data) {
-        this.teamService.joinTeam(data, true);
+        this.teamService.joinTeam(data.team.id, true);
       }
     });
     searchTeamModal.present();
