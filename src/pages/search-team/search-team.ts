@@ -17,12 +17,8 @@ export class SearchTeamPage {
   }
 
   ionViewDidLoad() {
-    //document.addEventListener('serviceallteamsready', e => {
       this.totalTeams = this.service.getAllTeams();
       this.resetFilter();
-   // });
-
-    //this.service.getAllTeamsAsync();
   }
 
   resetFilter() {
@@ -57,6 +53,11 @@ export class SearchTeamPage {
   }
 
   createTeam() {
-    this.modalCtrl.create(CreateTeamPage).present();
+    let model = this.modalCtrl.create(CreateTeamPage);
+    model.onDidDismiss (() => {
+      this.totalTeams = this.service.getAllTeams();
+      this.resetFilter();
+    })
+    model.present();
   }
 }

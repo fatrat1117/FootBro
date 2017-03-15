@@ -57,6 +57,7 @@ export class FirebaseManager {
 
   initialize() {
     this.af.auth.subscribe(auth => {
+      //console.log(auth);
       this.auth = auth;
       if (auth) {
         this.getPlayerAsync(auth.uid);
@@ -372,22 +373,9 @@ export class FirebaseManager {
   joinTeam(id, isDefault) {
     this.af.database.object(this.teamPlayerRef(this.selfId(), id)).set(true);
     this.af.database.object(this.playerTeamRef(this.selfId(), id)).set({ isMember: true });
-    let player = this.cachedPlayersMap[this.auth.uid];
     //set default team if no team
     if (isDefault || !this.selfTeamId())
       this.setDefaultTeam(id);
-
-    let afTeamBasic = this.afTeamBasic(id);
-    //totalPlayer = player.length
-    // let sub = afTeamBasic.subscribe(snapshot => {
-    //   setTimeout(() => {
-    //     sub.unsubscribe();
-    //     //increase total by 1
-    //     //trade-off: performance is better than updateTotalPlayers but might have bug when 2 players join at same time
-    //     afTeamBasic.update({ totalPlayers: snapshot.totalPlayers + 1 });
-    //   },
-    //     250);
-    // });
   }
 
   afTeam(teamId: string) {
@@ -507,22 +495,20 @@ export class FirebaseManager {
     }
     else {
       this.af.database.object(`/players/${id}`).subscribe(snapshot => {
-        if (snapshot.$exists()) {
-          if (snapshot['basic-info']) {
-            if ('joinTime' in snapshot) {
-              if ('img/none.png' === snapshot['basic-info'].photoURL)
-                snapshot['basic-info'].photoURL = 'assets/img/none.png';
-              this.cachedPlayersMap[id] = snapshot;
-              this.FireCustomEvent('playerready', id);
-            }
-            else {
-              //fix all missing properties
-              this.af.database.object(`/players/${id}`).update({ joinTime: firebase.database.ServerValue.TIMESTAMP });
-            }
+        if (snapshot && snapshot['basic-info']) {
+          if ('joinTime' in snapshot) {
+            if ('img/none.png' === snapshot['basic-info'].photoURL)
+              snapshot['basic-info'].photoURL = 'assets/img/none.png';
+            this.cachedPlayersMap[id] = snapshot;
+            this.FireCustomEvent('playerready', id);
           }
-          else
-            this.FireCustomEvent('playernotregistered', id);
+          else {
+            //fix all missing properties
+            this.af.database.object(`/players/${id}`).update({ joinTime: firebase.database.ServerValue.TIMESTAMP });
+          }
         }
+        else
+          this.FireCustomEvent('playernotregistered', id);
       });
     }
   }
