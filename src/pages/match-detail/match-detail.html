@@ -1,30 +1,3 @@
-<!--ion-header #pageHeader>
-  <ion-navbar>
-    <ion-title>{{'MatchDetail' | trans}}</ion-title>
-    <ion-buttons left>
-      <button (click)="dismiss()" color='danger' ion-button icon-only clear>
-        <ion-icon name="md-close"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-buttons right>
-      <button color='primaryYellow' (click)="edit()" ion-button icon-only clear>
-          <ion-icon name="md-create"></ion-icon>
-      </button>
-      <button ion-button icon-only (click)="showShare()">
-        <ion-icon name="md-share" color="primary"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-  <ion-segment [ngModel]="matchSegments" (ngModelChange)="segmentChange($event)" mode="md">
-    <ion-segment-button value="info">
-      {{'Info' | trans}}
-    </ion-segment-button>
-    <ion-segment-button value="squad">
-      {{'squad' | trans}}
-    </ion-segment-button>
-  </ion-segment>
-</ion-header-->
-
 <ion-header #pageHeader>
   <ion-toolbar>
     <ion-buttons left>
@@ -36,12 +9,12 @@
       <ion-segment-button value="info">
         {{'Info' | trans}}
       </ion-segment-button>
-      <ion-segment-button value="squad">
+      <ion-segment-button *ngIf='canShowSquadSegment()' value="squad">
         {{'squad' | trans}}
       </ion-segment-button>
     </ion-segment>
     <ion-buttons right>
-      <button color='primaryYellow' (click)="edit()" ion-button icon-only clear>
+      <button  *ngIf = 'canShowEdit()' color='primaryYellow' (click)="edit()" ion-button icon-only clear>
           <ion-icon name="md-create"></ion-icon>
       </button>
       <sb-share-button></sb-share-button>
@@ -56,15 +29,6 @@
 </ion-header>
 
 <ion-content [ngSwitch]="matchSegments" style="width: 100%; height: 100%">
-  <!--ion-fab top right edge>
-    <button ion-fab mini color="light"><ion-icon name="md-share" color="primary"></ion-icon></button>
-    <ion-fab-list>
-      <sb-fb-share-button></sb-fb-share-button>
-      <sb-wechat-share-button [type]=1></sb-wechat-share-button>
-      <sb-wechat-share-button [type]=0></sb-wechat-share-button>
-    </ion-fab-list>
-  </ion-fab-->
-
   <div class="content-all" *ngSwitchCase="'info'" style="width: 100%; height: 100%">
     <ion-list no-lines class="content-list" center>
       <!--中间的对战时间-->
@@ -133,7 +97,7 @@
   </div>
 
   <div class="content-all" *ngSwitchCase="'squad'" style="width: 100%; height: 100%">
-    <page-squad #squadCtrl [settings]="homeSquadSettings" style="width: 100%; height: 100%"></page-squad>
+    <page-squad #squadCtrl [settings]="squadSettings" style="width: 100%; height: 100%"></page-squad>
   </div>
 
 </ion-content>

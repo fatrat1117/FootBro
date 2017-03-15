@@ -3,6 +3,7 @@ import { ViewController, NavParams, ModalController } from 'ionic-angular';
 import { Match } from '../../app/matches/match.model';
 import { EditSquadPage } from '../edit-squad/edit-squad';
 import { SharePage } from '../share/share';
+import { PlayerService } from '../../app/players/player.service'
 
 declare var google: any;
 
@@ -10,22 +11,31 @@ declare var google: any;
   selector: 'page-match-detail',
   templateUrl: 'match-detail.html'
 })
-export class MatchDetailPage{
+export class MatchDetailPage {
   @ViewChild('pageHeader') pageHeader;
   //@ViewChild('squadCtrl') squadCtrl;
 
   map;
   match: Match;
   matchSegments = 'info';
-  homeSquadSettings: any;
+  squadSettings: any;
 
   constructor(private viewCtrl: ViewController,
     private modal: ModalController,
-    navParams: NavParams) {
+    navParams: NavParams,
+    private playerService: PlayerService) {
     this.match = navParams.get('match');
-    this.homeSquadSettings = {};
-    this.homeSquadSettings.matchId = this.match.id;
-    this.homeSquadSettings.teamId = this.match.homeId;
+    this.squadSettings = {};
+    this.squadSettings.matchId = this.match.id;
+    
+    //only show captain's team
+    if (this.playerService.isAuthenticated()) {
+      if (this.playerService.isCaptain(this.playerService.selfId(), this.match.homeId))
+        this.squadSettings.teamId = this.match.homeId;
+      else if (this.playerService.isCaptain(this.playerService.selfId(), this.match.awayId))
+        this.squadSettings.teamId = this.match.awayId;
+    }
+    //this.squadSettings.teamId = this.match.homeId;
   }
 
   dismiss() {
@@ -33,21 +43,21 @@ export class MatchDetailPage{
   }
 
   ionViewDidLoad() {
-    this.homeSquadSettings.offsetY = this.pageHeader.nativeElement.clientHeight;
+    this.squadSettings.offsetY = this.pageHeader.nativeElement.clientHeight;
   }
 
   segmentChange(e) {
     //console.log(e);
     this.matchSegments = e;
     if ('info' === e) {
-    //  this.showCurrentPositionInGoogleMap();
+      //  this.showCurrentPositionInGoogleMap();
     }
     else if ('squad' === e) {
       // let self = this;
       // setTimeout(function() {
       //   console.log(self.squadCtrl);
       // }, 2000);
-    }   
+    }
   }
 
   showCurrentPositionInGoogleMap() {
@@ -103,10 +113,54 @@ export class MatchDetailPage{
 
   edit() {
     if ('squad' === this.matchSegments) {
-      let teamId = this.match.homeId;
-      this.modal.create(EditSquadPage, {match: this.match, teamId: teamId}).present();
+      this.modal.create(EditSquadPage, { match: this.match, teamId: this.squadSettings.teamId }).present();
     }
   }
 
-  
+  canShowSquadSegment() {
+    if (!this.playerService.isAuthenticated())
+      return false;
+
+    if (this.playerService.isCaptain(this.playerService.selfId(), this.match.homeId) ||
+      this.playerService.isCaptain(this.playerService.selfId(), this.match.awayId))
+      return true;
+
+    return false;
+  }
+
+  canShowEdit() {
+    if (!this.playerService.isAuthenticated())
+      return false;
+
+    switch (this.matchSegments) {
+      case 'info':
+        {
+          //captain can update matchInfo
+          if (this.playerService.isCaptain(this.playerService.selfId(), this.match.homeId) ||
+            this.playerService.isCaptain(this.playerService.selfId(), this.match.awayId))
+            return true;
+        }
+        break;
+      case 'squad':
+        {
+          //captain can update squad
+          if (this.playerService.isCaptain(this.playerService.selfId(), this.match.homeId) ||
+            this.playerService.isCaptain(this.playerService.selfId(), this.match.awayId))
+            return true;
+        }
+        break;
+      // case 'stats':
+      //   {
+      //     //captain can update stats
+      //     if (this.playerService.isCaptain(me, this.match.homeId) ||
+      //       this.playerService.isCaptain(me, this.match.awayId))
+      //       return true;
+      //   }
+      //   break;
+      // case 'rating':
+      //   break;
+    }
+
+    return false;
+  }
 }

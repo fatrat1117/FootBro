@@ -204,6 +204,7 @@ export class PlayerService {
       return false;
 
     let fmTeam = this.fm.getTeam(tId);
+    //console.log(fmTeam);
     if (fmTeam && 'basic-info' in fmTeam)
       return pId === fmTeam['basic-info'].captain;
 
