@@ -12,10 +12,10 @@
       </button>
     </ion-buttons> 
   </ion-navbar>
+  <ion-searchbar (ionInput)="filterPlayers($event)"></ion-searchbar>
 </ion-header>
 
 <ion-content>
-  <ion-searchbar (ionInput)="filterPlayers($event)"></ion-searchbar>
   <ion-list [virtualScroll]="filteredPlayers">
     <ion-item *virtualItem="let player" (click)="selectPlayer(player.id)">
       <ion-label *ngIf='selectPlayersMode'>{{ player.name }}</ion-label>

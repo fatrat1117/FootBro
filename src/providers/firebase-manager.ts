@@ -373,22 +373,9 @@ export class FirebaseManager {
   joinTeam(id, isDefault) {
     this.af.database.object(this.teamPlayerRef(this.selfId(), id)).set(true);
     this.af.database.object(this.playerTeamRef(this.selfId(), id)).set({ isMember: true });
-    let player = this.cachedPlayersMap[this.auth.uid];
     //set default team if no team
     if (isDefault || !this.selfTeamId())
       this.setDefaultTeam(id);
-
-    let afTeamBasic = this.afTeamBasic(id);
-    //totalPlayer = player.length
-    // let sub = afTeamBasic.subscribe(snapshot => {
-    //   setTimeout(() => {
-    //     sub.unsubscribe();
-    //     //increase total by 1
-    //     //trade-off: performance is better than updateTotalPlayers but might have bug when 2 players join at same time
-    //     afTeamBasic.update({ totalPlayers: snapshot.totalPlayers + 1 });
-    //   },
-    //     250);
-    // });
   }
 
   afTeam(teamId: string) {
