@@ -12,7 +12,7 @@ import { MessagesPage } from "../messages/messages";
 import { PlayerService } from '../../app/players/player.service'
 import { TeamService } from '../../app/teams/team.service'
 import { MessageService } from '../../app/messages/message.service'
-import { CreateTeamPage } from '../create-team/create-team'
+import { SearchTeamPage } from '../search-team/search-team'
 
 @Component({
   selector: 'page-me',
@@ -83,9 +83,18 @@ export class MePage {
   goMessagesPage() {
     this.navCtrl.push(MessagesPage);
   }
+  // createTeam() {
+  //   this.modalCtrl.create(CreateTeamPage).present();
+  // }
 
-  createTeam() {
-    this.modalCtrl.create(CreateTeamPage).present();
+  joinTeam() {
+    let searchTeamModal = this.modalCtrl.create(SearchTeamPage);
+    searchTeamModal.onDidDismiss(data => {
+      if (data) {
+        this.teamService.joinTeam(data.team.id, true);
+      }
+    });
+    searchTeamModal.present();
   }
 
   onLogout() {

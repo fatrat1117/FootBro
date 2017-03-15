@@ -9,46 +9,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <!--<div class="cheering-team-segment">
-    <ion-segment [(ngModel)]="who">
-      <ion-segment-button no-padding value="baby">
-        <ion-icon name="md-football" class="football-icon"><span>{{'宝贝' | trans}}</span></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button no-padding value="judge">
-        <ion-icon name="md-hand" class="judge-icon"><span>{{'裁判' | trans}}</span></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button no-padding value="player">
-        <ion-icon name="md-body" class="player-icon"><span>{{'球员' | trans}}</span></ion-icon>
-      </ion-segment-button>
-    </ion-segment>
-  </div>-->
   <div class="cheering-team-type">
-    <!--<ion-row class="baby-type-row">
-        <ion-col width-25 tabindex="0">
-          <div class="TabbedPanelsTab" [ngStyle]="{'color':getColor(0),
-          'border-color': getColor(0)}" (click)="highLight(0)">
-            <ion-label no-margin class="label label-md">颜值高</ion-label>
-          </div>
-        </ion-col>
-        <ion-col width-25 tabindex="0">
-          <div class="TabbedPanelsTab" [ngStyle]="{'color':getColor(1),
-          'border-color': getColor(1)}" (click)="highLight(1)">
-            <ion-label no-margin class="label label-md">在校生</ion-label>
-          </div>
-        </ion-col>
-        <ion-col width-25 tabindex="0">
-          <div class="TabbedPanelsTab" [ngStyle]="{'color':getColor(2),
-          'border-color': getColor(2)}" (click)="highLight(2)">
-            <ion-label no-margin class="label label-md">兼职模特</ion-label>
-          </div>
-        </ion-col>
-        <ion-col width-25 tabindex="0">
-          <div class="TabbedPanelsTab" [ngStyle]="{'color':getColor(3),
-          'border-color': getColor(3)}" (click)="highLight(3)">
-            <ion-label no-margin class="label label-md">团体</ion-label>
-          </div>
-        </ion-col>
-      </ion-row>-->
     <ion-row class="baby-become-row">
       <ion-col width-75 no-margin>
         <div class="speaker">
@@ -62,30 +23,27 @@
       </ion-col>
     </ion-row>
     <ion-row class="baby-row">
-
-        <div *ngIf='playerService.isAdmin()' class="baby-admin">
+      <div *ngIf='playerService.isAdmin()' class="baby-admin">
         <ion-row *ngFor='let clrow of pendingCheerleaders | groupNPipe:2;let i = index' no-margin>
-            <ion-col class="cheerleader-item" width-50 *ngFor='let clItem of clrow; let j = index'>
-                <div *ngIf = 'clItem'>
-                  <ion-row class="item-row">
-                    <div class="baby-img-frame">
-                      <button ion-button icon-only clear class="chat-logo" color="lightGrey" (click)="approve(clItem.id)">
-                        <ion-icon name="lock"></ion-icon>
-                      </button>
-
-                            <img class="img" [src]="clItem.photoMedium">
-
-                    </div>
+          <ion-col class="cheerleader-item" width-50 *ngFor='let clItem of clrow; let j = index'>
+            <div *ngIf='clItem'>
+              <ion-row class="item-row">
+                <div class="baby-img-frame">
+                  <button ion-button icon-only clear class="chat-logo" color="lightGrey" (click)="approve(clItem.id)">
+                    <ion-icon name="lock"></ion-icon>
+                  </button>
+                  <img class="img" [src]="clItem.photoMedium">
+                </div>
+              </ion-row>
+              <ion-row class="item-row">
+                <div class="baby-status">
+                  <ion-row>
+                    <h3>{{clItem.name}}</h3>
                   </ion-row>
-                  <ion-row class="item-row">
-                    <div class="baby-status">
-                      <ion-row>
-                        <h3>{{clItem.name}}</h3>
-                      </ion-row>
-                    </div>
-                  </ion-row>
-                   </div>
-            </ion-col>
+                </div>
+              </ion-row>
+            </div>
+          </ion-col>
         </ion-row>
       </div>
 
@@ -93,8 +51,8 @@
 
     </ion-row>
 
-      <div class="baby-row">
-       <div *ngIf='(afPendingSelf | async)?.$exists()' class="baby-self" width-50 no-margin>
+    <div class="baby-row">
+      <div *ngIf='(afPendingSelf | async)?.$exists()' class="baby-self" width-50 no-margin>
         <ion-row class="self-row">
           <div class="baby-img-frame">
             <img class="img" [src]="(afPendingSelf | async)?.photo">
@@ -108,132 +66,40 @@
           </div>
         </ion-row>
       </div>
-      </div>
+    </div>
 
     <div class="baby-row">
       <ion-row *ngFor='let clrow of approvedCheerleaders |groupNPipe:2 ;let i = index' no-margin>
         <ion-col class="cheerleader-item" width-50 *ngFor='let clItem of clrow; let j = index'>
-        <div *ngIf = 'clItem'>
+          <div *ngIf='clItem'>
             <ion-row class="item-row">
-          <div class="baby-img-frame">
-            <button *ngIf="isUnlocked(clItem.id)" ion-button icon-only clear class="chat-logo" color="primary" (click)="enterChatPage(clItem)">
+              <div class="baby-img-frame">
+                <button *ngIf="isUnlocked(clItem.id)" ion-button icon-only clear class="chat-logo" color="primary" (click)="enterChatPage(clItem)">
                 <ion-icon name="md-chatbubbles"></ion-icon>
             </button>
-            <button *ngIf="!isUnlocked(clItem.id)" ion-button icon-only clear class="chat-logo" color="lightGrey" (click)="unlockCheerleader(clItem)">
+                <button *ngIf="!isUnlocked(clItem.id)" ion-button icon-only clear class="chat-logo" color="lightGrey" (click)="unlockCheerleader(clItem)">
                 <ion-icon name="md-chatbubbles"></ion-icon>
             </button>
-            <img class="img" [src]="clItem.photoMedium">
-          </div>
-        </ion-row>
+                <img class="img" [src]="clItem.photoMedium">
+              </div>
+            </ion-row>
             <ion-row class="item-row">
-          <div class="baby-status">
-            <ion-row>
-              <h3>{{clItem.name}}</h3>
-            </ion-row>
-            <ion-row>
-              <ion-col class="eyes" width-40 no-padding>
-                <img src="assets/img/cheering-team/eye.png" />{{clItem.popularity}}
-              </ion-col>
-              <!--<ion-col class="prize" width-60>$299/小时</ion-col>-->
+              <div class="baby-status">
+                <ion-row>
+                  <h3>{{clItem.name}}</h3>
+                </ion-row>
+                <ion-row>
+                  <ion-col class="eyes" width-40 no-padding>
+                    <img src="assets/img/cheering-team/eye.png" />{{clItem.popularity}}
+                  </ion-col>
+                  <!--<ion-col class="prize" width-60>$299/小时</ion-col>-->
+                </ion-row>
+              </div>
             </ion-row>
           </div>
-        </ion-row>
-            </div>
         </ion-col>
       </ion-row>
-
-      <!--<ion-col width-50 no-margin>
-        <ion-row>
-          <div class="baby-img-frame">
-            <button ion-button icon-only clear class="chat-logo" color="lightGrey" (click)="unlockBaby()">
-                <ion-icon name="lock"></ion-icon>
-              </button>
-            <img class="img" src="assets/img/cheering-team/sample_baby_1.png">
-          </div>
-        </ion-row>
-        <ion-row>
-          <div class="baby-status">
-            <ion-row>
-              <h3>夏一天</h3>
-            </ion-row>
-            <ion-row>
-              <ion-col class="eyes" width-40>
-                <img src="assets/img/cheering-team/eye.png" />5754
-              </ion-col>
-              <ion-col class="prize" width-60>$299/小时</ion-col>
-            </ion-row>
-          </div>
-        </ion-row>
-      </ion-col>-->
-      <!--<ion-col width-50 no-margin>
-        <ion-row>
-          <div class="baby-img-frame">
-            <div class="chat-shadow"></div>
-            <img class="chat-logo" src="assets/img/cheering-team/cheering_team_chat.png">
-            <img class="img" src="assets/img/cheering-team/sample_baby_2.png">
-          </div>
-        </ion-row>
-        <ion-row>
-          <div class="baby-status">
-            <ion-row>
-              <h3>夏一天</h3>
-            </ion-row>
-            <ion-row>
-              <ion-col class="eyes" width-40>
-                <img src="assets/img/cheering-team/eye.png" />5754
-              </ion-col>
-              <ion-col class="prize" width-60>$299/小时</ion-col>
-            </ion-row>
-          </div>
-        </ion-row>
-      </ion-col>
-    </ion-row>
-    <ion-row class="baby-row baby-row-2">
-      <ion-col width-50 no-margin>
-        <ion-row>
-          <div class="baby-img-frame">
-            <div class="chat-shadow"></div>
-            <img class="chat-logo" src="assets/img/cheering-team/cheering_team_chat.png">
-            <img class="img" src="assets/img/cheering-team/sample_baby_3.png">
-          </div>
-        </ion-row>
-        <ion-row>
-          <div class="baby-status">
-            <ion-row>
-              <h3>夏一天</h3>
-            </ion-row>
-            <ion-row>
-              <ion-col class="eyes" width-40>
-                <img src="assets/img/cheering-team/eye.png" />5754
-              </ion-col>
-              <ion-col class="prize" width-60>$299/小时</ion-col>
-            </ion-row>
-          </div>
-        </ion-row>
-      </ion-col>
-      <ion-col width-50 no-margin>
-        <ion-row>
-          <div class="baby-img-frame">
-            <div class="chat-shadow"></div>
-            <img class="chat-logo" src="assets/img/cheering-team/cheering_team_chat.png">
-            <img class="img" src="assets/img/cheering-team/sample_baby_4.png">
-          </div>
-        </ion-row>
-        <ion-row>
-          <div class="baby-status">
-            <ion-row>
-              <h3>夏一天</h3>
-            </ion-row>
-            <ion-row>
-              <ion-col class="eyes" width-40>
-                <img src="assets/img/cheering-team/eye.png" />5754
-              </ion-col>
-              <ion-col class="prize" width-60>$299/小时</ion-col>
-            </ion-row>
-          </div>
-        </ion-row>
-      </ion-col>-->
-      </div>
+    </div>
     <!--<div *ngSwitchCase="'judge'">
       裁判
     </div>

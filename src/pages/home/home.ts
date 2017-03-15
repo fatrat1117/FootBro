@@ -23,7 +23,6 @@ export class HomePage {
 
   ionViewDidLoad() :any{
   }
-
   loadSlides(langCode: string, total: number) {
     for (let i = 0; i < total; ++i) {
       this.slides.push({

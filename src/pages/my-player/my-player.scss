@@ -132,7 +132,7 @@ page-my-player{
           position: absolute;
           right: 7rem;
           font-size: 1.4rem;
-          font-weight: 500;
+          font-weight: bold;
           max-width: 50%;
           white-space: nowrap;
           overflow: hidden;
@@ -307,7 +307,7 @@ page-my-player{
 
   }
   .personal-data-header{
-    background-image: url("/../../assets/img/my-player/bg3@3x.png");
+    background-image: url("../assets/img/my-player/bg3@3x.png");
     font-size: 1rem;
     color: #ababab;
     font-weight: normal;
@@ -789,11 +789,11 @@ page-my-player{
     border: 1px solid #00ff00 !important;
   }
   .setOne .alike {
-    background: url(/../../assets/img/my-player/arrowgreenup.png) no-repeat;
+    background: url("../assets/img/my-player/arrowgreenup.png") no-repeat;
     background-size: 100% 100%;
   }
   .setOne .changlike {
-    background: url(/../../assets/img/my-player/arrowgreedown.png) no-repeat;
+    background: url("../assets/img/my-player/arrowgreedown.png") no-repeat;
     background-size: 100% 100%;
   }
   .setOne .mainLikez {

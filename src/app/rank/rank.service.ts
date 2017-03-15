@@ -26,7 +26,7 @@ export class RankService {
             let teamRankData = {
               id: teamId,
               name: sortedPublicTeams[i].name,
-              logo: "assets/img/none.png",
+              logo: "assetsimg/none.png",
               totalPlayers: 0,
               ability: sortedPublicTeams[i].ability,
               popularity: sortedPublicTeams[i].popularity

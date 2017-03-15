@@ -2,7 +2,7 @@
   <ion-navbar no-padding swipeBackEnabled="false">
     <ion-title text-center>{{'TeamInfo' | trans}}</ion-title>
     <ion-buttons *ngIf="isMember()" right>
-      <button ion-button icon-only class="my-team-btn-right" (click)="invitePlayer()">
+      <button ion-button icon-only (click)="invitePlayer()">
         <ion-icon color="iPrimary" name="md-person-add"></ion-icon>
       </button>
       <sb-share-button></sb-share-button>

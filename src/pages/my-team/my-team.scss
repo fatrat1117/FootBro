@@ -1,7 +1,4 @@
 page-my-team {
-  .my-team-btn-right {
-    color: #fff;
-  }
   //通用样式
   .center-margin {
     margin: 0px auto;
@@ -89,7 +86,7 @@ page-my-team {
     //顶部图片样式 ionic plugin add cordova-plugin-whitelist
     .content-top {
       //background: #a5a5a5;
-      background-image: url("/assets/img/team/court.png");
+      background-image: url("../assets/img/team/court.png");
       background-size: cover;
       background-position: center center;
       //球队图标
@@ -103,6 +100,7 @@ page-my-team {
         margin-left: 100px;
         margin-top: -60px;
         color: #f2f2f2;
+        font-weight: bold;
       }
       //球队场地
       .team-place {
