@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
-import { TeamService } from '../../app/teams/team.service'
-import { Team } from '../../app/teams/team.model'
-import { PlayerService } from '../../app/players/player.service'
 import { MatchService } from '../../app/matches/match.service'
 import { Match } from '../../app/matches/match.model'
 import { SearchPlayerPage } from '../search-player/search-player'
 import { SearchMatchPage } from '../search-match/search-match'
 import { MatchDetailPage } from '../match-detail/match-detail'
+
+import { Player } from '../../app/players/player.model'
+import { PlayerService } from '../../app/players/player.service'
+import { Team } from '../../app/teams/team.model'
+import { TeamService } from '../../app/teams/team.service'
+
 import * as moment from 'moment';
 
 @Component({
@@ -16,6 +19,8 @@ import * as moment from 'moment';
 })
 export class MyTeamPage {
   first = [];
+  selfId: string;
+  selfPlayer: Player;
   id;
   team: Team = new Team();
   currTeamStat;
@@ -37,13 +42,21 @@ export class MyTeamPage {
 
   ionViewDidLoad() {
     this.addEventListeners();
+    this.selfId = this.playerService.selfId();
     this.id = this.navParams.get('id');
     this.service.increasePopularity(this.id);
+    this.playerService.getPlayerAsync(this.selfId);
     this.service.getTeamAsync(this.id, true);
     this.matchService.getTeamMatchesAsync(this.id);
   }
 
   addEventListeners() {
+    document.addEventListener('serviceplayerready', e => {
+      let id = e['detail'];
+      if (id == this.selfId)
+        this.selfPlayer = this.playerService.getPlayer(id);
+    });
+
     document.addEventListener('serviceteamstatsdataready', e => {
       //console.log(e);
       let teamId = e['detail'];
@@ -94,6 +107,14 @@ export class MyTeamPage {
       this.upcomingMatch = this.matches[index];
     }
   }
+
+  isMember() {
+    if (!this.selfPlayer)
+      return false;
+    
+    return this.selfPlayer.teams.indexOf(this.id) >= 0;
+  }
+
 
   //打开邀请
   invitePlayer() {

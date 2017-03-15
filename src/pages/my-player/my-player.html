@@ -3,10 +3,11 @@
 
     <ion-title text-center>{{'starcard' | trans}}</ion-title>
 
-    <ion-buttons end>
-      <button ion-button icon-only (click) = "enterChatPage()">
+    <ion-buttons right>
+      <button *ngIf="selfId != this.player.id" ion-button icon-only (click) = "enterChatPage()">
         <ion-icon name="md-chatbubbles" color="primary"></ion-icon>
       </button>
+      <sb-share-button *ngIf="selfId == this.player.id"></sb-share-button>
     </ion-buttons>
   </ion-navbar>
 
@@ -14,14 +15,14 @@
 
 
 <ion-content>
-  <ion-fab bottom right>
+  <!--ion-fab bottom right>
     <button ion-fab mini color="light"><ion-icon name="md-share"></ion-icon></button>
     <ion-fab-list side="left">
       <sb-fb-share-button></sb-fb-share-button>
       <sb-wechat-share-button [type]=1></sb-wechat-share-button>
       <sb-wechat-share-button [type]=0></sb-wechat-share-button>
     </ion-fab-list>
-  </ion-fab>
+  </ion-fab-->
 
   <!-->
   <sb-share-button></sb-share-button>

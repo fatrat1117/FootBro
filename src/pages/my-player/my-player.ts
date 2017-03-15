@@ -12,6 +12,7 @@ import { ChatPage } from '../chat/chat'
   templateUrl: 'my-player.html',
 })
 export class MyPlayerPage {
+  selfId: string;
   id;
   player = new Player();
   //af
@@ -32,6 +33,7 @@ export class MyPlayerPage {
   }
 
   ionViewDidLoad() {
+    this.selfId = this.service.selfId();
     document.addEventListener('serviceplayerready', e => {
       let id = e['detail'];
       if (this.id === id)

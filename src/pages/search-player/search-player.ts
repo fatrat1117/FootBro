@@ -26,7 +26,7 @@ export class SearchPlayerPage {
     this.showDetail = navParams.get('showDetail');
     this.showClose = navParams.get('showClose');
     this.selectPlayersMode = navParams.get('selectPlayersMode');
-    //if (this.selectPlayersMode) {
+   // if (this.selectPlayersMode) {
       let selectedIds = navParams.get('selectedIds');
       selectedIds.forEach(id => {
         this.addedPlayerMap[id] = true;

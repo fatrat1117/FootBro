@@ -1,10 +1,11 @@
 <ion-header>
   <ion-navbar no-padding swipeBackEnabled="false">
     <ion-title text-center>{{'TeamInfo' | trans}}</ion-title>
-    <ion-buttons end>
-      <button ion-button class="my-team-btn-right" (click)="invitePlayer()">
-        <ion-icon name="md-person-add"></ion-icon>
+    <ion-buttons *ngIf="isMember()" right>
+      <button ion-button icon-only class="my-team-btn-right" (click)="invitePlayer()">
+        <ion-icon color="iPrimary" name="md-person-add"></ion-icon>
       </button>
+      <sb-share-button></sb-share-button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
