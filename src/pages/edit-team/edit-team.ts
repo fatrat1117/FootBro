@@ -57,11 +57,13 @@ export class EditTeamPage {
   choosePlayer() {
     let modal = this.modalCtrl.create(SearchPlayerPage, {
       teamId: this.teamId,
+      showClose: true
     });
 
     modal.onDidDismiss(data => {
+      if (!data)
+        return;
       let player = this.playerService.getPlayer(data['playerId']);
-      console.log(player);
 
       if (player.id == this.playerService.selfId()) {
         this.toastCtrl.create({

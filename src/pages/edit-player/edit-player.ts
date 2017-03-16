@@ -8,8 +8,6 @@ import { EditPlayerPositionPage } from './edit-player-position'
 import { EditPlayerFootPage } from './edit-player-foot'
 import { EditPlayerDescriptionPage } from './edit-player-description'
 
-import { EditTeamPage } from '../edit-team/edit-team'
-
 import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
 import { Team } from '../../app/teams/team.model'
@@ -101,27 +99,4 @@ export class EditPlayerPage {
       description: this.player.description
     }).present();
   }
-
-/*
-  setDefaultTeam(id: string, slidingItem) {
-    slidingItem.close();
-    this.playerService.setDefaultTeam(id);
-    this.updatePlayerTeams();
-  }
-
-  quitTeam(id: string, slidingItem) {
-    slidingItem.close();
-    this.playerService.quitTeam(id);
-    this.teamService.getPlayerTeamsAsync(this.playerService.selfId());
-  }
-
-  editTeam(teamId: string, slidingItem) {
-    slidingItem.close();
-    this.modalCtrl.create(EditTeamPage, {
-      teamId: teamId
-    }).present();
-  }
-  */
 }
-
-

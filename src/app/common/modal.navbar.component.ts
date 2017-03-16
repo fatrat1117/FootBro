@@ -6,12 +6,12 @@ import { ViewController } from 'ionic-angular';
   template: `
   <ion-navbar>
     <ion-title>{{ title | trans }}</ion-title>
-    <ion-buttons start> <!--showWhen="ios"-->
-      <button (click)="dismiss()" text-center ion-button clear color="light">
-        {{ 'Cancel' | trans }}
+    <ion-buttons left>
+      <button (click)="dismiss()" ion-button icon-only>
+        <ion-icon name="md-close" color="danger"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons end *ngIf="buttonName">
+    <ion-buttons right *ngIf="buttonName">
       <button [disabled] = "!isEnabled" (click)="onFinishClick()" text-center ion-button clear color="primary">
         {{ buttonName | trans }}
       </button>

@@ -3,10 +3,9 @@
     <ion-title>
       Waiting.....
     </ion-title>
-    <ion-buttons start>
-      <button ion-button (click)="dismiss()">
-        <span ion-text color="primary" showWhen="ios">Cancel</span>
-        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+    <ion-buttons left>
+      <button (click)="dismiss()" ion-button icon-only>
+        <ion-icon name="md-close" color="danger"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>

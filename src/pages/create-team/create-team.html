@@ -6,7 +6,7 @@
         <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons end>
+    <ion-buttons right>
       <button [disabled] = "teamName.trim().length == 0 || busy" (click)="doCreateTeam()" text-center ion-button clear color="primary">
         {{ 'Save' | trans }}
       </button>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ViewController, ModalController } from 'ionic-angular';
+import { ViewController, NavController, ModalController } from 'ionic-angular';
 
 import { CreateTeamPage } from '../create-team/create-team'
 import { EditTeamPage } from '../edit-team/edit-team'
@@ -19,7 +19,7 @@ export class ManageTeamPage {
   selfId: string;
   player: Player;
   teams: Team[];
-  constructor(private viewCtrl: ViewController, private modalCtrl: ModalController, 
+  constructor(private viewCtrl: ViewController, private navCtrl: NavController, private modalCtrl: ModalController, 
               private playerService: PlayerService, private teamService: TeamService) {
 
     this.selfId = this.playerService.selfId();
@@ -62,9 +62,9 @@ export class ManageTeamPage {
 
   editTeam(teamId: string, slidingItem) {
     slidingItem.close();
-    this.modalCtrl.create(EditTeamPage, {
+    this.navCtrl.push(EditTeamPage, {
       teamId: teamId
-    }).present();
+    });
   }
 
   updatePlayerTeams() {
