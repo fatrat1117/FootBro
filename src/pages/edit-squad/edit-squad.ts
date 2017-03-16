@@ -27,7 +27,7 @@ export class EditSquadPage {
     this.squadSettings = {};
     this.squadSettings.editMode = true;
     this.squadSettings.matchId = this.match.id;
-    this.squadSettings.teamId = this.match.homeId;
+    this.squadSettings.teamId = this.teamId;
   }
 
   dismiss() {
