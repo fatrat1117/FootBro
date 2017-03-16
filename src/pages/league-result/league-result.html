@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>League Result</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="md-share" color="primary"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="league-stats-standing">
+    <ion-grid>
+      <ion-row no-margin>
+        <ion-col width-50>
+          <p text-center>
+            <label>{{'Team' | trans}}</label>
+          </p>
+        </ion-col>
+        <ion-col class="data-column">
+          <p><label>{{'P' | trans}}</label></p>
+        </ion-col>
+        <ion-col class="data-column">
+          <p><label>{{'W' | trans}}</label></p>
+        </ion-col>
+        <ion-col class="data-column">
+          <p><label>{{'D' | trans}}</label></p>
+        </ion-col>
+        <ion-col class="data-column">
+          <p><label>{{'L' | trans}}</label></p>
+        </ion-col>
+        <ion-col class="data-column-broad">
+          <p><label>{{'GFGA' | trans}}</label></p>
+        </ion-col>
+        <ion-col class="data-column">
+          <p><label>{{'PTS' | trans}}</label></p>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let s of matchStandings; let i = index;" no-margin>
+        <!--ion-col class="badge">
+              <ion-badge style="position:absolute;" color="sky">1</ion-badge>
+            </ion-col-->
+        <ion-col width-50>
+          <ion-thumbnail>
+            <img [src]="s?.team?.logo">
+          </ion-thumbnail>
+          <p text-left>
+            <ion-badge color="sky">{{ i+1 }}</ion-badge>
+            <label>{{ s?.team?.name }}</label>
+          </p>
+        </ion-col>
+        <ion-col class="data-column">
+          <p><label>{{s.P}}</label></p>
+        </ion-col>
+        <ion-col class="data-column">
+          <p><label>{{s.W}}</label></p>
+        </ion-col>
+        <ion-col class="data-column">
+          <p><label>{{s.D}}</label></p>
+        </ion-col>
+        <ion-col class="data-column">
+          <p><label>{{s.L}}</label></p>
+        </ion-col>
+        <ion-col class="data-column-broad">
+          <p><label>{{s.GS}}/{{s.GA}}</label></p>
+        </ion-col>
+        <ion-col class="data-column">
+          <p><label>{{s.PTS}}</label></p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

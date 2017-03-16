@@ -50,4 +50,26 @@
       </ion-col>
     </ion-card>
   </div>
+
+  <div *ngFor="let league of afTournamentList | async" class="card-background-page">
+    <ion-card (click) = "showLeagueResult(league.$key)">
+      <div class="card-title">{{ league.name }}</div>
+      <div class="card-bottom-banner">
+        <ion-row>
+          <ion-col class="left" center>
+            <ion-row class="title">
+              Subtitle
+            </ion-row>
+            <ion-row class="info">
+              <ion-icon name="md-calendar"></ion-icon>
+              Start Date
+            </ion-row>
+          </ion-col>
+          <ion-col class="right">
+            Show Result
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-card>
+  </div>
 </ion-content>

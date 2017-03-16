@@ -1,8 +1,6 @@
 <ion-header>
-  <ion-navbar no-padding>
-
+  <ion-navbar>
     <ion-title text-center>{{'starcard' | trans}}</ion-title>
-
     <ion-buttons right>
       <button *ngIf="selfId != this.player.id" ion-button icon-only (click) = "enterChatPage()">
         <ion-icon name="md-chatbubbles" color="primary"></ion-icon>

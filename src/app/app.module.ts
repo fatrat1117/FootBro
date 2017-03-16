@@ -23,6 +23,7 @@ import { EditTeamNamePage } from "../pages/edit-team/edit-team-name";
 import { ManageTeamPage } from "../pages/manage-team/manage-team";
 import { NewTeamPage } from "../pages/manage-team/new-team";
 import { LeagueInfoPage } from "../pages/league-info/league-info";
+import { LeagueResultPage } from "../pages/league-result/league-result";
 import { MyPlayerPage } from "../pages/my-player/my-player";
 import { FeedbackPage } from "../pages/feedback/feedback";
 import { MatchesPage } from "../pages/matches/matches";
@@ -87,6 +88,7 @@ export const firebaseConfig = {
     HomePage,
     TabsPage,
     LeagueInfoPage,
+    LeagueResultPage,
     MePage,
     MessagesPage,
     ChatPage,
@@ -158,6 +160,7 @@ export const firebaseConfig = {
     ContactPage,
     HomePage,
     LeagueInfoPage,
+    LeagueResultPage,
     TabsPage,
     MePage,
     MessagesPage,
