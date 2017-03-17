@@ -224,6 +224,7 @@ export class Localization {
             note: 'Please Note',
             starcard: 'Star Card',
             teamupdateonceandearnpoints: 'Upon confirming, you can not modify the match data again. You team will earn team %d points.',
+            teaminvitation: "%s invited you to join \"%s\". \n\nCopy this message and go back to \"SoccerBro\" to accept the invitation.\\n(%s)",
             bench: 'Substitutes',
             schedule: 'Schedule',
             share: 'Share'
@@ -432,6 +433,7 @@ export class Localization {
             note: '请注意',
             starcard: '球星卡',
             teamupdateonceandearnpoints: '确认之后你就不能够再修改比赛数据. 你的球队会得到%d积分',
+            teaminvitation: "%s 邀请你加入\“%s\”。\n复制这条信息，打开\“绿茵兄弟\”即可加入。\n(%s)",
             bench: '替补席',
             schedule: '赛程表',
             share: '分享'

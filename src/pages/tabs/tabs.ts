@@ -44,10 +44,7 @@ export class TabsPage {
     document.addEventListener('userlogin', e => {
       this.tab2Root = MessagesPage;
       this.tab3Root = MePage;
-      this.playerService.getPlayerAsync(this.playerService.selfId());
       this.messageService.prepareAllMessages();
-      //setTimeout(this.checkClipboard(), 500);
-      //this.checkClipboard();
     });
 
     document.addEventListener('userlogout', e => {
@@ -55,6 +52,10 @@ export class TabsPage {
       this.tab2Root = null;
       this.tab3Root = null;
       this.unreadCount = null;
+      
+      if (this.selfPlayer == null)
+        this.checkClipboard();
+
       this.selfPlayer = null;
     });
 
@@ -72,12 +73,6 @@ export class TabsPage {
 
     document.addEventListener('resume', e => {
       this.checkClipboard();
-    });
-
-    // Start app without login
-    this.platform.ready().then(() => {
-      if (!this.playerService.isAuthenticated())
-        this.checkClipboard();
     });
   }
 
@@ -105,15 +100,16 @@ export class TabsPage {
     let end = msg.lastIndexOf(')');
     if (start == -1 || end == -1)
       return;
-
+    
     let teamId = msg.substring(start + 1, end);
     if (this.selfPlayer && this.selfPlayer.teams.indexOf(teamId) >=0) // already team member
       return;
 
-    this.teamService.getAfPublicTeamName(teamId).subscribe(snapshot => {
+    let subscription = this.teamService.getAfPublicTeamName(teamId).subscribe(snapshot => {
       if (snapshot.$value)
         this.showJoinTeamAlert(teamId, snapshot.$value)
-    }).unsubscribe();
+      subscription.unsubscribe()
+    })
   }
 
   showJoinTeamAlert(teamId: string, teamName: string) {

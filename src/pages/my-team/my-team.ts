@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
-import { MatchService } from '../../app/matches/match.service'
-import { Match } from '../../app/matches/match.model'
+import { Clipboard } from 'ionic-native';
+import { NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
+import { Localization } from '../../providers/localization';
 import { SearchPlayerPage } from '../search-player/search-player'
 import { SearchMatchPage } from '../search-match/search-match'
 import { MatchDetailPage } from '../match-detail/match-detail'
@@ -10,8 +10,11 @@ import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
 import { Team } from '../../app/teams/team.model'
 import { TeamService } from '../../app/teams/team.service'
+import { Match } from '../../app/matches/match.model'
+import { MatchService } from '../../app/matches/match.service'
 
 import * as moment from 'moment';
+declare var sprintf: any;
 
 @Component({
   selector: 'page-my-team',
@@ -37,7 +40,9 @@ export class MyTeamPage {
     private service: TeamService,
     private playerService: PlayerService,
     private matchService: MatchService,
-    private modalCtrl : ModalController) {
+    private modalCtrl: ModalController,
+    private alertCtrl: AlertController,
+    private loc: Localization) {
   }
 
   ionViewDidLoad() {
@@ -118,7 +123,15 @@ export class MyTeamPage {
 
   //打开邀请
   invitePlayer() {
-    alert("invite");
+    let msg = sprintf(this.loc.getString('teaminvitation'), this.selfPlayer.name, this.team.name, this.team.id);
+    Clipboard.copy(msg);
+    let alert = this.alertCtrl.create({
+      title: this.loc.getString('SoccerBro'),
+      subTitle: msg,
+      buttons: [this.loc.getString('OK')]
+    });
+    alert.present();
+
   }
 
   //打开修改
