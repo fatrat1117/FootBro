@@ -24,10 +24,7 @@ export class LoginPage {
     })
     private cordovaOauth: OauthCordova = new OauthCordova();
 
-    constructor(public af: AngularFire,
-        public viewCtrl: ViewController,
-        private local: Localization
-    ) {
+    constructor(public af: AngularFire, public viewCtrl: ViewController, private local: Localization){
         this._credentials = {
             email: '',
             password: ''

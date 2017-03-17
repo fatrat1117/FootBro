@@ -409,6 +409,11 @@ export class FirebaseManager {
     this.af.database.object(`teams/${teamId}/basic-info/captain`).set(playerId);
   }
 
+  // for check team from clipboard
+  getAfTeamPublicName(teamId: string) {
+    return this.af.database.object(`/public/teams/${teamId}/name`);
+  }
+
 
 
 

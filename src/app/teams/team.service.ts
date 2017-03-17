@@ -239,4 +239,8 @@ export class TeamService {
   joinTeam(teamId, isDefault) {
     this.fm.joinTeam(teamId, isDefault);
   }
+
+  getAfPublicTeamName(teamId: string) {
+    return this.fm.getAfTeamPublicName(teamId);
+  }
 }
