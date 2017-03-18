@@ -779,7 +779,7 @@ export class FirebaseManager {
       this.FireCustomEvent('matchsquadready', detail);
     }
     else {
-      this.af.database.object(`/team_squads/${teamId}/matches/${matchId}`).subscribe(snapshot => {
+      this.af.database.object(this.getMatchSquadRef(teamId, matchId)).subscribe(snapshot => {
         if (snapshot.$exists()) {
           this.cachedSquads[teamId] = {};
           this.cachedSquads[teamId][matchId] = snapshot;
@@ -787,6 +787,15 @@ export class FirebaseManager {
         }
       });
     }
+  }
+
+  updateMatchParticipants(teamId, matchId, participants) {
+    this.af.database.object(this.getMatchSquadRef(teamId, matchId) + 'participants').set(participants);
+    this.af.database.object(this.getMatchSquadRef(teamId, matchId) + 'participantsConfirmed').set(true);
+  }
+
+  getMatchSquadRef(teamId, matchId) {
+    return `/team_squads/${teamId}/matches/${matchId}/`;
   }
 
   getTournamentTableList(id) {
