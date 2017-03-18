@@ -21,7 +21,7 @@ export class SquadPage implements OnInit, OnDestroy {
   substitutes = [];
   overflowMode = 'auto';
   uiPlayerMap = {};
-  onTeamMatchReady;
+  onMatchSquadReady;
   onPlayerReady;
 
   constructor(private matchService: MatchService,
@@ -30,7 +30,7 @@ export class SquadPage implements OnInit, OnDestroy {
     private uiHelper: UIHelper,
     private teamService: TeamService,
     public events: Events) {
-    this.onTeamMatchReady = (teamId, matchId) => {
+    this.onMatchSquadReady = (teamId, matchId) => {
       //console.log(teamId, matchId, this);
       if (teamId === this.settings.teamId && matchId === this.settings.matchId) {
         let squad = this.teamService.getMatchSquad(teamId, matchId);
@@ -59,7 +59,7 @@ export class SquadPage implements OnInit, OnDestroy {
       }
     }
 
-    events.subscribe('servicematchsquadready', this.onTeamMatchReady);
+    events.subscribe('servicematchsquadready', this.onMatchSquadReady);
 
     this.onPlayerReady = e => {
       let playerId = e['detail'];
@@ -228,7 +228,7 @@ export class SquadPage implements OnInit, OnDestroy {
 
   unsubscribeEvents() {
     //console.log('unsubscribeEvents', 'servicematchsquadready');
-    this.events.unsubscribe('servicematchsquadready', this.onTeamMatchReady);
+    this.events.unsubscribe('servicematchsquadready', this.onMatchSquadReady);
     document.removeEventListener('serviceplayerready', this.onPlayerReady);
   }
 
