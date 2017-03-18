@@ -8,14 +8,15 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content>
+<ion-content no-bounce>
   <ion-list>
-    <ion-item-sliding *ngFor="let t of teams" #slidingItem>
+    <ion-item-sliding *ngFor="let t of teams" #slidingItem (ionDrag)="onItemSwipe($event)">
       <ion-item>
         <ion-thumbnail item-left>
           <img [src]="t.logo">
         </ion-thumbnail>
         <h2 ion-text [color]="player.teamId == t.id ? 'primary' : 'none'">{{ t.name }}</h2>
+        <ion-icon name="ios-arrow-back" item-right></ion-icon>
       </ion-item>
       <ion-item-options side="right">
         <button *ngIf="player.teamId != t.id" ion-button color="primary" text-capitalize (click)="setDefaultTeam(t.id, slidingItem)">

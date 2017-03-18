@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{'updatematch' | trans}}</ion-title>
+    <ion-title>{{'rating' | trans}}</ion-title>
     <ion-buttons left>
       <button (click)="close()" color='danger' ion-button icon-only clear>
         <ion-icon name="md-close"></ion-icon>
@@ -14,5 +14,5 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-    <page-game-rating></page-game-rating>
+    <page-game-rating #ratingCtrl></page-game-rating>
 </ion-content>

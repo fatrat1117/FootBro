@@ -87,6 +87,11 @@ export class ManageTeamPage {
     model.present();
     */
   }
+
+  onItemSwipe(e) {
+    console.log(e);
+    
+  }
   
   /*
   setDefaultTeam(index: number, slidingItem) {

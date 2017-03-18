@@ -6,6 +6,7 @@ import { SharePage } from '../share/share';
 import { PlayerService } from '../../app/players/player.service'
 import { UpdateGamePage } from '../../pages/update-game/update-game'
 import { NewGamePage } from '../../pages/new-game/new-game'
+import { EditGameRatingPage } from '../edit-game-rating/edit-game-rating';
 
 @Component({
   selector: 'page-match-detail',
@@ -119,6 +120,9 @@ export class MatchDetailPage {
       case 'squad':
         this.modal.create(EditSquadPage, { match: this.match, teamId: this.squadSettings.teamId }).present();
         break;
+      case 'players':
+        this.modal.create(EditGameRatingPage, {teamId: this.squadSettings.teamId, matchId: this.match.id}).present();
+        break;
     }
   }
 
@@ -154,14 +158,12 @@ export class MatchDetailPage {
             return true;
         }
         break;
-      // case 'stats':
-      //   {
-      //     //captain can update stats
-      //     if (this.playerService.isCaptain(me, this.match.homeId) ||
-      //       this.playerService.isCaptain(me, this.match.awayId))
-      //       return true;
-      //   }
-      //   break;
+      case 'players':
+        {
+          //captain can update stats
+            return true;
+        }
+        //break;
       // case 'rating':
       //   break;
     }

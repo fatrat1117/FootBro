@@ -1,34 +1,5 @@
 page-my-player{
 //图片大小固定为: 6rem 正方形
- ion-header{
-
-    .toolbar-background-md{
-      border-color: #b2b2b2;
-      background: linear-gradient(to bottom, #444, #000);
-    }
-    .back-button{
-      color: #fff;
-    }
-    .my-player-btn-right{
-      color: #fff;
-    }
-
-
-    .toolbar-content {
-      position: relative;
-      left: 0;
-      right: 0;
-      margin-left: auto;
-      margin-right: auto;
-
-      .toolbar-title-md{
-        color: #fff !important;
-        font-size: 1.7rem;
-      }
-    }
-
-  }
-
   .prototype-spliter{
     background-color: #00ef00 ;
   }
