@@ -26,13 +26,13 @@ export class UpdateGamePage {
     matchTime;
     tournamentId;
     id;
-    homePlayers: PlayerMatchData[];
-    awayPlayers: PlayerMatchData[];
+    //homePlayers: PlayerMatchData[];
+    //awayPlayers: PlayerMatchData[];
     updateState = 3;
     myIdentity = 2; //0: home captain, 1: away captain, 2:others
     onMatchSquadReady;
     teamId;
-    participants = [];
+    participants: PlayerMatchData[];
 
     constructor(public navCtrl: NavController,
         private modalCtrl: ModalController,
@@ -51,7 +51,7 @@ export class UpdateGamePage {
         this.updateState = this.match.updateState();
         if (this.match.home.captain === this.playerService.selfId())
             this.myIdentity = 0;
-        else if  (this.match.away.captain === this.playerService.selfId())
+        else if (this.match.away.captain === this.playerService.selfId())
             this.myIdentity = 1;
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
         this.matchDate = helper.numberToDateString(this.match.date);
@@ -73,7 +73,26 @@ export class UpdateGamePage {
                 if ('participants' in squad)
                     this.copyParticipants(this.participants, squad.participants);
                 else {
-                    //get from lineup and subsititues
+                    //get from lineup and subsititutes
+                    if ('lineup' in squad) {
+                        squad.lineup.forEach(l => {
+                            if ('id' in l) {
+                                let player = new PlayerMatchData();
+                                player.id = l.id;
+                                this.playerService.findOrCreatePlayerAndPull(l.id);
+                                this.participants.push(player);
+                            }
+                        });
+                    }
+
+                    if ('subsititutes' in squad) {
+                        squad.subsititutes.forEach(s => {
+                            let player = new PlayerMatchData();
+                            player.id = s.id;
+                            this.playerService.findOrCreatePlayerAndPull(s.id);
+                            this.participants.push(player);
+                        });
+                    }
                 }
             }
         }
@@ -86,15 +105,15 @@ export class UpdateGamePage {
     }
 
     copyParticipants(target, source) {
-    if (source) {
-        target.splice(0);
-        source.forEach(p => {
-          let copy = Object.assign({}, p);
-          copy['player'] = this.playerService.findOrCreatePlayerAndPull(p.id);
-          target.push(copy);
-        })
-      }
-  }
+        if (source) {
+            target.splice(0);
+            source.forEach(p => {
+                let copy = Object.assign({}, p);
+                copy['player'] = this.playerService.findOrCreatePlayerAndPull(p.id);
+                target.push(copy);
+            })
+        }
+    }
 
     // //删除球员
     deleteTeamPlayer(player, e, players) {
@@ -147,7 +166,8 @@ export class UpdateGamePage {
     }
 
     updateMatch() {
-        let points = 100 + (0 === this.myIdentity ? this.homePlayers.length : this.awayPlayers.length) * 10;
+        //let points = 100 + (0 === this.myIdentity ? this.homePlayers.length : this.awayPlayers.length) * 10;
+        let points = 100 + this.participants.length * 10;
         let msg = sprintf(this.loc.getString('teamupdateonceandearnpoints'), points);
         let self = this;
         let confirm = this.alertCtrl.create({
@@ -171,11 +191,11 @@ export class UpdateGamePage {
     }
 
     doUpdateMatch() {
-        let copyHomeParticipants = this.copyAndUpdatePlayersData(this.homePlayers);
-        let copyAwayParticipants = this.copyAndUpdatePlayersData(this.awayPlayers);
+        // let copyHomeParticipants = this.copyAndUpdatePlayersData(this.homePlayers);
+        // let copyAwayParticipants = this.copyAndUpdatePlayersData(this.awayPlayers);
         let updateMatchData = {
-            homeParticipants: copyHomeParticipants,
-            awayParticipants: copyAwayParticipants,
+            // homeParticipants: copyHomeParticipants,
+            // awayParticipants: copyAwayParticipants,
         };
 
         let homeScoreStr = this.match.homeScore.toString().trim();
