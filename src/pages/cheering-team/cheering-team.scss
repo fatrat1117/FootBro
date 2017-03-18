@@ -116,8 +116,11 @@ page-cheering-team{
           }
         .chat-logo{
           position:absolute;
-          top: 0em;
-          right: 0.2em;
+          top: 0;
+          right: 0;
+          background-color: rgba(34, 34, 34, 0.6);
+          margin: 0;
+          border-radius: 0;
           //max-width: 1.8rem;
         }
         .img{

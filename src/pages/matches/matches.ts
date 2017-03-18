@@ -22,6 +22,10 @@ export class MatchesPage {
   //Key: year : String eg: 2014, 2017...
   //Value: selectedDate'index in dates : Number eg: 0 , 5 , 27....
   years = {};
+  onMatchDatesReady;
+  onMatchesByDateReady;
+  onTournamentTableReady;
+  onMatchesChanged;
 
   constructor(public navCtrl: NavController,
     private modalCtrl: ModalController,
@@ -75,9 +79,10 @@ export class MatchesPage {
   }
 
   addEventListeners() {
-    document.addEventListener('matchdatesready', e => {
+    this.onMatchDatesReady = e => {
       let id = e['detail'];
       this.dates = this.matchService.getMatchDates(id);
+      //console.log(this.dates);
       if (!this.selectedDate) {
         let self = this;
         setTimeout(() => {
@@ -86,25 +91,36 @@ export class MatchesPage {
         },
           1000);
       }
-    });
+    }
 
-    document.addEventListener('matchesbydateready', e => {
+    this.onMatchesByDateReady = e => {
       let date = e['detail'];
       this.matches = this.matchService.getMatchesByDate(date);
-      //console.log(this.matches);
-    });
+    }
 
-    document.addEventListener('servicetournamenttableready', e => {
+    this.onTournamentTableReady = e => {
       let tournamentId = e['detail'];
       if (tournamentId === this.selectedId)
         //console.log(tournamentId);
         this.matchStandings = this.matchService.getTournamentTable(tournamentId);
       //console.log(this.matchStandings);
-    });
+    };
 
-    document.addEventListener('matcheschanged', e => {
+    this.onMatchesChanged = e => {
       this.scrollToDate(this.selectedDate);
-    })
+    };
+
+    document.addEventListener('matchdatesready', this.onMatchDatesReady );
+    document.addEventListener('matchesbydateready', this.onMatchesByDateReady );
+    document.addEventListener('servicetournamenttableready', this.onTournamentTableReady);
+    document.addEventListener('matcheschanged', this.onMatchesChanged);
+  }
+
+  ionViewWillUnload() {
+    document.removeEventListener('matchdatesready', this.onMatchDatesReady );
+    document.removeEventListener('matchesbydateready', this.onMatchesByDateReady );
+    document.removeEventListener('servicetournamenttableready', this.onTournamentTableReady);
+    document.removeEventListener('matcheschanged', this.onMatchesChanged);
   }
 
   addYears() {

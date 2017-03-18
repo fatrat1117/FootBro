@@ -627,8 +627,9 @@ export class FirebaseManager {
     } else {
       if (id == "all") {
         let sub = this.afMatchDates().subscribe(snapshots => {
+          let r = snapshots.reverse();
           this.matchDatesMap[id] = [];
-          snapshots.forEach(snapshot => {
+          r.forEach(snapshot => {
             this.matchDatesMap[id].push(Number(snapshot.$key));
           });
           //sub.unsubscribe();
@@ -637,8 +638,9 @@ export class FirebaseManager {
       }
       else {
         let sub = this.afTournamentDates(id).subscribe(snapshots => {
+          let r = snapshots.reverse();
           this.matchDatesMap[id] = [];
-          snapshots.forEach(snapshot => {
+          r.forEach(snapshot => {
             this.matchDatesMap[id].push(Number(snapshot.$key));
           });
           //sub.unsubscribe();
