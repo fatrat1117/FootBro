@@ -35,5 +35,15 @@ page-rank {
     .sortby .item-inner{
       border-bottom: none;
     }
+      
+      .rank-team-items{
+          .rank-team-specs{
+              .rank-team-name{
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+              }
+          }
+      }
   }
 }
