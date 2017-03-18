@@ -89,17 +89,17 @@ export class MatchService {
     });
   }
 
-  copyParticipants(target, source) {
-    if (source) {
-        target.splice(0);
-        source.forEach(p => {
-          let copy = Object.assign({}, p);
-          copy['player'] = this.playerService.findOrCreatePlayer(p.id);
-          target.push(copy);
-          this.fm.getPlayerAsync(p.id);
-        })
-      }
-  }
+  // copyParticipants(target, source) {
+  //   if (source) {
+  //       target.splice(0);
+  //       source.forEach(p => {
+  //         let copy = Object.assign({}, p);
+  //         copy['player'] = this.playerService.findOrCreatePlayer(p.id);
+  //         target.push(copy);
+  //         this.fm.getPlayerAsync(p.id);
+  //       })
+  //     }
+  // }
   
   findOrCreateMatch(id): Match {
     let match;

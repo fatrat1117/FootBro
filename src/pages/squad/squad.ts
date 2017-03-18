@@ -35,14 +35,16 @@ export class SquadPage implements OnInit, OnDestroy {
       if (teamId === this.settings.teamId && matchId === this.settings.matchId) {
         let squad = this.teamService.getMatchSquad(teamId, matchId);
         this.setSquad(squad.lineup);
-        this.lineup.forEach(l => {
-          if ('id' in l) {
-            this.uiPlayerMap[l.id] = l;
-            let player = this.playerService.getPlayerAsync(l.id);
-            //l.photo = player.photo;
-            //l.name = player.name;
-          }
-        });
+        if (this.lineup) {
+          this.lineup.forEach(l => {
+            if ('id' in l) {
+              this.uiPlayerMap[l.id] = l;
+              let player = this.playerService.getPlayerAsync(l.id);
+              //l.photo = player.photo;
+              //l.name = player.name;
+            }
+          });
+        }
         this.substitutes.splice(0);
         if (squad.substitutes) {
           squad.substitutes.forEach(id => {
@@ -193,7 +195,7 @@ export class SquadPage implements OnInit, OnDestroy {
   addSubstitutes() {
     if (!this.settings.editMode)
       return;
-      
+
     let existingPlayers = this.getAddedPlayerIds();
 
     let modal = this.modal.create(SearchPlayerPage, {
