@@ -39,6 +39,7 @@ page-squad {
   .playersRow {
     display: -webkit-inline-box;
     overflow-x: auto;
+    overflow-y: hidden;
     height: 100%;
     padding: 5px;
     background-color: #2d2e32;
