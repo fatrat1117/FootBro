@@ -42,9 +42,13 @@ page-match-list {
         }
       }
       .right {
+        padding: 0px;
         min-width: 20%;
         max-width: 20%;
-        background: #20bd16;
+        button {
+          font-size: 90%;
+        }
+        //background: #20bd16;
       }
     }
   }
