@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'updatematch' | trans}}</ion-title>
+    <ion-buttons left>
+      <button (click)="close()" color='danger' ion-button icon-only clear>
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button (click)="ratePlayers()" color="primary" ion-button icon-only clear>
+        <ion-icon name="md-cloud-upload"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+    <page-game-rating></page-game-rating>
+</ion-content>

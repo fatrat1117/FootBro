@@ -175,4 +175,8 @@ export class MatchDetailPage {
     else
       this.modal.create(NewGamePage, { id: this.match.id}).present();
   }
+
+  canShowPlayersSegment() {
+    return true;
+  }
 }
