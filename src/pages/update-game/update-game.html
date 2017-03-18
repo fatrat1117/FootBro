@@ -77,15 +77,8 @@
       </div>
     </ion-item>-->
     
-  <div *ngIf="match?.home?.captain == playerService.selfId()">
-  <!-->
-  <ion-item class="game-info-item-team-title">
-    <button ion-button class="game-info-team-title-button">{{match?.home?.name}}
-      </button>
-  </ion-item>
-  <-->
-
-  <!-- home -->
+  <!--<div *ngIf="match?.home?.captain == playerService.selfId()">-->
+  <div>
   <ion-item class="game-info-item-team-title">
     <button ion-button disabled class="game-info-team-title-button">{{match?.home?.name}}
     </button>
@@ -93,14 +86,14 @@
 
   <ion-item class="game-info-item">
     <button ion-button item-left clear class="item-game-info-left-text">{{'participants' | trans}}</button>
-    <button ion-button item-right clear icon-right class="item-game-info-right-text" (click)='choosePlayers(match.homeId, homePlayers)'>
+    <button ion-button item-right clear icon-right class="item-game-info-right-text" (click)='choosePlayers(teamId, participants)'>
         <ion-icon name="md-add-circle"></ion-icon>
       </button>
   </ion-item>
 
-  <div class="content-expandable" *ngFor="let player of homePlayers">
+  <div class="content-expandable" *ngFor="let player of participants">
     <ion-item class="expandable-member-name" (click)="clickTeamMember(player)">
-      <button ion-button item-left icon-only clear (click)="deleteTeamPlayer(player, $event, homePlayers)">
+      <button ion-button item-left icon-only clear (click)="deleteTeamPlayer(player, $event, participants)">
           <ion-icon name="remove-circle" color="danger"></ion-icon>
         </button>
       <img [src]="player?.player?.photo" class="member-img" />
@@ -173,19 +166,7 @@
   </div>
 </div>
 
-<div *ngIf="match?.away?.captain == playerService.selfId()">
-  <ion-item class="game-info-item-team-title">
-    <button ion-button disabled class="game-info-team-title-button">{{match?.away?.name}}
-      </button>
-  </ion-item>
-
-  <ion-item class="game-info-item">
-    <button ion-button item-left clear class="item-game-info-left-text">{{'participants' | trans}}</button>
-    <button ion-button item-right clear icon-right class="item-game-info-right-text" (click)='choosePlayers(match.awayId, awayPlayers)'>
-        <ion-icon name="md-add-circle"></ion-icon>
-      </button>
-  </ion-item>
-  <!--away-->
+<!--<div *ngIf="match?.away?.captain == playerService.selfId()">
   <div class="content-expandable" *ngFor="let player of awayPlayers">
     <ion-item class="expandable-member-name" (click)="clickTeamMember(player)">
       <button ion-button item-left icon-only clear (click)="deleteTeamPlayer(player, $event, awayPlayers)">
@@ -258,7 +239,7 @@
       </div>
     </ion-item>
   </div>
-</div>
+</div>-->
 <!--<ion-item class="game-info-item-dark">
       <button ion-button clear color="light" icon-left item-left="">
         <ion-icon name="star"></ion-icon>

@@ -171,8 +171,8 @@ export class MatchDetailPage {
 
   goUpdateMatchPage() {
     if (this.match.isStarted())
-      this.modal.create(UpdateGamePage, { id: this.match.id }).present();
+      this.modal.create(UpdateGamePage, { id: this.match.id, teamId: this.squadSettings.teamId }).present();
     else
-      this.modal.create(NewGamePage, { id: this.match.id, teamId: this.squadSettings.teamId }).present();
+      this.modal.create(NewGamePage, { id: this.match.id}).present();
   }
 }

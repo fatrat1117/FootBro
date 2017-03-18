@@ -32,7 +32,7 @@ export class UpdateGamePage {
     myIdentity = 2; //0: home captain, 1: away captain, 2:others
     onMatchSquadReady;
     teamId;
-    participants: PlayerMatchData[];
+    participants: PlayerMatchData[] = [];
 
     constructor(public navCtrl: NavController,
         private modalCtrl: ModalController,
