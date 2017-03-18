@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header #matchHeader>
   <ion-navbar>
     <ion-title>{{ 'schedule' | trans }}</ion-title>
     <ion-buttons end>
@@ -26,7 +26,7 @@
   </ion-toolbar>
   <-->
 </ion-header>
-<ion-content no-bounce>
+<ion-content #matchContent no-bounce>
   <!-->
   <ion-fab top right edge>
     <button ion-fab mini (click)="enterNewGame()"><ion-icon color="dark" name="md-add"></ion-icon></button>
@@ -35,7 +35,7 @@
   <div [ngSwitch]="selectedInfo" [ngStyle]="{'height':'100%'}">
     <!-- schedule -->
     <div *ngSwitchCase="'schedule'" [ngStyle]="{'height':'100%'}">
-      <div class="left-scrollview matches-date-tab-col" id="sketchElement">
+      <div class="left-scrollview matches-date-tab-col" id="sketchElement" [ngStyle]="{'height.px': getMatchScrollHeight()}">
         <ion-list class="date-tab-list">
           <ion-item *ngFor="let date of dates;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (click)="showMatches(date)"
             [style.background]="selectedDate == date ? '#585F6F' : '#40444D'" [style.color]="selectedDate == date ? '#00ef00' : '#F2EDE7'"
@@ -49,7 +49,7 @@
           </ion-item>
         </ion-list>
       </div>
-      <div class="right-scrollview matches-match-info-col">
+      <div class="right-scrollview matches-match-info-col" [ngStyle]="{'height.px': getMatchScrollHeight()}">
         <ion-item *ngFor="let match of matches; let i = index" class="ionitem">
           <sb-match-basic [matchObj]="match"></sb-match-basic>
         </ion-item>

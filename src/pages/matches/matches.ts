@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Content, NavController, ModalController } from 'ionic-angular';
 import { Match } from '../../app/matches/match.model'
 import { MatchService } from '../../app/matches/match.service'
 import { NewGamePage } from "../new-game/new-game";
@@ -11,6 +11,9 @@ import * as moment from 'moment';
 })
 
 export class MatchesPage {
+  @ViewChild(Content) matchContent: Content;
+  @ViewChild('matchHeader') matchHeader;
+
   dates: number[];
   selectedDate: number;
   matches;
@@ -40,9 +43,15 @@ export class MatchesPage {
     this.addEventListeners();
     this.matchService.getMatchDatesAsync("all");
 
+    
+
     // this.matchService.getMatchStandings("test_league_id").then(matchStandings => {
     //   this.matchStandings = matchStandings;
     // });
+  }
+
+  getMatchScrollHeight() {
+    return this.matchContent.scrollHeight - this.matchHeader.nativeElement.clientHeight;
   }
 
   scrollToDate(date) {
