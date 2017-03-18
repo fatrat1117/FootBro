@@ -99,7 +99,6 @@ export class OneSignalManager {
 
   /****************************** Cheerleaders ******************************/
   cheerleaderApproved(id: string, pushId: string) {
-    this.p
     let message = {
         'en': "Welcome to join SoccerBro Cheerleaders!",
         'zh-Hans': "欢迎加入拉拉队！" 
