@@ -73,23 +73,23 @@ export class UpdateGamePage {
                 if ('participants' in squad)
                     this.copyParticipants(this.participants, squad.participants);
                 else {
-                    //get from lineup and subsititutes
+                    //get from lineup and substitutes
                     if ('lineup' in squad) {
                         squad.lineup.forEach(l => {
                             if ('id' in l) {
                                 let player = new PlayerMatchData();
                                 player.id = l.id;
-                                this.playerService.findOrCreatePlayerAndPull(l.id);
+                                player.player = this.playerService.findOrCreatePlayerAndPull(l.id);
                                 this.participants.push(player);
                             }
                         });
                     }
 
-                    if ('subsititutes' in squad) {
-                        squad.subsititutes.forEach(s => {
+                    if ('substitutes' in squad) {
+                        squad.substitutes.forEach(id => {
                             let player = new PlayerMatchData();
-                            player.id = s.id;
-                            this.playerService.findOrCreatePlayerAndPull(s.id);
+                            player.id = id;
+                            player.player = this.playerService.findOrCreatePlayerAndPull(id);
                             this.participants.push(player);
                         });
                     }
