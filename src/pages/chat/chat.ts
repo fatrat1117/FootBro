@@ -63,7 +63,7 @@ export class ChatPage {
   }
 
   sendMessage(input) {
-    this.chatService.sendChat(this.user.id, this.user.pushId, this.user.name, this.newMessage);
+    this.chatService.sendChat(this.user.id, this.user.pushId, this.newMessage);
     input.focus();
     this.newMessage = '';
     //input.setFocus();

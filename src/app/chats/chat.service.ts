@@ -29,9 +29,9 @@ export class ChatService {
     this.sizeSubject.next(this.currentSize)
   }
 
-  sendChat(id: string, pushId: string, name: string, content: string) {
+  sendChat(id: string, pushId: string, content: string) {
     //this.fm.addChatToUser(userId, content);
-    this.osm.sendNewChat(id, pushId, name, content)
+    this.osm.sendNewChat(id, pushId, content)
   }
 
   updateUnread(userId: string, isUnread: boolean) {

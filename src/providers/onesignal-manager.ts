@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { OneSignal } from 'ionic-native';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { Platform } from 'ionic-angular';
-import { MessagesPage } from "../pages/messages/messages";
 
 import * as firebase from 'firebase';
 
 import { FirebaseManager } from './firebase-manager';
+import { PlayerService } from '../app/players/player.service';
 
 @Injectable()
 export class OneSignalManager {
-  constructor(private platform: Platform, private fm: FirebaseManager) {
+  constructor(private platform: Platform, private fm: FirebaseManager, private playerService: PlayerService) {
 
   }
 
@@ -76,10 +76,13 @@ export class OneSignalManager {
 
 
   /****************************** Cheerleaders ******************************/
-  sendNewChat(id: string, pushId: string, name: string, content: string) {
+  sendNewChat(id: string, pushId: string, content: string) {
+    let player = this.playerService.getPlayer(this.playerService.selfId());
+    if (!player || !player.name)
+      return
     let message = {
-      'en': `${name} sent you a new message.`,
-      'zh-Hans': `${name} 向你发送了一条新信息.`
+      'en': `${player.name} sent you a new message.`,
+      'zh-Hans': `${player.name} 向你发送了一条新信息.`
     };
 
     let self = this;
@@ -96,6 +99,7 @@ export class OneSignalManager {
 
   /****************************** Cheerleaders ******************************/
   cheerleaderApproved(id: string, pushId: string) {
+    this.p
     let message = {
         'en': "Welcome to join SoccerBro Cheerleaders!",
         'zh-Hans': "欢迎加入拉拉队！" 
