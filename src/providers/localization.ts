@@ -227,7 +227,10 @@ export class Localization {
             teaminvitation: "%s invited you to join \"%s\". \n\nCopy this message and go back to \"SoccerBro\" to accept the invitation.\\n(%s)",
             bench: 'Substitutes',
             schedule: 'Schedule',
-            share: 'Share'
+            share: 'Share',
+            join: 'Join',
+            teamInvitation: 'Team invitation',
+            teamJoinSuccess: 'Welcome to ',
         },
 
         zh: {
@@ -436,7 +439,10 @@ export class Localization {
             teaminvitation: "%s 邀请你加入\“%s\”。\n复制这条信息，打开\“绿茵兄弟\”即可加入。\n(%s)",
             bench: '替补席',
             schedule: '赛程表',
-            share: '分享'
+            share: '分享',
+            join: '加入',
+            teamInvitation: '球队邀请',
+            teamJoinSuccess: '欢迎加入 ',
         }
     }
 }
