@@ -131,6 +131,7 @@ export class TabsPage {
         {
           text: this.local.getString("Cancel"),
           handler: () => {
+            Clipboard.copy("");
           }
         }
       ]

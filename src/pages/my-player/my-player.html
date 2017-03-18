@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title text-center>{{'starcard' | trans}}</ion-title>
+    <ion-title>{{'starcard' | trans}}</ion-title>
     <ion-buttons right>
       <button *ngIf="selfId != this.player.id" ion-button icon-only (click) = "enterChatPage()">
         <ion-icon name="md-chatbubbles" color="primary"></ion-icon>
@@ -61,11 +61,11 @@
       
     </div>
 
-    <ion-row class="player-statistics clearfloat">
-                <div class="company-logo">
-        <img src="assets/img/forTest/box.png">
-        <h4 no-margin>SoccerBro</h4>
-      </div>
+      <ion-row class="player-statistics clearfloat">
+        <div class="company-logo">
+          <img src="assets/img/forTest/box.png">
+          <h4 no-margin>SoccerBro</h4>
+        </div>
       <ion-col no-padding class="block height">
         <div class="flex-center txt height-inner">
           <ion-col no-padding width-50 class="fl flex-end data">177</ion-col>
