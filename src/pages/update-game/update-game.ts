@@ -30,6 +30,7 @@ export class UpdateGamePage {
     awayPlayers: PlayerMatchData[];
     updateState = 3;
     myIdentity = 2; //0: home captain, 1: away captain, 2:others
+    onMatchSquadReady;
 
     constructor(public navCtrl: NavController,
         private modalCtrl: ModalController,
@@ -76,29 +77,21 @@ export class UpdateGamePage {
         // player.hidden = !player.hidden;
     }
 
+    ionViewDidLoad() {
+        this.onMatchSquadReady = (teamId, matchId) => {
+            
+        }
+    }
+
+    ionViewWillLeave() {
+
+    }
+
     // //删除球员
     deleteTeamPlayer(player, e, players) {
         e.stopPropagation();
         players.splice(players.indexOf(player), 1);
     }
-
-    //减少得分
-    // minusScore(item) {
-    //     if (item.number > 0) {
-    //         item.number = item.number - 1;
-    //         if (item.number == 0) {
-    //             item.color = "light";
-    //         } else {
-    //             item.color = "secondary";
-    //         }
-    //     }
-    // }
-    // //增加得分
-    // addScore(item) {
-    //     item.number = item.number + 1;
-    //     item.color = "secondary";
-    // }
-    //更新数据
 
     minus(player, key) {
         --player[key];
