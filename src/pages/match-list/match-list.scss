@@ -26,12 +26,14 @@ page-match-list {
       bottom: 0px;
       right: 0px;
       .left {
-        min-width: 80%;
-        max-width: 80%;
+//        min-width: 80%;
+//        max-width: 80%;
+          flex:4;
         padding: 0px;
         .title {
           font-size: 80%;
           color: #f4c20d;
+            text-align: start;
         }
         .info {
           font-size: 80%;
@@ -43,8 +45,9 @@ page-match-list {
       }
       .right {
         padding: 0px;
-        min-width: 20%;
-        max-width: 20%;
+          flex:1;
+//        min-width: 20%;
+//        max-width: 20%;
         button {
           font-size: 90%;
         }
