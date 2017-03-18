@@ -34,46 +34,42 @@
         </ion-select>
       </ion-item>
       <ion-list>
-        <ion-item *ngFor="let t of teamRanks; let i = index;" style="margin-bottom:10px" text-wrap (click)='goTeamPage(t.id)'
-                  class="rank-team-items">
+        <ion-item *ngFor="let t of teamRanks; let i = index;" style="margin-bottom:10px" text-wrap (click)='goTeamPage(t.id)' class="rank-team-items">
           <ion-row>
             <ion-col width-25>
-            <ion-thumbnail item-left>
-            <img [src]="t.logo">
-                
-          </ion-thumbnail>
+              <ion-thumbnail item-left>
+                <img [src]="t.logo">
+              </ion-thumbnail>
+              <ion-badge class="rank-badge" color="sky">{{ i+1 }}</ion-badge>
             </ion-col>
-              <ion-col width-75 class="rank-team-specs">
-                  <ion-row>
-                      <ion-col width-20>
-          <ion-badge style="position:absolute;" color="sky">{{ i+1 }}</ion-badge>
-                          </ion-col>
-                      <ion-col width-80>
-          <h2 text-center class="rank-team-name">
-            {{t.name}}
-          </h2>
-                          </ion-col>
-                    </ion-row>
-          <ion-row>
-            <ion-col width-33>
-              <p text-center>
-                <ion-icon name='md-football' [color]="teamSortByStr=='ability' ? 'gYellow' : 'none'"></ion-icon>
-                &nbsp;{{'Ability' | trans}}</p>
-              <p text-center ion-text [color]="teamSortByStr=='ability' ? 'secondary' : 'primary-text'">{{t.ability}}</p>
-            </ion-col>
-            <ion-col width-33>
-              <p text-center>
-                <ion-icon name='md-people'></ion-icon>&nbsp;{{'Players' | trans}}</p>
-              <p text-center ion-text color="primary-text">{{t.totalPlayers}}</p>
-            </ion-col>
-            <ion-col width-33>
-              <p text-center>
-                <ion-icon name='md-flame' [color]="teamSortByStr=='popularity' ? 'danger' : 'none'"></ion-icon>&nbsp;{{'Popularity' | trans}}</p>
-              <p text-center ion-text [color]="teamSortByStr=='popularity' ? 'secondary' : 'primary-text'">{{t.popularity}}</p>
+            <ion-col width-75 class="rank-team-specs">
+              <ion-row>
+                <ion-col>
+                  <h2 text-center class="rank-team-name">
+                    {{t.name}}
+                  </h2>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col width-33>
+                  <p text-center>
+                    <ion-icon name='md-football' [color]="teamSortByStr=='ability' ? 'gYellow' : 'none'"></ion-icon>
+                    &nbsp;{{'Ability' | trans}}</p>
+                  <p text-center ion-text [color]="teamSortByStr=='ability' ? 'secondary' : 'primary-text'">{{t.ability}}</p>
+                </ion-col>
+                <ion-col width-33>
+                  <p text-center>
+                    <ion-icon name='md-people'></ion-icon>&nbsp;{{'Players' | trans}}</p>
+                  <p text-center ion-text color="primary-text">{{t.totalPlayers}}</p>
+                </ion-col>
+                <ion-col width-33>
+                  <p text-center>
+                    <ion-icon name='md-flame' [color]="teamSortByStr=='popularity' ? 'danger' : 'none'"></ion-icon>&nbsp;{{'Popularity' | trans}}</p>
+                  <p text-center ion-text [color]="teamSortByStr=='popularity' ? 'secondary' : 'primary-text'">{{t.popularity}}</p>
+                </ion-col>
+              </ion-row>
             </ion-col>
           </ion-row>
-                  </ion-col>
-        </ion-row>
         </ion-item>
       </ion-list>
       <ion-infinite-scroll (ionInfinite)="moreTeam($event)">
@@ -84,16 +80,16 @@
     <div *ngSwitchCase="'players'">
       <ion-list>
         <ion-item *ngFor="let p of playerRanks; let i = index;" (click)="goPlayerPage(p.id)" style="margin-bottom:10px" text-wrap
-                  class="rank-player-items">
+          class="rank-player-items">
           <ion-avatar item-left>
             <img [src]="p.photo">
           </ion-avatar>
           <ion-row center class="rank-player-specs">
             <ion-col class="badge">
-                <ion-badge color="sky">{{ i+1 }}</ion-badge>
-                </ion-col>
+              <ion-badge color="sky">{{ i+1 }}</ion-badge>
+            </ion-col>
             <ion-col class="name">
-                {{p.name}}
+              {{p.name}}
             </ion-col>
             <ion-col class="position" text-center>
               {{p.position | uppercase | trans}}

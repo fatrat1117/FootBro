@@ -44,6 +44,11 @@ page-rank {
                   text-overflow: ellipsis;
               }
           }
+          .rank-badge {
+            position:absolute;
+            top: 0px;
+            right: 0px;
+          }
       }
       
       .rank-player-items{
