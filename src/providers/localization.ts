@@ -231,7 +231,8 @@ export class Localization {
             join: 'Join',
             teamInvitation: 'Team invitation',
             teamJoinSuccess: 'Welcome to ',
-            stats: 'stats'
+            stats: 'stats',
+            owngoals: 'own goals'
         },
 
         zh: {
@@ -444,7 +445,8 @@ export class Localization {
             join: '加入',
             teamInvitation: '球队邀请',
             teamJoinSuccess: '欢迎加入 ',
-            stats: '技术统计'
+            stats: '技术统计',
+            owngoals: '乌龙球'
         }
     }
 }
