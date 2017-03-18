@@ -64,7 +64,12 @@ page-rank {
                   flex:2;
               }
               .popularity{
-                  flex:2;
+                  display: flex;
+                  flex:4;
+                  justify-content: flex-end;
+                  span{
+                      padding-left: 0.3rem;
+                  }
               }
           }
          
