@@ -22,42 +22,44 @@
   <ion-row class="team-info">
     <ion-col width-33 (click)="searchTeam(1)">
       <ion-row>
-        <button ion-button icon-left clear full style="margin:0px;padding:0px;" color="light"
-                class="select-team-btn">
+        <button ion-button icon-left clear full style="margin:0px;padding:0px;" color="light" class="select-team-btn">
           <ion-icon name="md-flag" color="danger"></ion-icon>
           <span>{{'HomeTeam' | trans}}</span>
         </button>
       </ion-row>
-      <ion-row><p class="team-name">{{match?.home?.name}}</p></ion-row>
+      <ion-row>
+        <p class="team-name">{{match?.home?.name}}</p>
+      </ion-row>
     </ion-col>
 
     <ion-col width-33>
       <ion-row center class="score-item">
-      <ion-col class="team-score">
-        <ion-input class="score-input" text-center type="number" min="0" max="99"[(ngModel)]="match.homeScore"></ion-input>
-      </ion-col>
-      <ion-col class="colon" text-center>
-        :
-      </ion-col>
-      <ion-col class="team-score">
-        <ion-input class="score-input" text-center type="number" min="0" max="99"[(ngModel)]="match.awayScore"></ion-input>
-      </ion-col>
+        <ion-col class="team-score">
+          <ion-input class="score-input" text-center type="number" min="0" max="99" [(ngModel)]="match.homeScore"></ion-input>
+        </ion-col>
+        <ion-col class="colon" text-center>
+          :
+        </ion-col>
+        <ion-col class="team-score">
+          <ion-input class="score-input" text-center type="number" min="0" max="99" [(ngModel)]="match.awayScore"></ion-input>
+        </ion-col>
       </ion-row>
     </ion-col>
 
     <ion-col width-33 (click)="searchTeam(2)">
       <ion-row>
-        <button ion-button icon-left clear full style="margin:0px;padding:0px;" color="light"
-                class="select-team-btn">
+        <button ion-button icon-left clear full style="margin:0px;padding:0px;" color="light" class="select-team-btn">
           <ion-icon name="md-flag" color="primary"></ion-icon>
           <span>{{'AwayTeam' | trans}}</span>
         </button>
       </ion-row>
-      <ion-row><p class="team-name">{{match?.away?.name}}</p></ion-row>
+      <ion-row>
+        <p class="team-name">{{match?.away?.name}}</p>
+      </ion-row>
     </ion-col>
   </ion-row>
 
-<ion-list no-lines class="content-game-info">
+  <ion-list no-lines class="content-game-info">
     <!--<ion-item class="game-info-item-light">
       <button ion-button clear full class="game-info-item-left" item-left>{{'Location' | trans}}</button>
       <div class="game-info-item-right-gray" item-right text-center>
@@ -78,112 +80,112 @@
         <ion-datetime text-center displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="matchTime"></ion-datetime>
       </div>
     </ion-item>-->
-    
-  <!--<div *ngIf="match?.home?.captain == playerService.selfId()">-->
-  <div>
-  <ion-item class="game-info-item-team-title">
-    <button ion-button disabled class="game-info-team-title-button">{{match?.home?.name}}
-    </button>
-  </ion-item>
 
-  <ion-item class="game-info-item">
-    <button ion-button item-left clear class="item-game-info-left-text">{{'participants' | trans}}</button>
-    <button ion-button item-right clear icon-right class="item-game-info-right-text" (click)='choosePlayers(teamId, participants)'>
+    <!--<div *ngIf="match?.home?.captain == playerService.selfId()">-->
+    <div>
+      <ion-item class="game-info-item-team-title">
+        <button ion-button disabled class="game-info-team-title-button">{{match?.home?.name}}
+    </button>
+      </ion-item>
+
+      <ion-item class="game-info-item">
+        <button ion-button item-left clear class="item-game-info-left-text">{{'participants' | trans}}</button>
+        <button ion-button item-right clear icon-right class="item-game-info-right-text" (click)='choosePlayers(teamId, participants)'>
         <ion-icon name="md-add-circle"></ion-icon>
       </button>
-  </ion-item>
+      </ion-item>
 
-  <div class="content-expandable" *ngFor="let player of participants">
-    <ion-item class="expandable-member-name" (click)="clickTeamMember(player)">
-      <button ion-button item-left icon-only clear (click)="deleteTeamPlayer(player, $event, participants)">
-          <ion-icon name="remove-circle" color="danger"></ion-icon>
-        </button>
-      <img [src]="player?.player?.photo" class="member-img" />
-      <button ion-button item-right icon-right clear color="light">
-          {{player?.player?.name}}
-          <ion-icon [name]="player.expanded ? 'ios-arrow-down' : 'ios-arrow-back'"></ion-icon>
-        </button>
-    </ion-item>
-    <!--<ion-item class="expandable-member-property" *ngFor="let item of player.items" [hidden]="player.hidden">-->
-    <ion-item class="expandable-member-property" [hidden]="!player.expanded">
-      <img src="assets/icon/b2.png" class="desc-img" item-left/>
-      <button ion-button clear color="light">{{'Goals' | trans}}</button>
-      <div item-right>
-        <button [disabled]="player.goals <= 0" ion-button icon-only clear (click)="minus(player, 'goals')" color="light">
+      <div class="content-expandable" *ngFor="let player of participants">
+        <ion-item class="expandable-member-name" (click)="clickTeamMember(player)">
+          <button ion-button item-left icon-only clear (click)="deleteTeamPlayer(player, $event, participants)">
+            <ion-icon name="remove-circle" color="danger"></ion-icon>
+            <img [src]="player?.player?.photo" class="member-img" />
+          </button>
+          <button ion-button item-right icon-right clear color="light">
+            <p class="player-name">{{player?.player?.name}}</p>
+            <ion-icon [name]="player.expanded ? 'ios-arrow-down' : 'ios-arrow-back'"></ion-icon>
+          </button>
+        </ion-item>
+        <!--<ion-item class="expandable-member-property" *ngFor="let item of player.items" [hidden]="player.hidden">-->
+        <ion-item class="expandable-member-property" [hidden]="!player.expanded">
+          <img src="assets/icon/b2.png" class="desc-img" item-left/>
+          <button ion-button clear color="light">{{'Goals' | trans}}</button>
+          <div item-right>
+            <button [disabled]="player.goals <= 0" ion-button icon-only clear (click)="minus(player, 'goals')" color="light">
             <ion-icon name="md-arrow-dropleft"></ion-icon>
           </button>
-        <button ion-button clear color="secondary">
+            <button ion-button clear color="secondary">
             {{player.goals}}
           </button>
-        <button ion-button icon-only clear (click)="plus(player, 'goals')">
+            <button ion-button icon-only clear (click)="plus(player, 'goals')">
             <ion-icon name="md-arrow-dropright" color="secondary"></ion-icon>
           </button>
-      </div>
-    </ion-item>
-    <ion-item class="expandable-member-property" [hidden]="!player.expanded">
-      <img src="assets/icon/b3.png" class="desc-img" item-left/>
-      <button ion-button clear color="light">{{'Assists' | trans}}</button>
-      <div item-right>
-        <button [disabled]="player.assists <= 0" ion-button icon-only clear (click)="minus(player, 'assists')" color="light">
+          </div>
+        </ion-item>
+        <ion-item class="expandable-member-property" [hidden]="!player.expanded">
+          <img src="assets/icon/b3.png" class="desc-img" item-left/>
+          <button ion-button clear color="light">{{'Assists' | trans}}</button>
+          <div item-right>
+            <button [disabled]="player.assists <= 0" ion-button icon-only clear (click)="minus(player, 'assists')" color="light">
             <ion-icon name="md-arrow-dropleft"></ion-icon>
           </button>
-        <button ion-button clear color="secondary">
+            <button ion-button clear color="secondary">
             {{player.assists}}
           </button>
-        <button ion-button icon-only clear (click)="plus(player,  'assists')">
+            <button ion-button icon-only clear (click)="plus(player,  'assists')">
             <ion-icon name="md-arrow-dropright" color="secondary"></ion-icon>
           </button>
-      </div>
-    </ion-item>
-    <ion-item class="expandable-member-property" [hidden]="!player.expanded">
-      <img src="assets/img/match_detail/yellowcard.png" class="desc-img" item-left/>
-      <button ion-button clear color="light">{{'Yellowcard' | trans}}</button>
-      <div item-right>
-        <button [disabled]="player.yellows <= 0" ion-button icon-only clear (click)="minus(player, 'yellows')" color="light">
+          </div>
+        </ion-item>
+        <ion-item class="expandable-member-property" [hidden]="!player.expanded">
+          <img src="assets/img/match_detail/yellowcard.png" class="desc-img" item-left/>
+          <button ion-button clear color="light">{{'Yellowcard' | trans}}</button>
+          <div item-right>
+            <button [disabled]="player.yellows <= 0" ion-button icon-only clear (click)="minus(player, 'yellows')" color="light">
             <ion-icon name="md-arrow-dropleft"></ion-icon>
           </button>
-        <button ion-button clear color="secondary">
+            <button ion-button clear color="secondary">
             {{player.yellows}}
           </button>
-        <button [disabled]="player.yellows > 1" ion-button icon-only clear (click)="plus(player, 'yellows')">
+            <button [disabled]="player.yellows > 1" ion-button icon-only clear (click)="plus(player, 'yellows')">
             <ion-icon name="md-arrow-dropright" color="secondary"></ion-icon>
           </button>
-      </div>
-    </ion-item>
-    <ion-item class="expandable-member-property" [hidden]="!player.expanded">
-      <img src="assets/img/match_detail/redcard.png" class="desc-img" item-left/>
-      <button ion-button clear color="light">{{'Redcard' | trans}}</button>
-      <div item-right>
-        <button [disabled]="player.reds <= 0" ion-button icon-only clear (click)="minus(player, 'reds')" color="light">
+          </div>
+        </ion-item>
+        <ion-item class="expandable-member-property" [hidden]="!player.expanded">
+          <img src="assets/img/match_detail/redcard.png" class="desc-img" item-left/>
+          <button ion-button clear color="light">{{'Redcard' | trans}}</button>
+          <div item-right>
+            <button [disabled]="player.reds <= 0" ion-button icon-only clear (click)="minus(player, 'reds')" color="light">
             <ion-icon name="md-arrow-dropleft"></ion-icon>
           </button>
-        <button ion-button clear color="secondary">
+            <button ion-button clear color="secondary">
             {{player.reds}}
           </button>
-        <button [disabled]="player.reds > 0" ion-button icon-only clear (click)="plus(player, 'reds')">
+            <button [disabled]="player.reds > 0" ion-button icon-only clear (click)="plus(player, 'reds')">
             <ion-icon name="md-arrow-dropright" color="secondary"></ion-icon>
           </button>
-      </div>
-    </ion-item>
-    <ion-item class="expandable-member-property" [hidden]="!player.expanded">
-      <img src="assets/icon/b2.png" class="desc-img" item-left/>
-      <button ion-button clear color="light">{{'owngoals' | trans}}</button>
-      <div item-right>
-        <button [disabled]="player.owngoals <= 0" ion-button icon-only clear (click)="minus(player, 'owngoals')" color="light">
+          </div>
+        </ion-item>
+        <ion-item class="expandable-member-property" [hidden]="!player.expanded">
+          <img src="assets/icon/b2.png" class="desc-img" item-left/>
+          <button ion-button clear color="light">{{'owngoals' | trans}}</button>
+          <div item-right>
+            <button [disabled]="player.owngoals <= 0" ion-button icon-only clear (click)="minus(player, 'owngoals')" color="light">
             <ion-icon name="md-arrow-dropleft"></ion-icon>
           </button>
-        <button ion-button clear color="secondary">
+            <button ion-button clear color="secondary">
             {{player.owngoals}}
           </button>
-        <button [disabled]="player.owngoals > 3" ion-button icon-only clear (click)="plus(player, 'owngoals')">
+            <button [disabled]="player.owngoals > 3" ion-button icon-only clear (click)="plus(player, 'owngoals')">
             <ion-icon name="md-arrow-dropright" color="secondary"></ion-icon>
           </button>
+          </div>
+        </ion-item>
       </div>
-    </ion-item>
-  </div>
-</div>
+    </div>
 
-<!--<div *ngIf="match?.away?.captain == playerService.selfId()">
+    <!--<div *ngIf="match?.away?.captain == playerService.selfId()">
   <div class="content-expandable" *ngFor="let player of awayPlayers">
     <ion-item class="expandable-member-name" (click)="clickTeamMember(player)">
       <button ion-button item-left icon-only clear (click)="deleteTeamPlayer(player, $event, awayPlayers)">
@@ -257,7 +259,7 @@
     </ion-item>
   </div>
 </div>-->
-<!--<ion-item class="game-info-item-dark">
+    <!--<ion-item class="game-info-item-dark">
       <button ion-button clear color="light" icon-left item-left="">
         <ion-icon name="star"></ion-icon>
         {{Re}}
@@ -272,5 +274,5 @@
       <ion-input type="text" style="height:100%;width: 100px;" item-right></ion-input>
 
     </ion-item>-->
-</ion-list>
+  </ion-list>
 </ion-content>

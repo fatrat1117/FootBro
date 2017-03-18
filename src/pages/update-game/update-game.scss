@@ -234,6 +234,12 @@ page-update-game {
     }
     
     .content-expandable{
+      .player-name {
+        color: white;
+        text-overflow: ellipsis;
+        white-space: no-wrap;
+        overflow: hidden;
+      }
       //样式一
       .expandable-member-name{
         padding: 0px 0px 0px 10px;
@@ -244,6 +250,7 @@ page-update-game {
           width: 30px;
           height:30px;
           border-radius:10%;
+          margin-left: 5px;
         }
       }
       .expandable-member-property{
