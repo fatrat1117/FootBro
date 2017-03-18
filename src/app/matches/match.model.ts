@@ -23,8 +23,6 @@ export class Match {
   tournamentId;
   location = new MatchLocation();
   createBy;
-  homeParticipants = [];
-  awayParticipants = [];
   isHomeUpdated;
   isAwayUpdated;
   homeSquad;

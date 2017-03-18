@@ -12,18 +12,15 @@
       <ion-segment-button *ngIf='canShowSquadSegment()' value="squad">
         {{'squad' | trans}}
       </ion-segment-button>
+      <ion-segment-button *ngIf='canShowPlayersSegment()' value="players">
+        {{'Players' | trans}}
+      </ion-segment-button>
     </ion-segment>
     <ion-buttons right>
       <button  *ngIf = 'canShowEdit()' color='primaryYellow' (click)="edit()" ion-button icon-only clear>
           <ion-icon name="md-create"></ion-icon>
       </button>
       <sb-share-button></sb-share-button>
-
-<!-->
-      <button ion-button icon-only (click)="showSharePage()">
-        <ion-icon name="md-share" color="primary"></ion-icon>
-      </button>
-      <-->
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -96,8 +93,12 @@
     </ion-list>
   </div>
 
-  <div class="content-all" *ngSwitchCase="'squad'" style="width: 100%; height: 100%">
+  <div class="content-all" *ngSwitchCase="'squad'">
     <page-squad #squadCtrl [settings]="squadSettings" style="width: 100%; height: 100%"></page-squad>
+  </div>
+
+  <div class="content-all" *ngSwitchCase="'players'">
+    <page-game-rating></page-game-rating>
   </div>
 
 </ion-content>

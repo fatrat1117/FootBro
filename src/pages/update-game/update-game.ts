@@ -56,10 +56,6 @@ export class UpdateGamePage {
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
         this.matchDate = helper.numberToDateString(this.match.date);
         this.matchTime = helper.numberToTimeString(this.match.time);
-        //this.homePlayers = this.match.homeParticipants;
-        //this.awayPlayers = this.match.awayParticipants;
-        //let test = sprintf('%d sdasdf', 1);
-        //console.log(test); 
     }
     //显示或关闭队员得分详情
     clickTeamMember(player) {
@@ -192,12 +188,16 @@ export class UpdateGamePage {
 
     doUpdateMatch() {
         let participants = this.copyAndUpdatePlayersData(this.participants);
-        // let copyAwayParticipants = this.copyAndUpdatePlayersData(this.awayPlayers);
+        
         let updateMatchData = {
             // homeParticipants: copyHomeParticipants,
             // awayParticipants: copyAwayParticipants,
         };
 
+        if (this.teamId === this.match.homeId)
+            updateMatchData['isHomeUpdated'] = true;
+        else if (this.teamId === this.match.awayId)
+            updateMatchData['isAwayUpdated'] = true;
         let homeScoreStr = this.match.homeScore.toString().trim();
         let awayScroeStr = this.match.awayScore.toString().trim();
         if (homeScoreStr.length > 0 && awayScroeStr.length > 0) {
