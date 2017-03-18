@@ -109,7 +109,7 @@
         //position: fixed;
         //position: fixed;
         width: 15%;
-        height: calc(100% - 140px);
+        //height: calc(100% - 140px);
         left: 0;
         right: 0;
         overflow-y: scroll;
@@ -121,7 +121,7 @@
         left: 15%;
         overflow-y: scroll;
         //position: absolute;
-        height: calc(100% - 140px);
+        //height: calc(100% - 140px);
         position: fixed;
         background: $darker-background;
       }
