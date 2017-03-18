@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { OneSignal, Clipboard } from 'ionic-native';
-import { Tabs, Platform, AlertController } from 'ionic-angular';
+import { Tabs, Platform, AlertController, ToastController } from 'ionic-angular';
+import { Localization } from '../../providers/localization';
 import { HomePage } from '../home/home';
 import { RankPage } from '../rank/rank';
 import { MatchesPage } from '../matches/matches';
@@ -35,6 +36,7 @@ export class TabsPage {
   selfPlayer: Player;
 
   constructor(private fm: FirebaseManager, private osm: OneSignalManager, private platform: Platform, private alertCtrl: AlertController, 
+              private toastCtrl: ToastController, private local: Localization, 
               private playerService:PlayerService, private teamService: TeamService, private messageService: MessageService) {
 
   }
@@ -102,7 +104,7 @@ export class TabsPage {
       return;
     
     let teamId = msg.substring(start + 1, end);
-    if (this.selfPlayer && this.selfPlayer.teams.indexOf(teamId) >=0) // already team member
+    if (this.selfPlayer &&this.selfPlayer.teams && this.selfPlayer.teams.indexOf(teamId) >=0) // already team member
       return;
 
     let subscription = this.teamService.getAfPublicTeamName(teamId).subscribe(snapshot => {
@@ -117,17 +119,17 @@ export class TabsPage {
       return;
 
     let confirm = this.alertCtrl.create({
-      title: `Team invitation from`,
+      title: this.local.getString("teamInvitation"),
       subTitle: teamName,
       buttons: [
         {
-          text: 'Join',
+          text: this.local.getString("join"),
           handler: () => {
-            this.confirmJoin(teamId)
+            this.confirmJoin(teamId, teamName)
           }
         },
         {
-          text: 'Cancel',
+          text: this.local.getString("Cancel"),
           handler: () => {
           }
         }
@@ -140,9 +142,14 @@ export class TabsPage {
     this.isAlertOpen = true;
   }
 
-  confirmJoin(teamId: string) {
+  confirmJoin(teamId: string, teamName: string) {
     if (this.playerService.isAuthenticated()) {
       this.teamService.joinTeam(teamId, false);
+      this.toastCtrl.create({
+        message: this.local.getString("teamJoinSuccess") + teamName,
+        duration: 2000,
+        position: 'top'
+      }).present();
     }
     else
       this.checkLogin()

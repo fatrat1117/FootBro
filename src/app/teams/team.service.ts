@@ -219,6 +219,7 @@ export class TeamService {
   }
 
   getMatchSquad(teamId, matchId) {
+    console.log('getMatchSquad', teamId, matchId);  
     return this.getTeam(teamId).matchSquads[matchId];
   }
 

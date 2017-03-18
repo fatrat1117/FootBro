@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, ViewController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, ModalController, ViewController, NavParams, AlertController, Events } from 'ionic-angular';
 import { SearchTeamPage } from '../search-team/search-team';
 import { SearchPlayerPage } from '../search-player/search-player';
 import { Team } from '../../app/teams/team.model'
@@ -26,11 +26,13 @@ export class UpdateGamePage {
     matchTime;
     tournamentId;
     id;
-    homePlayers: PlayerMatchData[];
-    awayPlayers: PlayerMatchData[];
+    //homePlayers: PlayerMatchData[];
+    //awayPlayers: PlayerMatchData[];
     updateState = 3;
     myIdentity = 2; //0: home captain, 1: away captain, 2:others
     onMatchSquadReady;
+    teamId;
+    participants: PlayerMatchData[] = [];
 
     constructor(public navCtrl: NavController,
         private modalCtrl: ModalController,
@@ -41,50 +43,76 @@ export class UpdateGamePage {
         private teamService: TeamService,
         private loc: Localization,
         private alertCtrl: AlertController,
-        params: NavParams) {
+        params: NavParams,
+        private events: Events) {
         this.id = params.get('id');
+        this.teamId = params.get('teamId');
         this.match = this.matchService.getMatch(this.id);
         this.updateState = this.match.updateState();
         if (this.match.home.captain === this.playerService.selfId())
             this.myIdentity = 0;
-        else if  (this.match.away.captain === this.playerService.selfId())
+        else if (this.match.away.captain === this.playerService.selfId())
             this.myIdentity = 1;
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
         this.matchDate = helper.numberToDateString(this.match.date);
         this.matchTime = helper.numberToTimeString(this.match.time);
-        this.homePlayers = this.match.homeParticipants;
-        this.awayPlayers = this.match.awayParticipants;
+        //this.homePlayers = this.match.homeParticipants;
+        //this.awayPlayers = this.match.awayParticipants;
         //let test = sprintf('%d sdasdf', 1);
         //console.log(test); 
     }
     //显示或关闭队员得分详情
     clickTeamMember(player) {
         player.expanded = !player.expanded;
-        // if (player.hidden) {
-        //     player.showExpandableIcon = "ios-arrow-up";
-        //     for (var i = 0; i < this.players.length; i++) {
-        //         for (var j = 0; j < this.players[i].items.length; j++) {
-        //             if (this.players[i].items[j].number <= 0) {
-        //                 this.players[i].items[j].color = "light";
-        //             } else {
-        //                 this.players[i].items[j].color = "secondary";
-        //             }
-        //         }
-        //     }
-        // } else {
-        //     player.showExpandableIcon = "ios-arrow-down";
-        // }
-        // player.hidden = !player.hidden;
     }
 
     ionViewDidLoad() {
         this.onMatchSquadReady = (teamId, matchId) => {
-            
+            if (teamId === this.teamId && matchId === this.id) {
+                let squad = this.teamService.getMatchSquad(teamId, matchId);
+                if ('participants' in squad)
+                    this.copyParticipants(this.participants, squad.participants);
+                else {
+                    //get from lineup and subsititutes
+                    if ('lineup' in squad) {
+                        squad.lineup.forEach(l => {
+                            if ('id' in l) {
+                                let player = new PlayerMatchData();
+                                player.id = l.id;
+                                this.playerService.findOrCreatePlayerAndPull(l.id);
+                                this.participants.push(player);
+                            }
+                        });
+                    }
+
+                    if ('subsititutes' in squad) {
+                        squad.subsititutes.forEach(s => {
+                            let player = new PlayerMatchData();
+                            player.id = s.id;
+                            this.playerService.findOrCreatePlayerAndPull(s.id);
+                            this.participants.push(player);
+                        });
+                    }
+                }
+            }
         }
+        this.events.subscribe('servicematchsquadready', this.onMatchSquadReady);
+        this.teamService.getMatchSquadAsync(this.teamId, this.id);
     }
 
-    ionViewWillLeave() {
+    ionViewWillUnload() {
+        this.events.unsubscribe('servicematchsquadready', this.onMatchSquadReady);
+    }
 
+    copyParticipants(target, source) {
+        if (source) {
+            target.splice(0);
+            source.forEach(p => {
+                let copy = Object.assign({}, p);
+                copy['player'] = this.playerService.findOrCreatePlayerAndPull(p.id);
+                target.push(copy);
+            })
+        }
     }
 
     // //删除球员
@@ -138,7 +166,8 @@ export class UpdateGamePage {
     }
 
     updateMatch() {
-        let points = 100 + (0 === this.myIdentity ? this.homePlayers.length : this.awayPlayers.length) * 10;
+        //let points = 100 + (0 === this.myIdentity ? this.homePlayers.length : this.awayPlayers.length) * 10;
+        let points = 100 + this.participants.length * 10;
         let msg = sprintf(this.loc.getString('teamupdateonceandearnpoints'), points);
         let self = this;
         let confirm = this.alertCtrl.create({
@@ -162,11 +191,11 @@ export class UpdateGamePage {
     }
 
     doUpdateMatch() {
-        let copyHomeParticipants = this.copyAndUpdatePlayersData(this.homePlayers);
-        let copyAwayParticipants = this.copyAndUpdatePlayersData(this.awayPlayers);
+        // let copyHomeParticipants = this.copyAndUpdatePlayersData(this.homePlayers);
+        // let copyAwayParticipants = this.copyAndUpdatePlayersData(this.awayPlayers);
         let updateMatchData = {
-            homeParticipants: copyHomeParticipants,
-            awayParticipants: copyAwayParticipants,
+            // homeParticipants: copyHomeParticipants,
+            // awayParticipants: copyAwayParticipants,
         };
 
         let homeScoreStr = this.match.homeScore.toString().trim();
