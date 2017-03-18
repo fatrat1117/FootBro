@@ -191,7 +191,7 @@ export class UpdateGamePage {
     }
 
     doUpdateMatch() {
-        // let copyHomeParticipants = this.copyAndUpdatePlayersData(this.homePlayers);
+        let participants = this.copyAndUpdatePlayersData(this.participants);
         // let copyAwayParticipants = this.copyAndUpdatePlayersData(this.awayPlayers);
         let updateMatchData = {
             // homeParticipants: copyHomeParticipants,
@@ -206,6 +206,7 @@ export class UpdateGamePage {
         }
 
         this.matchService.updateMatch(this.id, updateMatchData);
+        this.teamService.updateMatchParticipants(this.teamId, this.id, participants);
         this.close();
     }
 

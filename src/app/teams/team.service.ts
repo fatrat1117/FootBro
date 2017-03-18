@@ -226,15 +226,14 @@ export class TeamService {
   getMatchSquadAsync(teamId, matchId) {
     if (this.getMatchSquad(teamId, matchId)) {
       this.events.publish('servicematchsquadready', teamId, matchId);
-      // let detail = {
-      //   teamId: teamId,
-      //   matchId: matchId
-      // };
-      //this.fm.FireCustomEvent('servicematchsquadready', detail);
     }
     else {
       this.fm.getMatchSquadAsync(teamId, matchId);
     }
+  }
+
+  updateMatchParticipants(teamId, matchId, participants) {
+    this.fm.updateMatchParticipants(teamId, matchId, participants);
   }
 
   joinTeam(teamId, isDefault) {

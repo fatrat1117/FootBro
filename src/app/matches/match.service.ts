@@ -175,10 +175,6 @@ export class MatchService {
     this.fm.updateMatch(id, matchObj);
   }
 
-  // getMatchSquadAsync(matchId) {
-  //   this.fm.getMatchSquadAsync(matchId);
-  // }
-
   registerLeague(teamId: string, leagueId: string) {
     this.fm.registerLeague(teamId, leagueId);
   }
