@@ -57,9 +57,9 @@
           <ion-row>
             <ion-col width-33>
               <p text-center>
-                <ion-icon name='md-football'></ion-icon>
+                <ion-icon name='md-football' [color]="teamSortByStr=='ability' ? 'gYellow' : 'none'"></ion-icon>
                 &nbsp;{{'Ability' | trans}}</p>
-              <p text-center ion-text color="primary-text">{{t.ability}}</p>
+              <p text-center ion-text [color]="teamSortByStr=='ability' ? 'secondary' : 'primary-text'">{{t.ability}}</p>
             </ion-col>
             <ion-col width-33>
               <p text-center>
@@ -68,8 +68,8 @@
             </ion-col>
             <ion-col width-33>
               <p text-center>
-                <ion-icon name='md-flame' color="danger"></ion-icon>&nbsp;{{'Popularity' | trans}}</p>
-              <p text-center ion-text color="secondary">{{t.popularity}}</p>
+                <ion-icon name='md-flame' [color]="teamSortByStr=='popularity' ? 'danger' : 'none'"></ion-icon>&nbsp;{{'Popularity' | trans}}</p>
+              <p text-center ion-text [color]="teamSortByStr=='popularity' ? 'secondary' : 'primary-text'">{{t.popularity}}</p>
             </ion-col>
           </ion-row>
                   </ion-col>
