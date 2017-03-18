@@ -42,12 +42,6 @@ export class MatchesPage {
     this.today = moment(moment().format("YYYY-MM-DD")).unix() * 1000;
     this.addEventListeners();
     this.matchService.getMatchDatesAsync("all");
-
-    
-
-    // this.matchService.getMatchStandings("test_league_id").then(matchStandings => {
-    //   this.matchStandings = matchStandings;
-    // });
   }
 
   getMatchScrollHeight() {
@@ -63,7 +57,7 @@ export class MatchesPage {
       let currFormattedDate = moment(this.dates[i]).format("YYYY-MM-DD");
       if (currFormattedDate >= selectedFormatDate) {
         cToday = i;
-      }else {
+      } else {
         break;
       }
     }
@@ -90,21 +84,24 @@ export class MatchesPage {
   addEventListeners() {
     this.onMatchDatesReady = e => {
       let id = e['detail'];
-      this.dates = this.matchService.getMatchDates(id);
-      //console.log(this.dates);
-      if (!this.selectedDate) {
-        let self = this;
-        setTimeout(() => {
-          self.scrollToToday();
-          self.addYears();
-        },
-          1000);
+      if (this.selectedId === id) {
+        this.dates = this.matchService.getMatchDates(id);
+        //console.log(this.dates);
+        if (!this.selectedDate) {
+          let self = this;
+          setTimeout(() => {
+            self.scrollToToday();
+            self.addYears();
+          },
+            1000);
+        }
       }
     }
 
     this.onMatchesByDateReady = e => {
       let date = e['detail'];
-      this.matches = this.matchService.getMatchesByDate(date);
+      if (this.selectedDate === date) 
+        this.matches = this.matchService.getMatchesByDate(date);
     }
 
     this.onTournamentTableReady = e => {
@@ -119,15 +116,15 @@ export class MatchesPage {
       this.scrollToDate(this.selectedDate);
     };
 
-    document.addEventListener('matchdatesready', this.onMatchDatesReady );
-    document.addEventListener('matchesbydateready', this.onMatchesByDateReady );
+    document.addEventListener('matchdatesready', this.onMatchDatesReady);
+    document.addEventListener('matchesbydateready', this.onMatchesByDateReady);
     document.addEventListener('servicetournamenttableready', this.onTournamentTableReady);
     document.addEventListener('matcheschanged', this.onMatchesChanged);
   }
 
   ionViewWillUnload() {
-    document.removeEventListener('matchdatesready', this.onMatchDatesReady );
-    document.removeEventListener('matchesbydateready', this.onMatchesByDateReady );
+    document.removeEventListener('matchdatesready', this.onMatchDatesReady);
+    document.removeEventListener('matchesbydateready', this.onMatchesByDateReady);
     document.removeEventListener('servicetournamenttableready', this.onTournamentTableReady);
     document.removeEventListener('matcheschanged', this.onMatchesChanged);
   }
@@ -153,49 +150,49 @@ export class MatchesPage {
       let item = document.getElementById("matches-scroll-target-" + String(item_id));
       if (item != null) {
         item.className += " ion-item-changeYear";
-        extraHeight = item.clientHeight * 0.5;    
+        extraHeight = item.clientHeight * 0.5;
       }
     }
-    
-    setTimeout(this.reScrolling(extraHeight),3000);
-   
-  }
-  
-  reScrolling(extraHeight){
 
-     let scrollableDiv = document.getElementById("sketchElement");
-     if (scrollableDiv) {
-        let currentYear = this.getYearStringFromDate(this.selectedDate);
-        let currentIndex = this.getIndexFromDates(this.selectedDate);
-        let isLastDayOfYear = false;
-        let extraCount = 0;
-        for (let key in this.years){
-            if (parseInt(key) >= parseInt(currentYear)){
-                extraCount++;
-            }
-             if (currentIndex == this.years[key]){
-                isLastDayOfYear = true;
-            }
+    setTimeout(this.reScrolling(extraHeight), 3000);
+
+  }
+
+  reScrolling(extraHeight) {
+
+    let scrollableDiv = document.getElementById("sketchElement");
+    if (scrollableDiv) {
+      let currentYear = this.getYearStringFromDate(this.selectedDate);
+      let currentIndex = this.getIndexFromDates(this.selectedDate);
+      let isLastDayOfYear = false;
+      let extraCount = 0;
+      for (let key in this.years) {
+        if (parseInt(key) >= parseInt(currentYear)) {
+          extraCount++;
         }
-        if (isLastDayOfYear){
-            if (extraCount > 0){
-                extraCount-=1;
-            }
+        if (currentIndex == this.years[key]) {
+          isLastDayOfYear = true;
         }
-        scrollableDiv.scrollTop += extraHeight * extraCount;
+      }
+      if (isLastDayOfYear) {
+        if (extraCount > 0) {
+          extraCount -= 1;
+        }
+      }
+      scrollableDiv.scrollTop += extraHeight * extraCount;
     }
   }
-  
-  getIndexFromDates(currentDate){
-     let result = 0;
-     for (let i = 0 ; i < this.dates.length; i++){
-        if(currentDate == this.dates[i]){
-            result = i;
-        }
-     }
-     return result;
+
+  getIndexFromDates(currentDate) {
+    let result = 0;
+    for (let i = 0; i < this.dates.length; i++) {
+      if (currentDate == this.dates[i]) {
+        result = i;
+      }
+    }
+    return result;
   }
-  
+
 
   showMatches(date, index) {
     //console.log('showMatches', date, index);
@@ -215,7 +212,7 @@ export class MatchesPage {
   }
 
   enterNewGame() {
-    let modal = this.modalCtrl.create(NewGamePage, { tournamentId: 'all' === this.selectedId ? null : this.selectedId});
+    let modal = this.modalCtrl.create(NewGamePage, { tournamentId: 'all' === this.selectedId ? null : this.selectedId });
     modal.onDidDismiss(e => {
       if (e && e['date']) {
         let date = e['date'];
