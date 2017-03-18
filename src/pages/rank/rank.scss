@@ -45,5 +45,29 @@ page-rank {
               }
           }
       }
+      
+      .rank-player-items{
+        
+          .rank-player-specs{
+                display: flex;
+          flex-wrap: nowrap;
+              .badge{
+                    flex:1;
+                }
+              .name{
+                   flex:5;
+                   white-space: wrap;
+                   overflow: hidden;
+                   text-overflow: ellipsis;
+              }
+              .position{
+                  flex:2;
+              }
+              .popularity{
+                  flex:2;
+              }
+          }
+         
+      }
   }
 }
