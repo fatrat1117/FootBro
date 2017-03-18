@@ -32,7 +32,7 @@ export class UpdateGamePage {
     myIdentity = 2; //0: home captain, 1: away captain, 2:others
     onMatchSquadReady;
     teamId;
-    participants: PlayerMatchData[];
+    participants: PlayerMatchData[] = [];
 
     constructor(public navCtrl: NavController,
         private modalCtrl: ModalController,
@@ -73,23 +73,23 @@ export class UpdateGamePage {
                 if ('participants' in squad)
                     this.copyParticipants(this.participants, squad.participants);
                 else {
-                    //get from lineup and subsititutes
+                    //get from lineup and substitutes
                     if ('lineup' in squad) {
                         squad.lineup.forEach(l => {
                             if ('id' in l) {
                                 let player = new PlayerMatchData();
                                 player.id = l.id;
-                                this.playerService.findOrCreatePlayerAndPull(l.id);
+                                player.player = this.playerService.findOrCreatePlayerAndPull(l.id);
                                 this.participants.push(player);
                             }
                         });
                     }
 
-                    if ('subsititutes' in squad) {
-                        squad.subsititutes.forEach(s => {
+                    if ('substitutes' in squad) {
+                        squad.substitutes.forEach(id => {
                             let player = new PlayerMatchData();
-                            player.id = s.id;
-                            this.playerService.findOrCreatePlayerAndPull(s.id);
+                            player.id = id;
+                            player.player = this.playerService.findOrCreatePlayerAndPull(id);
                             this.participants.push(player);
                         });
                     }
@@ -191,7 +191,7 @@ export class UpdateGamePage {
     }
 
     doUpdateMatch() {
-        // let copyHomeParticipants = this.copyAndUpdatePlayersData(this.homePlayers);
+        let participants = this.copyAndUpdatePlayersData(this.participants);
         // let copyAwayParticipants = this.copyAndUpdatePlayersData(this.awayPlayers);
         let updateMatchData = {
             // homeParticipants: copyHomeParticipants,
@@ -206,6 +206,7 @@ export class UpdateGamePage {
         }
 
         this.matchService.updateMatch(this.id, updateMatchData);
+        this.teamService.updateMatchParticipants(this.teamId, this.id, participants);
         this.close();
     }
 

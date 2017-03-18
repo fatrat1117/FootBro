@@ -76,9 +76,22 @@ page-update-game {
     .team-info {
       background-color: #2c2b31;
       .team-name {
-        overflow: hidden;
         margin: 0px auto;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 1.2rem;
       }
+        
+        .select-team-btn{
+            white-space: normal;
+            font-size: 1.2rem;
+        }
+        
+       .score-item{
+          display: flex;
+          flex-wrap: nowrap;
+       }
       .team-score {
         min-width: 45%;
         max-width: 45%;
