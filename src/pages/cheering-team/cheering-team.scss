@@ -135,6 +135,9 @@ page-cheering-team{
         h3{
             margin:0;
             font-size:1.4rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .eyes{

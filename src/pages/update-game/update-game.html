@@ -10,7 +10,7 @@
       <!--<button (click)="deleteMatch()" color="danger" ion-button icon-only clear>
         <ion-icon *ngIf='0 === updateState' name="md-trash"></ion-icon>
       </button>-->
-      <button *ngIf='isShowSave()' [disabled]="!(match.type && matchDate && matchTime && match.location.address)" (click)="updateMatch()" color="primary"
+      <button *ngIf='isShowSave()' [disabled]="!(this.match.homeScore && this.match.awayScore)" (click)="updateMatch()" color="primary"
         ion-button icon-only clear>
         <ion-icon name="md-cloud-upload"></ion-icon>
       </button>
@@ -161,6 +161,21 @@
             {{player.reds}}
           </button>
         <button [disabled]="player.reds > 0" ion-button icon-only clear (click)="plus(player, 'reds')">
+            <ion-icon name="md-arrow-dropright" color="secondary"></ion-icon>
+          </button>
+      </div>
+    </ion-item>
+    <ion-item class="expandable-member-property" [hidden]="!player.expanded">
+      <img src="assets/icon/b2.png" class="desc-img" item-left/>
+      <button ion-button clear color="light">{{'owngoals' | trans}}</button>
+      <div item-right>
+        <button [disabled]="player.owngoals <= 0" ion-button icon-only clear (click)="minus(player, 'owngoals')" color="light">
+            <ion-icon name="md-arrow-dropleft"></ion-icon>
+          </button>
+        <button ion-button clear color="secondary">
+            {{player.owngoals}}
+          </button>
+        <button [disabled]="player.owngoals > 3" ion-button icon-only clear (click)="plus(player, 'owngoals')">
             <ion-icon name="md-arrow-dropright" color="secondary"></ion-icon>
           </button>
       </div>

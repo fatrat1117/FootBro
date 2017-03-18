@@ -1,18 +1,22 @@
-import {NavController, Slides, ViewController} from "ionic-angular";
-import {Component, NgModule} from "@angular/core";
+import {ViewController, NavParams} from "ionic-angular";
+import {Component, ViewChild} from "@angular/core";
 
-import {ViewChild} from '@angular/core';
 @Component({
   selector: 'page-edit-game-rating',
   templateUrl: 'edit-game-rating.html'
 })
-@NgModule({})
+
 export class EditGameRatingPage {
+  @ViewChild('ratingCtrl') ratingCtrl;
+
   memberlist = [];
-
-
-  constructor(public navCtrl: NavController,
-  private viewCtrl: ViewController) {
+  teamId;
+  matchId;
+  
+  constructor(private viewCtrl: ViewController,
+  params: NavParams) {
+    this.teamId = params.get('teamId');
+    this.matchId = params.get('matchId');
 
     for (var i = 0; i < 5; i++) {
       this.memberlist[i] = {
@@ -44,7 +48,13 @@ export class EditGameRatingPage {
     }
   }
 
+  ionViewDidLoad() {
 
+  }
+
+  ionViewWillUnload() {
+
+  }
 
   //通过star修改评价字符串及评价字颜色
   modifyEvaluteDataByStar(member) {
@@ -164,7 +174,7 @@ export class EditGameRatingPage {
     }
   }
 
-  dismiss() {
+  close() {
     this.viewCtrl.dismiss();
   }
 }

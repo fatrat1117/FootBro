@@ -27,5 +27,6 @@ export class PlayerMatchData {
   assists = 0;
   reds = 0;
   yellows = 0;
+  owngoals = 0;
   expanded = false; //UI use
 }
