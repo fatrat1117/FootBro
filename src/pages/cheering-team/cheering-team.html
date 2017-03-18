@@ -74,12 +74,12 @@
           <div *ngIf='clItem'>
             <ion-row class="item-row">
               <div class="baby-img-frame">
-                <button *ngIf="isUnlocked(clItem.id)" ion-button icon-only clear class="chat-logo" color="primary" (click)="enterChatPage(clItem)">
-                <ion-icon name="md-chatbubbles"></ion-icon>
-            </button>
-                <button *ngIf="!isUnlocked(clItem.id)" ion-button icon-only clear class="chat-logo" color="lightGrey" (click)="unlockCheerleader(clItem)">
-                <ion-icon name="md-chatbubbles"></ion-icon>
-            </button>
+                <button *ngIf="isUnlocked(clItem.id)" ion-button icon-only clear small class="chat-logo" color="primary" (click)="enterChatPage(clItem)">
+                  <ion-icon name="md-chatbubbles"></ion-icon>
+                </button>
+                <button *ngIf="!isUnlocked(clItem.id)" ion-button icon-only clear small class="chat-logo" color="gYellow" (click)="unlockCheerleader(clItem)">
+                  <ion-icon name="md-unlock"></ion-icon>
+                </button>
                 <img class="img" [src]="clItem.photoMedium">
               </div>
             </ion-row>
@@ -88,12 +88,14 @@
                 <ion-row>
                   <h3>{{clItem.name}}</h3>
                 </ion-row>
+                <!-->
                 <ion-row>
                   <ion-col class="eyes" width-40 no-padding>
                     <img src="assets/img/cheering-team/eye.png" />{{clItem.popularity}}
                   </ion-col>
-                  <!--<ion-col class="prize" width-60>$299/小时</ion-col>-->
+                  <ion-col class="prize" width-60>$299/小时</ion-col>
                 </ion-row>
+                <-->
               </div>
             </ion-row>
           </div>
