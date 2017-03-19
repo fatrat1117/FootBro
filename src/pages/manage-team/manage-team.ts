@@ -99,6 +99,10 @@ export class ManageTeamPage {
     */
   }
 
+  allowToQuit(team: Team) {
+    return this.player.teamId != team.id && (this.player.id != team.captain || team.totalPlayers == 1);
+  }
+
   /*
   setDefaultTeam(index: number, slidingItem) {
     slidingItem.close();
