@@ -1,8 +1,11 @@
-   
+.squad-popover{
+       top:56px !important;
+}
 .squad-popover .popover-content{
         width: 100%;
         left:0 !important;
-        top:56px !important;
+        top:0 !important;
+        bottom: inherit;
         height: auto;
 }
 page-edit-squad {

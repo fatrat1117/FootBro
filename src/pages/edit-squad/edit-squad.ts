@@ -4,7 +4,7 @@ import { Match, PREDEFINEDSQUAD } from '../../app/matches/match.model';
 import { PlayerService} from '../../app/players/player.service';
 import { UIHelper } from  '../../providers/uihelper';
 import { TeamService } from '../../app/teams/team.service';
-import { SharePage } from '../../pages/share/share';
+import { SquadSelectPage } from '../../pages/squad-select/squad-select';
 
 @Component({
   selector: 'page-edit-squad',
@@ -18,6 +18,7 @@ export class EditSquadPage {
   squadSettings: any;
   teamId;
   selectedSquad = 11; //Default Squad Number set to 11
+  popOverPage:any;
 
   constructor(private viewCtrl: ViewController,
     private playerService: PlayerService,
@@ -59,10 +60,17 @@ export class EditSquadPage {
   }
   
   selectSquadNumber(myEvent,number) {
-  
+    
+    if (this.popOverPage){
+        this.popOverPage.dismiss();
+    }
     this.selectedSquad = number;
-    this.popoverCtrl.create(SharePage,{},{cssClass:'squad-popover'}).present({
+    this.popOverPage = this.popoverCtrl.create(SquadSelectPage,{select:this.selectedSquad},{cssClass:'squad-popover'});
+    
+    this.popOverPage.present({
         ev:myEvent
     });
+    
+  
   }
  }

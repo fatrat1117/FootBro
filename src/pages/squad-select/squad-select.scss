@@ -1,0 +1,68 @@
+page-squad-select {
+/* 颜色 */
+$grey:rgba(235, 235, 235, 0.27);
+/* Generic button defaults */
+$padding:10px 20px;
+$margin:10px;
+$default-font: 'Source Sans Pro', sans-serif;
+$default-font-size: 13px;
+$button-depth:4px;
+$shadow-amount:10;
+$hover-darken:$shadow-amount / 2;
+$default-font-color:#fff;
+
+/* 主题 */
+$background:whitesmoke;
+    
+
+/* Mixins 重用模块 */
+@mixin depth($button-depth,$shadow-color) {
+  box-shadow: 0px $button-depth 0px darken($shadow-color, $shadow-amount);
+  &:hover{
+    background-color:darken($shadow-color,$hover-darken);
+  }
+  &:active{
+    box-shadow:none;
+    -webkit-transform:translateY($button-depth);
+  }
+  
+}
+
+/* 布局 */
+    
+button{
+display:inline-block;
+cursor:pointer;
+color:$default-font-color;
+border-radius:2px;
+padding:0;
+margin:$margin;
+font-family:$default-font;
+font-size:$default-font-size;
+}
+
+.btn{
+  @extend button;
+    i{
+      margin-right:10px;
+    }
+    width: 100%;
+    min-height: 2.5rem;
+}
+.grey{
+  background-color:$grey;
+  @include depth($button-depth,$grey);
+}
+
+    
+.squad-select-row{
+    ion-col{
+        display: flex;
+    }
+}
+
+
+
+
+    
+}
