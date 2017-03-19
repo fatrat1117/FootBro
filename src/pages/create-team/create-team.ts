@@ -12,7 +12,8 @@ export class CreateTeamPage {
   location: any;
   busy: boolean;
   isDefault = false;
-  //isDisabled = false;
+  onSuccess;
+  onFail;
 
   constructor(private viewCtrl: ViewController,
     private service: TeamService,
@@ -20,15 +21,25 @@ export class CreateTeamPage {
     this.busy = false;
     this.location = 'SG';
     this.teamName = '';
+  }
 
-    document.addEventListener('createteamsucceeded', e => {
+  ionViewDidLoad() {
+    this.onSuccess = e => {
       this.dismiss();
-    })
-
-    document.addEventListener('createteamfailed', e => {
+    };
+    this.onFail = e => {
       this.busy = false;
       alert(this.loc.getString(e['detail']));
-    })
+    };
+
+    
+    document.addEventListener('createteamsucceeded', this.onSuccess);
+    document.addEventListener('createteamfailed', this.onFail);
+  }
+
+  ionViewWillUnload() {
+    document.removeEventListener('createteamsucceeded', this.onSuccess);
+    document.removeEventListener('createteamfailed', this.onFail);
   }
 
   dismiss() {

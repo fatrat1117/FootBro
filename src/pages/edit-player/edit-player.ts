@@ -21,7 +21,8 @@ import { TeamService } from '../../app/teams/team.service'
 export class EditPlayerPage {
   selfId: string;
   player: Player;
-  //teams: Team[];
+  onPlayerReady;
+
   constructor(private navCtrl: NavController, private modalCtrl: ModalController, private playerService: PlayerService, private teamService: TeamService) {
     this.selfId = this.playerService.selfId();
     //this.teams = [];
@@ -33,36 +34,21 @@ export class EditPlayerPage {
     //this.teamService.getPlayerTeamsAsync(this.playerService.selfId());
   }
 
+  ionViewWillUnload() {
+    document.removeEventListener('serviceplayerready', this.onPlayerReady);
+  }
+
   addEventListeners() {
-    // player
-    document.addEventListener('serviceplayerready', e => {
+    this.onPlayerReady = e => {
       let playerId = e['detail'];
       if (playerId === this.selfId) {
         this.player = this.playerService.getPlayer(playerId);
       }
-    });
+    };
 
-    /*
-    document.addEventListener('serviceplayerteamsready', e=> {
-      let id = e['detail'];
-      if (id === this.player.id) {
-        this.updatePlayerTeams();
-      }
-    });
-    */
+    // player
+    document.addEventListener('serviceplayerready', this.onPlayerReady);
   }
-
-  /*
-  updatePlayerTeams() {
-    this.teams.splice(0);
-    for(var t of this.teamService.getPlayerTeams(this.player.id)) {
-      if (t.id == this.player.teamId)
-        this.teams.unshift(t);
-      else
-        this.teams.push(t);
-    }
-  }
-  */
 
   editName() {
     this.modalCtrl.create(EditPlayerNamePage, {

@@ -23,6 +23,8 @@ import { PlayerService } from '../../app/players/player.service'
 export class EditTeamPage {
   teamId: string;
   team: Team;
+  onTeamReady;
+
   constructor(private navCtrl: NavController, private modalCtrl: ModalController, private alertCtrl: AlertController, 
     private toastCtrl: ToastController, private navParams: NavParams,
     private playerService: PlayerService, private teamService: TeamService, ) {
@@ -34,13 +36,19 @@ export class EditTeamPage {
     this.teamService.getTeamAsync(this.teamId);
   }
 
+  ionViewWillUnload() {
+    document.removeEventListener('serviceteamready', this.onTeamReady);
+  }
+
   addEventListeners() {
-    document.addEventListener('serviceteamready', e => {
+    this.onTeamReady = e => {
       let teamId = e['detail'];
       if (teamId === this.teamId) {
         this.team = this.teamService.getTeam(teamId);
       }
-    });
+    };
+
+    document.addEventListener('serviceteamready', this.onTeamReady);
   }
 
   changeLogo() {

@@ -40,10 +40,6 @@ export class EditSquadPage {
     //this.squadCtrl.loadSquad();
   }
 
-  // ionViewDidLeave() {
-  //   this.squadCtrl.unsubscribeEvents();
-  // }
-
   load7() {
 
   }
