@@ -59,6 +59,7 @@ import { PlayerService } from '../../app/players/player.service'
 export class CheeringTeamStatsPage {
   selfPlayer: Player;
   cheerleader: Cheerleader;
+  onPlayerReady;
   constructor(private viewCtrl: ViewController, private alertCtrl: AlertController,
               private navParams: NavParams, private playerService: PlayerService,
               private toastCtrl: ToastController) {
@@ -71,13 +72,19 @@ export class CheeringTeamStatsPage {
     this.playerService.getPlayerAsync(this.playerService.selfId());
   }
 
+  ionViewWillUnload() {
+    document.removeEventListener('serviceplayerready', this.onPlayerReady);
+  }
+
   addEventListeners() {
-    document.addEventListener('serviceplayerready', e => {
+    this.onPlayerReady = e => {
       let playerId = e['detail'];
       if (playerId === this.playerService.selfId()) {
         this.selfPlayer = this.playerService.getPlayer(playerId);
       }
-    });
+    };
+
+    document.addEventListener('serviceplayerready', this.onPlayerReady);
   }
 
   unlock() {

@@ -19,6 +19,9 @@ export class CheeringTeamPage {
   approvedCheerleaders;
   amICheerleader = true;
   afPendingSelf;
+  onPendingCheerleadersReady;
+  onApprovedCheerleadersReady;
+  onPlayerReady;
 
   constructor(private nav: NavController,
     private modalCtrl: ModalController,
@@ -37,27 +40,36 @@ export class CheeringTeamPage {
     this.playerService.getPlayerAsync(this.playerService.selfId());
   }
 
-  addEventListeners() {
-    document.addEventListener('servicependingcheerleadersready', e => {
-      this.pendingCheerleaders = this.cheerleaderService.getPendingCheerleaders();
-      //console.log(this.pendingCheerleaders, this.pendingCheerleaders[this.selfId]);
-    });
+  ionViewWillUnload() {
+    document.removeEventListener('servicependingcheerleadersready', this.onPendingCheerleadersReady);
+    document.removeEventListener('serviceapprovedcheerleadersready', this.onApprovedCheerleadersReady);
+    document.removeEventListener('serviceplayerready', this.onPlayerReady);
+  }
 
-    document.addEventListener('serviceapprovedcheerleadersready', e => {
+  addEventListeners() {
+    this.onPendingCheerleadersReady = e => {
+      this.pendingCheerleaders = this.cheerleaderService.getPendingCheerleaders();
+    };
+
+    this.onApprovedCheerleadersReady =  e => {
       this.approvedCheerleaders = this.cheerleaderService.getApprovedCheerleaders();
 
       if (this.cheerleaderService.isCheerleader(this.playerService.selfId()))
         this.amICheerleader = true;
       else
         this.amICheerleader = false;
-    });
+    };
 
-    document.addEventListener('serviceplayerready', e => {
+    this.onPlayerReady = e => {
       let playerId = e['detail'];
       if (playerId === this.playerService.selfId()) {
         this.selfPlayer = this.playerService.getPlayer(playerId);
       }
-    });
+    };
+
+    document.addEventListener('servicependingcheerleadersready', this.onPendingCheerleadersReady);
+    document.addEventListener('serviceapprovedcheerleadersready', this.onApprovedCheerleadersReady);
+    document.addEventListener('serviceplayerready', this.onPlayerReady);
   }
 
   highLight(index: number) {
