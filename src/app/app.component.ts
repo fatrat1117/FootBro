@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen, OneSignal } from 'ionic-native';
+import { StatusBar, Splashscreen, OneSignal, Keyboard } from 'ionic-native';
 import { ModalController, App } from 'ionic-angular';
 import { Localization } from '../providers/localization';
 import * as localforage from "localforage";
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
-
 
 import { FirebaseManager } from '../providers/firebase-manager';
 import { OneSignalManager } from '../providers/onesignal-manager';
@@ -39,6 +38,7 @@ export class MyApp {
 
       Splashscreen.hide();
       StatusBar.styleBlackOpaque();
+      Keyboard.disableScroll(true);
       //this.registerForPushNotifications();
       fm.initialize();
       osm.initialize(app.getRootNav().getActiveChildNav());

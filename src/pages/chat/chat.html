@@ -15,8 +15,8 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <ion-refresher  color="lightGrey" (ionRefresh)="doRefresh($event)">
+<ion-content #content>
+  <ion-refresher color="lightGrey" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content refreshingSpinner="circles"></ion-refresher-content>
   </ion-refresher>
   <ion-list no-lines>
@@ -63,7 +63,7 @@
   </ion-toolbar>
 </ion-footer-->
 
-<ion-footer class="chat-room-footer" *ngIf="!isSystem">
+<ion-footer [keyboardAttach]="content" class="chat-room-footer" *ngIf="!isSystem">
   <ion-toolbar text-center>
     <input #input type="text" class="text-input" [(ngModel)]="newMessage">
     <ion-buttons right>

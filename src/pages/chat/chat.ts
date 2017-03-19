@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Directive, ViewChild } from '@angular/core';
 import { Keyboard } from 'ionic-native';
 import { NavController, NavParams, Content } from 'ionic-angular';
 
@@ -12,13 +12,18 @@ import { ChatService } from '../../app/chats/chat.service'
 import { Player } from '../../app/players/player.model';
 
 
+
 @Component({
   selector: 'page-chat',
   templateUrl: 'chat.html',
   providers: [ChatService]
 })
+
+@Directive({
+  selector: '[keyboardAttach]'
+})
 export class ChatPage {
-  @ViewChild(Content) content: Content;
+  @ViewChild('content') content: Content;
   //chats: FirebaseListObservable<any[]>;
   chats: any[];
   user: Player;
@@ -32,7 +37,7 @@ export class ChatPage {
 
   ionViewDidLoad() {
     this.isRefreshing = false;
-    this.content.resize();
+    //this.content.resize();
     
     this.isSystem = this.navParams.get('isSystem');
     this.isUnread = this.navParams.get('isUnread');
@@ -50,8 +55,28 @@ export class ChatPage {
     this.chatService.updateUnread(this.user.id, false);
   }
 
+  ionViewDidEnter() {
+    //this.scrollView();
+    /*
+    this.showSub = Keyboard.onKeyboardShow().subscribe(e => {
+      console.log("showkeyboard");
+      //this.scrollToBottom(); 
+      //this.content.resize();
+      let keyboardHeight: number = e.keyboardHeight || (e.detail && e.detail.keyboardHeight);
+      this.setElementPosition(keyboardHeight);
+    })
+    this.hideSub = Keyboard.onKeyboardHide().subscribe(e => {
+      console.log("hidekeyboard");
+      //this.scrollToBottom(); 
+      //this.content.resize();
+      this.setElementPosition(0);
+    })
+    //this.scrollToBottom();
+    */
+  }
+
   scrollView() {
-    if (this.content._scroll) {
+    if (this.content && this.content._scroll) {
       if (this.isRefreshing) {
         setTimeout(_ => this.content.scrollToTop(), 100);
         this.isRefreshing = false;
