@@ -472,7 +472,8 @@ export class FirebaseManager {
   increasePlayerPopularity(id) {
     let publicData = this.sortedPublicPlayersMap[id];
     if (publicData) {
-      this.af.database.object(`public/players/${id}`).update({ popularity: publicData.popularity + 1 });
+      let p = publicData.popularity ? publicData.popularity + 1 : 1;
+      this.af.database.object(`public/players/${id}/popularity`).set(p);
     };
   }
   getPlayerDetail(id) {
@@ -798,6 +799,10 @@ export class FirebaseManager {
 
   getMatchSquadRef(teamId, matchId) {
     return `/team_squads/${teamId}/matches/${matchId}/`;
+  }
+
+  ratePlayers(teamId, matchId, ratings) {
+    this.af.database.object(this.getMatchSquadRef(teamId, matchId) + 'ratings/' + this.selfId()).set(ratings);
   }
 
   getTournamentTableList(id) {

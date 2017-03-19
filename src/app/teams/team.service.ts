@@ -90,6 +90,8 @@ export class TeamService {
     });
 
     document.addEventListener('playerready', e => {
+      console.log(this.bRefreshPlayerTeams);
+      
       if (this.bRefreshPlayerTeams) {
         let id = e['detail'];
         let player = this.fm.getPlayer(id);
@@ -154,6 +156,7 @@ export class TeamService {
 
   createTeam(teamObj, isDefault = false) {
     this.fm.createTeam(teamObj, isDefault);
+    this.bRefreshPlayerTeams = true;
   }
 
   selfTeamId() {
@@ -242,5 +245,9 @@ export class TeamService {
 
   getAfPublicTeamName(teamId: string) {
     return this.fm.getAfTeamPublicName(teamId);
+  }
+
+  ratePlayers(teamId, matchId, ratings) {
+    this.fm.ratePlayers(teamId, matchId, ratings);
   }
 }

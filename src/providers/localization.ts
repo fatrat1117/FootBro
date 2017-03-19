@@ -233,7 +233,14 @@ export class Localization {
             teamJoinSuccess: 'Welcome to ',
             stats: 'stats',
             owngoals: 'own goals',
-            rating: 'rating'
+            rating: 'rating',
+            excellent: 'Excellent',
+            verygood: 'Very Good',
+            good: 'Good',
+            average: 'Average',
+            poor: 'Poor',
+            verypoor: 'Very Poor',
+            extremelypoor: 'Extremely Poor'
         },
 
         zh: {
@@ -448,7 +455,14 @@ export class Localization {
             teamJoinSuccess: '欢迎加入 ',
             stats: '技术统计',
             owngoals: '乌龙球',
-            rating: '评分'
+            rating: '评分',
+            excellent: '球王',
+            verygood: '很好',
+            good: '好',
+            average: '一般',
+            poor: '差',
+            verypoor: '很差',
+            extremelypoor: '不会踢'
         }
     }
 }

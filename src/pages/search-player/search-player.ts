@@ -86,7 +86,7 @@ export class SearchPlayerPage {
       return;
 
     if (this.showDetail === true)
-      this.nav.push(MyPlayerPage, { pId: id });
+      this.nav.push(MyPlayerPage, { id: id });
     else
       this.viewCtrl.dismiss({ playerId: id });
   }
