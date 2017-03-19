@@ -49,5 +49,6 @@ export class EditGameRatingPage {
       }
     });
     this.teamService.ratePlayers(this.teamId, this.matchId, ratings);
+    this.viewCtrl.dismiss();
   }
 }
