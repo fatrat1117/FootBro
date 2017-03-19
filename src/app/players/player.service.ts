@@ -19,6 +19,7 @@ export class PlayerService {
       player.name = playerData['basic-info'].displayName || "John Doe";
       player.photo = playerData['basic-info'].photoURL || "assets/img/none.png";
       player.teamId = playerData['basic-info'].teamId;
+      player.points = playerData.points;
       if (playerData.photoMedium)
         player.photoMedium = playerData.photoMedium;
       if ('points' in playerData)
