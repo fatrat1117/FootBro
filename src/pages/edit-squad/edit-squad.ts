@@ -1,9 +1,10 @@
 import { Component, ViewChild } from "@angular/core";
-import { ViewController, NavParams } from 'ionic-angular';
+import { ViewController, NavParams,PopoverController } from 'ionic-angular';
 import { Match, PREDEFINEDSQUAD } from '../../app/matches/match.model';
 import { PlayerService} from '../../app/players/player.service';
-import { UIHelper } from  '../../providers/uihelper'
-import { TeamService } from '../../app/teams/team.service'
+import { UIHelper } from  '../../providers/uihelper';
+import { TeamService } from '../../app/teams/team.service';
+import { SharePage } from '../../pages/share/share';
 
 @Component({
   selector: 'page-edit-squad',
@@ -16,12 +17,14 @@ export class EditSquadPage {
   match: Match;
   squadSettings: any;
   teamId;
+  selectedSquad = 11; //Default Squad Number set to 11
 
   constructor(private viewCtrl: ViewController,
     private playerService: PlayerService,
     private uiHelper: UIHelper,
     navParams: NavParams,
-    private teamService: TeamService) {
+    private teamService: TeamService,
+    private popoverCtrl: PopoverController) {
     this.match = navParams.get('match');
     this.teamId = navParams.get('teamId');
     this.squadSettings = {};
@@ -53,5 +56,13 @@ export class EditSquadPage {
     let squad = this.squadCtrl.getSquad();
     this.teamService.saveMatchSquad(this.teamId, this.match.id, squad);
     this.dismiss();
+  }
+  
+  selectSquadNumber(myEvent,number) {
+  
+    this.selectedSquad = number;
+    this.popoverCtrl.create(SharePage,{},{cssClass:'squad-popover'}).present({
+        ev:myEvent
+    });
   }
  }
