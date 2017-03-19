@@ -472,7 +472,8 @@ export class FirebaseManager {
   increasePlayerPopularity(id) {
     let publicData = this.sortedPublicPlayersMap[id];
     if (publicData) {
-      this.af.database.object(`public/players/${id}`).update({ popularity: publicData.popularity + 1 });
+      let p = publicData.popularity ? publicData.popularity + 1 : 1;
+      this.af.database.object(`public/players/${id}/popularity`).set(p);
     };
   }
   getPlayerDetail(id) {
