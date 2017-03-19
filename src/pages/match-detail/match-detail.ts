@@ -1,9 +1,10 @@
 import { Component, ViewChild } from "@angular/core";
-import { ViewController, NavParams, ModalController } from 'ionic-angular';
+import { ViewController, NavParams, ModalController, Events } from 'ionic-angular';
 import { Match } from '../../app/matches/match.model';
 import { EditSquadPage } from '../edit-squad/edit-squad';
 import { SharePage } from '../share/share';
 import { PlayerService } from '../../app/players/player.service'
+import { TeamService } from '../../app/teams/team.service'
 import { UpdateGamePage } from '../../pages/update-game/update-game'
 import { NewGamePage } from '../../pages/new-game/new-game'
 import { EditGameRatingPage } from '../edit-game-rating/edit-game-rating';
@@ -14,17 +15,20 @@ import { EditGameRatingPage } from '../edit-game-rating/edit-game-rating';
 })
 export class MatchDetailPage {
   @ViewChild('pageHeader') pageHeader;
-  //@ViewChild('squadCtrl') squadCtrl;
 
   map;
   match: Match;
   matchSegments = 'info';
   squadSettings: any;
+  onMatchSquadReady;
+  squad;
 
   constructor(private viewCtrl: ViewController,
     private modal: ModalController,
     navParams: NavParams,
-    private playerService: PlayerService) {
+    private playerService: PlayerService,
+    private events: Events,
+    private teamService: TeamService) {
     this.match = navParams.get('match');
     this.squadSettings = {};
     this.squadSettings.matchId = this.match.id;
@@ -44,7 +48,21 @@ export class MatchDetailPage {
   }
 
   ionViewDidLoad() {
+    this.onMatchSquadReady = (teamId, matchId) => {
+      if ('teamId' in this.squadSettings && teamId === this.squadSettings.teamId && matchId === this.match.id) {
+        this.squad = this.teamService.getMatchSquad(teamId, matchId);
+      }
+    }
+
+    this.events.subscribe('servicematchsquadready', this.onMatchSquadReady);
+    if ('teamId' in this.squadSettings) {
+      this.teamService.getMatchSquadAsync(this.squadSettings.teamId, this.match.id);
+    }
     this.squadSettings.offsetY = this.pageHeader.nativeElement.clientHeight;
+  }
+
+  ionViewWillUnload() {
+    this.events.unsubscribe('servicematchsquadready', this.onMatchSquadReady);
   }
 
   segmentChange(e) {
@@ -112,20 +130,6 @@ export class MatchDetailPage {
     // }
   }
 
-  edit() {
-    switch (this.matchSegments) {
-      case 'info':
-        this.goUpdateMatchPage();
-        break;
-      case 'squad':
-        this.modal.create(EditSquadPage, { match: this.match, teamId: this.squadSettings.teamId }).present();
-        break;
-      case 'players':
-        this.modal.create(EditGameRatingPage, {teamId: this.squadSettings.teamId, matchId: this.match.id}).present();
-        break;
-    }
-  }
-
   canShowSquadSegment() {
     if (!this.playerService.isAuthenticated())
       return false;
@@ -135,6 +139,20 @@ export class MatchDetailPage {
       return true;
 
     return false;
+  }
+
+  edit() {
+    switch (this.matchSegments) {
+      case 'info':
+        this.goUpdateMatchPage();
+        break;
+      case 'squad':
+        this.modal.create(EditSquadPage, { match: this.match, teamId: this.squadSettings.teamId }).present();
+        break;
+      case 'players':
+        this.modal.create(EditGameRatingPage, {squad: this.squad, teamId: this.squadSettings.teamId, matchId: this.match.id }).present();
+        break;
+    }
   }
 
   canShowEdit() {
@@ -161,9 +179,10 @@ export class MatchDetailPage {
       case 'players':
         {
           //captain can update stats
+          if (this.squad)
             return true;
         }
-        //break;
+        break;
       // case 'rating':
       //   break;
     }
@@ -175,7 +194,7 @@ export class MatchDetailPage {
     if (this.match.isStarted())
       this.modal.create(UpdateGamePage, { id: this.match.id, teamId: this.squadSettings.teamId }).present();
     else
-      this.modal.create(NewGamePage, { id: this.match.id}).present();
+      this.modal.create(NewGamePage, { id: this.match.id }).present();
   }
 
   canShowPlayersSegment() {

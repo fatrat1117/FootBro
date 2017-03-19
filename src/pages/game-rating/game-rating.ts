@@ -1,49 +1,44 @@
-/**
- * Created by Administrator on 2017/1/23.
- */
-import {NavController, Slides} from "ionic-angular";
-import {Component, NgModule} from "@angular/core";
+import {NavController} from "ionic-angular";
+import {Component, Input} from "@angular/core";
+import {PlayerRatingUI} from '../../app/players/player.model';
 
-import {ViewChild} from '@angular/core';
 @Component({
   selector: 'page-game-rating',
   templateUrl: 'game-rating.html'
 })
-@NgModule({})
-export class GameRatingPage {
-  memberlist = [];
 
+export class GameRatingPage {
+  @Input() players : PlayerRatingUI[];
 
   constructor(public navCtrl: NavController) {
-
-    for (var i = 0; i < 5; i++) {
-      this.memberlist[i] = {
-        name: "梅西" + i,
-        star: 5 - 0.5 * (i + 1),
-        evaluteString: i,
-        evaluteColor: "#00ff00",
-        starArray: [{
-          id: 2,
-          src: "ios-star-outline"
-        }, {
-          id: 4,
-          src: "ios-star-outline"
-        }, {
-          id: 6,
-          src: "ios-star-outline"
-        }, {
-          id: 8,
-          src: "ios-star-outline"
-        }, {
-          id: 10,
-          src: "ios-star-outline"
-        }]
-      }
-    }
-    for (var i = 0; i < 5; i++) {
-      this.modifyEvaluteDataByStar(this.memberlist[i]);
-      this.modifyStarPictureByStar(this.memberlist[i].starArray, this.memberlist[i].star);
-    }
+    // for (var i = 0; i < 5; i++) {
+    //   this.memberlist[i] = {
+    //     name: "梅西" + i,
+    //     star: 5 - 0.5 * (i + 1),
+    //     evaluteString: i,
+    //     evaluteColor: "#00ff00",
+    //     starArray: [{
+    //       id: 2,
+    //       src: "ios-star-outline"
+    //     }, {
+    //       id: 4,
+    //       src: "ios-star-outline"
+    //     }, {
+    //       id: 6,
+    //       src: "ios-star-outline"
+    //     }, {
+    //       id: 8,
+    //       src: "ios-star-outline"
+    //     }, {
+    //       id: 10,
+    //       src: "ios-star-outline"
+    //     }]
+    //   }
+    // }
+    // for (var i = 0; i < 5; i++) {
+    //   this.modifyEvaluteDataByStar(this.memberlist[i]);
+    //   this.modifyStarPictureByStar(this.memberlist[i].starArray, this.memberlist[i].star);
+    // }
   }
 
 

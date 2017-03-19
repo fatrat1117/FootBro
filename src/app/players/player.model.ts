@@ -20,7 +20,7 @@ export class Player {
   joinTime;
 }
 
-export class PlayerMatchData {
+export class PlayerMatchStatsUI {
   id;
   player: Player;
   goals = 0;
@@ -29,4 +29,12 @@ export class PlayerMatchData {
   yellows = 0;
   owngoals = 0;
   expanded = false; //UI use
+}
+
+export class PlayerRatingUI {
+  //id;
+  player: Player;
+  rating;
+  evaluteString;
+  evaluteColor;
 }
