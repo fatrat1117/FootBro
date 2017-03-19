@@ -36,6 +36,9 @@ export class EditSquadPage {
 
   dismiss() {
     this.viewCtrl.dismiss();
+     if (this.popOverPage){
+        this.popOverPage.dismiss();
+    }
   }
 
   ionViewDidLoad() {
@@ -57,6 +60,7 @@ export class EditSquadPage {
     let squad = this.squadCtrl.getSquad();
     this.teamService.saveMatchSquad(this.teamId, this.match.id, squad);
     this.dismiss();
+    
   }
   
   selectSquadNumber(myEvent,number) {
