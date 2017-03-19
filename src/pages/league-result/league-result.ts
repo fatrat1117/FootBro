@@ -14,6 +14,7 @@ import { MatchService } from '../../app/matches/match.service'
 export class LeagueResultPage {
   leagueId: string;
   matchStandings;
+  onTournamentTableReady;
 
   constructor(private viewCtrl: ViewController, private navParams: NavParams, 
               private toastCtrl: ToastController, private alertCtrl: AlertController,
@@ -22,15 +23,21 @@ export class LeagueResultPage {
 
   ionViewDidLoad() {
     this.leagueId = this.navParams.get('leagueId');
-    this.addEventListener()
+    this.addEventListeners();
     this.matchService.getTournamentTableAsync(this.leagueId);
   }
 
-  addEventListener() {
-    document.addEventListener('servicetournamenttableready', e => {
+  ionViewWillUnload() {
+    document.removeEventListener('servicetournamenttableready', this.onTournamentTableReady);
+  }
+
+  addEventListeners() {
+    this.onTournamentTableReady = e => {
       let tournamentId = e['detail'];
       if (tournamentId === this.leagueId)
         this.matchStandings = this.matchService.getTournamentTable(tournamentId);
-    });
+    };
+
+    document.addEventListener('servicetournamenttableready', this.onTournamentTableReady);
   }
 }

@@ -19,6 +19,9 @@ export class LeagueInfoPage {
   registerTeams: Team[];
   teams: Team[];
   leagueInfo = "info";
+  onPlayerReady;
+  onTeamReady;
+  onRegisteredTeamsReady
 
   constructor(private viewCtrl: ViewController, private navParams: NavParams, 
               private toastCtrl: ToastController, private alertCtrl: AlertController,
@@ -40,28 +43,38 @@ export class LeagueInfoPage {
     this.matchService.getRegisteredTeamsAsync(this.leagueId);
   }
 
+  ionViewWillUnload() {
+    document.removeEventListener('serviceplayerready', this.onPlayerReady);
+    document.removeEventListener('serviceteamready', this.onTeamReady );
+    document.removeEventListener('serviceregisteredteamsready', this.onRegisteredTeamsReady);
+  }
+
   addEventListeners() {
-    document.addEventListener('serviceplayerready', e => {
+    this.onPlayerReady = e => {
       let pId = e['detail'];
       if (pId === this.selfId) {
         this.selfPlayer = this.playerService.getPlayer(pId);
         if (!this.selfTeam && this.selfPlayer)
           this.teamService.getTeamAsync(this.selfPlayer.teamId);
       }
-    });
+    };
 
-    document.addEventListener('serviceteamready', e => {
+    this.onTeamReady = e => {
       let tId = e['detail'];
       if (this.selfPlayer && tId === this.selfPlayer.teamId)
         this.selfTeam = this.teamService.getTeam(tId);
-    });
+    };
 
-    document.addEventListener('serviceregisteredteamsready', e => {
+    this.onRegisteredTeamsReady = e => {
       let lId = e['detail'];
       if (lId = this.leagueId) {
         this.registerTeams = this.matchService.getRegisteredTeams(lId);
       }
-    })
+    }
+
+    document.addEventListener('serviceplayerready', this.onPlayerReady);
+    document.addEventListener('serviceteamready', this.onTeamReady );
+    document.addEventListener('serviceregisteredteamsready', this.onRegisteredTeamsReady);
   }
   
   registerTeam() {

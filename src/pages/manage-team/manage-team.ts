@@ -19,6 +19,9 @@ export class ManageTeamPage {
   selfId: string;
   player: Player;
   teams: Team[];
+  onPlayerReady;
+  onPlayerTeamsReady;
+
   constructor(private viewCtrl: ViewController, private navCtrl: NavController, private modalCtrl: ModalController, 
               private playerService: PlayerService, private teamService: TeamService) {
 
@@ -32,20 +35,28 @@ export class ManageTeamPage {
     this.teamService.getPlayerTeamsAsync(this.selfId);
   }
 
+  ionViewWillUnload() {
+    document.removeEventListener('serviceplayerready', this.onPlayerReady);
+    document.removeEventListener('serviceplayerteamsready', this.onPlayerTeamsReady);
+  }
+
   addEventListeners() {
-    document.addEventListener('serviceplayerready', e => {
+    this.onPlayerReady = e => {
       let playerId = e['detail'];
       if (playerId === this.selfId) {
         this.player = this.playerService.getPlayer(playerId);
       }
-    });
+    };
 
-    document.addEventListener('serviceplayerteamsready', e=> {
+    this.onPlayerTeamsReady = e=> {
       let id = e['detail'];
       if (id === this.selfId) {
         this.updatePlayerTeams();
       }
-    });
+    };
+
+    document.addEventListener('serviceplayerready', this.onPlayerReady);
+    document.addEventListener('serviceplayerteamsready', this.onPlayerTeamsReady);
   }
 
   setDefaultTeam(id: string, slidingItem) {

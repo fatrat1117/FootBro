@@ -59,13 +59,13 @@ export class MePage {
       }
     };
 
-    document.addEventListener('serviceplayerready', this.onPlayerReady);
-
     this.onTeamReady = e => {
       let teamId = e['detail'];
       if (this.player && this.player.teamId === teamId)
         this.team = this.teamService.getTeam(teamId);
     };
+    
+    document.addEventListener('serviceplayerready', this.onPlayerReady);
     document.addEventListener('serviceteamready', this.onTeamReady);
   }
 
