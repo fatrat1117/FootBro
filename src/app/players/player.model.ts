@@ -34,7 +34,7 @@ export class PlayerMatchStatsUI {
 export class PlayerRatingUI {
   //id;
   player: Player;
-  rating;
+  rating = 5;
   evaluteString;
   evaluteColor;
 }

@@ -1,6 +1,6 @@
-import {NavController} from "ionic-angular";
-import {Component, Input} from "@angular/core";
-import {PlayerRatingUI} from '../../app/players/player.model';
+import { NavController } from "ionic-angular";
+import { Component, Input } from "@angular/core";
+import { PlayerRatingUI } from '../../app/players/player.model';
 
 @Component({
   selector: 'page-game-rating',
@@ -8,7 +8,7 @@ import {PlayerRatingUI} from '../../app/players/player.model';
 })
 
 export class GameRatingPage {
-  @Input() players : PlayerRatingUI[];
+  @Input() players: PlayerRatingUI[];
 
   constructor(public navCtrl: NavController) {
     // for (var i = 0; i < 5; i++) {
@@ -41,6 +41,32 @@ export class GameRatingPage {
     // }
   }
 
+  getRatingString(rating) {
+    if (rating) {
+      if (rating >= 9) {
+        return "非常好";
+        //member.evaluteColor = "secondary";
+      } else if (rating >= 8) {
+        return "很好";
+        //member.evaluteColor = "secondary";
+      } else if (rating >= 7) {
+        return "好";
+        //member.evaluteColor = "secondary";
+      } else if (rating >= 6) {
+        return "一般";
+        //member.evaluteColor = "primary";
+      } else if (rating >= 5) {
+        return "差";
+        //member.evaluteColor = "light";
+      } else if (rating >= 4) {
+        return "很差";
+        // member.evaluteColor = "light";
+      } else {
+        return "非常差";
+        //member.evaluteColor = "light";
+      }
+    }
+  }
 
 
   //通过star修改评价字符串及评价字颜色
@@ -143,7 +169,7 @@ export class GameRatingPage {
   //星星评分拖动效果的实现函数
   panStar(member, e) {
     var dist = -1;
-    if(e.additionalEvent == "panright" || e.additionalEvent == "panleft"){
+    if (e.additionalEvent == "panright" || e.additionalEvent == "panleft") {
       dist = e.changedPointers[0].clientX - 70;
     }
     if (dist > -1) {
@@ -156,7 +182,7 @@ export class GameRatingPage {
     var dist = -1;
     dist = e.clientX - 65;
     if (dist > -1) {
-      var j = parseInt("" + dist) / 12+1;
+      var j = parseInt("" + dist) / 12 + 1;
       this.onTouchChanged(member, parseInt("" + j));
     }
   }
