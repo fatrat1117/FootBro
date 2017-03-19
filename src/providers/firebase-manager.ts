@@ -801,6 +801,10 @@ export class FirebaseManager {
     return `/team_squads/${teamId}/matches/${matchId}/`;
   }
 
+  ratePlayers(teamId, matchId, ratings) {
+    this.af.database.object(this.getMatchSquadRef(teamId, matchId) + 'ratings/' + this.selfId()).set(ratings);
+  }
+
   getTournamentTableList(id) {
     return this.af.database.list('/tournaments/list/' + id + '/table',
       { query: { orderByChild: 'rank' } });
