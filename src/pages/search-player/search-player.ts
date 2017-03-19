@@ -16,6 +16,7 @@ export class SearchPlayerPage {
   selectPlayersMode = false;
   selectedPlayersMap = {};
   addedPlayerMap = {};
+  onTeamPlayersReady;
 
   constructor(private nav: NavController,
     navParams: NavParams,
@@ -37,14 +38,20 @@ export class SearchPlayerPage {
   }
 
   ionViewDidLoad() {
-    document.addEventListener('serviceteamplayersready', e => {
+    this.onTeamPlayersReady = e => {
       let id = e['detail'];
       if (id === this.teamId)
         this.totalPlayers = this.teamPlayersService.getTeamPlayers(id);
       this.resetFilter();
-    })
+    };
+
+    document.addEventListener('serviceteamplayersready', this.onTeamPlayersReady);
 
     this.teamPlayersService.getTeamPlayersAsync(this.teamId);
+  }
+
+  ionViewWillUnload() {
+    document.removeEventListener('serviceteamplayersready', this.onTeamPlayersReady);
   }
 
   resetFilter() {

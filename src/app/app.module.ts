@@ -55,6 +55,7 @@ import { MiscService } from './misc/misc.service'
 import { MatchService } from './matches/match.service'
 import { MessageService } from './messages/message.service'
 import { CheerleaderService} from './cheerleaders/cheerleader.service'
+import { RankService } from './rank/rank.service'
 
 // pipes
 import { TransPipe, Localization } from '../providers/localization';
@@ -211,7 +212,8 @@ export const firebaseConfig = {
     TeamService,
     MatchService,
     MessageService,
-    CheerleaderService]
+    CheerleaderService,
+    RankService]
 })
 export class AppModule {
 }

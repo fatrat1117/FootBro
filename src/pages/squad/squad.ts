@@ -30,7 +30,11 @@ export class SquadPage implements OnInit, OnDestroy {
     private uiHelper: UIHelper,
     private teamService: TeamService,
     public events: Events) {
-    this.onMatchSquadReady = (teamId, matchId) => {
+
+  } 
+
+  addEventListeners() {
+      this.onMatchSquadReady = (teamId, matchId) => {
       //console.log(teamId, matchId, this);
       if (teamId === this.settings.teamId && matchId === this.settings.matchId) {
         let squad = this.teamService.getMatchSquad(teamId, matchId);
@@ -40,8 +44,6 @@ export class SquadPage implements OnInit, OnDestroy {
             if ('id' in l) {
               this.uiPlayerMap[l.id] = l;
               let player = this.playerService.getPlayerAsync(l.id);
-              //l.photo = player.photo;
-              //l.name = player.name;
             }
           });
         }
@@ -50,8 +52,6 @@ export class SquadPage implements OnInit, OnDestroy {
           squad.substitutes.forEach(id => {
             let substitue = {
               id: id,
-              // photo: player.photo,
-              // name: player.name,
             }
             this.uiPlayerMap[id] = substitue;
             this.substitutes.push(substitue);
@@ -60,8 +60,6 @@ export class SquadPage implements OnInit, OnDestroy {
         }
       }
     }
-
-    events.subscribe('servicematchsquadready', this.onMatchSquadReady);
 
     this.onPlayerReady = e => {
       let playerId = e['detail'];
@@ -73,7 +71,32 @@ export class SquadPage implements OnInit, OnDestroy {
       }
     };
 
+    this.events.subscribe('servicematchsquadready', this.onMatchSquadReady);
     document.addEventListener('serviceplayerready', this.onPlayerReady);
+  }
+
+  ngOnInit() {
+    this.addEventListeners();
+
+    if (!this.settings.editMode)
+      this.loadSquad();
+    else {
+      //ionic 2 bug, need to waitfor height
+      let self = this;
+      setTimeout(function () {
+        self.loadSquad();
+      }, 1000);
+    }
+  }
+
+  ngOnDestroy() {
+    this.unsubscribeEvents();
+  }
+
+  
+  unsubscribeEvents() {
+    this.events.unsubscribe('servicematchsquadready', this.onMatchSquadReady);
+    document.removeEventListener('serviceplayerready', this.onPlayerReady);
   }
 
   addSubstitute(id) {
@@ -117,22 +140,6 @@ export class SquadPage implements OnInit, OnDestroy {
         p.y = y;
       }
     }
-  }
-
-  ngOnInit() {
-    if (!this.settings.editMode)
-      this.loadSquad();
-    else {
-      //ionic 2 bug, need to waitfor height
-      let self = this;
-      setTimeout(function () {
-        self.loadSquad();
-      }, 1000);
-    }
-  }
-
-  ngOnDestroy() {
-    this.unsubscribeEvents();
   }
 
   getAddedPlayerIds() {
@@ -227,12 +234,4 @@ export class SquadPage implements OnInit, OnDestroy {
   loadSquad() {
     this.teamService.getMatchSquadAsync(this.settings.teamId, this.settings.matchId);
   }
-
-  unsubscribeEvents() {
-    //console.log('unsubscribeEvents', 'servicematchsquadready');
-    this.events.unsubscribe('servicematchsquadready', this.onMatchSquadReady);
-    document.removeEventListener('serviceplayerready', this.onPlayerReady);
-  }
-
-
 }

@@ -15,33 +15,40 @@ import { PlayerService } from '../../app/players/player.service';
 export class MessagesPage {
   messages: Message[];
   watchListMap : {};
+  onMessageReady;
+  onPlayerReady;
 
   constructor(private navCtrl: NavController, private messageService: MessageService, private playerService: PlayerService) {
   }
 
   ionViewDidLoad() {
     this.addEventListeners();
-    document.addEventListener('servicemessageready', e => {
-      this.messages = this.messageService.getAllMessages();
-    });
 
     this.messages = this.messageService.getAllMessages();
     this.getPlayerAsync();
   }
 
+  ionViewWillUnload() {
+    document.removeEventListener('servicemessageready', this.onMessageReady);
+    document.removeEventListener('serviceplayerready', this.onPlayerReady);
+  }
+
   addEventListeners() {
-    document.addEventListener('servicemessageready', e => {
+    this.onMessageReady = e => {
       this.messages = this.messageService.getAllMessages();
       this.getPlayerAsync();
-    });
+    };
 
-    document.addEventListener('serviceplayerready', e => {
+    this.onPlayerReady = e => {
       let playerId = e['detail'];
       if (this.watchListMap[playerId])
       {
         this.watchListMap[playerId] = this.playerService.getPlayer(playerId);
       }
-    });
+    };
+
+    document.addEventListener('servicemessageready', this.onMessageReady);
+    document.addEventListener('serviceplayerready', this.onPlayerReady);
   }
 
   getPlayerAsync() {

@@ -34,6 +34,10 @@ export class MyTeamPage {
   mostGAMatchId;
   mostGFMatchId;
   captain;
+  onPlayerReady;
+  onTeamStatsDataReady;
+  onTeamPlayersReady;
+  onTeamMatchesReady
 
   constructor(public nav: NavController,
     private navParams: NavParams,
@@ -56,13 +60,13 @@ export class MyTeamPage {
   }
 
   addEventListeners() {
-    document.addEventListener('serviceplayerready', e => {
+    this.onPlayerReady = e => {
       let id = e['detail'];
       if (id == this.selfId)
         this.selfPlayer = this.playerService.getPlayer(id);
-    });
+    };
 
-    document.addEventListener('serviceteamstatsdataready', e => {
+    this.onTeamStatsDataReady = e => {
       //console.log(e);
       let teamId = e['detail'];
       //console.log(teamId, this.id);
@@ -79,9 +83,9 @@ export class MyTeamPage {
         this.playerService.getTeamPlayersAsync(teamId);
         this.setChoosePosition(this.selectedStatIndex);
       }
-    });
+    };
 
-    document.addEventListener('serviceteamplayersready', e => {
+    this.onTeamPlayersReady = e => {
       let teamId = e['detail'];
       //console.log(teamId, this.id);
       if (teamId === this.id) {
@@ -89,15 +93,27 @@ export class MyTeamPage {
         this.captain = this.playerService.getPlayer(this.team.captain);
         //console.log(this.team.captain, this.captain);
       }
-    });
+    };
 
-    document.addEventListener('serviceteammatchesready', e => {
+    this.onTeamMatchesReady = e => {
       let teamId = e['detail'];
       if (teamId === this.id) {
         this.matches = this.matchService.getTeamMatches(teamId);
         this.updateUpcomingMatch();
       }
-    });
+    };
+
+    document.addEventListener('serviceplayerready', this.onPlayerReady);
+    document.addEventListener('serviceteamstatsdataready', this.onTeamStatsDataReady);
+    document.addEventListener('serviceteamplayersready', this.onTeamPlayersReady);
+    document.addEventListener('serviceteammatchesready', this.onTeamMatchesReady);
+  }
+
+  ionViewWillUnload() {
+    document.removeEventListener('serviceplayerready', this.onPlayerReady);
+    document.removeEventListener('serviceteamstatsdataready', this.onTeamStatsDataReady);
+    document.removeEventListener('serviceteamplayersready', this.onTeamPlayersReady);
+    document.removeEventListener('serviceteammatchesready', this.onTeamMatchesReady);
   }
 
   updateUpcomingMatch() {

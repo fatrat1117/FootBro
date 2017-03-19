@@ -6,8 +6,7 @@ import { MyTeamPage } from '../my-team/my-team'
 
 @Component({
   selector: 'page-rank',
-  templateUrl: 'rank.html',
-  providers: [RankService]
+  templateUrl: 'rank.html'
 })
 export class RankPage {
   stats = "teams";
@@ -19,6 +18,8 @@ export class RankPage {
   teamScroll;
   numOfPlayers = 0;
   playerScroll;
+  onTeamRanksChanged;
+  onPlayerRanksChanged;
 
   constructor(public nav: NavController,
     private rankService: RankService) {
@@ -26,23 +27,31 @@ export class RankPage {
   }
 
   ionViewDidLoad() {
-    document.addEventListener('serviceteamrankschanged', e => {
+    this.onTeamRanksChanged = e => {
       this.teamRanks = this.rankService.teamRanks;
       this.numOfTeams = this.teamRanks.length;
       if (this.teamScroll)
         this.teamScroll.complete();
-    });
+    };
 
-    document.addEventListener('serviceplayerrankschanged', e => {
+    this.onPlayerRanksChanged = e => {
       this.playerRanks = this.rankService.playerRanks;
       this.numOfPlayers = this.playerRanks.length;
       if (this.playerScroll)
          this.playerScroll.complete();
-    });
+    };
+
+    document.addEventListener('serviceteamrankschanged', this.onTeamRanksChanged);
+    document.addEventListener('serviceplayerrankschanged', this.onPlayerRanksChanged );
 
     this.rankService.getTeamRanksAsync(this.teamSortByStr, this.numOfTeams + 10);
     this.rankService.getPlayerRanksAsync(this.playerSortByStr, this.numOfPlayers + 20);
   }
+
+  ionViewWillUnload() {
+    document.removeEventListener('serviceteamrankschanged', this.onTeamRanksChanged);
+    document.removeEventListener('serviceplayerrankschanged', this.onPlayerRanksChanged );
+  } 
 
   sortTeamBy(str) {
     this.teamSortByStr = str;
