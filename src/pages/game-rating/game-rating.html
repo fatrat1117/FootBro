@@ -21,14 +21,14 @@
     <img [src]="p.player?.photo" class="img-evalute" item-left>
     <div>
       <button ion-button clear class="member-name">{{p?.player?.name}}</button>
-      <!--<div class="star-touch-back">
-        <div class="star-back" *ngFor="let item of member.starArray">
+      <div class="star-touch-back">
+        <div class="star-back" *ngFor="let item of p.starArray">
           <ion-icon name="{{item.src}}" class="star-icon" isActive="true"></ion-icon>
         </div>
-        <div class="touch-back" (pan)="panStar(member,$event)" (click)="clickStar(member,$event)"></div>
-      </div>-->
+        <div class="touch-back" (pan)="panStar(p,$event)" (click)="clickStar(p,$event)"></div>
+      </div>
     </div>
-    <button ion-button clear color="{{p.evaluteColor}}" class="evalute-string" item-right>
+    <button ion-button clear color="{{getRatingColor(p.rating)}}" class="evalute-string" item-right>
         {{getRatingString(p.rating)}}
       </button>
   </ion-item>
