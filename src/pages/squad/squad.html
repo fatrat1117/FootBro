@@ -24,6 +24,7 @@
       <ion-icon *ngIf="settings.editMode" name="md-remove-circle" color="danger" (click)="removeSubstitute(p)"></ion-icon>
     </div>
   </ion-row>
+  <ion-icon *ngIf="substitutes.length > 5" name="ios-more" class="more-icon"></ion-icon>
 </ion-grid>
 
 <!--ion-grid *ngIf="!settings.editMode" class="bench" no-padding>

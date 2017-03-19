@@ -51,17 +51,17 @@ import { OneSignalManager } from '../providers/onesignal-manager';
 import { UIHelper } from '../providers/uihelper';
 import { PlayerService } from './players/player.service';
 import { TeamService } from './teams/team.service';
-import { MiscService } from './misc/misc.service'
-import { MatchService } from './matches/match.service'
-import { MessageService } from './messages/message.service'
-import { CheerleaderService} from './cheerleaders/cheerleader.service'
-import { RankService } from './rank/rank.service'
+import { MiscService } from './misc/misc.service';
+import { MatchService } from './matches/match.service';
+import { MessageService } from './messages/message.service';
+import { CheerleaderService} from './cheerleaders/cheerleader.service';
+import { RankService } from './rank/rank.service';
 
 // pipes
 import { TransPipe, Localization } from '../providers/localization';
 import { StringToDatePipe, NumberToTimePipe, MomentPipe,StringToYearOnlyPipe} from '../pipes/moment.pipe';
-import { TeamBasicPipe } from '../pipes/team.pipe'
-import { ReversePipe, MapToArrayPipe, GroupThreePipe,GroupNPipe } from '../pipes/utilities.pipe'
+import { TeamBasicPipe } from '../pipes/team.pipe';
+import { ReversePipe, MapToArrayPipe, GroupThreePipe,GroupNPipe } from '../pipes/utilities.pipe';
 
 // components
 import { SbLoadingComponent } from './common/loading.component';
@@ -73,6 +73,9 @@ import { SbWechatShareButtonComponent } from './common/wechat.share.button.compo
 import { SbMatchBasicComponent } from './matches/match-basic.component';
 import { MatchDetailPage } from "../pages/match-detail/match-detail";
 import { GameRatingPage } from "../pages/game-rating/game-rating";
+
+// directives
+import { KeyboardAttachDirective } from '../providers/keyboard-attach.directive';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCrhL6g6rHs7-X09jw5Oq8I_g0fspD8bf8",
@@ -147,6 +150,8 @@ export const firebaseConfig = {
     SbFbShareButtonComponent,
     SbWechatShareButtonComponent,
     SbMatchBasicComponent,
+    // directives
+    KeyboardAttachDirective
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
@@ -213,7 +218,7 @@ export const firebaseConfig = {
     MatchService,
     MessageService,
     CheerleaderService,
-    RankService]
+    RankService],
 })
 export class AppModule {
 }
