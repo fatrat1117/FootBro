@@ -35,6 +35,20 @@ export class PlayerRatingUI {
   //id;
   player: Player;
   rating = 5;
-  evaluteString;
-  evaluteColor;
+  starArray = [{
+    id: 2,
+    src: "ios-star-outline"
+  }, {
+      id: 4,
+      src: "ios-star-outline"
+    }, {
+      id: 6,
+      src: "ios-star-outline"
+    }, {
+      id: 8,
+      src: "ios-star-outline"
+    }, {
+      id: 10,
+      src: "ios-star-outline"
+    }];
 }

@@ -29,6 +29,7 @@ export class EditGameRatingPage {
       this.squad.participants.forEach(p => {
         let player = new PlayerRatingUI();
         player.player = this.playerService.findOrCreatePlayerAndPull(p.id);
+        //console.log(player.starArray);
         this.players.push(player);
       })
     }
