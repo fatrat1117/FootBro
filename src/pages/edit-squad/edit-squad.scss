@@ -1,4 +1,12 @@
-page-edit-squad {    
+   
+.squad-popover .popover-content{
+        width: 100%;
+        left:0 !important;
+        top:56px !important;
+        height: auto;
+}
+page-edit-squad {
+ 
     ion-navbar{
         .squard-number-container{
             display: flex;
@@ -37,9 +45,7 @@ page-edit-squad {
                     transition: all 300ms;
                 }
             
-            .squard-number-btn:focus{
-                  transform: scale(1.05);
-                }
+            
             .squard-number-btn.circle{
                  background: rgba(235, 235, 235, 0.27);
                   border: none;
@@ -56,10 +62,19 @@ page-edit-squad {
                     justify-content: center;
                   transition: 0.5s;
             }
-            .squard-number-btn.circle:focus {
-                  background: color($colors,primary);
-                  padding: -2px;
-                }
+//            .squard-number-btn.circle:focus {
+//                  background: color($colors,primary);
+//                  padding: -2px;
+//                }
+//            
+//            .squard-number-btn:focus{
+//                  transform: scale(1.05);
+//                }
+            .selected{
+                 background: color($colors,primary) !important;
+                 padding: -2px !important;
+                 transform: scale(1.05) !important;
+            }
         }
     }
   .playerImg {

@@ -6,20 +6,30 @@
       </button>
     </ion-buttons>
     <ion-buttons left class="squard-number-container">
-      <button class="squard-number-btn circle five">
+      <button class="squard-number-btn circle five" (click) ="selectSquadNumber($event,5)" [ngClass]="{selected:selectedSquad==5}">
           <span>5</span></button>
-      <button class="squard-number-btn circle seven">
+      <button class="squard-number-btn circle seven" (click) ="selectSquadNumber($event,7)" [ngClass]="{selected:selectedSquad==7}">
           <span>7</span></button>
-      <button class="squard-number-btn circle eleven" (click) = "load11()"><span>11</span></button>
+      <button class="squard-number-btn circle eleven" (click) ="selectSquadNumber($event,11)" [ngClass]="{selected:selectedSquad==11}"><span>11</span></button>
     </ion-buttons>
       <ion-buttons right>
             <button color="primary" ion-button icon-only clear (click) = "saveSquad()">
          <ion-icon name="md-cloud-upload"></ion-icon>
       </button>
       </ion-buttons>
+      
+<!--
+        <div class="squard-info-panel">
+    <svg height="25" width="55">
+  <polygon points="0,0 50,0 40,20 10,20" style="fill:white;stroke:purple;stroke-width:1" />
+  Sorry, your browser does not support inline SVG.
+</svg>
+    </div>
+-->
   </ion-navbar>
 </ion-header>
 
 <ion-content no-bounce>
+  
   <page-squad ion-fixed [settings]="squadSettings" style="width: 100%; height: 100%" #squadCtrl></page-squad>
 </ion-content>
