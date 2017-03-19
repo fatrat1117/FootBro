@@ -11,30 +11,6 @@ export class GameRatingPage implements OnInit {
   @Input() players: PlayerRatingUI[];
 
   constructor(public navCtrl: NavController) {
-    // for (var i = 0; i < 5; i++) {
-    //   this.memberlist[i] = {
-    //     name: "梅西" + i,
-    //     star: 5 - 0.5 * (i + 1),
-    //     evaluteString: i,
-    //     evaluteColor: "#00ff00",
-    //     starArray: [{
-    //       id: 2,
-    //       src: "ios-star-outline"
-    //     }, {
-    //       id: 4,
-    //       src: "ios-star-outline"
-    //     }, {
-    //       id: 6,
-    //       src: "ios-star-outline"
-    //     }, {
-    //       id: 8,
-    //       src: "ios-star-outline"
-    //     }, {
-    //       id: 10,
-    //       src: "ios-star-outline"
-    //     }]
-    //   }
-    // }
   }
 
   ngOnInit() {
@@ -96,6 +72,8 @@ export class GameRatingPage implements OnInit {
 
   //通过star修改星星图片
   modifyStarPictureByStar(starArray, star) {
+    console.log(star);
+    
     switch (star) {
       case 1:
         starArray[0].src = "ios-star-half";
@@ -152,7 +130,7 @@ export class GameRatingPage implements OnInit {
 
   //touch事件处理
   onTouchChanged(member, itemId) {
-    member.rating = itemId / 2;
+    member.rating = itemId;
     for (var i = 0; i < member.starArray.length; i++) {
       if (member.starArray[i].id == itemId + 1) {
         member.starArray[i].src = "ios-star-half";
