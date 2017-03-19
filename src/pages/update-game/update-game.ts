@@ -6,7 +6,7 @@ import { Team } from '../../app/teams/team.model'
 import { Match } from '../../app/matches/match.model'
 import { MatchService } from '../../app/matches/match.service'
 import { PlayerService } from '../../app/players/player.service'
-import { PlayerMatchData } from '../../app/players/player.model'
+import { PlayerMatchStatsUI } from '../../app/players/player.model'
 import { TeamService } from '../../app/teams/team.service'
 import { UIHelper } from '../../providers/uihelper'
 import { Localization } from '../../providers/localization'
@@ -26,13 +26,13 @@ export class UpdateGamePage {
     matchTime;
     tournamentId;
     id;
-    //homePlayers: PlayerMatchData[];
-    //awayPlayers: PlayerMatchData[];
+    //homePlayers: PlayerMatchStatsUI[];
+    //awayPlayers: PlayerMatchStatsUI[];
     updateState = 3;
     myIdentity = 2; //0: home captain, 1: away captain, 2:others
     onMatchSquadReady;
     teamId;
-    participants: PlayerMatchData[] = [];
+    participants: PlayerMatchStatsUI[] = [];
 
     constructor(public navCtrl: NavController,
         private modalCtrl: ModalController,
@@ -73,7 +73,7 @@ export class UpdateGamePage {
                     if ('lineup' in squad) {
                         squad.lineup.forEach(l => {
                             if ('id' in l) {
-                                let player = new PlayerMatchData();
+                                let player = new PlayerMatchStatsUI();
                                 player.id = l.id;
                                 player.player = this.playerService.findOrCreatePlayerAndPull(l.id);
                                 this.participants.push(player);
@@ -83,7 +83,7 @@ export class UpdateGamePage {
 
                     if ('substitutes' in squad) {
                         squad.substitutes.forEach(id => {
-                            let player = new PlayerMatchData();
+                            let player = new PlayerMatchStatsUI();
                             player.id = id;
                             player.player = this.playerService.findOrCreatePlayerAndPull(id);
                             this.participants.push(player);
@@ -248,7 +248,7 @@ export class UpdateGamePage {
                 for (let id in selectedIds) {
                     //add only new
                     if (selectedIds[id] && existingPlayersMap[id] != true) {
-                        let data = new PlayerMatchData();
+                        let data = new PlayerMatchStatsUI();
                         data.id = id;
                         data.player = this.playerService.getPlayer(id);
                         players.push(data);
