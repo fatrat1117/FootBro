@@ -32,23 +32,81 @@ export class PlayerMatchStatsUI {
 }
 
 export class PlayerRatingUI {
-  //id;
   player: Player;
-  rating = 5;
+  rating = 6;
   starArray = [{
     id: 2,
     src: "ios-star-outline"
   }, {
-      id: 4,
-      src: "ios-star-outline"
-    }, {
-      id: 6,
-      src: "ios-star-outline"
-    }, {
-      id: 8,
-      src: "ios-star-outline"
-    }, {
-      id: 10,
-      src: "ios-star-outline"
-    }];
+    id: 4,
+    src: "ios-star-outline"
+  }, {
+    id: 6,
+    src: "ios-star-outline"
+  }, {
+    id: 8,
+    src: "ios-star-outline"
+  }, {
+    id: 10,
+    src: "ios-star-outline"
+  }];
+
+  constructor() {
+    this.updateStarPictureByStar();
+  }
+
+  updateStarPictureByStar() {
+    switch (this.rating) {
+      case 1:
+        this.starArray[0].src = "ios-star-half";
+        break;
+      case 2:
+        this.starArray[0].src = "ios-star";
+        break;
+      case 3:
+        this.starArray[0].src = "ios-star";
+        this.starArray[1].src = "ios-star-half";
+        break;
+      case 4:
+        this.starArray[0].src = "ios-star";
+        this.starArray[1].src = "ios-star";
+        break;
+      case 5:
+        this.starArray[0].src = "ios-star";
+        this.starArray[1].src = "ios-star";
+        this.starArray[2].src = "ios-star-half";
+        break;
+      case 6:
+        this.starArray[0].src = "ios-star";
+        this.starArray[1].src = "ios-star";
+        this.starArray[2].src = "ios-star";
+        break;
+      case 7:
+        this.starArray[0].src = "ios-star";
+        this.starArray[1].src = "ios-star";
+        this.starArray[2].src = "ios-star";
+        this.starArray[3].src = "ios-star-half";
+        break;
+      case 8:
+        this.starArray[0].src = "ios-star";
+        this.starArray[1].src = "ios-star";
+        this.starArray[2].src = "ios-star";
+        this.starArray[3].src = "ios-star";
+        break;
+      case 9:
+        this.starArray[0].src = "ios-star";
+        this.starArray[1].src = "ios-star";
+        this.starArray[2].src = "ios-star";
+        this.starArray[3].src = "ios-star";
+        this.starArray[4].src = "ios-star-half";
+        break;
+      case 10:
+        this.starArray[0].src = "ios-star";
+        this.starArray[1].src = "ios-star";
+        this.starArray[2].src = "ios-star";
+        this.starArray[3].src = "ios-star";
+        this.starArray[4].src = "ios-star";
+        break;
+    }
+  }
 }

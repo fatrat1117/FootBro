@@ -1,6 +1,7 @@
 import { NavController } from "ionic-angular";
 import { Component, Input, OnInit } from "@angular/core";
 import { PlayerRatingUI } from '../../app/players/player.model';
+import { Localization } from '../../providers/localization';
 
 @Component({
   selector: 'page-game-rating',
@@ -10,127 +11,64 @@ import { PlayerRatingUI } from '../../app/players/player.model';
 export class GameRatingPage implements OnInit {
   @Input() players: PlayerRatingUI[];
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController,
+  private loc: Localization) {
   }
 
   ngOnInit() {
-    if (this.players) {
-      //console.log(this.players);
-      for (var i = 0; i < this.players.length; i++) {
-        //this.modifyEvaluteDataByStar(this.players[i]);
-        this.modifyStarPictureByStar(this.players[i].starArray, this.players[i].rating);
-      }
-    }
+    // if (this.players) {
+    //   //console.log(this.players);
+    //   for (var i = 0; i < this.players.length; i++) {
+    //     //this.modifyEvaluteDataByStar(this.players[i]);
+    //     this.modifyStarPictureByStar(this.players[i].starArray, this.players[i].rating);
+    //   }
+    // }
   }
 
   getRatingString(rating) {
-    if (rating) {
+    if (rating != null) {
       if (rating >= 9) {
-        return "非常好";
-        //member.evaluteColor = "secondary";
+        return this.loc.getString('excellent');
       } else if (rating >= 8) {
-        return "很好";
-        //member.evaluteColor = "secondary";
+        return this.loc.getString('verygood');
       } else if (rating >= 7) {
-        return "好";
-        //member.evaluteColor = "secondary";
+        return this.loc.getString('good');
       } else if (rating >= 6) {
-        return "一般";
-        //member.evaluteColor = "primary";
+        return this.loc.getString('average');
       } else if (rating >= 5) {
-        return "差";
-        //member.evaluteColor = "light";
+        return this.loc.getString('poor');
       } else if (rating >= 4) {
-        return "很差";
-        // member.evaluteColor = "light";
+        return this.loc.getString('verypoor');
       } else {
-        return "非常差";
-        //member.evaluteColor = "light";
+        return this.loc.getString('extremelypoor');
       }
     }
   }
 
   getRatingColor(rating) {
-    if (rating) {
+    if (rating != null) {
       if (rating >= 9) {
-        return "secondary";
+        return "excellent";
       } else if (rating >= 8) {
-        return "secondary";
+        return "verygood";
       } else if (rating >= 7) {
-        return "secondary";
+        return "good";
       } else if (rating >= 6) {
-        return "primary";
+        return "average";
       } else if (rating >= 5) {
-        return "light";
+        return "poor";
       } else if (rating >= 4) {
-        return "light";
+        return "verypoor";
       } else {
-        return "light";
+        return "extremelypoor";
       }
-    }
-  }
-
-  //通过star修改星星图片
-  modifyStarPictureByStar(starArray, star) {
-    console.log(star);
-    
-    switch (star) {
-      case 1:
-        starArray[0].src = "ios-star-half";
-        break;
-      case 2:
-        starArray[0].src = "ios-star";
-        break;
-      case 3:
-        starArray[0].src = "ios-star";
-        starArray[1].src = "ios-star-half";
-        break;
-      case 4:
-        starArray[0].src = "ios-star";
-        starArray[1].src = "ios-star";
-        break;
-      case 5:
-        starArray[0].src = "ios-star";
-        starArray[1].src = "ios-star";
-        starArray[2].src = "ios-star-half";
-        break;
-      case 6:
-        starArray[0].src = "ios-star";
-        starArray[1].src = "ios-star";
-        starArray[2].src = "ios-star";
-        break;
-      case 7:
-        starArray[0].src = "ios-star";
-        starArray[1].src = "ios-star";
-        starArray[2].src = "ios-star";
-        starArray[3].src = "ios-star-half";
-        break;
-      case 8:
-        starArray[0].src = "ios-star";
-        starArray[1].src = "ios-star";
-        starArray[2].src = "ios-star";
-        starArray[3].src = "ios-star";
-        break;
-      case 9:
-        starArray[0].src = "ios-star";
-        starArray[1].src = "ios-star";
-        starArray[2].src = "ios-star";
-        starArray[3].src = "ios-star";
-        starArray[4].src = "ios-star-half";
-        break;
-      case 10:
-        starArray[0].src = "ios-star";
-        starArray[1].src = "ios-star";
-        starArray[2].src = "ios-star";
-        starArray[3].src = "ios-star";
-        starArray[4].src = "ios-star";
-        break;
     }
   }
 
   //touch事件处理
   onTouchChanged(member, itemId) {
     member.rating = itemId;
+    //console.log(itemId);
     for (var i = 0; i < member.starArray.length; i++) {
       if (member.starArray[i].id == itemId + 1) {
         member.starArray[i].src = "ios-star-half";
@@ -140,8 +78,9 @@ export class GameRatingPage implements OnInit {
         member.starArray[i].src = "ios-star-outline";
       }
     }
+    member.updateStarPictureByStar();
     //this.modifyEvaluteDataByStar(member);
-    this.modifyStarPictureByStar(member.starArray, member.rating);
+    //this.modifyStarPictureByStar(member.starArray, member.rating);
   }
   //星星评分拖动效果的实现函数
   panStar(member, e) {
