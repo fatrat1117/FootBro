@@ -99,11 +99,6 @@ export class ManageTeamPage {
     */
   }
 
-  onItemSwipe(e) {
-    console.log(e);
-    
-  }
-  
   /*
   setDefaultTeam(index: number, slidingItem) {
     slidingItem.close();

@@ -16,7 +16,7 @@
           <img [src]="t.logo">
         </ion-thumbnail>
         <h2 ion-text [color]="player.teamId == t.id ? 'primary' : 'none'">{{ t.name }}</h2>
-        <ion-icon name="ios-arrow-back" item-right></ion-icon>
+        <ion-icon name="md-arrow-back" item-right style="opacity: 0.3"></ion-icon>
       </ion-item>
       <ion-item-options side="right">
         <button *ngIf="player.teamId != t.id" ion-button color="primary" text-capitalize (click)="setDefaultTeam(t.id, slidingItem)">
