@@ -5,7 +5,7 @@ import { MATCHSTANDINGS } from './shared/mock-data/mock-match-standing';
 import { FirebaseManager } from '../../providers/firebase-manager';
 import { TeamService } from '../teams/team.service';
 import { Team } from '../teams/team.model';
-import { PlayerMatchData } from '../players/player.model';
+import { PlayerMatchStatsUI } from '../players/player.model';
 import { PlayerService } from '../players/player.service';
 
 @Injectable()

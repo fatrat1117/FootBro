@@ -5,13 +5,18 @@
         <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons right>
-      <button ion-button (click) = "load7()">7</button>
-      <button ion-button (click) = "load11()">11</button>
-      <button color="primary" ion-button icon-only clear (click) = "saveSquad()">
+    <ion-buttons left class="squard-number-container">
+      <button class="squard-number-btn circle five">
+          <span>5</span></button>
+      <button class="squard-number-btn circle seven">
+          <span>7</span></button>
+      <button class="squard-number-btn circle eleven" (click) = "load11()"><span>11</span></button>
+    </ion-buttons>
+      <ion-buttons right>
+            <button color="primary" ion-button icon-only clear (click) = "saveSquad()">
          <ion-icon name="md-cloud-upload"></ion-icon>
       </button>
-    </ion-buttons>
+      </ion-buttons>
   </ion-navbar>
 </ion-header>
 
