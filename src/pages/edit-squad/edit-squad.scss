@@ -80,6 +80,21 @@ page-edit-squad {
             }
         }
     }
+    
+    .squad-selected{
+        position: relative;
+        text-align: center;
+        span{
+            position: absolute;
+            left: 0;
+            right: 0;
+            color: black;
+            font-size: 1rem;
+        }
+        .squard-info-panel{
+            height: 2.5rem;
+        }
+    }
   .playerImg {
     width: 32px;
     height: 32px;
