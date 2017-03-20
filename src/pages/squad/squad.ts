@@ -12,6 +12,7 @@ import { UIHelper } from '../../providers/uihelper'
 })
 export class SquadPage implements OnInit, OnDestroy {
   @Input() settings;
+  @Input() squad;
 
   @ViewChild(Content) content: Content;
   @ViewChild('squadCtrl') squadCtrl;
@@ -21,7 +22,7 @@ export class SquadPage implements OnInit, OnDestroy {
   substitutes = [];
   overflowMode = 'auto';
   uiPlayerMap = {};
-  onMatchSquadReady;
+  //onMatchSquadReady;
   onPlayerReady;
 
   constructor(private matchService: MatchService,
@@ -31,35 +32,15 @@ export class SquadPage implements OnInit, OnDestroy {
     private teamService: TeamService,
     public events: Events) {
 
-  } 
+  }
 
   addEventListeners() {
-      this.onMatchSquadReady = (teamId, matchId) => {
-      //console.log(teamId, matchId, this);
-      if (teamId === this.settings.teamId && matchId === this.settings.matchId) {
-        let squad = this.teamService.getMatchSquad(teamId, matchId);
-        this.setSquad(squad.lineup);
-        if (this.lineup) {
-          this.lineup.forEach(l => {
-            if ('id' in l) {
-              this.uiPlayerMap[l.id] = l;
-              let player = this.playerService.getPlayerAsync(l.id);
-            }
-          });
-        }
-        this.substitutes.splice(0);
-        if (squad.substitutes) {
-          squad.substitutes.forEach(id => {
-            let substitue = {
-              id: id,
-            }
-            this.uiPlayerMap[id] = substitue;
-            this.substitutes.push(substitue);
-            let player = this.playerService.getPlayerAsync(id);
-          });
-        }
-      }
-    }
+    // this.onMatchSquadReady = (teamId, matchId) => {
+    // //console.log(teamId, matchId, this);
+    // if (teamId === this.settings.teamId && matchId === this.settings.matchId) {
+    //let squad = this.teamService.getMatchSquad(teamId, matchId);
+    //   }
+    // }
 
     this.onPlayerReady = e => {
       let playerId = e['detail'];
@@ -71,31 +52,30 @@ export class SquadPage implements OnInit, OnDestroy {
       }
     };
 
-    this.events.subscribe('servicematchsquadready', this.onMatchSquadReady);
+    //this.events.subscribe('servicematchsquadready', this.onMatchSquadReady);
     document.addEventListener('serviceplayerready', this.onPlayerReady);
   }
 
   ngOnInit() {
     this.addEventListeners();
-
-    if (!this.settings.editMode)
-      this.loadSquad();
-    else {
-      //ionic 2 bug, need to waitfor height
+    // if (!this.settings.editMode)
+    //   this.loadSquad();
+    // else {
+    //   //ionic 2 bug, need to waitfor height
       let self = this;
       setTimeout(function () {
         self.loadSquad();
-      }, 1000);
-    }
+      }, 500);
+    //}
   }
 
   ngOnDestroy() {
     this.unsubscribeEvents();
   }
 
-  
+
   unsubscribeEvents() {
-    this.events.unsubscribe('servicematchsquadready', this.onMatchSquadReady);
+    //this.events.unsubscribe('servicematchsquadready', this.onMatchSquadReady);
     document.removeEventListener('serviceplayerready', this.onPlayerReady);
   }
 
@@ -232,6 +212,30 @@ export class SquadPage implements OnInit, OnDestroy {
   }
 
   loadSquad() {
-    this.teamService.getMatchSquadAsync(this.settings.teamId, this.settings.matchId);
+    let squad = this.settings.squad;
+    if (!squad)
+      return;
+    
+    this.setSquad(squad.lineup);
+    if (this.lineup) {
+      this.lineup.forEach(l => {
+        if ('id' in l) {
+          this.uiPlayerMap[l.id] = l;
+          this.playerService.getPlayerAsync(l.id);
+        }
+      });
+    }
+    this.substitutes.splice(0);
+    if (squad.substitutes) {
+      squad.substitutes.forEach(id => {
+        let substitue = {
+          id: id,
+        }
+        this.uiPlayerMap[id] = substitue;
+        this.substitutes.push(substitue);
+        this.playerService.getPlayerAsync(id);
+      });
+    }
+    //this.teamService.getMatchSquadAsync(this.settings.teamId, this.settings.matchId);
   }
 }

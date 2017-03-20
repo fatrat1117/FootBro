@@ -51,6 +51,7 @@ export class MatchDetailPage {
     this.onMatchSquadReady = (teamId, matchId) => {
       if ('teamId' in this.squadSettings && teamId === this.squadSettings.teamId && matchId === this.match.id) {
         this.squad = this.teamService.getMatchSquad(teamId, matchId);
+        this.squadSettings.squad = this.squad;
       }
     }
 
