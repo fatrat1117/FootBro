@@ -78,15 +78,15 @@ export class SquadPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.addEventListeners();
 
-    if (!this.settings.editMode)
-      this.loadSquad();
-    else {
-      //ionic 2 bug, need to waitfor height
+    // if (!this.settings.editMode)
+    //   this.loadSquad();
+    // else {
+    //   //ionic 2 bug, need to waitfor height
       let self = this;
       setTimeout(function () {
         self.loadSquad();
-      }, 1000);
-    }
+      }, 500);
+    //}
   }
 
   ngOnDestroy() {
