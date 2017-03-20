@@ -53,7 +53,6 @@ export class CheeringTeamPage {
 
     this.onApprovedCheerleadersReady =  e => {
       this.approvedCheerleaders = this.cheerleaderService.getApprovedCheerleaders();
-
       if (this.cheerleaderService.isCheerleader(this.playerService.selfId()))
         this.amICheerleader = true;
       else

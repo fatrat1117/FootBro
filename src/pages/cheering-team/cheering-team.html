@@ -1,14 +1,14 @@
 <ion-header>
   <ion-navbar no-padding>
     <ion-title text-center>{{'Cheerleaders' | trans}}</ion-title>
-<!--
+    <!--
     <ion-buttons end>
       <button class="my-player-btn-right" ion-button>
         <img class="share-icon" src="assets/img/cheering-team/share.png"/>
       </button>
     </ion-buttons>
 -->
-      
+
   </ion-navbar>
 </ion-header>
 <ion-content>
@@ -49,9 +49,6 @@
           </ion-col>
         </ion-row>
       </div>
-
-
-
     </ion-row>
 
     <div class="baby-row">
@@ -83,7 +80,7 @@
                 <button *ngIf="!isUnlocked(clItem.id)" ion-button icon-only clear small class="chat-logo" color="gYellow" (click)="unlockCheerleader(clItem)">
                   <ion-icon name="md-unlock"></ion-icon>
                 </button>
-                <img class="img" [src]="clItem.photoMedium">
+                <img *ngIf="clItem?.photoMedium" [src]="clItem?.photoMedium">
               </div>
             </ion-row>
             <ion-row class="item-row">

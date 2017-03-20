@@ -39,7 +39,7 @@ export class Localization {
             Settings: 'Settings',
             ChatRoom: 'Chats',
             Create: 'Create',
-            CreateAccount: 'CreateAccount',
+            CreateAccount: 'Create Account',
             Quit: 'Quit',
             players: 'players',
             Players: 'Players',
