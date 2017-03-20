@@ -40,6 +40,7 @@ export class FirebaseManager {
   //admins
   admins;
 
+  ratePlayerPoints = 100;
 
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,
@@ -311,13 +312,11 @@ export class FirebaseManager {
   }
 
   increaseTeamPopularity(teamId) {
-    //setTimeout(() => {
     //cause pulic team changed to fire multiple times, need a fix
     let teamPublicData = this.sortedPublicTeamsMap[teamId];
     if (teamPublicData) {
       this.af.database.object(`public/teams/${teamId}`).update({ popularity: teamPublicData.popularity + 1 });
     };
-    //}, 1000);
   }
 
   createTeam(teamObj, isDefault) {
@@ -502,7 +501,7 @@ export class FirebaseManager {
     else {
       this.af.database.object(`/players/${id}`).subscribe(snapshot => {
         if (snapshot && snapshot['basic-info']) {
-          if ('joinTime' in snapshot) {
+          if ('points' in snapshot) {
             if ('img/none.png' === snapshot['basic-info'].photoURL)
               snapshot['basic-info'].photoURL = 'assets/img/none.png';
             this.cachedPlayersMap[id] = snapshot;
@@ -510,7 +509,9 @@ export class FirebaseManager {
           }
           else {
             //fix all missing properties
-            this.af.database.object(`/players/${id}`).update({ joinTime: firebase.database.ServerValue.TIMESTAMP });
+            this.af.database.object(`/players/${id}`).update(
+              { joinTime: firebase.database.ServerValue.TIMESTAMP,
+                points: this.ratePlayerPoints });
           }
         }
         else
@@ -799,6 +800,11 @@ export class FirebaseManager {
 
   getMatchSquadRef(teamId, matchId) {
     return `/team_squads/${teamId}/matches/${matchId}/`;
+  }
+
+  ratePlayers(teamId, matchId, ratings) {
+    this.af.database.object(this.getMatchSquadRef(teamId, matchId) + 'ratings/' + this.selfId()).set(ratings);
+    this.updatePlayerPoints(this.selfId(), this.getPlayer(this.selfId()).points + this.ratePlayerPoints);
   }
 
   getTournamentTableList(id) {

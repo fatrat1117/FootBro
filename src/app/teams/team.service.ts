@@ -246,4 +246,8 @@ export class TeamService {
   getAfPublicTeamName(teamId: string) {
     return this.fm.getAfTeamPublicName(teamId);
   }
+
+  ratePlayers(teamId, matchId, ratings) {
+    this.fm.ratePlayers(teamId, matchId, ratings);
+  }
 }

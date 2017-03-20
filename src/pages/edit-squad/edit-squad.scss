@@ -1,8 +1,11 @@
-   
+.squad-popover{
+       top:56px !important;
+}
 .squad-popover .popover-content{
         width: 100%;
         left:0 !important;
-        top:56px !important;
+        top:0 !important;
+        bottom: inherit;
         height: auto;
 }
 page-edit-squad {
@@ -75,6 +78,21 @@ page-edit-squad {
                  padding: -2px !important;
                  transform: scale(1.05) !important;
             }
+        }
+    }
+    
+    .squad-selected{
+        position: relative;
+        text-align: center;
+        span{
+            position: absolute;
+            left: 0;
+            right: 0;
+            color: black;
+            font-size: 1rem;
+        }
+        .squard-info-panel{
+            height: 2.5rem;
         }
     }
   .playerImg {

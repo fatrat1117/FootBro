@@ -42,7 +42,8 @@ import { UpdateGamePage } from '../pages/update-game/update-game';
 import { SquadPage } from '../pages/squad/squad';
 import { EditSquadPage } from '../pages/edit-squad/edit-squad';
 import { SharePage } from '../pages/share/share';
-import { EditGameRatingPage } from '../pages/edit-game-rating/edit-game-rating'
+import { EditGameRatingPage } from '../pages/edit-game-rating/edit-game-rating';
+import { SquadSelectPage} from '../pages/squad-select/squad-select';
 
 // services
 import { AngularFireModule } from 'angularfire2';
@@ -131,6 +132,8 @@ export const firebaseConfig = {
     EditSquadPage,
     SharePage,
     EditGameRatingPage,
+    SquadSelectPage,
+    
     // pipes
     TransPipe,
     StringToDatePipe,
@@ -206,7 +209,8 @@ export const firebaseConfig = {
     SquadPage,
     EditSquadPage,
     SharePage,
-    EditGameRatingPage
+    EditGameRatingPage,
+    SquadSelectPage
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
     FirebaseManager,
