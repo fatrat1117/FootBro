@@ -51,18 +51,18 @@
     </div>
     <div *ngSwitchCase="'teams'" class="teams-panel">
       <ion-grid>
-        <ion-row *ngFor="let ts of registerTeams | groupNPipe:3" text-center>
-          <ion-col *ngFor="let t of ts;let i = index;" width-33 text-center>
-            <div *ngIf="t" class="team-item">
+        <ion-row *ngFor="let ts of teamsGrid" text-center>
+          <ion-col *ngFor="let i of ts" width-33 text-center>
+            <div *ngIf="ts[i]" class="team-item">
               <!-->
               <img *ngIf="i == 0" class="status" src="assets/img/league-info/passed_trans.png" />
               <img *ngIf="i == 1" class="status" src="assets/img/league-info/pending.png" />
               <img *ngIf="i == 2" class="status" src="assets/img/league-info/failed_trans.png" />
               <img class="team-logo" src="assets/img/league-info/club.jpeg" />
               <-->
-              <img class="team-logo" [src]="t.logo" />
+              <img class="team-logo" [src]="ts[i].logo" />
               <div class="team-name">
-                {{ t.name }}
+                {{ ts[i].name }}
               </div>
 
             </div>

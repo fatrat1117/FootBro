@@ -21,7 +21,10 @@ export class LeagueInfoPage {
   leagueInfo = "info";
   onPlayerReady;
   onTeamReady;
-  onRegisteredTeamsReady
+  onRegisteredTeamsReady;
+
+  teamsGrid: number[][];
+  oldTotal: number;
 
   constructor(private viewCtrl: ViewController, private navParams: NavParams, 
               private toastCtrl: ToastController, private alertCtrl: AlertController,
@@ -69,6 +72,7 @@ export class LeagueInfoPage {
       let lId = e['detail'];
       if (lId = this.leagueId) {
         this.registerTeams = this.matchService.getRegisteredTeams(lId);
+        this.buildGrid(this.registerTeams.length);
       }
     }
 
@@ -112,5 +116,25 @@ export class LeagueInfoPage {
   isRegistered() {
     if (this.registerTeams)
       return this.registerTeams.indexOf(this.selfTeam);
+  }
+
+  buildGrid(total: number) {
+    if (total == this.oldTotal)
+      return
+    this.oldTotal = total;
+    this.teamsGrid = [];
+
+    let row = [];
+    for (let i = 0; i < total; ++i) {
+      row.push(i);
+      
+      if ((i+1)%3 == 0) {
+        this.teamsGrid.push(row)
+        row = [];
+      }
+    }
+    if (row.length > 0) {
+      this.teamsGrid.push(row);
+    }
   }
 }

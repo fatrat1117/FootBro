@@ -81,6 +81,7 @@ export class GroupNPipe implements PipeTransform {
      let rowItem = [];
       for (let i = 0; i < arr.length; i++) {
         rowItem.push(arr[i]);
+        //rowItem.push(i);
         if (( i + 1) % numPerRow == 0) {
           rowArray.push(rowItem);
           rowItem = [];

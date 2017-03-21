@@ -23,6 +23,9 @@ export class CheeringTeamPage {
   onApprovedCheerleadersReady;
   onPlayerReady;
 
+  approvedGrid: number[][];
+  oldTotal: number;
+
   constructor(private nav: NavController,
     private modalCtrl: ModalController,
     private playerService: PlayerService,
@@ -53,6 +56,7 @@ export class CheeringTeamPage {
 
     this.onApprovedCheerleadersReady =  e => {
       this.approvedCheerleaders = this.cheerleaderService.getApprovedCheerleaders();
+      this.buildGrid(this.approvedCheerleaders.length)
       if (this.cheerleaderService.isCheerleader(this.playerService.selfId()))
         this.amICheerleader = true;
       else
@@ -125,33 +129,23 @@ export class CheeringTeamPage {
     });
   }
 
-  buildCheerleaderRowArray(appCheerleaders,numPerRow){
-        // var numPerRow = 2;
-        // var rowArray = [];
-        // if (!appCheerleaders){
-        //     return rowArray;
-        // }
-        // for (var i = 0; i < appCheerleaders.length; i+=numPerRow){
-        //     var rowItem = [];
-        //     for (var j = 0 ; j < numPerRow ;j ++){
-        //         var curr = appCheerleaders[i+j];
-        //         rowItem.push(curr);
-        //     }
-        //     rowArray.push(rowItem);
-        // }
-        var rowArray = [];
-        if (appCheerleaders){
-           var rowItem = [];
-           for (var i = 0; i < appCheerleaders.length ; i++){
-             var curr = appCheerleaders[i];
-             rowItem.push(curr);
-             if ((i + 1) % numPerRow == 0){
-                rowArray.push(rowItem);
-                rowItem = [];
-             }
-           }
-        }
-        return rowArray;
+  buildGrid(total: number) {
+    if (total == this.oldTotal)
+      return
+    this.oldTotal = total;
+    this.approvedGrid = [];
+
+    let row = [];
+    for (let i = 0; i < total; ++i) {
+      row.push(i);
+      
+      if ((i+1)%2 == 0) {
+        this.approvedGrid.push(row)
+        row = [];
+      }
+    }
+    if (row.length > 0) {
+      this.approvedGrid.push(row);
+    }
   }
 }
-

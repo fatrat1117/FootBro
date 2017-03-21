@@ -69,24 +69,24 @@
     </div>
 
     <div class="baby-row">
-      <ion-row *ngFor='let clrow of approvedCheerleaders |groupNPipe:2 ;let i = index' no-margin>
-        <ion-col class="cheerleader-item" width-50 *ngFor='let clItem of clrow; let j = index'>
-          <div *ngIf='clItem'>
+      <ion-row *ngFor="let clrow of approvedGrid" no-margin>
+        <ion-col class="cheerleader-item" width-50 *ngFor='let i of clrow'>
+          <div *ngIf='approvedCheerleaders[i]'>
             <ion-row class="item-row">
               <div class="baby-img-frame">
-                <button *ngIf="isUnlocked(clItem.id)" ion-button icon-only clear small class="chat-logo" color="primary" (click)="enterChatPage(clItem)">
+                <button *ngIf="isUnlocked(approvedCheerleaders[i].id)" ion-button icon-only clear small class="chat-logo" color="primary" (click)="enterChatPage(clItem)">
                   <ion-icon name="md-chatbubbles"></ion-icon>
                 </button>
-                <button *ngIf="!isUnlocked(clItem.id)" ion-button icon-only clear small class="chat-logo" color="gYellow" (click)="unlockCheerleader(clItem)">
+                <button *ngIf="!isUnlocked(approvedCheerleaders[i].id)" ion-button icon-only clear small class="chat-logo" color="gYellow" (click)="unlockCheerleader(clItem)">
                   <ion-icon name="md-unlock"></ion-icon>
                 </button>
-                <img *ngIf="clItem?.photoMedium" [src]="clItem?.photoMedium">
+                <img [src]="approvedCheerleaders[i].photoMedium">
               </div>
             </ion-row>
             <ion-row class="item-row">
               <div class="baby-status">
                 <ion-row>
-                  <h3>{{clItem.name}}</h3>
+                  <h3>{{approvedCheerleaders[i].name}}</h3>
                 </ion-row>
               </div>
             </ion-row>
