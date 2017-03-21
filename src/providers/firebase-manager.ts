@@ -402,6 +402,7 @@ export class FirebaseManager {
 
   updateTeamName(id: string, name: string) {
     this.af.database.object(`teams/${id}/basic-info/name`).set(name);
+    this.getAfTeamPublicName(id).set(name);
   }
 
   promoteNewCaptain(teamId: string, playerId: string) {
@@ -510,8 +511,10 @@ export class FirebaseManager {
           else {
             //fix all missing properties
             this.af.database.object(`/players/${id}`).update(
-              { joinTime: firebase.database.ServerValue.TIMESTAMP,
-                points: this.ratePlayerPoints });
+              {
+                joinTime: firebase.database.ServerValue.TIMESTAMP,
+                points: this.ratePlayerPoints
+              });
           }
         }
         else
@@ -633,7 +636,7 @@ export class FirebaseManager {
           snapshots.forEach(snapshot => {
             this.matchDatesMap[id].push(Number(snapshot.$key));
           });
-          this.matchDatesMap[id].sort((a, b) => {return b - a});
+          this.matchDatesMap[id].sort((a, b) => { return b - a });
           //console.log(this.matchDatesMap[id]);
           this.FireCustomEvent('matchdatesready', id);
         });
@@ -644,7 +647,7 @@ export class FirebaseManager {
           snapshots.forEach(snapshot => {
             this.matchDatesMap[id].push(Number(snapshot.$key));
           });
-          this.matchDatesMap[id].sort((a, b) => {return b - a});
+          this.matchDatesMap[id].sort((a, b) => { return b - a });
           this.FireCustomEvent('matchdatesready', id);
         });
       }
@@ -744,10 +747,20 @@ export class FirebaseManager {
     });
   }
 
+  updateTeamMatches(matchId, matchObj) {
+    console.log('updateTeamMatches', matchId, matchObj);
+    
+    //update team matches list
+    if ('time' in matchObj && 'homeId' in matchObj && 'awayId' in matchObj) {
+      this.af.database.object(this.getMatchSquadRef(matchObj.homeId, matchId) + 'time').set(matchObj.time);
+      this.af.database.object(this.getMatchSquadRef(matchObj.awayId, matchId) + 'time').set(matchObj.time);
+    }
+  }
+
   scheduleMatch(matchObj) {
     console.log('scheduleMatch', matchObj);
     this.afMatchList().push(matchObj).then(newMatch => {
-      console.log(newMatch);
+      this.updateTeamMatches(newMatch.key, matchObj);
     });
     this.afMatchDate(matchObj.date).set(true);
     if (matchObj.tournamentId)
@@ -761,6 +774,7 @@ export class FirebaseManager {
       this.afMatchDate(matchObj.date).set(true);
       if (matchObj.tournamentId)
         this.afTournamentMatchDate(matchObj.tournamentId, matchObj.date).set(true);
+      this.updateTeamMatches(id, matchObj);
     }
   }
 
