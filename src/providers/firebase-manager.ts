@@ -628,24 +628,23 @@ export class FirebaseManager {
       this.FireCustomEvent('matchdatesready', id);
     } else {
       if (id == "all") {
-        let sub = this.afMatchDates().subscribe(snapshots => {
-          let r = snapshots.reverse();
+        this.afMatchDates().subscribe(snapshots => {
           this.matchDatesMap[id] = [];
-          r.forEach(snapshot => {
+          snapshots.forEach(snapshot => {
             this.matchDatesMap[id].push(Number(snapshot.$key));
           });
-          //sub.unsubscribe();
+          this.matchDatesMap[id].sort((a, b) => {return b - a});
+          //console.log(this.matchDatesMap[id]);
           this.FireCustomEvent('matchdatesready', id);
         });
       }
       else {
-        let sub = this.afTournamentDates(id).subscribe(snapshots => {
-          let r = snapshots.reverse();
+        this.afTournamentDates(id).subscribe(snapshots => {
           this.matchDatesMap[id] = [];
-          r.forEach(snapshot => {
+          snapshots.forEach(snapshot => {
             this.matchDatesMap[id].push(Number(snapshot.$key));
           });
-          //sub.unsubscribe();
+          this.matchDatesMap[id].sort((a, b) => {return b - a});
           this.FireCustomEvent('matchdatesready', id);
         });
       }
@@ -747,7 +746,9 @@ export class FirebaseManager {
 
   scheduleMatch(matchObj) {
     console.log('scheduleMatch', matchObj);
-    this.afMatchList().push(matchObj);
+    this.afMatchList().push(matchObj).then(newMatch => {
+      console.log(newMatch);
+    });
     this.afMatchDate(matchObj.date).set(true);
     if (matchObj.tournamentId)
       this.afTournamentMatchDate(matchObj.tournamentId, matchObj.date).set(true);
