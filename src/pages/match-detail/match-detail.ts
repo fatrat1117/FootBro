@@ -22,6 +22,10 @@ export class MatchDetailPage {
   squadSettings: any;
   onMatchSquadReady;
   squad;
+  homeSquad;
+  awaySquad;
+  homePlayerStats = {};
+  awayPlayerStats = {};
 
   constructor(private viewCtrl: ViewController,
     private modal: ModalController,
@@ -35,8 +39,9 @@ export class MatchDetailPage {
 
     //only show captain's team
     if (this.playerService.isAuthenticated()) {
-      if (this.playerService.isCaptain(this.playerService.selfId(), this.match.homeId))
+      if (this.playerService.isCaptain(this.playerService.selfId(), this.match.homeId)) {
         this.squadSettings.teamId = this.match.homeId;
+      }
       else if (this.playerService.isCaptain(this.playerService.selfId(), this.match.awayId))
         this.squadSettings.teamId = this.match.awayId;
     }
@@ -49,15 +54,22 @@ export class MatchDetailPage {
 
   ionViewDidLoad() {
     this.onMatchSquadReady = (teamId, matchId) => {
-      if ('teamId' in this.squadSettings && teamId === this.squadSettings.teamId && matchId === this.match.id) {
-        this.squad = this.teamService.getMatchSquad(teamId, matchId);
+      if ('teamId' in this.squadSettings && matchId === this.match.id) {
+        if (teamId === this.squadSettings.teamId)
+          this.squad = this.teamService.getMatchSquad(teamId, matchId);
+
+        if (teamId === this.match.homeId) {
+          this.homeSquad = this.teamService.getMatchSquad(this.match.homeId, matchId);
+        }
+        else if (teamId === this.match.awayId) {
+          this.awaySquad = this.teamService.getMatchSquad(this.match.awayId, matchId);
+        }
       }
     }
 
     this.events.subscribe('servicematchsquadready', this.onMatchSquadReady);
-    if ('teamId' in this.squadSettings) {
-      this.teamService.getMatchSquadAsync(this.squadSettings.teamId, this.match.id);
-    }
+    this.teamService.getMatchSquadAsync(this.match.homeId, this.match.id);
+    this.teamService.getMatchSquadAsync(this.match.awayId, this.match.id);
     this.squadSettings.offsetY = this.pageHeader.nativeElement.clientHeight;
   }
 
@@ -65,6 +77,7 @@ export class MatchDetailPage {
     this.events.unsubscribe('servicematchsquadready', this.onMatchSquadReady);
   }
 
+  
   segmentChange(e) {
     //console.log(e);
     this.matchSegments = e;
