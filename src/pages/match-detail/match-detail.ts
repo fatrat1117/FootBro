@@ -60,9 +60,11 @@ export class MatchDetailPage {
 
         if (teamId === this.match.homeId) {
           this.homeSquad = this.teamService.getMatchSquad(this.match.homeId, matchId);
+          this.updatePlayerStats(this.homePlayerStats, this.homeSquad, this.match.home);
         }
         else if (teamId === this.match.awayId) {
           this.awaySquad = this.teamService.getMatchSquad(this.match.awayId, matchId);
+          this.updatePlayerStats(this.awayPlayerStats, this.awaySquad, this.match.away);
         }
       }
     }
@@ -77,7 +79,74 @@ export class MatchDetailPage {
     this.events.unsubscribe('servicematchsquadready', this.onMatchSquadReady);
   }
 
-  
+  updatePlayerStats(stats, squad, team) {
+    stats['goals'] = [];
+    stats['assists'] = [];
+    stats['redcards'] = [];
+    stats['yellowcards'] = [];
+    stats['owngoals'] = [];
+    stats['rating'] = [];
+
+    if (squad) {
+      if ('participants' in squad) {
+        squad.participants.forEach(p => {
+           if (p.goals) {
+             let stat:any = {};
+             stat.player = this.playerService.findOrCreatePlayerAndPull(p.id);
+             stat.teamName = team.name;
+             stat.val = p.goals;
+             stats['goals'].push(stat);
+           }
+
+           if (p.assists) {
+             let stat:any = {};
+             stat.player = this.playerService.findOrCreatePlayerAndPull(p.id);
+             stat.teamName = team.name;
+             stat.val = p.assists;
+             stats['assists'].push(stat);
+           }
+
+           if (p.redcards) {
+             let stat:any = {};
+             stat.player = this.playerService.findOrCreatePlayerAndPull(p.id);
+             stat.teamName = team.name;
+             stat.val = p.redcards;
+             stats['redcards'].push(stat);
+           }
+
+           if (p.yellowcards) {
+             let stat:any = {};
+             stat.player = this.playerService.findOrCreatePlayerAndPull(p.id);
+             stat.teamName = team.name;
+             stat.val = p.yellowcards;
+             stats['yellowcards'].push(stat);
+           }
+
+           if (p.owngoals) {
+             let stat:any = {};
+             stat.player = this.playerService.findOrCreatePlayerAndPull(p.id);
+             stat.teamName = team.name;
+             stat.val = p.owngoals;
+             stats['owngoals'].push(stat);
+           }
+        });
+      }
+
+      if ('ratings' in squad) {
+        let playerRatingsMap: any = {};
+        for (let key in squad.ratings) {
+          let ratingObj = squad.ratings[key];
+          for (let playerId in ratingObj) {
+            let playerRating = ratingObj[playerId];
+            //console.log(playerRating);
+            playerRatingsMap[playerId] ? playerRatingsMap[playerId].push(playerRating) : playerRatingsMap[playerId] = [playerRating];
+          }
+        }
+        //console.log(playerRatingsMap);
+      }
+    }
+  }
+
   segmentChange(e) {
     //console.log(e);
     this.matchSegments = e;

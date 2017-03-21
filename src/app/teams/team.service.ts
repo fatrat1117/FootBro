@@ -136,6 +136,18 @@ export class TeamService {
     return team;
   }
 
+  findOrCreateTeamAndPull(id): Team {
+    let team;
+    if (this.teamDataMap[id])
+      team = this.teamDataMap[id];
+    else {
+      team = new Team();
+      this.teamDataMap[id] = team;
+      this.fm.getTeamAsync(id);
+    }
+    return team;
+  }
+
   getTeamAsync(id, pullStats = false) {
     if (this.getTeam(id))
       this.fm.FireCustomEvent('serviceteamready', id);
