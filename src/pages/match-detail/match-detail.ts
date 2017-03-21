@@ -90,45 +90,45 @@ export class MatchDetailPage {
     if (squad) {
       if ('participants' in squad) {
         squad.participants.forEach(p => {
-           if (p.goals) {
-             let stat:any = {};
-             stat.player = this.playerService.findOrCreatePlayerAndPull(p.id);
-             stat.teamName = team.name;
-             stat.val = p.goals;
-             stats['goals'].push(stat);
-           }
+          if (p.goals) {
+            let stat: any = {};
+            stat.player = this.playerService.findOrCreatePlayerAndPull(p.id);
+            stat.teamName = team.name;
+            stat.val = p.goals;
+            stats['goals'].push(stat);
+          }
 
-           if (p.assists) {
-             let stat:any = {};
-             stat.player = this.playerService.findOrCreatePlayerAndPull(p.id);
-             stat.teamName = team.name;
-             stat.val = p.assists;
-             stats['assists'].push(stat);
-           }
+          if (p.assists) {
+            let stat: any = {};
+            stat.player = this.playerService.findOrCreatePlayerAndPull(p.id);
+            stat.teamName = team.name;
+            stat.val = p.assists;
+            stats['assists'].push(stat);
+          }
 
-           if (p.redcards) {
-             let stat:any = {};
-             stat.player = this.playerService.findOrCreatePlayerAndPull(p.id);
-             stat.teamName = team.name;
-             stat.val = p.redcards;
-             stats['redcards'].push(stat);
-           }
+          if (p.redcards) {
+            let stat: any = {};
+            stat.player = this.playerService.findOrCreatePlayerAndPull(p.id);
+            stat.teamName = team.name;
+            stat.val = p.redcards;
+            stats['redcards'].push(stat);
+          }
 
-           if (p.yellowcards) {
-             let stat:any = {};
-             stat.player = this.playerService.findOrCreatePlayerAndPull(p.id);
-             stat.teamName = team.name;
-             stat.val = p.yellowcards;
-             stats['yellowcards'].push(stat);
-           }
+          if (p.yellowcards) {
+            let stat: any = {};
+            stat.player = this.playerService.findOrCreatePlayerAndPull(p.id);
+            stat.teamName = team.name;
+            stat.val = p.yellowcards;
+            stats['yellowcards'].push(stat);
+          }
 
-           if (p.owngoals) {
-             let stat:any = {};
-             stat.player = this.playerService.findOrCreatePlayerAndPull(p.id);
-             stat.teamName = team.name;
-             stat.val = p.owngoals;
-             stats['owngoals'].push(stat);
-           }
+          if (p.owngoals) {
+            let stat: any = {};
+            stat.player = this.playerService.findOrCreatePlayerAndPull(p.id);
+            stat.teamName = team.name;
+            stat.val = p.owngoals;
+            stats['owngoals'].push(stat);
+          }
         });
       }
 
@@ -142,9 +142,26 @@ export class MatchDetailPage {
             playerRatingsMap[playerId] ? playerRatingsMap[playerId].push(playerRating) : playerRatingsMap[playerId] = [playerRating];
           }
         }
+
+        for (let key in playerRatingsMap) {
+          let playerRatings = playerRatingsMap[key];
+          if (playerRatings.length) {
+            let stat: any = {};
+            stat.player = this.playerService.findOrCreatePlayerAndPull(key);
+            stat.teamName = team.name;
+            let sum = 0;
+            playerRatings.forEach(r => {
+              sum += r;
+            })
+            stat.val = (sum / playerRatings.length).toFixed(1);
+            stats['rating'].push(stat);
+          }
+        }
         //console.log(playerRatingsMap);
       }
     }
+
+    console.log(stats);
   }
 
   segmentChange(e) {
@@ -232,7 +249,7 @@ export class MatchDetailPage {
         this.modal.create(EditSquadPage, { match: this.match, teamId: this.squadSettings.teamId }).present();
         break;
       case 'players':
-        this.modal.create(EditGameRatingPage, {squad: this.squad, teamId: this.squadSettings.teamId, matchId: this.match.id }).present();
+        this.modal.create(EditGameRatingPage, { squad: this.squad, teamId: this.squadSettings.teamId, matchId: this.match.id }).present();
         break;
     }
   }
