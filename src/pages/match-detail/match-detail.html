@@ -98,6 +98,21 @@
   </div>
 
   <div class="content-all" *ngSwitchCase="'players'">
-    
+    <div class="left-scrollview matches-date-tab-col" id="sketchElement">
+        <ion-list class="date-tab-list">
+          <ion-item *ngFor="let cat of statCategories;let i = index;" #list_item [id]="'matches-scroll-target-'+i">
+            <div class="date-inner">
+              {{cat}}
+            </div>
+          </ion-item>
+        </ion-list>
+      </div>
+      <!--<div class="right-scrollview matches-match-info-col" [ngStyle]="{'height.px': getMatchScrollHeight()}">
+        <ion-item *ngFor="let match of matches; let i = index" class="ionitem">
+          <sb-match-basic [matchObj]="match"></sb-match-basic>
+        </ion-item>
+      </div> -->
+                  <!--[style.background]="selectedDate == date ? '#585F6F' : '#40444D'" [style.color]="selectedDate == date ? '#00ef00' : '#F2EDE7'"
+                    [ngClass]="addDateSelectNgClass(i,date)">-->
   </div>
 </ion-content>

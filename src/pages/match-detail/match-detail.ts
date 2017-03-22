@@ -26,6 +26,8 @@ export class MatchDetailPage {
   awaySquad;
   homePlayerStats = {};
   awayPlayerStats = {};
+  allPlayersStats = {};
+  statCategories = [];
 
   constructor(private viewCtrl: ViewController,
     private modal: ModalController,
@@ -45,7 +47,8 @@ export class MatchDetailPage {
       else if (this.playerService.isCaptain(this.playerService.selfId(), this.match.awayId))
         this.squadSettings.teamId = this.match.awayId;
     }
-    //this.squadSettings.teamId = this.match.homeId;
+    this.initializePlayerStats(this.homePlayerStats);
+    this.initializePlayerStats(this.awayPlayerStats);
   }
 
   dismiss() {
@@ -77,6 +80,15 @@ export class MatchDetailPage {
 
   ionViewWillUnload() {
     this.events.unsubscribe('servicematchsquadready', this.onMatchSquadReady);
+  }
+
+  initializePlayerStats(stats) {
+    stats['goals'] = [];
+    stats['assists'] = [];
+    stats['redcards'] = [];
+    stats['yellowcards'] = [];
+    stats['owngoals'] = [];
+    stats['rating'] = [];
   }
 
   updatePlayerStats(stats, squad, team) {
@@ -176,6 +188,8 @@ export class MatchDetailPage {
       //   console.log(self.squadCtrl);
       // }, 2000);
     }
+    else if ('players' === e) 
+      this.getCombinedStats(); 
   }
 
   showCurrentPositionInGoogleMap() {
@@ -298,5 +312,18 @@ export class MatchDetailPage {
 
   canShowPlayersSegment() {
     return true;
+  }
+
+  getCombinedStats() {
+    this.statCategories.splice(0);
+    for (let key in this.homePlayerStats) {
+      let allStats = this.homePlayerStats[key].concat(this.awayPlayerStats[key]);
+      //console.log(allStats);
+      this.allPlayersStats[key] = allStats;
+      if (allStats.length > 0)
+        this.statCategories.push(key);
+    }
+
+    console.log(this.statCategories);
   }
 }
