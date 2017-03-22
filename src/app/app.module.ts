@@ -57,6 +57,7 @@ import { MatchService } from './matches/match.service';
 import { MessageService } from './messages/message.service';
 import { CheerleaderService} from './cheerleaders/cheerleader.service';
 import { RankService } from './rank/rank.service';
+import { CameraService } from './common/camera.service';
 
 // pipes
 import { TransPipe, Localization } from '../providers/localization';
@@ -222,7 +223,8 @@ export const firebaseConfig = {
     MatchService,
     MessageService,
     CheerleaderService,
-    RankService],
+    RankService,
+    CameraService],
 })
 export class AppModule {
 }

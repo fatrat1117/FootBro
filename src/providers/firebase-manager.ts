@@ -972,6 +972,7 @@ export class FirebaseManager {
     return blob;
   }
 
+  /*
   selectImgGetData(width, height, success, error) {
     let self = this;
     let options = {
@@ -989,6 +990,7 @@ export class FirebaseManager {
       error(err);
     });
   }
+  */
 
   updateImgGetUrl(imageData, imgId, width, height, success, error) {
     let self = this;

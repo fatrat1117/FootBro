@@ -51,4 +51,5 @@
     </plugin>
     <plugin name="cordova-plugin-firebase" spec="~0.1.19" />
     <plugin name="com.verso.cordova.clipboard" spec="https://github.com/VersoSolutions/CordovaClipboard" />
+    <plugin name="cordova-plugin-crop" spec="~0.3.1" />
 </widget>

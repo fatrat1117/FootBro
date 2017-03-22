@@ -88,7 +88,7 @@ export class TabsPage {
         //setTimeout(this.getTeamInfo(resolve), 1000);
         this.getTeamInfo(resolve);
       }, (reject: string) => {
-        alert('Error: ' + reject);
+        //alert('Clipboard Error: ' + reject);
       }
     );
   }

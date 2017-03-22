@@ -4,6 +4,7 @@ import { OneSignalManager } from '../../providers/onesignal-manager';
 import { Cheerleader } from './cheerleader.model';
 import { PlayerService } from '../players/player.service'
 import { UIHelper } from '../../providers/uihelper'
+import { CameraService } from '../common/camera.service'
 
 @Injectable()
 export class CheerleaderService {
@@ -12,7 +13,8 @@ export class CheerleaderService {
   approvedCheerleaders;
 
   constructor(private fm: FirebaseManager, private osm: OneSignalManager,
-    private playerService: PlayerService, private uiHelper: UIHelper) {
+    private playerService: PlayerService, private uiHelper: UIHelper,
+    private cameraService: CameraService) {
     document.addEventListener('pendingcheerleadersready', e => {
       this.pendingCheerleaders = [];
       this.fm.cachedPendingCheerleaders.forEach(fmCheerleader => {
@@ -70,6 +72,16 @@ export class CheerleaderService {
   }
 
   submitInfo() {
+    this.cameraService.getMedia().then((path) => {
+      if (path) {
+        this.fm.submitCheerleaderInfo(path);
+        this.uiHelper.presentToast('ApplicationSubmited');
+      }
+    })
+  }
+
+  /*
+  submitInfo() {
     let width = 512;
     let height = 512;
 
@@ -85,6 +97,7 @@ export class CheerleaderService {
       alert(err);
     });
   }
+  */
 
   findOrCreateCheerleader(id): Cheerleader {
     let cheerleader;
