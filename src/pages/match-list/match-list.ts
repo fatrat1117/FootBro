@@ -38,15 +38,6 @@ export class MatchListPage {
       this.playerService.checkLogin();
   }
 
-  goEditSquadPage(){
-    var testMatchId = "-KfHbLZ8ON_KHG3LVImp";
-    this.matchService.getMatchAsync(testMatchId);
-     var testMatch = this.matchService.getMatch(testMatchId);
-     if (testMatch){
-      this.modal.create(EditSquadPage, { match: testMatch, teamId: testMatch.homeId }).present();
-     }
-  }
-
   showLeagueResult(leagueId: string) {
     this.navCtrl.push(LeagueResultPage, {
       leagueId: leagueId

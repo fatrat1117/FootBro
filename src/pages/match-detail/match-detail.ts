@@ -28,6 +28,8 @@ export class MatchDetailPage {
   awayPlayerStats = {};
   allPlayersStats = {};
   statCategories = [];
+  selectedStats;
+  selectedCat;
 
   constructor(private viewCtrl: ViewController,
     private modal: ModalController,
@@ -188,8 +190,8 @@ export class MatchDetailPage {
       //   console.log(self.squadCtrl);
       // }, 2000);
     }
-    else if ('players' === e) 
-      this.getCombinedStats(); 
+    else if ('players' === e)
+      this.getCombinedStats();
   }
 
   showCurrentPositionInGoogleMap() {
@@ -323,7 +325,14 @@ export class MatchDetailPage {
       if (allStats.length > 0)
         this.statCategories.push(key);
     }
+    if (this.statCategories.length && !this.selectedCat) {
+      this.selectedCat = this.statCategories[0];
+      this.selectedStats = this.allPlayersStats[this.selectedCat];
+    }
+  }
 
-    console.log(this.statCategories);
+  showStat(cat) {
+    this.selectedCat = cat;
+    this.selectedStats = this.allPlayersStats[cat];
   }
 }

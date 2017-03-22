@@ -47,14 +47,6 @@
     </ion-card>
   </div>
 
-  <div class="card-background-page">
-    <ion-card (click) = "goEditSquadPage()">
-      <ion-col class="right">
-        Squad 的测试入口
-      </ion-col>
-    </ion-card>
-  </div>
-
   <div *ngFor="let league of afTournamentList | async" class="card-background-page">
     <ion-card (click) = "showLeagueResult(league.$key)">
       <div class="card-title">{{ league.name }}</div>
