@@ -100,12 +100,9 @@ export class TeamService {
         else
           this.playerTeamsMap[id] = [];
         for (let tId in player.teams) {
-          let teamExist = this.isTeamExist(tId);
-          let team = this.findOrCreateTeam(tId);
+          let team = this.findOrCreateTeamAndPull(tId);
           //console.log(tId);     
           this.playerTeamsMap[id].push(team);
-          if (!teamExist)
-            this.fm.getTeamAsync(tId);
         }
         //console.log(this.playerTeamsMap[id]);
         this.bRefreshPlayerTeams = false;

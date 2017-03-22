@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
+import { TeamService } from '../../app/teams/team.service'
 import { ChatPage } from '../chat/chat'
 
 @Component({
@@ -19,7 +20,10 @@ export class MyPlayerPage {
   PercentOfUnLikes: number;
   onPlayerReady;
 
-  constructor(private navCtrl: NavController, private service: PlayerService, params: NavParams) {
+  constructor(private navCtrl: NavController, 
+  private service: PlayerService, 
+  params: NavParams,
+  private teamService: TeamService) {
     this.id = params.get('id');
 
     var fromDBLikes = 213;

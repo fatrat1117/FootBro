@@ -92,9 +92,8 @@ export class PlayerService {
         }
 
         for (let pId in team.players) {
-          let player = this.findOrCreatePlayer(pId);
+          let player = this.findOrCreatePlayerAndPull(pId);
           players.push(player);
-          this.fm.getPlayerAsync(pId);
         }
         this.bRefreshTeamPlayers = false;
         this.fm.FireCustomEvent('serviceteamplayersready', id);
