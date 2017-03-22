@@ -9,7 +9,7 @@ export class UIHelper {
   private loc : Localization) {
   }
 
-  squadHalfImageSize = 24;
+  squadHalfImageSize = 16;
 
   presentToast(msgId, dur = 3000) {
       let msg = this.loc.getString(msgId);
