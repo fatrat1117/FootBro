@@ -102,7 +102,7 @@
         <ion-list class="date-tab-list">
           <ion-item *ngFor="let cat of statCategories;let i = index;" #list_item [id]="'matches-scroll-target-'+i">
             <div class="date-inner">
-              {{cat}}
+              {{cat | trans}}
             </div>
           </ion-item>
         </ion-list>

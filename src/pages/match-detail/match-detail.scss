@@ -1,4 +1,8 @@
 page-match-detail {
+  // $selected-date-color: #585F6F;
+  //     $unselected-date-color: #40444D;
+      $darker-background: #2D2E32;
+
   ion-content {
     //给整个内容区调整背景及边距
     .content-all {
@@ -127,4 +131,70 @@ page-match-detail {
   .default-font-size {
     font-size: 1.2rem;
   }
+
+  .matches-date-tab-col {
+        .date-tab-list {
+          ion-item {
+            padding-left: 0;
+            min-height: 2.8rem;
+            .item-inner {
+              padding-right: 0;
+              border-bottom: 1px solid $darker-background;
+              ion-label {
+                font-size: 1rem;
+                margin: 0 auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                .year {
+                  min-height: 1.4rem;
+                  background-color: $darker-background;
+                  color: #E1C61E;
+                }
+                .date-inner {
+                  min-height: 2.8rem;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                }
+              }
+            }
+          }
+          ion-item::before {
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            right: -9px;
+            border-style: solid;
+            border-width: 15px 15px 15px 15px;
+            border-color: transparent transparent transparent transparent;
+            z-index: 0;
+          }
+          .ion-item-selected::before {
+            border-color: transparent $darker-background transparent transparent;
+          }
+          .ion-item-changeYear::before {
+            top: 1.4rem;
+          }
+        }
+      }
+
+  .left-scrollview {
+        width: 15%;
+        height: 100%;
+        left: 0;
+        right: 0;
+        overflow-y: scroll;
+        position: fixed;
+        background: $darker-background;
+      }
+      .right-scrollview {
+        width: 85%;
+        left: 15%;
+        overflow-y: scroll;
+        position: fixed;
+        background: $darker-background;
+      }
 }
