@@ -189,4 +189,8 @@ export class MatchService {
     else
       this.fm.getRegisteredTeamsAsync(leagueId);
   }
+
+  getLeagueRule(leagueId: string) {
+    //this.fm.getLeagueRule(leagueId);
+  }
 }

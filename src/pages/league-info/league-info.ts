@@ -17,7 +17,6 @@ export class LeagueInfoPage {
   selfPlayer: Player;
   selfTeam: Team;
   registerTeams: Team[];
-  teams: Team[];
   leagueInfo = "info";
   onPlayerReady;
   onTeamReady;
@@ -29,17 +28,10 @@ export class LeagueInfoPage {
   constructor(private viewCtrl: ViewController, private navParams: NavParams, 
               private toastCtrl: ToastController, private alertCtrl: AlertController,
               private playerService: PlayerService, private teamService: TeamService, private matchService: MatchService) {
-    // dummy data
-    this.teams = [];
-    for (let i = 0; i < 10; ++i) {
-      let t = new Team();
-      t.name = "宇宙第一超级无敌DDDDDDDDDDiao之巴塞罗那"+i;
-      this.teams.push(t);
-    }
   }
 
   ionViewDidLoad() {
-    this.leagueId = '0';//this.navParams.get('leagueId');
+    this.leagueId = this.navParams.get('leagueId');
     this.addEventListeners();
     this.selfId = this.playerService.selfId();
     this.playerService.getPlayerAsync(this.selfId);

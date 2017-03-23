@@ -4,7 +4,6 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { MyApp } from './app.component';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { RankPage } from '../pages/rank/rank';
-import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { ModalContentPage } from '../pages/home/place-selection';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -92,7 +91,6 @@ export const firebaseConfig = {
     MyApp,
     TutorialPage,
     RankPage,
-    ContactPage,
     HomePage,
     TabsPage,
     LeagueInfoPage,
@@ -170,7 +168,6 @@ export const firebaseConfig = {
     MyApp,
     TutorialPage,
     RankPage,
-    ContactPage,
     HomePage,
     LeagueInfoPage,
     LeagueResultPage,

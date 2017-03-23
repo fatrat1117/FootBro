@@ -30,9 +30,11 @@ export class MatchListPage {
     this.navCtrl.push(MatchesPage);
   }
 
-  goLeaguePage() {
+  goLeaguePage(league) {
     if (this.playerService.isAuthenticated()) {
-      this.navCtrl.push(LeagueInfoPage);
+      this.navCtrl.push(LeagueInfoPage, {
+        league: league
+      });
     }
     else
       this.playerService.checkLogin();
