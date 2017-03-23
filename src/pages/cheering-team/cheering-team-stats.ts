@@ -30,7 +30,7 @@ import { PlayerService } from '../../app/players/player.service'
       <ion-item>
         <ion-icon name="md-unlock" item-left></ion-icon>
           Unlock points
-        <ion-note color="primary-text" item-right>{{ cheerleader?.unlockPoints }}</ion-note>
+        <ion-note color="primary-text" item-right>{{ unlockAmount }}</ion-note>
       </ion-item>
       <ion-item>
         <ion-icon name="md-pin" item-left></ion-icon>
@@ -60,6 +60,7 @@ export class CheeringTeamStatsPage {
   selfPlayer: Player;
   cheerleader: Cheerleader;
   onPlayerReady;
+  unlockAmount: number;
   constructor(private viewCtrl: ViewController, private alertCtrl: AlertController,
               private navParams: NavParams, private playerService: PlayerService,
               private toastCtrl: ToastController) {
@@ -68,6 +69,7 @@ export class CheeringTeamStatsPage {
   ionViewDidLoad() {
     this.addEventListeners();
     this.cheerleader = this.navParams.get("cheerleader");
+    this.unlockAmount = Math.floor(this.cheerleader.unlockPoints / 10) * 10;
 
     this.playerService.getPlayerAsync(this.playerService.selfId());
   }
@@ -88,9 +90,9 @@ export class CheeringTeamStatsPage {
   }
 
   unlock() {
-    let amount = Math.floor(this.cheerleader.unlockPoints / 10) * 10;
-    if (this.selfPlayer.points >= amount)
-      this.showConfirm(amount);
+    //let amount = Math.floor(this.cheerleader.unlockPoints / 10) * 10;
+    if (this.selfPlayer.points >= this.unlockAmount)
+      this.showConfirm(this.unlockAmount);
     else
       this.showWarning();
   }
@@ -137,7 +139,7 @@ export class CheeringTeamStatsPage {
     if (this.selfPlayer.points >= amount) {
       //this.playerService.placeOrder(this.cheerleader.id, amount);
       this.playerService.unlockCheerleader(
-        this.cheerleader.id, this.cheerleader.points + amount, this.cheerleader.unlockPoints + 1, this.selfPlayer.points - amount);
+        this.cheerleader.id, this.cheerleader.points + this.unlockAmount, this.cheerleader.unlockPoints + 1, this.selfPlayer.points - this.unlockAmount);
     }
     else {
       this.toastCtrl.create({

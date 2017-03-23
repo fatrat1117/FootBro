@@ -74,10 +74,10 @@
           <div *ngIf='approvedCheerleaders[i]'>
             <ion-row class="item-row">
               <div class="baby-img-frame">
-                <button *ngIf="isUnlocked(approvedCheerleaders[i].id)" ion-button icon-only clear small class="chat-logo" color="primary" (click)="enterChatPage(clItem)">
+                <button *ngIf="isUnlocked(approvedCheerleaders[i].id)" ion-button icon-only clear small class="chat-logo" color="primary" (click)="enterChatPage(approvedCheerleaders[i])">
                   <ion-icon name="md-chatbubbles"></ion-icon>
                 </button>
-                <button *ngIf="!isUnlocked(approvedCheerleaders[i].id)" ion-button icon-only clear small class="chat-logo" color="gYellow" (click)="unlockCheerleader(clItem)">
+                <button *ngIf="!isUnlocked(approvedCheerleaders[i].id)" ion-button icon-only clear small class="chat-logo" color="gYellow" (click)="unlockCheerleader(approvedCheerleaders[i])">
                   <ion-icon name="md-unlock"></ion-icon>
                 </button>
                 <img [src]="approvedCheerleaders[i].photoMedium">

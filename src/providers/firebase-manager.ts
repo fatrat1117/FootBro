@@ -903,7 +903,7 @@ export class FirebaseManager {
   unlockCheerleader(cheerleaderId: string, newPoints: number, newUnlockPoints: number, selfNewPoints: number) {
     this.placeOrder(this.auth.uid, cheerleaderId, newUnlockPoints - 1);
     this.updatePlayerPoints(cheerleaderId, newPoints);
-    this.af.database.object(`/players/${cheerleaderId}/unlockPoints`).set(newUnlockPoints);
+    this.af.database.object(`/public/cheerleaders/${cheerleaderId}/unlockPoints`).set(newUnlockPoints);
 
     this.updatePlayerPoints(this.auth.uid, selfNewPoints);
     this.af.database.object(`/players/${this.auth.uid}/cheerleaders/${cheerleaderId}`).set(true);
