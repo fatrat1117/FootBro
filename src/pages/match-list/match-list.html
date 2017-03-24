@@ -50,7 +50,7 @@
   <-->
 
   <div *ngFor="let league of afTournamentList | async" class="card-background-page">
-    <ion-card (click) = "league.isEnd? showLeagueResult(league.$key) : goLeaguePage(league)">
+    <ion-card (click) = "league.isEnd ? showLeagueResult(league.$key) : goLeaguePage(league)">
       <div class="card-title">{{ league.name }}</div>
       <div class="card-bottom-banner">
         <ion-row>
@@ -64,10 +64,10 @@
             </ion-row>
           </ion-col>
           <ion-col class="right" bottom>
-            <button *ngIf="league.isEnd" ion-button small full no-margin color="primary">
+            <button ion-button small full no-margin color="primary" *ngIf="league.isEnd">
               Results
             </button>
-            <button *ngIf="!league.isEnd" ion-button small full no-margin color="primary">
+            <button ion-button small full no-margin color="primary" *ngIf="!league.isEnd">
               Register
             </button>
           </ion-col>

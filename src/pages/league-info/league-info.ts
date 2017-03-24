@@ -13,6 +13,7 @@ import { MatchService } from '../../app/matches/match.service'
 })
 export class LeagueInfoPage {
   leagueId: string
+  league: any;
   selfId: string;
   selfPlayer: Player;
   selfTeam: Team;
@@ -31,11 +32,13 @@ export class LeagueInfoPage {
   }
 
   ionViewDidLoad() {
-    this.leagueId = this.navParams.get('leagueId');
+    this.league = this.navParams.get('league');
+    console.log(this.league);
+    
     this.addEventListeners();
     this.selfId = this.playerService.selfId();
     this.playerService.getPlayerAsync(this.selfId);
-    this.matchService.getRegisteredTeamsAsync(this.leagueId);
+    this.matchService.getRegisteredTeamsAsync(this.league.$key);
   }
 
   ionViewWillUnload() {
@@ -62,7 +65,7 @@ export class LeagueInfoPage {
 
     this.onRegisteredTeamsReady = e => {
       let lId = e['detail'];
-      if (lId = this.leagueId) {
+      if (lId = this.league.$key) {
         this.registerTeams = this.matchService.getRegisteredTeams(lId);
         this.buildGrid(this.registerTeams.length);
       }
