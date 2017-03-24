@@ -64,10 +64,10 @@
             </ion-row>
           </ion-col>
           <ion-col class="right" bottom>
-            <button ion-button small full no-margin color="primary" *ngIf="league.isEnd">
+            <button ion-button small full no-margin color="primary" *ngIf="league?.isEnd">
               Results
             </button>
-            <button ion-button small full no-margin color="primary" *ngIf="!league.isEnd">
+            <button ion-button small full no-margin color="primary" *ngIf="!league?.isEnd">
               Register
             </button>
           </ion-col>

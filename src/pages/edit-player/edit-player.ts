@@ -22,6 +22,7 @@ export class EditPlayerPage {
   selfId: string;
   player: Player;
   onPlayerReady;
+  isCheerleader = false;
 
   constructor(private navCtrl: NavController, private modalCtrl: ModalController, private playerService: PlayerService, private teamService: TeamService) {
     this.selfId = this.playerService.selfId();
@@ -43,6 +44,7 @@ export class EditPlayerPage {
       let playerId = e['detail'];
       if (playerId === this.selfId) {
         this.player = this.playerService.getPlayer(playerId);
+        this.isCheerleader = this.player.role == 'cheerleader';
       }
     };
 

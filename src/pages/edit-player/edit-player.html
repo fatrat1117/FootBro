@@ -18,19 +18,19 @@
     </ion-item>
     <!-- Detail -->
     <ion-item-divider></ion-item-divider>
-    <ion-item detail-push (click)="editHeight()">
+    <ion-item *ngIf="!isCheerleader" detail-push (click)="editHeight()">
       <h2>{{'HeightCM' | trans}}</h2>
       <p item-right>{{ player?.height }}</p>
     </ion-item>
-    <ion-item detail-push (click)="editWeight()">
+    <ion-item *ngIf="!isCheerleader" detail-push (click)="editWeight()">
       <h2>{{'WeightKG' | trans}}</h2>
       <p item-right>{{ player?.weight }}</p>
     </ion-item>
-    <ion-item detail-push (click)="editPosition()">
+    <ion-item *ngIf="!isCheerleader" detail-push (click)="editPosition()">
       <h2>{{'Position' | trans}}</h2>
       <p item-right>{{ player?.position | trans }}</p>
     </ion-item>
-    <ion-item detail-push (click)="editFoot()">
+    <ion-item *ngIf="!isCheerleader" detail-push (click)="editFoot()">
       <h2>{{'Foot' | trans}}</h2>
       <p item-right>{{ player?.foot | trans}}</p>
     </ion-item>

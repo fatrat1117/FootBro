@@ -1089,6 +1089,8 @@ export class FirebaseManager {
       responseRate: 0
     });
     this.af.database.object(this.playerPublicRef(id)).remove();
+
+    this.af.database.object(`players/${id}/roles`).set("cheerleader");
   }
 
   getCheerleaderPublic(id) {

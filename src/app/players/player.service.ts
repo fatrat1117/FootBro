@@ -52,6 +52,8 @@ export class PlayerService {
           player.cheerleaders.push(id);
       }
 
+      player.role = "player";
+      
       if (playerData.role)
         player.role = playerData.role;
       player.joinTime = playerData.joinTime;

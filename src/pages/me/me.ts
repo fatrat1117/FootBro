@@ -25,6 +25,7 @@ export class MePage {
   messageCount: number;
   onPlayerReady;
   onTeamReady;
+  isCheerleader = false;
 
   constructor(private navCtrl: NavController,
     private modalCtrl: ModalController,
@@ -53,7 +54,7 @@ export class MePage {
       //console.log(playerId, this.playerService.selfId());
       if (playerId === this.playerService.selfId()) {
         this.player = this.playerService.getPlayer(playerId);
-        //console.log(this.player);
+        this.isCheerleader = this.player.role == 'cheerleader';
         if (this.player.teamId)
           this.teamService.getTeamAsync(this.player.teamId);
       }
