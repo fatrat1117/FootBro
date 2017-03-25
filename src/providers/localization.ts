@@ -240,7 +240,17 @@ export class Localization {
             average: 'Average',
             poor: 'Poor',
             verypoor: 'Very Poor',
-            extremelypoor: 'Extremely Poor'
+            extremelypoor: 'Extremely Poor',
+            vote: 'Vote',
+            charm: 'Charm',
+            Ilikehim: 'I like him',
+            Idislikehim: 'I dislike him',
+            skill: 'Skill',
+            heisagoodplayer: 'He is a good player',
+            hesucks: 'he sucks',
+            playstyle: 'Play Style',
+            heiscleanandelegant: 'He plays cleanly and elegantly',
+            heisdirty: 'Stay away from him to protect yourself'
         },
 
         zh: {
@@ -462,7 +472,17 @@ export class Localization {
             average: '一般',
             poor: '差',
             verypoor: '很差',
-            extremelypoor: '不会踢'
+            extremelypoor: '不会踢',
+            vote: '投票',
+            charm: '魅力',
+            Ilikehim: '我喜欢他',
+            Idislikehim: '看到他就想吐',
+            skill: '球技',
+            heisagoodplayer: '他球技我服',
+            hesucks: '他弱爆了',
+            playstyle: '球风',
+            heiscleanandelegant: '他是艺术足球大师',
+            heisdirty: '离他远点，小心受伤'
         }
     }
 }
