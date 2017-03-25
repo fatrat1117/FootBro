@@ -263,7 +263,10 @@ export class Localization {
             leagueInfo: 'League Info',
             searchMatchPageNoRecord: 'No match record... :(',
             chatPageNoRecord: 'start chatting...',
-            messagePageNoRecord: 'No message record... :('
+            messagePageNoRecord: 'No message record... :(',
+            unlockPoints: 'Unlock Points',
+            joinDate: 'Join Date',
+            delete: 'Delete'
         },
 
         zh: {
@@ -508,7 +511,10 @@ export class Localization {
             leagueInfo: '联赛信息',
             searchMatchPageNoRecord :'没有比赛信息...',
             chatPageNoRecord : '开始对话吧 :)',
-            messagePageNoRecord : '消息栏为空...'
+            messagePageNoRecord : '消息栏为空...',
+            unlockPoints: '解锁积分',
+            joinDate: '注册时间',
+            delete: '删除'
         }
     }
 }
