@@ -17,7 +17,7 @@ export class SearchMatchPage {
     this.matches = params.get('matches');
     this.showDate = params.get('showDate');
     console.log(this.showDate);
-    
+
   }
 
   ionViewDidLoad() {
@@ -42,7 +42,7 @@ export class SearchMatchPage {
 
     // // set val to the value of the searchbar
     // let val = ev.target.value;
-    
+
     // // if the value is an empty string don't filter the items
     // if (val && val.trim() != '') {
     //   this.filteredTeams = this.filteredTeams.filter((team) => {
@@ -54,5 +54,17 @@ export class SearchMatchPage {
 
   close() {
     this.viewCtrl.dismiss();
+  }
+
+  hasMatches(){
+    if (typeof this.matches != 'undefined' || this.matches != null){
+      if(this.matches.length == 0){
+        return false;
+      }else{
+        return true;
+      }
+    }else{
+      return false;
+    }
   }
 }
