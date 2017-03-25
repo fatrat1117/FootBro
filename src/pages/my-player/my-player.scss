@@ -156,8 +156,8 @@ page-my-player{
         }
       }
 
-     
-   
+
+
     }
 
 
@@ -187,7 +187,7 @@ page-my-player{
       }
       .block{
         background-color: #25262b;
-        width: 33.33%;
+        width: 30%;
         text-align: center;
         float: left;
         margin-left: 0.2rem;
@@ -203,11 +203,20 @@ page-my-player{
           font-weight: bolder;
         }
 
+        .zh-foot-data{
+          flex: 0 0 33% !important;
+          max-width: 33% !important;
+        }
+        .en-foot-data{
+            flex: 0 0 70% !important;
+            max-width: 70% !important;
+        }
+
         .unit{
           color: #fff;
           padding-top: 0;
           padding-bottom: 0;
-        
+
           .unit-first{
             font-size: 1.4rem;
             line-height: 1.3rem;
@@ -219,7 +228,23 @@ page-my-player{
             line-height: 1.3rem;
                 font-weight: bold;
           }
+          .en-prefer-foot-label{
+            font-size: 1rem;
+          }
+          .zh-prefer-foot-label{
+             font-size: 0.8rem;
+          }
         }
+
+        .zh-foot-panel{
+          flex: 0 0 66% !important;
+          max-width: 66% !important;
+        }
+        .en-foot-panel{
+          flex: 0 0 30% !important;
+          max-width: 30% !important;
+        }
+
 
         h1{
           color: #fff;
@@ -240,7 +265,7 @@ page-my-player{
             font-size: 1.65rem;
           }
         }
-           
+
       }
       .flex-start{
           color: #fff;
@@ -307,8 +332,8 @@ page-my-player{
     height: 2.2px;
     color: #171717;
   }
-    
-    
+
+
 
   .win-rate{
     //background-image: url("/../../assets/img/my-player/bg4@3x.png");
@@ -325,9 +350,9 @@ page-my-player{
               position: absolute;
               font-size: 1.2rem;
               max-width: 20%;
-        
+
           }
-      
+
        .win-progress{
            position: relative;
           .winning-circle{
@@ -335,27 +360,27 @@ page-my-player{
             position: relative;
             left: 10%;
           }
-         
+
         }
-      
+
       .goal-rate{
-          position: relative;   
+          position: relative;
       }
       .loss-rate{
-          position: relative;   
+          position: relative;
        }
-      
+
       .records{
           ion-col{
               font-size: 1.2rem;
           }
       }
-      
+
       .records-value{
-          
+
       }
 
-      
+
     .progressbar{
       position: relative;
     }
