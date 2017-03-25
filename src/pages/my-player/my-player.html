@@ -63,10 +63,13 @@
       </ion-col>
       <ion-col no-padding class="block foot">
         <div class="flex-center txt foot-inner">
-          <ion-col no-padding width-33 class="fl flex-end data">{{player?.foot | trans}}</ion-col>
-          <ion-col width-66 class="fl unit">
-            <ion-row class="unit-first flex-start invisible"> </ion-row>
-            <ion-row class="unit-second flex-start">{{'Foot' | trans}}</ion-row>
+          <ion-col no-padding width-50 class="fl flex-end data"
+                   [ngClass] = "getLocalizationClass('foot-data')">{{player?.foot | trans}}</ion-col>
+          <ion-col width-50 class="fl unit"
+                   [ngClass] = "getLocalizationClass('foot-panel')">
+            <ion-row class="unit-first flex-start invisible">NA</ion-row>
+            <ion-row class="unit-second flex-start"
+            [ngClass] = "getLocalizationClass('prefer-foot-label')">{{'Foot' | trans}}</ion-row>
           </ion-col>
         </div>
       </ion-col>
@@ -108,7 +111,7 @@
     </ion-row>
     <hr class="separate" no-margin>
   </ion-grid>
-    
+
   <ion-grid class="win-rate">
 
     <ion-row>
@@ -140,19 +143,19 @@
       <ion-col class="main-font absolute-center-txt">失球率</ion-col>
      <ion-col width-50 text-center class="flex-center">0.0</ion-col>
     </ion-row>
-      
+
     <hr class="separate" no-margin>
-      
+
     <ion-row class="records">
       <ion-col width-50 class="flex-center">最佳纪录</ion-col>
       <ion-col width-50 class="flex-center">最差纪录</ion-col>
     </ion-row>
-      
+
     <ion-row class="records-value">
       <ion-col width-50 class="flex-center best">98.69</ion-col>
       <ion-col width-50 class="flex-center worse">无评分</ion-col>
     </ion-row>
-      
+
     <ion-row class="match-time">
       <ion-col width-50 class="flex-center best-time">2016年12月3日</ion-col>
       <ion-col width-50 class="flex-center worst-time">2016年12月03日</ion-col>

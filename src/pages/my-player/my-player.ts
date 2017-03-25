@@ -5,6 +5,7 @@ import { PlayerService } from '../../app/players/player.service'
 import { TeamService } from '../../app/teams/team.service'
 import { Team } from '../../app/teams/team.model'
 import { ChatPage } from '../chat/chat'
+import { Localization} from '../../providers/localization';
 
 @Component({
   selector: 'page-my-player',
@@ -23,7 +24,7 @@ export class MyPlayerPage {
   constructor(private navCtrl: NavController,
     private service: PlayerService,
     params: NavParams,
-    private teamService: TeamService) {
+    private teamService: TeamService,private local: Localization) {
     this.id = params.get('id');
   }
 
@@ -120,7 +121,7 @@ export class MyPlayerPage {
     }
     if (true === val)
       this.socialStats[key] = num;
-    else 
+    else
       this.socialStats['opp' + key] = num;
 
     return num;
@@ -166,5 +167,10 @@ export class MyPlayerPage {
     }
 
     return "assets/icon/bed_push@2x.png";
+  }
+
+  getLocalizationClass(suffix){
+      let localCode = this.local.langCode;
+       return localCode + "-" + suffix;
   }
 }
