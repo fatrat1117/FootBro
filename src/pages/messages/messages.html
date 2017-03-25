@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Messages</ion-title>
+    <ion-title>{{ 'Messages' | trans }}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -20,7 +20,7 @@
       </ion-item>
       <ion-item-options side="right">
         <button ion-button color="danger" text-capitalize  (click)="deleteMessage(msg.playerId, slidingItem)">
-          Delete
+          {{ 'delete' | trans }}
         </button>
       </ion-item-options>
     </ion-item-sliding>

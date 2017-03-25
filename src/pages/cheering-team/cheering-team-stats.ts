@@ -29,17 +29,17 @@ import { PlayerService } from '../../app/players/player.service'
     <ion-item-group>
       <ion-item>
         <ion-icon name="md-unlock" item-left></ion-icon>
-          Unlock points
+          {{ 'unlockPoints' | trans }}
         <ion-note color="primary-text" item-right>{{ unlockAmount }}</ion-note>
       </ion-item>
       <ion-item>
         <ion-icon name="md-pin" item-left></ion-icon>
-          Location
+          {{ 'Location' | trans }}
         <ion-note item-right color="primary-text">Singapore</ion-note>
       </ion-item>
       <ion-item>
         <ion-icon name="md-calendar" item-left></ion-icon>
-          Join date
+          {{ 'joinDate' | trans }}
         <ion-note item-right color="primary-text">{{ cheerleader?.joinTime | date:'yyyy-MM-dd' }}</ion-note>
       </ion-item>
 
