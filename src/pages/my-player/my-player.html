@@ -188,8 +188,10 @@
     <ion-row class="light-grey">
       <div class="feedHead">
         <div class="wrapper">
-          <div class="rose"><span class="firstPic"><img src="assets/img/my-player/flowerrose.png"></span><span
-            class="picText">{{'charm' | trans}}</span>
+          <div class="rose">
+            <ion-icon name="md-flower" class="firstPic" color='gRed'></ion-icon>
+            <!--span class="firstPic"><img src="assets/img/my-player/flowerrose.png"></span-->
+            <span class="picText">{{'charm' | trans}}</span>
           </div>
         </div>
       </div>
@@ -205,7 +207,7 @@
 
             <ion-col width-10 class="feed-back-like">
               <div class="like fl">
-                <img src="assets/icon/good@2x.png" (click) = "likeHim()">
+                <ion-icon name="md-thumbs-up" color="gRed" (click) = "likeHim()"></ion-icon>
               </div>
             </ion-col>
             <ion-col width-80 class="feed-back-bar fl">
@@ -220,7 +222,8 @@
             </ion-col>
             <ion-col width-10 class="feed-back-unlike">
               <div class="unLike fr">
-                <img src="assets/icon/bed@2x.png" (click) = "dislikeHim()">
+                <ion-icon name="md-thumbs-down" color="gBlue" (click) = "dislikeHim()"></ion-icon>
+                <!--img src="assets/icon/bed@2x.png" (click) = "dislikeHim()"-->
               </div>
             </ion-col>
           </ion-row>
@@ -230,8 +233,10 @@
     <ion-row class="light-grey">
       <div class="feedHead">
         <div class="wrapper">
-          <div class="rose"><span class="firstPic"><img src="assets/img/my-player/football.png"></span><span
-            class="picText">{{'skill' | trans}}</span>
+          <div class="rose">
+            <ion-icon name="ios-football" class="firstPic"></ion-icon>
+            <!--span class="firstPic"><img src="assets/img/my-player/football.png"></span-->
+            <span class="picText">{{'skill' | trans}}</span>
           </div>
         </div>
       </div>
@@ -247,7 +252,8 @@
 
             <ion-col width-10 class="feed-back-like">
               <div class="like fl">
-                <img src="assets/icon/good@2x.png">
+                <ion-icon name="md-thumbs-up" color="gRed"></ion-icon>
+                <!--img src="assets/icon/good@2x.png"-->
               </div>
             </ion-col>
             <ion-col width-80 class="feed-back-bar fl">
@@ -262,7 +268,8 @@
             </ion-col>
             <ion-col width-10 class="feed-back-unlike">
               <div class="unLike fr">
-                <img src="assets/icon/bed@2x.png">
+                <!--img src="assets/icon/bed@2x.png"-->
+                <ion-icon name="md-thumbs-down" color="gBlue"></ion-icon>
               </div>
             </ion-col>
           </ion-row>
@@ -272,8 +279,10 @@
     <ion-row class="light-grey">
       <div class="feedHead">
         <div class="wrapper">
-          <div class="rose"><span class="firstPic"><img src="assets/img/my-player/footplayer.png"></span><span
-            class="picText">{{'playstyle' | trans}}</span>
+          <div class="rose">
+            <ion-icon name="md-person" color='gBlue' class="firstPic"></ion-icon>
+            <!--span class="firstPic"><img src="assets/img/my-player/footplayer.png"></span-->
+            <span class="picText">{{'playstyle' | trans}}</span>
           </div>
         </div>
       </div>
@@ -289,7 +298,8 @@
 
             <ion-col width-10 class="feed-back-like">
               <div class="like fl">
-                <img src="assets/icon/good@2x.png">
+                <ion-icon name="md-thumbs-up" color="gRed"></ion-icon>
+                <!--img src="assets/icon/good@2x.png"-->
               </div>
             </ion-col>
             <ion-col width-80 class="feed-back-bar fl">
@@ -304,7 +314,8 @@
             </ion-col>
             <ion-col width-10 class="feed-back-unlike">
               <div class="unLike fr">
-                <img src="assets/icon/bed@2x.png">
+                <ion-icon name="md-thumbs-down" color="gBlue"></ion-icon>
+                <!--img src="assets/icon/bed@2x.png"-->
               </div>
             </ion-col>
           </ion-row>
@@ -362,10 +373,9 @@
               </ion-col>
             </ion-row>
 
-
+            <!-->
             <div class="TabbedPanelsContentGroup tabbedContents clearfloat">
               <div class="TabbedPanelsContent">
-                <!--one-->
                 <div class="booSet">
                   <div class="wrapper">
                     <div class="ball clearfloat">
@@ -402,6 +412,7 @@
                 </div>
               </div>
             </div>
+            <-->
           </div>
           <!--tabMain ends-->
 

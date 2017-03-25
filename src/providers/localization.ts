@@ -252,7 +252,7 @@ export class Localization {
             skill: 'Skill',
             heisagoodplayer: 'He is a good player',
             hesucks: 'he sucks',
-            playstyle: 'Play Style',
+            playstyle: 'Style',
             heiscleanandelegant: 'He plays cleanly and elegantly',
             heisdirty: 'Stay away from him to protect yourself'
         },
