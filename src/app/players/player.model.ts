@@ -18,6 +18,7 @@ export class Player {
   popularity;
   points: number;
   joinTime;
+  social;
 }
 
 export class PlayerMatchStatsUI {

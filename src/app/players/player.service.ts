@@ -101,6 +101,12 @@ export class PlayerService {
         this.fm.FireCustomEvent('serviceteamplayersready', id);
       }
     });
+
+    document.addEventListener('playersocialready', e => {
+      let playerId = e['detail'];
+      let player = this.findOrCreatePlayer(playerId);
+      player.social = this.fm.getPlayerSocial(playerId);
+    })
   }
 
   findOrCreatePlayer(id) : Player{
@@ -126,13 +132,16 @@ export class PlayerService {
     return player;
   }
 
-  getPlayerAsync(id) {
+  getPlayerAsync(id, pullSocial = false) {
     if (this.getPlayer(id)) {
       this.fm.FireCustomEvent('serviceplayerready', id);
     }
     else {
       this.fm.getPlayerAsync(id);
     }
+
+    if (pullSocial)
+      this.getPlayerSocialAsync(id);
   }
 
   getPlayer(id): Player {
@@ -211,5 +220,23 @@ export class PlayerService {
       return pId === fmTeam['basic-info'].captain;
 
     return false;
+  }
+
+  like(playerId, val) {
+    this.fm.likePlayer(playerId, val);
+  }
+
+  getPlayerSocial(playerId) {
+    let player = this.getPlayer(playerId);
+    if (player)
+      return player.social;
+    return null;
+  }
+
+  getPlayerSocialAsync(playerId) {
+    if (this.getPlayerSocial(playerId)){
+    } else {
+      this.fm.getPlayerSocialAsync(playerId);
+    }
   }
 }
