@@ -262,7 +262,8 @@ export class Localization {
             registered: 'Registered',
             leagueInfo: 'League Info',
             searchMatchPageNoRecord: 'No match record... :(',
-            chatPageNoRecord: 'No message... :('
+            chatPageNoRecord: 'start chatting...',
+            messagePageNoRecord: 'No message record... :('
         },
 
         zh: {
@@ -506,7 +507,8 @@ export class Localization {
             registered: '已报名',
             leagueInfo: '联赛信息',
             searchMatchPageNoRecord :'没有比赛信息...',
-            chatPageNoRecord : '开始对话吧 :)'
+            chatPageNoRecord : '开始对话吧 :)',
+            messagePageNoRecord : '消息栏为空...'
         }
     }
 }

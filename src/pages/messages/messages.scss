@@ -9,8 +9,9 @@ page-messages {
       max-height: 4rem;
     }
   }
-    
+
   .message-panel{
+      height: 100%;
       .sender-name{
           white-space: nowrap;
           overflow: hidden;

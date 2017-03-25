@@ -6,7 +6,7 @@ import { Message } from '../../app/messages/message.model'
 import { MessageService } from '../../app/messages/message.service'
 import { Player } from '../../app/players/player.model';
 import { PlayerService } from '../../app/players/player.service';
-
+import { Localization } from '../../providers/localization';
 
 @Component({
   selector: 'page-messages',
@@ -17,8 +17,11 @@ export class MessagesPage {
   watchListMap : {};
   onMessageReady;
   onPlayerReady;
+  noRecordId = "messagePageNoRecord";
+  noRecordMessage = "";
 
-  constructor(private navCtrl: NavController, private messageService: MessageService, private playerService: PlayerService) {
+  constructor(private navCtrl: NavController, private messageService: MessageService, private playerService: PlayerService
+  ,private local:Localization) {
   }
 
   ionViewDidLoad() {
@@ -26,6 +29,8 @@ export class MessagesPage {
 
     this.messages = this.messageService.getAllMessages();
     this.getPlayerAsync();
+
+    this.noRecordMessage = this.local.getString(this.noRecordId);
   }
 
   ionViewWillUnload() {
@@ -60,7 +65,7 @@ export class MessagesPage {
   }
 
   getPlayerInfo(playerId: string) {
-    
+
     if (playerId)
       return this.watchListMap[playerId];
     else
@@ -79,5 +84,18 @@ export class MessagesPage {
       isUnread: msg.isUnread,
       user: this.watchListMap[msg.playerId]
     });
+  }
+
+  hasMessage(){
+    // return this.chats.length != 0  ? true : false;
+    if (typeof this.messages != 'undefined' || this.messages != null){
+      if(this.messages.length == 0){
+        return false;
+      }else{
+        return true;
+      }
+    }else{
+      return false;
+    }
   }
 }

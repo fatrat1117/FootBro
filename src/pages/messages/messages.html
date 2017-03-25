@@ -6,6 +6,8 @@
 
 <ion-content>
   <ion-list class="message-panel">
+
+    <no-record *ngIf="!hasMessage()" [message]="noRecordMessage"></no-record>
     <ion-item-sliding *ngFor="let msg of messages | reversePipe" #slidingItem>
       <ion-item (click)="enterChatPage(msg)">
         <ion-thumbnail item-left>
