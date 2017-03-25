@@ -57,7 +57,7 @@ export class MyPlayerPage {
 
     document.addEventListener('serviceteamready', this.onTeamReady);
     document.addEventListener('serviceplayerready', this.onPlayerReady);
-    this.service.getPlayerAsync(this.id);
+    this.service.getPlayerAsync(this.id, true);
   }
 
   ionViewWillUnload() {
@@ -73,6 +73,20 @@ export class MyPlayerPage {
         user: this.player
       })
     }
+    else
+      this.service.checkLogin();
+  }
+
+  likeHim() {
+    if (this.service.isAuthenticated())
+      this.service.like(this.id, true);
+    else
+      this.service.checkLogin();
+  }
+
+  dislikeHim() {
+    if (this.service.isAuthenticated())
+      this.service.like(this.id, false);
     else
       this.service.checkLogin();
   }
