@@ -211,11 +211,11 @@
             <ion-col width-80 class="feed-back-bar fl">
               <div [ngStyle]="{'width':PercentOfLikes.toString()+'%'}" class="redPrg fl">
                 <div class="redStrip"></div>
-                <span class="stripText">{{NumOfLikes}}</span>
+                <span class="stripText">{{getNumber('like', true)}}</span>
               </div>
               <div [ngStyle]="{'width':PercentOfUnLikes.toString()+'%'}" class="bluePrg fl">
                 <div class="blueStrip"></div>
-                <span class="blueText">{{NumOfUnLikes}}</span>
+                <span class="blueText">{{getNumber('like', false)}}</span>
               </div>
             </ion-col>
             <ion-col width-10 class="feed-back-unlike">

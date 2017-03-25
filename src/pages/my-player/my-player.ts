@@ -23,10 +23,10 @@ export class MyPlayerPage {
   onPlayerReady;
   onTeamReady;
 
-  constructor(private navCtrl: NavController, 
-  private service: PlayerService, 
-  params: NavParams,
-  private teamService: TeamService) {
+  constructor(private navCtrl: NavController,
+    private service: PlayerService,
+    params: NavParams,
+    private teamService: TeamService) {
     this.id = params.get('id');
 
     var fromDBLikes = 213;
@@ -89,5 +89,17 @@ export class MyPlayerPage {
       this.service.like(this.id, false);
     else
       this.service.checkLogin();
+  }
+
+  getNumber(key, val) {
+    let num = 0;
+    if (this.player && this.player.social && this.player.social.votes) {
+      let votes = this.player.social.votes;
+      for (let k in votes) {
+        if (key in votes[k] && val === votes[k][key])
+          ++num;
+      }
+    }
+    return num;
   }
 }
