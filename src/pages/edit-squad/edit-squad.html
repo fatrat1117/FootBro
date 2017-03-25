@@ -17,7 +17,7 @@
          <ion-icon name="md-cloud-upload"></ion-icon>
       </button>
       </ion-buttons>
-      
+
 <!--
         <div class="squard-info-panel">
     <svg height="25" width="55">
@@ -30,22 +30,22 @@
 </ion-header>
 
 <ion-content no-bounce>
-  
+
   <page-squad ion-fixed [settings]="squadSettings" style="width: 100%; height: 100%" #squadCtrl></page-squad>
   <div ion-fixed class="squad-selected">
-        <span>Hello World</span>
-       <div class="squard-info-panel"> 
+        <span>{{currentSquadForm}}</span>
+       <div class="squard-info-panel">
        </div>
-      
+
       <div class="frame-panel">
       </div>
-       
+
 <!--
          <svg width='100%' height='100%' viewBox="0 0 100 100" preserveAspectRatio="none">
   <polygon points="33,0 66,0 63,100 36,100" style="fill:#ebebeb;fill-opacity: 0.6;stroke-width:5px;stroke:grey"/>
-        
+
 </svg>
 -->
     </div>
-    
+
 </ion-content>

@@ -19,6 +19,7 @@ export class EditSquadPage {
   teamId;
   selectedSquad = 11; //Default Squad Number set to 11
   popOverPage:any;
+  currentSquadForm = '4-4-2';
 
   constructor(private viewCtrl: ViewController,
     private playerService: PlayerService,
@@ -60,21 +61,26 @@ export class EditSquadPage {
     let squad = this.squadCtrl.getSquad();
     this.teamService.saveMatchSquad(this.teamId, this.match.id, squad);
     this.dismiss();
-    
+
   }
-  
+
   selectSquadNumber(myEvent,number) {
-    
+
     if (this.popOverPage){
         this.popOverPage.dismiss();
     }
     this.selectedSquad = number;
     this.popOverPage = this.popoverCtrl.create(SquadSelectPage,{select:this.selectedSquad},{cssClass:'squad-popover'});
-    
+
     this.popOverPage.present({
         ev:myEvent
     });
-    
-  
+
+    this.popOverPage.onDidDismiss(data => {
+          console.log(data);
+          this.currentSquadForm = data;
+    });
+
+
   }
  }

@@ -11,6 +11,7 @@ declare var Wechat: any;
 export class SquadSelectPage {
 
   squadNumber : Number;
+  selectedSquad : String;
   sampleFiveList:String[] = ["1-1-1-1","1-2-1","2-1-1","1-1-2","2-2-0","2-0-2"];
   sampleSevenList:String[] = ["3-1-2","3-2-1","2-2-2","2-3-1","2-1-3",
   "4-1-1"];
@@ -19,84 +20,27 @@ export class SquadSelectPage {
   constructor(private viewCtrl: ViewController,private navParams: NavParams) {
 
   }
-  
+
   ngOnInit() {
     if (this.navParams.data) {
       this.squadNumber = this.navParams.data.select;
       console.log(this.squadNumber);
     }
   }
-  
+
    dismiss() {
-    this.viewCtrl.dismiss();
-  }
-
-  // Facebook
-  onFaceBookClick() {
-    this.viewCtrl.dismiss();
-    this.viewCtrl.onDidDismiss(() => {
-      this.shareToFacebook();
-    });
-  }
-
-  shareToFacebook() {
-    Screenshot.URI(10).then((res) => {
-      //console.log(res);
-      SocialSharing.shareViaFacebook(null, res.URI, null)
-        .then(() => { },
-        err => {
-          alert(err);
-        });
-    }, err => {
-      alert(err);
-    });
+    this.viewCtrl.dismiss(
+       this.selectedSquad
+    );
   }
 
 
-  // WeChat
-  onWeChatClick(type: number) {
-    this.viewCtrl.dismiss();
-    this.viewCtrl.onDidDismiss(()=> {
-      this.shareToWeChat(type);
-    });
+  squadSelect(event :any){
+
+     let raw = event.target.innerHTML;
+     this.selectedSquad = raw.trim();
+     this.dismiss();
   }
 
-  shareToWeChat(type: number) {
-    this.viewCtrl.dismiss();
-    Screenshot.URI(10).then((res) => {
-      this.sharePhoto(res.URI, type);
-      console.log(res, type);
-    },
-      () => {
-        alert('Screenshot failed');
-      });
-  }
 
-  sharePhoto(picAddress, type) {
-    if (typeof Wechat === "undefined") {
-      alert("Wechat plugin is not installed.");
-      return false;
-    }
-    var params = {
-      scene: type   //0: chats 1: moments
-    };
-
-    params['message'] = {
-      title: "",
-      description: "",
-      mediaTagName: "",
-      messageExt: "",
-      thumb: picAddress,
-      messageAction: "<action>Intent.ACTION_SEND</action>",
-      media: {picAddress}
-    };
-    params['message'].media.type = Wechat.Type.IMAGE;
-    params['message'].media.image = picAddress;
-
-    Wechat.share(params, function () {
-      alert("Share Success");
-    }, function (reason) {
-      alert("Share Failed: " + reason);
-    });
-  }
 }
