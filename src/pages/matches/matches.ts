@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Content, NavController, ModalController } from 'ionic-angular';
+import { Content, NavController, ModalController, NavParams } from 'ionic-angular';
 import { Match } from '../../app/matches/match.model'
 import { MatchService } from '../../app/matches/match.service'
 import { NewGamePage } from "../new-game/new-game";
@@ -29,10 +29,13 @@ export class MatchesPage {
   onMatchesByDateReady;
   onTournamentTableReady;
   onMatchesChanged;
+  isEnd = false;
+  title = "schedule";
 
   constructor(public navCtrl: NavController,
     private modalCtrl: ModalController,
-    private matchService: MatchService) {
+    private matchService: MatchService,
+    private navParams: NavParams) {
     this.selectedInfo = "schedule";
     this.selectedId = "all";
     this.afTournamentList = this.matchService.afTournamentList();
@@ -41,7 +44,17 @@ export class MatchesPage {
   ionViewDidLoad() {
     this.today = moment(moment().format("YYYY-MM-DD")).unix() * 1000;
     this.addEventListeners();
-    this.matchService.getMatchDatesAsync("all");
+    if (this.navParams.get('id')) {
+      this.selectedId = this.navParams.get('id');
+      this.matchService.getTournamentTableAsync(this.selectedId);
+    }
+    if (this.navParams.get('status') == 'end') {
+      this.selectedInfo = "standings";
+      this.isEnd = true;
+      this.title = "results";
+    }
+
+    this.matchService.getMatchDatesAsync(this.selectedId);
   }
 
   getMatchScrollHeight() {

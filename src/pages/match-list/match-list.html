@@ -15,7 +15,7 @@
           </ion-col>
           <ion-col class="right" bottom>
             <button ion-button small full no-margin color="primary">
-              查看赛程表
+              {{ 'schedule' | trans }}
             </button>
           </ion-col>
         </ion-row>
@@ -50,7 +50,7 @@
   <-->
 
   <div *ngFor="let league of afTournamentList | async" class="card-background-page">
-    <ion-card (click) = "league.isEnd ? showLeagueResult(league.$key) : goLeaguePage(league)">
+    <ion-card (click) = "leagueClick(league)">
       <div class="card-title">{{ league.name }}</div>
       <div class="card-bottom-banner">
         <ion-row>
@@ -64,11 +64,14 @@
             </ion-row>
           </ion-col>
           <ion-col class="right" bottom>
-            <button ion-button small full no-margin color="primary" *ngIf="league?.isEnd">
-              Results
+            <button ion-button small full no-margin color="primary" *ngIf="league?.status=='prepare'">
+              {{ 'register' | trans }}
             </button>
-            <button ion-button small full no-margin color="primary" *ngIf="!league?.isEnd">
-              Register
+            <button ion-button small full no-margin color="gYellow" *ngIf="league?.status=='start'" style="color:white">
+              {{ 'inProgress' | trans }}
+            </button>
+            <button ion-button small full no-margin color="lightGrey" *ngIf="league?.status=='end'">
+              {{ 'showResults' | trans }}
             </button>
           </ion-col>
         </ion-row>

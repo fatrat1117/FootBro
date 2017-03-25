@@ -240,7 +240,11 @@ export class Localization {
             average: 'Average',
             poor: 'Poor',
             verypoor: 'Very Poor',
-            extremelypoor: 'Extremely Poor'
+            extremelypoor: 'Extremely Poor',
+            register: 'Register',
+            inProgress: 'In Progress',
+            showResults: 'Show results',
+            results: 'Results'
         },
 
         zh: {
@@ -462,7 +466,11 @@ export class Localization {
             average: '一般',
             poor: '差',
             verypoor: '很差',
-            extremelypoor: '不会踢'
+            extremelypoor: '不会踢',
+            register: '报名',
+            inProgress: '进行中',
+            showResults: '查看战绩',
+            results: '战绩'
         }
     }
 }

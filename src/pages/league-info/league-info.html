@@ -20,9 +20,6 @@
       <ion-segment-button value="info">
         报名须知
       </ion-segment-button>
-      <ion-segment-button value="rule">
-        赛事章程
-      </ion-segment-button>
       <ion-segment-button value="teams">
         参赛队伍
       </ion-segment-button>
@@ -31,39 +28,19 @@
 
   <div class="league-info-content" [ngSwitch]="leagueInfo">
     <div *ngSwitchCase="'info'" class="info-panel">
-
-
       <div class="content">
         {{ league?.rules }}
-        <!-->
-        报名开始时间： 2017-02-15<br>报名截止时间： 2017-03-10<br>人数：30<br>保证金： 20000
-        报名开始时间: 2017-02-15<br> 报名截止时间: 2017-03-10<br> 每队最大报名人数: 30<br> 报名要求: 真实姓名 身份证号 大头照 足协注册<br> 停赛规则: 3张黄牌停赛1轮 1张红牌停赛1轮<br>        晋级规则: 1.球队积分 2.总净胜球球数 3. 总进球数 4.胜负关系 5. 两队间客场进球数<br> 保证金:20000
-        <br> -------------------------------------------------------------------------------- ----------------------
-        <br> 具体规程出台后公布
-        <br>
-        <-->
-
       </div>
-      <!--            <div class="fix-bottom-btn" style="margin-bottom:56px;"></div>-->
       <div class="application-button">
         <button *ngIf="isRegistered() < 0" ion-button full (click)="registerTeam()">立即报名</button>
         <button *ngIf="isRegistered() >= 0" disabled ion-button full>已报名</button>
       </div>
-    </div>
-    <div *ngSwitchCase="'rule'" class="rule-panel">
-      具体规程出台后公布<br>
     </div>
     <div *ngSwitchCase="'teams'" class="teams-panel">
       <ion-grid>
         <ion-row *ngFor="let ts of teamsGrid" text-center>
           <ion-col *ngFor="let i of ts" width-33 text-center>
             <div *ngIf="registerTeams[i]" class="team-item">
-              <!-->
-              <img *ngIf="i == 0" class="status" src="assets/img/league-info/passed_trans.png" />
-              <img *ngIf="i == 1" class="status" src="assets/img/league-info/pending.png" />
-              <img *ngIf="i == 2" class="status" src="assets/img/league-info/failed_trans.png" />
-              <img class="team-logo" src="assets/img/league-info/club.jpeg" />
-              <-->
               <img class="team-logo" [src]="registerTeams[i].logo" />
               <div class="team-name">
                 {{ registerTeams[i].name }}
@@ -75,6 +52,4 @@
       </ion-grid>
     </div>
   </div>
-
-
 </ion-content>
