@@ -16,25 +16,15 @@ export class MyPlayerPage {
   player = new Player();
   team = new Team();
   //af
-  NumOfLikes: number;
-  NumOfUnLikes: number;
-  PercentOfLikes: number;
-  PercentOfUnLikes: number;
   onPlayerReady;
   onTeamReady;
+  socialStats = {};
 
   constructor(private navCtrl: NavController,
     private service: PlayerService,
     params: NavParams,
     private teamService: TeamService) {
     this.id = params.get('id');
-
-    var fromDBLikes = 213;
-    var fromDBUnLikes = 67;
-    this.NumOfLikes = fromDBLikes;
-    this.NumOfUnLikes = fromDBUnLikes;
-    this.PercentOfLikes = fromDBLikes / (fromDBLikes + fromDBUnLikes) * 100;
-    this.PercentOfUnLikes = fromDBUnLikes / (fromDBLikes + fromDBUnLikes) * 100;
   }
 
   ionViewDidLoad() {
@@ -79,14 +69,42 @@ export class MyPlayerPage {
 
   likeHim() {
     if (this.service.isAuthenticated())
-      this.service.like(this.id, true);
+      this.service.like(this.id, true, 'charm');
     else
       this.service.checkLogin();
   }
 
   dislikeHim() {
     if (this.service.isAuthenticated())
-      this.service.like(this.id, false);
+      this.service.like(this.id, false, 'charm');
+    else
+      this.service.checkLogin();
+  }
+
+  likeSkill() {
+    if (this.service.isAuthenticated())
+      this.service.like(this.id, true, 'skill');
+    else
+      this.service.checkLogin();
+  }
+
+  dislikeSkill() {
+    if (this.service.isAuthenticated())
+      this.service.like(this.id, false, 'skill');
+    else
+      this.service.checkLogin();
+  }
+
+  likeStyle() {
+    if (this.service.isAuthenticated())
+      this.service.like(this.id, true, 'style');
+    else
+      this.service.checkLogin();
+  }
+
+  dislikeStyle() {
+    if (this.service.isAuthenticated())
+      this.service.like(this.id, false, 'style');
     else
       this.service.checkLogin();
   }
@@ -100,6 +118,53 @@ export class MyPlayerPage {
           ++num;
       }
     }
+    if (true === val)
+      this.socialStats[key] = num;
+    else 
+      this.socialStats['opp' + key] = num;
+
     return num;
+  }
+
+  getPercent(key, flag) {
+    let oppKey = 'opp' + key;
+    if (flag) {
+      this.getNumber(key,flag);
+      this.getNumber(key, !flag);
+    }
+    if (key in this.socialStats && oppKey in this.socialStats) {
+      let val = this.socialStats[key];
+      let oppVal = this.socialStats[oppKey];
+      let total = val + oppVal;
+      //console.log(val, oppVal, total);
+      if (0 === total)
+        return 50;
+      return flag ? (val * 100 / total) : (oppVal * 100 / total);
+    }
+    return 50;
+  }
+
+  getLikePic(key) {
+    if (this.player && this.player.social && this.player.social.votes) {
+      let myVote = this.player.social.votes[this.service.selfId()];
+      if (myVote && key in myVote) {
+        if (myVote[key])
+          return "assets/icon/good@2x.png";
+      }
+    }
+
+    return "assets/icon/good_push@2x.png";
+  }
+
+  getUnlikePic(key) {
+    if (this.player && this.player.social && this.player.social.votes) {
+      let myVote = this.player.social.votes[this.service.selfId()];
+      if (myVote && key in myVote) {
+        if (false === myVote[key])
+          return "assets/icon/bed@2x.png";
+      }
+    }
+
+    return "assets/icon/bed_push@2x.png";
   }
 }

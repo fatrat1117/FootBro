@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>{{'starcard' | trans}}</ion-title>
     <ion-buttons right>
-      <button *ngIf="selfId != this.player.id" ion-button icon-only (click) = "enterChatPage()">
+      <button *ngIf="selfId != this.player.id" ion-button icon-only (click)="enterChatPage()">
         <ion-icon name="md-chatbubbles" color="primary"></ion-icon>
       </button>
       <sb-share-button *ngIf="selfId == this.player.id"></sb-share-button>
@@ -21,16 +21,16 @@
           <div class="pop-number">
             <h3 no-margin>{{player?.popularity}}</h3>
           </div>
-        
-            <div class="pop-label clearfloat">
+
+          <div class="pop-label clearfloat">
             <ion-icon class="label-fire icon icon-md ion-md-flame" name="md-flame" role="img" aria-label="flame" ng-reflect-name="md-flame"></ion-icon>
-            </div>
+          </div>
 
         </div>
         <h1 class="fr info-name">{{player?.name}}</h1>
-           <div class="player-logo">
-        <img [src]="player?.photo">
-      </div>
+        <div class="player-logo">
+          <img [src]="player?.photo">
+        </div>
       </div>
     </div>
 
@@ -38,11 +38,11 @@
       <h1><span class="player-position">{{player?.position | trans}}</span><span class="player-at">@</span><span class="player-team-name">{{team?.name}}</span></h1>
     </div>
 
-      <ion-row class="player-statistics clearfloat">
-        <div class="company-logo">
-          <img src="assets/img/forTest/box.png">
-          <h4 no-margin>SoccerBro</h4>
-        </div>
+    <ion-row class="player-statistics clearfloat">
+      <div class="company-logo">
+        <img src="assets/img/forTest/box.png">
+        <h4 no-margin>SoccerBro</h4>
+      </div>
       <ion-col no-padding class="block height">
         <div class="flex-center txt height-inner">
           <ion-col no-padding width-50 class="fl flex-end data">{{player?.height}}</ion-col>
@@ -188,10 +188,7 @@
     <ion-row class="light-grey">
       <div class="feedHead">
         <div class="wrapper">
-          <div class="rose">
-            <ion-icon name="md-flower" class="firstPic" color='gRed'></ion-icon>
-            <!--span class="firstPic"><img src="assets/img/my-player/flowerrose.png"></span-->
-            <span class="picText">{{'charm' | trans}}</span>
+          <div class="rose"><span class="firstPic"><img src="assets/img/my-player/flowerrose.png"></span><span class="picText">{{'charm' | trans}}</span>
           </div>
         </div>
       </div>
@@ -201,226 +198,215 @@
         <div class="wrapper">
           <div class="clearfloat totalText">
             <h1 class="fl" style="margin: 0">{{'Ilikehim' | trans}}</h1>
-            <h2 class="fr">{{'Idislikehim' | trans}}</h2>
-          </div>
-          <ion-row class="clearfloat totalFeedBack">
+<h2 class="fr">{{'Idislikehim' | trans}}</h2>
+</div>
+<ion-row class="clearfloat totalFeedBack">
 
-            <ion-col width-10 class="feed-back-like">
-              <div class="like fl">
-                <ion-icon name="md-thumbs-up" color="gRed" (click) = "likeHim()"></ion-icon>
-              </div>
-            </ion-col>
-            <ion-col width-80 class="feed-back-bar fl">
-              <div [ngStyle]="{'width':PercentOfLikes.toString()+'%'}" class="redPrg fl">
-                <div class="redStrip"></div>
-                <span class="stripText">{{getNumber('like', true)}}</span>
-              </div>
-              <div [ngStyle]="{'width':PercentOfUnLikes.toString()+'%'}" class="bluePrg fl">
-                <div class="blueStrip"></div>
-                <span class="blueText">{{getNumber('like', false)}}</span>
-              </div>
-            </ion-col>
-            <ion-col width-10 class="feed-back-unlike">
-              <div class="unLike fr">
-                <ion-icon name="md-thumbs-down" color="gBlue" (click) = "dislikeHim()"></ion-icon>
-                <!--img src="assets/icon/bed@2x.png" (click) = "dislikeHim()"-->
-              </div>
-            </ion-col>
-          </ion-row>
-        </div>
+  <ion-col width-10 class="feed-back-like">
+    <div class="like fl">
+      <img [src]="getLikePic('charm')" (click)="likeHim()">
+    </div>
+  </ion-col>
+  <ion-col width-80 class="feed-back-bar fl">
+    <div [ngStyle]="{'width':getPercent('charm', true)+'%'}" class="redPrg fl">
+      <div class="redStrip"></div>
+      <span class="stripText">{{socialStats['charm']}}</span>
+    </div>
+    <div [ngStyle]="{'width':getPercent('charm', false)+'%'}" class="bluePrg fl">
+      <div class="blueStrip"></div>
+      <span class="blueText">{{socialStats['oppcharm']}}</span>
+    </div>
+  </ion-col>
+  <ion-col width-10 class="feed-back-unlike">
+    <div class="unLike fr">
+      <img [src]="getUnlikePic('charm')" (click)="dislikeHim()">
+    </div>
+  </ion-col>
+</ion-row>
+</div>
+</div>
+</ion-row>
+<ion-row class="light-grey">
+  <div class="feedHead">
+    <div class="wrapper">
+      <div class="rose">
+        <span class="firstPic">
+            <img src="assets/img/my-player/football.png">
+            </span>
+        <span class="picText">{{'skill' | trans}}</span>
       </div>
-    </ion-row>
-    <ion-row class="light-grey">
-      <div class="feedHead">
-        <div class="wrapper">
-          <div class="rose">
-            <ion-icon name="ios-football" class="firstPic"></ion-icon>
-            <!--span class="firstPic"><img src="assets/img/my-player/football.png"></span-->
-            <span class="picText">{{'skill' | trans}}</span>
-          </div>
-        </div>
-      </div>
-    </ion-row>
-    <ion-row class="personal-data-title">
-      <div class="feedBack">
-        <div class="wrapper">
-          <div class="clearfloat totalText">
-            <h1 class="fl" style="margin: 0">{{'heisagoodplayer' | trans}}</h1>
-            <h2 class="fr">{{'hesucks' | trans}}</h2>
-          </div>
-          <ion-row class="clearfloat totalFeedBack">
+    </div>
+  </div>
+</ion-row>
+<ion-row class="personal-data-title">
+  <div class="feedBack">
+    <div class="wrapper">
+      <div class="clearfloat totalText">
+        <h1 class="fl" style="margin: 0">{{'heisagoodplayer' | trans}}</h1>
+<h2 class="fr">{{'hesucks' | trans}}</h2>
+</div>
+<ion-row class="clearfloat totalFeedBack">
 
-            <ion-col width-10 class="feed-back-like">
-              <div class="like fl">
-                <ion-icon name="md-thumbs-up" color="gRed"></ion-icon>
-                <!--img src="assets/icon/good@2x.png"-->
-              </div>
-            </ion-col>
-            <ion-col width-80 class="feed-back-bar fl">
-              <div [ngStyle]="{'width':PercentOfLikes.toString()+'%'}" class="redPrg fl">
-                <div class="redStrip"></div>
-                <span class="stripText">{{NumOfLikes}}</span>
-              </div>
-              <div [ngStyle]="{'width':PercentOfUnLikes.toString()+'%'}" class="bluePrg fl">
-                <div class="blueStrip"></div>
-                <span class="blueText">{{NumOfUnLikes}}</span>
-              </div>
-            </ion-col>
-            <ion-col width-10 class="feed-back-unlike">
-              <div class="unLike fr">
-                <!--img src="assets/icon/bed@2x.png"-->
-                <ion-icon name="md-thumbs-down" color="gBlue"></ion-icon>
-              </div>
-            </ion-col>
-          </ion-row>
-        </div>
+  <ion-col width-10 class="feed-back-like">
+    <div class="like fl">
+      <img [src]="getLikePic('skill')" (click)="likeSkill()">
+    </div>
+  </ion-col>
+  <ion-col width-80 class="feed-back-bar fl">
+    <div [ngStyle]="{'width':getPercent('skill', true)+'%'}" class="redPrg fl">
+      <div class="redStrip"></div>
+      <span class="stripText">{{socialStats['skill']}}</span>
+    </div>
+    <div [ngStyle]="{'width':getPercent('skill', false)+'%'}" class="bluePrg fl">
+      <div class="blueStrip"></div>
+      <span class="blueText">{{socialStats['oppskill']}}</span>
+    </div>
+  </ion-col>
+  <ion-col width-10 class="feed-back-unlike">
+    <div class="unLike fr">
+      <img [src]="getUnlikePic('skill')" (click)="dislikeSkill()">
+    </div>
+  </ion-col>
+</ion-row>
+</div>
+</div>
+</ion-row>
+<ion-row class="light-grey">
+  <div class="feedHead">
+    <div class="wrapper">
+      <div class="rose"><span class="firstPic"><img src="assets/img/my-player/footplayer.png"></span><span class="picText">{{'playstyle' | trans}}</span>
       </div>
-    </ion-row>
-    <ion-row class="light-grey">
-      <div class="feedHead">
-        <div class="wrapper">
-          <div class="rose">
-            <ion-icon name="md-person" color='gBlue' class="firstPic"></ion-icon>
-            <!--span class="firstPic"><img src="assets/img/my-player/footplayer.png"></span-->
-            <span class="picText">{{'playstyle' | trans}}</span>
-          </div>
-        </div>
-      </div>
-    </ion-row>
-    <ion-row class="personal-data-title">
-      <div class="feedBack">
-        <div class="wrapper">
-          <div class="clearfloat totalText">
-            <h1 class="fl" style="margin: 0">{{'heiscleanandelegant' | trans}}</h1>
-            <h2 class="fr">{{'heisdirty' | trans}}</h2>
-          </div>
-          <ion-row class="clearfloat totalFeedBack">
+    </div>
+  </div>
+</ion-row>
+<ion-row class="personal-data-title">
+  <div class="feedBack">
+    <div class="wrapper">
+      <div class="clearfloat totalText">
+        <h1 class="fl" style="margin: 0">{{'heiscleanandelegant' | trans}}</h1>
+<h2 class="fr">{{'heisdirty' | trans}}</h2>
+</div>
+<ion-row class="clearfloat totalFeedBack">
 
-            <ion-col width-10 class="feed-back-like">
-              <div class="like fl">
-                <ion-icon name="md-thumbs-up" color="gRed"></ion-icon>
-                <!--img src="assets/icon/good@2x.png"-->
-              </div>
-            </ion-col>
-            <ion-col width-80 class="feed-back-bar fl">
-              <div [ngStyle]="{'width':PercentOfLikes.toString()+'%'}" class="redPrg fl">
-                <div class="redStrip"></div>
-                <span class="stripText">{{NumOfLikes}}</span>
-              </div>
-              <div [ngStyle]="{'width':PercentOfUnLikes.toString()+'%'}" class="bluePrg fl">
-                <div class="blueStrip"></div>
-                <span class="blueText">{{NumOfUnLikes}}</span>
-              </div>
-            </ion-col>
-            <ion-col width-10 class="feed-back-unlike">
-              <div class="unLike fr">
-                <ion-icon name="md-thumbs-down" color="gBlue"></ion-icon>
-                <!--img src="assets/icon/bed@2x.png"-->
-              </div>
-            </ion-col>
-          </ion-row>
-        </div>
-      </div>
-    </ion-row>
-    <ion-row class="personal-data-title">
-      <ion-col class="subtitle">{{'Description' | trans}}</ion-col>
-    </ion-row>
-    <ion-row class="light-grey personal-data">
-      <div class="description"><p>{{player?.description}}</p>
-      </div>
-    </ion-row>
-    <ion-row class="personal-data-title">
-      <ion-col class="subtitle">我要评论</ion-col>
-    </ion-row>
-    <ion-row>
-      <div class="setOne">
-        <!--setOne starts-->
-        <div class="tabMain">
-          <div id="TabbedPanels1" class="TabbedPanels">
-            <!--tabMain start-->
-            <ion-row class="TabbedPanelsTabGroup clearfloat">
-              <ion-col width-80>
-                <div class="TabbedPanelsTab" tabindex="0">
-                  <span class="tabpic"></span>
-                  <ion-label no-margin>全部(156)</ion-label>
-                </div>
-                <div class="TabbedPanelsTab" tabindex="0">
-                  <span class="tabpic"></span>
-                  <ion-label no-margin>天生射手(22)</ion-label>
-                </div>
-                <div class="TabbedPanelsTab" tabindex="0">
-                  <span class="tabpic"></span>
-                  <ion-label no-margin>差劲(1)</ion-label>
-                </div>
-                <div class="TabbedPanelsTab" tabindex="0">
-                  <span class="tabpic"></span>
-                  <ion-label no-margin>护球像亨利(10)</ion-label>
-                </div>
-                <div class="TabbedPanelsTab" tabindex="0">
-                  <span class="tabpic"></span>
-                  <ion-label no-margin>关键先生(2)</ion-label>
-                </div>
-                <div class="TabbedPanelsTab" tabindex="0">
-                  <span class="tabpic"></span>
-                  <ion-label no-margin>呆(99)</ion-label>
-                </div>
-              </ion-col>
-              <ion-col width-20>
-                <div class="setOneRight">
-                  <button no-padding class="btn"><span class="pic"><img src="assets/img/my-player/yellowpic.png"></span>评论
+  <ion-col width-10 class="feed-back-like">
+    <div class="like fl">
+      <img [src]="getLikePic('style')" (click)="likeStyle()">
+    </div>
+  </ion-col>
+  <ion-col width-80 class="feed-back-bar fl">
+    <div [ngStyle]="{'width':getPercent('style', true)+'%'}" class="redPrg fl">
+      <div class="redStrip"></div>
+      <span class="stripText">{{socialStats['style']}}</span>
+    </div>
+    <div [ngStyle]="{'width':getPercent('style', false)+'%'}" class="bluePrg fl">
+      <div class="blueStrip"></div>
+      <span class="blueText">{{socialStats['oppstyle']}}</span>
+    </div>
+  </ion-col>
+  <ion-col width-10 class="feed-back-unlike">
+    <div class="unLike fr">
+      <img [src]="getUnlikePic('style')" (click)="dislikeStyle()">
+    </div>
+  </ion-col>
+</ion-row>
+</div>
+</div>
+</ion-row>
+<ion-row class="personal-data-title">
+  <ion-col class="subtitle">{{'Description' | trans}}</ion-col>
+</ion-row>
+<ion-row class="light-grey personal-data">
+  <div class="description">
+    <p>{{player?.description}}</p>
+  </div>
+</ion-row>
+<ion-row class="personal-data-title">
+  <ion-col class="subtitle">{{'tags' | trans}}</ion-col>
+</ion-row>
+<ion-row>
+  <div class="setOne">
+    <!--setOne starts-->
+    <div class="tabMain">
+      <div id="TabbedPanels1" class="TabbedPanels">
+        <!--tabMain start-->
+        <ion-row class="TabbedPanelsTabGroup clearfloat">
+          <ion-col width-80>
+            <div class="TabbedPanelsTab" tabindex="0">
+              <span class="tabpic"></span>
+              <ion-label no-margin>全部(156)</ion-label>
+            </div>
+            <div class="TabbedPanelsTab" tabindex="0">
+              <span class="tabpic"></span>
+              <ion-label no-margin>天生射手(22)</ion-label>
+            </div>
+            <div class="TabbedPanelsTab" tabindex="0">
+              <span class="tabpic"></span>
+              <ion-label no-margin>差劲(1)</ion-label>
+            </div>
+            <div class="TabbedPanelsTab" tabindex="0">
+              <span class="tabpic"></span>
+              <ion-label no-margin>护球像亨利(10)</ion-label>
+            </div>
+            <div class="TabbedPanelsTab" tabindex="0">
+              <span class="tabpic"></span>
+              <ion-label no-margin>关键先生(2)</ion-label>
+            </div>
+            <div class="TabbedPanelsTab" tabindex="0">
+              <span class="tabpic"></span>
+              <ion-label no-margin>呆(99)</ion-label>
+            </div>
+          </ion-col>
+          <ion-col width-20>
+            <div class="setOneRight">
+              <button no-padding class="btn"><span class="pic"><img src="assets/img/my-player/yellowpic.png"></span>
                   </button>
-                </div>
-              </ion-col>
-            </ion-row>
+            </div>
+          </ion-col>
+        </ion-row>
 
-            <!-->
-            <div class="TabbedPanelsContentGroup tabbedContents clearfloat">
-              <div class="TabbedPanelsContent">
-                <div class="booSet">
-                  <div class="wrapper">
-                    <div class="ball clearfloat">
-                      <div class="ballpic fl"><img src="assets/img/my-player/ball.png">
-                      </div>
-                      <div class="ballLeft fl">BOO</div>
-                      <div class="ballRight fr">2016-11-12</div>
-                    </div>
-                    <p>他是一名天生的射手，他嗅觉灵敏，射术出众，头球出色。踢得很6，喜欢~</p>
-                    <div class="clearfloat">
-                      <div class="fr">
-                        <a href="#" class="mainLike"><img class="like" src="assets/img/my-player/defunlike.png"/>踩56</a>
-                        <a href="#" class="mainLikez"><img class="like" src="assets/img/my-player/deflike.png"/>赞451</a>
-                      </div>
-                    </div>
+
+        <!--<div class="TabbedPanelsContentGroup tabbedContents clearfloat">
+          <div class="TabbedPanelsContent">
+            <div class="booSet">
+              <div class="wrapper">
+                <div class="ball clearfloat">
+                  <div class="ballpic fl"><img src="assets/img/my-player/ball.png">
                   </div>
+                  <div class="ballLeft fl">BOO</div>
+                  <div class="ballRight fr">2016-11-12</div>
                 </div>
-                <div class="booSet">
-                  <div class="wrapper">
-                    <div class="ball clearfloat">
-                      <div class="ballpic fl"><img src="assets/img/my-player/ball.png">
-                      </div>
-                      <div class="ballLeft fl">BOO</div>
-                      <div class="ballRight fr">2016-11-12</div>
-                    </div>
-                    <p>他是一名天生的射手，他嗅觉灵敏，射术出众，头球出色。踢得很6，喜欢~</p>
-                    <div class="clearfloat">
-                      <div class="fr">
-                        <a href="#" class="mainLike"><img class="like" src="assets/img/my-player/defunlike.png"/>踩56</a>
-                        <a href="#" class="mainLikez"><img class="like" src="assets/img/my-player/deflike.png"/>赞451</a>
-                      </div>
-                    </div>
+                <p>他是一名天生的射手，他嗅觉灵敏，射术出众，头球出色。踢得很6，喜欢~</p>
+                <div class="clearfloat">
+                  <div class="fr">
+                    <a href="#" class="mainLike"><img class="like" src="assets/img/my-player/defunlike.png" />踩56</a>
+                    <a href="#" class="mainLikez"><img class="like" src="assets/img/my-player/deflike.png" />赞451</a>
                   </div>
                 </div>
               </div>
             </div>
-            <-->
+            <div class="booSet">
+              <div class="wrapper">
+                <div class="ball clearfloat">
+                  <div class="ballpic fl"><img src="assets/img/my-player/ball.png">
+                  </div>
+                  <div class="ballLeft fl">BOO</div>
+                  <div class="ballRight fr">2016-11-12</div>
+                </div>
+                <p>他是一名天生的射手，他嗅觉灵敏，射术出众，头球出色。踢得很6，喜欢~</p>
+                <div class="clearfloat">
+                  <div class="fr">
+                    <a href="#" class="mainLike"><img class="like" src="assets/img/my-player/defunlike.png" />踩56</a>
+                    <a href="#" class="mainLikez"><img class="like" src="assets/img/my-player/deflike.png" />赞451</a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <!--tabMain ends-->
-
-        </div>
+        </div>-->
       </div>
-      <!--setOne ends-->
-
-    </ion-row>
-  </ion-grid>
+    </div>
+  </div>
+</ion-row>
+</ion-grid>
 
 </ion-content>

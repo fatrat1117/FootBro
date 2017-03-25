@@ -585,8 +585,8 @@ export class FirebaseManager {
     return this.getPlayerSocialRef(playerId) + 'votes/' + this.selfId() + '/';
   }
 
-  likePlayer(playerId, val) {
-    this.af.database.object(this.getPlayerSocialVotesRef(playerId) + 'like/').set(val);
+  likePlayer(playerId, val, tag) {
+    this.af.database.object(this.getPlayerSocialVotesRef(playerId) + tag + '/').set(val);
   }
 
   //Fire document events 

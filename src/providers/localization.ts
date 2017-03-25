@@ -254,7 +254,8 @@ export class Localization {
             hesucks: 'he sucks',
             playstyle: 'Style',
             heiscleanandelegant: 'He plays cleanly and elegantly',
-            heisdirty: 'Stay away from him to protect yourself'
+            heisdirty: 'Stay away from him to protect yourself',
+            tags: 'Tags'
         },
 
         zh: {
@@ -490,7 +491,8 @@ export class Localization {
             hesucks: '他弱爆了',
             playstyle: '球风',
             heiscleanandelegant: '他是艺术足球大师',
-            heisdirty: '离他远点，小心受伤'
+            heisdirty: '离他远点，小心受伤',
+            tags: '标签'
         }
     }
 }
