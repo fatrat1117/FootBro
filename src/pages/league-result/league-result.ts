@@ -12,9 +12,10 @@ import { MatchService } from '../../app/matches/match.service'
   templateUrl: 'league-result.html'
 })
 export class LeagueResultPage {
-  leagueId: string;
+  league: any;
   matchStandings;
   onTournamentTableReady;
+  leagueResults = "schedule";
 
   constructor(private viewCtrl: ViewController, private navParams: NavParams, 
               private toastCtrl: ToastController, private alertCtrl: AlertController,
@@ -22,9 +23,13 @@ export class LeagueResultPage {
   }
 
   ionViewDidLoad() {
-    this.leagueId = this.navParams.get('leagueId');
+    this.league = this.navParams.get('league');
+    if (this.league.status == 'end')
+      this.leagueResults = "standings"
+
+    
     this.addEventListeners();
-    this.matchService.getTournamentTableAsync(this.leagueId);
+    this.matchService.getTournamentTableAsync(this.league.$key);
   }
 
   ionViewWillUnload() {
@@ -34,7 +39,7 @@ export class LeagueResultPage {
   addEventListeners() {
     this.onTournamentTableReady = e => {
       let tournamentId = e['detail'];
-      if (tournamentId === this.leagueId)
+      if (tournamentId === this.league.$key)
         this.matchStandings = this.matchService.getTournamentTable(tournamentId);
     };
 

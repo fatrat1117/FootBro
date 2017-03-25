@@ -1,4 +1,28 @@
 page-league-result {
+  .card-background-page {
+    ion-card {
+      background-image: url("../assets/img/match/background.png");
+      background-size: cover;
+      background-position: center center;
+      position: relative;
+      text-align: center;
+      height: 12rem;
+      border-radius: 0px;
+      margin: 0px;
+      width: 100%;
+    }
+    .card-title {
+      position: absolute;
+      top: 20%;
+      font-size: 2.0em;
+      width: 100%;
+      font-weight: bold;
+      color: #fff;
+    }
+  }
+  .league-info-segments {
+    background-color: #222;
+  }
   // table
   .league-stats-standing {
     .data-column {

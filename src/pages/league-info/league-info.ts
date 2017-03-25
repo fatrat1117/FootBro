@@ -12,7 +12,6 @@ import { MatchService } from '../../app/matches/match.service'
   templateUrl: 'league-info.html'
 })
 export class LeagueInfoPage {
-  leagueId: string
   league: any;
   selfId: string;
   selfPlayer: Player;
@@ -33,7 +32,6 @@ export class LeagueInfoPage {
 
   ionViewDidLoad() {
     this.league = this.navParams.get('league');
-    console.log(this.league);
     
     this.addEventListeners();
     this.selfId = this.playerService.selfId();
@@ -86,7 +84,7 @@ export class LeagueInfoPage {
           {
             text: 'Confirm',
             handler: () => {
-              this.matchService.registerLeague(this.selfTeam.id, this.leagueId);
+              this.matchService.registerLeague(this.selfTeam.id, this.league.$key);
             }
           },
           {

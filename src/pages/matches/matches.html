@@ -1,21 +1,14 @@
 <ion-header #matchHeader>
   <ion-navbar>
-    <ion-title>{{ 'schedule' | trans }}</ion-title>
-    <ion-buttons end>
+    <ion-title>{{ title | trans }}</ion-title>
+    <ion-buttons end *ngIf="!isEnd">
       <button ion-button icon-only (click)="enterNewGame()">
         <ion-icon name="md-add" color="primary"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
-  <!-->
-  <ion-toolbar>
-    <ion-segment *ngIf="selectedId == 'all'" [(ngModel)]="selectedInfo" mode="md">
-      <ion-segment-button value="schedule">
-        Schedule
-      </ion-segment-button>
-    </ion-segment>
-
-    <ion-segment *ngIf="selectedId != 'all'" [(ngModel)]="selectedInfo" mode="md">
+  <ion-toolbar *ngIf="selectedId != 'all'">
+    <ion-segment [(ngModel)]="selectedInfo" mode="md">
       <ion-segment-button value="schedule">
         Schedule
       </ion-segment-button>
@@ -24,9 +17,9 @@
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
-  <-->
 </ion-header>
 <ion-content #matchContent no-bounce>
+
   <!-->
   <ion-fab top right edge>
     <button ion-fab mini (click)="enterNewGame()"><ion-icon color="dark" name="md-add"></ion-icon></button>

@@ -30,7 +30,7 @@ export class MatchListPage {
     this.navCtrl.push(MatchesPage);
   }
 
-  goLeaguePage(league) {
+  goLeagueInfoPage(league) {
     if (this.playerService.isAuthenticated()) {
       this.navCtrl.push(LeagueInfoPage, {
         league: league
@@ -40,9 +40,22 @@ export class MatchListPage {
       this.playerService.checkLogin();
   }
 
-  showLeagueResult(leagueId: string) {
+  showLeagueResult(league) {
     this.navCtrl.push(LeagueResultPage, {
-      leagueId: leagueId
+      league: league
     })
+  }
+
+  leagueClick(league) {
+    if (league.status == 'prepare') {
+      this.goLeagueInfoPage(league);
+    }
+    else {
+      this.navCtrl.push(MatchesPage, {
+        id: league.$key,
+        status: league.status
+      })
+    }
+
   }
 }
