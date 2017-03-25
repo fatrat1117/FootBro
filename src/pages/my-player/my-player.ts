@@ -143,4 +143,28 @@ export class MyPlayerPage {
     }
     return 50;
   }
+
+  getLikePic(key) {
+    if (this.player && this.player.social && this.player.social.votes) {
+      let myVote = this.player.social.votes[this.service.selfId()];
+      if (myVote && key in myVote) {
+        if (myVote[key])
+          return "assets/icon/good@2x.png";
+      }
+    }
+
+    return "assets/icon/good_push@2x.png";
+  }
+
+  getUnlikePic(key) {
+    if (this.player && this.player.social && this.player.social.votes) {
+      let myVote = this.player.social.votes[this.service.selfId()];
+      if (myVote && key in myVote) {
+        if (false === myVote[key])
+          return "assets/icon/bed@2x.png";
+      }
+    }
+
+    return "assets/icon/bed_push@2x.png";
+  }
 }
