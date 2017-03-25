@@ -74,6 +74,7 @@ import { SbWechatShareButtonComponent } from './common/wechat.share.button.compo
 import { SbMatchBasicComponent } from './matches/match-basic.component';
 import { MatchDetailPage } from "../pages/match-detail/match-detail";
 import { GameRatingPage } from "../pages/game-rating/game-rating";
+import { NoRecordComponent } from './common/no.record.component';
 
 // directives
 import { KeyboardAttachDirective } from '../providers/keyboard-attach.directive';
@@ -132,7 +133,7 @@ export const firebaseConfig = {
     SharePage,
     EditGameRatingPage,
     SquadSelectPage,
-    
+
     // pipes
     TransPipe,
     StringToDatePipe,
@@ -152,6 +153,7 @@ export const firebaseConfig = {
     SbFbShareButtonComponent,
     SbWechatShareButtonComponent,
     SbMatchBasicComponent,
+    NoRecordComponent,
     // directives
     KeyboardAttachDirective
   ],

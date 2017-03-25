@@ -32,8 +32,10 @@ export class ChatPage {
   newMessage: string;
   isRefreshing: boolean;
   hasChatsMessage = true;
+  hasNoChatsMessageId = "chatPageNoRecord";
+  hasNoChatsMessage = "";
 
-  constructor(private navCtrl: NavController, private navParams: NavParams, private chatService: ChatService, private loacal: Localization) {
+  constructor(private navCtrl: NavController, private navParams: NavParams, private chatService: ChatService, private local: Localization) {
   }
 
   ionViewDidLoad() {
@@ -51,6 +53,7 @@ export class ChatPage {
     })
 
     this.chatService.loadMoreChats();
+    this.hasNoChatsMessage = this.local.getString(this.hasNoChatsMessageId);
   }
 
   ionViewWillLeave() {
@@ -123,7 +126,7 @@ export class ChatPage {
 
     var newTime: string;
     if (!isTheSameDay) {
-      newTime = new MomentPipe(this.loacal).transform(current);
+      newTime = new MomentPipe(this.local).transform(current);
     }
     else {
       newTime = moment(current).format('HH:mm');

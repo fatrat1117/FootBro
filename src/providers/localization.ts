@@ -260,7 +260,9 @@ export class Localization {
             registeredTeams: 'Registered Teams',
             registerNow: 'Register Now',
             registered: 'Registered',
-            leagueInfo: 'League Info'
+            leagueInfo: 'League Info',
+            searchMatchPageNoRecord: 'No match record... :(',
+            chatPageNoRecord: 'No message... :('
         },
 
         zh: {
@@ -502,7 +504,9 @@ export class Localization {
             registeredTeams: '参赛队伍',
             registerNow: '立即报名',
             registered: '已报名',
-            leagueInfo: '联赛信息'
+            leagueInfo: '联赛信息',
+            searchMatchPageNoRecord :'没有比赛信息...',
+            chatPageNoRecord : '开始对话吧 :)'
         }
     }
 }
