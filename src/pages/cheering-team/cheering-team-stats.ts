@@ -40,7 +40,7 @@ import { PlayerService } from '../../app/players/player.service'
       <ion-item>
         <ion-icon name="md-calendar" item-left></ion-icon>
           Join date
-        <ion-note item-right color="primary-text">2015-01-01</ion-note>
+        <ion-note item-right color="primary-text">{{ cheerleader?.joinTime | date:'yyyy-MM-dd' }}</ion-note>
       </ion-item>
 
       <ion-item>
@@ -69,6 +69,8 @@ export class CheeringTeamStatsPage {
   ionViewDidLoad() {
     this.addEventListeners();
     this.cheerleader = this.navParams.get("cheerleader");
+    console.log(this.cheerleader);
+    
     this.unlockAmount = Math.floor(this.cheerleader.unlockPoints / 10) * 10;
 
     this.playerService.getPlayerAsync(this.playerService.selfId());

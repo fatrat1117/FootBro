@@ -21,4 +21,5 @@ export class Cheerleader {
   received: number;
   responsed: number;
   responseRate: number;
+  joinTime: number;
 }

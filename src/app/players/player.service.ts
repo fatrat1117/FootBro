@@ -53,10 +53,11 @@ export class PlayerService {
       }
 
       player.role = "player";
-      
       if (playerData.role)
         player.role = playerData.role;
-      player.joinTime = playerData.joinTime;
+      
+      if (playerData.joinTime)
+        player.joinTime = playerData.joinTime;
 
       this.playersMap[id] = player;
       if (player.role && player.role === 'cheerleader') {

@@ -49,6 +49,8 @@ export class CheerleaderService {
         cheerleader.photoMedium = p.photoMedium;
       if (p.pushId)
         cheerleader.pushId = p.pushId;
+      if (p.joinTime)
+        cheerleader.joinTime = p.joinTime;
 
       if ('points' in p)
         cheerleader.points = p.points;
