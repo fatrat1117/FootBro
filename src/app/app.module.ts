@@ -1,5 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { AgmCoreModule } from 'angular2-google-maps/core';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { MyApp } from './app.component';
 import { TutorialPage } from '../pages/tutorial/tutorial';
@@ -161,7 +162,10 @@ export const firebaseConfig = {
       backButtonText: ''
     }),
     RoundProgressModule,
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    AgmCoreModule.forRoot({
+      libraries: ["places"]
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
