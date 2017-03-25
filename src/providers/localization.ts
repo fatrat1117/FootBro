@@ -255,7 +255,12 @@ export class Localization {
             playstyle: 'Style',
             heiscleanandelegant: 'He plays cleanly and elegantly',
             heisdirty: 'Stay away from him to protect yourself',
-            tags: 'Tags'
+            tags: 'Tags',
+            registerRules: 'Notice',
+            registeredTeams: 'Registered Teams',
+            registerNow: 'Register Now',
+            registered: 'Registered',
+            leagueInfo: 'League Info'
         },
 
         zh: {
@@ -492,7 +497,12 @@ export class Localization {
             playstyle: '球风',
             heiscleanandelegant: '他是艺术足球大师',
             heisdirty: '离他远点，小心受伤',
-            tags: '标签'
+            tags: '标签',
+            registerRules: '报名须知',
+            registeredTeams: '参赛队伍',
+            registerNow: '立即报名',
+            registered: '已报名',
+            leagueInfo: '联赛信息'
         }
     }
 }

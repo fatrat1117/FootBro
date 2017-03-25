@@ -1,10 +1,8 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>League Info</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only>
-        <ion-icon name="md-share" color="primary"></ion-icon>
-      </button>
+    <ion-title>{{ 'leagueInfo' | trans }}</ion-title>
+    <ion-buttons right>
+      <sb-share-button></sb-share-button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -12,16 +10,16 @@
 <ion-content no-bounce>
   <div class="card-background-page">
     <ion-card>
-        <div class="card-title">联赛名</div>
+        <div class="card-title">{{ league?.name }}</div>
     </ion-card>
   </div>
   <ion-row class="league-info-segments">
     <ion-segment no-padding [(ngModel)]="leagueInfo" mode="md">
       <ion-segment-button value="info">
-        报名须知
+        {{ 'registerRules' | trans }}
       </ion-segment-button>
       <ion-segment-button value="teams">
-        参赛队伍
+        {{ 'registeredTeams' | trans }}
       </ion-segment-button>
     </ion-segment>
   </ion-row>
@@ -32,8 +30,8 @@
         {{ league?.rules }}
       </div>
       <div class="application-button">
-        <button *ngIf="isRegistered() < 0" ion-button full (click)="registerTeam()">立即报名</button>
-        <button *ngIf="isRegistered() >= 0" disabled ion-button full>已报名</button>
+        <button *ngIf="isRegistered() < 0" ion-button full (click)="registerTeam()">{{ 'registerNow' | trans }}</button>
+        <button *ngIf="isRegistered() >= 0" disabled ion-button full>{{ 'Registered' | trans }}</button>
       </div>
     </div>
     <div *ngSwitchCase="'teams'" class="teams-panel">
@@ -45,7 +43,6 @@
               <div class="team-name">
                 {{ registerTeams[i].name }}
               </div>
-
             </div>
           </ion-col>
         </ion-row>
