@@ -66,30 +66,21 @@
     <ion-col width-33>{{match?.away?.name}}</ion-col>
   </ion-row>
 
-  <!--<ion-item class="red-style">
-        <button ion-button clear item-left color="light" class="default-font-size">0</button>
-        <img class="center-img no-padding" style="background-color: red;">
-        <button ion-button clear item-right color="light" class="default-font-size">0</button>
-      </ion-item>
-      <ion-item class="yellow-style">
-        <button ion-button clear item-left color="light" class="default-font-size">0</button>
-        <img class="center-img no-padding" style="background-color: yellow;">
-        <button ion-button clear item-right color="light" class="default-font-size">0</button>
-      </ion-item>-->
-  <!--地图 标题-->
-  <ion-item class="map-title">
-    <ion-icon name="navigate" color="iPrimary"></ion-icon>
-    {{match?.location?.name}}
-    <p>{{match?.location?.address}}</p>
-  </ion-item>
-  <p><a href="geo:1.393618,103.74255900000003">Location 50/10</a></p>
+  <a [href]="geo">
+    <ion-item class="map-title">
+      <ion-icon name="navigate" color="iPrimary"></ion-icon>
+      {{match?.location?.name}}
+      <p>{{match?.location?.address}}</p>
+    </ion-item>
+  </a>
+  <!--<p><a href="geo:1.393618,103.74255900000003">Location 50/10</a></p>
   <p><a href="geo:Vienna">Location Vienna</a></p>
   <p><a href="geo:?z=5&q=New+York">Zoom 5, Search for New York</a></p>
   <p><a href="geo:?q=1.393618,103.74255900000003">my home</a></p>
   <p><a href="google.navigation:q=San+Francisco">Navigation to San Francisco</a></p>
   <p><a href="google.navigation:q=50,10">Navigation to 50/10</a></p>
-  <p><a href="http://maps.google.com/maps?saddr=New+York&daddr=San+Francisco">Route New York --> San Francisco</a></p>
-  <p><a href="http://maps.google.com/maps?saddr=50,10&daddr=50,20">Route 50/10 --> 50/20</a></p>
+  <p><a href="http://maps.google.com/maps?saddr=New+York&daddr=San+Francisco">Route New YorkSan Francisco</a></p>
+  <p><a href="http://maps.google.com/maps?saddr=50,10&daddr=50,20">Route 50/10 50/20</a></p>-->
 </ion-list>
 </div>
 
@@ -101,7 +92,7 @@
   <div class="left-scrollview matches-date-tab-col">
     <ion-list class="date-tab-list">
       <ion-item *ngFor="let cat of statCategories;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (click)='showStat(cat)'
-      [style.background]="selectedCat === cat ? '#585F6F' : '#40444D'" [style.color]="selectedCat === cat ? '#00ef00' : '#F2EDE7'">
+        [style.background]="selectedCat === cat ? '#585F6F' : '#40444D'" [style.color]="selectedCat === cat ? '#00ef00' : '#F2EDE7'">
         <div class="date-inner">
           {{cat | trans}}
         </div>

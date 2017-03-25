@@ -30,6 +30,7 @@ export class MatchDetailPage {
   statCategories = [];
   selectedStats;
   selectedCat;
+  geo = "geo:?q=0,0";
 
   constructor(private viewCtrl: ViewController,
     private modal: ModalController,
@@ -38,6 +39,10 @@ export class MatchDetailPage {
     private events: Events,
     private teamService: TeamService) {
     this.match = navParams.get('match');
+    if ('lat' in this.match.location && 'lng' in this.match.location)
+      this.geo = "geo:?q=" + this.match.location.lat + ',' + this.match.location.lng;
+    console.log(this.geo);
+    
     this.squadSettings = {};
     this.squadSettings.matchId = this.match.id;
 
