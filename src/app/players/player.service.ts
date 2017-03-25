@@ -223,8 +223,8 @@ export class PlayerService {
     return false;
   }
 
-  like(playerId, val) {
-    this.fm.likePlayer(playerId, val);
+  like(playerId, val, tag) {
+    this.fm.likePlayer(playerId, val, tag);
   }
 
   getPlayerSocial(playerId) {

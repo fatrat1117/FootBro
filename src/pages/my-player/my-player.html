@@ -209,13 +209,13 @@
               </div>
             </ion-col>
             <ion-col width-80 class="feed-back-bar fl">
-              <div [ngStyle]="{'width':PercentOfLikes.toString()+'%'}" class="redPrg fl">
+              <div [ngStyle]="{'width':getPercent('charm', true)+'%'}" class="redPrg fl">
                 <div class="redStrip"></div>
-                <span class="stripText">{{getNumber('like', true)}}</span>
+                <span class="stripText">{{socialStats['charm']}}</span>
               </div>
-              <div [ngStyle]="{'width':PercentOfUnLikes.toString()+'%'}" class="bluePrg fl">
+              <div [ngStyle]="{'width':getPercent('charm', false)+'%'}" class="bluePrg fl">
                 <div class="blueStrip"></div>
-                <span class="blueText">{{getNumber('like', false)}}</span>
+                <span class="blueText">{{socialStats['oppcharm']}}</span>
               </div>
             </ion-col>
             <ion-col width-10 class="feed-back-unlike">
@@ -230,7 +230,11 @@
     <ion-row class="light-grey">
       <div class="feedHead">
         <div class="wrapper">
-          <div class="rose"><span class="firstPic"><img src="assets/img/my-player/football.png"></span><span
+          <div class="rose">
+            <span class="firstPic">
+            <img src="assets/img/my-player/football.png">
+            </span>
+            <span
             class="picText">{{'skill' | trans}}</span>
           </div>
         </div>
@@ -247,22 +251,22 @@
 
             <ion-col width-10 class="feed-back-like">
               <div class="like fl">
-                <img src="assets/icon/good@2x.png">
+                <img src="assets/icon/good@2x.png" (click)="likeSkill()">
               </div>
             </ion-col>
             <ion-col width-80 class="feed-back-bar fl">
-              <div [ngStyle]="{'width':PercentOfLikes.toString()+'%'}" class="redPrg fl">
+              <div [ngStyle]="{'width':getPercent('skill', true)+'%'}" class="redPrg fl">
                 <div class="redStrip"></div>
-                <span class="stripText">{{NumOfLikes}}</span>
+                <span class="stripText">{{socialStats['skill']}}</span>
               </div>
-              <div [ngStyle]="{'width':PercentOfUnLikes.toString()+'%'}" class="bluePrg fl">
+              <div [ngStyle]="{'width':getPercent('skill', false)+'%'}" class="bluePrg fl">
                 <div class="blueStrip"></div>
-                <span class="blueText">{{NumOfUnLikes}}</span>
+                <span class="blueText">{{socialStats['oppskill']}}</span>
               </div>
             </ion-col>
             <ion-col width-10 class="feed-back-unlike">
               <div class="unLike fr">
-                <img src="assets/icon/bed@2x.png">
+                <img src="assets/icon/bed@2x.png" (click)="dislikeSkill()">
               </div>
             </ion-col>
           </ion-row>
@@ -289,22 +293,22 @@
 
             <ion-col width-10 class="feed-back-like">
               <div class="like fl">
-                <img src="assets/icon/good@2x.png">
+                <img src="assets/icon/good@2x.png" (click)="likeStyle()">
               </div>
             </ion-col>
             <ion-col width-80 class="feed-back-bar fl">
-              <div [ngStyle]="{'width':PercentOfLikes.toString()+'%'}" class="redPrg fl">
+              <div [ngStyle]="{'width':getPercent('style', true)+'%'}" class="redPrg fl">
                 <div class="redStrip"></div>
-                <span class="stripText">{{NumOfLikes}}</span>
+                <span class="stripText">{{socialStats['style']}}</span>
               </div>
-              <div [ngStyle]="{'width':PercentOfUnLikes.toString()+'%'}" class="bluePrg fl">
+              <div [ngStyle]="{'width':getPercent('style', false)+'%'}" class="bluePrg fl">
                 <div class="blueStrip"></div>
-                <span class="blueText">{{NumOfUnLikes}}</span>
+                <span class="blueText">{{socialStats['oppstyle']}}</span>
               </div>
             </ion-col>
             <ion-col width-10 class="feed-back-unlike">
               <div class="unLike fr">
-                <img src="assets/icon/bed@2x.png">
+                <img src="assets/icon/bed@2x.png" (click)="dislikeStyle()">
               </div>
             </ion-col>
           </ion-row>
