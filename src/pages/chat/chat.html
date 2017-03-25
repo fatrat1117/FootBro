@@ -19,7 +19,14 @@
   <ion-refresher color="lightGrey" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content refreshingSpinner="circles"></ion-refresher-content>
   </ion-refresher>
-  <ion-list no-lines>
+  <ion-list no-lines class="chat-container">
+
+    <!--<div *ngIf="!hasChatsMessage" class="no-message-wrapper">-->
+       <!--<div class="no-message">-->
+         <!--No message...-->
+       <!--</div>-->
+    <!--</div>-->
+    <no-record *ngIf="!hasChatsMessage" [message]="hasNoChatsMessage"></no-record>
     <div *ngFor="let chat of chats; let i = index;">
       <!-- time -->
       <ion-item *ngIf="shouldShowTime(i)" class="chat-room-time-item">

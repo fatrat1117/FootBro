@@ -1,12 +1,12 @@
-page-search-match{
-  .search-match-container{
+no-record{
+    width: 100%;
     height: 100%;
-  }
-  .no-match-wrapper{
+   position: relative;
+  .no-record-wrapper{
     width: 100%;
     height: 100%;
     position: relative;
-    .no-match{
+    .no-record{
       margin: auto;
       position: absolute;
       top: 0;
@@ -20,4 +20,5 @@ page-search-match{
       justify-content: center;
     }
   }
+
 }

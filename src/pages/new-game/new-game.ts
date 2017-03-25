@@ -6,6 +6,7 @@ import { Match } from '../../app/matches/match.model'
 import { MatchService } from '../../app/matches/match.service'
 import { PlayerService } from '../../app/players/player.service'
 import { UIHelper } from '../../providers/uihelper'
+import { MapsAPILoader } from 'angular2-google-maps/core';
 import * as moment from 'moment';
 declare var google: any;
 
@@ -28,7 +29,8 @@ export class NewGamePage {
         private matchService: MatchService,
         private helper: UIHelper,
         private playerService: PlayerService,
-        params: NavParams) {
+        params: NavParams,
+        private mapsAPILoader: MapsAPILoader) {
         this.tournamentId = params.get('tournamentId');
         this.id = params.get('id');
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
@@ -41,62 +43,24 @@ export class NewGamePage {
             this.matchDate = moment().format("YYYY-MM-DD");
             this.matchTime = "15:00";
         }
-        // for (var i = 0; i < 4; i++) {
-        //     this.players[i] = {
-        //         name: i,
-        //         items: [],
-        //         hidden: true,
-        //         showExpandableIcon: "ios-arrow-down"
-        //     };
-        //     for (var j = 0; j < 3; j++) {
-        //         // this.players[i].items.push(i + '-' + j);
-        //         this.players[i].items = [
-        //             {
-        //                 name: "进球",
-        //                 number: 5,
-        //                 icon: "assets/icon/b2.png",
-        //                 color: "light"
-        //             },
-        //             {
-        //                 name: "助攻",
-        //                 number: 1,
-        //                 icon: "assets/icon/b3.png",
-        //                 color: "light"
-        //             },
-        //             {
-        //                 name: "红牌",
-        //                 number: 2,
-        //                 icon: "assets/icon/b2.png",
-        //                 color: "light"
-        //             },
-        //             {
-        //                 name: "黄牌",
-        //                 number: 4,
-        //                 icon: "assets/icon/b2.png",
-        //                 color: "light"
-        //             },
-
-        //         ];
-        //     }
-        // }
     }
 
     ionViewDidLoad() {
         let input = document.getElementById('autocompleteInput');
-        //console.log(google);    
-        let autocomplete = new google.maps.places.Autocomplete(input);
-        //console.log(autocomplete);
-        //let autocomplete = new google.maps.places.Autocomplete(document.getElementById("autocompleteInput"), {});
-        autocomplete.addListener('place_changed', () => {
-            let place = autocomplete.getPlace();
-            //console.log(place);
-            this.match.location.name = place.name;
-            this.match.location.address = place.formatted_address;
-            if (place.geometry) {
-                this.match.location.lat = place.geometry.location.lat();
-                this.match.location.lng = place.geometry.location.lng();
-            }
-            console.log(this.match);
+        this.mapsAPILoader.load().then(() => {
+            //console.log(google);
+            let autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.addListener('place_changed', () => {
+                let place = autocomplete.getPlace();
+                //console.log(place);
+                this.match.location.name = place.name;
+                this.match.location.address = place.formatted_address;
+                if (place.geometry) {
+                    this.match.location.lat = place.geometry.location.lat();
+                    this.match.location.lng = place.geometry.location.lng();
+                }
+                console.log(this.match);
+            });
         });
     }
 

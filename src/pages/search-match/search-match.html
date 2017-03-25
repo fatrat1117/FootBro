@@ -9,7 +9,13 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-list>
+  <ion-list class="search-match-container">
+    <!--<div *ngIf="!hasMatches()" class="no-match-wrapper">-->
+      <!--<div class="no-match">-->
+        <!--No match record...-->
+      <!--</div>-->
+    <!--</div>-->
+    <no-record *ngIf="!hasMatches()" [message]="noRecordMessage"></no-record>
     <ion-item *ngFor="let match of matches">
       <sb-match-basic [matchObj]="match" [showDate]="showDate"></sb-match-basic>
     </ion-item>
