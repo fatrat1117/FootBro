@@ -32,7 +32,8 @@ export class FirebaseManager {
   cachedRegisteredTeamsMap = {};
   //squads
   cachedSquads: any = {};
-
+  //player social
+  cachedPlayersSocialMap = {};
   //cheerleader
   cachedPendingCheerleaders;
   cachedApprovedCheerleaders;
@@ -560,6 +561,34 @@ export class FirebaseManager {
       self.FireCustomEvent('playerpublicready', snapshot.key);
     });
   }
+
+  getPlayerSocial(playerId) {
+    return this.cachedPlayersSocialMap[playerId];
+  }
+
+  getPlayerSocialAsync(playerId) {
+    if (this.getPlayerSocial(playerId))
+      this.FireCustomEvent('playersocialready', playerId);
+    else {
+      this.af.database.object(this.getPlayerSocialRef(playerId)).subscribe(snapshot => {
+        this.cachedPlayersSocialMap[playerId] = snapshot;
+        this.FireCustomEvent('playersocialready', playerId);
+      });
+    }
+  }
+
+  getPlayerSocialRef(playerId) {
+    return `/player_social/${playerId}/`;
+  }
+
+  getPlayerSocialVotesRef(playerId) {
+    return this.getPlayerSocialRef(playerId) + 'votes/' + this.selfId() + '/';
+  }
+
+  likePlayer(playerId, val) {
+    this.af.database.object(this.getPlayerSocialVotesRef(playerId) + 'like/').set(val);
+  }
+
   //Fire document events 
   FireEvent(name) {
     //  console.log(name);
