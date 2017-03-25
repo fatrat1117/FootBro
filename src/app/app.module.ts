@@ -166,6 +166,7 @@ export const firebaseConfig = {
     RoundProgressModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA9L3ja5ZcViqTc5Tgz8tG6QvJGlYO-fa4',
       libraries: ["places"]
     })
   ],

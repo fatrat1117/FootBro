@@ -495,7 +495,7 @@ export class FirebaseManager {
       });
     }
   }
-
+  
   getPlayerAsync(id) {
     if (this.cachedPlayersMap[id]) {
       this.FireCustomEvent('playerready', id);
