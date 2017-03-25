@@ -45,28 +45,28 @@
         </div>
       <ion-col no-padding class="block height">
         <div class="flex-center txt height-inner">
-          <ion-col no-padding width-50 class="fl flex-end data">177</ion-col>
+          <ion-col no-padding width-50 class="fl flex-end data">{{player?.height}}</ion-col>
           <ion-col width-50 class="fl unit">
             <ion-row class="unit-first flex-start">CM</ion-row>
-            <ion-row class="unit-second flex-start">身高</ion-row>
+            <ion-row class="unit-second flex-start">{{'Height' | trans}}</ion-row>
           </ion-col>
         </div>
       </ion-col>
       <ion-col no-padding class="block weight">
         <div class="flex-center txt weight-inner">
-          <ion-col no-padding width-50 class="fl flex-end data">75</ion-col>
+          <ion-col no-padding width-50 class="fl flex-end data">{{player?.weight}}</ion-col>
           <ion-col width-50 class="fl unit">
             <ion-row class="unit-first flex-start">KG</ion-row>
-            <ion-row class="unit-second flex-start">体重</ion-row>
+            <ion-row class="unit-second flex-start">{{'Weight' | trans}}</ion-row>
           </ion-col>
         </div>
       </ion-col>
       <ion-col no-padding class="block foot">
         <div class="flex-center txt foot-inner">
-          <ion-col no-padding width-33 class="fl flex-end data">右</ion-col>
+          <ion-col no-padding width-33 class="fl flex-end data">{{player?.foot | trans}}</ion-col>
           <ion-col width-66 class="fl unit">
-            <ion-row class="unit-first flex-start invisible">CDM</ion-row>
-            <ion-row class="unit-second flex-start">惯用脚</ion-row>
+            <ion-row class="unit-first flex-start invisible"> </ion-row>
+            <ion-row class="unit-second flex-start">{{'Foot' | trans}}</ion-row>
           </ion-col>
         </div>
       </ion-col>
@@ -75,8 +75,7 @@
   </ion-card>
 
   <ion-grid>
-
-    <ion-row class="personal-data-title">
+    <!--<ion-row class="personal-data-title">
       <ion-col class="subtitle">职业数据</ion-col>
     </ion-row>
     <hr class="separate" no-margin>
@@ -130,43 +129,7 @@
     </div>
     </ion-col>
     </ion-row>
-<!--
-        <round-progress [current]=80
-                        [max]=100
-                        [color]="'#'+'00ff00'"
-                        [background]="'#'+'a0a0a0'"
-                        [radius]="125"
-                        [stroke]="15"
-                        [semicircle]="false"
-                        [rounded]="true"
-                        [clockwise]="false"
-                        [responsive]="true"
-        ></round-progress>
-        <div text-center class="win-rate-text">80%</div>
-        </div>
-      </ion-col>
-      <ion-col class="col-20 col-center">胜率</ion-col>
-      <ion-col class="col-35">
-        <div class="proBar proBar-right">
-        <round-progress [current]=80
-                        [max]=100
-                        [color]="'#'+'00ff00'"
-                        [background]="'#'+'a0a0a0'"
-                        [radius]="125"
-                        [stroke]="15"
-                        [semicircle]="false"
-                        [rounded]="true"
-                        [clockwise]="false"
-                        [responsive]="true"
-        ></round-progress>
 
-        <div text-center class="win-rate-text">80%</div>
--->
-<!--      </div>-->
-
-
-
-    <!---->
     <ion-row class="goal-rate">
       <ion-col width-50 class="flex-center">0.0</ion-col>
       <ion-col class="main-font absolute-center-txt">进球率</ion-col>
@@ -218,7 +181,7 @@
       <ion-col width-16.6 text-center class="personal-data">564</ion-col>
       <ion-col width-16.6 text-center class="personal-data">647</ion-col>
       <ion-col width-16.6 text-center class="personal-data">99.99</ion-col>
-    </ion-row>
+    </ion-row>-->
     <ion-row class="personal-data-title">
       <ion-col class="subtitle">我要投票</ion-col>
     </ion-row>
@@ -349,11 +312,10 @@
       </div>
     </ion-row>
     <ion-row class="personal-data-title">
-      <ion-col class="subtitle">个人简介</ion-col>
+      <ion-col class="subtitle">{{'Description' | trans}}</ion-col>
     </ion-row>
     <ion-row class="light-grey personal-data">
-      <div class="description"><p>奥·梅西（Lionel Messi），1987年6月24日出生于圣菲省罗 萨里奥市，阿根廷足球运动员。2000年，梅西加入巴塞罗那俱乐部 。2005年，阿根廷青年队夺取世青赛冠军，梅西赢得了金球奖和金
-        靴奖双项大奖。2007年4月18日，梅西在国王杯半决赛对赫塔菲时 复制了马拉多纳在世界杯上的连过五人进球。</p>
+      <div class="description"><p>{{player?.description}}</p>
       </div>
     </ion-row>
     <ion-row class="personal-data-title">
