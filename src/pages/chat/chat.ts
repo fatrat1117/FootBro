@@ -31,6 +31,7 @@ export class ChatPage {
   isUnread: boolean;
   newMessage: string;
   isRefreshing: boolean;
+  hasChatsMessage = true;
 
   constructor(private navCtrl: NavController, private navParams: NavParams, private chatService: ChatService, private loacal: Localization) {
   }
@@ -38,13 +39,14 @@ export class ChatPage {
   ionViewDidLoad() {
     this.isRefreshing = false;
     //this.content.resize();
-    
+
     this.isSystem = this.navParams.get('isSystem');
     this.isUnread = this.navParams.get('isUnread');
     this.user = this.navParams.get('user');
 
     this.chatService.getRecentChats(this.user.id, this.isUnread).subscribe(chats => {
       this.chats = chats;
+      this.hasChatsMessage = this.hasChats();
       this.scrollView();
     })
 
@@ -60,14 +62,14 @@ export class ChatPage {
     /*
     this.showSub = Keyboard.onKeyboardShow().subscribe(e => {
       console.log("showkeyboard");
-      //this.scrollToBottom(); 
+      //this.scrollToBottom();
       //this.content.resize();
       let keyboardHeight: number = e.keyboardHeight || (e.detail && e.detail.keyboardHeight);
       this.setElementPosition(keyboardHeight);
     })
     this.hideSub = Keyboard.onKeyboardHide().subscribe(e => {
       console.log("hidekeyboard");
-      //this.scrollToBottom(); 
+      //this.scrollToBottom();
       //this.content.resize();
       this.setElementPosition(0);
     })
@@ -128,5 +130,18 @@ export class ChatPage {
     }
 
     return newTime;
+  }
+
+  hasChats(){
+    // return this.chats.length != 0  ? true : false;
+      if (typeof this.chats != 'undefined' || this.chats != null){
+        if(this.chats.length == 0){
+          return false;
+        }else{
+          return true;
+        }
+      }else{
+        return false;
+      }
   }
 }
