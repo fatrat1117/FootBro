@@ -977,6 +977,7 @@ export class FirebaseManager {
     })
   }
 
+
   b64toBlob(b64Data, contentType, sliceSize) {
     contentType = contentType || '';
     sliceSize = sliceSize || 512;
@@ -1001,10 +1002,10 @@ export class FirebaseManager {
     return blob;
   }
 
-  /*
   selectImgGetData(width, height, success, error) {
     let self = this;
     let options = {
+      allowEdit: true,
       quality: 75,
       encodingType: Camera.EncodingType.JPEG,
       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
@@ -1019,10 +1020,35 @@ export class FirebaseManager {
       error(err);
     });
   }
+
+/*
+  updateImgGetUrl(dataUrl, imgId, width, height, success, error) {
+    let self = this;
+    let contentType = 'image/jpg';
+    let b64Data = dataUrl;
+
+    let blob = this.b64toBlob(b64Data, contentType, width);
+    let metadata = {
+      contentType: 'image/jpeg',
+    };
+
+    let storageRef = firebase.storage().ref();
+    let uploadTask = storageRef.child('images/' + imgId + '.jpg').put(blob, metadata);;
+    uploadTask.on('state_changed', function (snapshot) {
+      // Observe state change events such as progress, pause, and resume
+      // See below for more detail
+    }, error, function () {
+      // Handle successful uploads on complete
+      var downloadURL = uploadTask.snapshot.downloadURL;
+      console.log('upload image done', downloadURL);
+      success(downloadURL);
+    });
+  }
   */
 
   updateImgGetUrl(imageData, imgId, width, height, success, error) {
     let self = this;
+    /*
     let options = {
       quality: 75,
       allowEdit: true,
@@ -1032,6 +1058,7 @@ export class FirebaseManager {
       targetWidth: width,
       targetHeight: height
     };
+    */
 
     // imageData is either a base64 encoded string or a file URI
     // If it's base64:

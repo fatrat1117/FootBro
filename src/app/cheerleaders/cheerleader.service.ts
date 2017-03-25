@@ -73,21 +73,35 @@ export class CheerleaderService {
     });
   }
 
+/*
   submitInfo() {
-    this.cameraService.getMedia().then((path) => {
-      if (path) {
-        this.fm.submitCheerleaderInfo(path);
-        this.uiHelper.presentToast('ApplicationSubmited');
+    let width = 512;
+    let height = 128;
+
+    this.cameraService.getMedia(width, height).then((dataUrl) => {
+      if (dataUrl) {
+        //this.fm.submitCheerleaderInfo(path);
+        //this.uiHelper.presentToast('ApplicationSubmited');
+        
+        this.fm.updateImgGetUrl(dataUrl, this.playerService.selfId() + 'medium', width, height,
+        url => {
+          this.fm.submitCheerleaderInfo(url);
+          this.uiHelper.presentToast('ApplicationSubmited');
+        }, e => {
+          alert(e);
+        })
       }
     })
   }
+  */
 
-  /*
   submitInfo() {
     let width = 512;
     let height = 512;
 
     this.fm.selectImgGetData(width, height, imgData => {
+      console.log("imgData: " + imgData);
+      
       this.fm.updateImgGetUrl(imgData, this.playerService.selfId() + 'medium', width, height,
         url => {
           this.fm.submitCheerleaderInfo(url);
@@ -99,7 +113,6 @@ export class CheerleaderService {
       alert(err);
     });
   }
-  */
 
   findOrCreateCheerleader(id): Cheerleader {
     let cheerleader;

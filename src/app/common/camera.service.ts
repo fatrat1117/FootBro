@@ -8,28 +8,35 @@ export class CameraService {
   public options: any = {
         allowEdit: true,
         quality: 75,
-        sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
         mediaType: Camera.MediaType.ALLMEDIA,
-        destinationType: Camera.DestinationType.FILE_URI
+        destinationType: Camera.DestinationType.DATA_URL,
+        encodingType: Camera.EncodingType.JPEG,
   }
   
   constructor(public platform: Platform) {}
 
   // Return a promise to catch errors while loading image
-  getMedia(): Promise<any> {
+  getMedia(width, height): Promise<any> {
+    this.options.targetWidth = width;
+    this.options.targetHeight = height;
+
+    console.log(this.options);
+    
+
     // Get Image from ionic-native's built in camera plugin
     return Camera.getPicture(this.options)
       .then((fileUri) => {
         // Crop Image, on android this returns something like, '/storage/emulated/0/Android/...'
         // Only giving an android example as ionic-native camera has built in cropping ability
         if (this.platform.is('ios')) {
-          return fileUri
+          return fileUri;
         } else if (this.platform.is('android')) {
           // Modify fileUri format, may not always be necessary
-          fileUri = 'file://' + fileUri;
+          //fileUri = 'file://' + fileUri;
 
           /* Using cordova-plugin-crop starts here */
-          return Crop.crop(fileUri);
+          return fileUri;//Crop.crop(fileUri);
         }
       })
       .then((path) => {
