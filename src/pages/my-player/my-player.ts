@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
 import { TeamService } from '../../app/teams/team.service'
+import { Team } from '../../app/teams/team.model'
 import { ChatPage } from '../chat/chat'
 
 @Component({
@@ -13,12 +14,14 @@ export class MyPlayerPage {
   selfId: string;
   id;
   player = new Player();
+  team = new Team();
   //af
   NumOfLikes: number;
   NumOfUnLikes: number;
   PercentOfLikes: number;
   PercentOfUnLikes: number;
   onPlayerReady;
+  onTeamReady;
 
   constructor(private navCtrl: NavController, 
   private service: PlayerService, 
@@ -35,20 +38,30 @@ export class MyPlayerPage {
   }
 
   ionViewDidLoad() {
+    this.service.increasePopularity(this.id);
     this.selfId = this.service.selfId();
+    this.onTeamReady = e => {
+      let teamId = e['detail'];
+      if (this.player && 'teamId' in this.player && teamId === this.player.teamId)
+        this.team = this.teamService.getTeam(teamId);
+    }
+
     this.onPlayerReady = e => {
       let id = e['detail'];
-      if (this.id === id)
+      if (this.id === id) {
         this.player = this.service.getPlayer(id);
+        if (this.player.teamId)
+          this.teamService.getTeamAsync(this.player.teamId);
+      }
     };
 
+    document.addEventListener('serviceteamready', this.onTeamReady);
     document.addEventListener('serviceplayerready', this.onPlayerReady);
-
     this.service.getPlayerAsync(this.id);
-    this.service.increasePopularity(this.id);
   }
 
   ionViewWillUnload() {
+    document.removeEventListener('serviceteamready', this.onTeamReady);
     document.removeEventListener('serviceplayerready', this.onPlayerReady);
   }
 
