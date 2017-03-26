@@ -23,6 +23,8 @@ export class HomePage {
   items = ["item1","item2","item3"];
   selfPlayer: Player;
   selfTeam: Team;
+  showLogin: boolean;
+  showJoinTeam: boolean;
   onPlayerReady;
   onTeamReady;
 
@@ -33,15 +35,19 @@ export class HomePage {
     this.loadSlides(local.langCode, 1);
     this.selfPlayer = null;
     this.selfTeam = null;
+    this.showLogin = false;
+    this.showJoinTeam = false;
   }
 
   ionViewDidLoad() {
     document.addEventListener('userlogin', e => {
+      this.showLogin = false;
       this.playerService.getPlayerAsync(this.playerService.selfId());
       document.addEventListener('serviceplayerready', this.onPlayerReady);
     });
 
     document.addEventListener('userlogout', e => {
+      this.showLogin = true;
       this.selfPlayer = null;
       this.selfTeam = null
       document.removeEventListener('serviceteamready', this.onTeamReady);
@@ -51,8 +57,15 @@ export class HomePage {
     this.onPlayerReady = e => {
       if (this.playerService.selfId() && e['detail'] == this.playerService.selfId()) {
         this.selfPlayer = this.playerService.getPlayer(e['detail']);
-        this.teamService.getTeamAsync(this.selfPlayer.teamId);
-        document.addEventListener('serviceteamready', this.onTeamReady);
+        if (this.selfPlayer.teamId) {
+          this.teamService.getTeamAsync(this.selfPlayer.teamId);
+          document.addEventListener('serviceteamready', this.onTeamReady);
+          this.showJoinTeam = false;
+        }
+        else
+        {
+          this.showJoinTeam = true;
+        }
       }
     };
 

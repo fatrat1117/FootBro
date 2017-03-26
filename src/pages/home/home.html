@@ -37,7 +37,7 @@
     </ion-col>
   </ion-row>
 
-  <div *ngIf="!selfPlayer">
+  <div *ngIf="!selfPlayer && showLogin">
     <ion-row center margin>
       <button ion-button round icon-left color="gYellow" class="login-button">
         <ion-icon name="md-log-in"></ion-icon>
@@ -66,7 +66,7 @@
           <img class="img-block" [src]="selfTeam?.logo">
         </ion-thumbnail>
       </ion-col>
-      <ion-col width-50 class="home-block" *ngIf="!selfTeam" text-center>
+      <ion-col width-50 class="home-block" text-center *ngIf="!selfTeam && showJoinTeam">
         <button ion-button icon-left>
           <ion-icon name="md-add"></ion-icon>
           {{'JoinTeam' | trans}}
