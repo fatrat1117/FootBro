@@ -57,7 +57,6 @@ import { MatchService } from './matches/match.service';
 import { MessageService } from './messages/message.service';
 import { CheerleaderService} from './cheerleaders/cheerleader.service';
 import { RankService } from './rank/rank.service';
-import { CameraService } from './common/camera.service';
 
 // pipes
 import { TransPipe, Localization } from '../providers/localization';
@@ -79,6 +78,9 @@ import { NoRecordComponent } from './common/no.record.component';
 
 // directives
 import { KeyboardAttachDirective } from '../providers/keyboard-attach.directive';
+
+//native
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCrhL6g6rHs7-X09jw5Oq8I_g0fspD8bf8",
@@ -228,7 +230,7 @@ export const firebaseConfig = {
     MessageService,
     CheerleaderService,
     RankService,
-    CameraService],
+    LaunchNavigator],
 })
 export class AppModule {
 }

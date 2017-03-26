@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ViewController } from 'ionic-angular';
 import { TeamService } from '../../app/teams/team.service';
 import { Localization} from '../../providers/localization'
+import { FirebaseManager} from '../../providers/firebase-manager'
 
 @Component({
   selector: 'page-create-team',
@@ -14,10 +15,13 @@ export class CreateTeamPage {
   isDefault = false;
   onSuccess;
   onFail;
+  logoData: any;
+  logoUrl = 'assets/img/none.png';
 
   constructor(private viewCtrl: ViewController,
     private service: TeamService,
-    private loc : Localization) {
+    private loc : Localization,
+    private fm : FirebaseManager) {
     this.busy = false;
     this.location = 'SG';
     this.teamName = '';
@@ -62,7 +66,19 @@ export class CreateTeamPage {
     this.service.createTeam(teamObj, this.isDefault);
   }
 
-  changeLogo() {
-    alert("TODO: change logo");
+  changePhoto() {
+    let self = this;
+    self.busy = true;
+
+    let success = data => {
+      self.logoData = data;
+      self.busy = false;
+      self.logoUrl = "data:image/jpeg;base64," + data;
+    }
+    let error = err => {
+      alert(err);
+      self.busy = false;
+    }
+    this.fm.selectImgGetData(256, 256, success, error);
   }
 }
