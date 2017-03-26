@@ -140,7 +140,8 @@ export class MyPlayerPage {
       //console.log(val, oppVal, total);
       if (0 === total)
         return 50;
-      return flag ? (val * 100 / total) : (oppVal * 100 / total);
+      //comment: set percent range from 0% ~ 99% in order to to avoid 100% overflow issue.
+      return flag ? (val * 99 / total) : (oppVal * 99 / total);
     }
     return 50;
   }
