@@ -266,7 +266,8 @@ export class Localization {
             messagePageNoRecord: 'No message record... :(',
             unlockPoints: 'Unlock Points',
             joinDate: 'Join Date',
-            delete: 'Delete'
+            delete: 'Delete',
+            year: 'Year'
         },
 
         zh: {
@@ -514,7 +515,8 @@ export class Localization {
             messagePageNoRecord : '消息栏为空...',
             unlockPoints: '解锁积分',
             joinDate: '注册时间',
-            delete: '删除'
+            delete: '删除',
+            year: '年份'
         }
     }
 }
