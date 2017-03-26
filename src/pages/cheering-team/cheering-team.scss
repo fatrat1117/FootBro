@@ -46,8 +46,35 @@ page-cheering-team{
       width: 85%;
       margin: 0 auto;
     }
+
+    .baby-info-row{
+      padding: 5px;
+      .info-text{
+        margin-left: 5px;
+      }
+    }
+
     .baby-become-row{
-      width:97%;
+      .baby-top-button{
+        background: #222;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        margin: 0px auto;
+        .top-button{
+          margin: 0px;
+          box-shadow: none;
+          background: transparent;
+          opacity: 1;
+        }
+        p{
+          margin-bottom: 5px;
+        }
+      }
+
+      .baby-top-button:active{
+          background: #333;
+      }
     }
 
     .speaker{
@@ -55,28 +82,30 @@ page-cheering-team{
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      position: relative;
+      left: 5px;
       img{
         max-width:1.2rem;
       }
     }
 
-    .become-col{
-      background: rgba(249, 0, 32, 1);
-      border-radius: 0.3rem;
-        .become{
-        text-align: center;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        ion-icon{
-          font-size:1.2rem;
-        }
-        span{
-          font-size:1.2rem;
-        white-space: initial;
-        }
-      }
-    }
+    //.become-col{
+    //  background: rgba(249, 0, 32, 1);
+    //  border-radius: 0.3rem;
+    //    .become{
+    //    text-align: center;
+    //    white-space: nowrap;
+    //    overflow: hidden;
+    //    text-overflow: ellipsis;
+    //    ion-icon{
+    //      font-size:1.2rem;
+    //    }
+    //    span{
+    //      font-size:1.2rem;
+    //    white-space: initial;
+    //    }
+    //  }
+    //}
 
     .baby-row{
         .cheerleader-item{
@@ -156,8 +185,8 @@ page-cheering-team{
         }
       }
     }
-      
-    
+
+
 
   }
 
