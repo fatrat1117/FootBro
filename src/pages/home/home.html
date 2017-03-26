@@ -46,7 +46,7 @@
     </ion-row>
   </div>
 
-  <div *ngIf="selfPlayer">
+  <div *ngIf="selfPlayer && selfPlayer?.role != 'cheerleader'">
     <ion-row margin-left margin-right>
       <ion-col width-50 text-center>
         <h2 style="margin-bottom: 0px">{{ 'starcard' | trans }}</h2>
@@ -81,6 +81,10 @@
         {{ selfTeam?.name }}
       </ion-col>
     </ion-row>
+  </div>
+
+  <div *ngIf="selfPlayer && selfPlayer?.role == 'cheerleader'">
+    <no-record message="no-record"></no-record>
   </div>
 
   <!--ion-row class="home-menu">
