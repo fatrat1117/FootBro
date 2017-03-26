@@ -4,7 +4,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content no-bounce>
   <ion-row>
     <!--ion-slides autoplay="3000" loop="true">
       <ion-slide *ngFor="let slide of slides">
@@ -17,6 +17,7 @@
       </ion-slide>
     </ion-slides>
   </ion-row>
+
   <ion-row class="home-menu" no-padding>
     <ion-col class="menu-col" width-50 center (click)="enterCheeringTeam()">
       <div class="menu-block">
@@ -35,6 +36,52 @@
       </div>
     </ion-col>
   </ion-row>
+
+  <div *ngIf="!selfPlayer">
+    <ion-row center margin>
+      <button ion-button round icon-left color="gYellow" class="login-button">
+        <ion-icon name="md-log-in"></ion-icon>
+        {{'Login' | trans}}
+      </button>
+    </ion-row>
+  </div>
+
+  <div *ngIf="selfPlayer">
+    <ion-row margin-left margin-right>
+      <ion-col width-50 text-center>
+        <h2 style="margin-bottom: 0px">{{ 'starcard' | trans }}</h2>
+      </ion-col>
+      <ion-col width-50 text-center *ngIf="selfTeam">
+        <h2 style="margin-bottom: 0px">{{ 'Team' | trans }}</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row margin-left margin-right center>
+      <ion-col width-50 class="home-block">
+        <ion-thumbnail>
+          <img class="img-block" [src]="selfPlayer?.photo">
+        </ion-thumbnail>
+      </ion-col>
+      <ion-col width-50 class="home-block" *ngIf="selfTeam">
+        <ion-thumbnail>
+          <img class="img-block" [src]="selfTeam?.logo">
+        </ion-thumbnail>
+      </ion-col>
+      <ion-col width-50 class="home-block" *ngIf="!selfTeam" text-center>
+        <button ion-button icon-left>
+          <ion-icon name="md-add"></ion-icon>
+          {{'JoinTeam' | trans}}
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row margin-left margin-right>
+      <ion-col text-center width-50>
+        {{ selfPlayer?.name }}
+      </ion-col>
+      <ion-col text-center width-50 *ngIf="selfTeam">
+        {{ selfTeam?.name }}
+      </ion-col>
+    </ion-row>
+  </div>
 
   <!--ion-row class="home-menu">
     <ion-col (click)="enterCheeringTeam()" class="menu-col" width-25>
@@ -55,10 +102,7 @@
     </ion-col>
   </ion-row-->
 
-  <ion-list class="home-news">
-    <!--<button ion-item *ngFor="let item of items" (click)="itemSelected(item)">-->
-    <!--{{ item }}-->
-    <!--</button>-->
+  <!--ion-list class="home-news">
     <ion-row class="news-row" ion-item *ngFor="let item of items" (click)="selectItems(item)">
       <ion-thumbnail item-left>
         <img src="assets/img/home/news_pic.png">
@@ -81,5 +125,5 @@
         </ion-col>
       </ion-row>
     </ion-row>
-  </ion-list>
+  </ion-list-->
 </ion-content>
