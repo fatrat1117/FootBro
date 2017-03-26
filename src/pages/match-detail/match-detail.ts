@@ -31,6 +31,7 @@ export class MatchDetailPage {
   selectedStats;
   selectedCat;
   geo = "geo:?q=0,0";
+  currPageName = "match-detail";
 
   constructor(private viewCtrl: ViewController,
     private modal: ModalController,
@@ -42,7 +43,7 @@ export class MatchDetailPage {
     if ('lat' in this.match.location && 'lng' in this.match.location)
       this.geo = "geo:?q=" + this.match.location.lat + ',' + this.match.location.lng;
     console.log(this.geo);
-    
+
     this.squadSettings = {};
     this.squadSettings.matchId = this.match.id;
 
