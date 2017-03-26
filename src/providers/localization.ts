@@ -267,7 +267,10 @@ export class Localization {
             unlockPoints: 'Unlock Points',
             joinDate: 'Join Date',
             delete: 'Delete',
-            year: 'Year'
+            year: 'Year',
+            skip: 'Skip',
+            whatsNew: "What's New",
+            teamDesc: 'All team infomation could be found here.'
         },
 
         zh: {
@@ -516,7 +519,11 @@ export class Localization {
             unlockPoints: '解锁积分',
             joinDate: '注册时间',
             delete: '删除',
-            year: '年份'
+            year: '年份',
+            skip: '跳过',
+            whatsNew: "新特性",
+            teamDesc: '查看球队所有信息'
+
         }
     }
 }

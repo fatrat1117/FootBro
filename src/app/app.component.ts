@@ -43,6 +43,7 @@ export class MyApp {
       fm.initialize();
       osm.initialize(app.getRootNav().getActiveChildNav());
       // tutorial
+      //modalCtrl.create(TutorialPage).present();
       localforage.getItem('notFirstTime').then(val => {
         if (!val) {
           modalCtrl.create(TutorialPage).present();
