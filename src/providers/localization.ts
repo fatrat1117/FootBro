@@ -267,7 +267,8 @@ export class Localization {
             unlockPoints: 'Unlock Points',
             joinDate: 'Join Date',
             delete: 'Delete',
-            year: 'Year'
+            year: 'Year',
+            checkCheerLeaders:'Have a look',
         },
 
         zh: {
@@ -516,7 +517,8 @@ export class Localization {
             unlockPoints: '解锁积分',
             joinDate: '注册时间',
             delete: '删除',
-            year: '年份'
+            year: '年份',
+            checkCheerLeaders:'点击查看'
         }
     }
 }

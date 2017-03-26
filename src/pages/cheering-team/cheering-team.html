@@ -13,15 +13,38 @@
 </ion-header>
 <ion-content>
   <div class="cheering-team-type">
+
+    <ion-row class="baby-info-row">
+      <div class="speaker">
+      <span>
+        <img src="assets/img/cheering-team/speaker.png"/>
+        <span class="info-text">{{approvedCheerleaders?.length}} {{'Cheerleadersavailable' | trans}}</span>
+      </span>
+      </div>
+    </ion-row>
     <ion-row class="baby-become-row">
-      <ion-col width-75 no-margin>
-        <div class="speaker">
-          <span><img src="assets/img/cheering-team/speaker.png"/>{{approvedCheerleaders?.length}} {{'Cheerleadersavailable' | trans}}</span>
+      <ion-col width-50 no-margin>
+        <!--<div class="speaker">-->
+          <!---->
+          <!--<span><img src="assets/img/cheering-team/speaker.png"/>{{approvedCheerleaders?.length}} {{'Cheerleadersavailable' | trans}}</span>-->
+        <!--</div>-->
+        <div class="baby-top-button">
+          <button class="top-button"  ion-button icon-only small>
+             <ion-icon name="eye"></ion-icon>
+          </button>
+          <p no-margin text-center>{{ 'checkCheerLeaders'|trans }}</p>
         </div>
       </ion-col>
-      <ion-col *ngIf="!amICheerleader" class="become-col" width-25 no-margin>
-        <div class="become" (click)="becomeCheerleader()">
-          <ion-icon name="football" class="football-icon"><span>{{'BecomeCheerleader' | trans}}</span></ion-icon>
+      <ion-col *ngIf="!amICheerleader" width-50 no-margin>
+        <!--<div class="become" (click)="becomeCheerleader()">-->
+          <!--<ion-icon name="football" class="football-icon"><span>{{'BecomeCheerleader' | trans}}</span></ion-icon>-->
+        <!--</div>-->
+
+        <div class="baby-top-button" (click)="becomeCheerleader()">
+          <button class="top-button"  ion-button icon-only small>
+            <ion-icon name="football" class="football-icon"></ion-icon>
+          </button>
+          <p no-margin text-center>{{'BecomeCheerleader' | trans}}</p>
         </div>
       </ion-col>
     </ion-row>
