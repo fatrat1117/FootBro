@@ -80,6 +80,9 @@ import { NoRecordComponent } from './common/no.record.component';
 // directives
 import { KeyboardAttachDirective } from '../providers/keyboard-attach.directive';
 
+//native
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
+
 export const firebaseConfig = {
   apiKey: "AIzaSyCrhL6g6rHs7-X09jw5Oq8I_g0fspD8bf8",
   authDomain: "project-3416565325366537224.firebaseapp.com",
@@ -228,7 +231,8 @@ export const firebaseConfig = {
     MessageService,
     CheerleaderService,
     RankService,
-    CameraService],
+    CameraService,
+    LaunchNavigator],
 })
 export class AppModule {
 }
