@@ -1,14 +1,14 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{ 'whatsNew' | trans }}</ion-title>
-    <ion-buttons end>
+    <ion-buttons end *ngIf="!slider.isEnd()">
       <button ion-button color="primary" (click)="finishTutorial()">{{ 'skip' | trans }}</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-slides pager>
+  <ion-slides pager #slider>
     <ion-slide *ngFor="let slide of slides">
       <!--ion-toolbar>
         <ion-buttons end>

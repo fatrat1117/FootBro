@@ -43,7 +43,7 @@ export class TutorialPage {
       this.slides.push({
         title: this.local.getString(this.titles[i]),
         description: this.local.getString(this.descriptions[i]),
-        image: `assets/img/tutorial/${langCode}/${i}.png`
+        image: `assets/img/tutorial/${langCode}/${i}.jpg`
       });
     }
   }
