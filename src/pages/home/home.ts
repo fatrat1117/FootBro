@@ -18,11 +18,13 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, local: Localization,private elRef: ElementRef,public modalCtrl: ModalController  ) {
     this.slides = [];
-    this.loadSlides(local.langCode, 4);
+    //this.loadSlides(local.langCode, 4);
+    this.loadSlides(local.langCode, 1);
   }
 
   ionViewDidLoad() :any{
   }
+
   loadSlides(langCode: string, total: number) {
     for (let i = 0; i < total; ++i) {
       this.slides.push({
