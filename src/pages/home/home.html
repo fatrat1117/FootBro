@@ -1,17 +1,10 @@
 <ion-header>
   <ion-navbar>
-    <ion-title no-margin class="home-title"><img src="assets/img/home/title.png"/></ion-title>
+    <ion-title no-margin class="home-title"><img src="assets/img/home/title.png" /></ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <ion-row>
-    <ion-col>
-    </ion-col>
-    <ion-col>
-    </ion-col>
-  </ion-row>
-
   <ion-row>
     <!--ion-slides autoplay="3000" loop="true">
       <ion-slide *ngFor="let slide of slides">
@@ -20,32 +13,51 @@
     </ion-slides-->
     <ion-slides loop="false">
       <ion-slide *ngFor="let slide of slides">
-        <img [src]="slide.image"/>
+        <img [src]="slide.image" />
       </ion-slide>
     </ion-slides>
   </ion-row>
-  <ion-row class="home-menu">
+  <ion-row class="home-menu" no-padding>
+    <ion-col class="menu-col" width-50 center (click)="enterCheeringTeam()">
+      <div class="menu-block">
+        <button class="menu-button" disabled ion-button icon-only>
+          <ion-icon name="md-flower" color="gRed"></ion-icon>
+        </button>
+        <p no-margin text-center>{{'Cheerleaders' | trans}}</p>
+      </div>
+    </ion-col>
+    <ion-col class="menu-col" width-50 (click)="enterRankPage()">
+      <div class="menu-block">
+        <button class="menu-button" disabled ion-button icon-only>
+        <ion-icon name="md-podium" color="gBlue"></ion-icon>
+      </button>
+        <p no-margin text-center>{{ 'Ranks'|trans }}</p>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <!--ion-row class="home-menu">
     <ion-col (click)="enterCheeringTeam()" class="menu-col" width-25>
       <ion-row><img src="assets/icon/home/icon-1.png"/></ion-row>
       <ion-row><p no-margin>{{'Cheerleaders' | trans}}</p></ion-row>
     </ion-col>
-    <!--ion-col (click)="enterGameSchedule()" class="menu-col" width-25>
+    <ion-col (click)="enterGameSchedule()" class="menu-col" width-25>
       <ion-row><img src="assets/icon/home/icon-2.png"/></ion-row>
       <ion-row><p no-margin>万人赛</p></ion-row>
-    </ion-col-->
+    </ion-col>
     <ion-col class="menu-col" (click)="enterRankPage()" width-25>
       <ion-row><img src="assets/icon/home/icon-3.png"/></ion-row>
       <ion-row><p no-margin>{{ 'Ranks'|trans }}</p></ion-row>
     </ion-col>
-    <!--ion-col class="menu-col" (click)="testSquad()" width-25>
+    <ion-col class="menu-col" (click)="testSquad()" width-25>
       <ion-row><img src="assets/icon/home/icon-4.png"/></ion-row>
       <ion-row><p no-margin>合作赛事</p></ion-row>
-    </ion-col-->
-  </ion-row>
+    </ion-col>
+  </ion-row-->
 
   <ion-list class="home-news">
     <!--<button ion-item *ngFor="let item of items" (click)="itemSelected(item)">-->
-      <!--{{ item }}-->
+    <!--{{ item }}-->
     <!--</button>-->
     <ion-row class="news-row" ion-item *ngFor="let item of items" (click)="selectItems(item)">
       <ion-thumbnail item-left>
@@ -58,8 +70,15 @@
         <div class="news-subtitle">切尔西13连胜被终结; 皇马主场轻取塞维利亚</div>
       </ion-row>
       <ion-row class="news-operation">
-        <ion-col class="top-col" width-66><div class="top-border"><h5>置顶</h5></div></ion-col>
-        <ion-col class="comments-col" width-33><div class="comments-div"><h5>336评论</h5><img src="assets/img/home/comments.png"/></div></ion-col>
+        <ion-col class="top-col" width-66>
+          <div class="top-border">
+            <h5>置顶</h5>
+          </div>
+        </ion-col>
+        <ion-col class="comments-col" width-33>
+          <div class="comments-div">
+            <h5>336评论</h5><img src="assets/img/home/comments.png" /></div>
+        </ion-col>
       </ion-row>
     </ion-row>
   </ion-list>
