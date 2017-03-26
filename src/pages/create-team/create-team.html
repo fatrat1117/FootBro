@@ -16,10 +16,10 @@
 
 <ion-content no-padding>
   <ion-item-group>
-    <ion-item (click)="changeLogo()">
+    <ion-item (click)="changePhoto()">
         <h2>{{'Logo' | trans}}</h2>
         <ion-thumbnail item-right>
-        <img src="assets/img/none.png">
+        <img [src]="logoUrl">
       </ion-thumbnail>
     </ion-item>
 

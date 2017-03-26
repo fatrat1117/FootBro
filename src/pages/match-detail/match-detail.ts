@@ -8,6 +8,7 @@ import { TeamService } from '../../app/teams/team.service'
 import { UpdateGamePage } from '../../pages/update-game/update-game'
 import { NewGamePage } from '../../pages/new-game/new-game'
 import { EditGameRatingPage } from '../edit-game-rating/edit-game-rating';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 
 @Component({
   selector: 'page-match-detail',
@@ -38,11 +39,14 @@ export class MatchDetailPage {
     navParams: NavParams,
     private playerService: PlayerService,
     private events: Events,
-    private teamService: TeamService) {
+    private teamService: TeamService,
+    private launchNavigator: LaunchNavigator) {
     this.match = navParams.get('match');
+
     if ('lat' in this.match.location && 'lng' in this.match.location)
       this.geo = "geo:?q=" + this.match.location.lat + ',' + this.match.location.lng;
     console.log(this.geo);
+
 
     this.squadSettings = {};
     this.squadSettings.matchId = this.match.id;
@@ -340,5 +344,23 @@ export class MatchDetailPage {
   showStat(cat) {
     this.selectedCat = cat;
     this.selectedStats = this.allPlayersStats[cat];
+  }
+
+  navigateToField() {
+    //console.log(this.launchNavigator);
+
+    if ('lat' in this.match.location && 'lng' in this.match.location) {
+      //   this.geo = "geo:?q=" + this.match.location.lat + ',' + this.match.location.lng;
+      // console.log(this.geo);
+      let options: LaunchNavigatorOptions = {
+        app: this.launchNavigator.APP.GOOGLE_MAPS
+      };
+
+      this.launchNavigator.navigate([this.match.location.lat, this.match.location.lng], options)
+        .then(
+        success => console.log('Launched navigator'),
+        error => alert(error)
+        );
+    }
   }
 }
