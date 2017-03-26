@@ -1,0 +1,164 @@
+result-score{
+   //background: ;
+
+  .game-time {
+    opacity: 0.7;
+    margin: 0px;
+    background: #2c2d31;
+    font-size: 1.2rem;
+  }
+  .game-time.match-detail{
+    margin-top: 10px !important;
+    height: 30px !important;
+    border-radius: 15px !important;
+    background-color: #2e3138 !important;
+    text-align: center !important;
+    opacity: 1 !important;
+    border-color: transparent !important;
+    color: #E0E0E0 !important;
+  }
+
+  .game-time.my-team{
+    background: #2c2d31 !important;
+    border-right-width: 0 !important;
+    border-left-width: 0 !important;
+    border-radius: 0 !important;
+    width: 100% !important;
+    opacity: 0.7 !important;
+    border-bottom: 1px solid rgba(221, 221, 221, 0.35) !important;
+  }
+
+
+  //match-detail page 布局
+  .game-info.match-detail {
+    background-color: #40444d;
+    //width: 100%;
+    //战队信息
+    .team-logo {
+      width: 70px !important;
+      height: 70px !important;
+      border-radius: 5% !important;
+    }
+    //比分部分
+    .game-score {
+      font-size: 3.0rem;
+      color: white;
+      text-align: center;
+      //width: 20%;
+    }
+  }
+
+  //my-team page 布局
+  .game-info.my-team{
+    background: #27282d;
+    .team-logo{
+      width: 40px !important;;
+      height: 40px !important;;
+      margin-top: 15px !important;;
+    }
+
+    .game-score {
+      font-size: 2.5rem;
+      color: white;
+      text-align: center;
+      margin: 0px;
+      padding-top: 30px;
+    }
+  }
+
+  .team-name.match-detail{
+    background: #40444d;
+    ion-col{
+      font-size: 1.2rem;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  .team-name.my-team{
+    background: #27282d;
+    ion-col{
+      font-size: 1.4rem;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  //
+  //.game-display {
+  //  background: #27282d;
+  //  height: 100px;
+  //  margin-bottom: 0px;
+  //  //左边战队
+  //  .game-left {
+  //    width: 40%;
+  //    height: 100%;
+  //    float: left;
+  //    .game-left-setting {
+  //      float: right;
+  //      color: white;
+  //      text-align: center;
+  //      width: 100%;
+  //      //左边战队头像
+  //      .game-left-img {
+  //        width: 40px;
+  //        height: 40px;
+  //        margin-top: 15px;
+  //      }
+  //      .game-left-text {
+  //        font-size: 1.2rem;
+  //        text-align: center;
+  //        overflow: hidden;
+  //        text-overflow: ellipsis;
+  //        white-space: nowrap;
+  //      }
+  //    }
+  //  }
+  //  //中间比分
+  //  .game-center {
+  //    float: left;
+  //    width: 20%;
+  //    height: 100%;
+  //    margin: 0 auto;
+  //    background: #27282d;
+  //    .game-score {
+  //      text-align: center;
+  //      font-size: 2.5rem;
+  //      color: white;
+  //      background: #27282d;
+  //      margin: 0px;
+  //      padding-top: 30px;
+  //    }
+  //  }
+  //  //右边战队
+  //  .game-right {
+  //    display: block;
+  //    width: 40%;
+  //    height: 0%;
+  //    float: left;
+  //    //右边战队数据总设置
+  //    .game-right-setting {
+  //      float: left;
+  //      color: white;
+  //      width: 100%;
+  //      text-align: center;
+  //      //右边战队头像
+  //      .game-right-img {
+  //        width: 40px;
+  //        height: 40px;
+  //        margin-top: 15px;
+  //      }
+  //      .game-right-text {
+  //        font-size: 1.2rem;
+  //        text-align: center;
+  //        overflow: hidden;
+  //        text-overflow: ellipsis;
+  //        white-space: nowrap;
+  //      }
+  //    }
+  //  }
+  //}
+}

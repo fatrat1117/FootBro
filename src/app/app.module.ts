@@ -75,6 +75,7 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
 import { MatchDetailPage } from "../pages/match-detail/match-detail";
 import { GameRatingPage } from "../pages/game-rating/game-rating";
 import { NoRecordComponent } from './common/no.record.component';
+import { ResultScoreComponent} from './common/result.score.component';
 
 // directives
 import { KeyboardAttachDirective } from '../providers/keyboard-attach.directive';
@@ -157,6 +158,7 @@ export const firebaseConfig = {
     SbWechatShareButtonComponent,
     SbMatchBasicComponent,
     NoRecordComponent,
+    ResultScoreComponent,
     // directives
     KeyboardAttachDirective
   ],
