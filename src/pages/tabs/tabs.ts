@@ -98,6 +98,8 @@ export class TabsPage {
   }
 
   getTeamInfo(msg: string) {
+    if (!msg)
+      return;
     let start = msg.lastIndexOf('(');
     let end = msg.lastIndexOf(')');
     if (start == -1 || end == -1)
