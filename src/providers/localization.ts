@@ -269,6 +269,9 @@ export class Localization {
             delete: 'Delete',
             year: 'Year',
             checkCheerLeaders:'Have a look',
+            skip: 'Skip',
+            whatsNew: "What's New",
+            teamDesc: 'All team infomation could be found here.'
         },
 
         zh: {
@@ -518,7 +521,10 @@ export class Localization {
             joinDate: '注册时间',
             delete: '删除',
             year: '年份',
-            checkCheerLeaders:'点击查看'
+            checkCheerLeaders:'点击查看',
+            skip: '跳过',
+            whatsNew: "新特性",
+            teamDesc: '查看球队所有信息'
         }
     }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ViewController } from 'ionic-angular';
+import { Localization } from '../../providers/localization';
 
 import * as localforage from "localforage";
 
@@ -9,10 +10,11 @@ import * as localforage from "localforage";
   templateUrl: 'tutorial.html',
 })
 export class TutorialPage {
+  /*
   slides = [
     {
-      title: "Welcome to the Docs!",
-      description: "The <b>Ionic Component Documentation</b> showcases a number of useful components that are included out of the box with Ionic.",
+      title: "{{ 'Team' | trans }}",
+      description: "All infomation of your team could be found here.",
       image: "assets/img/tutorial/ica-slidebox-img-1.png",
     },
     {
@@ -26,8 +28,24 @@ export class TutorialPage {
       image: "assets/img/tutorial/ica-slidebox-img-3.png",
     }
   ];
+  */
+  slides: any[];
+  titles = ['Team'];
+  descriptions = ['teamDesc'];
 
-  constructor(private viewCtrl: ViewController) {
+  constructor(private viewCtrl: ViewController, private local: Localization) {
+    this.loadSlides(local.langCode, 1);
+  }
+
+  loadSlides(langCode: string, total: number) {
+    this.slides = [];
+    for (let i = 0; i < total; ++i) {
+      this.slides.push({
+        title: this.local.getString(this.titles[i]),
+        description: this.local.getString(this.descriptions[i]),
+        image: `assets/img/tutorial/${langCode}/${i}.png`
+      });
+    }
   }
 
   finishTutorial() {
