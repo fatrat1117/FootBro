@@ -25,26 +25,26 @@
       </ion-thumbnail>
       <h2>{{ team?.name }}</h2>
     </ion-item>
-    <ion-item *ngIf="!isCheerleader && !player?.teamId" (click) = "joinTeam()">
+    <!--ion-item *ngIf="!isCheerleader && !player?.teamId" (click) = "joinTeam()">
       <ion-icon name="md-people" item-left color="gBlue"></ion-icon>
       {{'JoinTeam' | trans}}
-    </ion-item>
+    </ion-item-->
 
     <!-- show pages -->
-    <ion-item-divider *ngIf="!isCheerleader"></ion-item-divider>
+    <!--ion-item-divider *ngIf="!isCheerleader"></ion-item-divider>
     <ion-item *ngIf="!isCheerleader" (click)="goPlayerPage()" detail-push>
       <ion-icon name="md-aperture" item-left color="gGreen"></ion-icon>
       {{'starcard' | trans}}
-    </ion-item>
+    </ion-item-->
     
     <!--<ion-item tappable *ngIf="!player?.teamId" (click) = "createTeam()">
       <ion-icon name="md-people" item-left color="gBlue"></ion-icon>
       {{'CreateTeam' | trans}}
     </ion-item>-->
-    <ion-item *ngIf="!isCheerleader && (player)?.teamId" detail-push (click)="goTeamPage()">
+    <!--ion-item *ngIf="!isCheerleader && (player)?.teamId" detail-push (click)="goTeamPage()">
       <ion-icon name="md-people" item-left color="gBlue"></ion-icon>
       {{'MyTeam' | trans}}
-    </ion-item>
+    </ion-item-->
 
     <ion-item-divider></ion-item-divider>
     <ion-item (click)="goFeedbackPage()"  detail-push>

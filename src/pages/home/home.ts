@@ -7,6 +7,9 @@ import {GameSchedulePage} from "../game-schedule/game-schedule";
 import {ModalContentPage} from "../home/place-selection";
 import {GameRatingPage} from "../game-rating/game-rating";
 import { MatchesPage } from '../matches/matches';
+import { MyPlayerPage } from "../my-player/my-player";
+import { MyTeamPage } from "../my-team/my-team";
+import { SearchTeamPage } from '../search-team/search-team'
 
 import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
@@ -118,6 +121,28 @@ export class HomePage {
 
   testSquad() {
     this.navCtrl.push(MatchesPage);
+  }
+
+  goPlayerPage() {
+    this.navCtrl.push(MyPlayerPage, { id: this.selfPlayer.id });
+  }
+
+  goTeamPage() {
+    this.navCtrl.push(MyTeamPage, { id: this.selfPlayer.teamId });
+  }
+
+  joinTeam() {
+    let searchTeamModal = this.modalCtrl.create(SearchTeamPage);
+    searchTeamModal.onDidDismiss(data => {
+      if (data) {
+        this.teamService.joinTeam(data.team.id, true);
+      }
+    });
+    searchTeamModal.present();
+  }
+
+  login() {
+    this.playerService.checkLogin();
   }
 }
 
