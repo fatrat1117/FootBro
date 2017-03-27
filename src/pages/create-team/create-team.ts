@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ViewController } from 'ionic-angular';
 import { TeamService } from '../../app/teams/team.service';
-import { Localization} from '../../providers/localization'
-import { FirebaseManager} from '../../providers/firebase-manager'
+import { Localization } from '../../providers/localization'
+import { FirebaseManager } from '../../providers/firebase-manager'
 
 @Component({
   selector: 'page-create-team',
@@ -17,11 +17,12 @@ export class CreateTeamPage {
   onFail;
   logoData: any;
   logoUrl = 'assets/img/none.png';
+  imgSize = 256;
 
   constructor(private viewCtrl: ViewController,
     private service: TeamService,
-    private loc : Localization,
-    private fm : FirebaseManager) {
+    private loc: Localization,
+    private fm: FirebaseManager) {
     this.busy = false;
     this.location = 'SG';
     this.teamName = '';
@@ -29,14 +30,30 @@ export class CreateTeamPage {
 
   ionViewDidLoad() {
     this.onSuccess = e => {
-      this.dismiss();
+      let self = this;
+
+      let teamId = e['detail'];
+      if (this.logoData) {
+        let success = imgUrl => {
+          self.service.updateTeamLogo(teamId, imgUrl);
+          self.dismiss();
+        }
+
+        let error = err => {
+          alert(err);
+          self.busy = false;
+        }
+        self.fm.updateImgGetUrl(this.logoData, teamId, this.imgSize, this.imgSize, success, error);
+      } else 
+        self.dismiss();
     };
+
     this.onFail = e => {
       this.busy = false;
       alert(this.loc.getString(e['detail']));
     };
 
-    
+
     document.addEventListener('createteamsucceeded', this.onSuccess);
     document.addEventListener('createteamfailed', this.onFail);
   }
@@ -54,15 +71,9 @@ export class CreateTeamPage {
     this.dismiss();
   }
 
-  doCreateTeam() {
-    let teamObj = {
-      name: this.teamName.trim(),
-      location: this.location,
-      isDefault: true
-    };
-
-    this.busy = true;
-    let self = this;
+  doCreateTeam(teamObj) {
+    //this.busy = true;
+    //let self = this;
     this.service.createTeam(teamObj, this.isDefault);
   }
 
@@ -76,9 +87,31 @@ export class CreateTeamPage {
       self.logoUrl = "data:image/jpeg;base64," + data;
     }
     let error = err => {
-      alert(err);
+      console.log(err);
       self.busy = false;
     }
-    this.fm.selectImgGetData(256, 256, success, error);
+    this.fm.selectImgGetData(this.imgSize, this.imgSize, success, error);
+  }
+
+  save() {
+    let self = this;
+    this.busy = true;
+    let teamObj: any = {
+      name: this.teamName.trim(),
+      location: this.location,
+      logo: this.logoUrl
+    };
+
+    // if (this.logoData) {
+    //     let success = imgUrl => {
+    //         teamObj.logo = imgUrl;
+    //         self.doCreateTeam(teamObj);
+    //     }
+
+    //     let error = err => alert(err);
+    //     this.fm.updateImgGetUrl(this.logoData, this.imgSize, this.imgSize, this., success, error);
+    // } else {
+    self.doCreateTeam(teamObj);
+    //}
   }
 }

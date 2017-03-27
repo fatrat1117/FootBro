@@ -259,4 +259,8 @@ export class TeamService {
   ratePlayers(teamId, matchId, ratings) {
     this.fm.ratePlayers(teamId, matchId, ratings);
   }
+
+  updateTeamLogo(id, logo) {
+    this.fm.updateTeamLogo(id, logo);
+  }
 }

@@ -406,6 +406,10 @@ export class FirebaseManager {
     this.getAfTeamPublicName(id).set(name);
   }
 
+  updateTeamLogo(id: string, logo: string) {
+    this.af.database.object(`teams/${id}/basic-info/logo`).set(logo);
+  }
+
   promoteNewCaptain(teamId: string, playerId: string) {
     this.af.database.object(`teams/${teamId}/basic-info/captain`).set(playerId);
   }
@@ -1021,44 +1025,8 @@ export class FirebaseManager {
     });
   }
 
-/*
-  updateImgGetUrl(dataUrl, imgId, width, height, success, error) {
-    let self = this;
-    let contentType = 'image/jpg';
-    let b64Data = dataUrl;
-
-    let blob = this.b64toBlob(b64Data, contentType, width);
-    let metadata = {
-      contentType: 'image/jpeg',
-    };
-
-    let storageRef = firebase.storage().ref();
-    let uploadTask = storageRef.child('images/' + imgId + '.jpg').put(blob, metadata);;
-    uploadTask.on('state_changed', function (snapshot) {
-      // Observe state change events such as progress, pause, and resume
-      // See below for more detail
-    }, error, function () {
-      // Handle successful uploads on complete
-      var downloadURL = uploadTask.snapshot.downloadURL;
-      console.log('upload image done', downloadURL);
-      success(downloadURL);
-    });
-  }
-  */
-
   updateImgGetUrl(imageData, imgId, width, height, success, error) {
     let self = this;
-    /*
-    let options = {
-      quality: 75,
-      allowEdit: true,
-      encodingType: Camera.EncodingType.JPEG,
-      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: Camera.DestinationType.DATA_URL,
-      targetWidth: width,
-      targetHeight: height
-    };
-    */
 
     // imageData is either a base64 encoded string or a file URI
     // If it's base64:
