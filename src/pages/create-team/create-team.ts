@@ -98,8 +98,7 @@ export class CreateTeamPage {
     this.busy = true;
     let teamObj: any = {
       name: this.teamName.trim(),
-      location: this.location,
-      logo: this.logoUrl
+      location: this.location
     };
 
     // if (this.logoData) {

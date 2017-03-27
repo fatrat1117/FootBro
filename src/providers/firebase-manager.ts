@@ -408,6 +408,7 @@ export class FirebaseManager {
   }
 
   updateTeamLogo(id: string, logo: string) {
+    console.log('updateTeamLogo', id, logo);
     this.af.database.object(`teams/${id}/basic-info/logo`).set(logo);
   }
 
