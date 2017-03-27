@@ -30,8 +30,8 @@ export class CheeringTeamPage {
     private modalCtrl: ModalController,
     private playerService: PlayerService,
     private cheerleaderService: CheerleaderService) {
-    this.afPendingSelf = this.cheerleaderService.afPendingCheerleaderSelf();
-    //this.afPendingSelf.subscribe(s =>{console.log(s);})
+      if (this.playerService.isAuthenticated())
+        this.afPendingSelf = this.cheerleaderService.afPendingCheerleaderSelf();
   }
 
   ionViewDidLoad() {

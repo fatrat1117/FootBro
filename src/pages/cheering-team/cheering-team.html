@@ -75,7 +75,7 @@
     </ion-row>
 
     <div class="baby-row">
-      <div *ngIf='(afPendingSelf | async)?.$exists()' class="baby-self" width-50 no-margin>
+      <div *ngIf='afPendingSelf && (afPendingSelf | async)?.$exists()' class="baby-self" width-50 no-margin>
         <ion-row class="self-row">
           <div class="baby-img-frame">
             <img class="img" [src]="(afPendingSelf | async)?.photo">
