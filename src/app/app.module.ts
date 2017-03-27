@@ -82,6 +82,7 @@ import { KeyboardAttachDirective } from '../providers/keyboard-attach.directive'
 
 //native
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
+import { Camera } from '@ionic-native/camera';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCrhL6g6rHs7-X09jw5Oq8I_g0fspD8bf8",
@@ -232,6 +233,7 @@ export const firebaseConfig = {
     MessageService,
     CheerleaderService,
     RankService,
+    Camera,
     LaunchNavigator],
 })
 export class AppModule {
