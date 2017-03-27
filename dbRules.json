@@ -1,8 +1,65 @@
 {
     "rules": {
-        ".read": true,
-        ".write": true,
+      	"admins":{
+          ".read":true,
+          ".write":false
+        },
+        // Currently Does not know the chats logic, so leave it as default
+        "chats": {
+            ".read": "auth !== null",
+            ".write": "auth !== null"
+        },
+        "cheerleaders": {
+            "approved": {
+                ".read": true,
+                ".write": "root.child('admins').hasChild(auth.uid)"
+            },
+            "pending": {
+                ".read": "root.child('admins').hasChild(auth.uid) || data.hasChild(auth.uid)",
+                ".write": "auth !== null"                
+            }
+        },
+        "matches": {
+          ".read": true,
+            "dates": {                
+                ".write": "root.child('admins').hasChild(auth.uid)"
+            },
+            "list": {                
+                // Only admin or team founder can write to this location
+                "$matchid": {
+                    ".write": "root.child('admins').hasChild(auth.uid) || auth.uid===root.child('teams').child(data.child('homeId').val()).child('basic-info').child('captain').val()"
+                },
+                ".indexOn": [
+                    "date",
+                    "tournamentId"
+                ]
+            }
+        },
+        "misc": {
+            "feedbacks": {
+                "$fid": {
+                    ".read": "root.child('admins').hasChild(auth.uid)",
+                    ".write": "!data.exists() && newData.exists()"
+                }
+            }
+        },
+        "orders": {
+            "$orderid": {
+                ".read": "root.child('admins').hasChild(auth.uid) || auth.uid===data.child('from').val()||auth.uid===data.child('to').val()",
+                ".write": "root.child('admins').hasChild(auth.uid) || auth.uid===data.child('from').val()"
+            }
+        },
+        "player_social": {
+            ".read": true,
+            ".write": "auth !== null"
+        },
+        "players": {
+            ".read": true,
+            ".write": "auth !== null"
+        },
         "public": {
+            ".read": true,
+            ".write": true,
             "players": {
                 ".indexOn": [
                     "popularity"
@@ -16,22 +73,46 @@
                 ]
             }
         },
-        "matches": {
-            "list": {
-                ".indexOn": [
-                    "date",
-                    "tournamentId"
-                ]
-            }
+        "team_squads": {
+            ".read": true,
+            ".write": "auth !== null"
         },
         "teams": {
-            "$team_id": {
+          ".read": true,
+           ".write": "auth !== null",
+            "$teamid": {
+                "basic-info": {                    
+                    ".write": "root.child('admins').hasChild(auth.uid) || auth.uid===data.child('captain').val() || !data.exists()&&newData.exists()&&root.child('players').hasChild(auth.uid)"
+                },
+                "chatroom": {
+                    ".read": "root.child('admins').hasChild(auth.uid) || data.parent().child('players').hasChild(auth.uid)",
+                    ".write": "root.child('admins').hasChild(auth.uid) || data.parent().child('players').hasChild(auth.uid)"
+                },
+                "detail-info": {
+                    ".read": true,
+                    ".write": "root.child('admins').hasChild(auth.uid) || auth.uid===root.child('teams').child(data.parent().val()).child('basic-info').child('captain').val()"
+                },
                 "matches": {
-                    ".indexOn": [
-                        "time"
-                    ]
+                    ".read": true,
+                    ".write": "root.child('admins').hasChild(auth.uid) || auth.uid===root.child('teams').child(data.parent().val()).child('basic-info').child('captain').val()"
+                },
+                "players": {
+                    ".read": true,
+                    ".write": "root.child('admins').hasChild(auth.uid) || auth.uid===root.child('teams').child(data.parent().val()).child('basic-info').child('captain').val()"
                 }
             }
+        },
+        "teams_matches": {
+            ".read": true,
+            ".write": "root.child('admins').hasChild(auth.uid)"
+        },
+        "teams_stats": {
+            ".read": true,
+            ".write": "root.child('admins').hasChild(auth.uid)"
+        },
+        "tournaments": {
+            ".read": true,
+            ".write": "root.child('admins').hasChild(auth.uid)"
         }
     }
 }
