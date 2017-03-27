@@ -4,7 +4,7 @@ import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'a
 import { LoginPage } from '../pages/login/login';
 import { NavController, ModalController, Platform } from 'ionic-angular';
 import { Subject } from 'rxjs/Subject';
-import { Camera } from 'ionic-native';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import * as firebase from 'firebase';
 
 @Injectable()
@@ -45,7 +45,8 @@ export class FirebaseManager {
 
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,
-    private platform: Platform) {
+    private platform: Platform,
+    private camera: Camera) {
     document.addEventListener('playernotregistered', e => {
       let id = e['detail'];
       if (this.auth && id === this.auth.uid) {
@@ -1008,17 +1009,17 @@ export class FirebaseManager {
 
   selectImgGetData(width, height, success, error) {
     let self = this;
-    let options = {
+    const options: CameraOptions = {
       allowEdit: true,
       quality: 75,
-      encodingType: Camera.EncodingType.JPEG,
-      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: Camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camera.DestinationType.DATA_URL,
       targetWidth: width,
       targetHeight: height
     };
 
-    Camera.getPicture(options).then(imageData => {
+    this.camera.getPicture(options).then(imageData => {
       success(imageData);
     }, (err) => {
       error(err);
