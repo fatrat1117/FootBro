@@ -83,8 +83,24 @@
     </ion-row>
   </div>
 
-  <div *ngIf="selfPlayer && selfPlayer?.role == 'cheerleader'" class="roleIsCheerLeaderPanel">
-    <no-record message="no-record"></no-record>
+  <div *ngIf="selfPlayer && selfPlayer?.role == 'cheerleader'">
+    <ion-row text-center margin-left margin-right>
+      <ion-col width-100 text-center>
+        <h2 style="margin-bottom: 0px">{{ 'Cheerleader' | trans }}</h2>
+      </ion-col>
+    </ion-row>
+    <ion-row center margin-left margin-right>
+      <ion-col width-100  class="home-cheerleader-block">
+        <ion-thumbnail>
+          <img class="img-block" [src]="selfPlayer?.photoMedium">
+        </ion-thumbnail>
+      </ion-col>
+    </ion-row>
+    <ion-row text-center margin-left margin-right>
+      <ion-col width-100 text-center>
+        {{ selfPlayer?.name }}
+      </ion-col>
+    </ion-row>
   </div>
 
   <!--ion-row class="home-menu">

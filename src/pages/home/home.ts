@@ -44,9 +44,9 @@ export class HomePage {
 
   ionViewDidLoad() {
     document.addEventListener('userlogin', e => {
+      document.addEventListener('serviceplayerready', this.onPlayerReady);
       this.showLogin = false;
       this.playerService.getPlayerAsync(this.playerService.selfId());
-      document.addEventListener('serviceplayerready', this.onPlayerReady);
     });
 
     document.addEventListener('userlogout', e => {
@@ -60,9 +60,11 @@ export class HomePage {
     this.onPlayerReady = e => {
       if (this.playerService.selfId() && e['detail'] == this.playerService.selfId()) {
         this.selfPlayer = this.playerService.getPlayer(e['detail']);
+        console.log(this.selfPlayer);
+        
         if (this.selfPlayer.teamId) {
-          this.teamService.getTeamAsync(this.selfPlayer.teamId);
           document.addEventListener('serviceteamready', this.onTeamReady);
+          this.teamService.getTeamAsync(this.selfPlayer.teamId);
           this.showJoinTeam = false;
         }
         else
