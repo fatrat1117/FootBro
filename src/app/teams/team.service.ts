@@ -25,6 +25,8 @@ export class TeamService {
         teamData.captain = team['basic-info'].captain;
         teamData.players = team.players;
         teamData.points = team.points;
+        if (!teamData.points)
+          teamData.points = 0;
         if (team.players)
           teamData.totalPlayers = Object.keys(team.players).length;
         else

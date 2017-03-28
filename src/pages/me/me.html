@@ -18,12 +18,14 @@
         <img [src]="player?.photo">
       </ion-thumbnail>
       <h2>{{ player?.name }}</h2>
+      <p item-right>{{ player?.points }} <span>{{ 'points' | trans }}</span></p>
     </ion-item>
     <ion-item *ngIf="!isCheerleader && (player)?.teamId" (click)="goSwitchTeamPage()" detail-push>
       <ion-thumbnail item-left>
         <img [src]="(team)?.logo">
       </ion-thumbnail>
       <h2>{{ team?.name }}</h2>
+      <p item-right>{{ team?.points }} <span>{{ 'points' | trans }}</span></p>
     </ion-item>
     <!--ion-item *ngIf="!isCheerleader && !player?.teamId" (click) = "joinTeam()">
       <ion-icon name="md-people" item-left color="gBlue"></ion-icon>
