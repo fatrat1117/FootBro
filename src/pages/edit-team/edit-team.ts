@@ -1,20 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, AlertController, ToastController, NavParams } from 'ionic-angular';
-
 import { EditTeamNamePage } from './edit-team-name'
 import { SearchPlayerPage } from '../search-player/search-player';
-/*
-import { EditPlayerHeightPage } from './edit-player-height'
-import { EditPlayerWeightPage } from './edit-player-weight'
-import { EditPlayerPositionPage } from './edit-player-position'
-import { EditPlayerFootPage } from './edit-player-foot'
-import { EditPlayerDescriptionPage } from './edit-player-description'
-*/
-
 import { Team } from '../../app/teams/team.model'
 import { TeamService } from '../../app/teams/team.service'
 import { PlayerService } from '../../app/players/player.service'
-
+import { FirebaseManager } from '../../providers/firebase-manager'
 
 @Component({
   selector: 'page-edit-team',
@@ -24,10 +15,14 @@ export class EditTeamPage {
   teamId: string;
   team: Team;
   onTeamReady;
+  logoUrl = 'assets/img/none.png';
+  imgSize = 256;
+  busy = false;
 
   constructor(private navCtrl: NavController, private modalCtrl: ModalController, private alertCtrl: AlertController, 
     private toastCtrl: ToastController, private navParams: NavParams,
-    private playerService: PlayerService, private teamService: TeamService, ) {
+    private playerService: PlayerService, private teamService: TeamService, 
+    private fm : FirebaseManager) {
   }
 
   ionViewDidLoad() {
@@ -45,6 +40,7 @@ export class EditTeamPage {
       let teamId = e['detail'];
       if (teamId === this.teamId) {
         this.team = this.teamService.getTeam(teamId);
+        this.logoUrl = this.team.logo;
       }
     };
 
@@ -52,7 +48,20 @@ export class EditTeamPage {
   }
 
   changeLogo() {
+    let self = this;
+    self.busy = true;
 
+    let success = logoUrl => {
+      self.busy = false;
+      this.teamService.updateTeamLogo(this.teamId, logoUrl);
+    }
+
+    let error = err => {
+      console.log(err);
+      self.busy = false;
+    }
+    
+    this.fm.selectImgUploadGetUrl(this.teamId, this.imgSize, this.imgSize, success, error);
   }
 
   editName() {
@@ -98,50 +107,6 @@ export class EditTeamPage {
 
     modal.present();
   }
-
-  /*
-    editHeight() {
-      this.modalCtrl.create(EditPlayerHeightPage, {
-        height: this.player.height
-      }).present();
-    }
-  
-    editWeight() {
-      this.modalCtrl.create(EditPlayerWeightPage, {
-        weight: this.player.weight
-      }).present();
-    }
-  
-    editPosition() {
-     this.modalCtrl.create(EditPlayerPositionPage, {
-       position: this.player.position
-     }).present();
-    }
-  
-    editFoot() {
-      this.modalCtrl.create(EditPlayerFootPage, {
-        foot: this.player.foot
-      }).present();
-    }
-  
-    editDescription() {
-      this.modalCtrl.create(EditPlayerDescriptionPage, {
-        description: this.player.description
-      }).present();
-    }
-  
-    setDefaultTeam(id: string, slidingItem) {
-      slidingItem.close();
-      this.playerService.setDefaultTeam(id);
-      this.updatePlayerTeams();
-    }
-  
-    quitTeam(id: string, slidingItem) {
-      slidingItem.close();
-      this.playerService.quitTeam(id);
-      this.teamService.getPlayerTeamsAsync(this.playerService.selfId());
-    }
-    */
 }
 
 

@@ -8,7 +8,7 @@
     <ion-item (click)="changeLogo()">
       <h2>{{'Logo' | trans}}</h2>
       <ion-thumbnail item-right>
-        <img [src]="team?.logo">
+        <img [src]="logoUrl">
       </ion-thumbnail>
     </ion-item>
     <ion-item detail-push (click)="editName()">
@@ -22,42 +22,4 @@
     </ion-item>
 
   </ion-item-group>
-  
-  <!-->
-  <ion-list *ngIf="team">
-    <ion-item-divider></ion-item-divider>
-    <ion-item-sliding #slidingItem>
-      <ion-item>
-        <ion-thumbnail item-left>
-          <img [src]="(team)?.logo">
-        </ion-thumbnail>
-        <h2>{{ team?.name }}</h2>
-      </ion-item>
-      <ion-item-options side="right">
-        <button ion-button color="primary" text-capitalize (click)="setDefaultTeam(i, slidingItem)">
-             Set Default
-           </button>
-        <button ion-button color="danger" text-capitalize (click)="quitTeam(i)">
-             Quit
-           </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
-  <ion-item-sliding *ngFor="let t of teams; let i = index;" #slidingItem>
-    <ion-item>
-      <ion-thumbnail item-left>
-        <img [src]="(t | teamBasicPipe | async)?.logo">
-      </ion-thumbnail>
-      <h2 ion-text [color]="(playerBasic)?.teamId == t ? 'primary' : 'none'">{{ (t | teamBasicPipe | async)?.name }}</h2>
-    </ion-item>
-    <ion-item-options side="right">
-      <button *ngIf="(playerBasic)?.teamId != t" ion-button color="primary" text-capitalize (click)="setDefaultTeam(i, slidingItem)">
-          Set Default
-        </button>
-      <button ion-button color="danger" text-capitalize (click)="quitTeam(i)">
-          Quit
-        </button>
-    </ion-item-options>
-  </ion-item-sliding>
-  <-->
 </ion-content>

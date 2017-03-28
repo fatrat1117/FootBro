@@ -1008,6 +1008,16 @@ export class FirebaseManager {
     return blob;
   }
 
+  selectImgUploadGetUrl(imgId, width, height, success, error) {
+    let getImgSuccess = data => {
+      this.updateImgGetUrl(data, imgId, width, height, success, error);
+    }
+
+    let getImgFail = err => {};
+
+    this.selectImgGetData(width, height, getImgSuccess, getImgFail);
+  }
+
   selectImgGetData(width, height, success, error) {
     let self = this;
     const options: CameraOptions = {
