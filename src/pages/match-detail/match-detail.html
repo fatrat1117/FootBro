@@ -103,12 +103,14 @@
   <div class="right-scrollview matches-match-info-col" *ngIf='selectedStats'>
     <ion-grid>
       <ion-row>
-        <ion-col>{{'Player' | trans}}</ion-col>
-        <ion-col>{{'Team' | trans}}</ion-col>
-        <ion-col>{{'Total' | trans}}</ion-col>
+        <ion-col width-10>{{'Rank' | trans}}</ion-col>
+        <ion-col width-50>{{'Player' | trans}}</ion-col>
+        <ion-col width-40>{{'Team' | trans}}</ion-col>
+        <ion-col width-10>{{'Total' | trans}}</ion-col>
       </ion-row>
-      <ion-row *ngFor="let stat of selectedStats">
-        <ion-col>
+      <ion-row *ngFor="let stat of selectedStats;let i=index" class="playerStats" >
+        <ion-col width-10><ion-label>{{i+1}}</ion-label></ion-col>
+        <ion-col width-50>
           <ion-item>
             <ion-avatar item-left>
               <img [src]="stat.player?.photo" />
@@ -116,8 +118,8 @@
             {{stat.player?.name}}
           </ion-item>
         </ion-col>
-        <ion-col>{{stat.teamName}}</ion-col>
-        <ion-col>{{stat.val}}</ion-col>
+        <ion-col width-40><ion-label>{{stat.teamName}}</ion-label></ion-col>
+        <ion-col width-10><ion-label>{{stat.val}}</ion-label></ion-col>
       </ion-row>
     </ion-grid>
   </div>

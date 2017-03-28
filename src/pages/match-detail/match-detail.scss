@@ -197,5 +197,18 @@ page-match-detail {
         overflow-y: scroll;
         position: fixed;
         background: $darker-background;
+        .playerStats{
+          ion-col{
+            background-color: #333D46;
+            ion-item{
+              padding-left:0;
+              background-color: #333D46;
+              .item-inner{
+                padding-right: 0;
+                border-bottom: none;
+              }
+            }
+          }
+        }
       }
 }
