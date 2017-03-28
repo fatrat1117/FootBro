@@ -103,23 +103,28 @@
   <div class="right-scrollview matches-match-info-col" *ngIf='selectedStats'>
     <ion-grid>
       <ion-row>
-        <ion-col width-10>{{'Rank' | trans}}</ion-col>
-        <ion-col width-50>{{'Player' | trans}}</ion-col>
-        <ion-col width-40>{{'Team' | trans}}</ion-col>
-        <ion-col width-10>{{'Total' | trans}}</ion-col>
+        <!--<ion-col width-10>{{'Rank' | trans}}</ion-col>-->
+        <ion-col width-20></ion-col>
+        <ion-col width-30 class="flex-width-30">{{'Player' | trans}}</ion-col>
+        <ion-col width-30 class="flex-width-30">{{'Team' | trans}}</ion-col>
+        <ion-col width-20 text-center>{{'Total' | trans}}</ion-col>
       </ion-row>
       <ion-row *ngFor="let stat of selectedStats;let i=index" class="playerStats" >
-        <ion-col width-10><ion-label>{{i+1}}</ion-label></ion-col>
-        <ion-col width-50>
+        <ion-col width-20 class="rank">
+
+            <ion-label no-margin>{{i+1}}</ion-label>
+          <ion-avatar item-left>
+            <img [src]="stat.player?.photo" />
+          </ion-avatar>
+        </ion-col>
+        <ion-col width-30 no-margin class="flex-width-30">
           <ion-item>
-            <ion-avatar item-left>
-              <img [src]="stat.player?.photo" />
-            </ion-avatar>
+
             {{stat.player?.name}}
           </ion-item>
         </ion-col>
-        <ion-col width-40><ion-label>{{stat.teamName}}</ion-label></ion-col>
-        <ion-col width-10><ion-label>{{stat.val}}</ion-label></ion-col>
+        <ion-col width-30 class="flex-width-30"><ion-label no-margin>{{stat.teamName}}</ion-label></ion-col>
+        <ion-col width-20 ><ion-label no-margin text-center>{{stat.val}}</ion-label></ion-col>
       </ion-row>
     </ion-grid>
   </div>
