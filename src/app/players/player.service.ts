@@ -240,4 +240,8 @@ export class PlayerService {
       this.fm.getPlayerSocialAsync(playerId);
     }
   }
+
+  updatePlayerPhoto(playerId, photoUrl) {
+    this.fm.updatePlayerPhoto(playerId, photoUrl);
+  }
 }

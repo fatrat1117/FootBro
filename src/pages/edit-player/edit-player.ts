@@ -12,7 +12,7 @@ import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
 import { Team } from '../../app/teams/team.model'
 import { TeamService } from '../../app/teams/team.service'
-
+import { FirebaseManager } from '../../providers/firebase-manager'
 
 @Component({
   selector: 'page-edit-player',
@@ -23,8 +23,10 @@ export class EditPlayerPage {
   player: Player;
   onPlayerReady;
   isCheerleader = false;
+  busy = false;
+  imgSize = 256;
 
-  constructor(private navCtrl: NavController, private modalCtrl: ModalController, private playerService: PlayerService, private teamService: TeamService) {
+  constructor(private navCtrl: NavController, private modalCtrl: ModalController, private playerService: PlayerService, private teamService: TeamService, private fm: FirebaseManager) {
     this.selfId = this.playerService.selfId();
     //this.teams = [];
   }
@@ -86,5 +88,22 @@ export class EditPlayerPage {
     this.modalCtrl.create(EditPlayerDescriptionPage, {
       description: this.player.description
     }).present();
+  }
+
+  changePhoto() {
+    let self = this;
+    self.busy = true;
+
+    let success = photoUrl => {
+      self.busy = false;
+      this.playerService.updatePlayerPhoto(this.selfId, photoUrl);
+    }
+
+    let error = err => {
+      console.log(err);
+      self.busy = false;
+    }
+
+    this.fm.selectImgUploadGetUrl(this.selfId, this.imgSize, this.imgSize, success, error);
   }
 }
