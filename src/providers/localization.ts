@@ -202,7 +202,7 @@ export class Localization {
             Recent15matches: 'Recent 15 matches',
             Recent30matches: 'Recent 30 matches',
             All: 'all',
-            BecomeCheerleader: 'Become Cheerleader',
+            BecomeCheerleader: 'Join Cheerleaders',
             ApplicationSubmited: 'Your application is submitted. We will process it within 1 working day',
             PendingforReview: 'Pending for Review',
             Cheerleadersavailable: 'Cheerleaders available',
