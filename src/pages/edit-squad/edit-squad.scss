@@ -1,160 +1,165 @@
-.squad-popover{
-       top:56px !important;
+.squad-popover {
+  top: 56px !important;
 }
-.squad-popover .popover-content{
-        width: 100%;
-        left:0 !important;
-        top:0 !important;
-        bottom: inherit;
-        height: auto;
+
+.squad-popover .popover-content {
+  width: 100%;
+  left: 0 !important;
+  top: 0 !important;
+  bottom: inherit;
+  height: auto;
 }
+
 page-edit-squad {
-
-    ion-navbar{
-        .squard-number-container{
-            display: flex;
-            width: 100%;
-            a{
-//                flex:1;
-                text-align: center;
-            }
-            .squard-number-btn{
-                  text-align: center;
-                  text-transform: uppercase;
-                  text-decoration: none;
-                  font-size: 14px;
-                  font-weight: 100;
-                  letter-spacing: 1px;
-                span{
-                    color:white;
-                }
-            }
-            .squard-number-btn:before {
-                      border-radius: 50%;
-                    border: 0.2rem solid white;
-                    box-shadow: 0 0 1px rgba(0, 255, 204, 0.15), 0 0 1px rgba(0, 255, 204, 0.15) inset;
-                    content: "";
-                    display: block;
-                    position: absolute;
-                    /* left: -3px; */
-                    /* top: -3px; */
-                    left: -0.3rem;
-                    top: -0.3rem;
-                    height: 3.8rem;
-                    width: 3.8rem;
-                    opacity: 1;
-                    -webkit-transform: scale(1);
-                    transform: scale(1);
-                    transition: all 300ms;
-                }
-
-
-            .squard-number-btn.circle{
-                 background: rgba(235, 235, 235, 0.27);
-                  border: none;
-                  border-radius: 50%;
-                  color: #e4ecfa;
-                  cursor: pointer;
-                  display: flex;
-                  width: 3.6rem;
-                  height: 3.6rem;
-                  line-height:1rem;
-                  position: relative;
-                  margin: auto;
-                    align-items: center;
-                    justify-content: center;
-                  transition: 0.5s;
-            }
-//            .squard-number-btn.circle:focus {
-//                  background: color($colors,primary);
-//                  padding: -2px;
-//                }
-//
-//            .squard-number-btn:focus{
-//                  transform: scale(1.05);
-//                }
-            .selected{
-                 background: color($colors,primary) !important;
-                 padding: -2px !important;
-                 transform: scale(1.05) !important;
-            }
-        }
-    }
-
-    .squad-selected{
-        position: relative;
+  ion-navbar {
+    .squard-number-container {
+      display: flex;
+      width: 100%;
+      a {
+        //                flex:1;
         text-align: center;
-        span{
-            position: absolute;
-            left: 0;
-            right: 0;
-            color: black;
-            font-size: 1rem;
-            z-index: 1;
+      }
+      .squard-number-btn {
+        //text-align: center;
+        //text-transform: uppercase;
+        //text-decoration: none;
+        //font-weight: 100;
+        //letter-spacing: 1px;
+        span {
+          color: white;
+          font-size: 1.5rem;
+          font-weight: bold;
+          text-align: center;
+          padding: 0px;
+          margin: 0px auto;
         }
-        .squard-info-panel{
-            margin: 0 auto;
-            width: 2rem;
-            position: absolute;
-            top: 0.2rem;
-            left: 0;
-            right: 0;
-            z-index: 10;
-
-            -webkit-box-sizing: content-box;
-            -moz-box-sizing: content-box;
-            box-sizing: content-box;
-            width: 6rem;
-            height: 0;
-            border-top: 2.2rem solid rgba(224, 224, 224, 0.61);
-            border-bottom: 0;
-            border-left: 0.6rem solid transparent;
-            border-right: 0.6rem solid transparent;
-            font: normal 100%/normal Arial, Helvetica, sans-serif;
-            color: rgba(0,0,0,1);
-            -o-text-overflow: clip;
-            text-overflow: clip;
-        }
-        .frame-panel{
-            margin: 0 auto;
-            width: 2rem;
-            position: absolute;
-            left: 0;
-            right: 0;
-
-            -webkit-box-sizing: content-box;
-            -moz-box-sizing: content-box;
-            box-sizing: content-box;
-            width: 6.2rem;
-            height: 0;
-            border-top: 2.6rem solid rgb(244, 194, 13);
-            border-bottom: 0;
-            border-left: 0.8rem solid transparent;
-            border-right: 0.8rem solid transparent;
-            font: normal 100%/normal Arial, Helvetica, sans-serif;
-            color: rgba(0,0,0,1);
-            -o-text-overflow: clip;
-            text-overflow: clip;
-
-        }
+      }
+      .squard-number-btn:before {
+        border-radius: 50%;
+        border: 0.2rem solid white;
+        box-shadow: 0 0 1px rgba(0, 255, 204, 0.15), 0 0 1px rgba(0, 255, 204, 0.15) inset;
+        content: "";
+        display: block;
+        position: absolute;
+        /* left: -3px; */
+        /* top: -3px; */
+        left: -0.3rem;
+        top: -0.3rem;
+        height: 3.8rem;
+        width: 3.8rem;
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        transition: all 300ms;
+      }
+      .squard-number-btn.circle {
+        font-weight: bold;
+        background: rgba(235, 235, 235, 0.27);
+        border: none;
+        border-radius: 50%;
+        color: #e4ecfa;
+        cursor: pointer;
+        display: flex;
+        width: 3.6rem;
+        height: 3.6rem;
+        line-height: 1rem;
+        position: relative;
+        margin: auto;
+        align-items: center;
+        justify-content: center;
+        transition: 0.5s;
+      }
+      //            .squard-number-btn.circle:focus {
+      //                  background: color($colors,primary);
+      //                  padding: -2px;
+      //                }
+      //
+      //            .squard-number-btn:focus{
+      //                  transform: scale(1.05);
+      //                }
+      .selected {
+        background: color($colors, primary) !important;
+        padding: -2px !important;
+        transform: scale(1.05) !important;
+      }
     }
+  }
+  .squad-selected {
+    position: relative;
+    text-align: center;
+    span {
+      position: absolute;
+      left: 0;
+      right: 0;
+      color: black;
+      font-size: 1rem;
+      z-index: 1;
+    }
+    .squard-info-panel {
+      margin: 0 auto;
+      width: 2rem;
+      position: absolute;
+      top: 0.2rem;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      -webkit-box-sizing: content-box;
+      -moz-box-sizing: content-box;
+      box-sizing: content-box;
+      width: 6rem;
+      height: 0;
+      border-top: 2.2rem solid rgba(224, 224, 224, 0.61);
+      border-bottom: 0;
+      border-left: 0.6rem solid transparent;
+      border-right: 0.6rem solid transparent;
+      font: normal 100%/normal Arial, Helvetica, sans-serif;
+      color: rgba(0, 0, 0, 1);
+      -o-text-overflow: clip;
+      text-overflow: clip;
+    }
+    .frame-panel {
+      margin: 0 auto;
+      width: 2rem;
+      position: absolute;
+      left: 0;
+      right: 0;
+      -webkit-box-sizing: content-box;
+      -moz-box-sizing: content-box;
+      box-sizing: content-box;
+      width: 6.2rem;
+      height: 0;
+      border-top: 2.6rem solid rgb(244, 194, 13);
+      border-bottom: 0;
+      border-left: 0.8rem solid transparent;
+      border-right: 0.8rem solid transparent;
+      font: normal 100%/normal Arial, Helvetica, sans-serif;
+      color: rgba(0, 0, 0, 1);
+      -o-text-overflow: clip;
+      text-overflow: clip;
+    }
+    .frame-panel-text {
+      font-weight: bold;
+      font-size: 1.2rem;
+      top: 3px;
+      z-index: 11;
+      color: #444;
+    }
+  }
   .playerImg {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-}
-.playerName {
+  }
+  .playerName {
     color: white;
     font-size: 0.75rem;
-}
-
-.playersRow {
-  overflow-y: hidden;
-}
-
-.playersDiv {
-  width: 30em;
+  }
+  .playersRow {
+    overflow-y: hidden;
+  }
+  .playersDiv {
+    width: 30em;
     overflow-x: auto;
     white-space: nowrap;
-}
+  }
 }
