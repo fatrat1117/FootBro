@@ -33,11 +33,6 @@ export class MessagesPage {
     this.noRecordMessage = this.local.getString(this.noRecordId);
   }
 
-  ionViewWillUnload() {
-    document.removeEventListener('servicemessageready', this.onMessageReady);
-    document.removeEventListener('serviceplayerready', this.onPlayerReady);
-  }
-
   addEventListeners() {
     this.onMessageReady = e => {
       this.messages = this.messageService.getAllMessages();
@@ -54,6 +49,11 @@ export class MessagesPage {
 
     document.addEventListener('servicemessageready', this.onMessageReady);
     document.addEventListener('serviceplayerready', this.onPlayerReady);
+
+    document.addEventListener('userlogout', e => {
+      document.removeEventListener('servicemessageready', this.onMessageReady);
+      document.removeEventListener('serviceplayerready', this.onPlayerReady);
+    });
   }
 
   getPlayerAsync() {

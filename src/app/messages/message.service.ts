@@ -8,12 +8,19 @@ import { Message } from './message.model';
 @Injectable()
 export class MessageService {
   messages: Message[];
+  subscription: any;
   constructor(private fm: FirebaseManager) {
     this.messages = [];
+
+    document.addEventListener('userlogout', e => {
+      if (this.subscription) {
+        this.subscription.unsubscribe();
+      }
+    });
   }
 
   prepareAllMessages() {
-    this.fm.getAllMessages().subscribe(messages => {
+    this.subscription = this.fm.getAllMessages().subscribe(messages => {
       this.messages = [];
       let unreadCount = 0;
       messages.forEach(msg => {

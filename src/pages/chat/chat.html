@@ -75,7 +75,7 @@
     <input #input type="text" class="text-input" [(ngModel)]="newMessage">
     <ion-buttons right>
       <button *ngIf="newMessage?.trim()" ion-button class="send-button" (click)="sendMessage(input)">
-        Send
+        {{ 'Send' | trans }}
       </button>
     </ion-buttons>
   </ion-toolbar>
