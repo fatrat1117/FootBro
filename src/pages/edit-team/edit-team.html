@@ -8,7 +8,7 @@
     <ion-item (click)="changeLogo()">
       <h2>{{'Logo' | trans}}</h2>
       <ion-thumbnail item-right>
-        <img [src]="logoUrl">
+        <img [src]="team?.logo">
       </ion-thumbnail>
     </ion-item>
     <ion-item detail-push (click)="editName()">

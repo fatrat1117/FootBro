@@ -15,7 +15,6 @@ export class EditTeamPage {
   teamId: string;
   team: Team;
   onTeamReady;
-  logoUrl = 'assets/img/none.png';
   imgSize = 256;
   busy = false;
 
@@ -40,7 +39,6 @@ export class EditTeamPage {
       let teamId = e['detail'];
       if (teamId === this.teamId) {
         this.team = this.teamService.getTeam(teamId);
-        this.logoUrl = this.team.logo;
       }
     };
 
@@ -60,7 +58,7 @@ export class EditTeamPage {
       console.log(err);
       self.busy = false;
     }
-    
+
     this.fm.selectImgUploadGetUrl(this.teamId, this.imgSize, this.imgSize, success, error);
   }
 
