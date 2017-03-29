@@ -164,6 +164,10 @@ page-match-detail {
                   display: flex;
                   align-items: center;
                   justify-content: center;
+                  text-align: center;
+                  white-space: initial;
+                  max-width: 100%;
+                  padding: 1.2rem 0rem 1.2rem 0rem;
                 }
               }
             }
@@ -189,7 +193,7 @@ page-match-detail {
       }
 
   .left-scrollview {
-        width: 15%;
+        width: 20%;
         height: 100%;
         left: 0;
         right: 0;
@@ -198,13 +202,16 @@ page-match-detail {
         background: $darker-background;
       }
   .right-scrollview {
-    width: 85%;
+    width: 80%;
     height: 100%;
-    left: 15%;
+    left: 20%;
     overflow-y: scroll;
     position: fixed;
     background: $darker-background;
 
+    .right-view-grid{
+      padding: 0px;
+    }
     .header-title{
       background: $header-bar-color;
     }
