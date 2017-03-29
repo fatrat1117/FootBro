@@ -108,7 +108,8 @@
         </ion-item>
         <!--<ion-item class="expandable-member-property" *ngFor="let item of player.items" [hidden]="player.hidden">-->
         <ion-item class="expandable-member-property" [hidden]="!player.expanded">
-          <img src="assets/icon/b2.png" class="desc-img" item-left/>
+          <!--<img src="assets/icon/b2.png" class="desc-img" item-left/>-->
+          <ion-icon name="football" class="desc-img" item-left></ion-icon>
           <button ion-button clear color="light">{{'Goals' | trans}}</button>
           <div item-right>
             <button [disabled]="player.goals <= 0" ion-button icon-only clear (click)="minus(player, 'goals')" color="light">
@@ -123,7 +124,9 @@
           </div>
         </ion-item>
         <ion-item class="expandable-member-property" [hidden]="!player.expanded">
-          <img src="assets/icon/b3.png" class="desc-img" item-left/>
+          <!--<img src="assets/icon/b3.png" class="desc-img" item-left/>-->
+
+          <ion-icon name="contacts" class="desc-img" item-left></ion-icon>
           <button ion-button clear color="light">{{'Assists' | trans}}</button>
           <div item-right>
             <button [disabled]="player.assists <= 0" ion-button icon-only clear (click)="minus(player, 'assists')" color="light">
@@ -138,7 +141,9 @@
           </div>
         </ion-item>
         <ion-item class="expandable-member-property" [hidden]="!player.expanded">
-          <img src="assets/img/match_detail/yellowcard.png" class="desc-img" item-left/>
+          <!--<img src="assets/img/match_detail/yellowcard.png" class="desc-img" item-left/>-->
+          <ion-icon name="square" class="desc-img" item-left [ngStyle]="{'color': 'yellow'}"></ion-icon>
+
           <button ion-button clear color="light">{{'Yellowcard' | trans}}</button>
           <div item-right>
             <button [disabled]="player.yellows <= 0" ion-button icon-only clear (click)="minus(player, 'yellows')" color="light">
@@ -153,7 +158,8 @@
           </div>
         </ion-item>
         <ion-item class="expandable-member-property" [hidden]="!player.expanded">
-          <img src="assets/img/match_detail/redcard.png" class="desc-img" item-left/>
+          <!--<img src="assets/img/match_detail/redcard.png" class="desc-img" item-left/>-->
+          <ion-icon name="square" class="desc-img" item-left [ngStyle]="{'color': 'red'}"></ion-icon>
           <button ion-button clear color="light">{{'Redcard' | trans}}</button>
           <div item-right>
             <button [disabled]="player.reds <= 0" ion-button icon-only clear (click)="minus(player, 'reds')" color="light">
@@ -168,7 +174,8 @@
           </div>
         </ion-item>
         <ion-item class="expandable-member-property" [hidden]="!player.expanded">
-          <img src="assets/icon/b2.png" class="desc-img" item-left/>
+          <!--<img src="assets/icon/b2.png" class="desc-img" item-left/>-->
+          <ion-icon name="egg" class="desc-img" item-left></ion-icon>
           <button ion-button clear color="light">{{'owngoals' | trans}}</button>
           <div item-right>
             <button [disabled]="player.owngoals <= 0" ion-button icon-only clear (click)="minus(player, 'owngoals')" color="light">

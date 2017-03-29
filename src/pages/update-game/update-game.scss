@@ -82,12 +82,12 @@ page-update-game {
         text-overflow: ellipsis;
         font-size: 1.2rem;
       }
-        
+
         .select-team-btn{
             white-space: normal;
             font-size: 1.2rem;
         }
-        
+
        .score-item{
           display: flex;
           flex-wrap: nowrap;
@@ -181,10 +181,10 @@ page-update-game {
             font-size:1.5rem;
           }
           .google-location {
-            width:100%; 
-            border:none; 
+            width:100%;
+            border:none;
             text-align:center;
-            //color: #222; 
+            //color: #222;
             background-color: transparent;
           }
         }
@@ -232,7 +232,7 @@ page-update-game {
         }
       }
     }
-    
+
     .content-expandable{
       .player-name {
         color: white;
@@ -266,6 +266,9 @@ page-update-game {
           width: 20px;
           height:20px;
           margin-left: 50px;
+          min-width: 20px;
+          min-height: 20px;
+          font-size: 20px;
         }
       }
     }
