@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
-import { AngularFire } from 'angularfire2';
+import { FirebaseManager } from '../../providers/firebase-manager';
 import { Player } from '../../app/players/player.model'
 import { Team } from '../../app/teams/team.model'
 import { MyTeamPage } from "../my-team/my-team";
@@ -32,7 +32,7 @@ export class MePage {
     private playerService: PlayerService,
     private messageService: MessageService,
     private teamService: TeamService,
-    private af: AngularFire) {
+    private fm: FirebaseManager) {
     this.messageCount = 0;
   }
 
@@ -108,6 +108,10 @@ export class MePage {
   }
 
   onLogout() {
-    this.af.auth.logout();
+    this.fm.logout();
+  }
+
+  migrateData() {
+    this.fm.migrateData();
   }
 }

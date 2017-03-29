@@ -29,7 +29,7 @@ export class MyTeamPage {
   currTeamStat;
   selectedStatIndex = 0;
   players;
-  matches;
+  matches : Match [] = [];
   upcomingMatch : Match;
   mostGAMatchId;
   mostGFMatchId;
@@ -101,6 +101,7 @@ export class MyTeamPage {
       let teamId = e['detail'];
       if (teamId === this.id) {
         this.matches = this.matchService.getTeamMatches(teamId);
+        //console.log(this.matches);
         this.updateUpcomingMatch();
       }
     };
@@ -119,11 +120,14 @@ export class MyTeamPage {
   }
 
   updateUpcomingMatch() {
+    //console.log(this.matches);
     if (this.matches.length) {
       let index = 0;
       let now = moment().unix() * 1000;
       for (let i = 1; i < this.matches.length; ++i) {
-        if (this.matches[i].time < now)
+        let match = this.matches[i];
+        //console.log(match.$key, match.date, match.id, now);
+        if (match.time < now)
           break;
         index = i;
       }
