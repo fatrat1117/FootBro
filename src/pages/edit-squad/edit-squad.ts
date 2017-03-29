@@ -1,8 +1,8 @@
 import { Component, ViewChild } from "@angular/core";
-import { ViewController, NavParams,PopoverController } from 'ionic-angular';
+import { ViewController, NavParams, PopoverController } from 'ionic-angular';
 import { Match, PREDEFINEDSQUAD } from '../../app/matches/match.model';
-import { PlayerService} from '../../app/players/player.service';
-import { UIHelper } from  '../../providers/uihelper';
+import { PlayerService } from '../../app/players/player.service';
+import { UIHelper } from '../../providers/uihelper';
 import { TeamService } from '../../app/teams/team.service';
 import { SquadSelectPage } from '../../pages/squad-select/squad-select';
 
@@ -18,7 +18,7 @@ export class EditSquadPage {
   squadSettings: any;
   teamId;
   selectedSquad = 11; //Default Squad Number set to 11
-  popOverPage:any;
+  popOverPage: any;
   currentSquadForm = '4-4-2';
 
   constructor(private viewCtrl: ViewController,
@@ -37,8 +37,8 @@ export class EditSquadPage {
 
   dismiss() {
     this.viewCtrl.dismiss();
-     if (this.popOverPage){
-        this.popOverPage.dismiss();
+    if (this.popOverPage) {
+      this.popOverPage.dismiss();
     }
   }
 
@@ -62,10 +62,16 @@ export class EditSquadPage {
     switch (this.currentSquadForm) {
       case '4-4-2':
         predefinedSquadId = '442';
-      break;
+        break;
       case '3-5-2':
         predefinedSquadId = '352';
-      break;
+        break;
+      case '4-5-1':
+        predefinedSquadId = '451';
+        break;
+      case '4-3-3':
+        predefinedSquadId = '433';
+        break;
     }
     this.squadCtrl.setSquad(PREDEFINEDSQUAD[predefinedSquadId]);
   }
@@ -77,22 +83,22 @@ export class EditSquadPage {
 
   }
 
-  selectSquadNumber(myEvent,number) {
+  selectSquadNumber(myEvent, number) {
 
-    if (this.popOverPage){
-        this.popOverPage.dismiss();
+    if (this.popOverPage) {
+      this.popOverPage.dismiss();
     }
     this.selectedSquad = number;
-    this.popOverPage = this.popoverCtrl.create(SquadSelectPage,{select:this.selectedSquad},{cssClass:'squad-popover'});
+    this.popOverPage = this.popoverCtrl.create(SquadSelectPage, { select: this.selectedSquad }, { cssClass: 'squad-popover' });
 
     this.popOverPage.present({
-        ev:myEvent
+      ev: myEvent
     });
 
     this.popOverPage.onDidDismiss(data => {
-          console.log(data);
-          this.currentSquadForm = data;
-          this.loadPredefinedSquad();
+      console.log(data);
+      this.currentSquadForm = data;
+      this.loadPredefinedSquad();
     });
   }
- }
+}
