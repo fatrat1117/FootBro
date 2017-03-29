@@ -1,7 +1,14 @@
 page-match-detail {
   // $selected-date-color: #585F6F;
   //     $unselected-date-color: #40444D;
-      $darker-background: #2D2E32;
+  $darker-background: #2D2E32;
+  $lighter-backgroud: #425065;
+  $header-bar-color:#585F6F;
+  $player-stats-darker-background:#373e4c;
+  //$player-stats-lighter-background;
+  $player-stats-lighter-background:color($colors,primary);
+  $player-stats-darker-font:#93abc5;
+
 
   ion-content {
     //给整个内容区调整背景及边距
@@ -198,13 +205,16 @@ page-match-detail {
     position: fixed;
     background: $darker-background;
 
+    .header-title{
+      background: $header-bar-color;
+    }
     .flex-width-30{
       flex:0 0 30%;
       max-width: 30%;
     }
     .playerStats{
       ion-col{
-        background-color: #40444d;
+        background-color: $lighter-backgroud;
         display: flex;
         max-height: 4rem;
         ion-avatar{
@@ -220,7 +230,7 @@ page-match-detail {
         }
         ion-item{
           padding-left:0;
-          background-color: #40444d;
+          background-color: $lighter-backgroud;
           min-height: 1.8rem;
           max-height: 3rem;
           .item-inner{
