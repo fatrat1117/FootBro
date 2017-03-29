@@ -60,7 +60,7 @@ export class HomePage {
     this.onPlayerReady = e => {
       if (this.playerService.selfId() && e['detail'] == this.playerService.selfId()) {
         this.selfPlayer = this.playerService.getPlayer(e['detail']);
-        console.log(this.selfPlayer);
+        //console.log(this.selfPlayer);
         
         if (this.selfPlayer.teamId) {
           document.addEventListener('serviceteamready', this.onTeamReady);

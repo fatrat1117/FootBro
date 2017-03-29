@@ -762,15 +762,15 @@ export class FirebaseManager {
   //   }
   // }
 
-  getTeamMatchesAsync(id) {
-    let sub = this.af.database.list('/teams_matches/' + id + '/matches', {
+  getTeamMatchesAsync(teamId) {
+    let sub = this.af.database.list('/team_squads/' + teamId + '/matches', {
       query: {
-        orderByChild: 'date'
+        orderByChild: 'time'
       }
     }).subscribe(snapshots => {
       sub.unsubscribe();
       let result = {
-        id: id,
+        id: teamId,
         matches: snapshots.reverse()
       };
       this.FireCustomEvent('teammatchesready', result);

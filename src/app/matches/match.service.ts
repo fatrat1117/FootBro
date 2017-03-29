@@ -52,9 +52,8 @@ export class MatchService {
       let matches = [];
       this.teamMatchesMap[result.id] = matches;
       result.matches.forEach(m => {
-        let match = this.findOrCreateMatch(m.$key);
+        let match = this.findOrCreateMatchAndPull(m.$key);
         matches.push(match);
-        this.fm.getMatchAsync(m.$key);
       });
       this.fm.FireCustomEvent('serviceteammatchesready', result.id);
     });
@@ -109,6 +108,19 @@ export class MatchService {
       match = new Match();
       match.$key = id;
       this.matchesMap[id] = match;
+    }
+    return match;
+  }
+
+  findOrCreateMatchAndPull(id): Match {
+    let match;
+    if (this.getMatch(id))
+      match = this.getMatch(id);
+    else {
+      match = new Match();
+      match.$key = id;
+      this.matchesMap[id] = match;
+      this.fm.getMatchAsync(id);
     }
     return match;
   }
