@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Content, NavController, ModalController, NavParams } from 'ionic-angular';
 import { Match } from '../../app/matches/match.model'
 import { MatchService } from '../../app/matches/match.service'
+import { PlayerService } from '../../app/players/player.service'
 import { NewGamePage } from "../new-game/new-game";
 import * as moment from 'moment';
 
@@ -35,7 +36,8 @@ export class MatchesPage {
   constructor(public navCtrl: NavController,
     private modalCtrl: ModalController,
     private matchService: MatchService,
-    private navParams: NavParams) {
+    private navParams: NavParams,
+    private playerService: PlayerService) {
     this.selectedInfo = "schedule";
     this.selectedId = "all";
     this.afTournamentList = this.matchService.afTournamentList();
@@ -256,5 +258,9 @@ export class MatchesPage {
     //let class2 = this.isChangeYear(i, date) == true ? "ion-item-changeYear" : "ion-item-unchangeYear"
 
     return class1;
+  }
+
+  amICaptain() {
+    return this.playerService.amICaptain();
   }
 }
