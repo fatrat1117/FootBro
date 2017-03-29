@@ -34,6 +34,8 @@ export class ChatPage {
   hasChatsMessage = true;
   hasNoChatsMessageId = "chatPageNoRecord";
   hasNoChatsMessage = "";
+  subscription: any;
+
 
   constructor(private navCtrl: NavController, private navParams: NavParams, private chatService: ChatService, private local: Localization) {
   }
@@ -46,7 +48,7 @@ export class ChatPage {
     this.isUnread = this.navParams.get('isUnread');
     this.user = this.navParams.get('user');
 
-    this.chatService.getRecentChats(this.user.id, this.isUnread).subscribe(chats => {
+    this.subscription = this.chatService.getRecentChats(this.user.id, this.isUnread).subscribe(chats => {
       this.chats = chats;
       this.hasChatsMessage = this.hasChats();
       this.scrollView();
@@ -58,6 +60,7 @@ export class ChatPage {
 
   ionViewWillLeave() {
     this.chatService.updateUnread(this.user.id, false);
+    this.subscription.unsubscribe();
   }
 
   ionViewDidEnter() {
