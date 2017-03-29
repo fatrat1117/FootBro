@@ -39,10 +39,10 @@
     </div>
 
     <ion-row class="player-statistics clearfloat">
-      <div class="company-logo">
+      <!--div class="company-logo">
         <img src="assets/img/forTest/box.png">
         <h4 no-margin>SoccerBro</h4>
-      </div>
+      </div-->
       <ion-col no-padding class="block height">
         <div class="flex-center txt height-inner">
           <ion-col no-padding width-50 class="fl flex-end data">{{player?.height}}</ion-col>
@@ -188,7 +188,7 @@
     <ion-row class="light-grey">
       <div class="feedHead">
         <div class="wrapper">
-          <div class="rose"><span class="firstPic"><img src="assets/img/my-player/flowerrose.png"></span><span class="picText">{{'charm' | trans}}</span>
+          <div class="rose"><ion-icon name="md-flower" color="gRed"></ion-icon><span class="picText">{{'charm' | trans}}</span>
           </div>
         </div>
       </div>
@@ -204,7 +204,8 @@
 
             <ion-col width-10 class="feed-back-like">
               <div class="like fl">
-                <img [src]="getLikePic('charm')" (click)="likeHim()">
+                <ion-icon (click)="likeHim()" name="md-thumbs-up" [ngStyle]="{'color': isLiked('charm') ? '#db3236' : none}"></ion-icon>
+                <!--img [src]="getLikePic('charm')" (click)="likeHim()"-->
               </div>
             </ion-col>
             <ion-col width-80 class="feed-back-bar fl">
@@ -219,7 +220,8 @@
             </ion-col>
             <ion-col width-10 class="feed-back-unlike">
               <div class="unLike fr">
-                <img [src]="getUnlikePic('charm')" (click)="dislikeHim()">
+                <ion-icon (click)="dislikeHim()" name="md-thumbs-down" [ngStyle]="{'color': isUnliked('charm') ? '#0F7AFE' : none}"></ion-icon>
+                <!--img [src]="getUnlikePic('charm')" (click)="dislikeHim()"-->
               </div>
             </ion-col>
           </ion-row>
@@ -230,9 +232,7 @@
       <div class="feedHead">
         <div class="wrapper">
           <div class="rose">
-            <span class="firstPic">
-            <img src="assets/img/my-player/football.png">
-            </span>
+            <ion-icon name="md-football" color="primary-text"></ion-icon>
             <span class="picText">{{'skill' | trans}}</span>
           </div>
         </div>
@@ -249,7 +249,8 @@
 
             <ion-col width-10 class="feed-back-like">
               <div class="like fl">
-                <img [src]="getLikePic('skill')" (click)="likeSkill()">
+                <ion-icon (click)="likeSkill()" name="md-thumbs-up" [ngStyle]="{'color': isLiked('skill') ? '#db3236' : none}"></ion-icon>
+                <!--img [src]="getLikePic('skill')" (click)="likeSkill()"-->
               </div>
             </ion-col>
             <ion-col width-80 class="feed-back-bar fl">
@@ -264,7 +265,8 @@
             </ion-col>
             <ion-col width-10 class="feed-back-unlike">
               <div class="unLike fr">
-                <img [src]="getUnlikePic('skill')" (click)="dislikeSkill()">
+                <ion-icon (click)="dislikeSkill()" name="md-thumbs-down" [ngStyle]="{'color': isUnliked('skill') ? '#0F7AFE' : none}"></ion-icon>
+                <!--img [src]="getUnlikePic('skill')" (click)="dislikeSkill()"-->
               </div>
             </ion-col>
           </ion-row>
@@ -274,7 +276,7 @@
     <ion-row class="light-grey">
       <div class="feedHead">
         <div class="wrapper">
-          <div class="rose"><span class="firstPic"><img src="assets/img/my-player/footplayer.png"></span><span class="picText">{{'playstyle' | trans}}</span>
+          <div class="rose"><ion-icon name="md-person" color="gGreen"></ion-icon><span class="picText">{{'playstyle' | trans}}</span>
           </div>
         </div>
       </div>
@@ -290,7 +292,8 @@
 
             <ion-col width-10 class="feed-back-like">
               <div class="like fl">
-                <img [src]="getLikePic('style')" (click)="likeStyle()">
+                <ion-icon (click)="likeStyle()" name="md-thumbs-up" [ngStyle]="{'color': isLiked('style') ? '#db3236' : none}"></ion-icon>
+                <!--img [src]="getLikePic('style')" (click)="likeStyle()"-->
               </div>
             </ion-col>
             <ion-col width-80 class="feed-back-bar fl">
@@ -305,7 +308,8 @@
             </ion-col>
             <ion-col width-10 class="feed-back-unlike">
               <div class="unLike fr">
-                <img [src]="getUnlikePic('style')" (click)="dislikeStyle()">
+                <ion-icon (click)="dislikeStyle()" name="md-thumbs-down" [ngStyle]="{'color': isUnliked('style') ? '#0F7AFE' : none}"></ion-icon>
+                <!--img [src]="getUnlikePic('style')" (click)="dislikeStyle()"-->
               </div>
             </ion-col>
           </ion-row>
