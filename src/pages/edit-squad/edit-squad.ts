@@ -78,6 +78,12 @@ export class EditSquadPage {
       case '3-2-1':
         predefinedSquadId = '321';
         break;
+      case '3-1-2':
+        predefinedSquadId = '312';
+        break;
+      case '2-3-1':
+        predefinedSquadId = '231';
+        break;
     }
     this.squadCtrl.setSquad(PREDEFINEDSQUAD[predefinedSquadId]);
   }
