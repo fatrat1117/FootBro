@@ -211,6 +211,22 @@ export class PlayerService {
       this.fm.getTeamAsync(id);
   }
 
+  amICaptain() {
+    let pId = this.selfId();
+    if (!pId)
+      return false;
+    
+    let tId = this.getPlayer(pId).teamId;
+    let fmTeam = this.fm.getTeam(tId);
+    console.log(fmTeam);
+    if (fmTeam && 'basic-info' in fmTeam) {
+      //console.log(pId, fmTeam['basic-info'].captain, tId);
+      return pId === fmTeam['basic-info'].captain;
+    }
+
+    return false;
+  }
+
   isCaptain(pId, tId) {
     //console.log('isCaptain', pId, tId);
     if (!pId || !tId)
