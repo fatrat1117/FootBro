@@ -274,7 +274,8 @@ export class Localization {
             skip: 'Skip',
             whatsNew: "What's New",
             teamDesc: 'All team infomation could be found here.',
-            changecoverphoto: 'Change Cover Photo'
+            changecoverphoto: 'Change Cover Photo',
+            squad: 'Squad'
         },
 
         zh: {
@@ -530,7 +531,8 @@ export class Localization {
             skip: '跳过',
             whatsNew: "新特性",
             teamDesc: '查看球队所有信息',
-            changecoverphoto: '更换封面'
+            changecoverphoto: '更换封面',
+            squad: '阵容'
         }
     }
 }

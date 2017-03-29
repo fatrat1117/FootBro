@@ -57,6 +57,19 @@ export class EditSquadPage {
     this.squadCtrl.setSquad(PREDEFINEDSQUAD['442']);
   }
 
+  loadPredefinedSquad() {
+    let predefinedSquadId = '442';
+    switch (this.currentSquadForm) {
+      case '4-4-2':
+        predefinedSquadId = '442';
+      break;
+      case '3-5-2':
+        predefinedSquadId = '352';
+      break;
+    }
+    this.squadCtrl.setSquad(PREDEFINEDSQUAD[predefinedSquadId]);
+  }
+
   saveSquad() {
     let squad = this.squadCtrl.getSquad();
     this.teamService.saveMatchSquad(this.teamId, this.match.id, squad);
@@ -79,8 +92,7 @@ export class EditSquadPage {
     this.popOverPage.onDidDismiss(data => {
           console.log(data);
           this.currentSquadForm = data;
+          this.loadPredefinedSquad();
     });
-
-
   }
  }

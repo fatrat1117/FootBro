@@ -1,4 +1,4 @@
-import { Team} from '../teams/team.model';
+import { Team } from '../teams/team.model';
 import * as moment from 'moment';
 
 export class MatchLocation {
@@ -6,7 +6,7 @@ export class MatchLocation {
   address;
   lat = 0;
   lng = 0;
-} 
+}
 
 export class Match {
   $key;
@@ -15,8 +15,8 @@ export class Match {
   time;
   homeId;
   awayId;
-  home : Team;
-  away : Team;
+  home: Team;
+  away: Team;
   homeScore;
   awayScore;
   type = 11;
@@ -27,7 +27,7 @@ export class Match {
   isAwayUpdated;
   homeSquad;
   awaySquad;
-  isStarted = function() {
+  isStarted = function () {
     let now = moment().unix() * 1000;
     //console.log(now, this.time);
     return now > this.time;
@@ -48,50 +48,93 @@ export class Match {
 }
 
 export const PREDEFINEDSQUAD = {
-  442: [
-    {
-      x: 15,
-      y: 10
-    },
-    {
-      x: 85,
-      y: 10
-    },
-    {
-      x: 5,
-      y: 40
-    },
-    {
-      x: 35,
-      y: 40
-    },
-    {
-      x: 65,
-      y: 40
-    },
-    {
-      x: 95,
-      y: 40
-    },
-    {
-      x: 5,
-      y: 70
-    },
-    {
-      x: 35,
-      y: 70
-    },
-    {
-      x: 65,
-      y: 70
-    },
-    {
-      x: 95,
-      y: 70
-    },
-    {
-      x: 50,
-      y: 5
-    },
+  442: [{
+    x: 15,
+    y: 10
+  },
+  {
+    x: 85,
+    y: 10
+  },
+  {
+    x: 5,
+    y: 40
+  },
+  {
+    x: 35,
+    y: 40
+  },
+  {
+    x: 65,
+    y: 40
+  },
+  {
+    x: 95,
+    y: 40
+  },
+  {
+    x: 5,
+    y: 70
+  },
+  {
+    x: 35,
+    y: 70
+  },
+  {
+    x: 65,
+    y: 70
+  },
+  {
+    x: 95,
+    y: 70
+  },
+  {
+    x: 50,
+    y: 90
+  },
+  ], 352: [{
+    x: 15,
+    y: 10
+  },
+  {
+    x: 85,
+    y: 10
+  },
+  {
+    x: 5,
+    y: 40
+  },
+  {
+    x: 27,
+    y: 40
+  },
+  {
+    x: 50,
+    y: 40
+  },
+  {
+    x: 73,
+    y: 40
+  },
+  {
+    x: 95,
+    y: 40
+  },
+  {
+    x: 15,
+    y: 70
+  },
+  {
+    x: 50,
+    y: 70
+  },
+  {
+    x: 85,
+    y: 70
+  },
+  {
+    x: 50,
+    y: 90
+  },
   ]
 }

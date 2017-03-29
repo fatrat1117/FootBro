@@ -19,7 +19,7 @@
   </ion-row>
 
   <ion-row class="home-menu" no-padding>
-    <ion-col class="menu-col" width-50 center>
+    <ion-col class="menu-col" width-33 center>
       <button ion-button icon-only full color="dark" (click)="enterCheeringTeam()">
         <ion-icon name="md-flower" color="gRed"></ion-icon>
       </button>
@@ -27,12 +27,20 @@
         <p>{{'Cheerleaders' | trans}}</p>
       </button>
     </ion-col>
-    <ion-col class="menu-col" width-50>
+    <ion-col class="menu-col" width-33 center>
       <button ion-button icon-only full color="dark" (click)="enterRankPage()">
         <ion-icon name="md-podium" color="gBlue"></ion-icon>
       </button>
       <button ion-button full color="dark" (click)="enterRankPage()">
         <p>{{'Ranks' | trans}}</p>
+      </button>
+    </ion-col>
+    <ion-col class="menu-col" width-33 center>
+      <button ion-button icon-only full color="dark" (click)="enterManageSquadPage()">
+        <ion-icon name="md-people" color="gGreen"></ion-icon>
+      </button>
+      <button ion-button full color="dark" (click)="enterManageSquadPage()">
+        <p>{{'squad' | trans}}</p>
       </button>
     </ion-col>
   </ion-row>

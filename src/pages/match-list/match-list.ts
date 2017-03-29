@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController ,ModalController } from 'ionic-angular';
 import { Match } from '../../app/matches/match.model'
-import { NewGamePage } from "../new-game/new-game";
 import { MatchesPage } from '../matches/matches';
-import { EditSquadPage } from '../edit-squad/edit-squad';
 import { LeagueInfoPage } from "../league-info/league-info";
 import { LeagueResultPage } from "../league-result/league-result";
 import * as moment from 'moment';
