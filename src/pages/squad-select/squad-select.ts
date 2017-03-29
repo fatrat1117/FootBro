@@ -12,7 +12,7 @@ export class SquadSelectPage {
 
   squadNumber : Number;
   selectedSquad : String;
-  sampleFiveList:String[] = ["1-1-1-1","1-2-1","2-1-1","1-1-2","2-2-0","2-0-2"];
+  sampleFiveList:String[] = ["1-2-1","1-1-2","0-2-2","2-0-2"];
   sampleSevenList:String[] = ["3-1-2","3-2-1","2-3-1"];
   sampleElevenList:String[] = ["4-4-2","4-5-1","4-3-3","4-2-3-1","3-5-2"];
   constructor(private viewCtrl: ViewController,private navParams: NavParams) {
