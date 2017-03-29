@@ -15,12 +15,12 @@
                 ".write": "root.child('admins').hasChild(auth.uid)"
             },
             "pending": {
-              //in case self id does not exist
+                //in case self id does not exist
                 ".read": "root.child('admins').hasChild(auth.uid)",
                 ".write": "auth !== null",
-                  "$id": { 
+                "$id": {
                     ".read": "$id === auth.uid"
-                  }
+                }
             }
         },
         "matches": {
@@ -75,7 +75,9 @@
         },
         "team_squads": {
             ".read": true,
-            ".write": "auth !== null"
+              "$teamId": {
+                ".write": "root.child('admins').hasChild(auth.uid) || root.child('teams').child($teamId).child('players').hasChild(auth.uid)"
+              }
         },
         "teams": {
             ".read": true,

@@ -44,6 +44,27 @@
    }
    .home-menu {
      .menu-col {
+       padding: 0px;
+       button {
+         //background-color: #222;
+         box-shadow: none;
+         opacity: 1;
+         padding: 0px;
+         margin: 0px;
+         height: 3.0rem;
+       }
+       button:active {
+         background: #222;
+       }
+       button:focus {
+         background: #222;
+       }
+       button:hover {
+         background: #222;
+       }
+     }
+     /*
+     .menu-col {
        //display: flex;
        //flex-direction: column;
        padding: 0px;
@@ -65,6 +86,7 @@
          }
        }
      }
+     */
    }
    .login-button {
      //color: white;
@@ -143,8 +165,7 @@
        }
      }
    }
-   .roleIsCheerLeaderPanel{
-
+   .roleIsCheerLeaderPanel {
      position: relative;
      width: 100%;
      height: calc(100% - (184px + 56px));
