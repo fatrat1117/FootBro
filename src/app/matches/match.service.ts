@@ -53,6 +53,7 @@ export class MatchService {
       this.teamMatchesMap[result.id] = matches;
       result.matches.forEach(m => {
         let match = this.findOrCreateMatchAndPull(m.$key);
+        match.time = m.time;
         matches.push(match);
       });
       this.fm.FireCustomEvent('serviceteammatchesready', result.id);
