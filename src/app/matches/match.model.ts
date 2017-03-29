@@ -91,7 +91,7 @@ export const PREDEFINEDSQUAD = {
     },
     {
       x: 50,
-      y: 5
+      y: 90
     },
   ]
 }

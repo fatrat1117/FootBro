@@ -147,7 +147,13 @@ export class HomePage {
   }
 
   enterManageSquadPage() {
-    this.navCtrl.push(ManageSquadPage);
+    if (this.playerService.isAuthenticated()) {
+      if (this.selfTeam)
+        this.navCtrl.push(ManageSquadPage, {teamId: this.selfTeam.id});
+      else 
+        this.joinTeam();
+    } else 
+      this.playerService.checkLogin();
   }
 }
 
