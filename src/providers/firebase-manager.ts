@@ -1148,7 +1148,9 @@ export class FirebaseManager {
   }
 
   afPendingCheerleaderSelf() {
-    return this.af.database.object(this.pendingCheerleadersRef() + this.selfId());
+    if (this.selfId())
+      return this.af.database.object(this.pendingCheerleadersRef() + this.selfId());
+    return null;
   }
 
   //admins 

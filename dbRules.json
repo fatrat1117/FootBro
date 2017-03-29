@@ -1,8 +1,8 @@
 {
     "rules": {
-      	"admins":{
-          ".read":true,
-          ".write":false
+        "admins": {
+            ".read": true,
+            ".write": false
         },
         // Currently Does not know the chats logic, so leave it as default
         "chats": {
@@ -15,20 +15,22 @@
                 ".write": "root.child('admins').hasChild(auth.uid)"
             },
             "pending": {
-                ".read": "root.child('admins').hasChild(auth.uid) || data.hasChild(auth.uid)",
-                ".write": "auth !== null"                
+              //in case self id does not exist
+                ".read": "root.child('admins').hasChild(auth.uid)",
+                ".write": "auth !== null",
+                  "$id": { 
+                    ".read": "$id === auth.uid"
+                  }
             }
         },
         "matches": {
-          ".read": true,
-            "dates": {                
+            ".read": true,
+            "dates": {
                 ".write": "root.child('admins').hasChild(auth.uid)"
             },
-            "list": {                
+            "list": {
                 // Only admin or team founder can write to this location
-                "$matchid": {
-                    ".write": "root.child('admins').hasChild(auth.uid) || auth.uid===root.child('teams').child(data.child('homeId').val()).child('basic-info').child('captain').val()"
-                },
+                ".write": "root.child('admins').hasChild(auth.uid) || root.child('players').hasChild(auth.uid)",
                 ".indexOn": [
                     "date",
                     "tournamentId"
@@ -37,10 +39,8 @@
         },
         "misc": {
             "feedbacks": {
-                "$fid": {
-                    ".read": "root.child('admins').hasChild(auth.uid)",
-                    ".write": "!data.exists() && newData.exists()"
-                }
+                ".read": "root.child('admins').hasChild(auth.uid)",
+                ".write": true
             }
         },
         "orders": {
@@ -78,10 +78,10 @@
             ".write": "auth !== null"
         },
         "teams": {
-          ".read": true,
-           ".write": "auth !== null",
+            ".read": true,
+            ".write": "auth !== null",
             "$teamid": {
-                "basic-info": {                    
+                "basic-info": {
                     ".write": "root.child('admins').hasChild(auth.uid) || auth.uid===data.child('captain').val() || !data.exists()&&newData.exists()&&root.child('players').hasChild(auth.uid)"
                 },
                 "chatroom": {
