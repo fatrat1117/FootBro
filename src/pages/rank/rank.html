@@ -1,17 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{'Ranks' | trans}}</ion-title>
-    <!--ion-segment [(ngModel)]="stats">
-      <ion-segment-button value="teams">
-        {{'Teams' | trans}}
-      </ion-segment-button>
-      <ion-segment-button value="players">
-        {{'Players' | trans}}
-      </ion-segment-button>
-    </ion-segment-->
   </ion-navbar>
-</ion-header>
-<ion-content>
   <ion-segment padding [(ngModel)]="stats" mode="md">
     <ion-segment-button value="teams">
       {{'Teams' | trans}}
@@ -20,91 +10,92 @@
       {{'Players' | trans}}
     </ion-segment-button>
   </ion-segment>
+</ion-header>
+<ion-content>
   <div class="rank-stats" [ngSwitch]="stats">
     <div *ngSwitchCase="'teams'">
       <ion-item style="margin-bottom: 10px" class="sortby">
-        <ion-label>{{'SortBy' | trans}}</ion-label>
-        <ion-select [ngModel]="teamSortByStr" (ngModelChange)="sortTeamBy($event)" text-center>
-          <ion-option value="ability">
-            {{'Ability' | trans}}
-          </ion-option>
-          <ion-option value="popularity">
-            {{'Popularity' | trans}}
-          </ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-list>
-        <ion-item *ngFor="let t of teamRanks; let i = index;" style="margin-bottom:10px" text-wrap (click)='goTeamPage(t.id)' class="rank-team-items">
-          <ion-row>
-            <ion-col width-25>
-              <ion-thumbnail item-left>
-                <img [src]="t.logo">
-              </ion-thumbnail>
-              <ion-badge class="rank-badge" color="sky">{{ i+1 }}</ion-badge>
-            </ion-col>
-            <ion-col width-75 class="rank-team-specs">
-              <ion-row>
-                <ion-col>
-                  <h2 text-center class="rank-team-name">
-                    {{t.name}}
-                  </h2>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col width-33>
-                  <p text-center>
-                    <ion-icon name='md-football' [color]="teamSortByStr=='ability' ? 'gYellow' : 'none'"></ion-icon>
-                    &nbsp;{{'Ability' | trans}}</p>
-                  <p text-center ion-text [color]="teamSortByStr=='ability' ? 'secondary' : 'primary-text'">{{t.ability}}</p>
-                </ion-col>
-                <ion-col width-33>
-                  <p text-center>
-                    <ion-icon name='md-people'></ion-icon>&nbsp;{{'Players' | trans}}</p>
-                  <p text-center ion-text color="primary-text">{{t.totalPlayers}}</p>
-                </ion-col>
-                <ion-col width-33>
-                  <p text-center>
-                    <ion-icon name='md-flame' [color]="teamSortByStr=='popularity' ? 'danger' : 'none'"></ion-icon>&nbsp;{{'Popularity' | trans}}</p>
-                  <p text-center ion-text [color]="teamSortByStr=='popularity' ? 'secondary' : 'primary-text'">{{t.popularity}}</p>
-                </ion-col>
-              </ion-row>
-            </ion-col>
-          </ion-row>
-        </ion-item>
-      </ion-list>
-      <ion-infinite-scroll (ionInfinite)="moreTeam($event)">
-        <ion-infinite-scroll-content loadingSpinner="circles">
-        </ion-infinite-scroll-content>
-      </ion-infinite-scroll>
-    </div>
-    <div *ngSwitchCase="'players'">
-      <ion-list>
-        <ion-item *ngFor="let p of playerRanks; let i = index;" (click)="goPlayerPage(p.id)" style="margin-bottom:10px" text-wrap
-          class="rank-player-items">
-          <ion-avatar item-left>
-            <img [src]="p.photo">
-          </ion-avatar>
-          <ion-row center class="rank-player-specs">
-            <ion-col class="badge">
-              <ion-badge color="sky">{{ i+1 }}</ion-badge>
-            </ion-col>
-            <ion-col class="name">
-              {{p.name}}
-            </ion-col>
-            <ion-col class="position" text-center>
-              {{p.position | uppercase | trans}}
-            </ion-col>
-            <ion-col class="popularity"text-center>
-                <ion-icon name='ios-flame'  color="danger" ></ion-icon>
-                <span  color="danger" >{{p.popularity}}</span>
-            </ion-col>
-          </ion-row>
-        </ion-item>
-      </ion-list>
-      <ion-infinite-scroll (ionInfinite)="morePlayer($event)">
-        <ion-infinite-scroll-content loadingSpinner="circles">
-        </ion-infinite-scroll-content>
-      </ion-infinite-scroll>
-    </div>
-  </div>
+<ion-label>{{'SortBy' | trans}}</ion-label>
+<ion-select [ngModel]="teamSortByStr" (ngModelChange)="sortTeamBy($event)" text-center>
+  <ion-option value="ability">
+    {{'Ability' | trans}}
+  </ion-option>
+  <ion-option value="popularity">
+    {{'Popularity' | trans}}
+  </ion-option>
+</ion-select>
+</ion-item>
+<ion-list>
+  <ion-item *ngFor="let t of teamRanks; let i = index;" style="margin-bottom:10px" text-wrap (click)='goTeamPage(t.id)' class="rank-team-items">
+<ion-row>
+  <ion-col width-25>
+    <ion-thumbnail item-left>
+      <img [src]="t.logo">
+    </ion-thumbnail>
+    <ion-badge class="rank-badge" color="sky">{{ i+1 }}</ion-badge>
+  </ion-col>
+  <ion-col width-75 class="rank-team-specs">
+    <ion-row>
+      <ion-col>
+        <h2 text-center class="rank-team-name">
+          {{t.name}}
+        </h2>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col width-33>
+        <p text-center>
+          <ion-icon name='md-football' [color]="teamSortByStr=='ability' ? 'gYellow' : 'none'"></ion-icon>
+          &nbsp;{{'Ability' | trans}}</p>
+        <p text-center ion-text [color]="teamSortByStr=='ability' ? 'secondary' : 'primary-text'">{{t.ability}}</p>
+      </ion-col>
+      <ion-col width-33>
+        <p text-center>
+          <ion-icon name='md-people'></ion-icon>&nbsp;{{'Players' | trans}}</p>
+        <p text-center ion-text color="primary-text">{{t.totalPlayers}}</p>
+      </ion-col>
+      <ion-col width-33>
+        <p text-center>
+          <ion-icon name='md-flame' [color]="teamSortByStr=='popularity' ? 'danger' : 'none'"></ion-icon>&nbsp;{{'Popularity' | trans}}</p>
+        <p text-center ion-text [color]="teamSortByStr=='popularity' ? 'secondary' : 'primary-text'">{{t.popularity}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-col>
+</ion-row>
+</ion-item>
+</ion-list>
+<ion-infinite-scroll (ionInfinite)="moreTeam($event)">
+  <ion-infinite-scroll-content loadingSpinner="circles">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
+</div>
+<div *ngSwitchCase="'players'">
+  <ion-list>
+    <ion-item *ngFor="let p of playerRanks; let i = index;" (click)="goPlayerPage(p.id)" style="margin-bottom:10px" text-wrap class="rank-player-items">
+<ion-avatar item-left>
+  <img [src]="p.photo">
+</ion-avatar>
+<ion-row center class="rank-player-specs">
+  <ion-col class="badge">
+    <ion-badge color="sky">{{ i+1 }}</ion-badge>
+  </ion-col>
+  <ion-col class="name">
+    {{p.name}}
+  </ion-col>
+  <ion-col class="position" text-center>
+    {{p.position | uppercase | trans}}
+  </ion-col>
+  <ion-col class="popularity" text-center>
+    <ion-icon name='ios-flame' color="danger"></ion-icon>
+    <span color="danger">{{p.popularity}}</span>
+  </ion-col>
+</ion-row>
+</ion-item>
+</ion-list>
+<ion-infinite-scroll (ionInfinite)="morePlayer($event)">
+  <ion-infinite-scroll-content loadingSpinner="circles">
+  </ion-infinite-scroll-content>
+</ion-infinite-scroll>
+</div>
+</div>
 </ion-content>
