@@ -44,7 +44,7 @@ import { EditSquadPage } from '../pages/edit-squad/edit-squad';
 import { SharePage } from '../pages/share/share';
 import { EditGameRatingPage } from '../pages/edit-game-rating/edit-game-rating';
 import { SquadSelectPage} from '../pages/squad-select/squad-select';
-
+import { ManageSquadPage } from '../pages/manage-squad/manage-squad';
 // services
 import { AngularFireModule } from 'angularfire2';
 import { FirebaseManager } from '../providers/firebase-manager';
@@ -138,7 +138,7 @@ export const firebaseConfig = {
     SharePage,
     EditGameRatingPage,
     SquadSelectPage,
-
+    ManageSquadPage,
     // pipes
     TransPipe,
     StringToDatePipe,
@@ -220,7 +220,8 @@ export const firebaseConfig = {
     EditSquadPage,
     SharePage,
     EditGameRatingPage,
-    SquadSelectPage
+    SquadSelectPage,
+    ManageSquadPage
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
     FirebaseManager,
