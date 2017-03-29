@@ -15,7 +15,7 @@
 <ion-content>
   <ion-card no-margin class="my-player-header-card">
     <div class="banner">
-      <img src="assets/img/forTest/messi_banner.png">
+      <img [src]="player?.photoLarge" (click)="changeCoverPhoto()">
       <div class="banner-info clearfloat">
         <div class="fl info-pop">
           <div class="pop-number">

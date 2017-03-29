@@ -20,6 +20,7 @@ export class PlayerService {
       player.photo = playerData['basic-info'].photoURL || "assets/img/none.png";
       player.teamId = playerData['basic-info'].teamId;
       player.points = playerData.points;
+      player.photoLarge = playerData.photoLarge || "assets/img/forTest/messi_banner.png";
       if (playerData.photoMedium)
         player.photoMedium = playerData.photoMedium;
       if ('points' in playerData)
@@ -243,5 +244,9 @@ export class PlayerService {
 
   updatePlayerPhoto(playerId, photoUrl) {
     this.fm.updatePlayerPhoto(playerId, photoUrl);
+  }
+
+  updatePlayerPhotoLarge(playerId, photoUrl) {
+    this.fm.updatePlayerPhotoLarge(playerId, photoUrl);
   }
 }

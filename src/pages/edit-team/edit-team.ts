@@ -15,7 +15,7 @@ export class EditTeamPage {
   teamId: string;
   team: Team;
   onTeamReady;
-  imgSize = 256;
+  imgSize = 128;
   busy = false;
 
   constructor(private navCtrl: NavController, private modalCtrl: ModalController, private alertCtrl: AlertController, 

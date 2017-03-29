@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
 import { TeamService } from '../../app/teams/team.service'
 import { Team } from '../../app/teams/team.model'
 import { ChatPage } from '../chat/chat'
 import { Localization} from '../../providers/localization';
+import { FirebaseManager} from '../../providers/firebase-manager';
 
 @Component({
   selector: 'page-my-player',
@@ -24,7 +25,9 @@ export class MyPlayerPage {
   constructor(private navCtrl: NavController,
     private service: PlayerService,
     params: NavParams,
-    private teamService: TeamService,private local: Localization) {
+    private teamService: TeamService,private local: Localization,
+    private actionSheetCtrl: ActionSheetController,
+    private fm : FirebaseManager) {
     this.id = params.get('id');
   }
 
@@ -173,5 +176,41 @@ export class MyPlayerPage {
   getLocalizationClass(suffix){
       let localCode = this.local.langCode;
        return localCode + "-" + suffix;
+  }
+
+  changeCoverPhoto() {
+    if (this.id !== this.service.selfId())
+      return;
+    
+    let actionSheet = this.actionSheetCtrl.create({
+      buttons: [{
+          text: this.local.getString('changecoverphoto'),
+          handler: () => {
+            this.doChangeCoverPhoto();
+          }
+        },{
+          text: this.local.getString('Cancel'),
+          role: 'cancel',
+          handler: () => {
+            //console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present(); 
+  }
+
+  doChangeCoverPhoto() {
+    let self = this;
+
+    let success = photoUrl => {
+      this.service.updatePlayerPhotoLarge(this.selfId, photoUrl);
+    }
+
+    let error = err => {
+      console.log(err);
+    }
+
+    this.fm.selectImgUploadGetUrl(this.selfId + 'Large', 300, 144, success, error);
   }
 }

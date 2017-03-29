@@ -17,7 +17,7 @@ export class CreateTeamPage {
   onFail;
   logoData: any;
   logoUrl = 'assets/img/none.png';
-  imgSize = 256;
+  imgSize = 128;
 
   constructor(private viewCtrl: ViewController,
     private service: TeamService,

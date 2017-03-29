@@ -4,6 +4,7 @@ export class Player {
   name: string;
   photo: string;
   photoMedium;
+  photoLarge;
   teamId: string;
   description: string;
   foot: string;

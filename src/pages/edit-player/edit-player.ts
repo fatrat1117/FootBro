@@ -24,7 +24,7 @@ export class EditPlayerPage {
   onPlayerReady;
   isCheerleader = false;
   busy = false;
-  imgSize = 256;
+  imgSize = 128;
 
   constructor(private navCtrl: NavController, private modalCtrl: ModalController, private playerService: PlayerService, private teamService: TeamService, private fm: FirebaseManager) {
     this.selfId = this.playerService.selfId();

@@ -273,7 +273,8 @@ export class Localization {
             checkCheerLeaders:'Have a look',
             skip: 'Skip',
             whatsNew: "What's New",
-            teamDesc: 'All team infomation could be found here.'
+            teamDesc: 'All team infomation could be found here.',
+            changecoverphoto: 'Change Cover Photo'
         },
 
         zh: {
@@ -528,7 +529,8 @@ export class Localization {
             checkCheerLeaders:'点击查看',
             skip: '跳过',
             whatsNew: "新特性",
-            teamDesc: '查看球队所有信息'
+            teamDesc: '查看球队所有信息',
+            changecoverphoto: '更换封面'
         }
     }
 }

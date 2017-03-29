@@ -481,6 +481,10 @@ export class FirebaseManager {
     this.af.database.object(`/players/${id}/basic-info/photoURL`).set(photoUrl);
   }
 
+  updatePlayerPhotoLarge(id: string, photoUrl) {
+    this.af.database.object(`/players/${id}/photoLarge`).set(photoUrl);
+  }
+
   increasePlayerPopularity(id) {
     let publicData = this.sortedPublicPlayersMap[id];
     if (publicData) {
