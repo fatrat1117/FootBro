@@ -279,7 +279,8 @@ export class Localization {
             squads: 'Squads',
             squaddescription: 'Squad Description',
             entersquaddescription: 'Please enter squad description',
-            creator: 'Creator'
+            creator: 'Creator',
+            inputscores: 'Input Scores'
         },
 
         zh: {
@@ -540,7 +541,8 @@ export class Localization {
             squads: '战术',
             squaddescription: '阵型描述',
             entersquaddescription: '请输入阵型描述',
-            creator: '创建者'
+            creator: '创建者',
+            inputscores: '录入比分'
         }
     }
 }

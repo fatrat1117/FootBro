@@ -30,6 +30,8 @@ export class MatchService {
       match.awayScore = fmMatch.awayScore;
       match.date = fmMatch.date;
       match.time = fmMatch.time;
+      match.isHomeUpdated = fmMatch.isHomeUpdated;
+      match.isAwayUpdated = fmMatch.isAwayUpdated;
 
       match.home = this.teamService.findOrCreateTeam(match.homeId);
       this.fm.getTeamAsync(match.homeId);
