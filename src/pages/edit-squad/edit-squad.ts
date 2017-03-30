@@ -144,7 +144,7 @@ export class EditSquadPage {
           text: this.loc.getString('Save'),
           handler: data => {
             squad.name = data.name;
-            squad.createdBy = this.playerService.selfId();
+            squad.creator = this.playerService.selfId();
             squad.formation = this.currentSquadForm;
             this.teamService.saveTeamSquad(this.teamId, squad, this.squadId);
             this.dismiss();

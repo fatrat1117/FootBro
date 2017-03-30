@@ -11,17 +11,16 @@
 <ion-content no-bounce>
   <ion-list>
     <ion-item-sliding *ngFor="let squad of team.squads">
-      <ion-item detail-push (click)="openEditSquadPage(squad.$key)">
+      <ion-item (click)="openEditSquadPage(squad.$key)">
         <ion-avatar item-left>
           <img src="assets/img/none.png">
         </ion-avatar>
         <h2>{{squad.name}}</h2>
         <p>{{squad.formation}}</p>
-        <p>{{'creator' | trans}}</p>
-        <p>{{playerService.getPlayer(squad.createdBy)?.name}}</p>
+        <p>{{'creator' | trans}}: {{playerService.getPlayer(squad.creator)?.name}}</p>
       </ion-item>
       <ion-item-options side="right">
-        <button color='danger' [disabled]="squad.createdBy !== playerService.selfId()" ion-button icon-only clear (click)="deleteSquad(squad.$key)">
+        <button color='danger' [disabled]="squad.creator !== playerService.selfId()" ion-button icon-only clear (click)="deleteSquad(squad.$key)">
           <ion-icon name='trash' item-right></ion-icon>
         </button>
       </ion-item-options>
