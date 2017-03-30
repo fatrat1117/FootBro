@@ -9,7 +9,7 @@ declare var Wechat: any;
   selector: 'sb-share-button',
   template: `
   <button ion-button icon-only style="background-color: transparent;" (click)="showSharePage()">
-    <ion-icon name="md-share" color="primary"></ion-icon>
+    <ion-icon name="md-share" color="gYellow"></ion-icon>
   </button>
   `
 })
