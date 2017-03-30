@@ -23,6 +23,7 @@ export class EditSquadPage {
   currentSquadForm = '4-4-2';
   teamMode = false;
   squadId;
+  teamSquad;
 
   constructor(private viewCtrl: ViewController,
     private playerService: PlayerService,
@@ -36,6 +37,16 @@ export class EditSquadPage {
     this.teamId = navParams.get('teamId');
     this.teamMode = navParams.get('teamMode');
     this.squadId = navParams.get('squadId');
+    if (this.teamMode && this.squadId) {
+      let squads = this.teamService.getTeam(this.teamId).squads;
+      for (let i = 0; i < squads.length; ++i) {
+        let squad = squads[i];
+        if (squad.$key === this.squadId) {
+          this.teamSquad = squad;
+          break;
+        }
+      }
+    }
     this.squadSettings = {};
     this.squadSettings.editMode = true;
     this.squadSettings.matchId = this.match.id;
@@ -52,12 +63,11 @@ export class EditSquadPage {
   ionViewDidLoad() {
     this.squadSettings.offsetY = this.pageHeader.nativeElement.clientHeight;
     console.log('editsquadloaded', this.squadCtrl);
-    //this.squadCtrl.loadSquad();
-  }
-
-  load11() {
-    //console.log(this.squadCtrl);
-    this.squadCtrl.setSquad(PREDEFINEDSQUAD['442']);
+    if (this.teamSquad) {
+      setTimeout(() => {
+        this.squadCtrl.setSquad(this.teamSquad);
+      }, 200)
+    }
   }
 
   loadPredefinedSquad() {
@@ -100,7 +110,7 @@ export class EditSquadPage {
         predefinedSquadId = '121';
         break;
     }
-    this.squadCtrl.setSquad(PREDEFINEDSQUAD[predefinedSquadId]);
+    this.squadCtrl.setLineup(PREDEFINEDSQUAD[predefinedSquadId]);
   }
 
   saveSquad() {
@@ -119,6 +129,7 @@ export class EditSquadPage {
       inputs: [
         {
           name: 'name',
+          value: this.teamSquad? this.teamSquad.name : null,
           placeholder: this.loc.getString('entersquaddescription')
         },
       ],

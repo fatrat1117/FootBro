@@ -41,19 +41,6 @@ export class RankService {
         }
       );
 
-    // document.addEventListener('serviceteamready', e => {
-    //   let teamId = e['detail'];
-    //   let team = this.teamService.getTeam(teamId);
-    //   let teamRankData = this.teamRanksMap[teamId];
-    //   if (team && teamRankData) {
-    //     teamRankData.logo = team.logo;
-    //     teamRankData.totalPlayers = team.totalPlayers;
-    //     teamRankData.ability = team.ability;
-    //     teamRankData.popularity = team.popularity;
-    //   }
-    // }
-    // );
-
     document.addEventListener('publicplayerschanged', e => {
       let sortedPublicPlayers = this.fm.sortedPublicPlayers;
       this.playerRanks = [];
@@ -69,18 +56,6 @@ export class RankService {
 
       this.fm.FireEvent('serviceplayerrankschanged');
     });
-
-    // document.addEventListener('serviceplayerready', e => {
-    //   let id = e['detail'];
-    //   let player = this.playerService.getPlayer(id);
-    //   let playerRank = this.playerRanksMap[id];
-    //   if (playerRank) {
-    //     playerRank.photo = player.photo;
-    //     playerRank.name = player.name;
-    //     playerRank.position = player.position;
-    //     playerRank.popularity = player.popularity;
-    //   } 
-    // });
   }
 
   getTeamRanksAsync(orderby, count) {

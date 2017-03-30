@@ -38,26 +38,7 @@ export class SquadPage implements OnInit, OnDestroy {
       //console.log(teamId, matchId, this);
       if (teamId === this.settings.teamId && matchId === this.settings.matchId) {
         let squad = this.teamService.getMatchSquad(teamId, matchId);
-        this.setSquad(squad.lineup);
-        if (this.lineup) {
-          this.lineup.forEach(l => {
-            if ('id' in l) {
-              this.uiPlayerMap[l.id] = l;
-              let player = this.playerService.getPlayerAsync(l.id);
-            }
-          });
-        }
-        this.substitutes.splice(0);
-        if (squad.substitutes) {
-          squad.substitutes.forEach(id => {
-            let substitue = {
-              id: id,
-            }
-            this.uiPlayerMap[id] = substitue;
-            this.substitutes.push(substitue);
-            let player = this.playerService.getPlayerAsync(id);
-          });
-        }
+        this.setSquad(squad);
       }
     }
 
@@ -174,10 +155,33 @@ export class SquadPage implements OnInit, OnDestroy {
     modal.present();
   }
 
+  setLineup(lineup) {
+    console.log('setLineup', this.squadCtrl);
+    if (lineup)
+      this.lineup = this.uiHelper.squadPercentToPx(lineup, this.squadCtrl.nativeElement.clientWidth, this.squadCtrl.nativeElement.clientHeight);
+  }
+
   setSquad(squad) {
-    console.log('setSquad', this.squadCtrl);
-    if (squad)
-      this.lineup = this.uiHelper.squadPercentToPx(squad, this.squadCtrl.nativeElement.clientWidth, this.squadCtrl.nativeElement.clientHeight);
+    this.setLineup(squad.lineup);
+        if (this.lineup) {
+          this.lineup.forEach(l => {
+            if ('id' in l) {
+              this.uiPlayerMap[l.id] = l;
+              let player = this.playerService.getPlayerAsync(l.id);
+            }
+          });
+        }
+        this.substitutes.splice(0);
+        if (squad.substitutes) {
+          squad.substitutes.forEach(id => {
+            let substitue = {
+              id: id,
+            }
+            this.uiPlayerMap[id] = substitue;
+            this.substitutes.push(substitue);
+            let player = this.playerService.getPlayerAsync(id);
+          });
+        }
   }
 
   getSquad() {
