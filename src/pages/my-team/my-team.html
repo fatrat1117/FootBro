@@ -53,26 +53,6 @@
     </ion-item>
   </ion-list>
   <div *ngIf="matches?.length > 0" (click)="showUpcomingMatch()" class="result-score-wrapper">
-    <!--<button ion-button full disabled class="nearest-game-time default-font-color">-->
-      <!--{{upcomingMatch?.time | date:'yyyy-MM-dd h:mma'}}-->
-    <!--</button>-->
-    <!--<div class="nearest-game-display">-->
-      <!--<div class="game-left">-->
-        <!--<div class="game-left-setting">-->
-          <!--<img [src]="upcomingMatch?.home?.logo" class="game-left-img">-->
-          <!--<p class="game-left-text">{{upcomingMatch?.home?.name}}</p>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="game-center">-->
-        <!--<p class="game-score">{{upcomingMatch?.homeScore}}&nbsp;:&nbsp;{{upcomingMatch?.awayScore}}</p>-->
-      <!--</div>-->
-      <!--<div class="game-right">-->
-        <!--<div class="game-right-setting">-->
-          <!--<img [src]="upcomingMatch?.away?.logo" class="game-right-img">-->
-          <!--<p class="game-right-text">{{upcomingMatch?.away?.name}}</p>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
     <result-score [upcomingMatch]="upcomingMatch" [hostPageName]="currPageName"></result-score>
   </div>
   <ion-list class="no-margin">

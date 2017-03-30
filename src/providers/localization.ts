@@ -276,9 +276,11 @@ export class Localization {
             teamDesc: 'All team infomation could be found here.',
             changecoverphoto: 'Change Cover Photo',
             squad: 'Squad',
+            squads: 'Squads',
             squaddescription: 'Squad Description',
             entersquaddescription: 'Please enter squad description',
-            creator: 'Creator'
+            creator: 'Creator',
+            inputscores: 'Input Scores'
         },
 
         zh: {
@@ -536,9 +538,11 @@ export class Localization {
             teamDesc: '查看球队所有信息',
             changecoverphoto: '更换封面',
             squad: '阵型',
+            squads: '战术',
             squaddescription: '阵型描述',
             entersquaddescription: '请输入阵型描述',
-            creator: '创建者'
+            creator: '创建者',
+            inputscores: '录入比分'
         }
     }
 }
