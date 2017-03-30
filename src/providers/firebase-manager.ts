@@ -32,6 +32,7 @@ export class FirebaseManager {
   cachedRegisteredTeamsMap = {};
   //squads
   cachedSquads: any = {};
+  cachedTeamSquads = {};
   //player social
   cachedPlayersSocialMap = {};
   //cheerleader
@@ -510,7 +511,7 @@ export class FirebaseManager {
       });
     }
   }
-  
+
   getPlayerAsync(id) {
     if (this.cachedPlayersMap[id]) {
       this.FireCustomEvent('playerready', id);
@@ -747,20 +748,20 @@ export class FirebaseManager {
     }
   }
 
-  // getMatchSquad(matchId) {
-  //   return this.cachedMatchSquadMap[matchId];
-  // }
+  getTeamSquads(teamId) {
+    return this.cachedTeamSquads[teamId];
+  }
 
-  // getMatchSquadAsync(matchId) {
-  //   if (this.getMatchSquad(matchId)) 
-  //     this.FireCustomEvent('matchsquadready', matchId);
-  //   else {
-  //     this.af.database.object('/matchs_squads/' + matchId).subscribe(snapshot=> {
-  //       this.cachedMatchSquadMap[matchId] = snapshot;
-  //       this.FireCustomEvent('matchsquadready', matchId);
-  //     })
-  //   }
-  // }
+  getTeamSquadsAsync(teamId) {
+    if (this.getTeamSquads(teamId))
+      this.FireCustomEvent('teamsquadsready', teamId);
+    else {
+      this.af.database.list(`/team_squads/${teamId}/squads/`).subscribe(squads => {
+        this.cachedTeamSquads[teamId] = squads;
+        this.FireCustomEvent('teamsquadsready', teamId);
+      });
+    }
+  }
 
   getTeamMatchesAsync(teamId) {
     let sub = this.af.database.list('/team_squads/' + teamId + '/matches', {
@@ -771,7 +772,7 @@ export class FirebaseManager {
       sub.unsubscribe();
       snapshots.sort((a, b) => { return b.time - a.time });
       //console.log(snapshots);
-      
+
       let result = {
         id: teamId,
         matches: snapshots
@@ -796,7 +797,7 @@ export class FirebaseManager {
 
   updateTeamMatches(matchId, matchObj) {
     console.log('updateTeamMatches', matchId, matchObj);
-    
+
     //update team matches list
     if ('time' in matchObj && 'homeId' in matchObj && 'awayId' in matchObj) {
       this.af.database.object(this.getMatchSquadRef(matchObj.homeId, matchId) + 'time').set(matchObj.time);
@@ -1034,7 +1035,7 @@ export class FirebaseManager {
       this.updateImgGetUrl(data, imgId, width, height, success, error);
     }
 
-    let getImgFail = err => {};
+    let getImgFail = err => { };
 
     this.selectImgGetData(width, height, getImgSuccess, getImgFail);
   }
@@ -1182,7 +1183,7 @@ export class FirebaseManager {
     this.af.auth.logout();
   }
 
-  migrateData () {
+  migrateData() {
     //match time for sorting
     let sub = this.af.database.list(this.matchListRef()).subscribe(matches => {
       sub.unsubscribe();
