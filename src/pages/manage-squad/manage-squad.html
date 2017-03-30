@@ -1,22 +1,24 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{'squad' | trans}}</ion-title>
-    <!--<ion-buttons right>
-      <button (click)="createTeam()" ion-button icon-only>
+    <ion-buttons right>
+      <button (click)="createSquad()" ion-button icon-only>
         <ion-icon name="md-add"></ion-icon>
       </button>
-    </ion-buttons>-->
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content no-bounce>
   <ion-list>
-    <ion-item-sliding>
-      <ion-item detail-push (click)="openEditSquadPage()">
+    <ion-item-sliding *ngFor="let squad of team.squads">
+      <ion-item detail-push (click)="openEditSquadPage(squad.$key)">
         <ion-avatar item-left>
           <img src="assets/img/none.png">
         </ion-avatar>
-        <h2>test</h2>
-        <p>4123</p>
+        <h2>{{squad.name}}</h2>
+        <p>{{squad.formation}}</p>
+        <p>{{'creator' | trans}}</p>
+        <p>{{playerService.getPlayer(squad.createdBy)?.name}}</p>
       </ion-item>
       <ion-item-options side="right">
         <button color='danger' ion-button icon-only clear>

@@ -753,6 +753,8 @@ export class FirebaseManager {
   }
 
   getTeamSquadsAsync(teamId) {
+    console.log('getTeamSquadsAsync', teamId);
+    
     if (this.getTeamSquads(teamId))
       this.FireCustomEvent('teamsquadsready', teamId);
     else {

@@ -111,6 +111,16 @@ export class TeamService {
         this.fm.FireCustomEvent('serviceplayerteamsready', id);
       }
     });
+
+    document.addEventListener('teamsquadsready', e => {
+      let teamId = e['detail'];
+      let team = this.findOrCreateTeam(teamId);
+      team.squads.splice(0);
+      let squads = this.fm.getTeamSquads(teamId);
+      squads.forEach(squad => {
+        team.squads.push(squad);
+      })
+    });
   }
 
   updateAvg(obj) {
@@ -147,7 +157,8 @@ export class TeamService {
     return team;
   }
 
-  getTeamAsync(id, pullStats = false) {
+  getTeamAsync(id, pullStats = false, pullSquads = false) {
+    //console.log('getTeamAsync', id, pullStats, pullSquads);
     if (this.getTeam(id))
       this.fm.FireCustomEvent('serviceteamready', id);
     else
@@ -155,6 +166,8 @@ export class TeamService {
 
     if (pullStats)
       this.fm.getTeamStatsAsync(id);
+    if (pullSquads)
+      this.fm.getTeamSquadsAsync(id);
   }
 
   getTeam(id): Team {

@@ -50,4 +50,5 @@ export class Team {
   captain;
   points;
   matchSquads : any = {};
+  squads = [];
 }

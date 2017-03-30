@@ -277,7 +277,8 @@ export class Localization {
             changecoverphoto: 'Change Cover Photo',
             squad: 'Squad',
             squaddescription: 'Squad Description',
-            entersquaddescription: 'Please enter squad description'
+            entersquaddescription: 'Please enter squad description',
+            creator: 'Creator'
         },
 
         zh: {
@@ -536,7 +537,8 @@ export class Localization {
             changecoverphoto: '更换封面',
             squad: '阵型',
             squaddescription: '阵型描述',
-            entersquaddescription: '请输入阵型描述'
+            entersquaddescription: '请输入阵型描述',
+            creator: '创建者'
         }
     }
 }

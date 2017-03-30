@@ -35,6 +35,7 @@ export class EditSquadPage {
     this.match = navParams.get('match');
     this.teamId = navParams.get('teamId');
     this.teamMode = navParams.get('teamMode');
+    this.squadId = navParams.get('squadId');
     this.squadSettings = {};
     this.squadSettings.editMode = true;
     this.squadSettings.matchId = this.match.id;
