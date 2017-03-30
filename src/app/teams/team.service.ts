@@ -228,6 +228,13 @@ export class TeamService {
     this.fm.promoteNewCaptain(teamId, playerId);
   }
 
+  saveTeamSquad(teamId, squadObj, squadId = null) {
+    if (squadId)
+      this.fm.updateTeamSquad(teamId, squadId, squadObj);
+    else 
+      this.fm.createTeamSquad(teamId, squadObj);
+  }
+
   saveMatchSquad(teamId, matchId, squadObj) {
     this.fm.saveMatchSquad(teamId, matchId, squadObj);
   }

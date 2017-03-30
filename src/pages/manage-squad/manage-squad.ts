@@ -25,6 +25,6 @@ export class ManageSquadPage {
   }  
 
   openEditSquadPage() {
-    this.modal.create(EditSquadPage, { match: this.match, teamId: this.teamId }).present();
+    this.modal.create(EditSquadPage, { match: this.match, teamId: this.teamId, teamMode: true }).present();
   }
 }

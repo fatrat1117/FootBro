@@ -825,6 +825,15 @@ export class FirebaseManager {
     }
   }
 
+  createTeamSquad(teamId, squadObj) {
+    console.log('createTeamSquad', teamId, squadObj);
+    this.af.database.list(`/team_squads/${teamId}/squads/`).push(squadObj);
+  }
+
+  updateTeamSquad(teamId, squadId, squadObj) {
+    this.af.database.object(`/team_squads/${teamId}/squads/${squadId}`).set(squadObj);
+  }
+
   saveMatchSquad(teamId, matchId, squadObj) {
     console.log('updateMatch', teamId, matchId, squadObj);
     this.af.database.object(`/team_squads/${teamId}/matches/${matchId}`).update(squadObj);

@@ -1,10 +1,11 @@
 import { Component, ViewChild } from "@angular/core";
-import { ViewController, NavParams, PopoverController } from 'ionic-angular';
+import { ViewController, NavParams, PopoverController, AlertController } from 'ionic-angular';
 import { Match, PREDEFINEDSQUAD } from '../../app/matches/match.model';
 import { PlayerService } from '../../app/players/player.service';
 import { UIHelper } from '../../providers/uihelper';
 import { TeamService } from '../../app/teams/team.service';
 import { SquadSelectPage } from '../../pages/squad-select/squad-select';
+import { Localization } from '../../providers/localization'
 
 @Component({
   selector: 'page-edit-squad',
@@ -20,15 +21,20 @@ export class EditSquadPage {
   selectedSquad = 11; //Default Squad Number set to 11
   popOverPage: any;
   currentSquadForm = '4-4-2';
+  teamMode = false;
+  squadId;
 
   constructor(private viewCtrl: ViewController,
     private playerService: PlayerService,
     private uiHelper: UIHelper,
     navParams: NavParams,
     private teamService: TeamService,
-    private popoverCtrl: PopoverController) {
+    private popoverCtrl: PopoverController,
+    private alertCtrl: AlertController,
+    private loc : Localization) {
     this.match = navParams.get('match');
     this.teamId = navParams.get('teamId');
+    this.teamMode = navParams.get('teamMode');
     this.squadSettings = {};
     this.squadSettings.editMode = true;
     this.squadSettings.matchId = this.match.id;
@@ -46,10 +52,6 @@ export class EditSquadPage {
     this.squadSettings.offsetY = this.pageHeader.nativeElement.clientHeight;
     console.log('editsquadloaded', this.squadCtrl);
     //this.squadCtrl.loadSquad();
-  }
-
-  load7() {
-
   }
 
   load11() {
@@ -102,13 +104,46 @@ export class EditSquadPage {
 
   saveSquad() {
     let squad = this.squadCtrl.getSquad();
-    this.teamService.saveMatchSquad(this.teamId, this.match.id, squad);
-    this.dismiss();
+    if (this.teamMode) 
+      this.saveTeamSquad(squad);
+    else {
+      this.teamService.saveMatchSquad(this.teamId, this.match.id, squad);
+      this.dismiss();
+    }
+  }
 
+  saveTeamSquad(squad : any) {
+    let prompt = this.alertCtrl.create({
+      title: this.loc.getString('squaddescription'),
+      inputs: [
+        {
+          name: 'name',
+          placeholder: this.loc.getString('entersquaddescription')
+        },
+      ],
+      buttons: [
+        {
+          text: this.loc.getString('Cancel'),
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: this.loc.getString('Save'),
+          handler: data => {
+            squad.name = data.name;
+            squad.createdBy = this.playerService.selfId();
+            squad.formation = this.currentSquadForm;
+            this.teamService.saveTeamSquad(this.teamId, squad, this.squadId);
+            this.dismiss();
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
   selectSquadNumber(myEvent, number) {
-
     if (this.popOverPage) {
       this.popOverPage.dismiss();
     }

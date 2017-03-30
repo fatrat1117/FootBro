@@ -275,7 +275,9 @@ export class Localization {
             whatsNew: "What's New",
             teamDesc: 'All team infomation could be found here.',
             changecoverphoto: 'Change Cover Photo',
-            squad: 'Squad'
+            squad: 'Squad',
+            squaddescription: 'Squad Description',
+            entersquaddescription: 'Please enter squad description'
         },
 
         zh: {
@@ -532,7 +534,9 @@ export class Localization {
             whatsNew: "新特性",
             teamDesc: '查看球队所有信息',
             changecoverphoto: '更换封面',
-            squad: '阵容'
+            squad: '阵型',
+            squaddescription: '阵型描述',
+            entersquaddescription: '请输入阵型描述'
         }
     }
 }
