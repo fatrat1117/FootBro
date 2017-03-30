@@ -5,7 +5,7 @@
         <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-buttons left class="squard-number-container">
+    <ion-buttons *ngIf="squadSettings.editMode" left class="squard-number-container">
       <button no-padding class="squard-number-btn circle five" (click)="selectSquadNumber($event,5)" [ngClass]="{selected:selectedSquad==5}">
         <span>5</span>
       </button>
