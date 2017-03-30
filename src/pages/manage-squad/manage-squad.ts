@@ -32,12 +32,12 @@ export class ManageSquadPage {
     this.modal.create(EditSquadPage, { match: this.match, teamId: this.teamId, teamMode: true }).present();
   }
 
-  openEditSquadPage(squadId) {
+  onClickSquad(squad) {
     if (this.selectMode) {
-      this.viewCtrl.dismiss(squadId);
+      this.viewCtrl.dismiss(squad);
     }
     else
-      this.modal.create(EditSquadPage, { match: this.match, teamId: this.teamId, teamMode: true, squadId: squadId }).present();
+      this.modal.create(EditSquadPage, { match: this.match, teamId: this.teamId, teamMode: true, squadId: squad.$key }).present();
   }
 
   deleteSquad(squadId) {

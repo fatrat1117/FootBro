@@ -33,8 +33,8 @@ export class EditSquadPage {
     private teamService: TeamService,
     private popoverCtrl: PopoverController,
     private alertCtrl: AlertController,
-    private loc : Localization,
-    private modal : ModalController) {
+    private loc: Localization,
+    private modal: ModalController) {
     this.match = navParams.get('match');
     this.teamId = navParams.get('teamId');
     this.teamMode = navParams.get('teamMode');
@@ -78,7 +78,7 @@ export class EditSquadPage {
   }
 
   loadPredefinedSquad() {
-    let predefinedSquadId = '442';
+    let predefinedSquadId;
     switch (this.currentSquadForm) {
       case '4-4-2':
         predefinedSquadId = '442';
@@ -117,12 +117,13 @@ export class EditSquadPage {
         predefinedSquadId = '121';
         break;
     }
-    this.squadCtrl.setLineup(PREDEFINEDSQUAD[predefinedSquadId]);
+    if (predefinedSquadId)
+      this.squadCtrl.setLineup(PREDEFINEDSQUAD[predefinedSquadId]);
   }
 
   saveSquad() {
     let squad = this.squadCtrl.getSquad();
-    if (this.teamMode) 
+    if (this.teamMode)
       this.saveTeamSquad(squad);
     else {
       this.teamService.saveMatchSquad(this.teamId, this.match.id, squad);
@@ -130,13 +131,13 @@ export class EditSquadPage {
     }
   }
 
-  saveTeamSquad(squad : any) {
+  saveTeamSquad(squad: any) {
     let prompt = this.alertCtrl.create({
       title: this.loc.getString('squaddescription'),
       inputs: [
         {
           name: 'name',
-          value: this.teamSquad? this.teamSquad.name : null,
+          value: this.teamSquad ? this.teamSquad.name : null,
           placeholder: this.loc.getString('entersquaddescription')
         },
       ],
@@ -175,15 +176,20 @@ export class EditSquadPage {
 
     this.popOverPage.onDidDismiss(data => {
       console.log(data);
-      this.currentSquadForm = data;
-      this.loadPredefinedSquad();
+      if (data) {
+        this.currentSquadForm = data;
+        this.loadPredefinedSquad();
+      }
     });
   }
 
   selectSquads() {
-    let modal = this.modal.create(ManageSquadPage, {selectMode: true});
+    let modal = this.modal.create(ManageSquadPage, { teamId: this.teamId, selectMode: true });
     modal.onDidDismiss(e => {
-      console.log(e);
+      if (e) {
+        this.teamSquad = e;
+        this.squadCtrl.setSquad(this.teamSquad);
+      }
     });
     modal.present();
   }
