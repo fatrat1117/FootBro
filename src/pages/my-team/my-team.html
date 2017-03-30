@@ -45,15 +45,18 @@
   </div>
   <ion-list class="subtitle no-margin">
     <ion-item color="dark">
-      <button ion-button item-left clear class="subtitle-text">{{'UpcomingMatches' | trans}}</button>
+      <button ion-button item-left clear class="subtitle-text">{{'recentmatches' | trans}}</button>
       <button ion-button item-right icon-right clear class="subtitle-text-small" (click)="seeMoreTeamGamePlan()">
         {{'ViewAll' | trans}}
         <ion-icon name="ios-arrow-forward"></ion-icon>
       </button>
     </ion-item>
   </ion-list>
-  <div *ngIf="matches?.length > 0" (click)="showUpcomingMatch()" class="result-score-wrapper">
+  <div *ngIf="matches?.length > 0" (click)="showMatch(upcomingMatch)" class="result-score-wrapper">
     <result-score [upcomingMatch]="upcomingMatch" [hostPageName]="currPageName"></result-score>
+  </div>
+  <div *ngIf="lastMatch" (click)="showMatch(lastMatch)" class="result-score-wrapper">
+    <result-score [upcomingMatch]="lastMatch" [hostPageName]="currPageName"></result-score>
   </div>
   <ion-list class="no-margin">
     <ion-item class="subtitle">

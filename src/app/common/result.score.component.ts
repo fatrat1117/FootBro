@@ -31,7 +31,7 @@ import { UpdateGamePage } from '../../pages/update-game/update-game';
         </ion-col>
       </ion-row>
       <ion-row *ngIf="canShowInputScores()" center>
-      <button ion-button clear color="gYellow" (click)="openUpdateMatchPage()">{{'inputscores' | trans}}
+      <button ion-button clear color="gYellow" (click)="openUpdateMatchPage($event)">{{'inputscores' | trans}}
       </button>
       </ion-row>
     </ion-col>
@@ -79,7 +79,7 @@ export class ResultScoreComponent {
     
     if (!this.upcomingMatch)
       return false;
-    console.log(this.upcomingMatch, this.upcomingMatch.isStarted(), this.playerService.selfId());
+    //console.log(this.upcomingMatch, this.upcomingMatch.isStarted(), this.playerService.selfId());
     if (this.upcomingMatch.isStarted() && 
     ((this.playerService.isCaptain(this.playerService.selfId(), this.upcomingMatch.homeId) && !this.upcomingMatch.isHomeUpdated)
     || (this.playerService.isCaptain(this.playerService.selfId(), this.upcomingMatch.awayId) && !this.upcomingMatch.isAwayUpdated))
@@ -90,7 +90,8 @@ export class ResultScoreComponent {
     return false;
   }
 
-  openUpdateMatchPage() {
+  openUpdateMatchPage(e) {
+     e.stopPropagation();
     let teamId = this.playerService.isCaptain(this.playerService.selfId(), this.upcomingMatch.homeId) ? this.upcomingMatch.homeId : this.upcomingMatch.awayId;
     this.modal.create(UpdateGamePage, { id: this.upcomingMatch.id, teamId: teamId }).present();
   }

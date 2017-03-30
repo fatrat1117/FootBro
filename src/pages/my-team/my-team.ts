@@ -39,6 +39,7 @@ export class MyTeamPage {
   onTeamPlayersReady;
   onTeamMatchesReady;
   currPageName = "my-team";
+  lastMatch;
 
   constructor(public nav: NavController,
     private navParams: NavParams,
@@ -132,6 +133,8 @@ export class MyTeamPage {
         index = i;
       }
       this.upcomingMatch = this.matches[index];
+      if (index + 1 < this.matches.length)
+        this.lastMatch = this.matches[index + 1];
     }
   }
 
@@ -298,10 +301,9 @@ export class MyTeamPage {
     return style;
   }
 
-  showUpcomingMatch() {
-    if (this.upcomingMatch) {
-      //console.log(this.upcomingMatch);
-      this.modalCtrl.create(MatchDetailPage, {match: this.upcomingMatch}).present();
+  showMatch(match) {
+    if (match) {
+      this.modalCtrl.create(MatchDetailPage, {match: match}).present();
     }
   }
 }
