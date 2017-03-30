@@ -32,6 +32,7 @@ export class MatchDetailPage {
   selectedStats;
   selectedCat;
   currPageName = "match-detail";
+  mapClicked = false;
 
   constructor(private viewCtrl: ViewController,
     private modal: ModalController,
@@ -341,7 +342,9 @@ export class MatchDetailPage {
   }
 
   navigateToField() {
-    //console.log(this.launchNavigator);
+    if (this.mapClicked)
+      return;
+    this.mapClicked = true;
 
     if ('lat' in this.match.location && 'lng' in this.match.location) {
       //   this.geo = "geo:?q=" + this.match.location.lat + ',' + this.match.location.lng;
@@ -356,5 +359,10 @@ export class MatchDetailPage {
         error => alert(error)
         );
     }
+
+    setTimeout(() => {
+      this.mapClicked = false;
+    },
+      3000);
   }
 }
