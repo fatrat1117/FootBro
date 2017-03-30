@@ -172,6 +172,7 @@ export class MyPlayerPage {
   }
 
 
+  /*
   getLikePic(key) {
     if (this.player && this.player.social && this.player.social.votes) {
       let myVote = this.player.social.votes[this.service.selfId()];
@@ -195,6 +196,7 @@ export class MyPlayerPage {
 
     return "assets/icon/bed_push@2x.png";
   }
+  */
 
   getLocalizationClass(suffix){
       let localCode = this.local.langCode;

@@ -126,7 +126,7 @@
         <ion-item class="expandable-member-property" [hidden]="!player.expanded">
           <!--<img src="assets/icon/b3.png" class="desc-img" item-left/>-->
 
-          <ion-icon name="contacts" class="desc-img" item-left></ion-icon>
+          <ion-icon name="contacts" class="desc-img" item-left color="gGreen"></ion-icon>
           <button ion-button clear color="light">{{'Assists' | trans}}</button>
           <div item-right>
             <button [disabled]="player.assists <= 0" ion-button icon-only clear (click)="minus(player, 'assists')" color="light">
