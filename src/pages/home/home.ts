@@ -149,7 +149,7 @@ export class HomePage {
   enterManageSquadPage() {
     if (this.playerService.isAuthenticated()) {
       if (this.selfTeam)
-        this.navCtrl.push(ManageSquadPage, { });
+        this.navCtrl.push(ManageSquadPage, { teamId: this.selfTeam.id });
       else 
         this.joinTeam();
     } else 

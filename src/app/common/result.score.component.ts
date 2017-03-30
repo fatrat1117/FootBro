@@ -31,7 +31,7 @@ import { UpdateGamePage } from '../../pages/update-game/update-game';
         </ion-col>
       </ion-row>
       <ion-row *ngIf="canShowInputScores()" center>
-      <button ion-button clear color="gYellow" (click)="openUpdateMatchPage($event)">{{'inputscores' | trans}}
+      <button ion-button color="gYellow" (click)="openUpdateMatchPage($event)">{{'inputscores' | trans}}
       </button>
       </ion-row>
     </ion-col>
