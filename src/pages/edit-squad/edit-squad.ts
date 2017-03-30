@@ -73,7 +73,7 @@ export class EditSquadPage {
     if (this.teamSquad) {
       setTimeout(() => {
         this.squadCtrl.setSquad(this.teamSquad);
-      }, 200)
+      }, 500)
     }
   }
 
