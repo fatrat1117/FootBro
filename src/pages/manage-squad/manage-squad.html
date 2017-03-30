@@ -21,7 +21,7 @@
         <p>{{playerService.getPlayer(squad.createdBy)?.name}}</p>
       </ion-item>
       <ion-item-options side="right">
-        <button color='danger' ion-button icon-only clear>
+        <button color='danger' [disabled]="squad.createdBy !== playerService.selfId()" ion-button icon-only clear (click)="deleteSquad(squad.$key)">
           <ion-icon name='trash' item-right></ion-icon>
         </button>
       </ion-item-options>

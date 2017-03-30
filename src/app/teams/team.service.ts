@@ -157,6 +157,10 @@ export class TeamService {
     return team;
   }
 
+  deleteTeamSquad(teamId, squadId) {
+    this.fm.deleteTeamSquad(teamId, squadId);
+  }
+
   getTeamAsync(id, pullStats = false, pullSquads = false) {
     //console.log('getTeamAsync', id, pullStats, pullSquads);
     if (this.getTeam(id))

@@ -40,4 +40,8 @@ export class ManageSquadPage {
   openEditSquadPage(squadId) {
     this.modal.create(EditSquadPage, { match: this.match, teamId: this.teamId, teamMode: true, squadId: squadId }).present();
   }
+
+  deleteSquad(squadId) {
+    this.teamService.deleteTeamSquad(this.teamId, squadId);
+  }
 }

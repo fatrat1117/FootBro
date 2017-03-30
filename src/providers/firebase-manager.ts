@@ -748,6 +748,10 @@ export class FirebaseManager {
     }
   }
 
+  deleteTeamSquad(teamId, squadId) {
+     this.af.database.list(`/team_squads/${teamId}/squads/${squadId}/`).remove();
+  }
+
   getTeamSquads(teamId) {
     return this.cachedTeamSquads[teamId];
   }
