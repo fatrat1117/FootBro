@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, ModalController} from 'ionic-angular'
+import { NavParams, ModalController, ViewController} from 'ionic-angular'
 import { EditSquadPage } from '../edit-squad/edit-squad';
 import { Match } from '../../app/matches/match.model';
 import { Team } from '../../app/teams/team.model'
@@ -14,34 +14,37 @@ export class ManageSquadPage {
   teamId;
   match = new Match();
   team;
+  selectMode;
   constructor(params: NavParams,
   private modal: ModalController,
   private teamService: TeamService,
-  private playerService: PlayerService) {
+  private playerService: PlayerService,
+  private viewCtrl: ViewController) {
     this.teamId = params.get('teamId');
+    this.selectMode = params.get('selectMode');
     this.playerService.getTeamPlayersAsync(this.teamId);
     this.teamService.getTeamAsync(this.teamId, false, true);
     this.team = this.teamService.getTeam(this.teamId);
     this.match.id = "nonexists";
   }
 
-  ionViewDidLoad() {
-
-  }
-
-  ionViewWillUnload() {
-
-  }  
-
   createSquad() {
     this.modal.create(EditSquadPage, { match: this.match, teamId: this.teamId, teamMode: true }).present();
   }
 
   openEditSquadPage(squadId) {
-    this.modal.create(EditSquadPage, { match: this.match, teamId: this.teamId, teamMode: true, squadId: squadId }).present();
+    if (this.selectMode) {
+      this.viewCtrl.dismiss(squadId);
+    }
+    else
+      this.modal.create(EditSquadPage, { match: this.match, teamId: this.teamId, teamMode: true, squadId: squadId }).present();
   }
 
   deleteSquad(squadId) {
     this.teamService.deleteTeamSquad(this.teamId, squadId);
+  }
+
+  close() {
+    this.viewCtrl.dismiss();
   }
 }

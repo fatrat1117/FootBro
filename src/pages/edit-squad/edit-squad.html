@@ -15,11 +15,15 @@
       <button no-padding class="squard-number-btn circle eleven" (click)="selectSquadNumber($event,11)" [ngClass]="{selected:selectedSquad==11}">
         <span>11</span>
       </button>
+      <button *ngIf="!teamMode" no-padding class="squard-number-btn circle" (click) = "selectSquads()">
+        <span>C</span>
+      </button>
     </ion-buttons>
     <ion-buttons right>
-      <button color="primary" ion-button icon-only clear (click)="saveSquad()">
+      <button *ngIf="squadSettings.editMode" color="primary" ion-button icon-only clear (click)="saveSquad()">
          <ion-icon name="md-cloud-upload"></ion-icon>
       </button>
+       <sb-share-button *ngIf="teamMode"></sb-share-button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>

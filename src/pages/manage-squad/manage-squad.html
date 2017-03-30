@@ -1,8 +1,13 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{'squad' | trans}}</ion-title>
+    <ion-buttons left>
+      <button *ngIf="selectMode" (click)="close()" color = 'danger' ion-button icon-only clear>
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-buttons right>
-      <button (click)="createSquad()" ion-button icon-only>
+      <button *ngIf="!selectMode" (click)="createSquad()" ion-button icon-only>
         <ion-icon name="md-add"></ion-icon>
       </button>
     </ion-buttons>
@@ -19,7 +24,7 @@
         <p>{{squad.formation}}</p>
         <p>{{'creator' | trans}}: {{playerService.getPlayer(squad.creator)?.name}}</p>
       </ion-item>
-      <ion-item-options side="right">
+      <ion-item-options *ngIf="!selectMode" side="right">
         <button color='danger' [disabled]="squad.creator !== playerService.selfId()" ion-button icon-only clear (click)="deleteSquad(squad.$key)">
           <ion-icon name='trash' item-right></ion-icon>
         </button>

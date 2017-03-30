@@ -1,11 +1,12 @@
 import { Component, ViewChild } from "@angular/core";
-import { ViewController, NavParams, PopoverController, AlertController } from 'ionic-angular';
+import { ViewController, NavParams, PopoverController, AlertController, ModalController } from 'ionic-angular';
 import { Match, PREDEFINEDSQUAD } from '../../app/matches/match.model';
 import { PlayerService } from '../../app/players/player.service';
 import { UIHelper } from '../../providers/uihelper';
 import { TeamService } from '../../app/teams/team.service';
 import { SquadSelectPage } from '../../pages/squad-select/squad-select';
 import { Localization } from '../../providers/localization'
+import { ManageSquadPage } from '../../pages/manage-squad/manage-squad'
 
 @Component({
   selector: 'page-edit-squad',
@@ -32,7 +33,8 @@ export class EditSquadPage {
     private teamService: TeamService,
     private popoverCtrl: PopoverController,
     private alertCtrl: AlertController,
-    private loc : Localization) {
+    private loc : Localization,
+    private modal : ModalController) {
     this.match = navParams.get('match');
     this.teamId = navParams.get('teamId');
     this.teamMode = navParams.get('teamMode');
@@ -43,12 +45,17 @@ export class EditSquadPage {
         let squad = squads[i];
         if (squad.$key === this.squadId) {
           this.teamSquad = squad;
+          this.currentSquadForm = squad.formation;
           break;
         }
       }
     }
     this.squadSettings = {};
-    this.squadSettings.editMode = true;
+    if (this.teamSquad && this.teamSquad.creator !== this.playerService.selfId()) {
+      this.squadSettings.editMode = false;
+    }
+    else
+      this.squadSettings.editMode = true;
     this.squadSettings.matchId = this.match.id;
     this.squadSettings.teamId = this.teamId;
   }
@@ -171,5 +178,13 @@ export class EditSquadPage {
       this.currentSquadForm = data;
       this.loadPredefinedSquad();
     });
+  }
+
+  selectSquads() {
+    let modal = this.modal.create(ManageSquadPage, {selectMode: true});
+    modal.onDidDismiss(e => {
+      console.log(e);
+    });
+    modal.present();
   }
 }
