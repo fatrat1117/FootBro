@@ -181,9 +181,12 @@ export class EditSquadPage {
   }
 
   selectSquads() {
-    let modal = this.modal.create(ManageSquadPage, {selectMode: true});
+    let modal = this.modal.create(ManageSquadPage, {teamId: this.teamId, selectMode: true});
     modal.onDidDismiss(e => {
-      console.log(e);
+      if (e) {
+        this.teamSquad = e;
+        this.squadCtrl.setSquad(this.teamSquad);
+      }
     });
     modal.present();
   }

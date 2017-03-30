@@ -16,7 +16,7 @@
 <ion-content no-bounce>
   <ion-list>
     <ion-item-sliding *ngFor="let squad of team.squads">
-      <ion-item (click)="openEditSquadPage(squad.$key)">
+      <ion-item (click)="onClickSquad(squad)">
         <ion-avatar item-left>
           <img src="assets/img/none.png">
         </ion-avatar>

@@ -218,7 +218,7 @@ export class PlayerService {
     
     let tId = this.getPlayer(pId).teamId;
     let fmTeam = this.fm.getTeam(tId);
-    console.log(fmTeam);
+    //console.log(fmTeam);
     if (fmTeam && 'basic-info' in fmTeam) {
       //console.log(pId, fmTeam['basic-info'].captain, tId);
       return pId === fmTeam['basic-info'].captain;
