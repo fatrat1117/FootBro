@@ -26,7 +26,7 @@
         "matches": {
             ".read": true,
             "dates": {
-                ".write": "root.child('admins').hasChild(auth.uid)"
+                ".write": "root.child('admins').hasChild(auth.uid) || root.child('players').hasChild(auth.uid)"
             },
             "list": {
                 // Only admin or team founder can write to this location
@@ -76,7 +76,14 @@
         "team_squads": {
             ".read": true,
               "$teamId": {
-                ".write": "root.child('admins').hasChild(auth.uid) || root.child('teams').child($teamId).child('players').hasChild(auth.uid)"
+                ".write": "root.child('admins').hasChild(auth.uid) || root.child('teams').child($teamId).child('players').hasChild(auth.uid)",
+                "matches":{
+                  "$matchId": {
+                    "time" : {
+                      ".write": "auth !== null"
+                    }
+                  }
+                } 
               }
         },
         "teams": {
