@@ -1,5 +1,5 @@
 import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicApp, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyErrorHandler} from '../providers/exception-handler'
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
@@ -224,7 +224,7 @@ export const firebaseConfig = {
     SquadSelectPage,
     ManageSquadPage
   ],
-  providers: [{ provide: ErrorHandler, useClass: MyErrorHandler  },
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler  },
     FirebaseManager,
     OneSignalManager,
     Localization,

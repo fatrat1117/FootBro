@@ -964,7 +964,7 @@ export class FirebaseManager {
   }
 
   unlockCheerleader(cheerleaderId: string, newPoints: number, newUnlockPoints: number, selfNewPoints: number) {
-    this.placeOrder(this.auth.uid, cheerleaderId, newUnlockPoints - 1);
+    this.placeOrder(this.auth.uid, cheerleaderId, newUnlockPoints - 10);
     this.updatePlayerPoints(cheerleaderId, newPoints);
     this.af.database.object(`/public/cheerleaders/${cheerleaderId}/unlockPoints`).set(newUnlockPoints);
 

@@ -61,6 +61,7 @@ export class CheeringTeamStatsPage {
   cheerleader: Cheerleader;
   onPlayerReady;
   unlockAmount: number;
+  increaseUnlockpoint = 10;
   constructor(private viewCtrl: ViewController, private alertCtrl: AlertController,
               private navParams: NavParams, private playerService: PlayerService,
               private toastCtrl: ToastController) {
@@ -141,7 +142,7 @@ export class CheeringTeamStatsPage {
     if (this.selfPlayer.points >= amount) {
       //this.playerService.placeOrder(this.cheerleader.id, amount);
       this.playerService.unlockCheerleader(
-        this.cheerleader.id, this.cheerleader.points + this.unlockAmount, this.cheerleader.unlockPoints + 1, this.selfPlayer.points - this.unlockAmount);
+        this.cheerleader.id, this.cheerleader.points + this.unlockAmount, this.cheerleader.unlockPoints + this.increaseUnlockpoint, this.selfPlayer.points - this.unlockAmount);
     }
     else {
       this.toastCtrl.create({
