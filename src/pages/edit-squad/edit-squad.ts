@@ -46,6 +46,7 @@ export class EditSquadPage {
         if (squad.$key === this.squadId) {
           this.teamSquad = squad;
           this.currentSquadForm = squad.formation;
+          this.selectedSquad = this.getSquadNumber(this.currentSquadForm);
           break;
         }
       }
@@ -178,6 +179,7 @@ export class EditSquadPage {
       console.log(data);
       if (data) {
         this.currentSquadForm = data;
+        this.selectedSquad = this.getSquadNumber(this.currentSquadForm);
         this.loadPredefinedSquad();
       }
     });
@@ -192,5 +194,16 @@ export class EditSquadPage {
       }
     });
     modal.present();
+  }
+
+  getSquadNumber(squadFormation){
+
+    let result = 1;
+    let pattern = /[^0-9]/g;
+    let numString = squadFormation.replace(pattern,'');
+    for (let num of numString){
+      result += parseInt(num);
+    }
+    return result;
   }
 }
