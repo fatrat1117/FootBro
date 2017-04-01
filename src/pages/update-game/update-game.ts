@@ -28,7 +28,7 @@ export class UpdateGamePage {
     id;
     //homePlayers: PlayerMatchStatsUI[];
     //awayPlayers: PlayerMatchStatsUI[];
-    updateState = 3;
+    //updateState = 3;
     myIdentity = 2; //0: home captain, 1: away captain, 2:others
     onMatchSquadReady;
     teamId;
@@ -48,7 +48,7 @@ export class UpdateGamePage {
         this.id = params.get('id');
         this.teamId = params.get('teamId');
         this.match = this.matchService.getMatch(this.id);
-        this.updateState = this.matchService.getUpdateState(this.match);
+        //this.updateState = this.matchService.getUpdateState(this.match);
         if (this.match.home.captain === this.playerService.selfId())
             this.myIdentity = 0;
         else if (this.match.away.captain === this.playerService.selfId())
@@ -161,9 +161,14 @@ export class UpdateGamePage {
         return data;
     }
 
+    getTeamPoints() {
+        let points = 100 + this.participants.length * 10;
+        return Math.min(250, points);
+    }
+
     updateMatch() {
         //let points = 100 + (0 === this.myIdentity ? this.homePlayers.length : this.awayPlayers.length) * 10;
-        let points = 100 + this.participants.length * 10;
+        let points = this.getTeamPoints();
         let msg = sprintf(this.loc.getString('teamupdateonceandearnpoints'), points);
         let self = this;
         let confirm = this.alertCtrl.create({
@@ -237,13 +242,13 @@ export class UpdateGamePage {
         modal.onDidDismiss(e => {
             if (e && e['selectedIds']) {
                 let selectedIds = e['selectedIds'];
-                //    console.log(selectedIds, players);
+                //console.log(selectedIds, players);
                 //delete not selected players
-                for (let i = players.length - 1; i >= 0; --i) {
-                    let p = players[i];
-                    if (selectedIds[p.id] != true)
-                        players.splice(i, 1);
-                }
+                // for (let i = players.length - 1; i >= 0; --i) {
+                //     let p = players[i];
+                //     if (selectedIds[p.id] != true)
+                //         players.splice(i, 1);
+                // }
 
                 for (let id in selectedIds) {
                     //add only new
@@ -261,13 +266,13 @@ export class UpdateGamePage {
         modal.present();
     }
 
-    isShowSave() {
-        if (3 === this.updateState)
-            return false;
-        if (2 === this.updateState && this.match.home.captain === this.playerService.selfId())
-            return false;
-        if (1 === this.updateState && this.match.away.captain === this.playerService.selfId())
-            return false;
-        return true;
-    }
+    // isShowSave() {
+    //     if (3 === this.updateState)
+    //         return false;
+    //     if (2 === this.updateState && this.match.home.captain === this.playerService.selfId())
+    //         return false;
+    //     if (1 === this.updateState && this.match.away.captain === this.playerService.selfId())
+    //         return false;
+    //     return true;
+    // }
 }
