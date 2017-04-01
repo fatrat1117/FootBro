@@ -46,10 +46,10 @@ export class SbMatchBasicComponent implements OnInit, OnDestroy {
     this.modalCtrl.create(MatchDetailPage, { match: this.match }).present();
   }
 
-  canUpdate() {
-    return this.PlayerService.isCaptain(this.PlayerService.selfId(), this.matchObj.homeId) ||
-      this.PlayerService.isCaptain(this.PlayerService.selfId(), this.matchObj.awayId);
-  }
+  // canUpdate() {
+  //   return this.PlayerService.isCaptain(this.PlayerService.selfId(), this.matchObj.homeId) ||
+  //     this.PlayerService.isCaptain(this.PlayerService.selfId(), this.matchObj.awayId);
+  // }
 
   deleteMatch(e) {
     

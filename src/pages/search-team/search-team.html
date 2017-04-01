@@ -15,10 +15,18 @@
   <ion-searchbar (ionInput)="filterTeams($event)"></ion-searchbar>
 </ion-header>
 <ion-content>
-  <ion-list [virtualScroll]="filteredTeams">
+  <!--<ion-list [virtualScroll]="filteredTeams" approxItemHeight = "58px">
     <ion-item *virtualItem="let team" tappable (click)="dismiss(team)">
       <ion-avatar item-left class="team-img">
         <ion-img [src] = "team.logo"></ion-img>
+      </ion-avatar>
+      {{ team.name }}
+    </ion-item>
+  </ion-list>-->
+    <ion-list>
+    <ion-item *ngFor="let team of filteredTeams" (click)="dismiss(team)">
+      <ion-avatar item-left class="team-img">
+        <img [src] = "team.logo"/>
       </ion-avatar>
       {{ team.name }}
     </ion-item>
