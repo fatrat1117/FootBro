@@ -281,7 +281,8 @@ export class Localization {
             entersquaddescription: 'Please enter squad description',
             creator: 'Creator',
             inputscores: 'Input Scores',
-            recentmatches: 'Recent Matches'
+            recentmatches: 'Recent Matches',
+            deletethismatch: 'Delete this match?'
         },
 
         zh: {
@@ -544,7 +545,8 @@ export class Localization {
             entersquaddescription: '请输入阵型描述',
             creator: '创建者',
             inputscores: '录入比分',
-            recentmatches: '最近的比赛'
+            recentmatches: '最近的比赛',
+            deletethismatch: '删除这场比赛?'
         }
     }
 }

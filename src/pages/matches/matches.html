@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>{{ title | trans }}</ion-title>
     <ion-buttons end *ngIf="!isEnd">
-      <button *ngIf="amICaptain()" ion-button icon-only (click)="enterNewGame()">
+      <button *ngIf="canShowAdd()" ion-button icon-only (click)="enterNewGame()">
         <ion-icon name="md-add" color="primary"></ion-icon>
       </button>
     </ion-buttons>

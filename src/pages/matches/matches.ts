@@ -260,7 +260,14 @@ export class MatchesPage {
     return class1;
   }
 
-  amICaptain() {
-    return this.playerService.amICaptain();
+  isLeagueAdmin() {
+    return false;
+  }
+
+  canShowAdd() {
+    if ('all' === this.selectedId)
+      return this.playerService.amICaptain();
+    else 
+      return this.isLeagueAdmin(); 
   }
 }

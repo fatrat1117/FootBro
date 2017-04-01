@@ -188,7 +188,7 @@ export class NewGamePage {
         else {
             if (this.tournamentId)
                 matchData["tournamentId"] = this.tournamentId;
-            matchData['createBy'] = this.playerService.selfId();
+            matchData['creator'] = this.playerService.selfId();
             this.matchService.scheduleMatch(matchData);
         }
 
