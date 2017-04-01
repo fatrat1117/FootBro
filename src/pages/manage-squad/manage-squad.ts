@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component ,OnInit, OnDestroy} from '@angular/core';
 import { NavParams, ModalController, ViewController} from 'ionic-angular'
 import { EditSquadPage } from '../edit-squad/edit-squad';
 import { Match } from '../../app/matches/match.model';
@@ -10,11 +10,12 @@ import { PlayerService } from '../../app/players/player.service'
   selector: 'page-manage-squad',
   templateUrl: 'manage-squad.html'
 })
-export class ManageSquadPage {
+export class ManageSquadPage implements OnInit,OnDestroy{
   teamId;
   match = new Match();
   team;
   selectMode;
+  squadNumber = 0;
   constructor(params: NavParams,
   private modal: ModalController,
   private teamService: TeamService,
@@ -26,6 +27,17 @@ export class ManageSquadPage {
     this.teamService.getTeamAsync(this.teamId, false, true);
     this.team = this.teamService.getTeam(this.teamId);
     this.match.id = "nonexists";
+  }
+
+  ngOnInit() {
+    // ...
+    //   if (this.team && this.team.squad && this.team.formation){
+    //     this.squadNumber = this.getSquadNumber(this.team.formation);
+    //   }
+  }
+
+  ngOnDestroy() {
+    this.squadNumber = 0;
   }
 
   createSquad() {
@@ -46,5 +58,16 @@ export class ManageSquadPage {
 
   close() {
     this.viewCtrl.dismiss();
+  }
+
+  getSquadNumber(squadFormation){
+
+    let result = 1;
+    let pattern = /[^0-9]/g;
+    let numString = squadFormation.replace(pattern,'');
+    for (let num of numString){
+      result += parseInt(num);
+    }
+    return result;
   }
 }
