@@ -155,5 +155,12 @@ export class HomePage {
     } else 
       this.playerService.checkLogin();
   }
+
+  amIPlayer() {
+    //all guest should see
+    if (!this.playerService.isAuthenticated())
+      return true;
+    return this.playerService.amIPlayer();
+  }
 }
 

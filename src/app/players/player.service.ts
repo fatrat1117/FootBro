@@ -186,6 +186,13 @@ export class PlayerService {
     return this.fm.auth && this.fm.auth.uid;
   }
 
+  amIPlayer() {
+    let player = this.getPlayer(this.selfId());
+    if (!player)
+      return false;
+    return player.role !== 'cheerleader';
+  }
+  
   checkLogin() {
     this.fm.checkLogin();
   }
