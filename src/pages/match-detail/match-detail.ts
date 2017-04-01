@@ -359,23 +359,19 @@ export class MatchDetailPage {
   }
 
   amIParticipants() {
-    console.log(this.squad);
+    //console.log(this.squad);
     if (!this.squad)
       return false;
 
     if ('participants' in this.squad) {
-      this.squad.participants.forEach(p =>  {
-       //console.log(p.id.trim(), this.playerService.selfId());
-        if (p.id === this.playerService.selfId())
+      for (let i = 0; i < this.squad.participants.length; ++i) {
+        let p = this.squad.participants[i];
+        if (p.id === this.playerService.selfId()) {
+          //console.log('equal');
           return true;
-      })
+        }
+      }
     }
-
-    // if (this.match.isHomeUpdated && this.playerService.amICaptainOf(this.match.homeId))
-    //   return true;
-    
-    // if (this.match.isAwayUpdated && this.playerService.amICaptainOf(this.match.awayId))
-    //   return true;
 
     return false;
   }
