@@ -32,7 +32,7 @@ $tabs-md-tab-font-size: 10px;
 
 //alert-md
 $alert-background-color:#444;
-$alert-input-text-color:#fff;
+$alert-md-input-text-color:#fff;
 $alert-ios-sub-title-text-color: #fff;
 $alert-radio-border-color-on:#fff;
 $alert-radio-border-color-off:#888;
@@ -102,7 +102,7 @@ font-face {
     src:url('../assets/fonts/webfonts_CMTattooDragon/CMTattooDragon.ttf.woff') format('woff'),
         url('../assets/fonts/webfonts_CMTattooDragon/CMTattooDragon.ttf.svg#CMTattooDragon') format('svg'),
         url('../assets/fonts/webfonts_CMTattooDragon/CMTattooDragon.ttf.eot'),
-        url('../assets/fonts/webfonts_CMTattooDragon/CMTattooDragon.ttf.eot?#iefix') format('embedded-opentype'); 
+        url('../assets/fonts/webfonts_CMTattooDragon/CMTattooDragon.ttf.eot?#iefix') format('embedded-opentype');
     font-weight: normal;
     font-style: normal;
 }
