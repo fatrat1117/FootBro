@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {ViewController, ModalController, NavParams} from 'ionic-angular';
 import {MatchService} from '../../app/matches/match.service';
 import {Localization,TransPipe} from '../../providers/localization';
+import {MatchDetailPage} from '../../pages/match-detail/match-detail';
 
 @Component({
   selector: 'page-search-match',
@@ -73,5 +74,10 @@ export class SearchMatchPage {
     }else{
       return false;
     }
+  }
+
+  openMatchDetailPage(match) {
+    //console.log('openMatchDetailPage')
+    this.modalCtrl.create(MatchDetailPage, { match: match }).present();
   }
 }

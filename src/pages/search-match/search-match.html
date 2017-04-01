@@ -6,7 +6,7 @@
 <ion-content>
   <ion-list class="search-match-container">
     <no-record *ngIf="!hasMatches()" [message]="noRecordMessage"></no-record>
-    <ion-item *ngFor="let match of matches">
+    <ion-item *ngFor="let match of matches" (click) = "openMatchDetailPage(match)">
       <result-score [upcomingMatch]="match" hostPageName = "my-team"></result-score>
     </ion-item>
   </ion-list>
