@@ -139,10 +139,9 @@ export class MyTeamPage {
   }
 
   isMember() {
-    if (!this.selfPlayer)
-      return false;
-
-    return this.selfPlayer.teams.indexOf(this.id) >= 0;
+    if (this.selfPlayer && this.selfPlayer.teams)
+      return this.selfPlayer.teams.indexOf(this.id) >= 0;
+    return false;
   }
 
 
