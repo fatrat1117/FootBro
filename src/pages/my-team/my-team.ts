@@ -135,6 +135,7 @@ export class MyTeamPage {
       this.upcomingMatch = this.matches[index];
       if (index + 1 < this.matches.length)
         this.lastMatch = this.matches[index + 1];
+      console.log('last match', this.lastMatch);
     }
   }
 
