@@ -46,6 +46,9 @@
 </div>
 
 <div class="content-all" *ngSwitchCase="'players'">
+  <button *ngIf='canShowRate()' (click)="openRatePlayersPage()" ion-button block>
+          {{'rateplayers' | trans}}
+      </button>
   <div class="left-scrollview matches-date-tab-col">
     <ion-list class="date-tab-list">
       <ion-item *ngFor="let cat of statCategories;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (click)='showStat(cat)'

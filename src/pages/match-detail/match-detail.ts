@@ -222,9 +222,6 @@ export class MatchDetailPage {
       case 'squad':
         this.modal.create(EditSquadPage, { match: this.match, teamId: this.squadSettings.teamId }).present();
         break;
-      case 'players':
-        this.modal.create(EditGameRatingPage, { squad: this.squad, teamId: this.squadSettings.teamId, matchId: this.match.id }).present();
-        break;
     }
   }
 
@@ -266,11 +263,12 @@ export class MatchDetailPage {
         break;
       case 'players':
         {
+          return false;
           //captain can update stats
-          if (this.squad)
-            return true;
+          //if (this.squad)
+          //  return true;
         }
-        break;
+        //break;
       // case 'rating':
       //   break;
     }
@@ -358,5 +356,19 @@ export class MatchDetailPage {
       ]
     });
     confirm.present();
+  }
+
+  canShowRate() {
+    if (this.match.isHomeUpdated && this.playerService.amICaptainOf(this.match.homeId))
+      return true;
+    
+    if (this.match.isAwayUpdated && this.playerService.amICaptainOf(this.match.awayId))
+      return true;
+
+    return false;
+  }
+
+  openRatePlayersPage() {
+      this.modal.create(EditGameRatingPage, { squad: this.squad, teamId: this.squadSettings.teamId, matchId: this.match.id }).present();
   }
 }

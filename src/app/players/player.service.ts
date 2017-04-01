@@ -234,6 +234,10 @@ export class PlayerService {
     return false;
   }
 
+  amICaptainOf(teamId) {
+    return this.isCaptain(this.selfId(), teamId);
+  }
+
   isCaptain(pId, tId) {
     //console.log('isCaptain', pId, tId);
     if (!pId || !tId)
