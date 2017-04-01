@@ -68,8 +68,8 @@ export class MatchDetailPage {
 
   ionViewDidLoad() {
     this.onMatchSquadReady = (teamId, matchId) => {
-      if ('teamId' in this.squadSettings && matchId === this.match.id) {
-        if (teamId === this.squadSettings.teamId)
+      if (matchId === this.match.id) {
+        if ('teamId' in this.squadSettings && teamId === this.squadSettings.teamId)
           this.squad = this.teamService.getMatchSquad(teamId, matchId);
 
         if (teamId === this.match.homeId) {
@@ -358,17 +358,19 @@ export class MatchDetailPage {
     confirm.present();
   }
 
-  canShowRate() {
+  amIParticipants() {
     console.log(this.squad);
     if (!this.squad)
       return false;
 
     if ('participants' in this.squad) {
       this.squad.participants.forEach(p =>  {
+       //console.log(p.id.trim(), this.playerService.selfId());
         if (p.id === this.playerService.selfId())
           return true;
       })
     }
+
     // if (this.match.isHomeUpdated && this.playerService.amICaptainOf(this.match.homeId))
     //   return true;
     
@@ -376,6 +378,10 @@ export class MatchDetailPage {
     //   return true;
 
     return false;
+  }
+
+  canShowRate() {
+    return this.amIParticipants();
   }
 
   openRatePlayersPage() {
