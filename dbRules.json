@@ -16,7 +16,7 @@
             },
             "pending": {
                 //in case self id does not exist
-                ".read": "root.child('admins').hasChild(auth.uid)",
+                ".read": true,
                 ".write": "auth !== null",
                 "$id": {
                     ".read": "$id === auth.uid"
