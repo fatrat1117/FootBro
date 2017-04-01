@@ -52,10 +52,10 @@ export class MatchDetailPage {
 
     //only show captain's team
     if (this.playerService.isAuthenticated()) {
-      if (this.playerService.isCaptain(this.playerService.selfId(), this.match.homeId)) {
+      if (this.playerService.amIMemberOfCurrentTeam(this.match.homeId)) {
         this.squadSettings.teamId = this.match.homeId;
       }
-      else if (this.playerService.isCaptain(this.playerService.selfId(), this.match.awayId))
+      else if (this.playerService.amIMemberOfCurrentTeam(this.match.awayId))
         this.squadSettings.teamId = this.match.awayId;
     }
     this.initializePlayerStats(this.homePlayerStats);
@@ -359,16 +359,32 @@ export class MatchDetailPage {
   }
 
   canShowRate() {
-    if (this.match.isHomeUpdated && this.playerService.amICaptainOf(this.match.homeId))
-      return true;
+    console.log(this.squad);
+    if (!this.squad)
+      return false;
+
+    if ('participants' in this.squad) {
+      this.squad.participants.forEach(p =>  {
+        if (p.id === this.playerService.selfId())
+          return true;
+      })
+    }
+    // if (this.match.isHomeUpdated && this.playerService.amICaptainOf(this.match.homeId))
+    //   return true;
     
-    if (this.match.isAwayUpdated && this.playerService.amICaptainOf(this.match.awayId))
-      return true;
+    // if (this.match.isAwayUpdated && this.playerService.amICaptainOf(this.match.awayId))
+    //   return true;
 
     return false;
   }
 
   openRatePlayersPage() {
-      this.modal.create(EditGameRatingPage, { squad: this.squad, teamId: this.squadSettings.teamId, matchId: this.match.id }).present();
+      let modal = this.modal.create(EditGameRatingPage, { squad: this.squad, teamId: this.squadSettings.teamId, matchId: this.match.id });
+      modal.onDidDismiss(done => {
+        if (done) {
+          this.getCombinedStats();
+        }
+      }); 
+      modal.present();
   }
 }

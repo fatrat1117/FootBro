@@ -166,12 +166,6 @@ export class PlayerService {
     return this.fm.selfId();
   }
 
-/*
-  placeOrder(toId: string, amount: number) {
-    this.fm.placeOrder(this.selfId(), toId, amount);
-  }
-*/
-
   unlockCheerleader(cheerleaderId: string, newPoints: number, newUnlockPoints: number, selfNewPoints: number) {
     this.fm.unlockCheerleader(cheerleaderId, newPoints, newUnlockPoints, selfNewPoints);
   }
@@ -233,6 +227,18 @@ export class PlayerService {
 
     return false;
   }
+
+  amIMemberOfCurrentTeam(teamId) {
+    let player = this.myself();
+    if (!player)
+      return false;
+    
+    return player.teamId === teamId;
+  }
+
+  myself() {
+    return this.getPlayer(this.selfId());
+  } 
 
   amICaptainOf(teamId) {
     return this.isCaptain(this.selfId(), teamId);
