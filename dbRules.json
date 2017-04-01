@@ -26,11 +26,12 @@
         "matches": {
             ".read": true,
             "dates": {
-                ".write": "root.child('admins').hasChild(auth.uid) || root.child('players').hasChild(auth.uid)"
+              ".write": "root.child('admins').hasChild(auth.uid) || root.child('teams').child(root.child('players').child(auth.uid).child('basic-info').child('teamId').val()).child('basic-info').child('captain').val() === auth.uid"  
+              //".write": "root.child('admins').hasChild(auth.uid) || root.child('players').hasChild(auth.uid)"
             },
             "list": {
                 // Only admin or team founder can write to this location
-                ".write": "root.child('admins').hasChild(auth.uid) || root.child('players').hasChild(auth.uid)",
+                ".write": "root.child('admins').hasChild(auth.uid) || root.child('teams').child(root.child('players').child(auth.uid).child('basic-info').child('teamId').val()).child('basic-info').child('captain').val() === auth.uid",
                 ".indexOn": [
                     "date",
                     "tournamentId"
@@ -46,7 +47,7 @@
         "orders": {
             "$orderid": {
                 ".read": "root.child('admins').hasChild(auth.uid) || auth.uid===data.child('from').val()||auth.uid===data.child('to').val()",
-                ".write": "root.child('admins').hasChild(auth.uid) || auth.uid===data.child('from').val()"
+                ".write": "root.child('players').hasChild(auth.uid)"
             }
         },
         "player_social": {
