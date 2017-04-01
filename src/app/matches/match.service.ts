@@ -83,9 +83,9 @@ export class MatchService {
         this.fm.getTeamAsync(t.$key);
         registeredTeams.push(team);
       });
-      
+
       console.log(registeredTeams);
-      
+
       this.registeredTeamsMap[id] = registeredTeams;
       this.fm.FireCustomEvent('serviceregisteredteamsready', id);
     });
@@ -102,7 +102,7 @@ export class MatchService {
   //       })
   //     }
   // }
-  
+
   findOrCreateMatch(id): Match {
     let match;
     if (this.matchesMap[id])
@@ -144,7 +144,7 @@ export class MatchService {
     this.fm.getMatchesByDateAsync(date, tournamentId);
   }
 
-  getMatch(id) : Match {
+  getMatch(id): Match {
     return this.matchesMap[id];
   }
 
@@ -207,5 +207,19 @@ export class MatchService {
 
   getLeagueInfo(leagueId: string) {
     //this.fm.getLeagueRule(leagueId);
+  }
+
+  getUpdateState(match) {
+    //0: no one update
+    //1: home updated
+    //2: away updated
+    //3 both updated
+    if (match.isHomeUpdated && match.isAwayUpdated)
+      return 3;
+    if (match.isHomeUpdated)
+      return 1;
+    if (match.isAwayUpdated)
+      return 2;
+    return 0;
   }
 }

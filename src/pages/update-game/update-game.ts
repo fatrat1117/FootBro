@@ -48,7 +48,7 @@ export class UpdateGamePage {
         this.id = params.get('id');
         this.teamId = params.get('teamId');
         this.match = this.matchService.getMatch(this.id);
-        this.updateState = this.match.updateState();
+        this.updateState = this.matchService.getUpdateState(this.match);
         if (this.match.home.captain === this.playerService.selfId())
             this.myIdentity = 0;
         else if (this.match.away.captain === this.playerService.selfId())
@@ -188,7 +188,7 @@ export class UpdateGamePage {
 
     doUpdateMatch() {
         let participants = this.copyAndUpdatePlayersData(this.participants);
-        
+
         let updateMatchData = {
             // homeParticipants: copyHomeParticipants,
             // awayParticipants: copyAwayParticipants,
