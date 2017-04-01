@@ -1,23 +1,13 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{'Teams' | trans}}</ion-title>
-    <!--<ion-buttons left>
-      <button (click)="close()" color='danger' ion-button icon-only clear>
-        <ion-icon name="close"></ion-icon>
-      </button>
-    </ion-buttons>-->
   </ion-navbar>
 </ion-header>
 <ion-content>
   <ion-list class="search-match-container">
-    <!--<div *ngIf="!hasMatches()" class="no-match-wrapper">-->
-      <!--<div class="no-match">-->
-        <!--No match record...-->
-      <!--</div>-->
-    <!--</div>-->
     <no-record *ngIf="!hasMatches()" [message]="noRecordMessage"></no-record>
     <ion-item *ngFor="let match of matches">
-      <sb-match-basic [matchObj]="match" [showDate]="showDate"></sb-match-basic>
+      <result-score [upcomingMatch]="match" hostPageName = "my-team"></result-score>
     </ion-item>
   </ion-list>
 </ion-content>
