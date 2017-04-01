@@ -14,6 +14,11 @@
   </ion-navbar>
 </ion-header>
 <ion-content no-bounce>
+  <ion-card no-padding no-margin>
+    <img class="card-banner-img" src="assets/img/manage-squad/manage-squad-banner.jpg"/>
+    <div class="card-title">你好,战术大师</div>
+    <div class="card-subtitle">Let's Rock!</div>
+  </ion-card>
   <ion-list>
     <ion-item-sliding *ngFor="let squad of team.squads">
       <ion-item (click)="onClickSquad(squad)">
