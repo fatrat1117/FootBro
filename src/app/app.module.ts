@@ -224,7 +224,7 @@ export const firebaseConfig = {
     SquadSelectPage,
     ManageSquadPage
   ],
-  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler  },
+  providers: [{ provide: ErrorHandler, useClass: MyErrorHandler  },
     FirebaseManager,
     OneSignalManager,
     Localization,
