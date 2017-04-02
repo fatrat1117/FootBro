@@ -16,8 +16,8 @@
 <ion-content no-bounce>
   <ion-card no-padding no-margin>
     <img class="card-banner-img" src="assets/img/manage-squad/manage-squad-banner.jpg"/>
-    <div class="card-title">你好,战术大师</div>
-    <div class="card-subtitle">Let's Rock!</div>
+    <div class="card-title">{{bannelTitle | trans}}</div>
+    <div class="card-subtitle">{{bannelSubtitle | trans}} {{team?.name}}</div>
   </ion-card>
   <ion-list class="container">
     <ion-item-sliding *ngFor="let squad of team.squads">
@@ -25,7 +25,7 @@
         <!--<ion-avatar item-left>-->
           <!--<img src="assets/img/none.png">-->
         <!--</ion-avatar>-->
-        <div class="numberCircle" item-left>{{getSquadNumber(squad.formation)}}</div>
+        <div class="numberCircle" item-left [ngClass]="{'vs5': getSquadNumber(squad.formation) === 5, 'vs7': getSquadNumber(squad.formation) === 7, 'vs11': getSquadNumber(squad.formation) === 11}">{{getSquadNumber(squad.formation)}}</div>
         <h2>{{squad.name}}</h2>
         <p>{{squad.formation}}</p>
         <p>{{'creator' | trans}}: {{playerService.getPlayer(squad.creator)?.name}}</p>

@@ -285,8 +285,11 @@ export class Localization {
             recentmatches: 'Recent Matches',
             deletethismatch: 'Delete this match?',
             rateplayers: 'Rate Players',
-            deletematch: 'Delete Match'
-        },
+            deletematch: 'Delete Match',
+            ManageSquadHello :'Hello, Ace coach!',
+            ManageSquadCheer : "Cheers! "
+
+},
 
         zh: {
             Description: '座右铭',
@@ -552,7 +555,9 @@ export class Localization {
             recentmatches: '最近的比赛',
             deletethismatch: '删除这场比赛?',
             rateplayers: '球员评分',
-            deletematch: '删除比赛'
+            deletematch: '删除比赛',
+            ManageSquadHello: '你好, 战术大师',
+            ManageSquadCheer: '加油! '
         }
     }
 }

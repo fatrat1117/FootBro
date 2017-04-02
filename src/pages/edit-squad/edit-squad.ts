@@ -21,7 +21,7 @@ export class EditSquadPage {
   teamId;
   selectedSquad = 11; //Default Squad Number set to 11
   popOverPage: any;
-  currentSquadForm = '4-4-2';
+  currentSquadForm = '';
   teamMode = false;
   squadId;
   teamSquad;

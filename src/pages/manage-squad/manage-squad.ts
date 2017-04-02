@@ -16,6 +16,8 @@ export class ManageSquadPage implements OnInit,OnDestroy{
   team;
   selectMode;
   squadNumber = 0;
+  bannelTitle = "ManageSquadHello";
+  bannelSubtitle = "ManageSquadCheer";
   constructor(params: NavParams,
   private modal: ModalController,
   private teamService: TeamService,
