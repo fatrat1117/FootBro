@@ -960,10 +960,12 @@ export class FirebaseManager {
   }
   */
 
+  // DONOT use this, use playerEarnPoints instead
   updatePlayerPoints(playerId: string, newPoints: number) {
     this.af.database.object(`/players/${playerId}/points`).set(newPoints);
   }
 
+  // DONOT use this, use teamEarnPoints instead
   updateTeamPoints(teamId: string, newPoints: number) {
     this.af.database.object(`/teams/${teamId}/points`).set(newPoints);
   }
@@ -992,7 +994,7 @@ export class FirebaseManager {
   }
 
   teamEarnPoints(teamId: string, amount: number, newPoints: number) {
-    console.log('teamEarnPoints', teamId, amount, newPoints);
+    //console.log('teamEarnPoints', teamId, amount, newPoints);
     this.placeOrder("0-to-team", teamId, amount);
     this.updateTeamPoints(teamId, newPoints);
   }

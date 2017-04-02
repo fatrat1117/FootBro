@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { ViewController, AlertController, ToastController, NavParams} from 'ionic-angular';
 
-import { Cheerleader } from '../../app/cheerleaders/cheerleader.model'
+import { Localization } from '../../providers/localization';
 
+import { Cheerleader } from '../../app/cheerleaders/cheerleader.model'
 import { Player} from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
+
+declare var sprintf: any;
 
 @Component({
   selector: 'page-cheering-team-stats',
@@ -35,7 +38,7 @@ import { PlayerService } from '../../app/players/player.service'
       <ion-item>
         <ion-icon name="md-pin" item-left></ion-icon>
           {{ 'Location' | trans }}
-        <ion-note item-right color="primary-text">Singapore</ion-note>
+        <ion-note item-right color="primary-text">{{ 'singapore' | trans }}</ion-note>
       </ion-item>
       <ion-item>
         <ion-icon name="md-calendar" item-left></ion-icon>
@@ -64,7 +67,7 @@ export class CheeringTeamStatsPage {
   increaseUnlockpoint = 10;
   constructor(private viewCtrl: ViewController, private alertCtrl: AlertController,
               private navParams: NavParams, private playerService: PlayerService,
-              private toastCtrl: ToastController) {
+              private toastCtrl: ToastController, private local: Localization) {
   }
 
   ionViewDidLoad() {
@@ -106,21 +109,21 @@ export class CheeringTeamStatsPage {
 
   showWarning() {
     this.alertCtrl.create({
-      title: 'Not enough points',
-      subTitle: 'Current balance: ' + this.selfPlayer.points,
-      message: `You need at least ${this.cheerleader.unlockPoints} points to unlock her.`,
-      buttons: ['OK']
+      title: this.local.getString('notEnoughPoints'),
+      subTitle: this.local.getString('balance') + this.selfPlayer.points,
+      message: sprintf(this.local.getString('pointsNedded'), this.cheerleader.unlockPoints),
+      buttons: [this.local.getString('OK')]
     }).present();
   }
 
   showConfirm(amount: number) {
     let confirm = this.alertCtrl.create({
-      title: `${amount} points needed`,
-      subTitle: 'Balance: ' + this.selfPlayer.points,
-      message: 'You will be able to message her once unlocked.',
+      title: sprintf(this.local.getString('pointsNedded'), amount),
+      subTitle: this.local.getString('balance') + this.selfPlayer.points,
+      message: this.local.getString('unlockMsg'),
       buttons: [
         {
-          text: 'Ok',
+          text: this.local.getString('OK'),
           handler: () => {
             this.unlockCheerleader(amount)
             //this.playerService.placeOrder('2qJEDrRMODbPOafc3cts4jbgS7z2', 5);
@@ -128,7 +131,7 @@ export class CheeringTeamStatsPage {
           }
         },
         {
-          text: 'Cancel',
+          text: this.local.getString('Cancel'),
           handler: () => {
           }
         }
@@ -146,7 +149,7 @@ export class CheeringTeamStatsPage {
     }
     else {
       this.toastCtrl.create({
-        message: 'Not enough points.',
+        message: this.local.getString('notEnoughPoints'),
         duration: 2000,
         position: 'top'
       }).present();
