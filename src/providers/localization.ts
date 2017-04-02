@@ -234,8 +234,8 @@ export class Localization {
             teamInvitation: 'Team invitation',
             teamJoinSuccess: 'Welcome to ',
             stats: 'stats',
-            owngoals: 'own goals',
-            rating: 'rating',
+            owngoals: 'Own Goals',
+            rating: 'Rating',
             excellent: 'Excellent',
             verygood: 'Very Good',
             good: 'Good',
@@ -287,9 +287,10 @@ export class Localization {
             rateplayers: 'Rate Players',
             deletematch: 'Delete Match',
             ManageSquadHello :'Hello, Ace coach!',
-            ManageSquadCheer : "Cheers! "
-
-},
+            ManageSquadCheer : "Cheers! ",
+            goals: 'Goals',
+            assists: 'Assists',
+        },
 
         zh: {
             Description: '座右铭',
@@ -557,7 +558,9 @@ export class Localization {
             rateplayers: '球员评分',
             deletematch: '删除比赛',
             ManageSquadHello: '你好, 战术大师',
-            ManageSquadCheer: '加油! '
+            ManageSquadCheer: '加油! ',
+            goals: '进球',
+            assists: '助攻',
         }
     }
 }

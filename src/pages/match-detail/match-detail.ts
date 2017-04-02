@@ -377,7 +377,14 @@ export class MatchDetailPage {
   }
 
   canShowRate() {
-    return this.amIParticipants();
+    if (!this.amIParticipants())
+      return false;
+    
+    //rated?
+    if (this.squad && this.squad.ratings && this.squad.ratings[this.playerService.selfId()])
+      return false;
+    
+    return true;
   }
 
   openRatePlayersPage() {

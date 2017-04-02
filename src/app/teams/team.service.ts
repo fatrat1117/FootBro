@@ -258,7 +258,10 @@ export class TeamService {
 
   getMatchSquad(teamId, matchId) {
     console.log('getMatchSquad', teamId, matchId);  
-    return this.getTeam(teamId).matchSquads[matchId];
+    let team = this.getTeam(teamId);
+    if (team)
+      return team.matchSquads[matchId];
+    return null;
   }
 
   getMatchSquadAsync(teamId, matchId) {
