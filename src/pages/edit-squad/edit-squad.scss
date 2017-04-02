@@ -90,6 +90,14 @@ page-edit-squad {
         transform: scale(1.05) !important;
       }
     }
+
+    .squad-operate{
+      display: flex;
+      align-items: center;
+      .upload-icon{
+        font-size: 3.5rem;
+      }
+    }
   }
   .squad-selected {
     position: relative;

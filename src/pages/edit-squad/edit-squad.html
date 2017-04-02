@@ -19,9 +19,9 @@
         <span>C</span>
       </button>
     </ion-buttons>
-    <ion-buttons right>
+    <ion-buttons right class="squad-operate">
       <button *ngIf="squadSettings.editMode" color="primary" ion-button icon-only clear (click)="saveSquad()">
-         <ion-icon name="md-cloud-upload"></ion-icon>
+         <ion-icon name="md-cloud-upload" class="upload-icon"></ion-icon>
       </button>
        <sb-share-button *ngIf="teamMode"></sb-share-button>
     </ion-buttons>
