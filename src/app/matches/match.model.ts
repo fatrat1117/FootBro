@@ -27,6 +27,7 @@ export class Match {
   isAwayUpdated;
   homeSquad;
   awaySquad;
+  dataReady = false;
   isStarted = function () {
     let now = moment().unix() * 1000;
     //console.log(now, this.time);

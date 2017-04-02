@@ -36,7 +36,7 @@
     <p>{{match?.location?.address}}</p>
   </ion-item>
 </ion-list>
-    <button *ngIf='canShowDelete()' (click)="deleteMatch()" color='danger' ion-button block>
+<button *ngIf='canShowDelete()' (click)="deleteMatch()" color='danger' ion-button block>
         {{'deletematch' | trans}}
     </button>
 </div>
@@ -46,51 +46,53 @@
 </div>
 
 <div class="content-all" *ngSwitchCase="'players'">
-  <button *ngIf='canShowRate()' (click)="openRatePlayersPage()" ion-button block>
+  <!--<no-record *ngIf="statCategories.length <= 0" [message="hasNoChatsMessage"></no-record>-->
+  <div *ngIf="statCategories.length > 0">
+    <button *ngIf='canShowRate()' (click)="openRatePlayersPage()" ion-button block>
           {{'rateplayers' | trans}}
       </button>
-  <div class="left-scrollview matches-date-tab-col">
-    <ion-list class="date-tab-list">
-      <ion-item *ngFor="let cat of statCategories;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (click)='showStat(cat)'
-        [style.background]="selectedCat === cat ? '#20bd16' : '#373e4c'" [style.color]="selectedCat === cat ? '#ffffff' : '#93ABC5'">
-        <div class="date-inner">
-          {{cat | trans}}
-        </div>
-      </ion-item>
-    </ion-list>
-  </div>
+    <div class="left-scrollview matches-date-tab-col">
+      <ion-list class="date-tab-list">
+        <ion-item *ngFor="let cat of statCategories;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (click)='showStat(cat)'
+          [style.background]="selectedCat === cat ? '#20bd16' : '#373e4c'" [style.color]="selectedCat === cat ? '#ffffff' : '#93ABC5'">
+          <div class="date-inner">
+            {{cat | trans}}
+          </div>
+        </ion-item>
+      </ion-list>
+    </div>
 
-  <div class="right-scrollview matches-match-info-col" *ngIf='selectedStats'>
-    <ion-grid class="right-view-grid">
-      <ion-row class="header-title">
-        <!--<ion-col width-10>{{'Rank' | trans}}</ion-col>-->
-        <ion-col width-20></ion-col>
-        <ion-col width-30 class="flex-width-30">{{'Player' | trans}}</ion-col>
-        <ion-col width-30 class="flex-width-30">{{'Team' | trans}}</ion-col>
-        <ion-col width-20 text-center>{{'Total' | trans}}</ion-col>
-      </ion-row>
-      <ion-row *ngFor="let stat of selectedStats;let i=index" class="playerStats">
-        <ion-col width-20 class="rank">
+    <div class="right-scrollview matches-match-info-col" *ngIf='selectedStats'>
+      <ion-grid class="right-view-grid">
+        <ion-row class="header-title">
+          <!--<ion-col width-10>{{'Rank' | trans}}</ion-col>-->
+          <ion-col width-20></ion-col>
+          <ion-col width-30 class="flex-width-30">{{'Player' | trans}}</ion-col>
+          <ion-col width-30 class="flex-width-30">{{'Team' | trans}}</ion-col>
+          <ion-col width-20 text-center>{{'Total' | trans}}</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let stat of selectedStats;let i=index" class="playerStats">
+          <ion-col width-20 class="rank">
 
-          <ion-label no-margin>{{i+1}}</ion-label>
-          <ion-avatar item-left>
-            <img [src]="stat.player?.photo" />
-          </ion-avatar>
-        </ion-col>
-        <ion-col width-30 no-margin class="flex-width-30">
-          <ion-item>
-
-            {{stat.player?.name}}
-          </ion-item>
-        </ion-col>
-        <ion-col width-30 class="flex-width-30">
-          <ion-label no-margin>{{stat.teamName}}</ion-label>
-        </ion-col>
-        <ion-col width-20>
-          <ion-label no-margin text-center>{{stat.val}}</ion-label>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+            <ion-label no-margin>{{i+1}}</ion-label>
+            <ion-avatar item-left>
+              <img [src]="stat.player?.photo" />
+            </ion-avatar>
+          </ion-col>
+          <ion-col width-30 no-margin class="flex-width-30">
+            <ion-item>
+              {{stat.player?.name}}
+            </ion-item>
+          </ion-col>
+          <ion-col width-30 class="flex-width-30">
+            <ion-label no-margin>{{stat.teamName}}</ion-label>
+          </ion-col>
+          <ion-col width-20>
+            <ion-label no-margin text-center>{{stat.val}}</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
   </div>
 </div>
 </ion-content>
