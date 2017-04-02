@@ -896,7 +896,7 @@ export class FirebaseManager {
 
   ratePlayers(teamId, matchId, ratings) {
     this.af.database.object(this.getMatchSquadRef(teamId, matchId) + 'ratings/' + this.selfId()).set(ratings);
-    this.updatePlayerPoints(this.selfId(), this.getPlayer(this.selfId()).points + this.ratePlayerPoints);
+    this.playerEarnPoints(this.selfId(), this.ratePlayerPoints, this.getPlayer(this.selfId()).points + this.ratePlayerPoints);
   }
 
   getTournamentTableList(id) {
