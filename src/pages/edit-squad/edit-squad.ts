@@ -210,4 +210,12 @@ export class EditSquadPage {
     }
     return result;
   }
+
+  canShowSquadButton(type) {
+    if (this.teamMode)
+      return true;
+    if (this.match)
+      return this.match.type === type;
+    return false;
+  }
 }

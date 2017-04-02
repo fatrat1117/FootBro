@@ -3,12 +3,12 @@
     <ion-item-divider>{{ 'share' | trans }}</ion-item-divider>
     <ion-row>
       <ion-col width-33>
-        <button [disable] = "!isWechatInstalled" ion-fab mini color="light" class="center-button" (click)="onWeChatClick(0)">
+        <button [disabled] = "!isWechatInstalled" ion-fab mini color="light" class="center-button" (click)="onWeChatClick(0)">
           <img style="max-width: 3rem;" src="assets/icon/wechat.png">
         </button>
       </ion-col>
       <ion-col width-33>
-        <button [disable] = "!isWechatInstalled" ion-fab mini color="light" class="center-button" (click)="onWeChatClick(1)">
+        <button [disabled] = "!isWechatInstalled" ion-fab mini color="light" class="center-button" (click)="onWeChatClick(1)">
           <img style="max-width: 3rem;" src="assets/icon/moments.png">
         </button>
       </ion-col>

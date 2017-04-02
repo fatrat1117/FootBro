@@ -6,13 +6,13 @@
       </button>
     </ion-buttons>
     <ion-buttons *ngIf="squadSettings.editMode" left class="squard-number-container">
-      <button no-padding class="squard-number-btn circle five" (click)="selectSquadNumber($event,5)" [ngClass]="{selected:selectedSquad==5}">
+      <button *ngIf = "canShowSquadButton(5)" no-padding class="squard-number-btn circle five" (click)="selectSquadNumber($event,5)" [ngClass]="{selected:selectedSquad==5}">
         <span>5</span>
       </button>
-      <button no-padding class="squard-number-btn circle seven" (click)="selectSquadNumber($event,7)" [ngClass]="{selected:selectedSquad==7}">
+      <button *ngIf = "canShowSquadButton(7)" no-padding class="squard-number-btn circle seven" (click)="selectSquadNumber($event,7)" [ngClass]="{selected:selectedSquad==7}">
         <span>7</span>
       </button>
-      <button no-padding class="squard-number-btn circle eleven" (click)="selectSquadNumber($event,11)" [ngClass]="{selected:selectedSquad==11}">
+      <button *ngIf = "canShowSquadButton(11)" no-padding class="squard-number-btn circle eleven" (click)="selectSquadNumber($event,11)" [ngClass]="{selected:selectedSquad==11}">
         <span>11</span>
       </button>
       <button *ngIf="!teamMode" no-padding class="squard-number-btn circle" (click) = "selectSquads()">
@@ -31,7 +31,7 @@
 <ion-content no-bounce>
 
   <page-squad ion-fixed [settings]="squadSettings" style="width: 100%; height: 100%" #squadCtrl></page-squad>
-  <div ion-fixed class="squad-selected">
+  <div *ngIf = "teamMode" ion-fixed class="squad-selected">
     <div class="squard-info-panel">
     </div>
     <div class="frame-panel">
