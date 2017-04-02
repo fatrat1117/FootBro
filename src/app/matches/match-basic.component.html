@@ -1,4 +1,4 @@
-<ion-grid no-padding>
+<ion-grid *ngIf = "match?.dataReady" no-padding>
   <ion-row (click)="goMatchDetailPage()">
     <ion-col class="matches-info" no-padding>
       <ion-item class="team-bar">

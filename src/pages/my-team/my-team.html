@@ -52,10 +52,10 @@
       </button>
     </ion-item>
   </ion-list>
-  <div *ngIf="matches?.length > 0" (click)="showMatch(upcomingMatch)" class="result-score-wrapper">
+  <div *ngIf="matches?.length > 0 && upcomingMatch.dataReady" (click)="showMatch(upcomingMatch)" class="result-score-wrapper">
     <result-score [upcomingMatch]="upcomingMatch" [hostPageName]="currPageName"></result-score>
   </div>
-  <div *ngIf="lastMatch" (click)="showMatch(lastMatch)" class="result-score-wrapper">
+  <div *ngIf="lastMatch && lastMatch.dataReady" (click)="showMatch(lastMatch)" class="result-score-wrapper">
     <result-score [upcomingMatch]="lastMatch" [hostPageName]="currPageName"></result-score>
   </div>
   <ion-list class="no-margin">
@@ -109,108 +109,108 @@
       <ion-col>
         <button ion-button clear icon-right class="team-see-more-members" (click)="seeMoreTeamMember()">
         <p class="team-see-more-member-text">{{'ViewAll' | trans}} (<a style="color: #00ff00;">{{team.totalPlayers}} </a>{{'Players' | trans | lowercase}})</p>
-      <ion-icon name="ios-arrow-forward"></ion-icon>
-    </button>
-      </ion-col>
-    </ion-row>
-  </div>
-  <ion-list class="no-margin">
-    <ion-item class="subtitle">
-      <button ion-button item-left clear class="subtitle-text">{{'Records' | trans}}</button>
-    </ion-item>
-  </ion-list>
-  <ion-row class="team-all-game">
-    <ion-col width-33 id="recent15" class="team-all-game-choose" (click)="setChoosePosition(0)">
-      <p id="btn-recent-15" class="recent-tab-button white">{{'Recent15matches' | trans}}</p>
+<ion-icon name="ios-arrow-forward"></ion-icon>
+</button>
+</ion-col>
+</ion-row>
+</div>
+<ion-list class="no-margin">
+  <ion-item class="subtitle">
+    <button ion-button item-left clear class="subtitle-text">{{'Records' | trans}}</button>
+  </ion-item>
+</ion-list>
+<ion-row class="team-all-game">
+  <ion-col width-33 id="recent15" class="team-all-game-choose" (click)="setChoosePosition(0)">
+    <p id="btn-recent-15" class="recent-tab-button white">{{'Recent15matches' | trans}}</p>
+  </ion-col>
+  <ion-col width-33 id="recent20" class="team-all-game-unchoose" (click)="setChoosePosition(1)">
+    <p id="btn-recent-20" class="recent-tab-button">{{'Recent30matches' | trans}}</p>
+  </ion-col>
+  <ion-col width-33 id="all" class="team-all-game-unchoose" (click)="setChoosePosition(2)">
+    <p id="btn-all" class="recent-tab-button">{{'all' | trans}}</p>
+  </ion-col>
+</ion-row>
+<ion-row style="height: 2px;padding: 0px;">
+<ion-col id="firstLine" class="yellow-line"></ion-col>
+<ion-col id="secondLine" class="gray-line"></ion-col>
+<ion-col id="thirdLine" class="gray-line"></ion-col>
+</ion-row>
+<div class="team-success-fail-data">
+  <ion-row>
+    <ion-col class="col-30"></ion-col>
+    <ion-col class="col-40">
+      <sb-rate-circle title="winningrate" [rate]="currTeamStat?.roundedRate"></sb-rate-circle>
     </ion-col>
-    <ion-col width-33 id="recent20" class="team-all-game-unchoose" (click)="setChoosePosition(1)">
-      <p id="btn-recent-20" class="recent-tab-button">{{'Recent30matches' | trans}}</p>
-    </ion-col>
-    <ion-col width-33 id="all" class="team-all-game-unchoose" (click)="setChoosePosition(2)">
-      <p id="btn-all" class="recent-tab-button">{{'all' | trans}}</p>
-    </ion-col>
+    <ion-col class="col-30"></ion-col>
   </ion-row>
-  <ion-row style="height: 2px;padding: 0px;">
-    <ion-col id="firstLine" class="yellow-line"></ion-col>
-    <ion-col id="secondLine" class="gray-line"></ion-col>
-    <ion-col id="thirdLine" class="gray-line"></ion-col>
+  <ion-row>
+    <ion-col class="recent-game-result-name">{{'Played' | trans}}</ion-col>
+    <ion-col class="recent-game-result-name">{{'W' | trans}}</ion-col>
+    <ion-col class="recent-game-result-name">{{'D' | trans}}</ion-col>
+    <ion-col class="recent-game-result-name">{{'L' | trans}}</ion-col>
+    <ion-col class="recent-game-result-name">{{'avgga' | trans}}</ion-col>
+    <ion-col class="recent-game-result-name">{{'avggf' | trans}}</ion-col>
   </ion-row>
-  <div class="team-success-fail-data">
+  <ion-row>
+    <ion-col class="recent-game-result">{{currTeamStat?.total_matches}}</ion-col>
+    <ion-col class="recent-game-result">{{currTeamStat?.win}}</ion-col>
+    <ion-col class="recent-game-result">{{currTeamStat?.draw}}</ion-col>
+    <ion-col class="recent-game-result">{{currTeamStat?.lose}}</ion-col>
+    <ion-col class="recent-game-result">{{currTeamStat?.avgGA}}</ion-col>
+    <ion-col class="recent-game-result">{{currTeamStat?.avgGF}}</ion-col>
+  </ion-row>
+</div>
+<ion-list *ngIf='matches && mostGFMatchId' no-lines="true" class="game-data-assist">
+  <ion-item class="game-data-assist-item">
     <ion-row>
-      <ion-col class="col-30"></ion-col>
-      <ion-col class="col-40">
-        <sb-rate-circle title="winningrate" [rate]="currTeamStat?.roundedRate"></sb-rate-circle>
-      </ion-col>
-      <ion-col class="col-30"></ion-col>
+      <div item-left class="goal-title">{{'maxgf' | trans}}</div>
+      <p item-right class="goal-data">{{matchService.getMatch(mostGFMatchId)?.homeScore}} : {{matchService.getMatch(mostGFMatchId)?.awayScore}}</p>
     </ion-row>
     <ion-row>
-      <ion-col class="recent-game-result-name">{{'Played' | trans}}</ion-col>
-      <ion-col class="recent-game-result-name">{{'W' | trans}}</ion-col>
-      <ion-col class="recent-game-result-name">{{'D' | trans}}</ion-col>
-      <ion-col class="recent-game-result-name">{{'L' | trans}}</ion-col>
-      <ion-col class="recent-game-result-name">{{'avgga' | trans}}</ion-col>
-      <ion-col class="recent-game-result-name">{{'avggf' | trans}}</ion-col>
+      <div item-right class="goal-data-detail-wrapper">
+        <p class="goal-data-detail">{{matchService.getMatch(mostGFMatchId)?.home?.name}} VS {{matchService.getMatch(mostGFMatchId)?.away?.name}} / {{matchService.getMatch(mostGFMatchId)?.date
+          | date:'mediumDate'}}</p>
+      </div>
+    </ion-row>
+  </ion-item>
+  <ion-item *ngIf='matches && mostGAMatchId' class="game-data-assist-item">
+    <ion-row>
+      <div item-left class="goal-title">{{'maxga' | trans}}</div>
+      <p class="goal-data">{{matchService.getMatch(mostGAMatchId)?.homeScore}} : {{matchService.getMatch(mostGAMatchId)?.awayScore}}</p>
     </ion-row>
     <ion-row>
-      <ion-col class="recent-game-result">{{currTeamStat?.total_matches}}</ion-col>
-      <ion-col class="recent-game-result">{{currTeamStat?.win}}</ion-col>
-      <ion-col class="recent-game-result">{{currTeamStat?.draw}}</ion-col>
-      <ion-col class="recent-game-result">{{currTeamStat?.lose}}</ion-col>
-      <ion-col class="recent-game-result">{{currTeamStat?.avgGA}}</ion-col>
-      <ion-col class="recent-game-result">{{currTeamStat?.avgGF}}</ion-col>
+      <div item-right class="goal-data-detail-wrapper">
+        <p class="goal-data-detail">{{matchService.getMatch(mostGAMatchId)?.home?.name}} VS {{matchService.getMatch(mostGAMatchId)?.away?.name}} / {{matchService.getMatch(mostGAMatchId)?.date
+          | date:'mediumDate'}}</p>
+      </div>
     </ion-row>
-  </div>
-  <ion-list *ngIf='matches && mostGFMatchId' no-lines="true" class="game-data-assist">
-    <ion-item class="game-data-assist-item">
-      <ion-row>
-        <div item-left class="goal-title">{{'maxgf' | trans}}</div>
-        <p item-right class="goal-data">{{matchService.getMatch(mostGFMatchId)?.homeScore}} : {{matchService.getMatch(mostGFMatchId)?.awayScore}}</p>
-      </ion-row>
-      <ion-row>
-        <div item-right class="goal-data-detail-wrapper">
-          <p class="goal-data-detail">{{matchService.getMatch(mostGFMatchId)?.home?.name}} VS {{matchService.getMatch(mostGFMatchId)?.away?.name}} /
-            {{matchService.getMatch(mostGFMatchId)?.date | date:'mediumDate'}}</p>
-        </div>
-      </ion-row>
-    </ion-item>
-    <ion-item *ngIf='matches && mostGAMatchId' class="game-data-assist-item">
-      <ion-row>
-        <div item-left class="goal-title">{{'maxga' | trans}}</div>
-        <p class="goal-data">{{matchService.getMatch(mostGAMatchId)?.homeScore}} : {{matchService.getMatch(mostGAMatchId)?.awayScore}}</p>
-      </ion-row>
-      <ion-row>
-        <div item-right class="goal-data-detail-wrapper">
-          <p class="goal-data-detail">{{matchService.getMatch(mostGAMatchId)?.home?.name}} VS {{matchService.getMatch(mostGAMatchId)?.away?.name}} /
-            {{matchService.getMatch(mostGAMatchId)?.date | date:'mediumDate'}}</p>
-        </div>
-      </ion-row>
-    </ion-item>
-    <ion-item class="game-data-assist-item">
-      <div item-left class="goal-title-2">{{'maxvictory' | trans}}</div>
-      <div item-right>
-        <p class="goal-data">{{team?.overall?.win_streak}}</p>
-      </div>
-    </ion-item>
-    <ion-item class="game-data-assist-item">
-      <div item-left class="goal-title-2">{{'maxlose' | trans}}</div>
-      <div item-right>
-        <p class="goal-data">{{team?.overall?.lose_streak}}</p>
-      </div>
-    </ion-item>
-    <ion-item class="game-data-assist-item">
-      <div item-left class="goal-title-2">{{'mostundefeated' | trans}}</div>
-      <div item-right>
-        <p class="goal-data">{{team?.overall?.draw_streak}}</p>
-      </div>
-    </ion-item>
-    <ion-item class="game-data-assist-item">
-      <div item-left class="goal-title-2">{{'mostcleansheets' | trans}}</div>
-      <div item-right>
-        <p class="goal-data">{{team?.overall?.noGA_streak}}</p>
-      </div>
-    </ion-item>
-  </ion-list>
-  <!--<div class="team-best-member-padding">
+  </ion-item>
+  <ion-item class="game-data-assist-item">
+    <div item-left class="goal-title-2">{{'maxvictory' | trans}}</div>
+    <div item-right>
+      <p class="goal-data">{{team?.overall?.win_streak}}</p>
+    </div>
+  </ion-item>
+  <ion-item class="game-data-assist-item">
+    <div item-left class="goal-title-2">{{'maxlose' | trans}}</div>
+    <div item-right>
+      <p class="goal-data">{{team?.overall?.lose_streak}}</p>
+    </div>
+  </ion-item>
+  <ion-item class="game-data-assist-item">
+    <div item-left class="goal-title-2">{{'mostundefeated' | trans}}</div>
+    <div item-right>
+      <p class="goal-data">{{team?.overall?.draw_streak}}</p>
+    </div>
+  </ion-item>
+  <ion-item class="game-data-assist-item">
+    <div item-left class="goal-title-2">{{'mostcleansheets' | trans}}</div>
+    <div item-right>
+      <p class="goal-data">{{team?.overall?.noGA_streak}}</p>
+    </div>
+  </ion-item>
+</ion-list>
+<!--<div class="team-best-member-padding">
   <button ion-button full class="nearest-5-game-result-title no-margin no-padding default-font-color">
       最佳球员排名
     </button>
