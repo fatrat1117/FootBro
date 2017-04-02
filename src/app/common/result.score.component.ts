@@ -34,6 +34,9 @@ import { UpdateGamePage } from '../../pages/update-game/update-game';
       <button ion-button color="gYellow" class="input-score" (click)="openUpdateMatchPage($event)">{{'inputscores' | trans}}
       </button>
       </ion-row>
+      <ion-row *ngIf="!canShowScores() && !canShowInputScores()">
+          <ion-label no-margin>{{versusLabel | trans}}</ion-label>
+      </ion-row>
     </ion-col>
     <!--右边队伍信息-->
     <ion-col text-center width-33>
@@ -53,6 +56,7 @@ import { UpdateGamePage } from '../../pages/update-game/update-game';
 export class ResultScoreComponent {
   @Input() upcomingMatch : Match;
   @Input() hostPageName : String;
+  versusLabel = "versus";
 
   constructor(private playerService : PlayerService,
   private modal: ModalController) {

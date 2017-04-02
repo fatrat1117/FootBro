@@ -295,7 +295,8 @@ export class Localization {
             pointsNedded: 'You need at least %d points to unlock her.',
             unlockMsg: 'You will be able to message her once unlocked.',
             unlockPointsUsed: '%d points needed',
-            singapore: 'Singapore'
+            singapore: 'Singapore',
+            versus:'vs',
         },
 
         zh: {
@@ -572,7 +573,8 @@ export class Localization {
             pointsNedded: '你需要最少%d积分来解锁她.',
             unlockMsg: '解锁之后你就可以和她聊天了。',
             unlockPointsUsed: '需要%d积分',
-            singapore: '新加坡'
+            singapore: '新加坡',
+            versus: '对阵',
         }
     }
 }
