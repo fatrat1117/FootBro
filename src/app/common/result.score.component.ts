@@ -11,7 +11,7 @@ import { UpdateGamePage } from '../../pages/update-game/update-game';
       {{upcomingMatch?.time | date:'yyyy-MM-dd h:mma'}}
     </button>
   <!--对战信息-->
-  <ion-row class="game-info" ngClass="{{hostPageName}}" center>
+  <ion-row class="game-info" ngClass="{{hostPageName}}" center justify-content-center>
     <!--左边队伍信息-->
     <ion-col text-center width-33>
       <img [src]="upcomingMatch?.home?.logo" class="team-logo">
@@ -19,7 +19,7 @@ import { UpdateGamePage } from '../../pages/update-game/update-game';
     </ion-col>
     <!--中间比分-->
     <ion-col width-33 class="game-score">
-      <ion-row *ngIf="canShowScores()" center>
+      <ion-row *ngIf="canShowScores()" center justify-content-center>
         <ion-col>
           {{upcomingMatch?.homeScore}}
         </ion-col>
@@ -30,7 +30,7 @@ import { UpdateGamePage } from '../../pages/update-game/update-game';
           {{upcomingMatch?.awayScore}}
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="canShowInputScores()" center>
+      <ion-row *ngIf="canShowInputScores()" center justify-content-center>
       <button ion-button color="gYellow" class="input-score" (click)="openUpdateMatchPage($event)">{{'inputscores' | trans}}
       </button>
       </ion-row>
