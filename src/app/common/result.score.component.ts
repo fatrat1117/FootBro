@@ -31,7 +31,7 @@ import { UpdateGamePage } from '../../pages/update-game/update-game';
         </ion-col>
       </ion-row>
       <ion-row *ngIf="canShowInputScores()" center>
-      <button ion-button color="gYellow" (click)="openUpdateMatchPage($event)">{{'inputscores' | trans}}
+      <button ion-button color="gYellow" class="input-score" (click)="openUpdateMatchPage($event)">{{'inputscores' | trans}}
       </button>
       </ion-row>
     </ion-col>
@@ -63,24 +63,24 @@ export class ResultScoreComponent {
     if (!this.upcomingMatch)
       return false;
     //console.log(this.upcomingMatch);
-    
-    if ('homeScore' in this.upcomingMatch 
+
+    if ('homeScore' in this.upcomingMatch
     && 'awayScore' in this.upcomingMatch &&
-    this.upcomingMatch.homeScore >= 0 && 
+    this.upcomingMatch.homeScore >= 0 &&
     this.upcomingMatch.awayScore >= 0)
       return true;
-    
+
     return false;
   }
 
   canShowInputScores() {
     if (!this.playerService.isAuthenticated())
       return false;
-    
+
     if (!this.upcomingMatch)
       return false;
     //console.log(this.upcomingMatch, this.upcomingMatch.isStarted(), this.playerService.selfId());
-    if (this.upcomingMatch.isStarted() && 
+    if (this.upcomingMatch.isStarted() &&
     ((this.playerService.isCaptain(this.playerService.selfId(), this.upcomingMatch.homeId) && !this.upcomingMatch.isHomeUpdated)
     || (this.playerService.isCaptain(this.playerService.selfId(), this.upcomingMatch.awayId) && !this.upcomingMatch.isAwayUpdated))
     ) {
