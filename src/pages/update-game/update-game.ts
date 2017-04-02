@@ -26,9 +26,8 @@ export class UpdateGamePage {
     matchTime;
     tournamentId;
     id;
-    //homePlayers: PlayerMatchStatsUI[];
-    //awayPlayers: PlayerMatchStatsUI[];
-    //updateState = 3;
+    homeScore = '';
+    awayScore = '';
     myIdentity = 2; //0: home captain, 1: away captain, 2:others
     onMatchSquadReady;
     teamId;
@@ -48,7 +47,8 @@ export class UpdateGamePage {
         this.id = params.get('id');
         this.teamId = params.get('teamId');
         this.match = this.matchService.getMatch(this.id);
-        //this.updateState = this.matchService.getUpdateState(this.match);
+        this.homeScore =  this.match.homeScore;
+        this.awayScore =  this.match.awayScore;
         if (this.match.home.captain === this.playerService.selfId())
             this.myIdentity = 0;
         else if (this.match.away.captain === this.playerService.selfId())
@@ -183,7 +183,7 @@ export class UpdateGamePage {
                 {
                     text: this.loc.getString('OK'),
                     handler: () => {
-                        self.doUpdateMatch();
+                        self.doUpdateMatch(points);
                     }
                 }
             ]
@@ -191,7 +191,7 @@ export class UpdateGamePage {
         confirm.present();
     }
 
-    doUpdateMatch() {
+    doUpdateMatch(points) {
         let participants = this.copyAndUpdatePlayersData(this.participants);
 
         let updateMatchData = {
@@ -203,15 +203,16 @@ export class UpdateGamePage {
             updateMatchData['isHomeUpdated'] = true;
         else if (this.teamId === this.match.awayId)
             updateMatchData['isAwayUpdated'] = true;
-        let homeScoreStr = this.match.homeScore.toString().trim();
-        let awayScroeStr = this.match.awayScore.toString().trim();
+        let homeScoreStr = this.homeScore.toString().trim();
+        let awayScroeStr = this.awayScore.toString().trim();
         if (homeScoreStr.length > 0 && awayScroeStr.length > 0) {
-            updateMatchData["homeScore"] = Number(this.match.homeScore);
-            updateMatchData["awayScore"] = Number(this.match.awayScore);
+            updateMatchData["homeScore"] = Number(this.homeScore);
+            updateMatchData["awayScore"] = Number(this.awayScore);
         }
 
         this.matchService.updateMatch(this.id, updateMatchData);
         this.teamService.updateMatchParticipants(this.teamId, this.id, participants);
+        this.teamService.teamEarnPoints(this.teamId, points);
         this.close();
     }
 
@@ -266,13 +267,14 @@ export class UpdateGamePage {
         modal.present();
     }
 
-    // isShowSave() {
-    //     if (3 === this.updateState)
-    //         return false;
-    //     if (2 === this.updateState && this.match.home.captain === this.playerService.selfId())
-    //         return false;
-    //     if (1 === this.updateState && this.match.away.captain === this.playerService.selfId())
-    //         return false;
-    //     return true;
-    // }
+    maxLengthHome(val, length) {
+        this.homeScore = val.toString().substr(0, length);
+        console.log(this.homeScore);
+        
+    }
+
+    maxLength(val, length) {
+        console.log(val, length);
+
+    }
 }

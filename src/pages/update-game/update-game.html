@@ -36,13 +36,13 @@
     <ion-col width-33>
       <ion-row center class="score-item">
         <ion-col class="team-score">
-          <ion-input class="score-input" text-center type="number" min="0" max="99" [(ngModel)]="match.homeScore"></ion-input>
+          <ion-input class="score-input" text-center type="number" maxlength="2" [(ngModel)]="homeScore"></ion-input>
         </ion-col>
         <ion-col class="colon" text-center>
           :
         </ion-col>
         <ion-col class="team-score">
-          <ion-input class="score-input" text-center type="number" min="0" max="99" [(ngModel)]="match.awayScore"></ion-input>
+          <ion-input class="score-input" text-center type="number" maxlength="2"  [(ngModel)]="awayScore"></ion-input>
         </ion-col>
       </ion-row>
     </ion-col>
