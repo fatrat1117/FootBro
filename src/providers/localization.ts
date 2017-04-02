@@ -290,6 +290,12 @@ export class Localization {
             ManageSquadCheer : "Cheers! ",
             goals: 'Goals',
             assists: 'Assists',
+            notEnoughPoints: 'Not enough points',
+            balance: 'Current balance: ',
+            pointsNedded: 'You need at least %d points to unlock her.',
+            unlockMsg: 'You will be able to message her once unlocked.',
+            unlockPointsUsed: '%d points needed',
+            singapore: 'Singapore'
         },
 
         zh: {
@@ -561,6 +567,12 @@ export class Localization {
             ManageSquadCheer: '加油! ',
             goals: '进球',
             assists: '助攻',
+            notEnoughPoints: '积分不足',
+            balance: '剩余积分：',
+            pointsNedded: '你需要最少%d积分来解锁她.',
+            unlockMsg: '解锁之后你就可以和她聊天了。',
+            unlockPointsUsed: '需要%d积分',
+            singapore: '新加坡'
         }
     }
 }
