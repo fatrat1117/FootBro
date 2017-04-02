@@ -795,9 +795,20 @@ export class FirebaseManager {
     return this.af.database.object('/matches/dates/' + day);
   }
 
-  deleteMatch(id) {
-    this.afMatch(id).remove().then(() => {
-      this.FireEvent('matcheschanged')
+  deleteMatchSquad(teamId, matchId) {
+    this.af.database.object(this.getMatchSquadRef(teamId, matchId)).remove();
+  }
+
+  deleteMatch(matchId) {
+    let match = this.cachedMatchesMap[matchId];
+    let date = match.date;
+    if ('homeId' in match)
+      this.deleteMatchSquad(match.homeId, matchId);
+    if ('awayId' in match)
+      this.deleteMatchSquad(match.awayId, matchId);
+
+    this.afMatch(matchId).remove().then(() => {
+      this.FireCustomEvent('matcheschanged', date)
     });
   }
 
@@ -823,7 +834,10 @@ export class FirebaseManager {
 
   updateMatch(id, matchObj) {
     console.log('updateMatch', matchObj);
-    this.afMatch(id).update(matchObj);
+    let date = matchObj.date;
+    this.afMatch(id).update(matchObj).then(()=> {
+      this.FireCustomEvent('matcheschanged', date);
+    });;
     if (matchObj.date) {
       this.afMatchDate(matchObj.date).set(true);
       if (matchObj.tournamentId)
