@@ -46,7 +46,7 @@
 </div>
 
 <div class="content-all" *ngSwitchCase="'players'">
-  <!--<no-record *ngIf="statCategories.length <= 0" [message="hasNoChatsMessage"></no-record>-->
+  <no-record *ngIf="statCategories.length <= 0" message="{{'searchMatchPageNoRecord' | trans}}"></no-record>
   <div *ngIf="statCategories.length > 0">
     <button *ngIf='canShowRate()' (click)="openRatePlayersPage()" ion-button block>
           {{'rateplayers' | trans}}

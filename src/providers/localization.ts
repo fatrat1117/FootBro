@@ -285,7 +285,9 @@ export class Localization {
             recentmatches: 'Recent Matches',
             deletethismatch: 'Delete this match?',
             rateplayers: 'Rate Players',
-            deletematch: 'Delete Match'
+            deletematch: 'Delete Match',
+            goals: 'Goals',
+            assists: 'Assists',
         },
 
         zh: {
@@ -552,7 +554,9 @@ export class Localization {
             recentmatches: '最近的比赛',
             deletethismatch: '删除这场比赛?',
             rateplayers: '球员评分',
-            deletematch: '删除比赛'
+            deletematch: '删除比赛',
+            goals: '进球',
+            assists: '助攻',
         }
     }
 }
