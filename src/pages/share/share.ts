@@ -9,9 +9,15 @@ declare var Wechat: any;
   templateUrl: 'share.html'
 })
 export class SharePage {
+  isWechatInstalled = false;
 
   constructor(private viewCtrl: ViewController) {
-
+    let self = this;
+    Wechat.isInstalled(function (installed) {
+      self.isWechatInstalled = installed;
+    }, function (reason) {
+      alert("Failed: " + reason);
+    });
   }
 
   // Facebook
@@ -39,7 +45,7 @@ export class SharePage {
   // WeChat
   onWeChatClick(type: number) {
     this.viewCtrl.dismiss();
-    this.viewCtrl.onDidDismiss(()=> {
+    this.viewCtrl.onDidDismiss(() => {
       this.shareToWeChat(type);
     });
   }
@@ -71,15 +77,15 @@ export class SharePage {
       messageExt: "",
       thumb: picAddress,
       messageAction: "<action>Intent.ACTION_SEND</action>",
-      media: {picAddress}
+      media: { picAddress }
     };
     params['message'].media.type = Wechat.Type.IMAGE;
     params['message'].media.image = picAddress;
 
     Wechat.share(params, function () {
-      alert("Share Success");
+      console.log("Share Success"); 
     }, function (reason) {
-      alert("Share Failed: " + reason);
+      console.log("Share Failed: " + reason);
     });
   }
 }

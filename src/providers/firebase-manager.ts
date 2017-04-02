@@ -1067,7 +1067,7 @@ export class FirebaseManager {
     const options: CameraOptions = {
       allowEdit: true,
       quality: 75,
-      encodingType: this.camera.EncodingType.JPEG,
+      encodingType: this.camera.EncodingType.PNG,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       destinationType: this.camera.DestinationType.DATA_URL,
       targetWidth: width,
@@ -1086,16 +1086,16 @@ export class FirebaseManager {
 
     // imageData is either a base64 encoded string or a file URI
     // If it's base64:
-    let contentType = 'image/jpg';
+    let contentType = 'image/png';
     let b64Data = imageData;
 
     let blob = this.b64toBlob(b64Data, contentType, width);
 
     let metadata = {
-      contentType: 'image/jpeg',
+      contentType: 'image/png',
     };
     let storageRef = firebase.storage().ref();
-    let uploadTask = storageRef.child('images/' + imgId + '.jpg').put(blob, metadata);;
+    let uploadTask = storageRef.child('images/' + imgId + '.png').put(blob, metadata);;
     uploadTask.on('state_changed', function (snapshot) {
       // Observe state change events such as progress, pause, and resume
       // See below for more detail
