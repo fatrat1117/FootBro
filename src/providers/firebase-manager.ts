@@ -43,6 +43,7 @@ export class FirebaseManager {
   admins;
 
   ratePlayerPoints = 100;
+  teamInitialPoints = 250;
 
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,
@@ -289,7 +290,9 @@ export class FirebaseManager {
   }
 
   getTeamAsync(teamId) {
-    if (!this.cachedTeamsMap[teamId]) {
+    if (this.getTeam(teamId)) 
+      this.FireCustomEvent('teamready', teamId);
+    else{
       this.af.database.object(`/teams/${teamId}`).subscribe(snapshot => {
         if (snapshot.$exists()) {
           //console.log(snapshot);
@@ -298,16 +301,24 @@ export class FirebaseManager {
             delete this.cachedTeamsMap[teamId];
           }
           else {
-            if ('img/none.png' === snapshot['basic-info'].logo)
+            if ('points' in snapshot) {
+              if ('img/none.png' === snapshot['basic-info'].logo)
               snapshot['basic-info'].logo = 'assets/img/none.png';
-            this.cachedTeamsMap[teamId] = snapshot;
-            this.FireCustomEvent('teamready', teamId);
+              this.cachedTeamsMap[teamId] = snapshot;
+              this.FireCustomEvent('teamready', teamId);
+            }
+            else {
+              //fix all missing properties
+              this.af.database.object(`/teams/${teamId}`).update(
+              {
+                yearBuilt: 2016,
+                points: this.teamInitialPoints
+              });
+            }
           }
         }
       })
     }
-    else
-      this.FireCustomEvent('teamready', teamId);
   }
 
   getTeam(teamId) {
