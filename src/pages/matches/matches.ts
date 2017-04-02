@@ -128,7 +128,9 @@ export class MatchesPage {
     };
 
     this.onMatchesChanged = e => {
-      this.scrollToDate(this.selectedDate);
+      let date = e['detail'];
+      //if (date == this.selectedDate)
+      this.scrollToDate(date);
     };
 
     document.addEventListener('matchdatesready', this.onMatchDatesReady);

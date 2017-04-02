@@ -284,7 +284,8 @@ export class Localization {
             inputscores: 'Input Scores',
             recentmatches: 'Recent Matches',
             deletethismatch: 'Delete this match?',
-            rateplayers: 'Rate Players'
+            rateplayers: 'Rate Players',
+            deletematch: 'Delete Match'
         },
 
         zh: {
@@ -550,7 +551,8 @@ export class Localization {
             inputscores: '录入比分',
             recentmatches: '最近的比赛',
             deletethismatch: '删除这场比赛?',
-            rateplayers: '球员评分'
+            rateplayers: '球员评分',
+            deletematch: '删除比赛'
         }
     }
 }

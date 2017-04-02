@@ -17,9 +17,6 @@
       </ion-segment-button>
     </ion-segment>
     <ion-buttons right>
-      <button *ngIf='canShowDelete()' (click)="deleteMatch()" color='danger' ion-button icon-only clear>
-        <ion-icon name="trash"></ion-icon>
-      </button>
       <button *ngIf='canShowEdit()' color='primaryYellow' (click)="edit()" ion-button icon-only clear>
           <ion-icon name="md-create"></ion-icon>
       </button>
@@ -39,6 +36,9 @@
     <p>{{match?.location?.address}}</p>
   </ion-item>
 </ion-list>
+    <button *ngIf='canShowDelete()' (click)="deleteMatch()" color='danger' ion-button block>
+        {{'deletematch' | trans}}
+    </button>
 </div>
 
 <div class="content-all" *ngSwitchCase="'squad'">

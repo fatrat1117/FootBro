@@ -26,8 +26,8 @@
         "matches": {
             ".read": true,
             "dates": {
-              ".write": "root.child('admins').hasChild(auth.uid) || root.child('teams').child(root.child('players').child(auth.uid).child('basic-info').child('teamId').val()).child('basic-info').child('captain').val() === auth.uid"  
-              //".write": "root.child('admins').hasChild(auth.uid) || root.child('players').hasChild(auth.uid)"
+                ".write": "root.child('admins').hasChild(auth.uid) || root.child('teams').child(root.child('players').child(auth.uid).child('basic-info').child('teamId').val()).child('basic-info').child('captain').val() === auth.uid"
+                //".write": "root.child('admins').hasChild(auth.uid) || root.child('players').hasChild(auth.uid)"
             },
             "list": {
                 // Only admin or team founder can write to this location
@@ -35,7 +35,11 @@
                 ".indexOn": [
                     "date",
                     "tournamentId"
-                ]
+                ],
+                ".validate": "newData.exists()",
+                "$id": {
+                    ".validate": "$id != null"
+                }
             }
         },
         "misc": {
@@ -56,7 +60,11 @@
         },
         "players": {
             ".read": true,
-            ".write": "auth !== null"
+            ".write": "auth !== null",
+            ".validate": "newData.exists()",
+            "$id": {
+                ".validate": "$id != null"
+            }
         },
         "public": {
             ".read": true,
@@ -64,33 +72,47 @@
             "players": {
                 ".indexOn": [
                     "popularity"
-                ]
+                ],
+                ".validate": "newData.exists()",
+                "$id": {
+                    ".validate": "$id != null"
+                }
             },
             "teams": {
                 ".indexOn": [
                     "popularity",
                     "name",
                     "ability"
-                ]
+                ],
+                ".validate": "newData.exists()",
+                "$id": {
+                    ".validate": "$id != null"
+                }
+            },
+            "cheerleaders": {
+                ".validate": "newData.exists()",
+                "$id": {
+                    ".validate": "$id != null"
+                }
             }
         },
         "team_squads": {
             ".read": true,
-              "$teamId": {
+            "$teamId": {
                 ".write": "root.child('admins').hasChild(auth.uid) || root.child('teams').child($teamId).child('players').hasChild(auth.uid)",
-                "matches":{
-                  "$matchId": {
-                    "time" : {
-                      ".write": "auth !== null"
+                "matches": {
+                    "$matchId": {
+                        ".write": "auth !== null"
                     }
-                  }
-                } 
-              }
+                }
+            }
         },
         "teams": {
             ".read": true,
             ".write": "auth !== null",
+            ".validate": "newData.exists()",
             "$teamid": {
+                ".validate": "$teamid != null",
                 "basic-info": {
                     ".write": "root.child('admins').hasChild(auth.uid) || auth.uid===data.child('captain').val() || !data.exists()&&newData.exists()&&root.child('players').hasChild(auth.uid)"
                 },
