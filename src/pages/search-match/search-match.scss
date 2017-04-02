@@ -1,6 +1,15 @@
 page-search-match{
   .search-match-container{
     height: 100%;
+
+    .search-march-item{
+      .item-inner{
+        padding: 0;
+        ion-label{
+          margin:0;
+        }
+      }
+    }
   }
   .no-match-wrapper{
     width: 100%;

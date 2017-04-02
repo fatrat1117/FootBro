@@ -13,7 +13,7 @@ import { UpdateGamePage } from '../../pages/update-game/update-game';
   <!--对战信息-->
   <ion-row class="game-info" ngClass="{{hostPageName}}" center>
     <!--左边队伍信息-->
-    <ion-col width-33>
+    <ion-col text-center width-33>
       <img [src]="upcomingMatch?.home?.logo" class="team-logo">
       <!--p class="team-left-text">{{match?.home?.name}}</p-->
     </ion-col>
@@ -36,7 +36,7 @@ import { UpdateGamePage } from '../../pages/update-game/update-game';
       </ion-row>
     </ion-col>
     <!--右边队伍信息-->
-    <ion-col width-33>
+    <ion-col text-center width-33>
       <img [src]="upcomingMatch?.away?.logo" class="team-logo">
       <!--p class="team-right-text">{{match?.away?.name}}</p-->
     </ion-col>
