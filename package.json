@@ -27,7 +27,7 @@
     "angular2-google-maps": "^0.17.0",
     "angularfire2": "^2.0.0-beta.8",
     "firebase": "^3.6.5",
-    "intl": "^1.2.5",
+    "intl": "1.2.4",
     "ionic-angular": "2.3.0",
     "ionic-native": "2.4.1",
     "ionicons": "3.0.0",
