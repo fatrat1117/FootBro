@@ -236,6 +236,6 @@ export class MyPlayerPage {
       console.log(err);
     }
 
-    this.fm.selectImgUploadGetUrl(this.selfId + 'Large', 300, 144, success, error);
+    this.fm.selectImgUploadGetUrl(this.selfId + 'Large', 512, 512, success, error);
   }
 }

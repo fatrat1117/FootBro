@@ -20,6 +20,8 @@ export class Player {
   points: number;
   joinTime;
   social;
+  wechatShareTime;
+  fbShareTime;
 }
 
 export class PlayerMatchStatsUI {

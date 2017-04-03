@@ -21,6 +21,8 @@ export class PlayerService {
       player.teamId = playerData['basic-info'].teamId;
       player.points = playerData.points;
       player.photoLarge = playerData.photoLarge || "assets/img/forTest/messi_banner.png";
+      player.wechatShareTime = playerData.wechatShareTime;
+      player.fbShareTime = playerData.fbShareTime;
       if (playerData.photoMedium)
         player.photoMedium = playerData.photoMedium;
       if ('points' in playerData)
