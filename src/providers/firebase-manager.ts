@@ -43,7 +43,7 @@ export class FirebaseManager {
   admins;
 
   ratePlayerPoints = 100;
-  teamInitialPoints = 250;
+  teamInitialPoints = 100;
 
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,

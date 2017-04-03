@@ -3,6 +3,7 @@ import { ModalController } from 'ionic-angular';
 import { Match } from '../../app/matches/match.model'
 import { PlayerService } from '../../app/players/player.service';
 import { UpdateGamePage } from '../../pages/update-game/update-game';
+import * as moment from 'moment';
 
 @Component({
   selector: 'result-score',
@@ -83,7 +84,13 @@ export class ResultScoreComponent {
 
     if (!this.upcomingMatch)
       return false;
+
+    //only input matches after April 2
     //console.log(this.upcomingMatch, this.upcomingMatch.isStarted(), this.playerService.selfId());
+    let april2 = moment("20170402", "YYYYMMDD").unix() * 1000;
+    if (this.upcomingMatch.date < april2)
+      return false;
+      
     if (this.upcomingMatch.isStarted() &&
     ((this.playerService.isCaptain(this.playerService.selfId(), this.upcomingMatch.homeId) && !this.upcomingMatch.isHomeUpdated)
     || (this.playerService.isCaptain(this.playerService.selfId(), this.upcomingMatch.awayId) && !this.upcomingMatch.isAwayUpdated))

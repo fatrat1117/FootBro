@@ -12,7 +12,7 @@
       </button>-->
       <button [disabled]="!(this.match.homeScore && this.match.awayScore)" (click)="updateMatch()" color="primary"
         ion-button icon-only clear>
-        {{getTeamPoints()}}
+        +{{getTeamPoints()}}
         <ion-icon name="md-cloud-upload"></ion-icon>
       </button>
     </ion-buttons>
@@ -21,7 +21,7 @@
 
 <ion-content>
   <ion-row class="team-info">
-    <ion-col width-33 (click)="searchTeam(1)">
+    <ion-col width-33>
       <ion-row>
         <button ion-button icon-left clear full style="margin:0px;padding:0px;" color="light" class="select-team-btn">
           <ion-icon name="md-flag" color="danger"></ion-icon>
@@ -47,7 +47,7 @@
       </ion-row>
     </ion-col>
 
-    <ion-col width-33 (click)="searchTeam(2)">
+    <ion-col width-33>
       <ion-row>
         <button ion-button icon-left clear full style="margin:0px;padding:0px;" color="light" class="select-team-btn">
           <ion-icon name="md-flag" color="primary"></ion-icon>
