@@ -15,7 +15,6 @@ export class EditTeamPage {
   teamId: string;
   team: Team;
   onTeamReady;
-  imgSize = 128;
   busy = false;
 
   constructor(private navCtrl: NavController, private modalCtrl: ModalController, private alertCtrl: AlertController, 
@@ -59,7 +58,7 @@ export class EditTeamPage {
       self.busy = false;
     }
 
-    this.fm.selectImgUploadGetUrl(this.teamId, this.imgSize, this.imgSize, success, error);
+    this.fm.selectImgUploadGetUrl(this.teamId, this.fm.smallImageSize, this.fm.smallImageSize, success, error);
   }
 
   editName() {

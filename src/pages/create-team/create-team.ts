@@ -17,7 +17,6 @@ export class CreateTeamPage {
   onFail;
   logoData: any;
   logoUrl = 'assets/img/none.png';
-  imgSize = 128;
 
   constructor(private viewCtrl: ViewController,
     private service: TeamService,
@@ -43,7 +42,7 @@ export class CreateTeamPage {
           alert(err);
           self.busy = false;
         }
-        self.fm.updateImgGetUrl(this.logoData, teamId, this.imgSize, this.imgSize, success, error);
+        self.fm.updateImgGetUrl(this.logoData, teamId, this.fm.smallImageSize, this.fm.smallImageSize, success, error);
       } else 
         self.dismiss();
     };
@@ -90,7 +89,7 @@ export class CreateTeamPage {
       console.log(err);
       self.busy = false;
     }
-    this.fm.selectImgGetData(this.imgSize, this.imgSize, success, error);
+    this.fm.selectImgGetData(this.fm.smallImageSize, this.fm.smallImageSize, success, error);
   }
 
   save() {
@@ -101,16 +100,6 @@ export class CreateTeamPage {
       location: this.location
     };
 
-    // if (this.logoData) {
-    //     let success = imgUrl => {
-    //         teamObj.logo = imgUrl;
-    //         self.doCreateTeam(teamObj);
-    //     }
-
-    //     let error = err => alert(err);
-    //     this.fm.updateImgGetUrl(this.logoData, this.imgSize, this.imgSize, this., success, error);
-    // } else {
     self.doCreateTeam(teamObj);
-    //}
   }
 }

@@ -297,6 +297,8 @@ export class Localization {
             unlockPointsUsed: '%d points needed',
             singapore: 'Singapore',
             versus:'vs',
+            enroll: 'Enroll',
+            youarenotcaptain: 'You are not captain'
         },
 
         zh: {
@@ -575,6 +577,8 @@ export class Localization {
             unlockPointsUsed: '需要%d积分',
             singapore: '新加坡',
             versus: '对阵',
+            enroll: '报名',
+            youarenotcaptain: '你不是队长'
         }
     }
 }

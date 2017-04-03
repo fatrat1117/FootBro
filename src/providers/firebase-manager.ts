@@ -44,6 +44,7 @@ export class FirebaseManager {
 
   ratePlayerPoints = 100;
   teamInitialPoints = 100;
+  smallImageSize = 256;
 
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,

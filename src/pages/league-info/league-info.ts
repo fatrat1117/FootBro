@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { ViewController, ToastController, AlertController, NavParams } from 'ionic-angular';
-
+import { Localization } from '../../providers/localization'
 import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
 import { Team } from '../../app/teams/team.model'
@@ -27,7 +27,8 @@ export class LeagueInfoPage {
 
   constructor(private viewCtrl: ViewController, private navParams: NavParams, 
               private toastCtrl: ToastController, private alertCtrl: AlertController,
-              private playerService: PlayerService, private teamService: TeamService, private matchService: MatchService) {
+              private playerService: PlayerService, private teamService: TeamService, 
+              private matchService: MatchService, private loc : Localization) {
   }
 
   ionViewDidLoad() {
@@ -77,19 +78,19 @@ export class LeagueInfoPage {
   registerTeam() {
     if (this.selfId == this.selfTeam.captain) {
       let confirm = this.alertCtrl.create({
-        title: `Register team:`,
+        title: this.loc.getString('enroll'),
         subTitle: this.selfTeam.name,
         //message: 'You will be able to message her once unlocked.',
         buttons: [
           {
-            text: 'Confirm',
+            text: this.loc.getString('Cancel'),
             handler: () => {
-              this.matchService.registerLeague(this.selfTeam.id, this.league.$key);
             }
           },
           {
-            text: 'Cancel',
+            text: this.loc.getString('OK'),
             handler: () => {
+              this.matchService.registerLeague(this.selfTeam.id, this.league.$key);
             }
           }
         ]
@@ -99,7 +100,7 @@ export class LeagueInfoPage {
     }
     else {
       this.toastCtrl.create({
-        message: 'Only captain can register.',
+        message: this.loc.getString('youarenotcaptain'),
         duration: 2000,
         position: 'top'
       }).present();

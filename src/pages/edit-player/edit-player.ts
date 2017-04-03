@@ -24,7 +24,6 @@ export class EditPlayerPage {
   onPlayerReady;
   isCheerleader = false;
   busy = false;
-  imgSize = 128;
 
   constructor(private navCtrl: NavController, private modalCtrl: ModalController, private playerService: PlayerService, private teamService: TeamService, private fm: FirebaseManager) {
     this.selfId = this.playerService.selfId();
@@ -104,6 +103,6 @@ export class EditPlayerPage {
       self.busy = false;
     }
 
-    this.fm.selectImgUploadGetUrl(this.selfId, this.imgSize, this.imgSize, success, error);
+    this.fm.selectImgUploadGetUrl(this.selfId, this.fm.smallImageSize, this.fm.smallImageSize, success, error);
   }
 }
