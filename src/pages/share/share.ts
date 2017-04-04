@@ -16,16 +16,16 @@ export class SharePage {
     Wechat.isInstalled(function (installed) {
       self.isWechatInstalled = installed;
     }, function (reason) {
-      alert("Failed: " + reason);
+      console.log("Failed: " + reason);
     });
   }
 
   // Facebook
   onFaceBookClick() {
-    this.viewCtrl.dismiss();
     this.viewCtrl.onDidDismiss(() => {
       this.shareToFacebook();
     });
+    this.viewCtrl.dismiss();
   }
 
   shareToFacebook() {
@@ -44,14 +44,14 @@ export class SharePage {
 
   // WeChat
   onWeChatClick(type: number) {
-    this.viewCtrl.dismiss();
     this.viewCtrl.onDidDismiss(() => {
       this.shareToWeChat(type);
     });
+    this.viewCtrl.dismiss();
   }
 
   shareToWeChat(type: number) {
-    this.viewCtrl.dismiss();
+    //this.viewCtrl.dismiss();
     Screenshot.URI(10).then((res) => {
       this.sharePhoto(res.URI, type);
       console.log(res, type);
