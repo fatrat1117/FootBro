@@ -2,6 +2,7 @@ import { Injectable} from '@angular/core';
 import { ToastController } from 'ionic-angular';
 import { Localization} from './localization';
 import * as moment from 'moment';
+declare var sprintf: any;
 
 @Injectable()
 export class UIHelper {
@@ -21,6 +22,20 @@ export class UIHelper {
       position: 'top'
     });
     toast.present();
+  }
+
+  showToastMessage(msg, dur = 3000) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: dur,
+      position: 'top'
+    });
+    toast.present();
+  }
+
+  showPointsToastMessage(points) {
+    let msg = sprintf(this.loc.getString('youearnedpoints'), points);
+    this.showToastMessage(msg);
   }
 
   //time converter

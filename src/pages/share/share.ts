@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ViewController } from 'ionic-angular';
 import { Screenshot, SocialSharing } from 'ionic-native';
+import { PlayerService } from '../../app/players/player.service'
+import { FirebaseManager } from '../../providers/firebase-manager'
 
 declare var Wechat: any;
 
@@ -10,14 +12,17 @@ declare var Wechat: any;
 })
 export class SharePage {
   isWechatInstalled = false;
-
-  constructor(private viewCtrl: ViewController) {
+  sharePoints = 50;
+  constructor(private viewCtrl: ViewController,
+    private playerService: PlayerService) {
     let self = this;
-    Wechat.isInstalled(function (installed) {
-      self.isWechatInstalled = installed;
-    }, function (reason) {
-      console.log("Failed: " + reason);
-    });
+    if (Wechat) {
+      Wechat.isInstalled(function (installed) {
+        self.isWechatInstalled = installed;
+      }, function (reason) {
+        console.log("Failed: " + reason);
+      });
+    }
   }
 
   // Facebook
@@ -29,10 +34,17 @@ export class SharePage {
   }
 
   shareToFacebook() {
+    let self = this;
+
     Screenshot.URI(10).then((res) => {
       //console.log(res);
       SocialSharing.shareViaFacebook(null, res.URI, null)
-        .then(() => { },
+        .then(() => {
+          let player = self.playerService.getSelfPlayer();
+          if (player && !player.fbShareTime) {
+            self.playerService.earnPoints(self.playerService.selfId(), self.sharePoints);
+          }
+        },
         err => {
           alert(err);
         });
@@ -62,7 +74,7 @@ export class SharePage {
   }
 
   sharePhoto(picAddress, type) {
-    if (typeof Wechat === "undefined") {
+    if (typeof Wechat == "undefined") {
       alert("Wechat plugin is not installed.");
       return false;
     }
@@ -81,9 +93,15 @@ export class SharePage {
     };
     params['message'].media.type = Wechat.Type.IMAGE;
     params['message'].media.image = picAddress;
-
+    let self = this;
     Wechat.share(params, function () {
-      console.log("Share Success"); 
+      console.log("Share Success");
+      if (1 === type) {
+        let player = self.playerService.getSelfPlayer();
+        if (player && !player.wechatShareTime) {
+          self.playerService.earnPoints(self.playerService.selfId(), self.sharePoints);
+        }
+      }
     }, function (reason) {
       console.log("Share Failed: " + reason);
     });

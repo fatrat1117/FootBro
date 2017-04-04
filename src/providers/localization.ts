@@ -298,7 +298,8 @@ export class Localization {
             singapore: 'Singapore',
             versus:'vs',
             enroll: 'Enroll',
-            youarenotcaptain: 'You are not captain'
+            youarenotcaptain: 'You are not captain',
+            youearnedpoints: 'You have earned %d points',
         },
 
         zh: {
@@ -578,7 +579,8 @@ export class Localization {
             singapore: '新加坡',
             versus: '对阵',
             enroll: '报名',
-            youarenotcaptain: '你不是队长'
+            youarenotcaptain: '你不是队长',
+            youearnedpoints: '你获得了%d积分',
         }
     }
 }

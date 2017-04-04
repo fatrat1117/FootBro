@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FirebaseManager } from '../../providers/firebase-manager';
 import { Player } from './player.model';
+import { UIHelper } from '../../providers/uihelper'
 
 @Injectable()
 export class PlayerService {
@@ -8,7 +9,8 @@ export class PlayerService {
   teamPlayersMap = {};
   bRefreshTeamPlayers = false;
 
-  constructor(private fm: FirebaseManager) {
+  constructor(private fm: FirebaseManager,
+  private uiHelper : UIHelper) {
     document.addEventListener('playerready', e => {
       let id = e['detail'];
 
@@ -58,7 +60,7 @@ export class PlayerService {
       player.role = "player";
       if (playerData.role)
         player.role = playerData.role;
-      
+
       if (playerData.joinTime)
         player.joinTime = playerData.joinTime;
 
@@ -86,7 +88,7 @@ export class PlayerService {
         let id = e['detail'];
         let team = this.fm.getTeam(id);
         //console.log(team);
-        
+
         let players;
         if (this.teamPlayersMap[id]) {
           players = this.teamPlayersMap[id];
@@ -113,7 +115,7 @@ export class PlayerService {
     })
   }
 
-  findOrCreatePlayer(id) : Player{
+  findOrCreatePlayer(id): Player {
     let player;
     if (this.playersMap[id])
       player = this.playersMap[id];
@@ -124,7 +126,7 @@ export class PlayerService {
     return player;
   }
 
-  findOrCreatePlayerAndPull(id) : Player{
+  findOrCreatePlayerAndPull(id): Player {
     let player;
     if (this.playersMap[id])
       player = this.playersMap[id];
@@ -146,6 +148,10 @@ export class PlayerService {
 
     if (pullSocial)
       this.getPlayerSocialAsync(id);
+  }
+
+  getSelfPlayer(): Player {
+    return this.getPlayer(this.selfId());
   }
 
   getPlayer(id): Player {
@@ -188,7 +194,7 @@ export class PlayerService {
       return false;
     return player.role !== 'cheerleader';
   }
-  
+
   checkLogin() {
     this.fm.checkLogin();
   }
@@ -218,7 +224,7 @@ export class PlayerService {
     let pId = this.selfId();
     if (!pId)
       return false;
-    
+
     let tId = this.getPlayer(pId).teamId;
     let fmTeam = this.fm.getTeam(tId);
     //console.log(fmTeam);
@@ -234,13 +240,13 @@ export class PlayerService {
     let player = this.myself();
     if (!player)
       return false;
-    
+
     return player.teamId === teamId;
   }
 
   myself() {
     return this.getPlayer(this.selfId());
-  } 
+  }
 
   amICaptainOf(teamId) {
     return this.isCaptain(this.selfId(), teamId);
@@ -271,7 +277,7 @@ export class PlayerService {
   }
 
   getPlayerSocialAsync(playerId) {
-    if (this.getPlayerSocial(playerId)){
+    if (this.getPlayerSocial(playerId)) {
     } else {
       this.fm.getPlayerSocialAsync(playerId);
     }
@@ -283,5 +289,14 @@ export class PlayerService {
 
   updatePlayerPhotoLarge(playerId, photoUrl) {
     this.fm.updatePlayerPhotoLarge(playerId, photoUrl);
+  }
+
+  earnPoints(playerId, amount) {
+    let player = this.getPlayer(playerId);
+    if (player) {
+      let newPoints = player.points ? player.points + amount : amount;
+      this.fm.playerEarnPoints(playerId, amount, newPoints);
+      this.uiHelper.showPointsToastMessage(amount);
+    }
   }
 }
