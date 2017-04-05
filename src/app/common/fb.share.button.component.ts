@@ -6,7 +6,7 @@ declare var Wechat: any;
 @Component({
   selector: 'sb-fb-share-button',
   template: `
-  <button ion-fab mini color="light" (click)="onFaceBookClick()">
+  <button ion-fab mini color="light" (tap)="onFaceBookClick()">
     <ion-icon name="logo-facebook" color="fBlue"></ion-icon>
   </button>
   `

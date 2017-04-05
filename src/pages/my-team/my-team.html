@@ -2,7 +2,7 @@
   <ion-navbar no-padding swipeBackEnabled="false">
     <ion-title>{{'TeamInfo' | trans}}</ion-title>
     <ion-buttons *ngIf="isMember()" right>
-      <button ion-button icon-only (click)="invitePlayer()">
+      <button ion-button icon-only (tap)="invitePlayer()">
         <ion-icon color="iPrimary" name="md-person-add"></ion-icon>
       </button>
       <sb-share-button></sb-share-button>
@@ -46,16 +46,16 @@
   <ion-list class="subtitle no-margin">
     <ion-item color="dark">
       <button ion-button item-left clear class="subtitle-text">{{'recentmatches' | trans}}</button>
-      <button ion-button item-right icon-right clear class="subtitle-text-small" (click)="seeMoreTeamGamePlan()">
+      <button ion-button item-right icon-right clear class="subtitle-text-small" (tap)="seeMoreTeamGamePlan()">
         {{'ViewAll' | trans}}
         <ion-icon name="ios-arrow-forward"></ion-icon>
       </button>
     </ion-item>
   </ion-list>
-  <div *ngIf="matches?.length > 0 && upcomingMatch.dataReady" (click)="showMatch(upcomingMatch)" class="result-score-wrapper">
+  <div *ngIf="matches?.length > 0 && upcomingMatch.dataReady" (tap)="showMatch(upcomingMatch)" class="result-score-wrapper">
     <result-score [upcomingMatch]="upcomingMatch" [hostPageName]="currPageName"></result-score>
   </div>
-  <div *ngIf="lastMatch && lastMatch.dataReady" (click)="showMatch(lastMatch)" class="result-score-wrapper">
+  <div *ngIf="lastMatch && lastMatch.dataReady" (tap)="showMatch(lastMatch)" class="result-score-wrapper">
     <result-score [upcomingMatch]="lastMatch" [hostPageName]="currPageName"></result-score>
   </div>
   <ion-list class="no-margin">
@@ -107,7 +107,7 @@
         <p class="team-member-name">{{p.name}}</p>
       </ion-col>-->
       <ion-col>
-        <button ion-button clear icon-right class="team-see-more-members" (click)="seeMoreTeamMember()">
+        <button ion-button clear icon-right class="team-see-more-members" (tap)="seeMoreTeamMember()">
         <p class="team-see-more-member-text">{{'ViewAll' | trans}} (<a style="color: #00ff00;">{{team.totalPlayers}} </a>{{'Players' | trans | lowercase}})</p>
 <ion-icon name="ios-arrow-forward"></ion-icon>
 </button>
@@ -120,13 +120,13 @@
   </ion-item>
 </ion-list>
 <ion-row class="team-all-game">
-  <ion-col width-33 id="recent15" class="team-all-game-choose" (click)="setChoosePosition(0)">
+  <ion-col width-33 id="recent15" class="team-all-game-choose" (tap)="setChoosePosition(0)">
     <p id="btn-recent-15" class="recent-tab-button white">{{'Recent15matches' | trans}}</p>
   </ion-col>
-  <ion-col width-33 id="recent20" class="team-all-game-unchoose" (click)="setChoosePosition(1)">
+  <ion-col width-33 id="recent20" class="team-all-game-unchoose" (tap)="setChoosePosition(1)">
     <p id="btn-recent-20" class="recent-tab-button">{{'Recent30matches' | trans}}</p>
   </ion-col>
-  <ion-col width-33 id="all" class="team-all-game-unchoose" (click)="setChoosePosition(2)">
+  <ion-col width-33 id="all" class="team-all-game-unchoose" (tap)="setChoosePosition(2)">
     <p id="btn-all" class="recent-tab-button">{{'all' | trans}}</p>
   </ion-col>
 </ion-row>

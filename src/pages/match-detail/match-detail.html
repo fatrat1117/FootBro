@@ -1,7 +1,7 @@
 <ion-header #pageHeader>
   <ion-toolbar>
     <ion-buttons left>
-      <button (click)="dismiss()" color='danger' ion-button icon-only clear>
+      <button (tap)="dismiss()" color='danger' ion-button icon-only clear>
         <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
@@ -17,7 +17,7 @@
       </ion-segment-button>
     </ion-segment>
     <ion-buttons right>
-      <button *ngIf='canShowEdit()' color='primaryYellow' (click)="edit()" ion-button icon-only clear>
+      <button *ngIf='canShowEdit()' color='primaryYellow' (tap)="edit()" ion-button icon-only clear>
           <ion-icon name="md-create"></ion-icon>
       </button>
       <sb-share-button></sb-share-button>
@@ -30,13 +30,13 @@
 <ion-list no-lines class="content-list" center>
   <result-score [upcomingMatch]="match" [hostPageName]="currPageName"></result-score>
 
-  <ion-item class="map-title" (click)="navigateToField()">
+  <ion-item class="map-title" (tap)="navigateToField()">
     <ion-icon name="navigate" color="iPrimary"></ion-icon>
     {{match?.location?.name}}
     <p>{{match?.location?.address}}</p>
   </ion-item>
 </ion-list>
-<button *ngIf='canShowDelete()' (click)="deleteMatch()" color='danger' ion-button block>
+<button *ngIf='canShowDelete()' (tap)="deleteMatch()" color='danger' ion-button block>
         {{'deletematch' | trans}}
     </button>
 </div>
@@ -48,12 +48,12 @@
 <div class="content-all" *ngSwitchCase="'players'">
   <no-record *ngIf="statCategories.length <= 0" message="{{'searchMatchPageNoRecord' | trans}}"></no-record>
   <div *ngIf="statCategories.length > 0">
-    <button *ngIf='canShowRate()' (click)="openRatePlayersPage()" ion-button block>
+    <button *ngIf='canShowRate()' (tap)="openRatePlayersPage()" ion-button block>
           {{'rateplayers' | trans}}
       </button>
     <div class="left-scrollview matches-date-tab-col">
       <ion-list class="date-tab-list">
-        <ion-item *ngFor="let cat of statCategories;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (click)='showStat(cat)'
+        <ion-item *ngFor="let cat of statCategories;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (tap)='showStat(cat)'
           [style.background]="selectedCat === cat ? '#20bd16' : '#373e4c'" [style.color]="selectedCat === cat ? '#ffffff' : '#93ABC5'">
           <div class="date-inner">
             {{cat | trans}}

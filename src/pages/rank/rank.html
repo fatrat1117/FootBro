@@ -26,7 +26,7 @@
 </ion-select>
 </ion-item>
 <ion-list>
-  <ion-item *ngFor="let t of teamRanks; let i = index;" style="margin-bottom:10px" text-wrap (click)='goTeamPage(t.id)' class="rank-team-items">
+  <ion-item *ngFor="let t of teamRanks; let i = index;" style="margin-bottom:10px" text-wrap (tap)='goTeamPage(t.id)' class="rank-team-items">
 <ion-row>
   <ion-col width-25>
     <ion-thumbnail item-left>
@@ -71,7 +71,7 @@
 </div>
 <div *ngSwitchCase="'players'">
   <ion-list>
-    <ion-item *ngFor="let p of playerRanks; let i = index;" (click)="goPlayerPage(p.id)" style="margin-bottom:10px" text-wrap class="rank-player-items">
+    <ion-item *ngFor="let p of playerRanks; let i = index;" (tap)="goPlayerPage(p.id)" style="margin-bottom:10px" text-wrap class="rank-player-items">
 <ion-avatar item-left>
   <img [src]="p.photo">
 </ion-avatar>

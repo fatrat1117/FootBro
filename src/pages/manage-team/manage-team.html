@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>{{'ManageTeams' | trans}}</ion-title>
     <ion-buttons right>
-      <button (click)="createTeam()" ion-button icon-only>
+      <button (tap)="createTeam()" ion-button icon-only>
         <ion-icon name="md-add"></ion-icon>
       </button>
     </ion-buttons>
@@ -19,13 +19,13 @@
         <ion-icon name="md-arrow-back" item-right style="opacity: 0.3"></ion-icon>
       </ion-item>
       <ion-item-options side="right">
-        <button *ngIf="player.teamId != t.id" ion-button color="primary" text-capitalize (click)="setDefaultTeam(t.id, slidingItem)">
+        <button *ngIf="player.teamId != t.id" ion-button color="primary" text-capitalize (tap)="setDefaultTeam(t.id, slidingItem)">
           {{ 'SetDefault' | trans }}
         </button>
-        <button *ngIf="t.captain === player.id" ion-button color="iPrimary" text-capitalize (click)="editTeam(t.id, slidingItem)">
+        <button *ngIf="t.captain === player.id" ion-button color="iPrimary" text-capitalize (tap)="editTeam(t.id, slidingItem)">
           {{ 'Edit' | trans }}
         </button>
-        <button [disabled]="!allowToQuit(t)" ion-button color="danger" text-capitalize (click)="quitTeam(t.id, slidingItem)">
+        <button [disabled]="!allowToQuit(t)" ion-button color="danger" text-capitalize (tap)="quitTeam(t.id, slidingItem)">
           {{ 'Quit' | trans }}
         </button>
       </ion-item-options>

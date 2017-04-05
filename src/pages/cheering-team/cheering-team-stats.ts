@@ -16,12 +16,12 @@ declare var sprintf: any;
     <ion-navbar>
       <ion-title>{{ cheerleader?.name }}</ion-title>
       <ion-buttons left>
-        <button (click)="dismiss()" ion-button icon-only>
+        <button (tap)="dismiss()" ion-button icon-only>
           <ion-icon name="md-close" color="danger"></ion-icon>
         </button>
       </ion-buttons>
       <ion-buttons right>
-        <button (click)="unlock()" [disabled]="selfPlayer == null" text-center ion-button clear color="primary">
+        <button (tap)="unlock()" [disabled]="selfPlayer == null" text-center ion-button clear color="primary">
           {{ 'Unlock' | trans }}
         </button>
       </ion-buttons>

@@ -8,7 +8,7 @@ declare var Wechat: any;
 @Component({
   selector: 'sb-share-button',
   template: `
-  <button ion-button icon-only style="background-color: transparent;" (click)="showSharePage()">
+  <button ion-button icon-only style="background-color: transparent;" (tap)="showSharePage()">
     <ion-icon name="md-share" color="gYellow"></ion-icon>
   </button>
   `

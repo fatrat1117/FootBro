@@ -6,7 +6,7 @@
 
 <ion-content>
   <div class="card-background-page">
-    <ion-card (click) = "goMatchesPage()">
+    <ion-card (tap) = "goMatchesPage()">
       <!--img src="assets/img/match/background.png"/-->
       <div class="card-title">{{'FriendlyMatches' | trans}}</div>
       <div class="card-bottom-banner">
@@ -25,7 +25,7 @@
 
   <!-->
   <div class="card-background-page">
-    <ion-card (click) = "goLeaguePage()">
+    <ion-card (tap) = "goLeaguePage()">
       <div class="card-title">超级联赛</div>
       <div class="card-bottom-banner">
         <ion-row>
@@ -50,7 +50,7 @@
   <-->
 
   <div *ngFor="let league of afTournamentList | async" class="card-background-page">
-    <ion-card (click) = "leagueClick(league)">
+    <ion-card (tap) = "leagueClick(league)">
       <div class="card-title">{{ league.name }}</div>
       <div class="card-bottom-banner">
         <ion-row>

@@ -9,10 +9,10 @@ declare var Wechat: any;
   <ion-fab bottom right>
     <button ion-fab mini color="light"><ion-icon name="md-share"></ion-icon></button>
     <ion-fab-list side="left">
-      <button ion-fab color="light" (click)="onFaceBookClick()">
+      <button ion-fab color="light" (tap)="onFaceBookClick()">
         <ion-icon name="logo-facebook" color="fBlue"></ion-icon>
       </button>
-      <button ion-fab color="light" (click)="onWeChatClick()">
+      <button ion-fab color="light" (tap)="onWeChatClick()">
         <img src="assets/icon/wechat.png">
       </button>
     </ion-fab-list>

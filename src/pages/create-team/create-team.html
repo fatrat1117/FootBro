@@ -2,12 +2,12 @@
   <ion-navbar>
     <ion-title>{{ 'CreateTeam' | trans }}</ion-title>
     <ion-buttons left>
-      <button [disabled] = "busy" (click)="dismiss()" color='danger' ion-button icon-only clear>
+      <button [disabled] = "busy" (tap)="dismiss()" color='danger' ion-button icon-only clear>
         <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons right>
-      <button [disabled] = "teamName.trim().length == 0 || busy" (click)="save()" text-center ion-button clear color="primary">
+      <button [disabled] = "teamName.trim().length == 0 || busy" (tap)="save()" text-center ion-button clear color="primary">
         {{ 'Save' | trans }}
       </button>
     </ion-buttons>
@@ -16,7 +16,7 @@
 
 <ion-content no-padding>
   <ion-item-group>
-    <ion-item (click)="changePhoto()">
+    <ion-item (tap)="changePhoto()">
         <h2>{{'Logo' | trans}}</h2>
         <ion-thumbnail item-right>
         <img [src]="logoUrl">
@@ -37,7 +37,7 @@
         <ion-option value="SG">Singapore</ion-option>
       </ion-select>
     </ion-item>-->
-    <!--button (click)="doCreateTeam()" [disabled]="!teamName.trim().length || busy" ion-button block>{{'Create' | trans}}</button>
-    <button (click)="doCancel()" [disabled]="busy" ion-button block color='lightGrey'>{{'Cancel' | trans}}</button-->
+    <!--button (tap)="doCreateTeam()" [disabled]="!teamName.trim().length || busy" ion-button block>{{'Create' | trans}}</button>
+    <button (tap)="doCancel()" [disabled]="busy" ion-button block color='lightGrey'>{{'Cancel' | trans}}</button-->
   </ion-item-group>
 </ion-content>

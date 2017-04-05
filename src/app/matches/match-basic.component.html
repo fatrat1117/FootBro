@@ -1,5 +1,5 @@
 <ion-grid *ngIf = "match?.dataReady" no-padding>
-  <ion-row (click)="goMatchDetailPage()">
+  <ion-row (tap)="goMatchDetailPage()">
     <ion-col class="matches-info" no-padding>
       <ion-item class="team-bar">
         <ion-thumbnail item-left>
@@ -39,7 +39,7 @@
       <ion-row>
         <p class="match-time-text">{{ match?.time | numberToTimePipe }}</p>
       </ion-row>
-      <!--<ion-row *ngIf="canUpdate()" (click)="deleteMatch($event)">
+      <!--<ion-row *ngIf="canUpdate()" (tap)="deleteMatch($event)">
         <ion-icon name = 'trash' color='danger' item-right></ion-icon>
       </ion-row>-->
     </ion-col>
@@ -52,7 +52,7 @@
         <ion-item>
         </ion-item>
         <ion-item>
-          <button *ngIf="canUpdate()" class="detail-button" text-center ion-button clear (click)="goUpdateMatchPage($event)">Update</button>
+          <button *ngIf="canUpdate()" class="detail-button" text-center ion-button clear (tap)="goUpdateMatchPage($event)">Update</button>
         </ion-item>
       </div>
     </ion-col>

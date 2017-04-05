@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>{{ title | trans }}</ion-title>
     <ion-buttons end *ngIf="!isEnd">
-      <button *ngIf="canShowAdd()" ion-button icon-only (click)="enterNewGame()">
+      <button *ngIf="canShowAdd()" ion-button icon-only (tap)="enterNewGame()">
         <ion-icon name="md-add" color="primary"></ion-icon>
       </button>
     </ion-buttons>
@@ -22,7 +22,7 @@
 
   <!-->
   <ion-fab top right edge>
-    <button ion-fab mini (click)="enterNewGame()"><ion-icon color="dark" name="md-add"></ion-icon></button>
+    <button ion-fab mini (tap)="enterNewGame()"><ion-icon color="dark" name="md-add"></ion-icon></button>
   </ion-fab>
   <-->
   <div [ngSwitch]="selectedInfo" [ngStyle]="{'height':'100%'}">
@@ -30,7 +30,7 @@
     <div *ngSwitchCase="'schedule'" [ngStyle]="{'height':'100%'}">
       <div class="left-scrollview matches-date-tab-col" id="sketchElement" [ngStyle]="{'height.px': getMatchScrollHeight()}">
         <ion-list class="date-tab-list">
-          <ion-item *ngFor="let date of dates;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (click)="showMatches(date)"
+          <ion-item *ngFor="let date of dates;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (tap)="showMatches(date)"
             [style.background]="selectedDate == date ? '#585F6F' : '#40444D'" [style.color]="selectedDate == date ? '#00ef00' : '#F2EDE7'"
                     [ngClass]="addDateSelectNgClass(i,date)">
             <ion-item *ngIf="isChangeYear(i) == true" class="year">

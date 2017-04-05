@@ -32,7 +32,7 @@ import * as moment from 'moment';
         </ion-col>
       </ion-row>
       <ion-row *ngIf="canShowInputScores()" center justify-content-center>
-      <button ion-button color="gYellow" class="input-score" (click)="openUpdateMatchPage($event)">{{'inputscores' | trans}}
+      <button ion-button color="gYellow" class="input-score" (tap)="openUpdateMatchPage($event)">{{'inputscores' | trans}}
       </button>
       </ion-row>
       <ion-row *ngIf="!canShowScores() && !canShowInputScores()">

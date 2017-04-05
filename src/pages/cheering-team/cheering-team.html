@@ -38,11 +38,11 @@
         </div>
       </ion-col>
       <ion-col *ngIf="!amICheerleader" width-50 no-margin>
-        <!--<div class="become" (click)="becomeCheerleader()">-->
+        <!--<div class="become" (tap)="becomeCheerleader()">-->
         <!--<ion-icon name="football" class="football-icon"><span>{{'BecomeCheerleader' | trans}}</span></ion-icon>-->
         <!--</div>-->
 
-        <div class="baby-top-button" (click)="becomeCheerleader()">
+        <div class="baby-top-button" (tap)="becomeCheerleader()">
           <button class="top-button" ion-button icon-only small>
             <ion-icon name="md-heart" class="football-icon" color="gRed"></ion-icon>
           </button>
@@ -57,7 +57,7 @@
             <div *ngIf='clItem'>
               <ion-row class="item-row">
                 <div class="baby-img-frame">
-                  <button ion-button icon-only clear class="chat-logo" color="lightGrey" (click)="approve(clItem.id)">
+                  <button ion-button icon-only clear class="chat-logo" color="lightGrey" (tap)="approve(clItem.id)">
                     <ion-icon name="lock"></ion-icon>
                   </button>
                   <img class="img" [src]="clItem.photoMedium">
@@ -100,11 +100,11 @@
             <ion-row class="item-row">
               <div class="baby-img-frame">
                 <button *ngIf="isUnlocked(approvedCheerleaders[i].id)" ion-button icon-only clear small class="chat-logo" color="primary"
-                  (click)="enterChatPage(approvedCheerleaders[i])">
+                  (tap)="enterChatPage(approvedCheerleaders[i])">
                   <ion-icon name="md-chatbubbles"></ion-icon>
                 </button>
                 <button *ngIf="!isUnlocked(approvedCheerleaders[i].id)" ion-button icon-only clear small class="chat-logo" color="gYellow"
-                  (click)="unlockCheerleader(approvedCheerleaders[i])">
+                  (tap)="unlockCheerleader(approvedCheerleaders[i])">
                   <ion-icon name="md-unlock"></ion-icon>
                 </button>
                 <img [src]="approvedCheerleaders[i].photoMedium">

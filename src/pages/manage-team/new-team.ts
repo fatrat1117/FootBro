@@ -13,7 +13,7 @@ import { PlayerService } from '../../app/players/player.service'
   <ion-content>
     <ion-item-group>
       <!-- image -->
-      <ion-item detail-push (click)="changePhoto()">
+      <ion-item detail-push (tap)="changePhoto()">
         <h2>{{'Photo' | trans}}</h2>
         <ion-thumbnail item-right>
           <img src="assets/team-logo/team-logo.jpg">

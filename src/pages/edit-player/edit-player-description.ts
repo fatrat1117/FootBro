@@ -9,12 +9,12 @@ import { PlayerService } from '../../app/players/player.service'
     <ion-navbar>
       <ion-title>{{ 'Description' | trans }}</ion-title>
       <ion-buttons left>
-        <button (click)="dismiss()" ion-button icon-only>
+        <button (tap)="dismiss()" ion-button icon-only>
           <ion-icon name="md-close" color="danger"></ion-icon>
         </button>
       </ion-buttons>
       <ion-buttons right>
-        <button [disabled] = "!isSavable" (click)="save()" text-center ion-button clear color="primary">
+        <button [disabled] = "!isSavable" (tap)="save()" text-center ion-button clear color="primary">
           {{ 'Save' | trans }}
         </button>
       </ion-buttons>

@@ -9,7 +9,7 @@
 
     <no-record *ngIf="!hasMessage()" [message]="noRecordMessage"></no-record>
     <ion-item-sliding *ngFor="let msg of messages | reversePipe" #slidingItem>
-      <ion-item (click)="enterChatPage(msg)">
+      <ion-item (tap)="enterChatPage(msg)">
         <ion-thumbnail item-left>
           <img [src]="getPlayerInfo(msg.playerId)?.photo">
         </ion-thumbnail>
@@ -21,7 +21,7 @@
         </ion-note>
       </ion-item>
       <ion-item-options side="right">
-        <button ion-button color="danger" text-capitalize  (click)="deleteMessage(msg.playerId, slidingItem)">
+        <button ion-button color="danger" text-capitalize  (tap)="deleteMessage(msg.playerId, slidingItem)">
           {{ 'delete' | trans }}
         </button>
       </ion-item-options>

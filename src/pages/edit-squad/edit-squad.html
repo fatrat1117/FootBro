@@ -1,26 +1,26 @@
 <ion-header #pageHeader>
   <ion-navbar>
     <ion-buttons left>
-      <button (click)="dismiss()" color='danger' ion-button icon-only clear>
+      <button (tap)="dismiss()" color='danger' ion-button icon-only clear>
         <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons *ngIf="squadSettings.editMode" left class="squard-number-container">
-      <button *ngIf = "canShowSquadButton(5)" no-padding class="squard-number-btn circle five" (click)="selectSquadNumber($event,5)" [ngClass]="{selected:selectedSquad==5}">
+      <button *ngIf = "canShowSquadButton(5)" no-padding class="squard-number-btn circle five" (tap)="selectSquadNumber($event,5)" [ngClass]="{selected:selectedSquad==5}">
         <span>5</span>
       </button>
-      <button *ngIf = "canShowSquadButton(7)" no-padding class="squard-number-btn circle seven" (click)="selectSquadNumber($event,7)" [ngClass]="{selected:selectedSquad==7}">
+      <button *ngIf = "canShowSquadButton(7)" no-padding class="squard-number-btn circle seven" (tap)="selectSquadNumber($event,7)" [ngClass]="{selected:selectedSquad==7}">
         <span>7</span>
       </button>
-      <button *ngIf = "canShowSquadButton(11)" no-padding class="squard-number-btn circle eleven" (click)="selectSquadNumber($event,11)" [ngClass]="{selected:selectedSquad==11}">
+      <button *ngIf = "canShowSquadButton(11)" no-padding class="squard-number-btn circle eleven" (tap)="selectSquadNumber($event,11)" [ngClass]="{selected:selectedSquad==11}">
         <span>11</span>
       </button>
-      <button *ngIf="!teamMode" no-padding class="squard-number-btn circle" (click) = "selectSquads()">
+      <button *ngIf="!teamMode" no-padding class="squard-number-btn circle" (tap) = "selectSquads()">
         <span>C</span>
       </button>
     </ion-buttons>
     <ion-buttons right class="squad-operate">
-      <button *ngIf="squadSettings.editMode" color="primary" ion-button icon-only clear (click)="saveSquad()">
+      <button *ngIf="squadSettings.editMode" color="primary" ion-button icon-only clear (tap)="saveSquad()">
          <ion-icon name="md-cloud-upload" class="upload-icon"></ion-icon>
       </button>
        <sb-share-button *ngIf="teamMode"></sb-share-button>

@@ -6,7 +6,7 @@ declare var Wechat: any;
 @Component({
   selector: 'sb-wechat-share-button',
   template: `
-  <button ion-fab mini color="light" (click)="onWeChatClick()">
+  <button ion-fab mini color="light" (tap)="onWeChatClick()">
     <img style="max-width: 3rem;" [src]=" type == 0 ? 'assets/icon/wechat.png' : 'assets/icon/moments.png'">
   </button>
   `

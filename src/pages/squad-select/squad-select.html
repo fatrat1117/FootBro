@@ -5,7 +5,7 @@
     <ion-row class="squad-select-row" *ngFor="let rItem of sampleFiveList | groupNPipe:3; let i = index;">
       <ion-col class="squad-select-col" width-33 *ngFor="let cItem of rItem; let j = index;">
 
-        <button *ngIf='cItem' color="light" class="btn grey thick" (click)="squadSelect($event)">
+        <button *ngIf='cItem' color="light" class="btn grey thick" (tap)="squadSelect($event)">
            {{cItem}}
         </button>
       </ion-col>
@@ -19,7 +19,7 @@
     <ion-row class="squad-select-row" *ngFor="let rItem of sampleSevenList | groupNPipe:3; let i = index;">
       <ion-col class="squad-select-col" width-33 *ngFor="let cItem of rItem; let j = index;">
 
-        <button *ngIf='cItem' color="light" class="btn grey thick" (click)="squadSelect($event)">
+        <button *ngIf='cItem' color="light" class="btn grey thick" (tap)="squadSelect($event)">
            {{cItem}}
         </button>
       </ion-col>
@@ -33,7 +33,7 @@
     <ion-row class="squad-select-row" *ngFor="let rItem of sampleElevenList | groupNPipe:3; let i = index;">
       <ion-col class="squad-select-col" width-33 *ngFor="let cItem of rItem; let j = index;">
 
-        <button *ngIf='cItem' color="light" class="btn grey thick" (click)="squadSelect($event)">
+        <button *ngIf='cItem' color="light" class="btn grey thick" (tap)="squadSelect($event)">
            {{cItem}}
         </button>
       </ion-col>

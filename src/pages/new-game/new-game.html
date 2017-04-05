@@ -2,12 +2,12 @@
   <ion-navbar>
     <ion-title>{{'NewMatch' | trans}}</ion-title>
     <ion-buttons left>
-      <button (click)="close()" color='danger' ion-button icon-only clear>
+      <button (tap)="close()" color='danger' ion-button icon-only clear>
         <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons right>
-      <button [disabled]="!(match.home && match.away &&  match.type && matchDate && matchTime && match.location.address)" (click)="scheduleMatch()"
+      <button [disabled]="!(match.home && match.away &&  match.type && matchDate && matchTime && match.location.address)" (tap)="scheduleMatch()"
               color="primary" ion-button icon-only clear>
          <ion-icon name="md-cloud-upload"></ion-icon>
       </button>
@@ -17,14 +17,14 @@
 
 <ion-content>
   <ion-row class="team-info" center>
-    <ion-col class="team-flag" (click)="searchTeam(1)">
+    <ion-col class="team-flag" (tap)="searchTeam(1)">
       <button ion-button icon-left clear full style="margin:0px;padding:0px;" color="light">
         <ion-icon name="md-flag" color="danger"></ion-icon>
         {{'HomeTeam' | trans}}
       </button>
     </ion-col>
     <ion-col></ion-col>
-    <ion-col class="team-flag" (click)="searchTeam(2)">
+    <ion-col class="team-flag" (tap)="searchTeam(2)">
       <button ion-button icon-left clear full style="margin:0px;padding:0px;"color="light">
         <ion-icon name="md-flag" color="primary"></ion-icon>
         {{'AwayTeam' | trans}}
@@ -33,9 +33,9 @@
   </ion-row>
 
   <ion-row *ngIf="match?.home || match?.away" class="team-info" center>
-    <ion-col class="team-name" (click)="searchTeam(1)">{{match?.home?.name}}</ion-col>
+    <ion-col class="team-name" (tap)="searchTeam(1)">{{match?.home?.name}}</ion-col>
     <ion-col class="vs-text">VS</ion-col>
-    <ion-col class="team-name" (click)="searchTeam(2)">{{match?.away?.name}}</ion-col>
+    <ion-col class="team-name" (tap)="searchTeam(2)">{{match?.away?.name}}</ion-col>
   </ion-row>
 
   <ion-list no-lines class="content-game-info">

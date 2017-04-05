@@ -2,12 +2,12 @@
   <ion-navbar>
     <ion-title>{{'squad' | trans}}</ion-title>
     <ion-buttons left>
-      <button *ngIf="selectMode" (click)="close()" color = 'danger' ion-button icon-only clear>
+      <button *ngIf="selectMode" (tap)="close()" color = 'danger' ion-button icon-only clear>
         <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons right>
-      <button *ngIf="!selectMode" (click)="createSquad()" ion-button icon-only>
+      <button *ngIf="!selectMode" (tap)="createSquad()" ion-button icon-only>
         <ion-icon name="md-add"></ion-icon>
       </button>
     </ion-buttons>
@@ -21,7 +21,7 @@
   </ion-card>
   <ion-list class="container">
     <ion-item-sliding *ngFor="let squad of team.squads">
-      <ion-item (click)="onClickSquad(squad)">
+      <ion-item (tap)="onClickSquad(squad)">
         <!--<ion-avatar item-left>-->
           <!--<img src="assets/img/none.png">-->
         <!--</ion-avatar>-->
@@ -31,7 +31,7 @@
         <p>{{'creator' | trans}}: {{playerService.getPlayer(squad.creator)?.name}}</p>
       </ion-item>
       <ion-item-options *ngIf="!selectMode" side="right">
-        <button color='danger' [disabled]="squad.creator !== playerService.selfId()" ion-button icon-only clear (click)="deleteSquad(squad.$key)">
+        <button color='danger' [disabled]="squad.creator !== playerService.selfId()" ion-button icon-only clear (tap)="deleteSquad(squad.$key)">
           <ion-icon name='trash' item-right></ion-icon>
         </button>
       </ion-item-options>
