@@ -31,7 +31,7 @@
       </div>
       <div class="application-button">
         <button *ngIf="isRegistered() < 0" ion-button full (click)="registerTeam()">{{ 'registerNow' | trans }}</button>
-        <button *ngIf="isRegistered() >= 0" disabled ion-button full>{{ 'Registered' | trans }}</button>
+        <button *ngIf="isRegistered() >= 0" disabled ion-button full>{{ 'registered' | trans }}</button>
       </div>
     </div>
     <div *ngSwitchCase="'teams'" class="teams-panel">
