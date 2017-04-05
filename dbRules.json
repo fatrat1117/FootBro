@@ -28,7 +28,7 @@
             "dates": {
                 ".write": "root.child('admins').hasChild(auth.uid) || root.child('teams').child(root.child('players').child(auth.uid).child('basic-info').child('teamId').val()).child('basic-info').child('captain').val() === auth.uid",
                 "$id": {
-                    ".validate": "$id != null && $id != 'undefined'"
+                  ".validate": "$id != null && $id != 'undefined'"
                 }
             },
             "list": {
@@ -146,7 +146,12 @@
         },
         "tournaments": {
             ".read": true,
-            ".write": "root.child('admins').hasChild(auth.uid) || root.child('teams').child(root.child('players').child(auth.uid).child('basic-info').child('teamId').val()).child('basic-info').child('captain').val() === auth.uid"
+            ".write": "root.child('admins').hasChild(auth.uid) || root.child('teams').child(root.child('players').child(auth.uid).child('basic-info').child('teamId').val()).child('basic-info').child('captain').val() === auth.uid",
+            "list" : {
+              "$id": {
+                ".validate": "$id != null && $id != 'undefined'"
+              }
+            }
         }
     }
 }
