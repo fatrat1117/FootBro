@@ -10,7 +10,7 @@ export class PlayerService {
   bRefreshTeamPlayers = false;
 
   constructor(private fm: FirebaseManager,
-  private uiHelper : UIHelper) {
+    private uiHelper: UIHelper) {
     document.addEventListener('playerready', e => {
       let id = e['detail'];
 
@@ -298,5 +298,13 @@ export class PlayerService {
       this.fm.playerEarnPoints(playerId, amount, newPoints);
       this.uiHelper.showPointsToastMessage(amount);
     }
+  }
+
+  updateWechatShareTime() {
+    this.fm.updateWechatShareTime(this.selfId());
+  }
+
+  updateFacebookShareTime() {
+    this.fm.updateFacebookShareTime(this.selfId());
   }
 }

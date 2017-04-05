@@ -6,6 +6,7 @@ import { NavController, ModalController, Platform } from 'ionic-angular';
 import { Subject } from 'rxjs/Subject';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import * as firebase from 'firebase';
+import * as moment from 'moment';
 
 @Injectable()
 export class FirebaseManager {
@@ -291,9 +292,9 @@ export class FirebaseManager {
   }
 
   getTeamAsync(teamId) {
-    if (this.getTeam(teamId)) 
+    if (this.getTeam(teamId))
       this.FireCustomEvent('teamready', teamId);
-    else{
+    else {
       this.af.database.object(`/teams/${teamId}`).subscribe(snapshot => {
         if (snapshot.$exists()) {
           //console.log(snapshot);
@@ -304,17 +305,17 @@ export class FirebaseManager {
           else {
             if ('points' in snapshot) {
               if ('img/none.png' === snapshot['basic-info'].logo)
-              snapshot['basic-info'].logo = 'assets/img/none.png';
+                snapshot['basic-info'].logo = 'assets/img/none.png';
               this.cachedTeamsMap[teamId] = snapshot;
               this.FireCustomEvent('teamready', teamId);
             }
             else {
               //fix all missing properties
               this.af.database.object(`/teams/${teamId}`).update(
-              {
-                yearBuilt: 2016,
-                points: this.teamInitialPoints
-              });
+                {
+                  yearBuilt: 2016,
+                  points: this.teamInitialPoints
+                });
             }
           }
         }
@@ -486,6 +487,20 @@ export class FirebaseManager {
         this.getPlayerDetail(this.auth.uid).update({ pushId: ids.userId });
         this.pushIdsMap[this.auth.uid] = ids.userId;
       });
+    }
+  }
+
+  updateWechatShareTime(playerId) {
+    if (playerId) {
+      let now = moment().unix() * 1000;
+      this.af.database.object(`/players/${playerId}/wechatShareTime`).set(now);
+    }
+  }
+
+  updateFacebookShareTime(playerId) {
+    if (playerId) {
+      let now = moment().unix() * 1000;
+      this.af.database.object(`/players/${playerId}/fbShareTime`).set(now);
     }
   }
 
@@ -761,7 +776,7 @@ export class FirebaseManager {
   }
 
   deleteTeamSquad(teamId, squadId) {
-     this.af.database.list(`/team_squads/${teamId}/squads/${squadId}/`).remove();
+    this.af.database.list(`/team_squads/${teamId}/squads/${squadId}/`).remove();
   }
 
   getTeamSquads(teamId) {
@@ -770,7 +785,7 @@ export class FirebaseManager {
 
   getTeamSquadsAsync(teamId) {
     console.log('getTeamSquadsAsync', teamId);
-    
+
     if (this.getTeamSquads(teamId))
       this.FireCustomEvent('teamsquadsready', teamId);
     else {
@@ -847,7 +862,7 @@ export class FirebaseManager {
   updateMatch(id, matchObj) {
     console.log('updateMatch', matchObj);
     let date = matchObj.date;
-    this.afMatch(id).update(matchObj).then(()=> {
+    this.afMatch(id).update(matchObj).then(() => {
       this.FireCustomEvent('matcheschanged', date);
     });;
     if (matchObj.date) {

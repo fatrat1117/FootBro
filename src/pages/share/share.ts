@@ -42,6 +42,7 @@ export class SharePage {
         .then(() => {
           let player = self.playerService.getSelfPlayer();
           if (player && !player.fbShareTime) {
+            self.playerService.updateFacebookShareTime();
             self.playerService.earnPoints(self.playerService.selfId(), self.sharePoints);
           }
         },
@@ -99,6 +100,7 @@ export class SharePage {
       if (1 === type) {
         let player = self.playerService.getSelfPlayer();
         if (player && !player.wechatShareTime) {
+          self.playerService.updateWechatShareTime();
           self.playerService.earnPoints(self.playerService.selfId(), self.sharePoints);
         }
       }
