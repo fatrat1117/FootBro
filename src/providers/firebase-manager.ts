@@ -828,14 +828,23 @@ export class FirebaseManager {
 
   deleteMatch(matchId) {
     let match = this.cachedMatchesMap[matchId];
+    let homeId, awayId;
     let date = match.date;
-    if ('homeId' in match)
+    if ('homeId' in match) {
       this.deleteMatchSquad(match.homeId, matchId);
-    if ('awayId' in match)
+      homeId = match.homeId;
+    }
+    if ('awayId' in match) {
       this.deleteMatchSquad(match.awayId, matchId);
+      awayId = match.awayId;
+    }
 
     this.afMatch(matchId).remove().then(() => {
-      this.FireCustomEvent('matcheschanged', date)
+      this.FireCustomEvent('matcheschanged', date);
+      if (homeId)
+        this.FireCustomEvent('teammatcheschanged', homeId);
+      if (awayId)
+        this.FireCustomEvent('teammatcheschanged', awayId);
     });
   }
 

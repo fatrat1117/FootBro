@@ -38,6 +38,7 @@ export class MyTeamPage {
   onTeamStatsDataReady;
   onTeamPlayersReady;
   onTeamMatchesReady;
+  onTeamMatchesChanged;
   currPageName = "my-team";
   lastMatch;
 
@@ -59,7 +60,6 @@ export class MyTeamPage {
     this.playerService.getPlayerAsync(this.selfId);
     this.service.getTeamAsync(this.id, true);
     this.matchService.getTeamMatchesAsync(this.id);
-
   }
 
   addEventListeners() {
@@ -107,10 +107,18 @@ export class MyTeamPage {
       }
     };
 
+    this.onTeamMatchesChanged = e => {
+      let teamId = e['detail'];
+      if (teamId === this.id) {
+        this.matchService.getTeamMatchesAsync(teamId);
+      }
+    }
+    
     document.addEventListener('serviceplayerready', this.onPlayerReady);
     document.addEventListener('serviceteamstatsdataready', this.onTeamStatsDataReady);
     document.addEventListener('serviceteamplayersready', this.onTeamPlayersReady);
     document.addEventListener('serviceteammatchesready', this.onTeamMatchesReady);
+    document.addEventListener('teammatcheschanged', this.onTeamMatchesChanged);
   }
 
   ionViewWillUnload() {
@@ -118,6 +126,7 @@ export class MyTeamPage {
     document.removeEventListener('serviceteamstatsdataready', this.onTeamStatsDataReady);
     document.removeEventListener('serviceteamplayersready', this.onTeamPlayersReady);
     document.removeEventListener('serviceteammatchesready', this.onTeamMatchesReady);
+    document.removeEventListener('teammatcheschanged', this.onTeamMatchesChanged);
   }
 
   updateUpcomingMatch() {
