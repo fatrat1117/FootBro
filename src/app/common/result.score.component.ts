@@ -102,7 +102,7 @@ export class ResultScoreComponent {
   }
 
   openUpdateMatchPage(e) {
-     e.stopPropagation();
+    //e.stopPropagation();
     let teamId = this.playerService.isCaptain(this.playerService.selfId(), this.upcomingMatch.homeId) ? this.upcomingMatch.homeId : this.upcomingMatch.awayId;
     this.modal.create(UpdateGamePage, { id: this.upcomingMatch.id, teamId: teamId }).present();
   }

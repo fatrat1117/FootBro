@@ -131,7 +131,7 @@ export class SquadPage implements OnInit, OnDestroy {
   }
 
   choosePlayer(e, p) {
-    e.stopPropagation();
+    //e.stopPropagation();
     if (!this.settings.editMode)
       return;
 

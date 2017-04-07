@@ -113,7 +113,7 @@ export class UpdateGamePage {
 
     // //删除球员
     deleteTeamPlayer(player, e, players) {
-        e.stopPropagation();
+        //e.stopPropagation();
         players.splice(players.indexOf(player), 1);
     }
 

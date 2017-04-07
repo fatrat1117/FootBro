@@ -10,7 +10,7 @@
       <!--<button (tap)="deleteMatch()" color="danger" ion-button icon-only clear>
         <ion-icon *ngIf='0 === updateState' name="md-trash"></ion-icon>
       </button>-->
-      <button [disabled]="!(this.match.homeScore && this.match.awayScore)" (tap)="updateMatch()" color="primary"
+      <button [disabled]="!(this.homeScore && this.awayScore)" (tap)="updateMatch()" color="primary"
         ion-button icon-only clear>
         +{{getTeamPoints()}}
         <ion-icon name="md-cloud-upload"></ion-icon>
