@@ -32,7 +32,7 @@ import * as moment from 'moment';
         </ion-col>
       </ion-row>
       <ion-row *ngIf="canShowInputScores()" center justify-content-center>
-      <button ion-button color="gYellow" class="input-score" (tap)="openUpdateMatchPage($event)">{{'inputscores' | trans}}
+      <button ion-button color="gYellow" class="input-score" (click)="openUpdateMatchPage($event)">{{'inputscores' | trans}}
       </button>
       </ion-row>
       <ion-row *ngIf="!canShowScores() && !canShowInputScores()">
@@ -102,7 +102,8 @@ export class ResultScoreComponent {
   }
 
   openUpdateMatchPage(e) {
-    //e.stopPropagation();
+    //console.log('openUpdateMatchPage', e);
+    e.stopPropagation();
     let teamId = this.playerService.isCaptain(this.playerService.selfId(), this.upcomingMatch.homeId) ? this.upcomingMatch.homeId : this.upcomingMatch.awayId;
     this.modal.create(UpdateGamePage, { id: this.upcomingMatch.id, teamId: teamId }).present();
   }
