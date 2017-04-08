@@ -148,7 +148,7 @@ export class EditSquadPage {
           handler: data => {
             console.log('Cancel clicked');
           },
-          // cssClass:"squad-alert-cancel"
+          cssClass:"squad-alert-cancel"
 
         },
         {
@@ -160,7 +160,7 @@ export class EditSquadPage {
             this.teamService.saveTeamSquad(this.teamId, squad, this.squadId);
             this.dismiss();
           },
-          // cssClass:"squad-alert-confirm"
+          cssClass:"squad-alert-confirm"
         }
       ],
       cssClass:"squad-alert"
