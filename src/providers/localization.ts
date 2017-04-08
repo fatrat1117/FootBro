@@ -300,6 +300,9 @@ export class Localization {
             enroll: 'Enroll',
             youarenotcaptain: 'You are not captain',
             youearnedpoints: 'You have earned %d points',
+            usephone: 'Or Via Phone',
+            more: 'More',
+            getotp: 'Get OTP'
         },
 
         zh: {
@@ -581,6 +584,9 @@ export class Localization {
             enroll: '报名',
             youarenotcaptain: '你不是队长',
             youearnedpoints: '你获得了%d积分',
+            usephone: '或者使用手机',
+            more: '更多',
+            getotp: '获取验证码'
         }
     }
 }
