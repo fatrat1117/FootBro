@@ -35,9 +35,6 @@ $alert-background-color:#444;
 $alert-ios-background: #444;
 $alert-md-background-color: #444;
 
-$alert-ios-message-text-color: #555;
-$alert-md-message-text-color: #555;
-
 $alert-md-input-border-color: #888;
 $alert-ios-input-border-color: #888;
 
@@ -52,6 +49,9 @@ $alert-button-text-color:#888;
 //$alert-button-background-color-activated:#0f0;
 $alert-input-border-color:#0f0;
 //$alert-radio-label-text-color-checked:#fff;
+$alert-ios-message-text-color: #fff;
+$alert-md-message-text-color: #fff;
+$alert-ios-sub-title-text-color: #fff;
 
 
 // checkbox
@@ -67,8 +67,7 @@ $item-ios-divider-color: #fff;
 
 //$alert-ios-button-background-color-activated: #888;
 $action-sheet-ios-button-background-activated: #222;
-$alert-ios-message-text-color: #fff;
-$alert-md-message-text-color: #fff;
+
 
 
 // list

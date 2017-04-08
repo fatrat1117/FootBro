@@ -105,6 +105,8 @@ export class SquadPage implements OnInit, OnDestroy {
   }
 
   onTouchMove(e, p) {
+    e.stopPropagation();
+    e.preventDefault();
     if (!this.settings.editMode)
       return;
     //console.log(e, this.settings, p);
@@ -131,7 +133,9 @@ export class SquadPage implements OnInit, OnDestroy {
   }
 
   choosePlayer(e, p) {
+    //console.log(e);
     e.stopPropagation();
+    e.preventDefault();
     if (!this.settings.editMode)
       return;
 
