@@ -3,7 +3,7 @@
     <ion-row #squadCtrl class="squadCtrl">
     <img class="squadBg" src="assets/img/soccer-field-background.jpg" alt="">
     <div class="playerItem" *ngFor="let p of lineup" [ngStyle]="{'left.px':p.x, 'top.px': p.y}">
-      <img class="playerImg" [src]="p.photo || 'assets/img/none.png'" (tap)="choosePlayer($event, p)" (touchstart)="onTouchStart()"
+      <img class="playerImg" [src]="p.photo || 'assets/img/none.png'" (click)="choosePlayer($event, p)" (touchstart)="onTouchStart()"
         (touchend)="onTouchEnd()" (touchmove)="onTouchMove($event, p)">
       <p class="playerName">{{p.name}}</p>
     </div>
