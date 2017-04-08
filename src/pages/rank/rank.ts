@@ -30,19 +30,23 @@ export class RankPage {
     this.onTeamRanksChanged = e => {
       this.teamRanks = this.rankService.teamRanks;
       this.numOfTeams = this.teamRanks.length;
-      if (this.teamScroll)
-        this.teamScroll.complete();
+      setTimeout(() => {
+        if (this.teamScroll)
+          this.teamScroll.complete();
+      }, 500);
     };
 
     this.onPlayerRanksChanged = e => {
       this.playerRanks = this.rankService.playerRanks;
       this.numOfPlayers = this.playerRanks.length;
-      if (this.playerScroll)
-         this.playerScroll.complete();
+      setTimeout(() => {
+        if (this.playerScroll)
+          this.playerScroll.complete();
+      }, 500);
     };
 
     document.addEventListener('serviceteamrankschanged', this.onTeamRanksChanged);
-    document.addEventListener('serviceplayerrankschanged', this.onPlayerRanksChanged );
+    document.addEventListener('serviceplayerrankschanged', this.onPlayerRanksChanged);
 
     this.rankService.getTeamRanksAsync(this.teamSortByStr, this.numOfTeams + 10);
     this.rankService.getPlayerRanksAsync(this.playerSortByStr, this.numOfPlayers + 20);
@@ -50,8 +54,8 @@ export class RankPage {
 
   ionViewWillUnload() {
     document.removeEventListener('serviceteamrankschanged', this.onTeamRanksChanged);
-    document.removeEventListener('serviceplayerrankschanged', this.onPlayerRanksChanged );
-  } 
+    document.removeEventListener('serviceplayerrankschanged', this.onPlayerRanksChanged);
+  }
 
   sortTeamBy(str) {
     this.teamSortByStr = str;
@@ -84,5 +88,5 @@ export class RankPage {
 
   goTeamPage(tId) {
     this.nav.push(MyTeamPage, { id: tId });
-  } 
+  }
 }
