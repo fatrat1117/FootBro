@@ -22,7 +22,6 @@ import { EditPlayerDescriptionPage } from "../pages/edit-player/edit-player-desc
 import { EditTeamPage } from "../pages/edit-team/edit-team";
 import { EditTeamNamePage } from "../pages/edit-team/edit-team-name";
 import { ManageTeamPage } from "../pages/manage-team/manage-team";
-import { NewTeamPage } from "../pages/manage-team/new-team";
 import { LeagueInfoPage } from "../pages/league-info/league-info";
 import { LeagueResultPage } from "../pages/league-result/league-result";
 import { MyPlayerPage } from "../pages/my-player/my-player";
@@ -115,7 +114,6 @@ export const firebaseConfig = {
     EditTeamPage,
     EditTeamNamePage,
     ManageTeamPage,
-    NewTeamPage,
     MyPlayerPage,
     FeedbackPage,
     MatchesPage,
@@ -198,7 +196,6 @@ export const firebaseConfig = {
     EditTeamPage,
     EditTeamNamePage,
     ManageTeamPage,
-    NewTeamPage,
     MyPlayerPage,
     FeedbackPage,
     MatchesPage,
