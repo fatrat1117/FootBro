@@ -207,9 +207,13 @@ export class MatchDetailPage {
     if (!this.playerService.isAuthenticated())
       return false;
 
-    if (this.playerService.isCaptain(this.playerService.selfId(), this.match.homeId) ||
-      this.playerService.isCaptain(this.playerService.selfId(), this.match.awayId))
-      return true;
+      if (this.playerService.amIMemberOfCurrentTeam(this.match.homeId) ||
+      this.playerService.amIMemberOfCurrentTeam(this.match.awayId)) {
+        return true;
+      }
+    // if (this.playerService.isCaptain(this.playerService.selfId(), this.match.homeId) ||
+    //   this.playerService.isCaptain(this.playerService.selfId(), this.match.awayId))
+    //   return true;
 
     return false;
   }
