@@ -824,6 +824,9 @@ page-my-player{
   .wrapper{
     width:96%;
     margin:0 auto;
+    ion-icon {
+      font-size: 1.5em;
+    }
   }
   .fl{
     float:left;
