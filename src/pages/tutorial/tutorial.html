@@ -1,8 +1,9 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{ 'whatsNew' | trans }}</ion-title>
-    <ion-buttons end *ngIf="!slider.isEnd()">
-      <button ion-button color="primary" (tap)="finishTutorial()">{{ 'skip' | trans }}</button>
+    <ion-buttons end>
+      <button *ngIf="!slider.isEnd()" ion-button color="primary" (tap)="finishTutorial()">{{ 'skip' | trans }}</button>
+      <button *ngIf="slider.isEnd()" ion-button color="primary" (tap)="finishTutorial()">{{ 'start' | trans }}</button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -18,16 +19,6 @@
       <h2 class="slide-title" [innerHTML]="slide.title"></h2>
       <p [innerHTML]="slide.description"></p>
       <img [src]="slide.image" class="slide-image" />
-    </ion-slide>
-    <ion-slide>
-      <ion-toolbar>
-      </ion-toolbar>
-      <img src="assets/img/tutorial/ica-slidebox-img-4.png" class="slide-image" />
-      <h2 class="slide-title">Ready to Play?</h2>
-      <button ion-button large clear icon-right color="primary" (tap)="finishTutorial()">
-        Continue
-        <ion-icon name="arrow-forward"></ion-icon>
-      </button>
     </ion-slide>
   </ion-slides>
 </ion-content>

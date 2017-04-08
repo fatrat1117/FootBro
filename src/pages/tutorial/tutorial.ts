@@ -30,11 +30,11 @@ export class TutorialPage {
   ];
   */
   slides: any[];
-  titles = ['Team'];
-  descriptions = ['teamDesc'];
+  titles = ['Player', 'Team', 'squad', 'Cheerleaders'];
+  descriptions = ['playerDesc', 'teamDesc', 'squadDesc', 'cheerleadersDesc'];
 
   constructor(private viewCtrl: ViewController, private local: Localization) {
-    this.loadSlides(local.langCode, 1);
+    this.loadSlides(local.langCode, 4);
   }
 
   loadSlides(langCode: string, total: number) {
@@ -43,7 +43,7 @@ export class TutorialPage {
       this.slides.push({
         title: this.local.getString(this.titles[i]),
         description: this.local.getString(this.descriptions[i]),
-        image: `assets/img/tutorial/${langCode}/${i}.jpg`
+        image: `assets/img/tutorial/${i}.jpg`
       });
     }
   }
