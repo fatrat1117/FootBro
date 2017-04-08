@@ -89,7 +89,7 @@ export class EditTeamPage {
       else {
         this.alertCtrl.create({
           title: `Promote ${player.name} to captain?`,
-          message: `You cannot undo this action.`,
+          subTitle: `You cannot undo this action.`,
           buttons: ['Cancel',
             {
               text: "Confirm",

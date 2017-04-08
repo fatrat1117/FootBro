@@ -61,7 +61,7 @@ export class EditGameRatingPage {
     let msg = sprintf(this.loc.getString('rateearnpoints'), this.playerPoints);
     let confirm = this.alertCtrl.create({
       title: this.loc.getString('note'),
-      message: msg,
+      subTitle: msg,
       buttons: [
         {
           text: this.loc.getString('Cancel'),
