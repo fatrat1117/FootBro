@@ -23,14 +23,14 @@
 page-edit-squad {
 
   ion-icon{
-    font-size: 3.5rem!important;
+    font-size: 2.5rem!important;
     padding: 0 !important;
   },
   ion-navbar {
     .squard-number-container {
       display: flex;
       width: 100%;
-      flex: 0 0 70%;
+      flex: 0 0 65%;
       a {
         //                flex:1;
         text-align: center;
@@ -103,10 +103,10 @@ page-edit-squad {
     .squad-operate{
       display: flex;
       align-items: center;
-      flex: 0 0 20%;
-      max-width: 20%;
+      flex: 0 0 25%;
+      max-width: 25%;
       .upload-icon{
-        font-size: 3.5rem;
+        font-size: 2.5rem;
       }
       .operate-btn{
         margin:auto;
