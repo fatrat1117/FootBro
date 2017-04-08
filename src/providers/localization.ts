@@ -43,7 +43,6 @@ export class Localization {
             Quit: 'Quit',
             players: 'players',
             Players: 'Players',
-            Player: 'Player',
             PromoteToCaptain: 'Promote to captain',
             Date: 'Date',
             Time: 'Time',
@@ -228,7 +227,6 @@ export class Localization {
             teamupdateonceandearnpoints: 'Upon confirming, you can not modify the match data again. You team will earn %d points.',
             rateearnpoints: 'Upon confirming, you can not rate again. You will earn %d points.',
             teaminvitation: "%s invited you to join \"%s\". \n\nCopy this message and go back to \"SoccerBro\" to accept the invitation.\\n(%s)",
-            teamInvitationCopied: "Invitation link is copied. Send to players to invite them",
             bench: 'Substitutes',
             schedule: 'Schedule',
             share: 'Share',
@@ -276,10 +274,7 @@ export class Localization {
             checkCheerLeaders:'Have a look',
             skip: 'Skip',
             whatsNew: "What's New",
-            playerDesc: 'Shows player information and appraisal',
-            teamDesc: 'All team statistics could be found here.',
-            squadDesc: 'Arrange your squads',
-            cheerleadersDesc: 'Chat with cheerleaders you like',
+            teamDesc: 'All team infomation could be found here.',
             changecoverphoto: 'Change Cover Photo',
             squad: 'Squad',
             squads: 'Squads',
@@ -305,7 +300,9 @@ export class Localization {
             enroll: 'Enroll',
             youarenotcaptain: 'You are not captain',
             youearnedpoints: 'You have earned %d points',
-            start: 'Start to use'
+            usephone: 'Or Via Phone',
+            more: 'More',
+            getotp: 'Get OTP'
         },
 
         zh: {
@@ -330,7 +327,6 @@ export class Localization {
             Quit: '退出',
             players: '队员',
             Players: '队员',
-            Player: '球员',
             PromoteToCaptain: '升为队长',
             Date: '日期',
             Time: '时间',
@@ -515,7 +511,6 @@ export class Localization {
             teamupdateonceandearnpoints: '确认之后你就不能够再修改比赛数据. 你的球队会得到%d积分',
             rateearnpoints: '确认之后就不能再对本次比赛评分. 你将获得%d积分.',
             teaminvitation: "%s 邀请你加入\“%s\”。\n复制这条信息，打开\“绿茵兄弟\”即可加入。\n(%s)",
-            teamInvitationCopied: "成功复制邀请链接，发送给球员邀请入队",
             bench: '替补席',
             schedule: '赛程表',
             share: '分享',
@@ -563,10 +558,7 @@ export class Localization {
             checkCheerLeaders:'点击查看',
             skip: '跳过',
             whatsNew: "新特性",
-            playerDesc: '查看球员数据及评价',
-            teamDesc: '查看球队所有数据',
-            squadDesc: '安排比赛阵容',
-            cheerleadersDesc: '和你喜欢的拉拉队员聊天',
+            teamDesc: '查看球队所有信息',
             changecoverphoto: '更换封面',
             squad: '阵型',
             squads: '战术',
@@ -592,7 +584,9 @@ export class Localization {
             enroll: '报名',
             youarenotcaptain: '你不是队长',
             youearnedpoints: '你获得了%d积分',
-            start: '开始使用'
+            usephone: '或者使用手机',
+            more: '更多',
+            getotp: '获取验证码'
         }
     }
 }
