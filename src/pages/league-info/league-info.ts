@@ -79,7 +79,7 @@ export class LeagueInfoPage {
     if (this.selfId == this.selfTeam.captain) {
       let confirm = this.alertCtrl.create({
         title: this.loc.getString('enroll'),
-        subTitle: this.selfTeam.name,
+        message: this.selfTeam.name,
         //message: 'You will be able to message her once unlocked.',
         buttons: [
           {

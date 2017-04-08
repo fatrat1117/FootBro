@@ -161,7 +161,7 @@ export class MyTeamPage {
     Clipboard.copy(msg);
     let alert = this.alertCtrl.create({
       title: this.loc.getString('SoccerBro'),
-      subTitle: this.loc.getString('teamInvitationCopied'),
+      message: this.loc.getString('teamInvitationCopied'),
       buttons: [this.loc.getString('OK')]
     });
     alert.present();

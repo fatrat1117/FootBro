@@ -173,7 +173,7 @@ export class UpdateGamePage {
         let self = this;
         let confirm = this.alertCtrl.create({
             title: this.loc.getString('note'),
-            subTitle: msg,
+            message: msg,
             buttons: [
                 {
                     text: this.loc.getString('Cancel'),

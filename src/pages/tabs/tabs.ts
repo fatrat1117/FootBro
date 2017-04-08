@@ -122,7 +122,7 @@ export class TabsPage {
 
     let confirm = this.alertCtrl.create({
       title: this.local.getString("teamInvitation"),
-      subTitle: teamName,
+      message: teamName,
       buttons: [
         {
           text: this.local.getString("join"),
