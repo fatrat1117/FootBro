@@ -30,8 +30,8 @@ export class CheeringTeamPage {
     private modalCtrl: ModalController,
     private playerService: PlayerService,
     private cheerleaderService: CheerleaderService) {
-      if (this.playerService.isAuthenticated())
-        this.afPendingSelf = this.cheerleaderService.afPendingCheerleaderSelf();
+    if (this.playerService.isAuthenticated())
+      this.afPendingSelf = this.cheerleaderService.afPendingCheerleaderSelf();
   }
 
   ionViewDidLoad() {
@@ -49,13 +49,21 @@ export class CheeringTeamPage {
     document.removeEventListener('serviceplayerready', this.onPlayerReady);
   }
 
+  shuffle(a) {
+    for (let i = a.length; i; i--) {
+      let j = Math.floor(Math.random() * i);
+      [a[i - 1], a[j]] = [a[j], a[i - 1]];
+    }
+  }
+
   addEventListeners() {
     this.onPendingCheerleadersReady = e => {
       this.pendingCheerleaders = this.cheerleaderService.getPendingCheerleaders();
     };
 
-    this.onApprovedCheerleadersReady =  e => {
+    this.onApprovedCheerleadersReady = e => {
       this.approvedCheerleaders = this.cheerleaderService.getApprovedCheerleaders();
+      this.shuffle(this.approvedCheerleaders);
       this.buildGrid(this.approvedCheerleaders.length)
       if (this.cheerleaderService.isCheerleader(this.playerService.selfId()))
         this.amICheerleader = true;
@@ -118,7 +126,7 @@ export class CheeringTeamPage {
     if (this.selfPlayer && this.selfPlayer.cheerleaders)
       return this.selfPlayer.cheerleaders.indexOf(id) >= 0;
 
-     return false;
+    return false;
   }
 
   enterChatPage(cl) {
@@ -138,8 +146,8 @@ export class CheeringTeamPage {
     let row = [];
     for (let i = 0; i < total; ++i) {
       row.push(i);
-      
-      if ((i+1)%2 == 0) {
+
+      if ((i + 1) % 2 == 0) {
         this.approvedGrid.push(row)
         row = [];
       }
