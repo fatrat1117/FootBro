@@ -36,7 +36,7 @@
         <p>{{'Ranks' | trans}}</p>
       </button>
     </ion-col>
-    <ion-col *ngIf = "amIPlayer()" class="menu-col"  center>
+    <ion-col *ngIf = "selfPlayer && selfPlayer?.role != 'cheerleader'" class="menu-col"  center>
       <button ion-button icon-only full color="dark" (tap)="enterManageSquadPage()">
         <ion-icon name="md-people" color="gGreen"></ion-icon>
       </button>
