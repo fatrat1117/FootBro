@@ -35,9 +35,9 @@ export class TabsPage {
   isAlertOpen = false;
   selfPlayer: Player;
 
-  constructor(private fm: FirebaseManager, private osm: OneSignalManager, private platform: Platform, private alertCtrl: AlertController, 
-              private toastCtrl: ToastController, private local: Localization, 
-              private playerService:PlayerService, private teamService: TeamService, private messageService: MessageService) {
+  constructor(private fm: FirebaseManager, private osm: OneSignalManager, private platform: Platform, private alertCtrl: AlertController,
+    private toastCtrl: ToastController, private local: Localization,
+    private playerService: PlayerService, private teamService: TeamService, private messageService: MessageService) {
 
   }
 
@@ -54,7 +54,7 @@ export class TabsPage {
       this.tab2Root = null;
       this.tab3Root = null;
       this.unreadCount = null;
-      
+
       if (this.selfPlayer == null)
         this.checkClipboard();
 
@@ -104,15 +104,17 @@ export class TabsPage {
     let end = msg.lastIndexOf(')');
     if (start == -1 || end == -1)
       return;
-    
+
     let teamId = msg.substring(start + 1, end);
-    if (this.selfPlayer &&this.selfPlayer.teams && this.selfPlayer.teams.indexOf(teamId) >=0) // already team member
+    if (this.selfPlayer && this.selfPlayer.teams && this.selfPlayer.teams.indexOf(teamId) >= 0) // already team member
       return;
 
     let subscription = this.teamService.getAfPublicTeamName(teamId).subscribe(snapshot => {
       if (snapshot.$value)
-        this.showJoinTeamAlert(teamId, snapshot.$value)
-      subscription.unsubscribe()
+        this.showJoinTeamAlert(teamId, snapshot.$value);
+      setTimeout(() => {
+        subscription.unsubscribe();
+      }, this.fm.unsubscribeTimeout);
     })
   }
 

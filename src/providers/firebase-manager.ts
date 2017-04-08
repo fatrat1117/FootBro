@@ -46,6 +46,7 @@ export class FirebaseManager {
   ratePlayerPoints = 100;
   teamInitialPoints = 100;
   smallImageSize = 256;
+  unsubscribeTimeout = 500;
 
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,
@@ -239,10 +240,9 @@ export class FirebaseManager {
 
   getAllPublicTeamsAsync() {
     if (!this.getAllPublicTeams()) {
-      let sub = this.af.database.list(`/public/teams/`, {
+      this.af.database.list(`/public/teams/`, {
         query: { orderByChild: 'name' }
       }).subscribe(snapshots => {
-        //sub.unsubscribe();
         this.cachedAllPublicTeams = snapshots;
         //console.log('allpublicteamsready');
       });
@@ -261,12 +261,14 @@ export class FirebaseManager {
     });
 
     let sub = this.afSortedPublicTeams.subscribe(snapshots => {
-      sub.unsubscribe();
-      this.sortedPublicTeams = snapshots.reverse();
-      for (let i = 0; i < snapshots.length; ++i) {
-        this.sortedPublicTeamsMap[snapshots[i].$key] = snapshots[i];
-      }
-      this.FireEvent('publicteamschanged');
+      setTimeout(() => {
+        sub.unsubscribe();
+        this.sortedPublicTeams = snapshots.reverse();
+        for (let i = 0; i < snapshots.length; ++i) {
+          this.sortedPublicTeamsMap[snapshots[i].$key] = snapshots[i];
+        }
+        this.FireEvent('publicteamschanged');
+      }, this.unsubscribeTimeout);
     });
 
     if (this.queryTeams)
@@ -274,9 +276,7 @@ export class FirebaseManager {
 
     let ref = firebase.database().ref(`/public/teams/`);
     this.queryTeams = ref.orderByChild(orderby).limitToLast(count);
-    // query.on("child_added", function (snapshot) {
-    //   console.log("child_added", snapshot.key);
-    // });
+
     let self = this;
     this.queryTeams.on("child_changed", function (snapshot) {
       let val = snapshot.val();
@@ -286,9 +286,6 @@ export class FirebaseManager {
       self.FireCustomEvent('teampublicready', snapshot.key);
       //console.log("child_changed", snapshot.key);
     });
-    //}
-    //this.subjectTeamSortBy.next(orderby);
-    //this.subjectTeamLimitTo.next(count);
   }
 
   getTeamAsync(teamId) {
@@ -348,7 +345,10 @@ export class FirebaseManager {
     let sub = queryObservable.subscribe(queriedItems => {
       //console.log("check team name", queriedItems);
       //stopping monitoring changes
-      sub.unsubscribe();
+      setTimeout(() => {
+        sub.unsubscribe();
+      }, this.unsubscribeTimeout);
+
       if (0 === queriedItems.length) {
         let teamData = {
           location: teamObj.location,
@@ -582,12 +582,14 @@ export class FirebaseManager {
     });
 
     let sub = afQuery.subscribe(snapshots => {
-      sub.unsubscribe();
-      this.sortedPublicPlayers = snapshots.reverse();
-      for (let i = 0; i < snapshots.length; ++i) {
-        this.sortedPublicPlayersMap[snapshots[i].$key] = snapshots[i];
-      }
-      this.FireEvent('publicplayerschanged');
+      setTimeout(() => {
+        sub.unsubscribe();
+        this.sortedPublicPlayers = snapshots.reverse();
+        for (let i = 0; i < snapshots.length; ++i) {
+          this.sortedPublicPlayersMap[snapshots[i].$key] = snapshots[i];
+        }
+        this.FireEvent('publicplayerschanged');
+      }, this.unsubscribeTimeout);
     });
 
     if (this.queryPlayers)
@@ -744,17 +746,19 @@ export class FirebaseManager {
 
     let sub = afQuery.subscribe(snapshots => {
       //console.log('pull', snapshots);
-      sub.unsubscribe();
-      this.matchesByDateMap[date] = snapshots.filter(m => {
-        return tournamentId === 'all' || m.tournamentId === tournamentId;
-      });
+      setTimeout(() => {
+        sub.unsubscribe();
+        this.matchesByDateMap[date] = snapshots.filter(m => {
+          return tournamentId === 'all' || m.tournamentId === tournamentId;
+        });
 
-      this.matchesByDateMap[date].forEach(snapshot => {
-        //monitor match change
-        //this.getMatchAsync(snapshot.$key);
-      });
-      //this.matchesByDateMap[date] = matches;
-      this.FireCustomEvent('matchesbydateready', date);
+        //this.matchesByDateMap[date].forEach(snapshot => {
+          //monitor match change
+          //this.getMatchAsync(snapshot.$key);
+        //});
+        //this.matchesByDateMap[date] = matches;
+        this.FireCustomEvent('matchesbydateready', date);
+      }, this.unsubscribeTimeout);
     });
   }
 
@@ -802,15 +806,17 @@ export class FirebaseManager {
         orderByChild: 'time'
       }
     }).subscribe(snapshots => {
-      sub.unsubscribe();
-      snapshots.sort((a, b) => { return b.time - a.time });
-      //console.log(snapshots);
+      setTimeout(() => {
+        sub.unsubscribe();
+        snapshots.sort((a, b) => { return b.time - a.time });
+        //console.log(snapshots);
 
-      let result = {
-        id: teamId,
-        matches: snapshots
-      };
-      this.FireCustomEvent('teammatchesready', result);
+        let result = {
+          id: teamId,
+          matches: snapshots
+        };
+        this.FireCustomEvent('teammatchesready', result);
+      }, this.unsubscribeTimeout);
     })
   }
 
