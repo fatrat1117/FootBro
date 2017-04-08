@@ -10,10 +10,10 @@
   <ion-toolbar *ngIf="selectedId != 'all'">
     <ion-segment [(ngModel)]="selectedInfo" mode="md">
       <ion-segment-button value="schedule">
-        Schedule
+        {{ 'schedule' | trans }}
       </ion-segment-button>
       <ion-segment-button value="standings">
-        Standings
+        {{ 'standings' | trans }}
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>

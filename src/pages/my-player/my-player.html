@@ -201,9 +201,9 @@
           </div>
           <ion-row class="clearfloat totalFeedBack">
 
-            <ion-col width-10 class="feed-back-like">
+            <ion-col width-10 class="feed-back-like" (tap)="likeHim()">
               <div class="like fl">
-                <ion-icon (tap)="likeHim()" name="md-thumbs-up" [ngStyle]="{'color': isLiked('charm') ? '#db3236' : none}"></ion-icon>
+                <ion-icon name="md-thumbs-up" [ngStyle]="{'color': isLiked('charm') ? '#db3236' : none}"></ion-icon>
                 <!--img [src]="getLikePic('charm')" (tap)="likeHim()"-->
               </div>
             </ion-col>
@@ -217,9 +217,9 @@
                 <span class="blueText">{{socialStats['oppcharm']}}</span>
               </div>
             </ion-col>
-            <ion-col width-10 class="feed-back-unlike">
+            <ion-col width-10 class="feed-back-unlike" (tap)="dislikeHim()">
               <div class="unLike fr">
-                <ion-icon (tap)="dislikeHim()" name="md-thumbs-down" [ngStyle]="{'color': isUnliked('charm') ? '#0F7AFE' : none}"></ion-icon>
+                <ion-icon name="md-thumbs-down" [ngStyle]="{'color': isUnliked('charm') ? '#0F7AFE' : none}"></ion-icon>
                 <!--img [src]="getUnlikePic('charm')" (tap)="dislikeHim()"-->
               </div>
             </ion-col>
@@ -246,9 +246,9 @@
           </div>
           <ion-row class="clearfloat totalFeedBack">
 
-            <ion-col width-10 class="feed-back-like">
+            <ion-col width-10 class="feed-back-like" (tap)="likeSkill()">
               <div class="like fl">
-                <ion-icon (tap)="likeSkill()" name="md-thumbs-up" [ngStyle]="{'color': isLiked('skill') ? '#db3236' : none}"></ion-icon>
+                <ion-icon name="md-thumbs-up" [ngStyle]="{'color': isLiked('skill') ? '#db3236' : none}"></ion-icon>
                 <!--img [src]="getLikePic('skill')" (tap)="likeSkill()"-->
               </div>
             </ion-col>
@@ -262,9 +262,9 @@
                 <span class="blueText">{{socialStats['oppskill']}}</span>
               </div>
             </ion-col>
-            <ion-col width-10 class="feed-back-unlike">
+            <ion-col width-10 class="feed-back-unlike" (tap)="dislikeSkill()">
               <div class="unLike fr">
-                <ion-icon (tap)="dislikeSkill()" name="md-thumbs-down" [ngStyle]="{'color': isUnliked('skill') ? '#0F7AFE' : none}"></ion-icon>
+                <ion-icon name="md-thumbs-down" [ngStyle]="{'color': isUnliked('skill') ? '#0F7AFE' : none}"></ion-icon>
                 <!--img [src]="getUnlikePic('skill')" (tap)="dislikeSkill()"-->
               </div>
             </ion-col>
@@ -289,9 +289,9 @@
           </div>
           <ion-row class="clearfloat totalFeedBack">
 
-            <ion-col width-10 class="feed-back-like">
+            <ion-col width-10 class="feed-back-like" (tap)="likeStyle()">
               <div class="like fl">
-                <ion-icon (tap)="likeStyle()" name="md-thumbs-up" [ngStyle]="{'color': isLiked('style') ? '#db3236' : none}"></ion-icon>
+                <ion-icon name="md-thumbs-up" [ngStyle]="{'color': isLiked('style') ? '#db3236' : none}"></ion-icon>
                 <!--img [src]="getLikePic('style')" (tap)="likeStyle()"-->
               </div>
             </ion-col>
@@ -305,9 +305,9 @@
                 <span class="blueText">{{socialStats['oppstyle']}}</span>
               </div>
             </ion-col>
-            <ion-col width-10 class="feed-back-unlike">
+            <ion-col width-10 class="feed-back-unlike" (tap)="dislikeStyle()">
               <div class="unLike fr">
-                <ion-icon (tap)="dislikeStyle()" name="md-thumbs-down" [ngStyle]="{'color': isUnliked('style') ? '#0F7AFE' : none}"></ion-icon>
+                <ion-icon name="md-thumbs-down" [ngStyle]="{'color': isUnliked('style') ? '#0F7AFE' : none}"></ion-icon>
                 <!--img [src]="getUnlikePic('style')" (tap)="dislikeStyle()"-->
               </div>
             </ion-col>
