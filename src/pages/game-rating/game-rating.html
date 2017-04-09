@@ -25,7 +25,7 @@
         <div class="star-back" *ngFor="let item of p.starArray">
           <ion-icon name="{{item.src}}" class="star-icon" isActive="true"></ion-icon>
         </div>
-        <div class="touch-back" (pan)="panStar(p,$event)" (tap)="clickStar(p,$event)"></div>
+        <div class="touch-back" (pan)="panStar(p,$event)" (click)="clickStar(p,$event)"></div>
       </div>
     </div>
     <button ion-button clear color="{{getRatingColor(p.rating)}}" class="evalute-string" item-right>
@@ -33,12 +33,3 @@
       </button>
   </ion-item>
 </ion-list>
-
-<!--<ion-row class="row-back">
-    <ion-col>
-      <button ion-button full class="cancel-button" (tap)="openCancel()">取消</button>
-    </ion-col>
-    <ion-col>
-      <button ion-button full class="ensure-button" (tap)="openEnsure()">确定</button>
-    </ion-col>
-  </ion-row>-->

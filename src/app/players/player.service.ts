@@ -252,6 +252,10 @@ export class PlayerService {
     return this.isCaptain(this.selfId(), teamId);
   }
 
+  amICaptainOfCurrentTeam(teamId) {
+    return this.amIMemberOfCurrentTeam(teamId) && this.amICaptainOf(teamId);
+  } 
+
   isCaptain(pId, tId) {
     //console.log('isCaptain', pId, tId);
     if (!pId || !tId)
