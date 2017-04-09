@@ -7,6 +7,14 @@ result-score{
     background: #2c2d31;
     font-size: 1.2rem;
   }
+
+  .input-score{
+    background-color: transparent;
+    border: 1px solid #f4c20d;
+    color: #f4c20d;
+    font-size: 1rem;
+  }
+
   .game-time.match-detail{
     margin-top: 10px !important;
     height: 30px !important;
@@ -41,10 +49,19 @@ result-score{
     }
     //比分部分
     .game-score {
-      font-size: 3.0rem;
+      font-size: 2.5rem;
       color: white;
       text-align: center;
-      //width: 20%;
+      margin: 0px;
+      padding-top: 30px;
+      .input-score{
+
+        background-color: transparent;
+        border: 1px solid #f4c20d;
+        color: #f4c20d;
+        font-size: 1rem;
+
+      }
     }
   }
 
