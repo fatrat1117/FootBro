@@ -33,11 +33,11 @@ export class EditGameRatingPage {
     if (this.squad && 'participants' in this.squad) {
       this.squad.participants.forEach(p => {
         //do not rate self
-        if (p.id !== this.playerService.selfId()) {
-          let player = new PlayerRatingUI();
-          player.player = this.playerService.findOrCreatePlayerAndPull(p.id);
-          this.players.push(player);
-        }
+        //if (p.id !== this.playerService.selfId()) {
+        let player = new PlayerRatingUI();
+        player.player = this.playerService.findOrCreatePlayerAndPull(p.id);
+        this.players.push(player);
+        //}
       })
     }
   }
