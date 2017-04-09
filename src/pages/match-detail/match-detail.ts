@@ -244,6 +244,9 @@ export class MatchDetailPage {
     if (!this.playerService.isAuthenticated())
       return false;
 
+    if (this.playerService.isAdmin())
+      return true;
+      
     return this.isMatchEditable();
   }
 
