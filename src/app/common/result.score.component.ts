@@ -55,12 +55,12 @@ import * as moment from 'moment';
 })
 
 export class ResultScoreComponent {
-  @Input() upcomingMatch : Match;
-  @Input() hostPageName : String;
+  @Input() upcomingMatch: Match;
+  @Input() hostPageName: String;
   versusLabel = "versus";
 
-  constructor(private playerService : PlayerService,
-  private modal: ModalController) {
+  constructor(private playerService: PlayerService,
+    private modal: ModalController) {
 
   }
 
@@ -70,9 +70,9 @@ export class ResultScoreComponent {
     //console.log(this.upcomingMatch);
 
     if ('homeScore' in this.upcomingMatch
-    && 'awayScore' in this.upcomingMatch &&
-    this.upcomingMatch.homeScore >= 0 &&
-    this.upcomingMatch.awayScore >= 0)
+      && 'awayScore' in this.upcomingMatch &&
+      this.upcomingMatch.homeScore >= 0 &&
+      this.upcomingMatch.awayScore >= 0)
       return true;
 
     return false;
@@ -90,10 +90,10 @@ export class ResultScoreComponent {
     let april2 = moment("20170402", "YYYYMMDD").unix() * 1000;
     if (this.upcomingMatch.date < april2)
       return false;
-      
+
     if (this.upcomingMatch.isStarted() &&
-    ((this.playerService.isCaptain(this.playerService.selfId(), this.upcomingMatch.homeId) && !this.upcomingMatch.isHomeUpdated)
-    || (this.playerService.isCaptain(this.playerService.selfId(), this.upcomingMatch.awayId) && !this.upcomingMatch.isAwayUpdated))
+      ((this.playerService.isCaptain(this.playerService.selfId(), this.upcomingMatch.homeId) && !this.upcomingMatch.isHomeUpdated)
+        || (this.playerService.isCaptain(this.playerService.selfId(), this.upcomingMatch.awayId) && !this.upcomingMatch.isAwayUpdated))
     ) {
       return true;
     }
@@ -104,7 +104,9 @@ export class ResultScoreComponent {
   openUpdateMatchPage(e) {
     //console.log('openUpdateMatchPage', e);
     e.stopPropagation();
-    let teamId = this.playerService.isCaptain(this.playerService.selfId(), this.upcomingMatch.homeId) ? this.upcomingMatch.homeId : this.upcomingMatch.awayId;
-    this.modal.create(UpdateGamePage, { id: this.upcomingMatch.id, teamId: teamId }).present();
+    //let teamId = this.playerService.isCaptain(this.playerService.selfId(), this.upcomingMatch.homeId) ? this.upcomingMatch.homeId : this.upcomingMatch.awayId;
+    if (this.playerService.myself().teamId === this.upcomingMatch.homeId ||
+      this.playerService.myself().teamId === this.upcomingMatch.awayId)
+      this.modal.create(UpdateGamePage, { id: this.upcomingMatch.id, teamId: this.playerService.myself().teamId }).present();
   }
 }
