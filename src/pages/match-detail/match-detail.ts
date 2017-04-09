@@ -316,9 +316,7 @@ export class MatchDetailPage {
       return;
     this.mapClicked = true;
 
-    if ('lat' in this.match.location && 'lng' in this.match.location) {
-      //   this.geo = "geo:?q=" + this.match.location.lat + ',' + this.match.location.lng;
-      // console.log(this.geo);
+    if (this.match.location.lat && this.match.location.lng) {
       let options: LaunchNavigatorOptions = {
         app: this.launchNavigator.APP.GOOGLE_MAPS
       };
