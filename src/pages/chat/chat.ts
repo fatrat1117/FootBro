@@ -34,7 +34,9 @@ export class ChatPage {
   hasChatsMessage = true;
   hasNoChatsMessageId = "chatPageNoRecord";
   hasNoChatsMessage = "";
+  blockMessage: string;
   subscription: any;
+  isBlocked: boolean;
   
   constructor(private navCtrl: NavController, private navParams: NavParams, private chatService: ChatService, private local: Localization) {
   }
@@ -46,6 +48,7 @@ export class ChatPage {
     this.isSystem = this.navParams.get('isSystem');
     this.isUnread = this.navParams.get('isUnread');
     this.user = this.navParams.get('user');
+    this.isBlocked = this.navParams.get('isBlocked')
 
     this.subscription = this.chatService.getRecentChats(this.user.id, this.isUnread).subscribe(chats => {
       this.chats = chats;
@@ -55,6 +58,7 @@ export class ChatPage {
 
     this.chatService.loadMoreChats();
     this.hasNoChatsMessage = this.local.getString(this.hasNoChatsMessageId);
+    this.blockMessage = this.local.getString('blockMsg');
   }
 
   ionViewWillLeave() {
@@ -148,5 +152,15 @@ export class ChatPage {
       }else{
         return false;
       }
+  }
+
+  block() {
+    this.chatService.blockUser(this.user.id)
+    this.isBlocked = true;
+  }
+
+  unblock() {
+    this.chatService.unblockUser(this.user.id)
+    this.isBlocked = false;
   }
 }

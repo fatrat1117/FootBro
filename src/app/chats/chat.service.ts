@@ -38,4 +38,11 @@ export class ChatService {
     this.fm.updateUnread(userId, isUnread);
   }
 
+  blockUser(userId: string) {
+    this.fm.block(userId);
+  }
+
+  unblockUser(userId: string) {
+    this.fm.unblock(userId);
+  }
 }

@@ -316,6 +316,9 @@ export class Localization {
             unlock: 'Unlock',
             reportobjectionalbecontent: 'Report Objectionalbe Content',
             systemadminsdealwithreport : 'System Admin will deal with your report ASAP',
+            block: "Block",
+            unblock: "Unblock",
+            blockMsg: "You've blocked this user.",
         },
 
         zh: {
@@ -613,6 +616,9 @@ export class Localization {
             unlock: '解锁',
             reportobjectionalbecontent: '举报不良内容',
             systemadminsdealwithreport : '系统管理员会尽快处理你的举报',
+            block: "屏蔽",
+            unblock: "解除屏蔽",
+            blockMsg: "你已屏蔽这个用户。",
         }
     }
 }

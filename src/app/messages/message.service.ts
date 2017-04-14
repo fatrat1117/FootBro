@@ -8,13 +8,19 @@ import { Message } from './message.model';
 @Injectable()
 export class MessageService {
   messages: Message[];
+  blacklist: string[];
   subscription: any;
+  blSubscription: any;
   constructor(private fm: FirebaseManager) {
     this.messages = [];
 
     document.addEventListener('userlogout', e => {
       if (this.subscription) {
         this.subscription.unsubscribe();
+      }
+
+      if (this.blSubscription) {
+        this.blSubscription.unsubscribe();
       }
     });
   }
@@ -40,8 +46,22 @@ export class MessageService {
     })
   }
 
+  prepareBlacklist() {
+    this. blSubscription = this.fm.getBlackList().subscribe(items => {
+      this.blacklist = [];
+      items.forEach(i => {
+        this.blacklist.push(i.$key);
+      })
+      this.fm.FireEvent("serviceblacklistready");
+    })
+  }
+
   getAllMessages() {
     return this.messages;
+  }
+
+  getBlackList() {
+    return this.blacklist;
   }
 
   deleteMessage(playerId: string) {

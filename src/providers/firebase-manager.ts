@@ -113,9 +113,21 @@ export class FirebaseManager {
     })
   }
 
+  getBlackList() {
+    return this.af.database.list(`/chats/${this.auth.uid}/black-list/`);
+  }
+
   deleteMessage(playerId: string) {
     this.af.database.object(`/chats/${this.auth.uid}/basic-info/${playerId}`).remove();
     this.af.database.object(`/chats/${this.auth.uid}/${playerId}`).remove();
+  }
+
+  block(playerId: string) {
+    this.af.database.object(`/chats/${this.auth.uid}/black-list/${playerId}`).set(true);
+  }
+
+  unblock(playerId: string) {
+    this.af.database.object(`/chats/${this.auth.uid}/black-list/${playerId}`).remove();
   }
 
 

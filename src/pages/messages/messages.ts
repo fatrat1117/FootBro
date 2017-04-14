@@ -17,20 +17,25 @@ export class MessagesPage {
   watchListMap : {};
   onMessageReady;
   onPlayerReady;
+  onBlacklistReady;
   noRecordId = "messagePageNoRecord";
   noRecordMessage = "";
+  blacklist: string[];
 
   constructor(private navCtrl: NavController, private messageService: MessageService, private playerService: PlayerService
   ,private local:Localization) {
   }
 
   ionViewDidLoad() {
+    this.messageService.prepareBlacklist();
     this.addEventListeners();
 
     this.messages = this.messageService.getAllMessages();
     this.getPlayerAsync();
 
     this.noRecordMessage = this.local.getString(this.noRecordId);
+
+    this.blacklist = [];
   }
 
   addEventListeners() {
@@ -46,18 +51,25 @@ export class MessagesPage {
         this.watchListMap[playerId] = this.playerService.getPlayer(playerId);
       }
     };
-    
+
+    this.onBlacklistReady = e => {
+      this.blacklist = this.messageService.getBlackList();
+    }
+        
     document.addEventListener('servicemessageready', this.onMessageReady);
     document.addEventListener('serviceplayerready', this.onPlayerReady);
+    document.addEventListener('serviceblacklistready', this.onBlacklistReady);
 
     document.addEventListener('userlogin', e => {
       document.addEventListener('servicemessageready', this.onMessageReady);
       document.addEventListener('serviceplayerready', this.onPlayerReady);
+      document.addEventListener('serviceblacklistready', this.onBlacklistReady);
     });
 
     document.addEventListener('userlogout', e => {
       document.removeEventListener('servicemessageready', this.onMessageReady);
       document.removeEventListener('serviceplayerready', this.onPlayerReady);
+      document.removeEventListener('serviceblacklistready', this.onBlacklistReady);
     });
   }
 
@@ -87,7 +99,8 @@ export class MessagesPage {
     this.navCtrl.push(ChatPage, {
       isSystem: msg.isSystem,
       isUnread: msg.isUnread,
-      user: this.watchListMap[msg.playerId]
+      user: this.watchListMap[msg.playerId],
+      isBlocked: this.isUserBlockded(msg.playerId) 
     });
   }
 
@@ -102,5 +115,9 @@ export class MessagesPage {
     }else{
       return false;
     }
+  }
+
+  isUserBlockded(userId: string) {
+    return this.blacklist.indexOf(userId) > -1;
   }
 }

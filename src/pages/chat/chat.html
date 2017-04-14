@@ -4,9 +4,12 @@
       {{ user?.name }}
     </ion-title>
     <ion-buttons right>
-      <button clear ion-button>
-    {{'block' | trans}}
-  </button>
+      <button *ngIf="!isBlocked" clear ion-button color="danger" (click)="block()">
+        {{'block' | trans}}
+      </button>
+      <button *ngIf="isBlocked" clear ion-button color="primary" (click)="unblock()">
+        {{'unblock' | trans}}
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -22,35 +25,41 @@
     <!--No message...-->
     <!--</div>-->
     <!--</div>-->
-    <no-record *ngIf="!hasChatsMessage" [message]="hasNoChatsMessage"></no-record>
-    <div *ngFor="let chat of chats; let i = index;">
-      <!-- time -->
-      <ion-item *ngIf="shouldShowTime(i)" class="chat-room-time-item">
-        <label>{{ getDisplayTime(i) }}</label>
-      </ion-item>
+    <div *ngIf="isBlocked">
+      <no-record [message]="blockMessage"></no-record>
+    </div>
 
-      <div *ngIf="isSystem">
-        <ion-item class="chat-room-msg-item" [ngClass]="['chat-room-msg-item-admin']">
-          <div class="msg-box center">
-            {{ chat.content }}
-          </div>
-        </ion-item>
-      </div>
-
-      <!-- other -->
-      <div *ngIf="!isSystem">
-        <ion-item *ngIf="!chat.isFromSelf" class="chat-room-msg-item">
-          <div class="msg-box left">
-            {{ chat.content }}
-          </div>
+    <div *ngIf="!isBlocked">
+      <no-record *ngIf="!hasChatsMessage" [message]="hasNoChatsMessage"></no-record>
+      <div *ngFor="let chat of chats; let i = index;">
+        <!-- time -->
+        <ion-item *ngIf="shouldShowTime(i)" class="chat-room-time-item">
+          <label>{{ getDisplayTime(i) }}</label>
         </ion-item>
 
-        <!-- self -->
-        <ion-item *ngIf="chat.isFromSelf" class="chat-room-msg-item">
-          <div class="msg-box right">
-            {{ chat.content }}
-          </div>
-        </ion-item>
+        <div *ngIf="isSystem">
+          <ion-item class="chat-room-msg-item" [ngClass]="['chat-room-msg-item-admin']">
+            <div class="msg-box center">
+              {{ chat.content }}
+            </div>
+          </ion-item>
+        </div>
+
+        <!-- other -->
+        <div *ngIf="!isSystem">
+          <ion-item *ngIf="!chat.isFromSelf" class="chat-room-msg-item">
+            <div class="msg-box left">
+              {{ chat.content }}
+            </div>
+          </ion-item>
+
+          <!-- self -->
+          <ion-item *ngIf="chat.isFromSelf" class="chat-room-msg-item">
+            <div class="msg-box right">
+              {{ chat.content }}
+            </div>
+          </ion-item>
+        </div>
       </div>
     </div>
   </ion-list>
