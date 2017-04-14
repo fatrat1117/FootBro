@@ -130,6 +130,10 @@ export class FirebaseManager {
     this.af.database.object(`/chats/${this.auth.uid}/black-list/${playerId}`).remove();
   }
 
+  isBlockedBy(userId: string) {
+    return this.af.database.object(`/chats/${userId}/black-list/${this.auth.uid}`);
+  }
+
 
 
 

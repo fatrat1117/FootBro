@@ -34,36 +34,47 @@ export class ChatPage {
   hasChatsMessage = true;
   hasNoChatsMessageId = "chatPageNoRecord";
   hasNoChatsMessage = "";
-  blockMessage: string;
+  blockingMessage: string;
+  blockedMessage: string;
   subscription: any;
+  blkSubscription: any;
+  isBlocking: boolean;
   isBlocked: boolean;
+
+
   
   constructor(private navCtrl: NavController, private navParams: NavParams, private chatService: ChatService, private local: Localization) {
   }
 
   ionViewDidLoad() {
     this.isRefreshing = false;
+    this.isBlocked = false;
     //this.content.resize();
 
     this.isSystem = this.navParams.get('isSystem');
     this.isUnread = this.navParams.get('isUnread');
     this.user = this.navParams.get('user');
-    this.isBlocked = this.navParams.get('isBlocked')
+    this.isBlocking = this.navParams.get('isBlocking')
 
     this.subscription = this.chatService.getRecentChats(this.user.id, this.isUnread).subscribe(chats => {
       this.chats = chats;
       this.hasChatsMessage = this.hasChats();
       this.scrollView();
     })
+    this.blkSubscription = this.chatService.isBlockedBy(this.user.id).subscribe(item => {
+      this.isBlocked = item.$value;
+    })
 
     this.chatService.loadMoreChats();
     this.hasNoChatsMessage = this.local.getString(this.hasNoChatsMessageId);
-    this.blockMessage = this.local.getString('blockMsg');
+    this.blockingMessage = this.local.getString('blockingMsg');
+    this.blockedMessage = this.local.getString('blockedMsg');
   }
 
   ionViewWillLeave() {
     this.chatService.updateUnread(this.user.id, false);
     this.subscription.unsubscribe();
+    this.blkSubscription.unsubscribe();
   }
 
   ionViewDidEnter() {
@@ -156,11 +167,11 @@ export class ChatPage {
 
   block() {
     this.chatService.blockUser(this.user.id)
-    this.isBlocked = true;
+    this.isBlocking = true;
   }
 
   unblock() {
     this.chatService.unblockUser(this.user.id)
-    this.isBlocked = false;
+    this.isBlocking = false;
   }
 }

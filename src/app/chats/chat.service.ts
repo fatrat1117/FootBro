@@ -45,4 +45,8 @@ export class ChatService {
   unblockUser(userId: string) {
     this.fm.unblock(userId);
   }
+
+  isBlockedBy(userId: string) {
+    return this.fm.isBlockedBy(userId)
+  }
 }
