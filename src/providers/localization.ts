@@ -317,6 +317,7 @@ export class Localization {
             reportobjectionalbecontent: 'Report Objectionalbe Content',
             systemadminsdealwithreport : 'System Admin will deal with your report ASAP',
             block: "Block",
+            blocked: "Blocked",
             unblock: "Unblock",
             blockMsg: "You've blocked this user.",
         },
@@ -617,6 +618,7 @@ export class Localization {
             reportobjectionalbecontent: '举报不良内容',
             systemadminsdealwithreport : '系统管理员会尽快处理你的举报',
             block: "屏蔽",
+            blocked: "已屏蔽",
             unblock: "解除屏蔽",
             blockMsg: "你已屏蔽这个用户。",
         }
