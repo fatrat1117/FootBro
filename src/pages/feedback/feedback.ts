@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-
-import { MiscService } from '../../app/misc/misc.service'
-
+import { OneSignalManager } from '../../providers/onesignal-manager'
 
 @Component({
   template: `
@@ -28,14 +26,13 @@ import { MiscService } from '../../app/misc/misc.service'
       </ion-textarea>
     </ion-item>
   </ion-content>
-  `,
-  providers: [ MiscService ]
+  `
 })
 export class FeedbackPage {
   isEnabled: boolean;
   content: string;
 
-  constructor(private navCtrl: NavController, private miscService: MiscService) {
+  constructor(private navCtrl: NavController, private osm: OneSignalManager) {
     this.isEnabled = false;
   }
 
@@ -47,7 +44,7 @@ export class FeedbackPage {
   }
 
   onSubmit() {
-    this.miscService.sendFeedBack(this.content);
+    this.osm.sendFeedBack(this.content);
     this.navCtrl.pop();
   }
 }

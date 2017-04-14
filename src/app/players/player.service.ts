@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FirebaseManager } from '../../providers/firebase-manager';
 import { Player } from './player.model';
-import { UIHelper } from '../../providers/uihelper'
+import { UIHelper } from '../../providers/uihelper';
 
 @Injectable()
 export class PlayerService {

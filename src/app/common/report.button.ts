@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PlayerService } from '../players/player.service'
+import { OneSignalManager } from '../../providers/onesignal-manager'
 import { AlertController} from 'ionic-angular';
 import { Localization } from '../../providers/localization'
 
@@ -13,14 +13,13 @@ import { Localization } from '../../providers/localization'
 export class SbReportButton {
   @Input() reportId;
 
-  constructor(private playerService : PlayerService,
+  constructor(private osm : OneSignalManager,
     private alertCtrl : AlertController,
     private loc : Localization) {
   }
 
   report() {
-    let admins = this.playerService.getAdmins();
-    console.log(this.reportId, admins);
+    this.osm.sendFeedBack(this.reportId + ' : ' + this.loc.getString('reportobjectionalbecontent'));
   }
 
   onReport() {

@@ -19,7 +19,7 @@ export class OneSignalManager {
       this.platform.is('core'))
       return;
 
-    
+
 
     /*
     window["plugins"].OneSignal.startInit("f6268d9c-3503-4696-8e4e-a6cf2c028fc6",
@@ -38,7 +38,7 @@ export class OneSignalManager {
     OneSignal.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.None);
 
     //OneSignal.handleNotificationReceived().subscribe(() => {
-      //console.log("received");
+    //console.log("received");
     //});
 
     OneSignal.handleNotificationOpened().subscribe(() => {
@@ -51,20 +51,21 @@ export class OneSignalManager {
     OneSignal.endInit();
   }
 
-  postNotification(messageObj, pushIds, success) {
+  postNotification(messageObj, pushIds, success = null) {
     let notificationObj = {
-      heading: {"en": "SoccerBro", "zh-Hans": "足球兄弟"},
+      heading: { "en": "SoccerBro", "zh-Hans": "足球兄弟" },
       contents: messageObj,
       include_player_ids: pushIds
     };
 
     window["plugins"].OneSignal.postNotification(notificationObj,
-      function(successResponse) {
-        console.log("Notification Post Success:", successResponse);
-        success();
+      function (successResponse) {
+        //console.log("Notification Post Success:", successResponse);
+        if (success)
+          success();
       },
       function (failedResponse) {
-        console.log("Notification Post Failed: ", failedResponse);
+        //console.log("Notification Post Failed: ", failedResponse);
         alert("Notification Post Failed:\n" + JSON.stringify(failedResponse));
       }
     );
@@ -100,8 +101,8 @@ export class OneSignalManager {
   /****************************** Cheerleaders ******************************/
   cheerleaderApproved(id: string, pushId: string) {
     let message = {
-        'en': "Welcome to join SoccerBro Cheerleaders!",
-        'zh-Hans': "欢迎加入拉拉队！" 
+      'en': "Welcome to join SoccerBro Cheerleaders!",
+      'zh-Hans': "欢迎加入拉拉队！"
     };
 
     let self = this;
@@ -110,5 +111,17 @@ export class OneSignalManager {
     }
 
     this.postNotification(message, [pushId], success);
+  }
+
+  sendFeedBack(content: string) {
+    this.fm.sendFeedback(content);
+    let pushIds = [];
+    this.playerService.getAdmins().forEach(admin => {
+      if (admin.pushId) {
+        pushIds.push(admin.pushId);
+      }
+    });
+    let msg = { "en": "You have a new feedback", "zh-Hans": "有新的反馈" };
+    this.postNotification(msg, pushIds);
   }
 }
