@@ -21,7 +21,7 @@ export class FirebaseManager {
   sortedPublicPlayersMap = {};
   sortedPublicPlayers;
   queryPlayers;
-  pushIdsMap = {};
+  //pushIdsMap = {};
   cachedAllPublicTeams;
   //matches 
   matchDatesMap = {};
@@ -497,7 +497,7 @@ export class FirebaseManager {
       OneSignal.getIds().then(ids => {
         console.log('push ids', ids);
         this.getPlayerDetail(this.auth.uid).update({ pushId: ids.userId });
-        this.pushIdsMap[this.auth.uid] = ids.userId;
+        //this.pushIdsMap[this.auth.uid] = ids.userId;
       });
     }
   }

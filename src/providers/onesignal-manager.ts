@@ -52,12 +52,14 @@ export class OneSignalManager {
   }
 
   postNotification(messageObj, pushIds, success = null) {
+    console.log('postNotification', messageObj, pushIds);
+
     let notificationObj = {
       heading: { "en": "SoccerBro", "zh-Hans": "足球兄弟" },
       contents: messageObj,
       include_player_ids: pushIds
     };
-
+    
     window["plugins"].OneSignal.postNotification(notificationObj,
       function (successResponse) {
         //console.log("Notification Post Success:", successResponse);
@@ -65,8 +67,8 @@ export class OneSignalManager {
           success();
       },
       function (failedResponse) {
-        //console.log("Notification Post Failed: ", failedResponse);
-        alert("Notification Post Failed:\n" + JSON.stringify(failedResponse));
+        console.log("Notification Post Failed: ", failedResponse);
+        //alert("Notification Post Failed:\n" + JSON.stringify(failedResponse));
       }
     );
 
