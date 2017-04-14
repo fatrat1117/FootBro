@@ -2,16 +2,12 @@
   <ion-navbar>
     <ion-title>
       {{ user?.name }}
-      <!-->
-      <ion-row center style="display: inline;">
-        <ion-thumbnail>
-          <img [src]="user?.photo">
-        </ion-thumbnail>
-        <p class="chat-title-text">{{ user?.name }}</p>
-      </ion-row>
-      <-->
-      <!--p class="chat-room-title">{{ user?.name }}</p-->
     </ion-title>
+    <ion-buttons right>
+      <button clear ion-button>
+    {{'block' | trans}}
+  </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -22,9 +18,9 @@
   <ion-list no-lines class="chat-container">
 
     <!--<div *ngIf="!hasChatsMessage" class="no-message-wrapper">-->
-       <!--<div class="no-message">-->
-         <!--No message...-->
-       <!--</div>-->
+    <!--<div class="no-message">-->
+    <!--No message...-->
+    <!--</div>-->
     <!--</div>-->
     <no-record *ngIf="!hasChatsMessage" [message]="hasNoChatsMessage"></no-record>
     <div *ngFor="let chat of chats; let i = index;">
@@ -34,7 +30,7 @@
       </ion-item>
 
       <div *ngIf="isSystem">
-        <ion-item class="chat-room-msg-item" [ngClass] = "['chat-room-msg-item-admin']">
+        <ion-item class="chat-room-msg-item" [ngClass]="['chat-room-msg-item-admin']">
           <div class="msg-box center">
             {{ chat.content }}
           </div>
