@@ -30,11 +30,11 @@ export class TutorialPage {
   ];
   */
   slides: any[];
-  titles = ['Player', 'Team', 'squad', 'Cheerleaders'];
-  descriptions = ['playerDesc', 'teamDesc', 'squadDesc', 'cheerleadersDesc'];
+  titles = ['Player', 'Team', 'squad', 'Cheerleaders', 'agreement'];
+  descriptions = ['playerDesc', 'teamDesc', 'squadDesc', 'cheerleadersDesc', 'agreementDesc'];
 
   constructor(private viewCtrl: ViewController, private local: Localization) {
-    this.loadSlides(local.langCode, 3);
+    this.loadSlides(local.langCode, 4);
   }
 
   loadSlides(langCode: string, total: number) {
@@ -49,6 +49,11 @@ export class TutorialPage {
   }
 
   finishTutorial() {
+    this.viewCtrl.dismiss();
+    localforage.setItem('notFirstTime', 'true');
+  }
+
+  agree() {
     this.viewCtrl.dismiss();
     localforage.setItem('notFirstTime', 'true');
   }
