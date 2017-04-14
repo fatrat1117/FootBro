@@ -1,10 +1,12 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{ 'whatsNew' | trans }}</ion-title>
+    <!-->
     <ion-buttons end>
       <button *ngIf="!slider.isEnd()" ion-button color="primary" (tap)="finishTutorial()">{{ 'skip' | trans }}</button>
       <button *ngIf="slider.isEnd()" ion-button color="primary" (tap)="finishTutorial()">{{ 'start' | trans }}</button>
     </ion-buttons>
+    <-->
   </ion-navbar>
 </ion-header>
 
@@ -18,7 +20,20 @@
       </ion-toolbar-->
       <h2 class="slide-title" [innerHTML]="slide.title"></h2>
       <p [innerHTML]="slide.description"></p>
-      <img [src]="slide.image" class="slide-image" />
+      <img *ngIf="slide.image" [src]="slide.image" class="slide-image" />
+    </ion-slide>
+    <ion-slide>
+      <!--ion-toolbar>
+        <ion-buttons end>
+          <button ion-button color="primary" (tap)="finishTutorial()">{{ 'skip' | trans }}</button>
+        </ion-buttons>
+      </ion-toolbar-->
+      <h2 class="slide-title">{{ 'agreement' | trans }}</h2>
+      <p style="white-space: pre-line;text-align: left;">{{ 'agreementDesc' | trans }}</p>
+      <button ion-button icon-left color="primary" (click)="agree()">
+        <ion-icon name="md-checkmark-circle"></ion-icon>
+        {{ 'agree' | trans }}
+      </button>
     </ion-slide>
   </ion-slides>
 </ion-content>
