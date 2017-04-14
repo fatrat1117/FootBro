@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { MyErrorHandler} from '../providers/exception-handler'
+import { MyErrorHandler } from '../providers/exception-handler'
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { MyApp } from './app.component';
@@ -43,7 +43,7 @@ import { SquadPage } from '../pages/squad/squad';
 import { EditSquadPage } from '../pages/edit-squad/edit-squad';
 import { SharePage } from '../pages/share/share';
 import { EditGameRatingPage } from '../pages/edit-game-rating/edit-game-rating';
-import { SquadSelectPage} from '../pages/squad-select/squad-select';
+import { SquadSelectPage } from '../pages/squad-select/squad-select';
 import { ManageSquadPage } from '../pages/manage-squad/manage-squad';
 // services
 import { AngularFireModule } from 'angularfire2';
@@ -55,14 +55,14 @@ import { TeamService } from './teams/team.service';
 import { MiscService } from './misc/misc.service';
 import { MatchService } from './matches/match.service';
 import { MessageService } from './messages/message.service';
-import { CheerleaderService} from './cheerleaders/cheerleader.service';
+import { CheerleaderService } from './cheerleaders/cheerleader.service';
 import { RankService } from './rank/rank.service';
 
 // pipes
 import { TransPipe, Localization } from '../providers/localization';
-import { StringToDatePipe, NumberToTimePipe, MomentPipe,StringToYearOnlyPipe} from '../pipes/moment.pipe';
+import { StringToDatePipe, NumberToTimePipe, MomentPipe, StringToYearOnlyPipe } from '../pipes/moment.pipe';
 import { TeamBasicPipe } from '../pipes/team.pipe';
-import { ReversePipe, MapToArrayPipe, GroupThreePipe,GroupNPipe } from '../pipes/utilities.pipe';
+import { ReversePipe, MapToArrayPipe, GroupThreePipe, GroupNPipe } from '../pipes/utilities.pipe';
 
 // components
 import { SbLoadingComponent } from './common/loading.component';
@@ -75,8 +75,8 @@ import { SbMatchBasicComponent } from './matches/match-basic.component';
 import { MatchDetailPage } from "../pages/match-detail/match-detail";
 import { GameRatingPage } from "../pages/game-rating/game-rating";
 import { NoRecordComponent } from './common/no.record.component';
-import { ResultScoreComponent} from './common/result.score.component';
-
+import { ResultScoreComponent } from './common/result.score.component';
+import { SbReportButton } from './common/report.button'
 // directives
 import { KeyboardAttachDirective } from '../providers/keyboard-attach.directive';
 
@@ -88,6 +88,7 @@ export const firebaseConfig = {
   apiKey: "AIzaSyCrhL6g6rHs7-X09jw5Oq8I_g0fspD8bf8",
   authDomain: "project-3416565325366537224.firebaseapp.com",
   databaseURL: "https://project-3416565325366537224.firebaseio.com",
+  projectId: "project-3416565325366537224",
   storageBucket: "project-3416565325366537224.appspot.com",
   messagingSenderId: "149844388984"
 };
@@ -159,6 +160,7 @@ export const firebaseConfig = {
     SbMatchBasicComponent,
     NoRecordComponent,
     ResultScoreComponent,
+    SbReportButton,
     // directives
     KeyboardAttachDirective
   ],
@@ -221,7 +223,7 @@ export const firebaseConfig = {
     SquadSelectPage,
     ManageSquadPage
   ],
-  providers: [{ provide: ErrorHandler, useClass: MyErrorHandler  },
+  providers: [{ provide: ErrorHandler, useClass: MyErrorHandler },
     FirebaseManager,
     OneSignalManager,
     Localization,
