@@ -34,7 +34,7 @@ export class TutorialPage {
   descriptions = ['playerDesc', 'teamDesc', 'squadDesc', 'cheerleadersDesc'];
 
   constructor(private viewCtrl: ViewController, private local: Localization) {
-    this.loadSlides(local.langCode, 4);
+    this.loadSlides(local.langCode, 3);
   }
 
   loadSlides(langCode: string, total: number) {

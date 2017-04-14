@@ -73,6 +73,9 @@ export class KeyboardAttachDirective {
   private setElementPosition(pixels: number) {
     this.elementRef.nativeElement.style.paddingBottom = pixels + 'px';
     this.content.resize();
-    setTimeout(_ => this.content.scrollToBottom(), 100)
+    setTimeout(_ => {
+      if (this.content && this.content._scroll)
+        this.content.scrollToBottom()
+    }, 100)
   }
 }

@@ -345,9 +345,9 @@ export class FirebaseManager {
     let sub = queryObservable.subscribe(queriedItems => {
       //console.log("check team name", queriedItems);
       //stopping monitoring changes
-      setTimeout(() => {
+      //setTimeout(() => {
         sub.unsubscribe();
-      }, this.unsubscribeTimeout);
+      //}, this.unsubscribeTimeout);
 
       if (0 === queriedItems.length) {
         let teamData = {

@@ -46,9 +46,14 @@ export class MessagesPage {
         this.watchListMap[playerId] = this.playerService.getPlayer(playerId);
       }
     };
-
+    
     document.addEventListener('servicemessageready', this.onMessageReady);
     document.addEventListener('serviceplayerready', this.onPlayerReady);
+
+    document.addEventListener('userlogin', e => {
+      document.addEventListener('servicemessageready', this.onMessageReady);
+      document.addEventListener('serviceplayerready', this.onPlayerReady);
+    });
 
     document.addEventListener('userlogout', e => {
       document.removeEventListener('servicemessageready', this.onMessageReady);
