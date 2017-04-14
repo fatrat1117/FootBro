@@ -173,5 +173,6 @@ export class ChatPage {
   unblock() {
     this.chatService.unblockUser(this.user.id)
     this.isBlocking = false;
+    this.scrollView();
   }
 }

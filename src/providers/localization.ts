@@ -314,7 +314,7 @@ export class Localization {
             agreement: 'User Agreement',
             agreementDesc: "By using SoccerBro’s mobile application and service, you agree to the following conditions: \n\n- Allows SoccerBro to scan the images you upload.\n- No objectionable content is allowed, this including the images uploaded, the descriptions used in profile and messages in chatroom.\n- SoccerBro has zero tolerance for abusive users. Once found, the account will be banned permanently.",
             unlock: 'Unlock',
-            reportobjectionalbecontent: 'Report Objectionalbe Content',
+            reportobjectionalbecontent: 'Report objectionable content',
             systemadminsdealwithreport : 'System Admin will deal with your report ASAP',
             block: "Block",
             blocked: "Blocked",

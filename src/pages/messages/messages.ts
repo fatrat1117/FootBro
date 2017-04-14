@@ -61,6 +61,7 @@ export class MessagesPage {
     document.addEventListener('serviceblacklistready', this.onBlacklistReady);
 
     document.addEventListener('userlogin', e => {
+      this.messageService.prepareBlacklist();
       document.addEventListener('servicemessageready', this.onMessageReady);
       document.addEventListener('serviceplayerready', this.onPlayerReady);
       document.addEventListener('serviceblacklistready', this.onBlacklistReady);

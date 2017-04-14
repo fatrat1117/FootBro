@@ -1,9 +1,21 @@
-page-cheering-team-stats{
-
-    .ResponseRateRow{
-      .col-40{
-        flex:0 0 40%;
-        max-width:40%;
+page-cheering-team-stats {
+  .self-row {
+    justify-content: center;
+  }
+  .baby-img-frame{
+        position:relative;
+        height: 15rem;
+        width: 15rem;
+        img{
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
       }
+  .ResponseRateRow {
+    .col-40 {
+      flex: 0 0 40%;
+      max-width: 40%;
     }
+  }
 }

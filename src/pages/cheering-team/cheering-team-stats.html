@@ -17,9 +17,11 @@
 <ion-content>
   <ion-item-group>
     <ion-item>
-      <ion-thumbnail item-left>
-        <img [src] = 'cheerleader?.photoMedium'>
-      </ion-thumbnail>
+    <ion-row class="self-row">
+      <div class="baby-img-frame">
+        <img class="img" [src]="cheerleader?.photoMedium">
+      </div>
+    </ion-row>
     </ion-item>
     <ion-item>
       <ion-icon name="md-unlock" item-left></ion-icon>
