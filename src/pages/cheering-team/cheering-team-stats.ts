@@ -78,16 +78,16 @@ export class CheeringTeamStatsPage {
       message: this.local.getString('unlockMsg'),
       buttons: [
         {
+          text: this.local.getString('Cancel'),
+          handler: () => {
+          }
+        },
+        {
           text: this.local.getString('OK'),
           handler: () => {
             this.unlockCheerleader(amount)
             //this.playerService.placeOrder('2qJEDrRMODbPOafc3cts4jbgS7z2', 5);
             this.dismiss();
-          }
-        },
-        {
-          text: this.local.getString('Cancel'),
-          handler: () => {
           }
         }
       ]

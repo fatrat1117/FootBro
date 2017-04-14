@@ -184,6 +184,18 @@ export class PlayerService {
     return false;
   }
 
+  getAdmins() {
+    let admins = [];
+    if (this.fm.admins) {
+      for (let adminId in this.fm.admins) {
+        let admin = this.getPlayer(adminId);
+        if (admin)
+          admins.push(admin);
+      }
+    }
+    return admins;
+  }
+
   isAuthenticated() {
     return this.fm.auth && this.fm.auth.uid;
   }
@@ -254,7 +266,7 @@ export class PlayerService {
 
   amICaptainOfCurrentTeam(teamId) {
     return this.amIMemberOfCurrentTeam(teamId) && this.amICaptainOf(teamId);
-  } 
+  }
 
   isCaptain(pId, tId) {
     //console.log('isCaptain', pId, tId);

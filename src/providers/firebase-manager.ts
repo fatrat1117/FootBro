@@ -540,7 +540,7 @@ export class FirebaseManager {
   }
 
   getPlayerAsync(id) {
-    if (this.cachedPlayersMap[id]) {
+    if (this.getPlayer(id)) {
       this.FireCustomEvent('playerready', id);
     }
     else {
@@ -1239,6 +1239,9 @@ export class FirebaseManager {
     if (!this.admins) {
       this.af.database.object('/admins/').subscribe(snapshot => {
         this.admins = snapshot;
+        for (let adminId in snapshot) {
+          this.getPlayerAsync(adminId);
+        }
       });
     }
   }

@@ -314,7 +314,8 @@ export class Localization {
             agreement: 'User Agreement',
             agreementDesc: "By using SoccerBro’s mobile application and service, you agree to the following conditions: \n\n- No objectionable content is allowed, this including the images uploaded, the descriptions used in profile and messages in chatroom.\n- SoccerBro has zero tolerance for abusive users. Once found, the account will be banned permanently.",
             unlock: 'Unlock',
-            reportobjectionalbecontent: 'Report Objectionalbe Content'
+            reportobjectionalbecontent: 'Report Objectionalbe Content',
+            systemadminsdealwithreport : 'System Admin will deal with your report ASAP',
         },
 
         zh: {
@@ -610,7 +611,8 @@ export class Localization {
             agreement: '用户协议',
             agreementDesc: "使用绿茵兄弟的移动产品和服务，即表明您同意我们以下条款：\n\n－任何会引起用户反感的内容都是不被允许的，包括您上传的图片，个人空间里的描述以及聊天室里的内容\n－绿茵兄弟对滥用服务的用户是零容忍的。一旦发现，账号将被永久禁止。",
             unlock: '解锁',
-            reportobjectionalbecontent: '举报不良内容'
+            reportobjectionalbecontent: '举报不良内容',
+            systemadminsdealwithreport : '系统管理员会尽快处理你的举报',
         }
     }
 }
