@@ -1064,7 +1064,7 @@ export class FirebaseManager {
   sendFeedback(content: string) {
     this.af.database.list(`misc/feedbacks/`).push({
       content: content,
-      creatorId: this.auth.uid,
+      creator: this.auth.uid,
       timestamp: firebase.database.ServerValue.TIMESTAMP
     })
   }
