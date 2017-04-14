@@ -35,8 +35,7 @@ export class ChatPage {
   hasNoChatsMessageId = "chatPageNoRecord";
   hasNoChatsMessage = "";
   subscription: any;
-
-
+  
   constructor(private navCtrl: NavController, private navParams: NavParams, private chatService: ChatService, private local: Localization) {
   }
 
