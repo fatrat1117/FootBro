@@ -25,7 +25,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [ngSwitch]="matchSegments" style="width: 100%; height: 100%" no-bounce>
+<ion-content #matchDetailContent [ngSwitch]="matchSegments" style="width: 100%; height: 100%" no-bounce>
 <div class="content-all" *ngSwitchCase="'info'" style="width: 100%; height: 100%">
 <ion-list no-lines class="content-list" center>
   <result-score [upcomingMatch]="match" [hostPageName]="currPageName"></result-score>
@@ -51,7 +51,7 @@
     <button *ngIf='canShowRate()' (tap)="openRatePlayersPage()" ion-button block>
           {{'rateplayers' | trans}}
       </button>
-    <div class="left-scrollview matches-date-tab-col">
+    <div class="left-scrollview matches-date-tab-col" [ngStyle]="{'height.px': getMatchDetailScrollHeight()}">
       <ion-list class="date-tab-list">
         <ion-item *ngFor="let cat of statCategories;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (tap)='showStat(cat)'
           [style.background]="selectedCat === cat ? '#20bd16' : '#373e4c'" [style.color]="selectedCat === cat ? '#ffffff' : '#93ABC5'">
@@ -62,7 +62,7 @@
       </ion-list>
     </div>
 
-    <div class="right-scrollview matches-match-info-col" *ngIf='selectedStats'>
+    <div class="right-scrollview matches-match-info-col" *ngIf='selectedStats' [ngStyle]="{'height.px': getMatchDetailScrollHeight()}">
       <ion-grid class="right-view-grid">
         <ion-row class="header-title">
           <!--<ion-col width-10>{{'Rank' | trans}}</ion-col>-->

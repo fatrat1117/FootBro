@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { ViewController, NavParams, ModalController, Events, AlertController } from 'ionic-angular';
+import { ViewController, NavParams, ModalController, Events, AlertController,Content } from 'ionic-angular';
 import { Match } from '../../app/matches/match.model';
 import { EditSquadPage } from '../edit-squad/edit-squad';
 import { SharePage } from '../share/share';
@@ -16,6 +16,7 @@ import { Localization } from '../../providers/localization'
   templateUrl: 'match-detail.html'
 })
 export class MatchDetailPage {
+  @ViewChild(Content) matchDetailContent: Content;
   @ViewChild('pageHeader') pageHeader;
 
   map;
@@ -246,7 +247,7 @@ export class MatchDetailPage {
 
     if (this.playerService.isAdmin())
       return true;
-      
+
     return this.isMatchEditable();
   }
 
@@ -384,11 +385,11 @@ export class MatchDetailPage {
   canShowRate() {
     if (!this.amIParticipants())
       return false;
-    
+
     //rated?
     if (this.squad && this.squad.ratings && this.squad.ratings[this.playerService.selfId()])
       return false;
-    
+
     return true;
   }
 
@@ -398,7 +399,12 @@ export class MatchDetailPage {
         if (done) {
           this.getCombinedStats();
         }
-      }); 
+      });
       modal.present();
   }
+
+  getMatchDetailScrollHeight() {
+    return this.matchDetailContent.scrollHeight - this.pageHeader.nativeElement.clientHeight;
+  }
+
 }
