@@ -321,6 +321,7 @@ export class Localization {
             unblock: "Unblock",
             blockingMsg: "You've blocked this user.",
             blockedMsg: "You've been blocked by this user.",
+            matchfinished: '%s vs %s (%d : %d), please rate your teammate to earn player points'
         },
 
         zh: {
@@ -623,6 +624,7 @@ export class Localization {
             unblock: "解除屏蔽",
             blockingMsg: "你已屏蔽这个用户。",
             blockedMsg: "你已被对方屏蔽。",
+            matchfinished: '%s vs %s (%d : %d), 快去给队友打分以获得个人积分吧'
         }
     }
 }

@@ -127,15 +127,15 @@ export class TabsPage {
       message: teamName,
       buttons: [
         {
-          text: this.local.getString("join"),
-          handler: () => {
-            this.confirmJoin(teamId, teamName)
-          }
-        },
-        {
           text: this.local.getString("Cancel"),
           handler: () => {
             Clipboard.copy("");
+          }
+        },
+        {
+          text: this.local.getString("join"),
+          handler: () => {
+            this.confirmJoin(teamId, teamName)
           }
         }
       ]

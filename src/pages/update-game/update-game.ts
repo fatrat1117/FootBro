@@ -10,6 +10,7 @@ import { PlayerMatchStatsUI } from '../../app/players/player.model'
 import { TeamService } from '../../app/teams/team.service'
 import { UIHelper } from '../../providers/uihelper'
 import { Localization } from '../../providers/localization'
+import { OneSignalManager } from '../../providers/onesignal-manager'
 import * as moment from 'moment';
 declare var sprintf: any;
 declare var google: any;
@@ -43,12 +44,13 @@ export class UpdateGamePage {
         private loc: Localization,
         private alertCtrl: AlertController,
         params: NavParams,
-        private events: Events) {
+        private events: Events,
+        private osm: OneSignalManager) {
         this.id = params.get('id');
         this.teamId = params.get('teamId');
         this.match = this.matchService.getMatch(this.id);
-        this.homeScore =  this.match.homeScore;
-        this.awayScore =  this.match.awayScore;
+        this.homeScore = this.match.homeScore;
+        this.awayScore = this.match.awayScore;
         if (this.match.home.captain === this.playerService.selfId())
             this.myIdentity = 0;
         else if (this.match.away.captain === this.playerService.selfId())
@@ -192,6 +194,12 @@ export class UpdateGamePage {
     }
 
     doUpdateMatch(points) {
+        let pushIds = [];
+        this.participants.forEach(p => {
+            if (p.player && p.player.pushId)
+                pushIds.push(p.player.pushId);
+        })
+
         let participants = this.copyAndUpdatePlayersData(this.participants);
 
         let updateMatchData = {
@@ -213,6 +221,23 @@ export class UpdateGamePage {
         this.matchService.updateMatch(this.id, updateMatchData);
         this.teamService.updateMatchParticipants(this.teamId, this.id, participants);
         this.teamService.teamEarnPoints(this.teamId, points);
+
+        let enMsg = sprintf('%s vs %s (%s : %s), please rate your teammate to earn player points',
+            this.match.home.name,
+            this.match.away.name,
+            homeScoreStr,
+            awayScroeStr
+        );
+
+        let chMsg = sprintf('%s vs %s (%s : %s), 快去给队友打分以获得个人积分吧',
+            this.match.home.name,
+            this.match.away.name,
+            homeScoreStr,
+            awayScroeStr
+        );
+
+        let pushMsg = { 'en': enMsg, 'zh-Hans': chMsg };
+        this.osm.postNotification(pushMsg, pushIds);
         this.close();
     }
 
@@ -250,7 +275,6 @@ export class UpdateGamePage {
                 //     if (selectedIds[p.id] != true)
                 //         players.splice(i, 1);
                 // }
-
                 for (let id in selectedIds) {
                     //add only new
                     if (selectedIds[id] && existingPlayersMap[id] != true) {
@@ -265,16 +289,5 @@ export class UpdateGamePage {
         });
 
         modal.present();
-    }
-
-    maxLengthHome(val, length) {
-        this.homeScore = val.toString().substr(0, length);
-        console.log(this.homeScore);
-        
-    }
-
-    maxLength(val, length) {
-        console.log(val, length);
-
     }
 }

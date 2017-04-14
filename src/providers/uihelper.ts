@@ -1,21 +1,21 @@
-import { Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ToastController } from 'ionic-angular';
-import { Localization} from './localization';
+import { Localization } from './localization';
 import * as moment from 'moment';
 declare var sprintf: any;
 
 @Injectable()
 export class UIHelper {
   constructor(private toastCtrl: ToastController,
-  private loc : Localization) {
+    private loc: Localization) {
   }
 
   squadHalfImageSize = 20;
 
   presentToast(msgId, dur = 3000) {
-      let msg = this.loc.getString(msgId);
-    console.log(msg, this.toastCtrl);
-    
+    let msg = this.loc.getString(msgId);
+    //console.log(msg, this.toastCtrl);
+
     let toast = this.toastCtrl.create({
       message: msg,
       duration: dur,
@@ -55,11 +55,11 @@ export class UIHelper {
     console.log('squadPercentToPx', squad, width, height);
     let results = [];
     squad.forEach(s => {
-      let r : any = {
+      let r: any = {
         x: s.x * width / 100 - this.squadHalfImageSize,
         y: s.y * height / 100 - this.squadHalfImageSize,
       };
-      if ('id' in s) 
+      if ('id' in s)
         r.id = s.id;
       results.push(r);
     });
@@ -71,11 +71,11 @@ export class UIHelper {
     console.log('squadPxToPercent', squad, width, height);
     let results = [];
     squad.forEach(s => {
-      let r : any = {
+      let r: any = {
         x: Math.round((s.x + this.squadHalfImageSize) * 100 / width),
         y: Math.round((s.y + this.squadHalfImageSize) * 100 / height),
       };
-      if ('id' in s) 
+      if ('id' in s)
         r.id = s.id;
       results.push(r);
     });

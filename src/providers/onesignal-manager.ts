@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { OneSignal } from 'ionic-native';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { Platform } from 'ionic-angular';
-
 import * as firebase from 'firebase';
-
+import { UIHelper } from '../providers/uihelper'
 import { FirebaseManager } from './firebase-manager';
 import { PlayerService } from '../app/players/player.service';
 
 @Injectable()
 export class OneSignalManager {
-  constructor(private platform: Platform, private fm: FirebaseManager, private playerService: PlayerService) {
+  constructor(private platform: Platform, private fm: FirebaseManager, private playerService: PlayerService, 
+  private uiHelper: UIHelper) {
 
   }
 
@@ -125,5 +125,11 @@ export class OneSignalManager {
     });
     let msg = { "en": "You have a new feedback", "zh-Hans": "有新的反馈" };
     this.postNotification(msg, pushIds);
+
+    let self = this;
+    //show toast to user
+    setTimeout(function() {
+      self.uiHelper.presentToast('Thanksforyourfeedback');
+    }, 1000);
   }
 }
