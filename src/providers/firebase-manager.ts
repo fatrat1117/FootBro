@@ -419,8 +419,8 @@ export class FirebaseManager {
 
   quitTeam(id) {
     //remove from self teams
-    this.af.database.list(`players/${this.selfId()}/teams`).remove(id);
-    this.af.database.list(`teams/${id}/players`).remove(this.selfId());
+    this.af.database.list(`players/${this.selfId()}/teams/${id}`).remove();
+    this.af.database.list(`teams/${id}/players/${this.selfId()}`).remove();
   }
 
   deleteTeam(id) {
