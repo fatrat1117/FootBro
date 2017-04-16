@@ -1,6 +1,6 @@
 import { Component, Directive, ViewChild } from '@angular/core';
 import { Keyboard } from 'ionic-native';
-import { NavController, NavParams, Content } from 'ionic-angular';
+import { NavController, NavParams, Content, AlertController } from 'ionic-angular';
 
 import { MomentPipe } from '../../pipes/moment.pipe'
 import * as moment from 'moment';
@@ -43,7 +43,9 @@ export class ChatPage {
 
 
   
-  constructor(private navCtrl: NavController, private navParams: NavParams, private chatService: ChatService, private local: Localization) {
+  constructor(private navCtrl: NavController, private navParams: NavParams, 
+              private chatService: ChatService, private local: Localization,
+              private alertCtrl : AlertController,) {
   }
 
   ionViewDidLoad() {
@@ -174,5 +176,26 @@ export class ChatPage {
     this.chatService.unblockUser(this.user.id)
     this.isBlocking = false;
     this.scrollView();
+  }
+
+  onReport() {
+    let confirm = this.alertCtrl.create({
+      subTitle: this.local.getString('reportobjectionalbecontent'),
+      message: this.local.getString('systemadminsdealwithreport'),
+      buttons: [
+        {
+          text: this.local.getString('Cancel'),
+          handler: () => {
+          }
+        },
+        {
+          text: this.local.getString('OK'),
+          handler: () => {
+            this.chatService.report(this.user.id);
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 }

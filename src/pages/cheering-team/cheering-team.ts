@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular'
+import { NavController, ModalController, AlertController } from 'ionic-angular'
 import { CheeringTeamStatsPage } from './cheering-team-stats'
 import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
 import { CheerleaderService } from '../../app/cheerleaders/cheerleader.service'
+import { MessageService } from '../../app/messages/message.service'
 import { ChatPage } from '../chat/chat'
+import { Localization } from '../../providers/localization'
 
 @Component({
   selector: 'page-cheering-team',
@@ -22,31 +24,40 @@ export class CheeringTeamPage {
   onPendingCheerleadersReady;
   onApprovedCheerleadersReady;
   onPlayerReady;
+  onBlacklistReady;
 
   approvedGrid: number[][];
   oldTotal: number;
+  blacklist: string[];
 
   constructor(private nav: NavController,
     private modalCtrl: ModalController,
     private playerService: PlayerService,
-    private cheerleaderService: CheerleaderService) {
+    private cheerleaderService: CheerleaderService,
+    private messageService: MessageService,
+    private alertCtrl : AlertController,
+    private loc : Localization) {
     if (this.playerService.isAuthenticated())
       this.afPendingSelf = this.cheerleaderService.afPendingCheerleaderSelf();
   }
 
   ionViewDidLoad() {
     //this.selfPlayer = this.playerService.getSelfPlayer();
+    this.blacklist = [];
     this.addEventListeners();
     if (this.playerService.isAdmin())
       this.cheerleaderService.getPendingCheerleadersAsync();
     this.cheerleaderService.getApprovedCheerleadersAsync();
     this.playerService.getPlayerAsync(this.playerService.selfId());
+    this.messageService.prepareBlacklist();
+    
   }
 
   ionViewWillUnload() {
     document.removeEventListener('servicependingcheerleadersready', this.onPendingCheerleadersReady);
     document.removeEventListener('serviceapprovedcheerleadersready', this.onApprovedCheerleadersReady);
     document.removeEventListener('serviceplayerready', this.onPlayerReady);
+    document.removeEventListener('serviceblacklistready', this.onBlacklistReady);
   }
 
   shuffle(a) {
@@ -78,9 +89,14 @@ export class CheeringTeamPage {
       }
     };
 
+    this.onBlacklistReady = e => {
+      this.blacklist = this.messageService.getBlackList();
+    }
+
     document.addEventListener('servicependingcheerleadersready', this.onPendingCheerleadersReady);
     document.addEventListener('serviceapprovedcheerleadersready', this.onApprovedCheerleadersReady);
     document.addEventListener('serviceplayerready', this.onPlayerReady);
+    document.addEventListener('serviceblacklistready', this.onBlacklistReady);
   }
 
   highLight(index: number) {
@@ -155,5 +171,37 @@ export class CheeringTeamPage {
     if (row.length > 0) {
       this.approvedGrid.push(row);
     }
+  }
+
+  onReport(id) {
+    let confirm = this.alertCtrl.create({
+      subTitle: this.loc.getString('reportobjectionalbecontent'),
+      message: this.loc.getString('systemadminsdealwithreport'),
+      buttons: [
+        {
+          text: this.loc.getString('Cancel'),
+          handler: () => {
+          }
+        },
+        {
+          text: this.loc.getString('OK'),
+          handler: () => {
+            this.cheerleaderService.report(id);
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  isBlocking(id) {
+    return this.blacklist.indexOf(id) > -1;
+  }
+
+  block(id) {
+    this.cheerleaderService.blockUser(id);
+  }
+  unblock(id) {
+    this.cheerleaderService.unblockUser(id);
   }
 }

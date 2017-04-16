@@ -3,6 +3,7 @@ import { Subject } from 'rxjs/Subject';
 
 import { FirebaseManager } from '../../providers/firebase-manager'
 import { OneSignalManager } from '../../providers/onesignal-manager'
+import { Localization } from '../../providers/localization';
 
 import { Chat } from './chat.model';
 import { CHATS } from './mock-data/mock-chat';
@@ -12,7 +13,7 @@ export class ChatService {
   sizeSubject: Subject<any>;
   currentSize: number;
 
-  constructor(private fm: FirebaseManager, private osm: OneSignalManager) {
+  constructor(private fm: FirebaseManager, private osm: OneSignalManager, private local: Localization) {
     this.sizeSubject = new Subject();
     this.currentSize = 0;
   }
@@ -48,5 +49,9 @@ export class ChatService {
 
   isBlockedBy(userId: string) {
     return this.fm.isBlockedBy(userId)
+  }
+
+  report(reportId) {
+    this.osm.sendFeedBack(reportId + ' : ' + this.local.getString('reportobjectionalbecontent'));
   }
 }

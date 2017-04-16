@@ -4,7 +4,10 @@
       {{ user?.name }}
     </ion-title>
     <ion-buttons right>
-      <button *ngIf="!isBlocking" clear ion-button color="danger" (click)="block()">
+      <button clear ion-button color="danger" (click)="onReport()">
+        {{'report' | trans}}
+      </button>
+      <button *ngIf="!isBlocking" clear ion-button color="lightGrey" (click)="block()">
         {{'block' | trans}}
       </button>
       <button *ngIf="isBlocking" clear ion-button color="primary" (click)="unblock()">
@@ -25,10 +28,10 @@
     <!--No message...-->
     <!--</div>-->
     <!--</div>-->
-    <no-record *ngIf="isBlocking && !isBlocked" [message]="blockingMessage"></no-record>
-    <no-record *ngIf="isBlocked" [message]="blockedMessage"></no-record>
+    <no-record *ngIf="!isSystem && isBlocking && !isBlocked" [message]="blockingMessage"></no-record>
+    <no-record *ngIf="!isSystem && isBlocked" [message]="blockedMessage"></no-record>
 
-    <no-record *ngIf="!hasChatsMessage && !isBlocking" [message]="hasNoChatsMessage"></no-record>
+    <no-record *ngIf="!hasChatsMessage && !isBlocking && !isBlocked" [message]="hasNoChatsMessage"></no-record>
     <div *ngIf="!isBlocking && !isBlocked">
       <div *ngFor="let chat of chats; let i = index;">
         <!-- time -->

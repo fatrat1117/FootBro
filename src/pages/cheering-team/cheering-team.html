@@ -99,19 +99,33 @@
           <div *ngIf='approvedCheerleaders[i]'>
             <ion-row class="item-row">
               <div class="baby-img-frame">
-                <button *ngIf="isUnlocked(approvedCheerleaders[i].id)" ion-button icon-only clear small class="chat-logo" color="primary"
+                <button *ngIf="isUnlocked(approvedCheerleaders[i].id) && !isBlocking(approvedCheerleaders[i].id)" ion-button icon-only clear small class="chat-logo" color="primary"
                   (tap)="enterChatPage(approvedCheerleaders[i])">
                   <ion-icon name="md-chatbubbles"></ion-icon>
                 </button>
-                <button *ngIf="!isUnlocked(approvedCheerleaders[i].id)" ion-button icon-only clear small class="chat-logo" color="gYellow"
+                <button *ngIf="!isUnlocked(approvedCheerleaders[i].id) && !isBlocking(approvedCheerleaders[i].id)" ion-button icon-only clear small class="chat-logo" color="gYellow"
                   (tap)="unlockCheerleader(approvedCheerleaders[i])">
                   <ion-icon name="md-unlock"></ion-icon>
                 </button>
-                <img [src]="approvedCheerleaders[i].photoMedium">
+                <img *ngIf="!isBlocking(approvedCheerleaders[i].id)" [src]="approvedCheerleaders[i].photoMedium">
+                <img *ngIf="isBlocking(approvedCheerleaders[i].id)" src="assets/img/blocked.png">
               </div>
             </ion-row>
             <ion-row class="item-row">
               <div class="baby-status">
+                <ion-row>
+                  <ion-col width-50 no-padding class="report-btn" (tap)="onReport(approvedCheerleaders[i].id)">
+                      {{ 'report' | trans }}
+                  </ion-col>
+                  <ion-col width-50 *ngIf="!isBlocking(approvedCheerleaders[i].id)" no-padding class="block-btn" 
+                           (tap)="block(approvedCheerleaders[i].id)">
+                      {{ 'block' | trans }}
+                  </ion-col>
+                  <ion-col width-50 *ngIf="isBlocking(approvedCheerleaders[i].id)" no-padding class="unblock-btn"
+                           (tap)="unblock(approvedCheerleaders[i].id)">
+                      {{ 'unblock' | trans }}
+                  </ion-col>
+                </ion-row>
                 <ion-row>
                   <h3>{{approvedCheerleaders[i].name}}</h3>
                 </ion-row>

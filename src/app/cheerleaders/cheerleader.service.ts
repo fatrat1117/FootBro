@@ -4,6 +4,7 @@ import { OneSignalManager } from '../../providers/onesignal-manager';
 import { Cheerleader } from './cheerleader.model';
 import { PlayerService } from '../players/player.service'
 import { UIHelper } from '../../providers/uihelper'
+import { Localization } from '../../providers/localization'
 
 @Injectable()
 export class CheerleaderService {
@@ -12,7 +13,7 @@ export class CheerleaderService {
   approvedCheerleaders;
 
   constructor(private fm: FirebaseManager, private osm: OneSignalManager,
-    private playerService: PlayerService, private uiHelper: UIHelper) {
+    private playerService: PlayerService, private uiHelper: UIHelper, private loc : Localization) {
     document.addEventListener('pendingcheerleadersready', e => {
       this.pendingCheerleaders = [];
       this.fm.cachedPendingCheerleaders.forEach(fmCheerleader => {
@@ -135,5 +136,17 @@ export class CheerleaderService {
 
   isCheerleader(id) {
     return this.cheerleadersMap[id] && this.cheerleadersMap[id].photoMedium;
+  }
+
+  blockUser(userId: string) {
+    this.fm.block(userId);
+  }
+
+  unblockUser(userId: string) {
+    this.fm.unblock(userId);
+  }
+
+  report(reportId) {
+    this.osm.sendFeedBack(reportId + ' : ' + this.loc.getString('reportobjectionalbecontent'));
   }
 }
