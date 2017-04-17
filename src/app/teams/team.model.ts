@@ -38,6 +38,7 @@ export class Team {
   id;
   popularity;
   logo;
+  photoLarge: string;
   name;
   ability;
   totalPlayers;

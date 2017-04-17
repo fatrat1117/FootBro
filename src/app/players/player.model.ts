@@ -3,8 +3,8 @@ export class Player {
   created: boolean;
   name: string;
   photo: string;
-  photoMedium;
-  photoLarge;
+  photoMedium: string;
+  photoLarge: string;
   teamId: string;
   description: string;
   foot: string;

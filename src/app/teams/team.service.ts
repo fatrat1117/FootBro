@@ -25,6 +25,7 @@ export class TeamService {
         teamData.captain = team['basic-info'].captain;
         teamData.players = team.players;
         teamData.points = team.points;
+        teamData.photoLarge = team.photoLarge || "assets/img/team/court.png";
         if (!teamData.points)
           teamData.points = 0;
         if (team.players)
