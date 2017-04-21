@@ -679,10 +679,18 @@ export class FirebaseManager {
     if (providerData.providerId.toLowerCase().indexOf('facebook') != -1) {
       photoURL = 'https://graph.facebook.com/' + providerData.uid + '/picture';
     }
+
+    //remove @
+    let userName = user.email;
+    if (userName) {
+      let len = userName.indexOf('@');
+      if (len != -1) 
+        userName = userName.substr(0, len);
+    }
     //todo
     this.afPlayerBasic(this.auth.uid).update({
       photoURL: photoURL,
-      displayName: user.displayName || user.email,
+      displayName: user.displayName || userName,
       created: true
     });
     //update player public

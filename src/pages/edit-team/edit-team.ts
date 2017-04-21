@@ -6,6 +6,7 @@ import { Team } from '../../app/teams/team.model'
 import { TeamService } from '../../app/teams/team.service'
 import { PlayerService } from '../../app/players/player.service'
 import { FirebaseManager } from '../../providers/firebase-manager'
+import { Localization } from '../../providers/localization'
 
 @Component({
   selector: 'page-edit-team',
@@ -20,7 +21,7 @@ export class EditTeamPage {
   constructor(private navCtrl: NavController, private modalCtrl: ModalController, private alertCtrl: AlertController, 
     private toastCtrl: ToastController, private navParams: NavParams,
     private playerService: PlayerService, private teamService: TeamService, 
-    private fm : FirebaseManager) {
+    private fm : FirebaseManager, private loc : Localization) {
   }
 
   ionViewDidLoad() {
@@ -81,7 +82,7 @@ export class EditTeamPage {
 
       if (player.id == this.playerService.selfId()) {
         this.toastCtrl.create({
-          message: 'You are already the captain.',
+          message: this.loc.getString('youarecaptain'),
           duration: 2000,
           position: 'top'
         }).present();

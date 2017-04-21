@@ -323,7 +323,8 @@ export class Localization {
             blockedMsg: "You've been blocked by this user.",
             matchfinished: '%s vs %s (%d : %d), please rate your teammate to earn player points',
             report: "Report",
-            total: 'Total'
+            total: 'Total',
+            youarecaptain: 'You are already the captain'
         },
 
         zh: {
@@ -628,7 +629,8 @@ export class Localization {
             blockedMsg: "你已被对方屏蔽。",
             matchfinished: '%s vs %s (%d : %d), 快去给队友打分以获得个人积分吧',
             report: "举报",
-            total: '总计'
+            total: '总计',
+            youarecaptain: '你已经是队长了'
         }
     }
 }
