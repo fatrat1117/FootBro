@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, PopoverController } from 'ionic-angular';
 import { PlayerService } from '../../app/players/player.service';
-import { MyPlayerPage } from '../my-player/my-player';
+import {ManagePlayerPopover} from './manage-players-menu';
 
 @Component({
   templateUrl: 'team-players.html',
-  selector: 'team-players'
+  selector: 'team-players',
 })
 export class TeamPlayersPage {
   //showDetail: boolean;
@@ -21,7 +21,8 @@ export class TeamPlayersPage {
   constructor(private nav: NavController,
     navParams: NavParams,
     private playersService: PlayerService,
-    private viewCtrl: ViewController) {
+    private viewCtrl: ViewController,
+    private popoverCtrl: PopoverController) {
     this.teamId = navParams.get('teamId');
     this.players = this.playersService.getTeamPlayers2(this.teamId);
     //console.log(this.players);
@@ -44,13 +45,10 @@ export class TeamPlayersPage {
     //document.removeEventListener('serviceteamplayersready', this.onTeamPlayersReady);
   }
 
-  // resetFilter() {
-  //   //skip added players
-  //   this.filteredPlayers = this.totalPlayers.slice();
-  //   this.filteredPlayers = this.filteredPlayers.filter((player) => {
-  //     return !this.addedPlayerMap[player.id];
-  //   });
-  // }
+  popupManageMenu() {
+    let popover = this.popoverCtrl.create(ManagePlayerPopover);
+    popover.present();
+  }
 
   // trackByName(player) {
   //   return player.id;

@@ -78,6 +78,7 @@ import { GameRatingPage } from "../pages/game-rating/game-rating";
 import { NoRecordComponent } from './common/no.record.component';
 import { ResultScoreComponent } from './common/result.score.component';
 import { SbReportButton } from './common/report.button'
+import { ManagePlayerPopover } from '../pages/team-players/manage-players-menu';
 // directives
 import { KeyboardAttachDirective } from '../providers/keyboard-attach.directive';
 
@@ -163,6 +164,7 @@ export const firebaseConfig = {
     NoRecordComponent,
     ResultScoreComponent,
     SbReportButton,
+    ManagePlayerPopover,
     // directives
     KeyboardAttachDirective
   ],
@@ -224,7 +226,8 @@ export const firebaseConfig = {
     EditGameRatingPage,
     SquadSelectPage,
     ManageSquadPage,
-    TeamPlayersPage
+    TeamPlayersPage,
+    ManagePlayerPopover
   ],
   providers: [{ provide: ErrorHandler, useClass: MyErrorHandler },
     FirebaseManager,
