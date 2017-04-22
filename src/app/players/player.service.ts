@@ -350,4 +350,16 @@ export class PlayerService {
     
     return players;
   }
+
+  setTeamRole(teamId, playerId, role) {
+    this.fm.setTeamRole(teamId, playerId, role);
+  }
+
+  appointTeamAdmin(teamId, playerId) {
+    this.setTeamRole(teamId, playerId, 'admin');
+  }
+
+  removeTeamAdmin(teamId, playerId) {
+    this.setTeamRole(teamId, playerId, 'player');
+  }
 }

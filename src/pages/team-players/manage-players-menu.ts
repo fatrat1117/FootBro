@@ -1,22 +1,39 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, PopoverController } from 'ionic-angular';
+import { NavParams, ViewController } from 'ionic-angular';
 import { PlayerService } from '../../app/players/player.service';
 
 @Component({
   template: `
     <ion-list>
-      <ion-list-header>Ionic</ion-list-header>
-      <button ion-item (click)="close()">Learn Ionic</button>
-      <button ion-item (click)="close()">Documentation</button>
-      <button ion-item (click)="close()">Showcase</button>
-      <button ion-item (click)="close()">GitHub Repo</button>
+      <button ion-item (click)="close()">{{'removefromteam' | trans}}</button>
+      <button ion-item (click)="appointAdmin()">{{'appointadmin' | trans}}</button>
+      <button ion-item (click)="removeAdmin()">{{'removeadmin' | trans}}</button>
+      <button ion-item (click)="close()">{{'Quit' | trans}}</button>
+      <button ion-item (click)="close()">{{'PromoteToCaptain' | trans}}</button>
     </ion-list>
   `
 })
 export class ManagePlayerPopover {
-  constructor(public viewCtrl: ViewController) {}
+  teamId;
+  playerId;
+  constructor(public viewCtrl: ViewController, 
+  params : NavParams,
+  private playerService: PlayerService) {
+    this.teamId = params.get('teamId');
+    this.playerId = params.get('playerId');
+  }
 
   close() {
     this.viewCtrl.dismiss();
+  }
+
+  appointAdmin() {
+    this.playerService.appointTeamAdmin(this.teamId, this.playerId);
+    this.close();
+  }
+
+  removeAdmin() {
+    this.playerService.removeTeamAdmin(this.teamId, this.playerId);
+    this.close();
   }
 }

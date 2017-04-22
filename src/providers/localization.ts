@@ -324,7 +324,10 @@ export class Localization {
             matchfinished: '%s vs %s (%d : %d), please rate your teammate to earn player points',
             report: "Report",
             total: 'Total',
-            youarecaptain: 'You are already the captain'
+            youarecaptain: 'You are already the captain',
+            removefromteam: 'Remove from team',
+            appointadmin: 'Promote to admin',
+            removeadmin: 'Remove from admin',
         },
 
         zh: {
@@ -350,7 +353,7 @@ export class Localization {
             players: '队员',
             Players: '队员',
             Player: '球员',
-            PromoteToCaptain: '升为队长',
+            PromoteToCaptain: '移交队长袖标',
             Date: '日期',
             Time: '时间',
             Opponent: '对手',

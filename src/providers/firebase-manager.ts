@@ -451,7 +451,9 @@ export class FirebaseManager {
     return this.af.database.object(`/public/teams/${teamId}/name`);
   }
 
-
+  setTeamRole(teamId, playerId, role) {
+    this.af.database.object(`teams/${teamId}/players/${playerId}/teamRole`).set(role);
+  }
 
 
 

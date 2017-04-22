@@ -45,8 +45,8 @@ export class TeamPlayersPage {
     //document.removeEventListener('serviceteamplayersready', this.onTeamPlayersReady);
   }
 
-  popupManageMenu(myEvent) {
-    let popover = this.popoverCtrl.create(ManagePlayerPopover);
+  popupManageMenu(myEvent, playerId) {
+    let popover = this.popoverCtrl.create(ManagePlayerPopover, {teamId: this.teamId, playerId: playerId});
     popover.present({ ev: myEvent});
   }
 
