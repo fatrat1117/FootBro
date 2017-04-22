@@ -1,5 +1,5 @@
 import { Component, ElementRef } from '@angular/core';
-import { NavController, ModalController, NavParams, ViewController, Platform } from 'ionic-angular';
+import { NavController, ModalController, NavParams, ViewController, Platform, AlertController } from 'ionic-angular';
 import { Localization } from '../../providers/localization';
 import { CheeringTeamPage } from '../cheering-team/cheering-team';
 import { RankPage } from '../rank/rank';
@@ -16,6 +16,8 @@ import { PlayerService } from '../../app/players/player.service'
 import { Team } from '../../app/teams/team.model'
 import { TeamService } from '../../app/teams/team.service'
 
+declare var sprintf: any;
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -31,8 +33,8 @@ export class HomePage {
   onPlayerReady;
   onTeamReady;
 
-  constructor(public navCtrl: NavController, local: Localization, private elRef: ElementRef, public modalCtrl: ModalController,
-    private playerService: PlayerService, private teamService: TeamService) {
+  constructor(public navCtrl: NavController, private local: Localization, private elRef: ElementRef, public modalCtrl: ModalController,
+    private playerService: PlayerService, private teamService: TeamService, private alertCtrl: AlertController) {
     this.slides = [];
     //this.loadSlides(local.langCode, 4);
     this.loadSlides(local.langCode, 1);
@@ -134,9 +136,24 @@ export class HomePage {
 
   joinTeam() {
     let searchTeamModal = this.modalCtrl.create(SearchTeamPage);
+
     searchTeamModal.onDidDismiss(data => {
       if (data) {
-        this.teamService.joinTeam(data.team.id, true);
+        this.alertCtrl.create({
+          title: sprintf(this.local.getString("confirmJoinTeam"), data.team.name),
+          buttons: [
+            {
+              text: this.local.getString('Cancel'),
+              handler: () => {
+              }
+            },
+            {
+              text: this.local.getString('OK'),
+              handler: () => {
+                this.teamService.joinTeam(data.team.id, true);
+              }
+            }]
+        }).present();
       }
     });
     searchTeamModal.present();

@@ -332,6 +332,7 @@ export class Localization {
             promoteToCaptain2: "Promote %s to captain?",
             confirm: "Confirm",
             noUndo: "You cannot undo this action.",
+            confirmJoinTeam: "Would you like to join %s?",
         },
 
         zh: {
@@ -642,6 +643,7 @@ export class Localization {
             promoteToCaptain2: "将 %s 提升为队长？",
             confirm: "确认",
             noUndo: "你将无法撤销次个操作。",
+            confirmJoinTeam: "要加入 %s 吗?",
         }
     }
 }

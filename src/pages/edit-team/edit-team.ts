@@ -93,7 +93,12 @@ export class EditTeamPage {
         this.alertCtrl.create({
           title: sprintf(this.loc.getString("promoteToCaptain2"), player.name),
           message: this.loc.getString("noUndo"),
-          buttons: [this.loc.getString('Cancel'),,
+          buttons: [
+            {
+              text: this.loc.getString('Cancel'),
+              handler: () => {
+              }
+            },
             {
               text: this.loc.getString('confirm'),
               handler: () => {
