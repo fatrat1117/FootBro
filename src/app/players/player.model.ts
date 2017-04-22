@@ -24,6 +24,10 @@ export class Player {
   fbShareTime;
 }
 
+export class TeamPlayer extends Player {
+  teamRole = 'player';
+};
+
 export class PlayerMatchStatsUI {
   id;
   player: Player;

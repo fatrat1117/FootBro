@@ -323,4 +323,24 @@ export class PlayerService {
   updateFacebookShareTime() {
     this.fm.updateFacebookShareTime(this.selfId());
   }
+
+  getTeamPlayers2(teamId) {
+    let players = [];
+    let team = this.fm.getTeam(teamId);
+    if (team && team.players) {
+       for (let pId in team.players) {
+          let teamPlayer = team.players[pId];
+          if (teamPlayer.isMember) { 
+            let player = this.findOrCreatePlayerAndPull(pId);
+            if (this.isCaptain(pId, teamId))
+              player['teamRole'] = 'captain';
+            else
+              player['teamRole'] = teamPlayer.teamRole || 'player';
+              
+            players.push(player);
+          }
+        }
+    }
+    return players;
+  }
 }

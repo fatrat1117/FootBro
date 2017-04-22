@@ -10,7 +10,7 @@ import { MyPlayerPage } from '../my-player/my-player';
 export class TeamPlayersPage {
   //showDetail: boolean;
   teamId: string;
-  totalPlayers: any[];
+  players: any[];
   // filteredPlayers: any[];
   // showClose: boolean;
   // selectPlayersMode = false;
@@ -20,38 +20,27 @@ export class TeamPlayersPage {
 
   constructor(private nav: NavController,
     navParams: NavParams,
-    private teamPlayersService: PlayerService,
+    private playersService: PlayerService,
     private viewCtrl: ViewController) {
     this.teamId = navParams.get('teamId');
-    //console.log(this.teamId);
-    // this.showDetail = navParams.get('showDetail');
-    // this.showClose = navParams.get('showClose');
-    // this.selectPlayersMode = navParams.get('selectPlayersMode');
-    // //if (this.selectPlayersMode) {
-    // let selectedIds = navParams.get('selectedIds');
-    // if (selectedIds) {
-    //   selectedIds.forEach(id => {
-    //     this.addedPlayerMap[id] = true;
-    //   });
-    // }
-    // this.totalPlayers = [];
+    this.players = this.playersService.getTeamPlayers2(this.teamId);
   }
 
   ionViewDidLoad() {
-    this.onTeamPlayersReady = e => {
-      let id = e['detail'];
-      if (id === this.teamId)
-        this.totalPlayers = this.teamPlayersService.getTeamPlayers(id);
-      //this.resetFilter();
-    };
+    // this.onTeamPlayersReady = e => {
+    //   let id = e['detail'];
+    //   if (id === this.teamId)
+    //     this.totalPlayers = this.teamPlayersService.getTeamPlayers(id);
+    //   //this.resetFilter();
+    // };
 
-    document.addEventListener('serviceteamplayersready', this.onTeamPlayersReady);
+    // document.addEventListener('serviceteamplayersready', this.onTeamPlayersReady);
 
-    this.teamPlayersService.getTeamPlayersAsync(this.teamId);
+    // this.teamPlayersService.getTeamPlayersAsync(this.teamId);
   }
 
   ionViewWillUnload() {
-    document.removeEventListener('serviceteamplayersready', this.onTeamPlayersReady);
+    //document.removeEventListener('serviceteamplayersready', this.onTeamPlayersReady);
   }
 
   // resetFilter() {
