@@ -536,7 +536,7 @@ export class Localization {
             starcard: '球星卡',
             teamupdateonceandearnpoints: '确认之后你就不能够再修改比赛数据. 你的球队会得到%d积分',
             rateearnpoints: '确认之后就不能再对本次比赛评分. 你将获得%d积分.',
-            teaminvitation: "%s 邀请你加入\“%s\”。\n复制这条信息，打开\“绿茵兄弟\”即可加入。\n(%s)",
+            teaminvitation: "%s 邀请你加入\“%s\”。\n\n复制这条信息，打开\“绿茵兄弟\”即可加入。\n(%s)",
             teamInvitationCopied: "成功复制邀请链接，发送给球员邀请入队",
             bench: '替补席',
             schedule: '赛程表',

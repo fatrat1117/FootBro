@@ -55,7 +55,7 @@ export class OneSignalManager {
     console.log('postNotification', messageObj, pushIds);
 
     let notificationObj = {
-      heading: { "en": "SoccerBro", "zh-Hans": "足球兄弟" },
+      heading: { "en": "SoccerBro", "zh-Hans": "绿茵兄弟" },
       contents: messageObj,
       include_player_ids: pushIds
     };
@@ -78,7 +78,37 @@ export class OneSignalManager {
 
 
 
-  /****************************** Cheerleaders ******************************/
+  /****************************** Invitation ******************************/
+  notifyInvitationSuccess(invitorId: string) {
+    let player = this.playerService.getPlayer(this.playerService.selfId());
+    if (!player || !player.name)
+      return
+
+    let message = {
+      'en': `${player.name} accept your team invitation, you earned 10 points.`,
+      'zh-Hans': `${player.name} 接受了你的球队邀请，你获得了10点积分。`
+    };
+    
+    let onPlayerReady = e => {
+      let id = e['detail'];
+      if (id == invitorId) {
+        let p = this.playerService.getPlayer(id);
+        this.postNotification(message, [p.pushId]);
+        console.log(p);
+      }
+      document.removeEventListener('serviceplayerready', onPlayerReady);
+    };
+    document.addEventListener('serviceplayerready', onPlayerReady);
+
+    this.playerService.getPlayerAsync(invitorId);
+  }
+
+
+
+
+
+
+  /****************************** Chats ******************************/
   sendNewChat(id: string, pushId: string, content: string) {
     let player = this.playerService.getPlayer(this.playerService.selfId());
     if (!player || !player.name)

@@ -9,8 +9,7 @@ export class PlayerService {
   teamPlayersMap = {};
   bRefreshTeamPlayers = false;
 
-  constructor(private fm: FirebaseManager,
-    private uiHelper: UIHelper) {
+  constructor(private fm: FirebaseManager, private uiHelper: UIHelper) {
     document.addEventListener('playerready', e => {
       let id = e['detail'];
 
@@ -312,6 +311,7 @@ export class PlayerService {
     if (player) {
       let newPoints = player.points ? player.points + amount : amount;
       this.fm.playerEarnPoints(playerId, amount, newPoints);
+      if (playerId == this.selfId())
       this.uiHelper.showPointsToastMessage(amount);
     }
   }

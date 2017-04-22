@@ -100,25 +100,43 @@ export class TabsPage {
   getTeamInfo(msg: string) {
     if (!msg)
       return;
+    
     let start = msg.lastIndexOf('(');
     let end = msg.lastIndexOf(')');
     if (start == -1 || end == -1)
+    {
       return;
+    }
 
-    let teamId = msg.substring(start + 1, end);
+    let ids = "";
+    try {
+      ids = atob(msg.substring(start + 1, end));
+    } catch (error) {
+      return;
+    }
+
+    let spliter = ids.lastIndexOf("%");
+    if (spliter == -1)
+    {
+      return;
+    }
+
+    let playerId = ids.substring(0, spliter);
+    let teamId = ids.substring(spliter + 1);
+
     if (this.selfPlayer && this.selfPlayer.teams && this.selfPlayer.teams.indexOf(teamId) >= 0) // already team member
       return;
 
     let subscription = this.teamService.getAfPublicTeamName(teamId).subscribe(snapshot => {
       if (snapshot.$value)
-        this.showJoinTeamAlert(teamId, snapshot.$value);
+        this.showJoinTeamAlert(teamId, snapshot.$value, playerId);
       setTimeout(() => {
         subscription.unsubscribe();
       }, this.fm.unsubscribeTimeout);
     })
   }
 
-  showJoinTeamAlert(teamId: string, teamName: string) {
+  showJoinTeamAlert(teamId: string, teamName: string, invitorId: string) {
     if (this.isAlertOpen)
       return;
 
@@ -135,7 +153,8 @@ export class TabsPage {
         {
           text: this.local.getString("join"),
           handler: () => {
-            this.confirmJoin(teamId, teamName)
+            this.confirmJoin(teamId, teamName, invitorId)
+            Clipboard.copy("");
           }
         }
       ]
@@ -147,9 +166,15 @@ export class TabsPage {
     this.isAlertOpen = true;
   }
 
-  confirmJoin(teamId: string, teamName: string) {
+  confirmJoin(teamId: string, teamName: string, invitorId: string) {
     if (this.playerService.isAuthenticated()) {
       this.teamService.joinTeam(teamId, false);
+      if (invitorId)
+      {
+        this.playerService.earnPoints(invitorId, 10);
+        this.osm.notifyInvitationSuccess(invitorId);
+      }
+
       this.toastCtrl.create({
         message: this.local.getString("teamJoinSuccess") + teamName,
         duration: 2000,

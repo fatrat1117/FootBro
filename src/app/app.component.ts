@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen, OneSignal, Keyboard } from 'ionic-native';
+import { StatusBar, Splashscreen, OneSignal, Keyboard, Clipboard } from 'ionic-native';
 import { ModalController, App } from 'ionic-angular';
 import { Localization } from '../providers/localization';
 import * as localforage from "localforage";
@@ -46,6 +46,7 @@ export class MyApp {
       //modalCtrl.create(TutorialPage).present();
       localforage.getItem('notFirstTime').then(val => {
         if (!val) {
+          Clipboard.copy("");
           modalCtrl.create(TutorialPage).present();
         }
       });
