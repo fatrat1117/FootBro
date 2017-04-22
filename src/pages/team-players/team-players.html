@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'Players' | trans}}</ion-title>
+    <!--<ion-buttons left *ngIf="showClose">
+      <button (tap)="close()" color='danger' ion-button icon-only clear>
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons *ngIf='selectPlayersMode' right>
+      <button color='primary' (tap) = 'dismiss()' ion-button clear>
+        {{'OK' | trans}}
+      </button>
+    </ion-buttons>--> 
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <!-- virtual scroll bug<ion-list [virtualScroll]="filteredPlayers" approxItemHeight = "58px">
+    <ion-item *virtualItem="let player" (tap)="selectPlayer(player.id)">
+      <ion-label *ngIf='selectPlayersMode'>{{ player.name }}</ion-label>
+      <ion-checkbox *ngIf='selectPlayersMode' color="primary" style="margin-right: 10px"
+      [checked] = 'selectedPlayersMap[player.id]'
+      (ionChange)="onSelectionChange(player.id, $event)"></ion-checkbox>
+      <ion-avatar item-left>
+        <ion-img [src] = "player.photo"></ion-img>
+      </ion-avatar>
+      {{ player.name }}
+    </ion-item>
+  </ion-list>-->
+  <!--<ion-list>
+    <ion-item *ngFor="let player of filteredPlayers" (tap)="selectPlayer(player.id)">
+      <ion-label *ngIf='selectPlayersMode'>{{ player.name }}</ion-label>
+      <ion-checkbox *ngIf='selectPlayersMode' color="primary" style="margin-right: 10px"
+      [checked] = 'selectedPlayersMap[player.id]'
+      (ionChange)="onSelectionChange(player.id, $event)"></ion-checkbox>
+      <ion-avatar item-left>
+        <img [src] = "player.photo"/>
+      </ion-avatar>
+      {{ player.name }}
+    </ion-item>
+  </ion-list>-->
+</ion-content>

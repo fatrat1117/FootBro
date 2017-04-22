@@ -5,7 +5,7 @@ import { Localization } from '../../providers/localization';
 import { SearchPlayerPage } from '../search-player/search-player'
 import { SearchMatchPage } from '../search-match/search-match'
 import { MatchDetailPage } from '../match-detail/match-detail'
-
+import { TeamPlayersPage } from '../team-players/team-players';
 import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
 import { Team } from '../../app/teams/team.model'
@@ -314,5 +314,9 @@ export class MyTeamPage {
     if (match) {
       this.modalCtrl.create(MatchDetailPage, {match: match}).present();
     }
+  }
+
+  openTeamPlayersPage() {
+    this.nav.push(TeamPlayersPage, {teamId: this.id});
   }
 }

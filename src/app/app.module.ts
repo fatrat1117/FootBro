@@ -45,6 +45,8 @@ import { SharePage } from '../pages/share/share';
 import { EditGameRatingPage } from '../pages/edit-game-rating/edit-game-rating';
 import { SquadSelectPage } from '../pages/squad-select/squad-select';
 import { ManageSquadPage } from '../pages/manage-squad/manage-squad';
+import { TeamPlayersPage } from '../pages/team-players/team-players';
+
 // services
 import { AngularFireModule } from 'angularfire2';
 import { FirebaseManager } from '../providers/firebase-manager';
@@ -138,6 +140,7 @@ export const firebaseConfig = {
     EditGameRatingPage,
     SquadSelectPage,
     ManageSquadPage,
+    TeamPlayersPage,
     // pipes
     TransPipe,
     StringToDatePipe,
@@ -220,7 +223,8 @@ export const firebaseConfig = {
     SharePage,
     EditGameRatingPage,
     SquadSelectPage,
-    ManageSquadPage
+    ManageSquadPage,
+    TeamPlayersPage
   ],
   providers: [{ provide: ErrorHandler, useClass: MyErrorHandler },
     FirebaseManager,
