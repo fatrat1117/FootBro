@@ -2,7 +2,7 @@
   <ion-navbar no-padding swipeBackEnabled="false">
     <ion-title>{{'TeamInfo' | trans}}</ion-title>
     <ion-buttons *ngIf="isMember()" right>
-      <button ion-button clear (click) = "openTeamPlayersPage()">{{'players' | trans}}</button>
+      <button ion-button clear color="primary" (click) = "openTeamPlayersPage()">{{'players' | trans}}</button>
       <button ion-button icon-only (click)="invitePlayer()">
         <ion-icon color="iPrimary" name="md-person-add"></ion-icon>
       </button>

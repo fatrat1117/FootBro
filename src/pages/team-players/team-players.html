@@ -32,8 +32,13 @@
       <ion-thumbnail item-left>
         <img [src] = "player.photo"/>
       </ion-thumbnail>
-      {{ player.name }}
-      <p>{{player.teamRole}}</p>
+      <ion-row>
+        <ion-col width-50>{{ player.name }}</ion-col>
+        <ion-col width-25>
+          <ion-icon name="settings"></ion-icon>
+        </ion-col>
+        <ion-col width-25>{{player.teamRole}}</ion-col>
+      </ion-row>
     </ion-item>
   </ion-list>
 </ion-content>
