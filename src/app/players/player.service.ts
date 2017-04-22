@@ -330,17 +330,24 @@ export class PlayerService {
     if (team && team.players) {
        for (let pId in team.players) {
           let teamPlayer = team.players[pId];
-          if (teamPlayer.isMember) { 
+          
+          if (!(teamPlayer.hasOwnProperty('isMember') && false == teamPlayer.isMember)) { 
             let player = this.findOrCreatePlayerAndPull(pId);
             if (this.isCaptain(pId, teamId))
               player['teamRole'] = 'captain';
             else
               player['teamRole'] = teamPlayer.teamRole || 'player';
-              
+
+            if (this.amIMemberOfCurrentTeam(teamId)) {
+              //show nick name for teamembers
+              player.name = teamPlayer.nickName || player.name;
+              player.photo = teamPlayer.photo || player.photo;
+            }  
             players.push(player);
           }
         }
     }
+    
     return players;
   }
 }

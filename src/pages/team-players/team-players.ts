@@ -24,6 +24,7 @@ export class TeamPlayersPage {
     private viewCtrl: ViewController) {
     this.teamId = navParams.get('teamId');
     this.players = this.playersService.getTeamPlayers2(this.teamId);
+    //console.log(this.players);
   }
 
   ionViewDidLoad() {
