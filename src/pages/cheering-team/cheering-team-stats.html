@@ -7,7 +7,7 @@
         </button>
     </ion-buttons>
     <ion-buttons right>
-      <button (tap)="unlock()" [disabled]="selfPlayer == null" text-center ion-button clear color="primary">
+      <button (tap)="unlock()" [disabled]="selfPlayer == null || selfPlayer.id == cheerleader.id" text-center ion-button clear color="primary">
           {{ 'unlock' | trans }}
         </button>
     </ion-buttons>
