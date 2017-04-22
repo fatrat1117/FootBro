@@ -328,6 +328,7 @@ export class Localization {
             removefromteam: 'Remove from team',
             appointadmin: 'Promote to admin',
             removeadmin: 'Remove from admin',
+            unlockDefaultMsg: "Hello %s, so glad to unlock you. Let's start chatting!"
         },
 
         zh: {
@@ -633,7 +634,8 @@ export class Localization {
             matchfinished: '%s vs %s (%d : %d), 快去给队友打分以获得个人积分吧',
             report: "举报",
             total: '总计',
-            youarecaptain: '你已经是队长了'
+            youarecaptain: '你已经是队长了',
+            unlockDefaultMsg: "Hello %s, 终于成功解锁了你，开始聊天吧！"
         }
     }
 }

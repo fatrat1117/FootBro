@@ -6,12 +6,14 @@ import { Localization } from '../../providers/localization';
 import { Cheerleader } from '../../app/cheerleaders/cheerleader.model'
 import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
+import { ChatService } from '../../app/chats/chat.service'
 
 declare var sprintf: any;
 
 @Component({
   selector: 'page-cheering-team-stats',
   templateUrl: 'cheering-team-stats.html',
+  providers: [ChatService]
 })
 
 export class CheeringTeamStatsPage {
@@ -20,7 +22,7 @@ export class CheeringTeamStatsPage {
   onPlayerReady;
   unlockAmount: number;
   increaseUnlockpoint = 10;
-  constructor(private viewCtrl: ViewController, private alertCtrl: AlertController,
+  constructor(private viewCtrl: ViewController, private alertCtrl: AlertController, private chatService: ChatService, 
     navParams: NavParams, private playerService: PlayerService,
     private toastCtrl: ToastController, private local: Localization) {
     this.cheerleader = navParams.get("cheerleader");
@@ -101,6 +103,9 @@ export class CheeringTeamStatsPage {
       //this.playerService.placeOrder(this.cheerleader.id, amount);
       this.playerService.unlockCheerleader(
         this.cheerleader.id, this.cheerleader.points + this.unlockAmount * 0.5, this.cheerleader.unlockPoints + this.increaseUnlockpoint, this.selfPlayer.points - this.unlockAmount);
+      
+
+      this.chatService.sendChat(this.cheerleader.id, this.cheerleader.pushId, sprintf(this.local.getString('unlockDefaultMsg'), this.cheerleader.name));
     }
     else {
       this.toastCtrl.create({
