@@ -12,7 +12,7 @@ declare var Wechat: any;
 })
 export class SharePage {
   isWechatInstalled = false;
-  sharePoints = 50;
+  sharePoints = 200;
   constructor(private viewCtrl: ViewController,
     private playerService: PlayerService) {
     let self = this;

@@ -50,8 +50,12 @@
 
     <ion-item-divider></ion-item-divider>
     <ion-item (tap)="goFeedbackPage()"  detail-push>
-      <ion-icon name="md-help" item-left color="gYellow"></ion-icon>
+      <ion-icon name="notifications" item-left color="gBlue"></ion-icon>
       {{'Feedback' | trans}}
+    </ion-item>
+    <ion-item (tap)="openFAQPage()"  detail-push>
+      <ion-icon name="md-help" item-left color="gYellow"></ion-icon>
+      FAQ
     </ion-item>
     <ion-item tappable (tap)="onLogout()">
       <ion-icon name="md-log-out" item-left color="danger"></ion-icon>

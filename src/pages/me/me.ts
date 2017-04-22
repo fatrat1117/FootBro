@@ -13,11 +13,12 @@ import { PlayerService } from '../../app/players/player.service'
 import { TeamService } from '../../app/teams/team.service'
 import { MessageService } from '../../app/messages/message.service'
 import { SearchTeamPage } from '../search-team/search-team'
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
   selector: 'page-me',
   templateUrl: 'me.html',
-  providers: [MessageService],
+  providers: [MessageService, InAppBrowser],
 })
 export class MePage {
   player: Player;
@@ -32,7 +33,8 @@ export class MePage {
     private playerService: PlayerService,
     private messageService: MessageService,
     private teamService: TeamService,
-    private fm: FirebaseManager) {
+    private fm: FirebaseManager,
+    private iab: InAppBrowser) {
     this.messageCount = 0;
   }
 
@@ -111,7 +113,11 @@ export class MePage {
     this.fm.logout();
   }
 
-  migrateData() {
-    this.fm.migrateData();
+  // migrateData() {
+  //   this.fm.migrateData();
+  // }
+
+  openFAQPage() {
+    const browser = this.iab.create('https://www.facebook.com/notes/soccerbro-studio/faq/792767360879298/');
   }
 }
