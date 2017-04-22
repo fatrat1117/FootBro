@@ -8,6 +8,8 @@ import { PlayerService } from '../../app/players/player.service'
 import { FirebaseManager } from '../../providers/firebase-manager'
 import { Localization } from '../../providers/localization'
 
+declare var sprintf: any;
+
 @Component({
   selector: 'page-edit-team',
   templateUrl: 'edit-team.html'
@@ -89,11 +91,11 @@ export class EditTeamPage {
       }
       else {
         this.alertCtrl.create({
-          title: `Promote ${player.name} to captain?`,
-          message: `You cannot undo this action.`,
-          buttons: ['Cancel',
+          title: sprintf(this.loc.getString("promoteToCaptain2"), player.name),
+          message: this.loc.getString("noUndo"),
+          buttons: [this.loc.getString('Cancel'),,
             {
-              text: "Confirm",
+              text: this.loc.getString('confirm'),
               handler: () => {
                 this.teamService.promoteNewCaptain(this.teamId, player.id);
                 this.navCtrl.pop();

@@ -328,7 +328,10 @@ export class Localization {
             removefromteam: 'Remove from team',
             appointadmin: 'Promote to admin',
             removeadmin: 'Remove from admin',
-            unlockDefaultMsg: "Hello %s, so glad to unlock you. Let's start chatting!"
+            unlockDefaultMsg: "Hello %s, so glad to unlock you. Let's start chatting!",
+            promoteToCaptain2: "Promote %s to captain?",
+            confirm: "Confirm",
+            noUndo: "You cannot undo this action.",
         },
 
         zh: {
@@ -635,7 +638,10 @@ export class Localization {
             report: "举报",
             total: '总计',
             youarecaptain: '你已经是队长了',
-            unlockDefaultMsg: "Hello %s, 终于成功解锁了你，开始聊天吧！"
+            unlockDefaultMsg: "Hello %s, 终于成功解锁了你，开始聊天吧！",
+            promoteToCaptain2: "将 %s 提升为队长？",
+            confirm: "确认",
+            noUndo: "你将无法撤销次个操作。",
         }
     }
 }
