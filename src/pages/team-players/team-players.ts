@@ -24,8 +24,12 @@ export class TeamPlayersPage {
     private viewCtrl: ViewController,
     private popoverCtrl: PopoverController) {
     this.teamId = navParams.get('teamId');
-    this.players = this.playersService.getTeamPlayers2(this.teamId);
+    this.refreshPlayers();
     //console.log(this.players);
+  }
+  
+  refreshPlayers() {
+    this.players = this.playersService.getTeamPlayers2(this.teamId);
   }
 
   ionViewDidLoad() {
@@ -47,6 +51,11 @@ export class TeamPlayersPage {
 
   popupManageMenu(myEvent, playerId) {
     let popover = this.popoverCtrl.create(ManagePlayerPopover, {teamId: this.teamId, playerId: playerId});
+    popover.onDidDismiss(e => {
+      if (e) {
+        this.refreshPlayers();
+      }
+    })
     popover.present({ ev: myEvent});
   }
 

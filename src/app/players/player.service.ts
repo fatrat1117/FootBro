@@ -351,6 +351,24 @@ export class PlayerService {
     return players;
   }
 
+  isTeamAdmin(playerId, teamId) {
+    let team = this.fm.getTeam(teamId);
+    if (team && team.players) {
+      let teamPlayer = team.players[playerId];
+      if (teamPlayer && teamPlayer.teamRole)
+        return "admin" === teamPlayer.teamRole;
+    }
+    return false;
+  } 
+
+  amITeamAdmin(teamId) {
+    return this.isTeamAdmin(this.selfId(), teamId);
+  }
+
+  isCaptainOrAdmin(playerId, teamId) {
+    return this.isCaptain(playerId, teamId) || this.isTeamAdmin(playerId, teamId);
+  }
+
   setTeamRole(teamId, playerId, role) {
     this.fm.setTeamRole(teamId, playerId, role);
   }
