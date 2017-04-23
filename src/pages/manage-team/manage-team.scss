@@ -9,4 +9,13 @@ page-manage-team {
       max-height: 4rem;
     }
   }
+
+  .manage-team-content{
+
+    //从右向左滑动提示
+    .swipe-notification-label{
+      font-size: 1.2rem;
+      color:color($colors,lightGrey);
+    }
+  }
 }

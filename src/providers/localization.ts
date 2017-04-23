@@ -336,7 +336,8 @@ export class Localization {
             captain: 'Captain',
             admin: 'Admin',
             player: 'Player',
-            confirmremove: 'Do you want to remove %s from %s?'
+            confirmremove: 'Do you want to remove %s from %s?',
+            swipeFromRightToLeft: 'Swipe from right to left'
         },
 
         zh: {
@@ -651,7 +652,8 @@ export class Localization {
             captain: '队长',
             admin: '管理员',
             player: '球员',
-            confirmremove: '确定要将 %s 移除 %s吗?'
+            confirmremove: '确定要将 %s 移除 %s吗?',
+            swipeFromRightToLeft:'从右向左滑动'
         }
     }
 }
