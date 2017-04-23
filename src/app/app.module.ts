@@ -79,6 +79,7 @@ import { NoRecordComponent } from './common/no.record.component';
 import { ResultScoreComponent } from './common/result.score.component';
 import { SbReportButton } from './common/report.button'
 import { ManagePlayerPopover } from '../pages/team-players/manage-players-menu';
+import { Badge } from '@ionic-native/badge';
 // directives
 import { KeyboardAttachDirective } from '../providers/keyboard-attach.directive';
 
@@ -241,7 +242,8 @@ export const firebaseConfig = {
     CheerleaderService,
     RankService,
     Camera,
-    LaunchNavigator],
+    LaunchNavigator,
+    Badge],
 })
 export class AppModule {
 }

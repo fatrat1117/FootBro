@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { OneSignal, Clipboard } from 'ionic-native';
+import { Badge } from '@ionic-native/badge';
 import { Tabs, Platform, AlertController, ToastController } from 'ionic-angular';
 import { Localization } from '../../providers/localization';
 import { HomePage } from '../home/home';
@@ -36,7 +37,7 @@ export class TabsPage {
   selfPlayer: Player;
 
   constructor(private fm: FirebaseManager, private osm: OneSignalManager, private platform: Platform, private alertCtrl: AlertController,
-    private toastCtrl: ToastController, private local: Localization,
+    private toastCtrl: ToastController, private local: Localization, private badge: Badge,
     private playerService: PlayerService, private teamService: TeamService, private messageService: MessageService) {
 
   }
@@ -63,6 +64,7 @@ export class TabsPage {
 
     document.addEventListener('servicemessageready', e => {
       this.unreadCount = e['detail'] > 0 ? e['detail'] : null;
+      this.badge.set(this.unreadCount);
     });
 
     // Start app with login

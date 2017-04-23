@@ -57,7 +57,9 @@ export class OneSignalManager {
     let notificationObj = {
       heading: { "en": "SoccerBro", "zh-Hans": "绿茵兄弟" },
       contents: messageObj,
-      include_player_ids: pushIds
+      include_player_ids: pushIds,
+      ios_badgeType: "Increase",
+      ios_badgeCount: 1
     };
     
     window["plugins"].OneSignal.postNotification(notificationObj,
