@@ -58,7 +58,7 @@ export class PlayerService {
       if (currentTeamFound) 
         player.teamId = playerData['basic-info'].teamId;
       else {
-        if (player.teams.length)
+        if (player.teams && player.teams.length)
           player.teamId = player.teams[0];
         else
           player.teamId = null;
@@ -421,4 +421,8 @@ export class PlayerService {
   removeFromTeam(playerId, teamId) {
     this.fm.removeFromTeam(playerId, teamId);
   }
+
+  saveTeamNickName(playerId, teamId, nickName) {
+    this.fm.saveTeamNickName(playerId, teamId, nickName);
+  } 
 }

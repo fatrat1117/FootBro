@@ -424,9 +424,13 @@ export class FirebaseManager {
     this.removeFromTeam(this.selfId(), teamId);
   }
 
+  saveTeamNickName(playerId, teamId, nickName) {
+    this.af.database.object(`teams/${teamId}/players/${playerId}/nickName`).set(nickName);
+  }
+  
   removeFromTeam(playerId, teamId) {
-    this.af.database.list(`players/${playerId}/teams/${teamId}`).remove();
-    this.af.database.list(`teams/${teamId}/players/${playerId}`).remove();
+    this.af.database.object(`players/${playerId}/teams/${teamId}`).remove();
+    this.af.database.object(`teams/${teamId}/players/${playerId}`).remove();
   }
 
   deleteTeam(id) {
@@ -812,7 +816,7 @@ export class FirebaseManager {
   }
 
   deleteTeamSquad(teamId, squadId) {
-    this.af.database.list(`/team_squads/${teamId}/squads/${squadId}/`).remove();
+    this.af.database.object(`/team_squads/${teamId}/squads/${squadId}/`).remove();
   }
 
   getTeamSquads(teamId) {

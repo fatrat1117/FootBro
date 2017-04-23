@@ -25,3 +25,18 @@
 * {
     font-family: "PingFang SC", "Microsoft Yahei";
 }
+
+.squad-alert{
+  .squad-alert-cancel{
+    color: color($colors,light);
+    opacity: 0.6;
+  }
+  input {
+    color: #fff !important;
+  }
+
+  .squad-alert-confirm {
+    color: lawngreen;
+    opacity: 0.6;
+  }
+}
