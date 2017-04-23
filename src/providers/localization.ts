@@ -337,7 +337,7 @@ export class Localization {
             admin: 'Admin',
             player: 'Player',
             confirmremove: 'Do you want to remove %s from %s?',
-            swipeFromRightToLeft: 'Swipe from right to left',
+            swipeFromRightToLeft: 'Please swipe items from right to left for more operations',
             editplayernickname: 'Edit nickname'
         },
 
@@ -654,7 +654,7 @@ export class Localization {
             admin: '管理员',
             player: '球员',
             confirmremove: '确定要将 %s 移除 %s吗?',
-            swipeFromRightToLeft:'从右向左滑动',
+            swipeFromRightToLeft:'请从右向左滑动列表来获取更多操作',
             editplayernickname: '编辑球员昵称'
         }
     }
