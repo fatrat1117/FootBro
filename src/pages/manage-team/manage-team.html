@@ -28,8 +28,8 @@
       <ion-item-options side="right">
         <button *ngIf="player.teamId != t.id" ion-button color="primary" text-capitalize (tap)="setDefaultTeam(t.id, slidingItem)">
           {{ 'SetDefault' | trans }}
-        </button>
-        <button *ngIf="t.captain === player.id" ion-button color="iPrimary" text-capitalize (tap)="editTeam(t.id, slidingItem)">
+        </button>(
+        <button *ngIf="canShowEdit(t.id)" ion-button color="iPrimary" text-capitalize (tap)="editTeam(t.id, slidingItem)">
           {{ 'Edit' | trans }}
         </button>
         <button [disabled]="!allowToQuit(t)" ion-button color="danger" text-capitalize (tap)="quitTeam(t.id, slidingItem)">
