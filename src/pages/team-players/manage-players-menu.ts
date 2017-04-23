@@ -12,7 +12,7 @@ declare var sprintf: any;
       <button ion-item (click)="removeFromTeam()" *ngIf="canShowRemoveFromTeam()">{{'removefromteam' | trans}}</button>
       <button ion-item (click)="appointAdmin()" *ngIf="canShowAppointAdmin()">{{'appointadmin' | trans}}</button>
       <button ion-item (click)="removeAdmin()" *ngIf="canShowRemoveAdmin()">{{'removeadmin' | trans}}</button>
-      <button ion-item (click)="PromoteToCaptain()" *ngIf="canPromoteToCaptain()">{{'PromoteToCaptain' | trans}}</button>
+      <button ion-item (click)="promoteToCaptain()" *ngIf="canPromoteToCaptain()">{{'PromoteToCaptain' | trans}}</button>
     </ion-list>
   `
 })
@@ -25,7 +25,7 @@ export class ManagePlayerPopover {
     private playerService: PlayerService,
     private teamService: TeamService,
     private alertCtrl: AlertController,
-    private local: Localization,
+    private loc: Localization,
     private osm: OneSignalManager) {
     this.teamId = params.get('teamId');
     this.teamPlayer = params.get('teamPlayer');
@@ -38,6 +38,18 @@ export class ManagePlayerPopover {
 
   appointAdmin() {
     this.playerService.appointTeamAdmin(this.teamId, this.teamPlayer.id);
+    if (this.teamPlayer.pushId && this.osm) {
+      let enMsg = sprintf('You have been appoint to admin of %s',
+        this.team.name
+      );
+
+      let chMsg = sprintf('你被任命为%s的管理员',
+        this.team.name
+      );
+
+      let pushMsg = { 'en': enMsg, 'zh-Hans': chMsg };
+      this.osm.postNotification(pushMsg, [this.teamPlayer.pushId]);
+    }
     this.close(true);
   }
 
@@ -64,8 +76,8 @@ export class ManagePlayerPopover {
 
   doRemoveFromTeam() {
     this.playerService.removeFromTeam(this.teamPlayer.id, this.teamId);
-    if (this.teamPlayer.pushId) {
-      let enMsg = sprintf('you have been removed from %s',
+    if (this.teamPlayer.pushId && this.osm) {
+      let enMsg = sprintf('You have been removed from %s',
         this.team.name
       );
 
@@ -79,21 +91,57 @@ export class ManagePlayerPopover {
     this.close(true);
   }
 
+  doPromoteToCaptain() {
+     this.teamService.promoteNewCaptain(this.teamId, this.teamPlayer.id);
+     if (this.teamPlayer.pushId && this.osm) {
+      let enMsg = sprintf('You have become captain of %s',
+        this.team.name
+      );
+
+      let chMsg = sprintf('你已经成为%s的队长',
+        this.team.name
+      );
+
+      let pushMsg = { 'en': enMsg, 'zh-Hans': chMsg };
+      this.osm.postNotification(pushMsg, [this.teamPlayer.pushId]);
+    }
+     this.close(true);
+  }
+
   removeFromTeam() {
     this.alertCtrl.create({
-      message: sprintf(this.local.getString("confirmremove"), this.teamPlayer.name, this.team.name),
+      message: sprintf(this.loc.getString("confirmremove"), this.teamPlayer.name, this.team.name),
       buttons: [
         {
-          text: this.local.getString('Cancel'),
+          text: this.loc.getString('Cancel'),
           handler: () => {
           }
         },
         {
-          text: this.local.getString('OK'),
+          text: this.loc.getString('confirm'),
           handler: () => {
             this.doRemoveFromTeam();
           }
         }]
     }).present();
+  }
+
+  promoteToCaptain() {
+    this.alertCtrl.create({
+          title: this.loc.getString("noUndo"),
+          message: sprintf(this.loc.getString("promoteToCaptain2"), this.teamPlayer.name),
+          buttons: [
+            {
+              text: this.loc.getString('Cancel'),
+              handler: () => {
+              }
+            },
+            {
+              text: this.loc.getString('confirm'),
+              handler: () => {
+                this.doPromoteToCaptain();
+              }
+            }]
+        }).present();
   }
 }
