@@ -452,6 +452,10 @@ export class FirebaseManager {
     this.af.database.object(`teams/${id}/basic-info/logo`).set(logo);
   }
 
+  updateTeamPhotoLarge(teamId, photoUrl) {
+    this.af.database.object(`/teams/${teamId}/photoLarge`).set(photoUrl);
+  }
+
   promoteNewCaptain(teamId: string, playerId: string) {
     this.af.database.object(`teams/${teamId}/basic-info/captain`).set(playerId);
   }

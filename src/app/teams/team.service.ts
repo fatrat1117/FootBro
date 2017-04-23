@@ -293,4 +293,8 @@ export class TeamService {
   updateTeamLogo(id, logo) {
     this.fm.updateTeamLogo(id, logo);
   }
+
+  updatePhotoLarge(teamId, photoUrl) {
+    this.fm.updateTeamPhotoLarge(teamId, photoUrl);
+  }
 }
