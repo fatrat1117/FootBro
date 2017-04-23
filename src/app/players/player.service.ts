@@ -19,7 +19,7 @@ export class PlayerService {
       //player.points = playerData.points;
       player.name = playerData['basic-info'].displayName || "John Doe";
       player.photo = playerData['basic-info'].photoURL || "assets/img/none.png";
-      player.teamId = playerData['basic-info'].teamId;
+      
       player.points = playerData.points;
       player.photoLarge = playerData.photoLarge || "assets/img/forTest/messi_banner.png";
       player.wechatShareTime = playerData.wechatShareTime;
@@ -44,10 +44,24 @@ export class PlayerService {
       if (playerData['detail-info'] && 'description' in playerData['detail-info'])
         player.description = playerData['detail-info'].description;
 
+      let currentTeamFound = false;
       if (playerData.teams) {
         player.teams = [];
-        for (let tId in playerData.teams)
+        for (let tId in playerData.teams) {
           player.teams.push(tId);
+          if (tId === playerData['basic-info'].teamId)
+            currentTeamFound = true;
+        }
+      }
+
+      //fix issue is currentTeam is not found
+      if (currentTeamFound) 
+        player.teamId = playerData['basic-info'].teamId;
+      else {
+        if (player.teams.length)
+          player.teamId = player.teams[0];
+        else
+          player.teamId = null;
       }
 
       if (playerData.cheerleaders) {
@@ -255,6 +269,25 @@ export class PlayerService {
     return player.teamId === teamId;
   }
 
+  isMemberOfTeam(playerId, teamId) {
+    let team = this.fm.getTeam(teamId);
+    if (team && team.players) {
+      let teamPlayer = team.players[playerId];
+      if (!teamPlayer)
+        return false;
+      //check legacy code where ismember is not there
+      if (teamPlayer.hasOwnProperty('isMember') && false == teamPlayer.isMember)
+        return false;
+
+      return true;
+    }
+    return false;
+  }
+
+  amIMemberOfTeam(teamId) {
+    return this.isMemberOfTeam(this.selfId(), teamId);
+  }
+
   myself() {
     return this.getPlayer(this.selfId());
   }
@@ -312,7 +345,7 @@ export class PlayerService {
       let newPoints = player.points ? player.points + amount : amount;
       this.fm.playerEarnPoints(playerId, amount, newPoints);
       if (playerId == this.selfId())
-      this.uiHelper.showPointsToastMessage(amount);
+        this.uiHelper.showPointsToastMessage(amount);
     }
   }
 
@@ -328,26 +361,26 @@ export class PlayerService {
     let players = [];
     let team = this.fm.getTeam(teamId);
     if (team && team.players) {
-       for (let pId in team.players) {
-          let teamPlayer = team.players[pId];
-          
-          if (!(teamPlayer.hasOwnProperty('isMember') && false == teamPlayer.isMember)) { 
-            let player = this.findOrCreatePlayerAndPull(pId);
-            if (this.isCaptain(pId, teamId))
-              player['teamRole'] = 'captain';
-            else
-              player['teamRole'] = teamPlayer.teamRole || 'player';
+      for (let pId in team.players) {
+        let teamPlayer = team.players[pId];
 
-            if (this.amIMemberOfCurrentTeam(teamId)) {
-              //show nick name for teamembers
-              player.name = teamPlayer.nickName || player.name;
-              player.photo = teamPlayer.photo || player.photo;
-            }  
-            players.push(player);
+        if (!(teamPlayer.hasOwnProperty('isMember') && false == teamPlayer.isMember)) {
+          let player = this.findOrCreatePlayerAndPull(pId);
+          if (this.isCaptain(pId, teamId))
+            player['teamRole'] = 'captain';
+          else
+            player['teamRole'] = teamPlayer.teamRole || 'player';
+
+          if (this.amIMemberOfCurrentTeam(teamId)) {
+            //show nick name for teamembers
+            player.name = teamPlayer.nickName || player.name;
+            //player.photo = teamPlayer.photo || player.photo;
           }
+          players.push(player);
         }
+      }
     }
-    
+
     return players;
   }
 
@@ -359,10 +392,14 @@ export class PlayerService {
         return "admin" === teamPlayer.teamRole;
     }
     return false;
-  } 
+  }
 
   amITeamAdmin(teamId) {
     return this.isTeamAdmin(this.selfId(), teamId);
+  }
+  
+  amICaptainOrAdmin(teamId) {
+    return this.isCaptainOrAdmin(this.selfId(), teamId);
   }
 
   isCaptainOrAdmin(playerId, teamId) {
@@ -379,5 +416,9 @@ export class PlayerService {
 
   removeTeamAdmin(teamId, playerId) {
     this.setTeamRole(teamId, playerId, 'player');
+  }
+
+  removeFromTeam(playerId, teamId) {
+    this.fm.removeFromTeam(playerId, teamId);
   }
 }

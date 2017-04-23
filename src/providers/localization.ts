@@ -333,6 +333,10 @@ export class Localization {
             confirm: "Confirm",
             noUndo: "You cannot undo this action.",
             confirmJoinTeam: "Would you like to join %s?",
+            captain: 'Captain',
+            admin: 'Admin',
+            player: 'Player',
+            confirmremove: 'Do you want to remove %s from %s?'
         },
 
         zh: {
@@ -644,6 +648,10 @@ export class Localization {
             confirm: "确认",
             noUndo: "你将无法撤销次个操作。",
             confirmJoinTeam: "要加入 %s 吗?",
+            captain: '队长',
+            admin: '管理员',
+            player: '球员',
+            confirmremove: '确定要将 %s 移除 %s吗?'
         }
     }
 }

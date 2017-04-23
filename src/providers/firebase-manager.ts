@@ -417,10 +417,16 @@ export class FirebaseManager {
     return this.af.database.object(`public/teams/${teamId}`);
   }
 
-  quitTeam(id) {
+  quitTeam(teamId) {
     //remove from self teams
-    this.af.database.list(`players/${this.selfId()}/teams/${id}`).remove();
-    this.af.database.list(`teams/${id}/players/${this.selfId()}`).remove();
+    //this.af.database.list(`players/${this.selfId()}/teams/${id}`).remove();
+    //this.af.database.list(`teams/${id}/players/${this.selfId()}`).remove();
+    this.removeFromTeam(this.selfId(), teamId);
+  }
+
+  removeFromTeam(playerId, teamId) {
+    this.af.database.list(`players/${playerId}/teams/${teamId}`).remove();
+    this.af.database.list(`teams/${teamId}/players/${playerId}`).remove();
   }
 
   deleteTeam(id) {

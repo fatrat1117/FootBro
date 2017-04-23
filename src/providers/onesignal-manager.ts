@@ -19,20 +19,6 @@ export class OneSignalManager {
       this.platform.is('core'))
       return;
 
-
-
-    /*
-    window["plugins"].OneSignal.startInit("f6268d9c-3503-4696-8e4e-a6cf2c028fc6",
-      { googleProjectNumber: "63493717987" },
-      notificationOpenedCallback).inFocusDisplaying(window["plugins"].OneSignal.OSInFocusDisplayOption.None)
-      .endInit();
-    
-    window["plugins"].OneSignal
-      .startInit('f6268d9c-3503-4696-8e4e-a6cf2c028fc6', { googleProjectNumber: "63493717987" })
-      .handleNotificationOpened(notificationOpenedCallback)
-      .endInit();
-      */
-
     OneSignal.startInit('f6268d9c-3503-4696-8e4e-a6cf2c028fc6', '63493717987');
 
     OneSignal.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.None);

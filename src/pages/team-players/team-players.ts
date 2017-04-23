@@ -49,8 +49,8 @@ export class TeamPlayersPage {
     //document.removeEventListener('serviceteamplayersready', this.onTeamPlayersReady);
   }
 
-  popupManageMenu(myEvent, playerId) {
-    let popover = this.popoverCtrl.create(ManagePlayerPopover, {teamId: this.teamId, playerId: playerId});
+  popupManageMenu(myEvent, player) {
+    let popover = this.popoverCtrl.create(ManagePlayerPopover, {teamId: this.teamId, teamPlayer: player});
     popover.onDidDismiss(e => {
       if (e) {
         this.refreshPlayers();
@@ -59,9 +59,18 @@ export class TeamPlayersPage {
     popover.present({ ev: myEvent});
   }
 
-  // trackByName(player) {
-  //   return player.id;
-  // }
+  canShowSettings(playerId) {
+    if (this.playersService.selfId() === playerId)
+      return false;
+
+    if (this.playersService.isCaptain(playerId, this.teamId))
+      return false;
+     
+    if (this.playersService.amICaptainOrAdmin(this.teamId)) 
+      return true;
+
+    return false;
+  }
 
   // filterPlayers(ev: any) {
   //   // Reset items back to all of the items
