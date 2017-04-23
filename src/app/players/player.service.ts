@@ -19,7 +19,7 @@ export class PlayerService {
       //player.points = playerData.points;
       player.name = playerData['basic-info'].displayName || "John Doe";
       player.photo = playerData['basic-info'].photoURL || "assets/img/none.png";
-      player.teamId = playerData['basic-info'].teamId;
+      
       player.points = playerData.points;
       player.photoLarge = playerData.photoLarge || "assets/img/forTest/messi_banner.png";
       player.wechatShareTime = playerData.wechatShareTime;
@@ -44,10 +44,24 @@ export class PlayerService {
       if (playerData['detail-info'] && 'description' in playerData['detail-info'])
         player.description = playerData['detail-info'].description;
 
+      let currentTeamFound = false;
       if (playerData.teams) {
         player.teams = [];
-        for (let tId in playerData.teams)
+        for (let tId in playerData.teams) {
           player.teams.push(tId);
+          if (tId === playerData['basic-info'].teamId)
+            currentTeamFound = true;
+        }
+      }
+
+      //fix issue is currentTeam is not found
+      if (currentTeamFound) 
+        player.teamId = playerData['basic-info'].teamId;
+      else {
+        if (player.teams.length)
+          player.teamId = player.teams[0];
+        else
+          player.teamId = null;
       }
 
       if (playerData.cheerleaders) {

@@ -51,4 +51,8 @@ export class ManagePlayerPopover {
   canShowRemoveFromTeam() {
     return this.playerService.amICaptainOrAdmin(this.teamId);
   }
+
+  removeFromTeam() {
+    
+  }
 }
