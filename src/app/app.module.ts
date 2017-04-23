@@ -230,7 +230,7 @@ export const firebaseConfig = {
     TeamPlayersPage,
     ManagePlayerPopover
   ],
-  providers: [{ provide: ErrorHandler, useClass: MyErrorHandler },
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
     FirebaseManager,
     OneSignalManager,
     Localization,

@@ -9,6 +9,7 @@ declare var sprintf: any;
 @Component({
   template: `
     <ion-list>
+      <button ion-item (click)="edit()" *ngIf="canShowRemoveFromTeam()">{{'editplayernickname' | trans}}</button>
       <button ion-item (click)="removeFromTeam()" *ngIf="canShowRemoveFromTeam()">{{'removefromteam' | trans}}</button>
       <button ion-item (click)="appointAdmin()" *ngIf="canShowAppointAdmin()">{{'appointadmin' | trans}}</button>
       <button ion-item (click)="removeAdmin()" *ngIf="canShowRemoveAdmin()">{{'removeadmin' | trans}}</button>
@@ -143,5 +144,40 @@ export class ManagePlayerPopover {
               }
             }]
         }).present();
+  }
+
+  doSaveNickname(nickName) {
+    this.playerService.saveTeamNickName(this.teamPlayer.id, this.teamId, nickName);
+    this.close(true);
+  }
+
+  edit() {
+    let prompt = this.alertCtrl.create({
+      title: this.loc.getString('editplayernickname'),
+      inputs: [
+        {
+          name: 'name',
+          value: this.teamPlayer.name,
+        },
+      ],
+      buttons: [
+        {
+          text: this.loc.getString('Cancel'),
+          handler: data => {
+            console.log('Cancel clicked');
+          },
+          cssClass:"squad-alert-cancel"
+        },
+        {
+          text: this.loc.getString('Save'),
+          handler: data => {
+            this.doSaveNickname(data.name);
+          },
+          cssClass:"squad-alert-confirm"
+        }
+      ],
+      cssClass:"squad-alert"
+    });
+    prompt.present();
   }
 }
