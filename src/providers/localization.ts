@@ -335,7 +335,8 @@ export class Localization {
             confirmJoinTeam: "Would you like to join %s?",
             captain: 'Captain',
             admin: 'Admin',
-            player: 'Player'
+            player: 'Player',
+            confirmremove: 'Do you want to remove %s from %s?'
         },
 
         zh: {
@@ -649,7 +650,8 @@ export class Localization {
             confirmJoinTeam: "要加入 %s 吗?",
             captain: '队长',
             admin: '管理员',
-            player: '球员'
+            player: '球员',
+            confirmremove: '确定要将 %s 移除 %s吗?'
         }
     }
 }

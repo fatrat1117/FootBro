@@ -374,7 +374,7 @@ export class PlayerService {
           if (this.amIMemberOfCurrentTeam(teamId)) {
             //show nick name for teamembers
             player.name = teamPlayer.nickName || player.name;
-            player.photo = teamPlayer.photo || player.photo;
+            //player.photo = teamPlayer.photo || player.photo;
           }
           players.push(player);
         }
@@ -416,5 +416,9 @@ export class PlayerService {
 
   removeTeamAdmin(teamId, playerId) {
     this.setTeamRole(teamId, playerId, 'player');
+  }
+
+  removeFromTeam(playerId, teamId) {
+    this.fm.removeFromTeam(playerId, teamId);
   }
 }

@@ -35,7 +35,7 @@
       <ion-row>
         <ion-col width-50>{{ player.name }}</ion-col>
         <ion-col width-25>
-          <ion-icon *ngIf = "canShowSettings(player.id)" name="settings" (tap) = "popupManageMenu($event, player.id)"></ion-icon>
+          <ion-icon *ngIf = "canShowSettings(player.id)" name="settings" (tap) = "popupManageMenu($event, player)"></ion-icon>
         </ion-col>
         <ion-col width-25>{{player.teamRole | trans}}</ion-col>
       </ion-row>
