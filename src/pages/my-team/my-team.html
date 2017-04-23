@@ -12,10 +12,17 @@
 </ion-header>
 <ion-content class="content-background-page">
   <div class="content-top">
-    <img [src]="team?.logo" class="thumbnail-img" />
-    <h6 class="team-name default-font-size-h6">{{team.name}}</h6>
+    <img src="assets/img/team/court.png" class="team-background-img"/>
+
+    <div class="team-banner-components">
+    <ion-row>
+      <img [src]="team?.logo" class="thumbnail-img" />
+      <h6 class="team-name default-font-size-h6">{{team.name}}</h6>
+    </ion-row>
+
     <!--<p class="team-place default-font-size-p">阿根廷&nbsp;|&nbsp;纪念碑球场</p>-->
-    <p class="team-place default-font-size-p">&nbsp;&nbsp;</p>
+    <ion-row justify-content-end>
+    <!--<p class="team-place default-font-size-p">&nbsp;&nbsp;</p>-->
     <div class="team-right-item">
       <p class="team-right-item-text">{{team.popularity}}</p>
       <div class="team-right-item-bottom">
@@ -29,7 +36,8 @@
         <!--        <a class="team-right-item-bottom-text">{{'Ability' | trans}}</a>-->
       </div>
     </div>
-    <div class="team-brief-info">
+    </ion-row>
+    <div class="team-brief-info display-none">
       <ion-row class="hidden">
         <ion-col class="default-font-size-col">{{'YearBuilt' | trans | uppercase}}</ion-col>
         <ion-col class="age-label default-font-size-col">平均年龄</ion-col>
@@ -42,6 +50,7 @@
         <ion-col class="age-gap white default-font-size-col">6</ion-col>
         <ion-col class="clothes-color white default-font-size-col">蓝</ion-col>
       </ion-row>
+    </div>
     </div>
   </div>
   <ion-list class="subtitle no-margin">
