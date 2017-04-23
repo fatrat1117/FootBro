@@ -103,35 +103,7 @@ export class ManageTeamPage {
     return this.player.teamId != team.id && (this.player.id != team.captain || team.totalPlayers == 1);
   }
 
-  /*
-  setDefaultTeam(index: number, slidingItem) {
-    slidingItem.close();
-    this.updateSelfBasic(this.teams[index]);
+  canShowEdit(teamId) {
+    return this.playerService.amICaptainOrAdmin(teamId);
   }
-
-  quitTeam(index: number) {
-    // if is default team, clear it
-    if (this.teams[index] == this.player.teamId)
-      this.updateSelfBasic("");
-
-    // remove from team list
-    this.teams.splice(index, 1);
-    //this.playerService.saveSelfTeams(this.teams);
-
-    // set default
-    if (this.teams.length > 0)
-      this.updateSelfBasic(this.teams[0]);
-    else
-      this.viewCtrl.dismiss();
-  }
-
-  adddNewTeam() {
-    this.modalCtrl.create(CreateTeamPage).present();
-  }
-
-  updateSelfBasic(teamId: string) {
-    // this.playerBasic.teamId = teamId;
-    // this.playerService.saveSelfBasic(this.playerBasic);
-  }
-  */
 }
