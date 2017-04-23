@@ -92,8 +92,8 @@ export class ResultScoreComponent {
       return false;
 
     if (this.upcomingMatch.isStarted() &&
-      ((this.playerService.amICaptainOfCurrentTeam(this.upcomingMatch.homeId) && !this.upcomingMatch.isHomeUpdated)
-        || (this.playerService.amICaptainOfCurrentTeam(this.upcomingMatch.awayId) && !this.upcomingMatch.isAwayUpdated))
+      ((this.playerService.amIMemberCaptainOrAdmin(this.upcomingMatch.homeId) && !this.upcomingMatch.isHomeUpdated)
+        || (this.playerService.amIMemberCaptainOrAdmin(this.upcomingMatch.awayId) && !this.upcomingMatch.isAwayUpdated))
     ) {
       return true;
     }
