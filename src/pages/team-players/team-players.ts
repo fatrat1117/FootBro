@@ -59,9 +59,18 @@ export class TeamPlayersPage {
     popover.present({ ev: myEvent});
   }
 
-  // trackByName(player) {
-  //   return player.id;
-  // }
+  canShowSettings(playerId) {
+    if (this.playersService.selfId() === playerId)
+      return false;
+
+    if (this.playersService.isCaptain(playerId, this.teamId))
+      return false;
+     
+    if (this.playersService.amICaptainOrAdmin(this.teamId)) 
+      return true;
+
+    return false;
+  }
 
   // filterPlayers(ev: any) {
   //   // Reset items back to all of the items

@@ -255,6 +255,25 @@ export class PlayerService {
     return player.teamId === teamId;
   }
 
+  isMemberOfTeam(playerId, teamId) {
+    let team = this.fm.getTeam(teamId);
+    if (team && team.players) {
+      let teamPlayer = team.players[playerId];
+      if (!teamPlayer)
+        return false;
+      //check legacy code where ismember is not there
+      if (teamPlayer.hasOwnProperty('isMember') && false == teamPlayer.isMember)
+        return false;
+
+      return true;
+    }
+    return false;
+  }
+
+  amIMemberOfTeam(teamId) {
+    return this.isMemberOfTeam(this.selfId(), teamId);
+  }
+
   myself() {
     return this.getPlayer(this.selfId());
   }
@@ -312,7 +331,7 @@ export class PlayerService {
       let newPoints = player.points ? player.points + amount : amount;
       this.fm.playerEarnPoints(playerId, amount, newPoints);
       if (playerId == this.selfId())
-      this.uiHelper.showPointsToastMessage(amount);
+        this.uiHelper.showPointsToastMessage(amount);
     }
   }
 
@@ -328,26 +347,26 @@ export class PlayerService {
     let players = [];
     let team = this.fm.getTeam(teamId);
     if (team && team.players) {
-       for (let pId in team.players) {
-          let teamPlayer = team.players[pId];
-          
-          if (!(teamPlayer.hasOwnProperty('isMember') && false == teamPlayer.isMember)) { 
-            let player = this.findOrCreatePlayerAndPull(pId);
-            if (this.isCaptain(pId, teamId))
-              player['teamRole'] = 'captain';
-            else
-              player['teamRole'] = teamPlayer.teamRole || 'player';
+      for (let pId in team.players) {
+        let teamPlayer = team.players[pId];
 
-            if (this.amIMemberOfCurrentTeam(teamId)) {
-              //show nick name for teamembers
-              player.name = teamPlayer.nickName || player.name;
-              player.photo = teamPlayer.photo || player.photo;
-            }  
-            players.push(player);
+        if (!(teamPlayer.hasOwnProperty('isMember') && false == teamPlayer.isMember)) {
+          let player = this.findOrCreatePlayerAndPull(pId);
+          if (this.isCaptain(pId, teamId))
+            player['teamRole'] = 'captain';
+          else
+            player['teamRole'] = teamPlayer.teamRole || 'player';
+
+          if (this.amIMemberOfCurrentTeam(teamId)) {
+            //show nick name for teamembers
+            player.name = teamPlayer.nickName || player.name;
+            player.photo = teamPlayer.photo || player.photo;
           }
+          players.push(player);
         }
+      }
     }
-    
+
     return players;
   }
 
@@ -359,10 +378,14 @@ export class PlayerService {
         return "admin" === teamPlayer.teamRole;
     }
     return false;
-  } 
+  }
 
   amITeamAdmin(teamId) {
     return this.isTeamAdmin(this.selfId(), teamId);
+  }
+  
+  amICaptainOrAdmin(teamId) {
+    return this.isCaptainOrAdmin(this.selfId(), teamId);
   }
 
   isCaptainOrAdmin(playerId, teamId) {
