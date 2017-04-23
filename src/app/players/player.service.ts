@@ -398,6 +398,15 @@ export class PlayerService {
     return this.isTeamAdmin(this.selfId(), teamId);
   }
   
+  amICaptainOrAdminOfCurrentTeam() {
+    let pId = this.selfId();
+    if (!pId)
+      return false;
+
+    let tId = this.getPlayer(pId).teamId;
+    return this.amICaptainOrAdmin(tId);
+  }
+
   amICaptainOrAdmin(teamId) {
     return this.isCaptainOrAdmin(this.selfId(), teamId);
   }

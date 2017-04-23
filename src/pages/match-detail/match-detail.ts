@@ -212,9 +212,6 @@ export class MatchDetailPage {
       this.playerService.amIMemberOfCurrentTeam(this.match.awayId)) {
         return true;
       }
-    // if (this.playerService.isCaptain(this.playerService.selfId(), this.match.homeId) ||
-    //   this.playerService.isCaptain(this.playerService.selfId(), this.match.awayId))
-    //   return true;
 
     return false;
   }
@@ -236,8 +233,8 @@ export class MatchDetailPage {
       return false;
 
     //captain can update matchInfo
-    if (this.playerService.isCaptain(this.playerService.selfId(), this.match.homeId) ||
-      this.playerService.isCaptain(this.playerService.selfId(), this.match.awayId))
+    if (this.playerService.isCaptainOrAdmin(this.playerService.selfId(), this.match.homeId) ||
+      this.playerService.isCaptainOrAdmin(this.playerService.selfId(), this.match.awayId))
       return true;
   }
 
@@ -264,8 +261,8 @@ export class MatchDetailPage {
       case 'squad':
         {
           //captain can update squad
-          if (this.playerService.isCaptain(this.playerService.selfId(), this.match.homeId) ||
-            this.playerService.isCaptain(this.playerService.selfId(), this.match.awayId))
+          if (this.playerService.isCaptainOrAdmin(this.playerService.selfId(), this.match.homeId) ||
+            this.playerService.isCaptainOrAdmin(this.playerService.selfId(), this.match.awayId))
             return true;
         }
         break;
