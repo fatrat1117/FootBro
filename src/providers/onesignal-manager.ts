@@ -9,8 +9,8 @@ import { PlayerService } from '../app/players/player.service';
 
 @Injectable()
 export class OneSignalManager {
-  constructor(private platform: Platform, private fm: FirebaseManager, private playerService: PlayerService, 
-  private uiHelper: UIHelper) {
+  constructor(private platform: Platform, private fm: FirebaseManager, private playerService: PlayerService,
+    private uiHelper: UIHelper) {
 
   }
 
@@ -47,19 +47,20 @@ export class OneSignalManager {
       ios_badgeType: "Increase",
       ios_badgeCount: 1
     };
-    
-    window["plugins"].OneSignal.postNotification(notificationObj,
-      function (successResponse) {
-        //console.log("Notification Post Success:", successResponse);
-        if (success)
-          success();
-      },
-      function (failedResponse) {
-        console.log("Notification Post Failed: ", failedResponse);
-        //alert("Notification Post Failed:\n" + JSON.stringify(failedResponse));
-      }
-    );
 
+    if (window["plugins"] && window["plugins"].OneSignal) {
+      window["plugins"].OneSignal.postNotification(notificationObj,
+        function (successResponse) {
+          //console.log("Notification Post Success:", successResponse);
+          if (success)
+            success();
+        },
+        function (failedResponse) {
+          console.log("Notification Post Failed: ", failedResponse);
+          //alert("Notification Post Failed:\n" + JSON.stringify(failedResponse));
+        }
+      );
+    }
   }
 
 
@@ -76,7 +77,7 @@ export class OneSignalManager {
       'en': `${player.name} accept your team invitation, you earned 10 points.`,
       'zh-Hans': `${player.name} 接受了你的球队邀请，你获得了10点积分。`
     };
-    
+
     let onPlayerReady = e => {
       let id = e['detail'];
       if (id == invitorId) {
@@ -146,7 +147,7 @@ export class OneSignalManager {
 
     let self = this;
     //show toast to user
-    setTimeout(function() {
+    setTimeout(function () {
       self.uiHelper.presentToast('Thanksforyourfeedback');
     }, 1000);
   }
