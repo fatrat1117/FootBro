@@ -72,6 +72,9 @@ export class TabsPage {
       if (this.selfPlayer == null && e['detail'] == this.playerService.selfId()) {
         this.selfPlayer = this.playerService.getPlayer(e['detail']);
         this.checkClipboard();
+        // setup tags
+        if (this.selfPlayer.role == "cheerleader") 
+          OneSignal.sendTag("role", "cheerleader");
       }
     });
 

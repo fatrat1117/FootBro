@@ -38,7 +38,7 @@ export class OneSignalManager {
   }
 
   postNotification(messageObj, pushIds, success = null) {
-    console.log('postNotification', messageObj, pushIds);
+    //console.log('postNotification', messageObj, pushIds);
 
     let notificationObj = {
       heading: { "en": "SoccerBro", "zh-Hans": "绿茵兄弟" },
@@ -62,6 +62,30 @@ export class OneSignalManager {
       );
     }
   }
+
+  postGroupNotification(messageObj, segmentName, success = null) {
+    let notificationObj = {
+      headers: { "Authorization": "Basic MjkxZWQ0MWYtMDgxYS00ODcxLTkwMTMtNjMzMmQ2MGQ1NDU4" },
+      heading: { "en": "SoccerBro", "zh-Hans": "绿茵兄弟" },
+      contents: messageObj,
+      included_segments: [segmentName],
+      ios_badgeType: "Increase",
+      ios_badgeCount: 1
+    };
+
+    if (window["plugins"] && window["plugins"].OneSignal) {
+      window["plugins"].OneSignal.postNotification(notificationObj,
+        function (successResponse) {
+          if (success)
+            success();
+        },
+        function (failedResponse) {
+          console.log("Notification Post Failed: ", failedResponse);
+        }
+      );
+    }
+  }
+
 
 
 
@@ -113,6 +137,24 @@ export class OneSignalManager {
     }
 
     this.postNotification(message, [pushId], success)
+  }
+
+  sendClGroupChat(content: string) {
+    let player = this.playerService.getPlayer(this.playerService.selfId());
+    if (!player || !player.name)
+      return
+
+    let message = {
+      'en': `${player.name} sent you a new message in group Cheerleaders.`,
+      'zh-Hans': `${player.name} 在 拉拉队 群内发送了一条新消息。`
+    };
+
+    let self = this;
+    let success = function (fm: FirebaseManager) {
+      self.fm.addClGroupChat(content);
+    }
+
+    this.postGroupNotification(message, "Cheerleaders", success)
   }
 
 

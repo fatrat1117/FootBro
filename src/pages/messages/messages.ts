@@ -101,7 +101,8 @@ export class MessagesPage {
       isSystem: msg.isSystem,
       isUnread: msg.isUnread,
       user: this.watchListMap[msg.playerId],
-      isBlocking: this.isUserBlockded(msg.playerId) 
+      isBlocking: this.isUserBlockded(msg.playerId),
+      groupName: msg.groupName ? msg.groupName : 'none'
     });
   }
 

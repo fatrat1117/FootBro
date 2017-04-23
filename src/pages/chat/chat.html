@@ -49,14 +49,22 @@
 
         <!-- other -->
         <div *ngIf="!isSystem">
-          <ion-item *ngIf="!chat.isFromSelf" class="chat-room-msg-item">
+          <ion-item *ngIf="!isFromSelf(chat)" class="chat-room-msg-item">
+            <div *ngIf="chat.senderId">
+              <div class="chat-room-avatar-div">
+                <ion-thumbnail item-left>
+                  <img [src]=" getPlayerInfo(chat.senderId)?.photo">
+                </ion-thumbnail>
+              </div>
+              <p>{{ getPlayerInfo(chat.senderId)?.name }}</p>
+            </div>
             <div class="msg-box left">
               {{ chat.content }}
             </div>
           </ion-item>
 
           <!-- self -->
-          <ion-item *ngIf="chat.isFromSelf" class="chat-room-msg-item">
+          <ion-item *ngIf="isFromSelf(chat)" class="chat-room-msg-item">
             <div class="msg-box right">
               {{ chat.content }}
             </div>

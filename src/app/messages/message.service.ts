@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { OneSignal } from 'ionic-native';
 import { Subject } from 'rxjs/Subject';
 
 import { FirebaseManager } from '../../providers/firebase-manager'
@@ -39,6 +40,9 @@ export class MessageService {
         m.isSystem = msg.isSystem;
         m.lastContent = msg.lastContent;
         m.lastTimestamp = msg.lastTimestamp;
+        if (msg.groupName)
+          m.groupName = msg.groupName;
+
         this.messages.push(m);
       })
 
@@ -51,6 +55,8 @@ export class MessageService {
       this.blacklist = [];
       items.forEach(i => {
         this.blacklist.push(i.$key);
+        if (i.$key == "1")
+          OneSignal.sendTag("block-cheerleader", "true");
       })
       this.fm.FireEvent("serviceblacklistready");
     })

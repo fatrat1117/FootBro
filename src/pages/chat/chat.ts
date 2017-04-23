@@ -10,6 +10,7 @@ import { Localization } from '../../providers/localization';
 import { Chat } from '../../app/chats/shared/chat.model'
 import { ChatService } from '../../app/chats/chat.service'
 import { Player } from '../../app/players/player.model';
+import { PlayerService } from '../../app/players/player.service';
 
 
 
@@ -40,12 +41,13 @@ export class ChatPage {
   blkSubscription: any;
   isBlocking: boolean;
   isBlocked: boolean;
+  groupName: string;
+  onPlayerReady: any;
+  watchListMap : {};
 
-
-  
   constructor(private navCtrl: NavController, private navParams: NavParams, 
               private chatService: ChatService, private local: Localization,
-              private alertCtrl : AlertController,) {
+              private alertCtrl : AlertController, private playerService: PlayerService) {
   }
 
   ionViewDidLoad() {
@@ -57,15 +59,37 @@ export class ChatPage {
     this.isUnread = this.navParams.get('isUnread');
     this.user = this.navParams.get('user');
     this.isBlocking = this.navParams.get('isBlocking')
+    this.groupName = this.navParams.get('groupName');
 
-    this.subscription = this.chatService.getRecentChats(this.user.id, this.isUnread).subscribe(chats => {
-      this.chats = chats;
-      this.hasChatsMessage = this.hasChats();
-      this.scrollView();
-    })
-    this.blkSubscription = this.chatService.isBlockedBy(this.user.id).subscribe(item => {
-      this.isBlocked = item.$value;
-    })
+    this.onPlayerReady = e => {
+      let playerId = e['detail'];
+      if (this.watchListMap[playerId])
+        this.watchListMap[playerId] = this.playerService.getPlayer(playerId);
+    };
+
+    if (this.groupName == "cheerleaders") {
+      this.subscription = this.chatService.getClGroupChats(this.isUnread).subscribe(chats => {
+        this.chats = chats;
+        this.hasChatsMessage = this.hasChats();
+        this.scrollView();
+        this.watchListMap = {};
+        document.addEventListener('serviceplayerready', this.onPlayerReady);
+        chats.forEach(chat => {
+          this.watchListMap[chat.senderId] = {};
+          this.playerService.getPlayerAsync(chat.senderId);
+        })
+      })
+    }
+    else {
+      this.subscription = this.chatService.getRecentChats(this.user.id, this.isUnread).subscribe(chats => {
+        this.chats = chats;
+        this.hasChatsMessage = this.hasChats();
+        this.scrollView();
+      })
+      this.blkSubscription = this.chatService.isBlockedBy(this.user.id).subscribe(item => {
+        this.isBlocked = item.$value;
+      })
+    }
 
     this.chatService.loadMoreChats();
     this.hasNoChatsMessage = this.local.getString(this.hasNoChatsMessageId);
@@ -75,8 +99,14 @@ export class ChatPage {
 
   ionViewWillLeave() {
     this.chatService.updateUnread(this.user.id, false);
-    this.subscription.unsubscribe();
-    this.blkSubscription.unsubscribe();
+    if (this.subscription)
+      this.subscription.unsubscribe();
+    if (this.blkSubscription)
+      this.blkSubscription.unsubscribe();
+  }
+
+  ionViewWillUnload() {
+    document.removeEventListener('serviceplayerready', this.onPlayerReady);
   }
 
   ionViewDidEnter() {
@@ -112,7 +142,10 @@ export class ChatPage {
   }
 
   sendMessage(input) {
-    this.chatService.sendChat(this.user.id, this.user.pushId, this.newMessage);
+    if (this.groupName == "cheerleaders")
+      this.chatService.sendClGroupChat(this.newMessage);
+    else
+      this.chatService.sendChat(this.user.id, this.user.pushId, this.newMessage);
     input.focus();
     this.newMessage = '';
     //input.setFocus();
@@ -197,5 +230,19 @@ export class ChatPage {
       ]
     });
     confirm.present();
+  }
+
+  isFromSelf(chat) {
+    if (chat.isFromSelf)
+      return chat.isFromSelf;
+    else
+      return chat.senderId == this.playerService.selfId();
+  }
+
+  getPlayerInfo(playerId: string) {
+    if (playerId)
+      return this.watchListMap[playerId];
+    else
+      return null;
   }
 }
