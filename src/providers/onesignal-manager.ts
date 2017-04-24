@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { OneSignal } from 'ionic-native';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
+import { Http, Headers, RequestOptions } from '@angular/http'
 import { Platform } from 'ionic-angular';
 import * as firebase from 'firebase';
 import { UIHelper } from '../providers/uihelper'
@@ -10,7 +11,7 @@ import { PlayerService } from '../app/players/player.service';
 @Injectable()
 export class OneSignalManager {
   constructor(private platform: Platform, private fm: FirebaseManager, private playerService: PlayerService,
-    private uiHelper: UIHelper) {
+    private uiHelper: UIHelper, private http: Http) {
 
   }
 
@@ -65,7 +66,7 @@ export class OneSignalManager {
 
   postGroupNotification(messageObj, segmentName, success = null) {
     let notificationObj = {
-      headers: { "Authorization": "Basic MjkxZWQ0MWYtMDgxYS00ODcxLTkwMTMtNjMzMmQ2MGQ1NDU4" },
+      app_id: "f6268d9c-3503-4696-8e4e-a6cf2c028fc6",
       heading: { "en": "SoccerBro", "zh-Hans": "绿茵兄弟" },
       contents: messageObj,
       included_segments: [segmentName],
@@ -73,6 +74,22 @@ export class OneSignalManager {
       ios_badgeCount: 1
     };
 
+    // freaking hack starts from here......
+    let headers = new Headers({ 
+      'Content-Type': 'application/json',
+      'Authorization': 'Basic MjkxZWQ0MWYtMDgxYS00ODcxLTkwMTMtNjMzMmQ2MGQ1NDU4'
+    });
+    let options = new RequestOptions({ headers: headers });
+
+    this.http.post("https://onesignal.com/api/v1/notifications", notificationObj, options).subscribe(data => {
+      if (success)
+        success();
+    }, error => {
+      console.log(JSON.stringify(error.json()));
+    });
+    // end......
+
+    /*
     if (window["plugins"] && window["plugins"].OneSignal) {
       window["plugins"].OneSignal.postNotification(notificationObj,
         function (successResponse) {
@@ -84,6 +101,7 @@ export class OneSignalManager {
         }
       );
     }
+    */
   }
 
 
