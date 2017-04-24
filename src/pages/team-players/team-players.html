@@ -15,7 +15,7 @@
 </ion-header>
 
 <ion-content>
-  <button ion-button block> {{'recruitplayers' | trans}} <p>{{'code' | trans}} {{teamId}}</p></button>
+  <button *ngIf = "canShowInvite()" (click) = "invitePlayer()"> {{'recruitplayers' | trans}} <p>{{'code' | trans}} {{teamId}}</p></button>
   <ion-list>
     <ion-item *ngFor="let player of players">
       <ion-avatar item-left>

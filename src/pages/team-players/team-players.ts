@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController, PopoverController } from 'ionic-angular';
+import { Clipboard } from 'ionic-native';
+import { NavController, NavParams, ViewController, PopoverController, AlertController } from 'ionic-angular';
 import { PlayerService } from '../../app/players/player.service';
-import {ManagePlayerPopover} from './manage-players-menu';
+import { TeamService } from '../../app/teams/team.service';
+import { ManagePlayerPopover } from './manage-players-menu';
+import { Localization } from '../../providers/localization'
+declare var sprintf: any;
 
 @Component({
   templateUrl: 'team-players.html',
@@ -10,53 +14,39 @@ import {ManagePlayerPopover} from './manage-players-menu';
 export class TeamPlayersPage {
   //showDetail: boolean;
   teamId: string;
+  team;
   players: any[];
-  // filteredPlayers: any[];
-  // showClose: boolean;
-  // selectPlayersMode = false;
-  // selectedPlayersMap = {};
-  // addedPlayerMap = {};
   onTeamPlayersReady;
-
+  invitationCode;
   constructor(private nav: NavController,
     navParams: NavParams,
     private playersService: PlayerService,
     private viewCtrl: ViewController,
-    private popoverCtrl: PopoverController) {
+    private popoverCtrl: PopoverController,
+    private alertCtrl: AlertController,
+    private loc: Localization,
+    private teamSerive: TeamService) {
     this.teamId = navParams.get('teamId');
+    this.team = this.teamSerive.getTeam(this.teamId);
+    if (this.playersService.isAuthenticated()) {
+      let id = this.playersService.selfId() + "%" + this.teamId;
+      this.invitationCode = btoa(id);
+    }
     this.refreshPlayers();
-    //console.log(this.players);
   }
-  
+
   refreshPlayers() {
     this.players = this.playersService.getTeamPlayers2(this.teamId);
   }
 
-  ionViewDidLoad() {
-    // this.onTeamPlayersReady = e => {
-    //   let id = e['detail'];
-    //   if (id === this.teamId)
-    //     this.totalPlayers = this.teamPlayersService.getTeamPlayers(id);
-    //   //this.resetFilter();
-    // };
-
-    // document.addEventListener('serviceteamplayersready', this.onTeamPlayersReady);
-
-    // this.teamPlayersService.getTeamPlayersAsync(this.teamId);
-  }
-
-  ionViewWillUnload() {
-    //document.removeEventListener('serviceteamplayersready', this.onTeamPlayersReady);
-  }
-
   popupManageMenu(myEvent, player) {
-    let popover = this.popoverCtrl.create(ManagePlayerPopover, {teamId: this.teamId, teamPlayer: player});
+    let popover = this.popoverCtrl.create(ManagePlayerPopover, { teamId: this.teamId, teamPlayer: player });
     popover.onDidDismiss(e => {
       if (e) {
         this.refreshPlayers();
       }
     })
-    popover.present({ ev: myEvent});
+    popover.present({ ev: myEvent });
   }
 
   canShowSettings(playerId) {
@@ -65,52 +55,28 @@ export class TeamPlayersPage {
 
     if (this.playersService.isCaptain(playerId, this.teamId))
       return false;
-     
-    if (this.playersService.amICaptainOrAdmin(this.teamId)) 
+
+    if (this.playersService.amICaptainOrAdmin(this.teamId))
       return true;
 
     return false;
   }
 
-  // filterPlayers(ev: any) {
-  //   // Reset items back to all of the items
-  //   this.resetFilter();
+  //打开邀请
+  invitePlayer() {
+    //let id = this.selfId + "%" + this.team.id;
 
-  //   // set val to the value of the searchbar
-  //   let val = ev.target.value;
+    let msg = sprintf(this.loc.getString('teaminvitation'), this.playersService.myself().name, this.team.name, this.invitationCode);
+    Clipboard.copy(msg);
+    let alert = this.alertCtrl.create({
+      title: this.loc.getString('SoccerBro'),
+      message: this.loc.getString('teamInvitationCopied'),
+      buttons: [this.loc.getString('OK')]
+    });
+    alert.present();
+  }
 
-  //   // if the value is an empty string don't filter the items
-  //   if (val && val.trim() != '') {
-  //     this.filteredPlayers = this.filteredPlayers.filter((player) => {
-  //       return (player.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
-  //     })
-  //   }
-  // }
-
-  // selectPlayer(id: string) {
-  //   if (this.selectPlayersMode)
-  //     return;
-
-  //   if (this.showDetail === true)
-  //     this.nav.push(MyPlayerPage, { id: id });
-  //   else
-  //     this.viewCtrl.dismiss({ playerId: id });
-  // }
-
-  // close() {
-  //   this.viewCtrl.dismiss();
-  // }
-
-  // dismiss() {
-  //   // let playerIds = [];
-  //   // for (let key in this.selectedPlayersMap) {
-  //   //   if (this.selectedPlayersMap[key])
-  //   //     playerIds.push(key);
-  //   // }
-  //   this.viewCtrl.dismiss({ selectedIds: this.selectedPlayersMap });
-  // }
-
-  // onSelectionChange(playerId, e) {
-  //   this.selectedPlayersMap[playerId] = e.checked;
-  // }
+  canShowInvite() {
+    return this.playersService.amIMemberOfTeam(this.teamId);
+  }
 }

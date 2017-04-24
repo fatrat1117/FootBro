@@ -158,18 +158,18 @@ export class MyTeamPage {
 
 
   //打开邀请
-  invitePlayer() {
-    let id = this.selfId + "%" + this.team.id;
+  // invitePlayer() {
+  //   let id = this.selfId + "%" + this.team.id;
 
-    let msg = sprintf(this.loc.getString('teaminvitation'), this.selfPlayer.name, this.team.name, btoa(id));
-    Clipboard.copy(msg);
-    let alert = this.alertCtrl.create({
-      title: this.loc.getString('SoccerBro'),
-      message: this.loc.getString('teamInvitationCopied'),
-      buttons: [this.loc.getString('OK')]
-    });
-    alert.present();
-  }
+  //   let msg = sprintf(this.loc.getString('teaminvitation'), this.selfPlayer.name, this.team.name, btoa(id));
+  //   Clipboard.copy(msg);
+  //   let alert = this.alertCtrl.create({
+  //     title: this.loc.getString('SoccerBro'),
+  //     message: this.loc.getString('teamInvitationCopied'),
+  //     buttons: [this.loc.getString('OK')]
+  //   });
+  //   alert.present();
+  // }
 
   //打开修改
   openModify() {
