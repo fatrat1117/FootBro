@@ -769,6 +769,10 @@ export class FirebaseManager {
     return this._afTournamentList;
   }
 
+  afTournamentAdmin(tournamentId) {
+    return this.af.database.object('/tournaments/list/' + tournamentId + '/whitelist/' + this.selfId());
+  }
+
   afMatch(id) {
     return this.af.database.object('/matches/list/' + id);
   }

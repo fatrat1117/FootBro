@@ -39,6 +39,31 @@
 <button *ngIf='canShowDelete()' (tap)="deleteMatch()" color='danger' ion-button block>
         {{'deletematch' | trans}}
     </button>
+<div *ngIf="canShowEnroll()">
+  <div>{{'participants' | trans}}</div>
+  <ion-item text-wrap *ngIf="squad && squad.lineup">
+    <div *ngFor="let p of squad.lineup" class="avatar-top">
+      <ion-img [src]="p.photo">
+      </ion-img>
+      <p>{{ p.name }}</p>
+    </div>
+  </ion-item>
+
+  <ion-row padding-horizontal>
+    <ion-col text-center width-50>
+      <button ion-button block color="secondary" small (click)="joinMatch()">
+        <ion-icon name="checkmark"></ion-icon>
+        {{'Going' | trans}}
+      </button>
+    </ion-col>
+    <ion-col text-center width-50>
+      <button ion-button color="danger" small (click)="leaveMatch()">
+        <ion-icon name="close"></ion-icon>
+        {{'Cannotgo' | trans}}
+      </button>
+    </ion-col>
+  </ion-row>
+</div>
 </div>
 
 <div class="content-all" *ngSwitchCase="'squad'">
