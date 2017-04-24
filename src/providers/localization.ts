@@ -339,7 +339,9 @@ export class Localization {
             confirmremove: 'Do you want to remove %s from %s?',
             swipeFromRightToLeft: 'Please swipe items from right to left for more operations',
             editplayernickname: 'Edit nickname',
-            help: 'Help'
+            help: 'Help',
+            recruitplayers: 'Recruit players',
+            code: 'Code'
         },
 
         zh: {
@@ -657,7 +659,9 @@ export class Localization {
             confirmremove: '确定要将 %s 移除 %s吗?',
             swipeFromRightToLeft:'请从右向左滑动列表来获取更多操作',
             editplayernickname: '编辑球员昵称',
-            help: '帮助'
+            help: '帮助',
+            recruitplayers: '招募队员',
+            code: '邀请码'
         }
     }
 }
