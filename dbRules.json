@@ -21,19 +21,24 @@
                 "$id": {
                     ".read": "$id === auth.uid"
                 }
+            },
+            "chats": {
+              ".read": true,
+              ".write": true
             }
         },
         "matches": {
             ".read": true,
             "dates": {
-                ".write": "root.child('admins').hasChild(auth.uid) || root.child('teams').child(root.child('players').child(auth.uid).child('basic-info').child('teamId').val()).child('basic-info').child('captain').val() === auth.uid",
+                ".write": "root.child('players').hasChild(auth.uid)",
                 "$id": {
                   ".validate": "$id != null && $id != 'undefined'"
                 }
             },
             "list": {
-                // Only admin or team founder can write to this location
-                ".write": "root.child('admins').hasChild(auth.uid) || root.child('teams').child(root.child('players').child(auth.uid).child('basic-info').child('teamId').val()).child('basic-info').child('captain').val() === auth.uid",
+                // Only admin or team founder can write to this location.
+                // Update team admin rights - by LH
+                ".write": "root.child('players').hasChild(auth.uid)",
                 ".indexOn": [
                     "date",
                     "tournamentId"
