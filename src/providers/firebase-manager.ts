@@ -124,10 +124,12 @@ export class FirebaseManager {
 
   block(playerId: string) {
     this.af.database.object(`/chats/${this.auth.uid}/black-list/${playerId}`).set(true);
+    OneSignal.sendTag("block-cheerleader", "true");
   }
 
   unblock(playerId: string) {
     this.af.database.object(`/chats/${this.auth.uid}/black-list/${playerId}`).remove();
+    OneSignal.deleteTag("block-cheerleader");
   }
 
   isBlockedBy(userId: string) {
@@ -152,6 +154,18 @@ export class FirebaseManager {
     }
 
     return this.af.database.list(`/chats/${this.auth.uid}/${userId}`, {
+      query: {
+        limitToLast: subject
+      }
+    });
+  }
+
+  getClGroupChats(subject: any, isUnread: boolean) {
+    if (isUnread) {
+      this.updateUnread("1", false);
+    }
+
+    return this.af.database.list(`/cheerleaders/chats`, {
       query: {
         limitToLast: subject
       }
@@ -189,6 +203,29 @@ export class FirebaseManager {
       lastContent: content,
       lastTimestamp: firebase.database.ServerValue.TIMESTAMP,
     })
+  }
+
+  addClGroupChat(content: string) {
+    this.af.database.list(`/cheerleaders/chats`).push({
+      createdAt: firebase.database.ServerValue.TIMESTAMP,
+      content: content,
+      senderId: this.auth.uid
+    })
+
+    let onApprovedCheerleadersReady = e => {
+      this.getApprovedCheerleaders().forEach(cl => {
+        this.af.database.object(`/chats/${cl.$key}/basic-info/1`).set({
+          isUnread: true,
+          lastContent: content,
+          lastTimestamp: firebase.database.ServerValue.TIMESTAMP,
+          senderId: this.auth.uid,
+          groupName: "cheerleaders"
+        })
+      })
+      document.removeEventListener('approvedcheerleadersready', onApprovedCheerleadersReady);
+    }
+    document.addEventListener('approvedcheerleadersready', onApprovedCheerleadersReady);
+    this.getApprovedCheerleadersAsync();
   }
 
 
@@ -450,6 +487,10 @@ export class FirebaseManager {
   updateTeamLogo(id: string, logo: string) {
     console.log('updateTeamLogo', id, logo);
     this.af.database.object(`teams/${id}/basic-info/logo`).set(logo);
+  }
+
+  updateTeamPhotoLarge(teamId, photoUrl) {
+    this.af.database.object(`/teams/${teamId}/photoLarge`).set(photoUrl);
   }
 
   promoteNewCaptain(teamId: string, playerId: string) {

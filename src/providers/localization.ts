@@ -341,7 +341,10 @@ export class Localization {
             editplayernickname: 'Edit nickname',
             Role:'Role',
             Number:'Number',
-            EditNumberByClickingClothesIcon:'You can edit your own number by clicking icon'
+            EditNumberByClickingClothesIcon:'You can edit your own number by clicking icon',
+            help: 'Help',
+            recruitplayers: 'Recruit players',
+            code: 'Code'
         },
 
         zh: {
@@ -661,7 +664,10 @@ export class Localization {
             editplayernickname: '编辑球员昵称',
             Role:'角色',
             Number:'号码',
-            EditNumberByClickingClothesIcon:'点击球衣可编辑自己的球衣号码'
+            EditNumberByClickingClothesIcon:'点击球衣可编辑自己的球衣号码',
+            help: '帮助',
+            recruitplayers: '招募队员',
+            code: '邀请码'
         }
     }
 }

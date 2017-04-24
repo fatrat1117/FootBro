@@ -1,6 +1,6 @@
 page-chat {
   /*
-  ion-thumbnail{
+  ion-thumbnail[item-left]{
     float: left;
     min-width: 0;
     min-height: 0;
@@ -120,20 +120,27 @@ page-chat {
       background: #9de856;
     }
   }
+
   /*
+  .chat-room-avatar-div ion-thumbnail[item-left] {
+    float: left;
+    margin: 5px 5px 5px 0px;
+  }
+  */
+
   .chat-room-avatar-div ion-thumbnail[item-left] {
     float: left;
     margin: 0px 10px 0px 0px;
     min-width: 0;
     min-height: 0;
-    max-height: 3.5rem;
-    max-width: 3.5rem;
+    max-height: 4rem;
+    max-width: 4rem;
     img {
-      max-width: 3.5rem;
-      max-height: 3.5rem;
+      max-width: 4rem;
+      max-height: 4rem;
     }
   }
-  */
+
   .chat-room-footer {
     .text-input {
       color: white;

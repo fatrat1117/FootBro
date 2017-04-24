@@ -296,10 +296,11 @@ export class PlayerService {
     return this.isCaptain(this.selfId(), teamId);
   }
 
-  amICaptainOfCurrentTeam(teamId) {
-    return this.amIMemberOfCurrentTeam(teamId) && this.amICaptainOf(teamId);
+  amIMemberCaptainOrAdmin(teamId) {
+    return this.amIMemberOfCurrentTeam(teamId) && this.amICaptainOrAdmin(teamId);
   }
 
+  
   isCaptain(pId, tId) {
     //console.log('isCaptain', pId, tId);
     if (!pId || !tId)
@@ -398,6 +399,15 @@ export class PlayerService {
     return this.isTeamAdmin(this.selfId(), teamId);
   }
   
+  amICaptainOrAdminOfCurrentTeam() {
+    let pId = this.selfId();
+    if (!pId)
+      return false;
+
+    let tId = this.getPlayer(pId).teamId;
+    return this.amICaptainOrAdmin(tId);
+  }
+
   amICaptainOrAdmin(teamId) {
     return this.isCaptainOrAdmin(this.selfId(), teamId);
   }

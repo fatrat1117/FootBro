@@ -268,7 +268,7 @@ export class MatchesPage {
 
   canShowAdd() {
     if ('all' === this.selectedId)
-      return this.playerService.amICaptain();
+      return this.playerService.amICaptainOrAdminOfCurrentTeam();
     else 
       return this.isLeagueAdmin(); 
   }

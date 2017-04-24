@@ -38,11 +38,12 @@
       <span class="text-content">{{'EditNumberByClickingClothesIcon' | trans}}</span>
     </div>
   </div>
+
   <ion-list class="player-list">
     <ion-item *ngFor="let player of players">
-      <ion-thumbnail item-left class="player-avatar-wrapper">
+      <ion-avatar item-left class="player-avatar-wrapper">
         <img [src] = "player.photo" class="player-avatar"/>
-      </ion-thumbnail>
+      </ion-avatar>
       <ion-row>
         <ion-col width-50>{{ player.name }}</ion-col>
         <ion-col width-25>
@@ -53,3 +54,7 @@
     </ion-item>
   </ion-list>
 </ion-content>
+
+<ion-footer>
+  <button *ngIf = "canShowInvite()" (click) = "invitePlayer()"> {{'recruitplayers' | trans}} <p>{{'code' | trans}} {{teamId}}</p></button>
+</ion-footer>

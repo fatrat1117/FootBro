@@ -25,6 +25,10 @@ export class ChatService {
     //return Promise.resolve(CHATS);
   }
 
+  getClGroupChats(isUnread: boolean) {
+    return this.fm.getClGroupChats(this.sizeSubject, isUnread);
+  }
+
   loadMoreChats() {
     this.currentSize += 10;
     this.sizeSubject.next(this.currentSize)
@@ -33,6 +37,10 @@ export class ChatService {
   sendChat(id: string, pushId: string, content: string) {
     //this.fm.addChatToUser(userId, content);
     this.osm.sendNewChat(id, pushId, content)
+  }
+
+  sendClGroupChat(content: string) {
+    this.osm.sendClGroupChat(content);
   }
 
   updateUnread(userId: string, isUnread: boolean) {

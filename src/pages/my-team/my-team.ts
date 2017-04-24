@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Clipboard } from 'ionic-native';
-import { NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, AlertController, ActionSheetController } from 'ionic-angular';
 import { Localization } from '../../providers/localization';
 import { SearchPlayerPage } from '../search-player/search-player'
 import { SearchMatchPage } from '../search-match/search-match'
@@ -12,7 +12,7 @@ import { Team } from '../../app/teams/team.model'
 import { TeamService } from '../../app/teams/team.service'
 import { Match } from '../../app/matches/match.model'
 import { MatchService } from '../../app/matches/match.service'
-
+import { FirebaseManager } from '../../providers/firebase-manager'
 import * as moment from 'moment';
 declare var sprintf: any;
 
@@ -29,8 +29,8 @@ export class MyTeamPage {
   currTeamStat;
   selectedStatIndex = 0;
   players;
-  matches : Match [] = [];
-  upcomingMatch : Match;
+  matches: Match[] = [];
+  upcomingMatch: Match;
   mostGAMatchId;
   mostGFMatchId;
   captain;
@@ -49,7 +49,9 @@ export class MyTeamPage {
     private matchService: MatchService,
     private modalCtrl: ModalController,
     private alertCtrl: AlertController,
-    private loc: Localization) {
+    private loc: Localization,
+    private actionSheetCtrl: ActionSheetController,
+    private fm: FirebaseManager) {
   }
 
   ionViewDidLoad() {
@@ -113,7 +115,7 @@ export class MyTeamPage {
         this.matchService.getTeamMatchesAsync(teamId);
       }
     }
-    
+
     document.addEventListener('serviceplayerready', this.onPlayerReady);
     document.addEventListener('serviceteamstatsdataready', this.onTeamStatsDataReady);
     document.addEventListener('serviceteamplayersready', this.onTeamPlayersReady);
@@ -156,18 +158,18 @@ export class MyTeamPage {
 
 
   //打开邀请
-  invitePlayer() {
-    let id = this.selfId + "%" + this.team.id;
-    
-    let msg = sprintf(this.loc.getString('teaminvitation'), this.selfPlayer.name, this.team.name, btoa(id));
-    Clipboard.copy(msg);
-    let alert = this.alertCtrl.create({
-      title: this.loc.getString('SoccerBro'),
-      message: this.loc.getString('teamInvitationCopied'),
-      buttons: [this.loc.getString('OK')]
-    });
-    alert.present();
-  }
+  // invitePlayer() {
+  //   let id = this.selfId + "%" + this.team.id;
+
+  //   let msg = sprintf(this.loc.getString('teaminvitation'), this.selfPlayer.name, this.team.name, btoa(id));
+  //   Clipboard.copy(msg);
+  //   let alert = this.alertCtrl.create({
+  //     title: this.loc.getString('SoccerBro'),
+  //     message: this.loc.getString('teamInvitationCopied'),
+  //     buttons: [this.loc.getString('OK')]
+  //   });
+  //   alert.present();
+  // }
 
   //打开修改
   openModify() {
@@ -176,7 +178,7 @@ export class MyTeamPage {
 
   //查看更多球队赛程
   seeMoreTeamGamePlan() {
-    this.nav.push(SearchMatchPage, {matches: this.matches, showDate: true});
+    this.nav.push(SearchMatchPage, { matches: this.matches, showDate: true });
   }
 
   //查看更多球队成员
@@ -313,11 +315,47 @@ export class MyTeamPage {
 
   showMatch(match) {
     if (match) {
-      this.modalCtrl.create(MatchDetailPage, {match: match}).present();
+      this.modalCtrl.create(MatchDetailPage, { match: match }).present();
     }
   }
 
   openTeamPlayersPage() {
-    this.nav.push(TeamPlayersPage, {teamId: this.id});
+    this.nav.push(TeamPlayersPage, { teamId: this.id });
+  }
+
+  changeCoverPhoto() {
+    if (!this.playerService.amICaptainOrAdmin(this.id))
+      return;
+
+    let actionSheet = this.actionSheetCtrl.create({
+      buttons: [{
+        text: this.loc.getString('changecoverphoto'),
+        handler: () => {
+          this.doChangeCoverPhoto();
+        }
+      }, {
+        text: this.loc.getString('Cancel'),
+        role: 'cancel',
+        handler: () => {
+          //console.log('Cancel clicked');
+        }
+      }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  doChangeCoverPhoto() {
+    let self = this;
+
+    let success = photoUrl => {
+      this.service.updatePhotoLarge(this.id, photoUrl);
+    }
+
+    let error = err => {
+      console.log(err);
+    }
+
+    this.fm.selectImgUploadGetUrl(this.id + 'Large', 512, 512, success, error);
   }
 }
