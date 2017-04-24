@@ -41,7 +41,7 @@ export class TeamPlayersPage {
   }
 
   popupManageMenu(myEvent, player) {
-    let popover = this.popoverCtrl.create(ManagePlayerPopover, { teamId: this.teamId, teamPlayer: player });
+    let popover = this.popoverCtrl.create(ManagePlayerPopover, { teamId: this.teamId, teamPlayer: player },{ cssClass: 'team-player-operation-popover' });
     popover.onDidDismiss(e => {
       if (e) {
         this.refreshPlayers();

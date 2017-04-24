@@ -47,7 +47,8 @@
         </ion-avatar>
         <ion-col class="player-name">
           <div class="name-text">{{ player.name }}</div>
-          <div class="position" *ngIf="isSetPosition(player.position)">{{ toUpperCase(player.position)}}</div>
+          <div class="position" *ngIf = "isSetPosition(player.position)">{{ toUpperCase(player.position)}}</div>
+          <div class="not-set-position" *ngIf = "isSetPosition(player.position) == false">{{ 'NotSet' | trans }}</div>
         </ion-col>
         <ion-col class="player-operation flex-center" >
           <ion-icon *ngIf = "canShowSettings(player.id)" name="settings" (tap) = "popupManageMenu($event, player)"></ion-icon>
@@ -59,5 +60,10 @@
 </ion-content>
 
 <ion-footer>
-  <button *ngIf = "canShowInvite()" (click) = "invitePlayer()"> {{'recruitplayers' | trans}} <p>{{'code' | trans}} {{teamId}}</p></button>
+  <button *ngIf = "canShowInvite()" (click) = "invitePlayer()" class="footer-button">
+    <div class="wrapper">
+    <div class="recruit-players">{{'recruitplayers' | trans}}</div>
+    <div class="invite-code">{{'code' | trans}} {{teamId}}</div>
+    </div>
+  </button>
 </ion-footer>

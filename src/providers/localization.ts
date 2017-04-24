@@ -345,7 +345,7 @@ export class Localization {
             help: 'Help',
             recruitplayers: 'Recruit players',
             code: 'Code',
-            NotSetPosition:'Position is not been set'
+            NotSet:'Not set'
         },
 
         zh: {
@@ -669,7 +669,7 @@ export class Localization {
             help: '帮助',
             recruitplayers: '招募队员',
             code: '邀请码',
-            NotSet: '位置未设定'
+            NotSet: '未设定'
         }
     }
 }
