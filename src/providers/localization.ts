@@ -338,7 +338,10 @@ export class Localization {
             player: 'Player',
             confirmremove: 'Do you want to remove %s from %s?',
             swipeFromRightToLeft: 'Please swipe items from right to left for more operations',
-            editplayernickname: 'Edit nickname'
+            editplayernickname: 'Edit nickname',
+            Role:'Role',
+            Number:'Number',
+            EditNumberByClickingClothesIcon:'You can edit your own number by clicking icon'
         },
 
         zh: {
@@ -655,7 +658,10 @@ export class Localization {
             player: '球员',
             confirmremove: '确定要将 %s 移除 %s吗?',
             swipeFromRightToLeft:'请从右向左滑动列表来获取更多操作',
-            editplayernickname: '编辑球员昵称'
+            editplayernickname: '编辑球员昵称',
+            Role:'角色',
+            Number:'号码',
+            EditNumberByClickingClothesIcon:'点击球衣可编辑自己的球衣号码'
         }
     }
 }

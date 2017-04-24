@@ -1,0 +1,60 @@
+team-players {
+
+  .list-header {
+    display: flex;
+    padding: 5px;
+    background: #2d2d2d;
+
+    .player-label {
+      flex: 4;
+      padding-left: 5px;
+    }
+
+    .player-role {
+      flex: 1;
+      text-align: center;
+    }
+
+    .player-number {
+      flex: 1;
+      text-align: center;
+    }
+  }
+  .usage-notification-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1f1f21;
+    padding-left: 10px;
+    positon: relative;
+    color: white;
+
+    .notification-text {
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      width: 100%;
+      justify-content: flex-start;
+      //animation: fade-in .65s ease-in forwards;
+      .icon{
+        text-align: center;
+        padding: 5px;
+      }
+      .text-content{
+      }
+    }
+  }
+
+  .player-list{
+    .player-avatar-wrapper{
+      min-height: 5rem;
+      min-width: 5rem;
+      .player-avatar{
+        max-height: 5rem;
+        max-width: 5rem;
+      }
+    }
+  }
+}
+
+

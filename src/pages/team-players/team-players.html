@@ -10,7 +10,7 @@
       <button color='primary' (tap) = 'dismiss()' ion-button clear>
         {{'OK' | trans}}
       </button>
-    </ion-buttons>--> 
+    </ion-buttons>-->
   </ion-navbar>
 </ion-header>
 
@@ -27,10 +27,21 @@
       {{ player.name }}
     </ion-item>
   </ion-list>-->
-  <ion-list>
+  <div class="list-header">
+    <div class="player-label">{{'Player' | trans}}</div>
+    <div class="player-role">{{'Role' | trans}}</div>
+    <div class="player-number">{{'Number' | trans}}</div>
+  </div>
+  <div class="usage-notification-panel">
+    <div class="notification-text">
+      <ion-icon name="bulb" class="icon"></ion-icon>
+      <span class="text-content">{{'EditNumberByClickingClothesIcon' | trans}}</span>
+    </div>
+  </div>
+  <ion-list class="player-list">
     <ion-item *ngFor="let player of players">
-      <ion-thumbnail item-left>
-        <img [src] = "player.photo"/>
+      <ion-thumbnail item-left class="player-avatar-wrapper">
+        <img [src] = "player.photo" class="player-avatar"/>
       </ion-thumbnail>
       <ion-row>
         <ion-col width-50>{{ player.name }}</ion-col>
