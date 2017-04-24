@@ -344,7 +344,8 @@ export class Localization {
             EditNumberByClickingClothesIcon:'You can edit your own number by clicking icon',
             help: 'Help',
             recruitplayers: 'Recruit players',
-            code: 'Code'
+            code: 'Code',
+            NotSetPosition:'Position is not been set'
         },
 
         zh: {
@@ -667,7 +668,8 @@ export class Localization {
             EditNumberByClickingClothesIcon:'点击球衣可编辑自己的球衣号码',
             help: '帮助',
             recruitplayers: '招募队员',
-            code: '邀请码'
+            code: '邀请码',
+            NotSet: '位置未设定'
         }
     }
 }
