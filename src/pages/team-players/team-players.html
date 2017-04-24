@@ -29,8 +29,8 @@
   </ion-list>-->
   <div class="list-header">
     <div class="player-label">{{'Player' | trans}}</div>
+    <div class="player-option">{{'Settings' | trans}}</div>
     <div class="player-role">{{'Role' | trans}}</div>
-    <div class="player-number">{{'Number' | trans}}</div>
   </div>
   <div class="usage-notification-panel">
     <div class="notification-text">
@@ -40,16 +40,19 @@
   </div>
 
   <ion-list class="player-list">
-    <ion-item *ngFor="let player of players">
-      <ion-avatar item-left class="player-avatar-wrapper">
+    <ion-item *ngFor="let player of players" class="player-item">
+      <ion-row class="player-item-row">
+        <ion-avatar item-left class="player-avatar-wrapper">
         <img [src] = "player.photo" class="player-avatar"/>
-      </ion-avatar>
-      <ion-row>
-        <ion-col width-50>{{ player.name }}</ion-col>
-        <ion-col width-25>
+        </ion-avatar>
+        <ion-col class="player-name">
+          <div class="name-text">{{ player.name }}</div>
+          <div class="position" *ngIf="isSetPosition(player.position)">{{ toUpperCase(player.position)}}</div>
+        </ion-col>
+        <ion-col class="player-operation flex-center" >
           <ion-icon *ngIf = "canShowSettings(player.id)" name="settings" (tap) = "popupManageMenu($event, player)"></ion-icon>
         </ion-col>
-        <ion-col width-25>{{player.teamRole | trans}}</ion-col>
+        <ion-col class="player-team-role flex-center">{{player.teamRole | trans}}</ion-col>
       </ion-row>
     </ion-item>
   </ion-list>

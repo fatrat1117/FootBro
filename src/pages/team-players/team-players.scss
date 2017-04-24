@@ -1,22 +1,32 @@
 team-players {
 
+  .flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .list-header {
     display: flex;
     padding: 5px;
     background: #2d2d2d;
+    font-size: 1.2rem;
 
     .player-label {
-      flex: 4;
+      flex: 0 0 60%;
+      max-width: 60%;
       padding-left: 5px;
     }
 
     .player-role {
-      flex: 1;
+      flex: 0 0 20%;
+      max-width: 20%;
       text-align: center;
     }
 
-    .player-number {
-      flex: 1;
+    .player-option {
+      flex: 0 0 20%;
+      max-width: 20%;
       text-align: center;
     }
   }
@@ -46,13 +56,58 @@ team-players {
   }
 
   .player-list{
+    .player-item{
+      padding:0;
+      .item-inner{
+        padding: 0;
+        ion-label{
+          margin: 0;
+        }
+      }
+    }
+
+    .player-item-row{
+      padding: 5px;
+      flex-wrap: nowrap;
+      font-size: 1.4rem;
+    }
+
     .player-avatar-wrapper{
       min-height: 5rem;
       min-width: 5rem;
+      display: flex;
+      align-items: center;
+      margin:0;
+      padding-left: 5px;
+
+      flex:0 0 15%;
+      max-width: 15%;
       .player-avatar{
         max-height: 5rem;
         max-width: 5rem;
       }
+    }
+    .player-name{
+       flex: 0 0 50%;
+       max-width: 50%;
+      .name-text{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .position{
+        font-size: 0.8rem;
+        color:#ddd;
+      }
+    }
+    .player-operation{
+      flex: 0 0 10%;
+      max-width: 10%;
+
+    }
+    .player-team-role{
+      flex: 0 0 20%;
+      max-width: 20%;
     }
   }
 }

@@ -81,4 +81,8 @@ export class UIHelper {
     });
     return results;
   }
+
+  stringToUpperCase(str){
+    return str.toUpperCase();
+  }
 }

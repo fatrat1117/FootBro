@@ -4,7 +4,8 @@ import { NavController, NavParams, ViewController, PopoverController, AlertContr
 import { PlayerService } from '../../app/players/player.service';
 import { TeamService } from '../../app/teams/team.service';
 import { ManagePlayerPopover } from './manage-players-menu';
-import { Localization } from '../../providers/localization'
+import { Localization } from '../../providers/localization';
+import { UIHelper } from '../../providers/uihelper';
 declare var sprintf: any;
 
 @Component({
@@ -25,7 +26,7 @@ export class TeamPlayersPage {
     private popoverCtrl: PopoverController,
     private alertCtrl: AlertController,
     private loc: Localization,
-    private teamSerive: TeamService) {
+    private teamSerive: TeamService, private uiHelper: UIHelper,) {
     this.teamId = navParams.get('teamId');
     this.team = this.teamSerive.getTeam(this.teamId);
     if (this.playersService.isAuthenticated()) {
@@ -78,5 +79,17 @@ export class TeamPlayersPage {
 
   canShowInvite() {
     return this.playersService.amIMemberOfTeam(this.teamId);
+  }
+
+  isSetPosition(position){
+    if (position){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  toUpperCase(str){
+    return this.uiHelper.stringToUpperCase(str);
   }
 }

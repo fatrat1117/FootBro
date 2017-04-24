@@ -404,4 +404,7 @@ export class MatchDetailPage {
     return this.matchDetailContent.scrollHeight - this.pageHeader.nativeElement.clientHeight;
   }
 
+  canShowEnroll() {
+    return !this.match.isStarted() && this.playerService.amIMemberOfTeam(this.squadSettings.teamId);
+  }
 }
