@@ -223,4 +223,16 @@ export class MatchService {
       return 2;
     return 0;
   }
+
+  attendMatch(teamId: string, matchId: string) {
+    this.fm.attendMatch(teamId, matchId);
+  }
+
+  absentMatch(teamId: string, matchId: string) {
+    this.fm.absentMatch(teamId, matchId);
+  }
+
+  TBDMatch(teamId: string, matchId: string) {
+    this.fm.TBDMatch(teamId, matchId);
+  }
 }

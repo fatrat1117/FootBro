@@ -407,4 +407,16 @@ export class MatchDetailPage {
   canShowEnroll() {
     return !this.match.isStarted() && this.playerService.amIMemberOfTeam(this.squadSettings.teamId);
   }
+
+  attendMatch() {
+    this.matchService.attendMatch(this.squadSettings.teamId, this.match.id);
+  }
+
+  absentMatch() {
+    this.matchService.absentMatch(this.squadSettings.teamId, this.match.id);
+  }
+
+  TBDMatch(teamId: string, matchId: string) {
+    this.matchService.TBDMatch(this.squadSettings.teamId, this.match.id);
+  }
 }

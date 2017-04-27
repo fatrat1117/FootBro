@@ -1016,6 +1016,19 @@ export class FirebaseManager {
   getMatchSquadRef(teamId, matchId) {
     return `/team_squads/${teamId}/matches/${matchId}/`;
   }
+  
+  
+  attendMatch(teamId: string, matchId: string) {
+    this.af.database.object(this.getMatchSquadRef(teamId, matchId) + 'attendance/' + this.selfId()).set(1);
+  }
+
+  absentMatch(teamId: string, matchId: string) {
+    this.af.database.object(this.getMatchSquadRef(teamId, matchId) + 'attendance/' + this.selfId()).set(0);
+  }
+
+  TBDMatch(teamId: string, matchId: string) {
+    this.af.database.object(this.getMatchSquadRef(teamId, matchId) + 'attendance/' + this.selfId()).set(2);
+  }
 
   ratePlayers(teamId, matchId, ratings) {
     this.af.database.object(this.getMatchSquadRef(teamId, matchId) + 'ratings/' + this.selfId()).set(ratings);

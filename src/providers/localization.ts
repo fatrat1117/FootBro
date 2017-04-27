@@ -345,7 +345,9 @@ export class Localization {
             help: 'Help',
             recruitplayers: 'Recruit players',
             code: 'Code',
-            NotSet:'Not set'
+            NotSet:'Not set',
+            TBD: 'TBD',
+            applyleave: 'Apply leave'
         },
 
         zh: {
@@ -669,7 +671,9 @@ export class Localization {
             help: '帮助',
             recruitplayers: '招募队员',
             code: '邀请码',
-            NotSet: '未设定'
+            NotSet: '未设定',
+            TBD: '待定',
+            applyleave: '请假'
         }
     }
 }
