@@ -387,7 +387,7 @@ export class MatchDetailPage {
     if (this.squad && this.squad.ratings && this.squad.ratings[this.playerService.selfId()])
       return false;
 
-    return true;
+    return this.squad && this.squad.participantsConfirmed;
   }
 
   openRatePlayersPage() {
