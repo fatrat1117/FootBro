@@ -3,7 +3,7 @@
     <ion-title>
       {{ user?.name }}
     </ion-title>
-    <ion-buttons right>
+    <ion-buttons right *ngIf="!isSystem">
       <button clear ion-button color="danger" (click)="onReport()">
         {{'report' | trans}}
       </button>
@@ -39,6 +39,7 @@
           <label>{{ getDisplayTime(i) }}</label>
         </ion-item>
 
+        <!-- system -->
         <div *ngIf="isSystem">
           <ion-item class="chat-room-msg-item" [ngClass]="['chat-room-msg-item-admin']">
             <div class="msg-box center">
