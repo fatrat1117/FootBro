@@ -5,6 +5,9 @@
       <button *ngIf="canShowAdd()" ion-button icon-only (tap)="enterNewGame()">
         <ion-icon name="md-add" color="primary"></ion-icon>
       </button>
+      <button ion-button icon-only (click)="showRules()">
+        <ion-icon name="md-information-circle" color="light"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar *ngIf="selectedId != 'all'">

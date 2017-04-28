@@ -4,6 +4,7 @@ import { Match } from '../../app/matches/match.model'
 import { MatchService } from '../../app/matches/match.service'
 import { PlayerService } from '../../app/players/player.service'
 import { NewGamePage } from "../new-game/new-game";
+import { MatchRulesPage } from "./match-rules"
 import * as moment from 'moment';
 
 @Component({
@@ -32,6 +33,7 @@ export class MatchesPage {
   onMatchesChanged;
   isEnd = false;
   title = "schedule";
+  rules = "";
 
   constructor(public navCtrl: NavController,
     private modalCtrl: ModalController,
@@ -54,6 +56,10 @@ export class MatchesPage {
       this.selectedInfo = "standings";
       this.isEnd = true;
       this.title = "results";
+    }
+
+    if (this.navParams.get("rules")) {
+      this.rules = this.navParams.get("rules");
     }
 
     this.matchService.getMatchDatesAsync(this.selectedId);
@@ -271,5 +277,11 @@ export class MatchesPage {
       return this.playerService.amICaptainOrAdminOfCurrentTeam();
     else 
       return this.isLeagueAdmin(); 
+  }
+
+  showRules() {
+    this.modalCtrl.create(MatchRulesPage, {
+      rules: this.rules
+    }).present();
   }
 }

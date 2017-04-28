@@ -51,7 +51,8 @@ export class MatchListPage {
     else {
       this.navCtrl.push(MatchesPage, {
         id: league.$key,
-        status: league.status
+        status: league.status,
+        rules: league.rules
       })
     }
 
