@@ -77,11 +77,11 @@
 </div>
 
 <div class="content-all" *ngSwitchCase="'players'">
-  <no-record *ngIf="statCategories.length <= 0" message="{{'searchMatchPageNoRecord' | trans}}"></no-record>
-  <div *ngIf="statCategories.length > 0">
-    <button *ngIf='canShowRate()' (tap)="openRatePlayersPage()" ion-button block>
+      <button *ngIf='canShowRate()' (tap)="openRatePlayersPage()" ion-button block>
           {{'rateplayers' | trans}}
       </button>
+  <no-record *ngIf="statCategories.length <= 0" message="{{'searchMatchPageNoRecord' | trans}}"></no-record>
+  <div *ngIf="statCategories.length > 0">
     <div class="left-scrollview matches-date-tab-col" [ngStyle]="{'height.px': getMatchDetailScrollHeight()}">
       <ion-list class="date-tab-list">
         <ion-item *ngFor="let cat of statCategories;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (tap)='showStat(cat)'
