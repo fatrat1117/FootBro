@@ -92,4 +92,5 @@ export class TeamPlayersPage {
   toUpperCase(str){
     return this.uiHelper.stringToUpperCase(str);
   }
+
 }

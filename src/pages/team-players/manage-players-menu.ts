@@ -8,14 +8,17 @@ declare var sprintf: any;
 
 @Component({
   template: `
-    <ion-list>
+    <ion-list class="menu-list">
       <button ion-item (click)="edit()" *ngIf="canShowRemoveFromTeam()">{{'editplayernickname' | trans}}</button>
-      <button ion-item (click)="removeFromTeam()" *ngIf="canShowRemoveFromTeam()">{{'removefromteam' | trans}}</button>
       <button ion-item (click)="appointAdmin()" *ngIf="canShowAppointAdmin()">{{'appointadmin' | trans}}</button>
       <button ion-item (click)="removeAdmin()" *ngIf="canShowRemoveAdmin()">{{'removeadmin' | trans}}</button>
       <button ion-item (click)="promoteToCaptain()" *ngIf="canPromoteToCaptain()">{{'PromoteToCaptain' | trans}}</button>
+      <button ion-item (click)="removeFromTeam()" *ngIf="canShowRemoveFromTeam()"
+      class="danger-operation no-bottom-line">{{'removefromteam' | trans}}</button>
     </ion-list>
-  `
+  `,
+  selector:'manage-players-menu'
+
 })
 export class ManagePlayerPopover {
   teamId;

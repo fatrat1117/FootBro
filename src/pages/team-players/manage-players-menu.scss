@@ -1,0 +1,22 @@
+//styles:[
+//'.danger-operation{' +
+//'color:red !important;' +
+//'}'
+//]
+manage-players-menu{
+  .menu-list{
+
+    margin:0;
+    .danger-operation{
+      color:red!important;
+    }
+
+    .no-bottom-line{
+      border-bottom: none;
+    }
+
+
+
+  }
+
+}
