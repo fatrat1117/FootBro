@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { ViewController, NavParams, ModalController, Events, AlertController,Content } from 'ionic-angular';
+import { ViewController, NavParams, ModalController, Events, AlertController, Content } from 'ionic-angular';
 import { Match } from '../../app/matches/match.model';
 import { EditSquadPage } from '../edit-squad/edit-squad';
 import { SharePage } from '../share/share';
@@ -35,6 +35,9 @@ export class MatchDetailPage {
   selectedCat;
   currPageName = "match-detail";
   mapClicked = false;
+  attendances = [];
+  absences = [];
+  TBDs = [];
 
   constructor(private viewCtrl: ViewController,
     private modal: ModalController,
@@ -44,7 +47,7 @@ export class MatchDetailPage {
     private teamService: TeamService,
     private launchNavigator: LaunchNavigator,
     private alertCtrl: AlertController,
-    private loc : Localization,
+    private loc: Localization,
     private matchService: MatchService) {
     this.match = navParams.get('match');
 
@@ -70,8 +73,10 @@ export class MatchDetailPage {
   ionViewDidLoad() {
     this.onMatchSquadReady = (teamId, matchId) => {
       if (matchId === this.match.id) {
-        if ('teamId' in this.squadSettings && teamId === this.squadSettings.teamId)
+        if ('teamId' in this.squadSettings && teamId === this.squadSettings.teamId) {
           this.squad = this.teamService.getMatchSquad(teamId, matchId);
+          this.updateEnrollPlayers();
+        }
 
         if (teamId === this.match.homeId) {
           this.homeSquad = this.teamService.getMatchSquad(this.match.homeId, matchId);
@@ -208,10 +213,10 @@ export class MatchDetailPage {
     if (!this.playerService.isAuthenticated())
       return false;
 
-      if (this.playerService.amIMemberOfCurrentTeam(this.match.homeId) ||
+    if (this.playerService.amIMemberOfCurrentTeam(this.match.homeId) ||
       this.playerService.amIMemberOfCurrentTeam(this.match.awayId)) {
-        return true;
-      }
+      return true;
+    }
 
     return false;
   }
@@ -273,7 +278,7 @@ export class MatchDetailPage {
           //if (this.squad)
           //  return true;
         }
-        //break;
+      //break;
       // case 'rating':
       //   break;
     }
@@ -335,7 +340,7 @@ export class MatchDetailPage {
       3000);
   }
 
-  doDeleteMatch () {
+  doDeleteMatch() {
     this.matchService.deleteMatch(this.match.id);
     this.dismiss();
   }
@@ -391,13 +396,13 @@ export class MatchDetailPage {
   }
 
   openRatePlayersPage() {
-      let modal = this.modal.create(EditGameRatingPage, { squad: this.squad, teamId: this.squadSettings.teamId, matchId: this.match.id });
-      modal.onDidDismiss(done => {
-        if (done) {
-          this.getCombinedStats();
-        }
-      });
-      modal.present();
+    let modal = this.modal.create(EditGameRatingPage, { squad: this.squad, teamId: this.squadSettings.teamId, matchId: this.match.id });
+    modal.onDidDismiss(done => {
+      if (done) {
+        this.getCombinedStats();
+      }
+    });
+    modal.present();
   }
 
   getMatchDetailScrollHeight() {
@@ -418,5 +423,35 @@ export class MatchDetailPage {
 
   TBDMatch(teamId: string, matchId: string) {
     this.matchService.TBDMatch(this.squadSettings.teamId, this.match.id);
+  }
+
+  updateEnrollPlayers() {
+    if (this.squad && this.squad.attendance) {
+      this.attendances.splice(0);
+      this.absences.splice(0);
+      this.TBDs.splice(0);
+
+      for (let playerId in this.squad.attendance) {
+          let playerEnrollInfo = this.squad.attendance[playerId];
+          switch (playerEnrollInfo) {
+            case 0:
+            this.absences.push(this.playerService.findOrCreatePlayerAndPull(playerId));
+            break;
+            case 1:
+            this.attendances.push(this.playerService.findOrCreatePlayerAndPull(playerId));
+            break;
+            case 2:
+            this.TBDs.push(this.playerService.findOrCreatePlayerAndPull(playerId));
+            break;
+          }
+      }
+    }
+  }
+
+  getDisabled(stat) {
+    if (this.squad && this.squad.attendance && stat === this.squad.attendance[this.playerService.selfId()])
+      return true;
+    
+    return false;
   }
 }

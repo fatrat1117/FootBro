@@ -36,40 +36,53 @@
     <p>{{match?.location?.address}}</p>
   </ion-item>
 </ion-list>
-<button *ngIf='canShowDelete()' (tap)="deleteMatch()" color='danger' ion-button block>
-        {{'deletematch' | trans}}
-    </button>
-<div *ngIf="canShowEnroll()">
-  <div>{{'participants' | trans}}</div>
-  <ion-item text-wrap *ngIf="squad && squad.attendance">
-    <div *ngFor="let p of squad.attendance" class="avatar-top">
-      <ion-img [src]="p.photo">
-      </ion-img>
-      <p>{{ p.name }}</p>
-    </div>
-  </ion-item>
 
+<div *ngIf="canShowEnroll()">
+  <ion-list>
+    <ion-item-divider>{{'participants' | trans}}({{attendances.length}})</ion-item-divider>
+    <ion-item *ngIf="attendances.length" text-wrap>
+      <div *ngFor="let p of attendances" class="avatar-top">
+        <img [src]="p?.photo" />
+        <p>{{ p?.name }}</p>
+      </div>
+    </ion-item>
+    <ion-item-divider>{{'applyleave' | trans}}({{absences.length}})</ion-item-divider>
+    <ion-item *ngIf="absences.length" text-wrap>
+      <div *ngFor="let p of absences" class="avatar-top">
+        <img [src]="p?.photo" />
+        <p>{{ p?.name }}</p>
+      </div>
+    </ion-item>
+    <ion-item-divider>{{'TBD' | trans}}({{TBDs.length}})</ion-item-divider>
+    <ion-item *ngIf="TBDs.length" text-wrap>
+      <div *ngFor="let p of TBDs" class="avatar-top">
+        <img [src]="p?.photo" />
+        <p>{{ p?.name }}</p>
+      </div>
+    </ion-item>
+  </ion-list>
   <ion-row padding-horizontal>
     <ion-col text-center>
-      <button ion-button block color="secondary" small (click)="TBDMatch()">
+      <button ion-button block color="secondary" [disabled]="getDisabled(2)" small (click)="TBDMatch()">
         <ion-icon name="checkmark"></ion-icon>
         {{'TBD' | trans}}
       </button>
     </ion-col>
     <ion-col text-center>
-      <button ion-button block color="secondary" small (click)="absentMatch()">
+      <button ion-button block color="secondary" [disabled]="getDisabled(0)" small (click)="absentMatch()">
         <ion-icon name="checkmark"></ion-icon>
         {{'applyleave' | trans}}
       </button>
     </ion-col>
     <ion-col text-center>
-      <button ion-button color="danger" small (click)="attendMatch()">
+      <button ion-button color="danger" [disabled]="getDisabled(1)" small (click)="attendMatch()">
         <ion-icon name="close"></ion-icon>
         {{'Going' | trans}}
       </button>
     </ion-col>
   </ion-row>
 </div>
+<button *ngIf='canShowDelete()' (tap)="deleteMatch()" color='danger' ion-button block>{{'deletematch' | trans}}</button>
 </div>
 
 <div class="content-all" *ngSwitchCase="'squad'">
@@ -77,7 +90,7 @@
 </div>
 
 <div class="content-all" *ngSwitchCase="'players'">
-      <button *ngIf='canShowRate()' (tap)="openRatePlayersPage()" ion-button block>
+  <button *ngIf='canShowRate()' (tap)="openRatePlayersPage()" ion-button block>
           {{'rateplayers' | trans}}
       </button>
   <no-record *ngIf="statCategories.length <= 0" message="{{'searchMatchPageNoRecord' | trans}}"></no-record>
