@@ -18,6 +18,9 @@
       <ion-segment-button value="standings">
         {{ 'standings' | trans }}
       </ion-segment-button>
+      <ion-segment-button value="eliminations" *ngIf="type == 'cup'">
+        {{ 'eliminations' | trans }}
+      </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 </ion-header>
@@ -53,13 +56,7 @@
       </div>
       <!-- table -->
       <div *ngSwitchCase="'standings'">
-        <div *ngIf="type == 'cup'">
-          <sb-cup-team></sb-cup-team>
-          <sb-cup-team></sb-cup-team>
-          <sb-cup-team></sb-cup-team>
-        </div>
-
-        <div *ngIf="type == 'league'" class="league-stats-standing">
+        <div class="league-stats-standing">
           <ion-grid>
             <ion-row no-margin>
               <ion-col width-50>
@@ -118,18 +115,51 @@
           </ion-grid>
         </div>
       </div>
+
+      <!-- elimination -->
+      <div *ngSwitchCase="'eliminations'">
+        <div>
+          <sb-cup-team></sb-cup-team>
+          <sb-cup-team></sb-cup-team>
+          <sb-cup-team></sb-cup-team>
+        </div>
+      </div>
     </div>
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="type == 'cup'">
+  <!-- standings -->
+  <ion-segment [(ngModel)]="selectedGroup" mode="md" *ngIf="selectedInfo == 'standings'">
+    <ion-segment-button *ngFor="let g of groups; let i = index" [value]="i">
+      Group Name
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- eliminations -->
+  <ion-segment [(ngModel)]="selectedElimination" mode="md" *ngIf="selectedInfo == 'eliminations'">
+    <ion-segment-button *ngFor="let e of eliminations; let i = index" [value]="i">
+      Elimination Name
+    </ion-segment-button>
+  </ion-segment>
+  <!-->
   <ion-row text-center>
+    <ion-col *ngFor="let g of groups;">
+      <button ion-button small color="secondary" (click)="showStandings(g)">
+        Group Name
+      </button>
+    </ion-col>
+  </ion-row>
+  <ion-row text-center *ngIf="selectedInfo == 'eliminations'">
     <ion-col>
       <button ion-button small color="secondary" (click)="setCurrentPosition(1)">
         GS
       </button>
     </ion-col>
     <ion-col>
-      2
+      <button ion-button small color="secondary" (click)="setCurrentPosition(1)">
+        GS
+      </button>
     </ion-col>
   </ion-row>
+  <-->
 </ion-footer>

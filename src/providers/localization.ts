@@ -351,7 +351,8 @@ export class Localization {
             roundNumber: 'Round %s',
             matchInfo:'Match',
             pending:'Pending',
-            informAll:'Message ALL'
+            informAll:'Message ALL',
+            eliminations: 'Eliminations',
         },
 
         zh: {
@@ -681,7 +682,8 @@ export class Localization {
             roundNumber: '第%s轮',
             matchInfo:'比赛',
             pending:'待定',
-            informAll:'群发短信'
+            informAll:'群发短信',
+            eliminations: '淘汰赛',
         }
     }
 }
