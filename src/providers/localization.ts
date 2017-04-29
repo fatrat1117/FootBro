@@ -349,6 +349,9 @@ export class Localization {
             TBD: 'TBD',
             applyleave: 'Apply leave',
             roundNumber: 'Round %s',
+            matchInfo:'Match',
+            pending:'Pending',
+            informAll:'Message ALL',
             eliminations: 'Eliminations',
         },
 
@@ -677,6 +680,9 @@ export class Localization {
             TBD: '待定',
             applyleave: '请假',
             roundNumber: '第%s轮',
+            matchInfo:'比赛',
+            pending:'待定',
+            informAll:'群发短信',
             eliminations: '淘汰赛',
         }
     }
