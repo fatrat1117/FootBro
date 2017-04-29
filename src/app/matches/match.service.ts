@@ -13,6 +13,7 @@ export class MatchService {
   matchesMap = {};
   teamMatchesMap = {};
   tournamentTableMap = {};
+  eliminationMap = {};
   registeredTeamsMap = {};
 
   constructor(private fm: FirebaseManager,
@@ -72,6 +73,27 @@ export class MatchService {
       });
       this.tournamentTableMap[id] = table;
       this.fm.FireCustomEvent('servicetournamenttableready', id);
+    });
+
+    document.addEventListener('eliminationsready', e => {
+      let id = e['detail'];
+      let els = this.fm.getEliminations(id);
+      let newEls = [];
+
+      for (let i = 0; i < els.length; ++i) {
+        let newEl: any = {};
+        newEl.name = els[i].name;
+        newEl.matches = [];
+        if (i < els.length - 1)
+          newEl.nextName = els[i+1].name;
+        for(let m in els[i].matches) {
+          newEl.matches.push(m);
+        }
+        newEls.push(newEl);
+      }
+
+      this.eliminationMap[id] = newEls;
+      this.fm.FireCustomEvent('serviceeliminationsready', id);
     });
 
     document.addEventListener('registeredteamsready', e => {
@@ -172,11 +194,22 @@ export class MatchService {
     return this.tournamentTableMap[id];
   }
 
+  getEliminations(id) {
+    return this.eliminationMap[id];
+  }
+
   getTournamentTableAsync(id) {
     if (this.getTournamentTable(id))
       this.fm.FireCustomEvent('servicetournamenttableready', id);
     else
       this.fm.getTournamentTableAsync(id);
+  }
+
+  getEliminationsAsync(id) {
+    if (this.getEliminations(id))
+      this.fm.FireCustomEvent('serviceeliminationsready', id);
+    else
+      this.fm.getEliminationsAsync(id);
   }
 
   scheduleMatch(matchObj) {
