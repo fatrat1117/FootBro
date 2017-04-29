@@ -347,7 +347,8 @@ export class Localization {
             code: 'Code',
             NotSet:'Not set',
             TBD: 'TBD',
-            applyleave: 'Apply leave'
+            applyleave: 'Apply leave',
+            roundNumber: 'Round %s',
         },
 
         zh: {
@@ -673,7 +674,8 @@ export class Localization {
             code: '邀请码',
             NotSet: '未设定',
             TBD: '待定',
-            applyleave: '请假'
+            applyleave: '请假',
+            roundNumber: '第%s轮'
         }
     }
 }

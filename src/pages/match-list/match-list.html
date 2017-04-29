@@ -2,6 +2,11 @@
   <ion-navbar>
     <ion-title>{{ 'Matches' | trans }}</ion-title>
   </ion-navbar>
+  <ion-buttons end>
+    <button ion-button icon-only (tap)="enterCup()">
+      <ion-icon name="md-trophy" color="primary"></ion-icon>
+    </button>
+  </ion-buttons>
 </ion-header>
 
 <ion-content>

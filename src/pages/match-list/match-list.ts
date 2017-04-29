@@ -9,6 +9,11 @@ import * as moment from 'moment';
 import { PlayerService } from '../../app/players/player.service'
 import { MatchService } from '../../app/matches/match.service'
 
+
+import { GameSchedulePage } from "../game-schedule/game-schedule"
+
+
+
 @Component({
   selector: 'page-match-list',
   templateUrl: 'match-list.html'
@@ -38,11 +43,13 @@ export class MatchListPage {
       this.playerService.checkLogin();
   }
 
+  /*
   showLeagueResult(league) {
     this.navCtrl.push(LeagueResultPage, {
       league: league
     })
   }
+  */
 
   leagueClick(league) {
     if (league.status == 'prepare') {
@@ -52,9 +59,13 @@ export class MatchListPage {
       this.navCtrl.push(MatchesPage, {
         id: league.$key,
         status: league.status,
-        rules: league.rules
+        rules: league.rules,
+        type: league.type,
       })
     }
+  }
 
+  enterCup() {
+    this.navCtrl.push(GameSchedulePage);
   }
 }

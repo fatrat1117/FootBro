@@ -13,8 +13,7 @@ import { PlayerService } from '../players/player.service'
 
 export class SbMatchBasicComponent implements OnInit, OnDestroy {
   @Input() showDate: boolean;
-  @Input()
-  matchObj;
+  @Input() matchObj;
   match: Match;
   onMatchReady;
 

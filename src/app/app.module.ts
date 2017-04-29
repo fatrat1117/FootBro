@@ -80,13 +80,15 @@ import { NoRecordComponent } from './common/no.record.component';
 import { ResultScoreComponent } from './common/result.score.component';
 import { SbReportButton } from './common/report.button'
 import { ManagePlayerPopover } from '../pages/team-players/manage-players-menu';
-import { Badge } from '@ionic-native/badge';
+import { SbCupTeamComponent } from './common/cup.team.component';
+
 // directives
 import { KeyboardAttachDirective } from '../providers/keyboard-attach.directive';
 
 //native
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { Camera } from '@ionic-native/camera';
+import { Badge } from '@ionic-native/badge';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCrhL6g6rHs7-X09jw5Oq8I_g0fspD8bf8",
@@ -168,6 +170,7 @@ export const firebaseConfig = {
     ResultScoreComponent,
     SbReportButton,
     ManagePlayerPopover,
+    SbCupTeamComponent,
     // directives
     KeyboardAttachDirective
   ],

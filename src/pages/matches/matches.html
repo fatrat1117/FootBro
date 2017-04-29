@@ -1,7 +1,7 @@
 <ion-header #matchHeader>
   <ion-navbar>
     <ion-title>{{ title | trans }}</ion-title>
-    <ion-buttons end *ngIf="!isEnd">
+    <ion-buttons end>
       <button *ngIf="canShowAdd()" ion-button icon-only (tap)="enterNewGame()">
         <ion-icon name="md-add" color="primary"></ion-icon>
       </button>
@@ -28,92 +28,108 @@
     <button ion-fab mini (tap)="enterNewGame()"><ion-icon color="dark" name="md-add"></ion-icon></button>
   </ion-fab>
   <-->
-  <div [ngSwitch]="selectedInfo" [ngStyle]="{'height':'100%'}">
-    <!-- schedule -->
-    <div *ngSwitchCase="'schedule'" [ngStyle]="{'height':'100%'}">
-      <div class="left-scrollview matches-date-tab-col" id="sketchElement" [ngStyle]="{'height.px': getMatchScrollHeight()}">
-        <ion-list class="date-tab-list">
-          <ion-item *ngFor="let date of dates;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (tap)="showMatches(date)"
-            [style.background]="selectedDate == date ? '#585F6F' : '#40444D'" [style.color]="selectedDate == date ? '#00ef00' : '#F2EDE7'"
-                    [ngClass]="addDateSelectNgClass(i,date)">
-            <ion-item *ngIf="isChangeYear(i) == true" class="year">
-              -{{getYearStringFromDate(date)}}-
+    <div [ngSwitch]="selectedInfo" [ngStyle]="{'height':'100%'}">
+      <!-- schedule -->
+      <div *ngSwitchCase="'schedule'" [ngStyle]="{'height':'100%'}">
+        <div class="left-scrollview matches-date-tab-col" id="sketchElement" [ngStyle]="{'height.px': getMatchScrollHeight()}">
+          <ion-list class="date-tab-list">
+            <ion-item *ngFor="let date of dates;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (tap)="showMatches(date)"
+              [style.background]="selectedDate == date ? '#585F6F' : '#40444D'" [style.color]="selectedDate == date ? '#00ef00' : '#F2EDE7'"
+              [ngClass]="addDateSelectNgClass(i,date)">
+              <ion-item *ngIf="isChangeYear(i) == true" class="year">
+                -{{getYearStringFromDate(date)}}-
+              </ion-item>
+              <div class="date-inner">
+                {{date | stringToDatePipe}}
+              </div>
             </ion-item>
-            <div class="date-inner">
-              {{date | stringToDatePipe}}
-            </div>
+          </ion-list>
+        </div>
+        <div class="right-scrollview matches-match-info-col" [ngStyle]="{'height.px': getMatchScrollHeight()}">
+          <ion-item *ngFor="let match of matches; let i = index" class="ionitem">
+            <sb-match-basic [matchObj]="match"></sb-match-basic>
           </ion-item>
-        </ion-list>
+        </div>
       </div>
-      <div class="right-scrollview matches-match-info-col" [ngStyle]="{'height.px': getMatchScrollHeight()}">
-        <ion-item *ngFor="let match of matches; let i = index" class="ionitem">
-          <sb-match-basic [matchObj]="match"></sb-match-basic>
-        </ion-item>
-      </div>  
-    </div>
-    <!-- table -->
-    <div *ngSwitchCase="'standings'">
-      <div class="league-stats-standing">
-        <ion-grid>
-          <ion-row no-margin>
-            <ion-col width-50>
-              <p text-center>
-                <label>{{'Team' | trans}}</label>
-              </p>
-            </ion-col>
-            <ion-col class="data-column">
-              <p><label>{{'P' | trans}}</label></p>
-            </ion-col>
-            <ion-col class="data-column">
-              <p><label>{{'W' | trans}}</label></p>
-            </ion-col>
-            <ion-col class="data-column">
-              <p><label>{{'D' | trans}}</label></p>
-            </ion-col>
-            <ion-col class="data-column">
-              <p><label>{{'L' | trans}}</label></p>
-            </ion-col>
-            <ion-col class="data-column-broad">
-              <p><label>{{'GFGA' | trans}}</label></p>
-            </ion-col>
-            <ion-col class="data-column">
-              <p><label>{{'PTS' | trans}}</label></p>
-            </ion-col>
-          </ion-row>
-          <ion-row *ngFor="let s of matchStandings; let i = index;" no-margin>
-            <!--ion-col class="badge">
-              <ion-badge style="position:absolute;" color="sky">1</ion-badge>
-            </ion-col-->
-            <ion-col width-50>
-              <ion-thumbnail>
-                <img [src]="s?.team?.logo">
-              </ion-thumbnail>
-              <p text-left>
-                <ion-badge color="sky">{{ i+1 }}</ion-badge>
-                <label>{{ s?.team?.name }}</label>
-              </p>
-            </ion-col>
-            <ion-col class="data-column">
-              <p><label>{{s.P}}</label></p>
-            </ion-col>
-            <ion-col class="data-column">
-              <p><label>{{s.W}}</label></p>
-            </ion-col>
-            <ion-col class="data-column">
-              <p><label>{{s.D}}</label></p>
-            </ion-col>
-            <ion-col class="data-column">
-              <p><label>{{s.L}}</label></p>
-            </ion-col>
-            <ion-col class="data-column-broad">
-              <p><label>{{s.GS}}/{{s.GA}}</label></p>
-            </ion-col>
-            <ion-col class="data-column">
-              <p><label>{{s.PTS}}</label></p>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+      <!-- table -->
+      <div *ngSwitchCase="'standings'">
+        <div *ngIf="type == 'cup'">
+          <sb-cup-team></sb-cup-team>
+          <sb-cup-team></sb-cup-team>
+          <sb-cup-team></sb-cup-team>
+        </div>
+
+        <div *ngIf="type == 'league'" class="league-stats-standing">
+          <ion-grid>
+            <ion-row no-margin>
+              <ion-col width-50>
+                <p text-center>
+                  <label>{{'Team' | trans}}</label>
+                </p>
+              </ion-col>
+              <ion-col class="data-column">
+                <p><label>{{'P' | trans}}</label></p>
+              </ion-col>
+              <ion-col class="data-column">
+                <p><label>{{'W' | trans}}</label></p>
+              </ion-col>
+              <ion-col class="data-column">
+                <p><label>{{'D' | trans}}</label></p>
+              </ion-col>
+              <ion-col class="data-column">
+                <p><label>{{'L' | trans}}</label></p>
+              </ion-col>
+              <ion-col class="data-column-broad">
+                <p><label>{{'GFGA' | trans}}</label></p>
+              </ion-col>
+              <ion-col class="data-column">
+                <p><label>{{'PTS' | trans}}</label></p>
+              </ion-col>
+            </ion-row>
+            <ion-row *ngFor="let s of matchStandings; let i = index;" no-margin>
+              <ion-col width-50>
+                <ion-thumbnail>
+                  <img [src]="s?.team?.logo">
+                </ion-thumbnail>
+                <p text-left>
+                  <ion-badge color="sky">{{ i+1 }}</ion-badge>
+                  <label>{{ s?.team?.name }}</label>
+                </p>
+              </ion-col>
+              <ion-col class="data-column">
+                <p><label>{{s.P}}</label></p>
+              </ion-col>
+              <ion-col class="data-column">
+                <p><label>{{s.W}}</label></p>
+              </ion-col>
+              <ion-col class="data-column">
+                <p><label>{{s.D}}</label></p>
+              </ion-col>
+              <ion-col class="data-column">
+                <p><label>{{s.L}}</label></p>
+              </ion-col>
+              <ion-col class="data-column-broad">
+                <p><label>{{s.GS}}/{{s.GA}}</label></p>
+              </ion-col>
+              <ion-col class="data-column">
+                <p><label>{{s.PTS}}</label></p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
       </div>
     </div>
-  </div>
 </ion-content>
+
+<ion-footer>
+  <ion-row text-center>
+    <ion-col>
+      <button ion-button small color="secondary" (click)="setCurrentPosition(1)">
+        GS
+      </button>
+    </ion-col>
+    <ion-col>
+      2
+    </ion-col>
+  </ion-row>
+</ion-footer>

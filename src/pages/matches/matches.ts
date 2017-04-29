@@ -34,6 +34,7 @@ export class MatchesPage {
   isEnd = false;
   title = "schedule";
   rules = "";
+  type = "";
 
   constructor(public navCtrl: NavController,
     private modalCtrl: ModalController,
@@ -60,6 +61,10 @@ export class MatchesPage {
 
     if (this.navParams.get("rules")) {
       this.rules = this.navParams.get("rules");
+    }
+
+    if (this.navParams.get("type")) {
+      this.type = this.navParams.get("type");
     }
 
     this.matchService.getMatchDatesAsync(this.selectedId);
@@ -273,6 +278,8 @@ export class MatchesPage {
   }
 
   canShowAdd() {
+    if (this.isEnd)
+      return false;
     if ('all' === this.selectedId)
       return this.playerService.amICaptainOrAdminOfCurrentTeam();
     else 

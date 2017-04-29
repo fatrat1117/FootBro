@@ -1,0 +1,101 @@
+sb-cup-team {
+  .content-left {
+    float: left;
+    width: 80%;
+    background: #171717;
+    .content-left-button {
+      opacity: 1.0;
+      height: 40px;
+      margin-left: 5px;
+      color: #a7a8ac;
+      font-size: 1.2rem;
+    }
+    .content-left-list {
+      margin-left: 10px;
+      .content-left-list-item {
+        background: #24252a;
+        height: 60px;
+        .content-left-img {
+          width: 30px;
+          height: 30px;
+          border-radius: 10%;
+          margin-right: 5px;
+        }
+        .team-name {
+          margin-left: 0px;
+          color: #a7a8ac;
+          font-size: 1.4rem;
+        }
+        .team-score {
+          font-size: 1.4rem;
+        }
+      }
+    }
+  }
+  .content-right {
+    position: relative;
+    float: right;
+    width: 20%;
+    background-color: #171717;
+    height: 320px;
+    .right-horizontal-line {
+      position: absolute;
+      top: 100px;
+      width: 25%;
+      height: 2px;
+      background: #3f3e43;
+    }
+    .right-horizontal-line-center {
+      position: absolute;
+      top: 180px;
+      right: 0px;
+      width: 25%;
+      height: 2px;
+      background: #3f3e43;
+    }
+    .right-horizontal-line_bottom {
+      position: absolute;
+      top: 260px;
+      width: 25%;
+      height: 2px;
+      background: #3f3e43;
+    }
+    .right-vertical-line {
+      position: absolute;
+      top: 100px;
+      width: 2px;
+      left: 25%;
+      height: 65px;
+      background: #3f3e43;
+    }
+    .right-vertical-line-bottom {
+      position: absolute;
+      top: 195px;
+      width: 2px;
+      left: 25%;
+      height: 67px;
+      background: #3f3e43;
+    }
+    .right-button {
+      position: absolute;
+      top: 165px;
+      height: 30px;
+      width: 100%;
+      margin-left: -25%;
+      border-radius: 30px;
+      font-size: 1.2rem;
+    }
+  }
+  .no-margin{
+    margin: 0px;
+  }
+  .no-padding{
+    padding: 0px;
+  }
+  .default-font-size{
+    font-size: 1.2rem;
+  }
+  ion-col{
+    text-align: center;
+  }
+}
