@@ -48,12 +48,13 @@
         <ion-col class="player-name">
           <div class="name-text">{{ player.name }}</div>
           <div class="position" *ngIf = "isSetPosition(player.position)">{{ toUpperCase(player.position)}}</div>
-          <div class="not-set-position" *ngIf = "isSetPosition(player.position) == false">{{ 'NotSet' | trans }}</div>
+          <!--<div class="not-set-position" *ngIf = "isSetPosition(player.position) == false">{{ 'NotSet' | trans }}</div>-->
         </ion-col>
         <ion-col class="player-operation flex-center" >
           <ion-icon *ngIf = "canShowSettings(player.id)" name="settings" (tap) = "popupManageMenu($event, player)"></ion-icon>
         </ion-col>
-        <ion-col class="player-team-role flex-center">{{player.teamRole | trans}}</ion-col>
+        <ion-col class="player-team-role flex-center" [ngClass]="player.teamRole">{{player.teamRole | trans}}</ion-col>
+        <!--[ngClass]="getLocalizationClass('foot-data')"-->
       </ion-row>
     </ion-item>
   </ion-list>

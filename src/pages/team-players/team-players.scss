@@ -6,7 +6,7 @@
     background: white !important;
     color: black !important;
     .item-inner{
-      border-bottom: 1px solid #ddd !important;
+      border-bottom: 1px solid #ddd;
     }
   }
 }
@@ -127,6 +127,12 @@ team-players {
       flex: 0 0 20%;
       max-width: 20%;
       font-size: 1.1rem;
+    }
+    .player-team-role.admin{
+      color: rgb(103,192,209);
+    }
+    .player-team-role.captain{
+      color:rgb(175,220,97);
     }
   }
 
