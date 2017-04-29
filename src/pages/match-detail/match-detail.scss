@@ -11,6 +11,59 @@ page-match-detail {
 
 
   ion-content {
+
+    //全局共享属性
+    .inline-flex-center{
+      display: inline-flex;
+      justify-content: center;
+    }
+
+    .flex-direction-column{
+      display: flex;
+      flex-direction: column;
+    }
+
+    //比赛菜单
+    .match-detail-menu{
+      .menu-col{
+          p{
+            margin:0;
+            padding: 5px;
+          }
+          .button-inner{
+            flex-direction: column;
+          }
+      }
+      //.menu-col:active{
+      //  background-color: #00A000;
+      //}
+      .team-name{
+        .team-logo{
+          max-width: 3rem;
+          border-radius: 50%;
+          margin: 0 auto;
+        }
+      }
+
+      .opponent{
+        .opponent-logo{
+          max-width: 3rem;
+          border-radius: 50%;
+          margin: 0 auto;
+        }
+      }
+
+      .group-message{
+        ion-icon{
+          font-size: 3rem;
+        }
+      }
+      .group-message:active{
+        background-color: rgb(38,38,39);
+      }
+    }
+
+
     //给整个内容区调整背景及边距
     .content-all {
       height: 100%;
