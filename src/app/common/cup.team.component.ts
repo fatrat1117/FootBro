@@ -59,6 +59,8 @@ export class SbCupTeamComponent {
   //@Input() match1: any;  // team1, team2, round, score1, score2
   //@Input() match2: any;
   //@Input() description: string;
+  @Input() match1Id: string;
+  @Input() match2Id: string;
 
   constructor(private loc : Localization) {
   }

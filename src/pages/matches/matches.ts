@@ -35,6 +35,10 @@ export class MatchesPage {
   title = "schedule";
   rules = "";
   type = "";
+  selectedGroup = 0;
+  groups = [0, 0, 0, 0];
+  selectedElimination = 0;
+  eliminations = [0, 0];
 
   constructor(public navCtrl: NavController,
     private modalCtrl: ModalController,
@@ -290,5 +294,9 @@ export class MatchesPage {
     this.modalCtrl.create(MatchRulesPage, {
       rules: this.rules
     }).present();
+  }
+
+  resize() {
+    this.matchContent.resize();
   }
 }

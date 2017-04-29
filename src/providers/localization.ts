@@ -349,6 +349,7 @@ export class Localization {
             TBD: 'TBD',
             applyleave: 'Apply leave',
             roundNumber: 'Round %s',
+            eliminations: 'Eliminations',
         },
 
         zh: {
@@ -675,7 +676,8 @@ export class Localization {
             NotSet: '未设定',
             TBD: '待定',
             applyleave: '请假',
-            roundNumber: '第%s轮'
+            roundNumber: '第%s轮',
+            eliminations: '淘汰赛',
         }
     }
 }
