@@ -18,26 +18,26 @@
 
 <ion-content #matchDetailContent [ngSwitch]="matchSegments" style="width: 100%; height: 100%" no-bounce>
 
-  <ion-row class="match-detail-menu" no-padding>
-    <ion-col class="menu-col" center width-33>
-      <div full color="dark" class="team-name flex-direction-column">
-        <img [src]="match?.home?.logo" class="team-logo inline-flex-center">
-        <p class="inline-flex-center">{{match?.home?.name}}</p>
-      </div>
-    </ion-col>
-    <ion-col class="menu-col" center width-33>
-      <div full color="dark" class="group-message flex-direction-column">
-        <ion-icon name="megaphone" class="inline-flex-center"></ion-icon>
-        <p class="inline-flex-center">{{'informAll' | trans}}</p>
-      </div>
-    </ion-col>
-    <ion-col class="menu-col" center width-33>
-      <div full color="dark" class="opponent flex-direction-column">
-        <img [src]="match?.away?.logo" class="opponent-logo inline-flex-center">
-        <p class="inline-flex-center">{{match?.away?.name}}</p>
-      </div>
-    </ion-col>
-  </ion-row>
+  <!--<ion-row class="match-detail-menu" no-padding>-->
+    <!--<ion-col class="menu-col" center width-33>-->
+      <!--<div full color="dark" class="team-name flex-direction-column">-->
+        <!--<img [src]="match?.home?.logo" class="team-logo inline-flex-center">-->
+        <!--<p class="inline-flex-center">{{match?.home?.name}}</p>-->
+      <!--</div>-->
+    <!--</ion-col>-->
+    <!--<ion-col class="menu-col" center width-33>-->
+      <!--<div full color="dark" class="group-message flex-direction-column">-->
+        <!--<ion-icon name="megaphone" class="inline-flex-center"></ion-icon>-->
+        <!--<p class="inline-flex-center">{{'informAll' | trans}}</p>-->
+      <!--</div>-->
+    <!--</ion-col>-->
+    <!--<ion-col class="menu-col" center width-33>-->
+      <!--<div full color="dark" class="opponent flex-direction-column">-->
+        <!--<img [src]="match?.away?.logo" class="opponent-logo inline-flex-center">-->
+        <!--<p class="inline-flex-center">{{match?.away?.name}}</p>-->
+      <!--</div>-->
+    <!--</ion-col>-->
+  <!--</ion-row>-->
 
   <ion-segment [ngModel]="matchSegments" (ngModelChange)="segmentChange($event)" mode="md">
     <ion-segment-button value="info">
@@ -64,11 +64,25 @@
     {{match?.location?.name}}
     <p>{{match?.location?.address}}</p>
   </ion-item>
+  <ion-item class="clothes-title">
+    <ion-icon name="shirt"></ion-icon>
+    <div class="clothes-content">无要求</div>
+  </ion-item>
 
-  <!--<ion-item class="time-title">-->
-    <!--<ion-icon name="time"></ion-icon>-->
-    <!--<div class="time-content"> {{match?.time | date:'MM-dd EEEE  H:mm'}}</div>-->
-  <!--</ion-item>-->
+  <ion-row class="registration-info">
+    <ion-col class="absent-number">
+      <span class="number-absent">0人请假</span>
+      <span class="number-cancel">0人取消报名</span>
+    </ion-col>
+    <ion-col class="registered-number">
+      <span class="number-register">0人报名</span>
+      <span class="number-pending">限额0人</span>
+    </ion-col>
+    <ion-col class="pending-number">
+      <div class="number-pending">0人待定</div>
+      <div class="number-dummy"></div>
+    </ion-col>
+  </ion-row>
 
 </ion-list>
 

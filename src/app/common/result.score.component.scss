@@ -1,5 +1,30 @@
 result-score{
    //background: ;
+  //共享属性
+  .inline-flex-center{
+    display: inline-flex;
+    justify-content: center;
+  }
+
+  .flex-direction-column{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .group-message{
+    font-size: 1.2rem;
+    color:rgb(240,149,28);
+    ion-icon{
+      font-size: 3rem;
+    }
+    p{
+      margin:0;
+      padding: 5px;
+    }
+  }
+  .group-message:active{
+    background-color: rgb(38,38,39);
+  }
 
   .game-time {
     opacity: 0.7;
@@ -53,6 +78,9 @@ result-score{
       color: white;
       text-align: center;
       margin: 0px;
+      display:flex;
+      justify-content: center;
+      align-items: center;
       .input-score{
 
         background-color: transparent;
@@ -79,6 +107,9 @@ result-score{
       text-align: center;
       margin: 0px;
       padding-top: 30px;
+      display:flex;
+      justify-content: center;
+      align-items: center;
       .input-score{
 
         background-color: transparent;

@@ -36,8 +36,19 @@ import * as moment from 'moment';
       </button>
       </ion-row>
       <ion-row *ngIf="!canShowScores() && !canShowInputScores()">
-          <ion-label no-margin>{{versusLabel | trans}}</ion-label>
+          <ion-label *ngIf="!canShowInformAll()" no-margin>{{versusLabel | trans}}</ion-label>
+          <div *ngIf="canShowInformAll()"full color="dark" class="group-message flex-direction-column"
+             (click)="informAllClick()" >
+             <ion-icon name="megaphone" class="inline-flex-center"></ion-icon>
+            <p class="inline-flex-center">{{'informAll' | trans}}</p>
+          </div>
       </ion-row>
+        <!--<ion-col class="menu-col" center width-33>-->
+      <!--<div full color="dark" class="group-message flex-direction-column">-->
+        <!--<ion-icon name="megaphone" class="inline-flex-center"></ion-icon>-->
+        <!--<p class="inline-flex-center">{{'informAll' | trans}}</p>-->
+      <!--</div>-->
+    <!--</ion-col>-->
     </ion-col>
     <!--右边队伍信息-->
     <ion-col text-center width-33>
@@ -62,6 +73,20 @@ export class ResultScoreComponent {
   constructor(private playerService: PlayerService,
     private modal: ModalController) {
 
+  }
+  informAllClick(){
+    alert("Cheers!Love, the cavalry is here!");
+  }
+  canShowInformAll(){
+    if (this.upcomingMatch){
+      if ((this.playerService.amICaptainOrAdmin(this.upcomingMatch.homeId) ||
+        this.playerService.amICaptainOrAdmin(this.upcomingMatch.awayId)) && this.hostPageName === 'match-detail'){
+        return true;
+      }else{
+        return false;
+      }
+    }
+    return false;
   }
 
   canShowScores() {
