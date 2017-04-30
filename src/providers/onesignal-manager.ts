@@ -7,11 +7,12 @@ import * as firebase from 'firebase';
 import { UIHelper } from '../providers/uihelper'
 import { FirebaseManager } from './firebase-manager';
 import { PlayerService } from '../app/players/player.service';
+import { Localization } from '../providers/localization';
 
 @Injectable()
 export class OneSignalManager {
   constructor(private platform: Platform, private fm: FirebaseManager, private playerService: PlayerService,
-    private uiHelper: UIHelper, private http: Http) {
+    private uiHelper: UIHelper, private http: Http, private local: Localization) {
 
   }
 
@@ -102,6 +103,31 @@ export class OneSignalManager {
       );
     }
     */
+  }
+
+
+
+
+  
+  /****************************** Match ******************************/
+  matchNotification(type: string /* 'joinMatch' or 'rateMatch' */, matchId: string, playerIds: string[], pushids: string[]) {
+    let message = {
+      'en': this.local.getString(type, 'en'),
+      'zh-Hans': this.local.getString(type, 'zh')
+    }
+
+    let self = this;
+    let success = function (fm: FirebaseManager) {
+      playerIds.forEach(id => {
+        self.fm.addChatToUser(id, this.local.getString(type), true, {
+          type: type,
+          detail: matchId
+        });
+      })
+    }
+
+    this.postNotification(message, pushids, success)
+
   }
 
 

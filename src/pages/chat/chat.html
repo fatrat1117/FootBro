@@ -44,6 +44,7 @@
           <ion-item class="chat-room-msg-item" [ngClass]="['chat-room-msg-item-admin']">
             <div class="msg-box center">
               {{ chat.content }}
+              <p *ngIf="chat.action" class="system-msg" (tap)="onSystemClick(chat.action)"><u>{{ getActionName(chat.action?.type) }}</u></p>
             </div>
           </ion-item>
         </div>

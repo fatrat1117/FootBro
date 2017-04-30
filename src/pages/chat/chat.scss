@@ -104,6 +104,10 @@ page-chat {
       font-size: 0.9em;
       border-radius: 5px;
       padding: 10px;
+      .system-msg{
+        text-align: right;
+        color: #387ef5;
+      }
     }
     .left {
       float: left;

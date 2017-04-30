@@ -15,8 +15,8 @@ export class Localization {
     }
 
 
-    getString(id) {
-        let s = this.translation[this.langCode][id];
+    getString(id, lang = null) {
+        let s = this.translation[lang ? lang : this.langCode][id];
         return s ? s : id;
     }
 
@@ -353,6 +353,10 @@ export class Localization {
             pending:'Pending',
             informAll:'Message ALL',
             eliminations: 'Eliminations',
+            joinMatchDetail: "A new match is waiting for you!",
+            joinMatch: "Clik to Join",
+            rateMatchDetail: "Rate your match to earn points!",
+            rateMatch: "Click to Rate",
         },
 
         zh: {
@@ -684,6 +688,10 @@ export class Localization {
             pending:'待定',
             informAll:'群发短信',
             eliminations: '淘汰赛',
+            joinMatchDetail: "一场新球赛等待你的加入!",
+            joinMatch: "点击加入",
+            rateMatchDetail: "评分经完成的比赛，赚取更多积分！",
+            rateMatch: "点击评分",
         }
     }
 }

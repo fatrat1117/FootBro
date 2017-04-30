@@ -50,6 +50,8 @@ export class MatchDetailPage {
     private loc: Localization,
     private matchService: MatchService) {
     this.match = navParams.get('match');
+    if (navParams.get('selectedValue'))
+      this.matchSegments = navParams.get('selectedValue');
 
     this.squadSettings = {};
     this.squadSettings.matchId = this.match.id;

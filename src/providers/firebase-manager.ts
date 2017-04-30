@@ -173,7 +173,7 @@ export class FirebaseManager {
     });
   }
 
-  addChatToUser(userId: string, content: string, isSystem: boolean = false) {
+  addChatToUser(userId: string, content: string, isSystem: boolean = false, action: any = null) {
     if (!isSystem) {
       // add to self
       this.af.database.list(`/chats/${this.auth.uid}/${userId}`).push({
@@ -195,7 +195,8 @@ export class FirebaseManager {
     this.af.database.list(`/chats/${userId}/${fromId}`).push({
       createdAt: firebase.database.ServerValue.TIMESTAMP,
       content: content,
-      isFromSelf: false
+      isFromSelf: false, 
+      action: action
     })
 
     this.af.database.object(`/chats/${userId}/basic-info/${fromId}`).set({

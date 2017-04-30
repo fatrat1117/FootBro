@@ -143,6 +143,9 @@ export class MatchesPage {
       let date = e['detail'];
       if (this.selectedDate === date)
         this.matches = this.matchService.getMatchesByDate(date);
+
+      console.log(this.matches);
+      
     }
 
     this.onTournamentTableReady = e => {
@@ -366,8 +369,6 @@ export class MatchesPage {
   }
 
   onSegmentChange(ev) {
-    console.log(this.eliminationPairs);
-    
     if (this.eliminationPairs.length == 0 && ev == 'eliminations')
       this.onEliminationChange(0);
   }
