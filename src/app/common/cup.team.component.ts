@@ -22,7 +22,7 @@ declare var sprintf: any;
           </ion-item>
           <ion-item class="content-left-list-item">
             <img [src]="p[0].away?.logo" class="content-left-img" item-left>
-            <button ion-button clear disabled class="team-name">{{ p[0].away.name }}</button>
+            <button ion-button clear disabled class="team-name">{{ p[0].away?.name }}</button>
             <button ion-button clear disabled color="secondary" item-right class="team-score">{{ p[0].awayScore }}</button>
           </ion-item>
         </ion-list>

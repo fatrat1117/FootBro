@@ -58,6 +58,7 @@ export class MatchesPage {
   }
 
   ionViewDidLoad() {
+    this.eliminationPairs = [];
     this.today = moment(moment().format("YYYY-MM-DD")).unix() * 1000;
     this.addEventListeners();
     if (this.navParams.get('id')) {
@@ -77,8 +78,6 @@ export class MatchesPage {
     if (this.navParams.get("type")) {
       this.type = this.navParams.get("type");
       if (this.type == 'cup') {
-        document.addEventListener('servicematchready', this.onMatchReady);
-        document.addEventListener('serviceeliminationsready', this.onEliminationReady);
         this.matchService.getEliminationsAsync(this.selectedId);
       }
     }
@@ -163,11 +162,12 @@ export class MatchesPage {
     this.onEliminationReady = e => {
       let id = e['detail'];
       if (id == this.selectedId) {
+        this.eliminationMatches = {};
         this.eliminations = this.matchService.getEliminations(id);
         this.eliminations.forEach(el => {
           for (let id of el.matches) {
-            this.matchService.getMatchAsync(id)
             this.eliminationMatches[id] = {};
+            this.matchService.getMatchAsync(id)
           }
         });
       }
@@ -183,8 +183,8 @@ export class MatchesPage {
     document.addEventListener('matchesbydateready', this.onMatchesByDateReady);
     document.addEventListener('servicetournamenttableready', this.onTournamentTableReady);
     document.addEventListener('matcheschanged', this.onMatchesChanged);
-
-
+    document.addEventListener('servicematchready', this.onMatchReady);
+    document.addEventListener('serviceeliminationsready', this.onEliminationReady);
   }
 
   ionViewWillUnload() {
@@ -192,9 +192,8 @@ export class MatchesPage {
     document.removeEventListener('matchesbydateready', this.onMatchesByDateReady);
     document.removeEventListener('servicetournamenttableready', this.onTournamentTableReady);
     document.removeEventListener('matcheschanged', this.onMatchesChanged);
-    if (this.type == 'cup')
-      document.removeEventListener('serviceeliminationsready', this.onEliminationReady);
-      document.removeEventListener('servicematchready', this.onMatchReady);
+    document.removeEventListener('servicematchready', this.onMatchReady);
+    document.removeEventListener('serviceeliminationsready', this.onEliminationReady);
   }
 
   addYears() {
@@ -364,5 +363,12 @@ export class MatchesPage {
     }
     if (pair.length != 0)
       this.eliminationPairs.push(pair);
+  }
+
+  onSegmentChange(ev) {
+    console.log(this.eliminationPairs);
+    
+    if (this.eliminationPairs.length == 0 && ev == 'eliminations')
+      this.onEliminationChange(0);
   }
 }

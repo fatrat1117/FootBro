@@ -11,7 +11,7 @@
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar *ngIf="selectedId != 'all'">
-    <ion-segment [(ngModel)]="selectedInfo" mode="md">
+    <ion-segment [(ngModel)]="selectedInfo" mode="md"  (ngModelChange)="onSegmentChange($event)">
       <ion-segment-button value="schedule">
         {{ 'schedule' | trans }}
       </ion-segment-button>
