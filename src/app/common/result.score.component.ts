@@ -68,9 +68,10 @@ export class ResultScoreComponent {
     private modal: ModalController) {
 
   }
-  informAllClick(event){
+  informAllClick(e){
     alert("Cheers!Love, the cavalry is here!");
-    event.stopPropagation();
+    e.stopPropagation();
+    e.preventDefault();
   }
   //调用此函数之前必须检查比赛是否开始，比赛还没开始才能调用!
   canShowInformAll(){
@@ -125,6 +126,7 @@ export class ResultScoreComponent {
   openUpdateMatchPage(e) {
     //console.log('openUpdateMatchPage', e);
     e.stopPropagation();
+    e.preventDefault();
     //let teamId = this.playerService.isCaptain(this.playerService.selfId(), this.upcomingMatch.homeId) ? this.upcomingMatch.homeId : this.upcomingMatch.awayId;
     if (this.playerService.myself().teamId === this.upcomingMatch.homeId ||
       this.playerService.myself().teamId === this.upcomingMatch.awayId)
