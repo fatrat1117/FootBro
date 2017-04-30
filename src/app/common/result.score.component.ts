@@ -43,12 +43,6 @@ import * as moment from 'moment';
             <p class="inline-flex-center">{{'informAll' | trans}}</p>
           </div>
       </ion-row>
-        <!--<ion-col class="menu-col" center width-33>-->
-      <!--<div full color="dark" class="group-message flex-direction-column">-->
-        <!--<ion-icon name="megaphone" class="inline-flex-center"></ion-icon>-->
-        <!--<p class="inline-flex-center">{{'informAll' | trans}}</p>-->
-      <!--</div>-->
-    <!--</ion-col>-->
     </ion-col>
     <!--右边队伍信息-->
     <ion-col text-center width-33>
@@ -80,7 +74,7 @@ export class ResultScoreComponent {
   }
   //调用此函数之前必须检查比赛是否开始，比赛还没开始才能调用!
   canShowInformAll(){
-    if (this.upcomingMatch){
+    if (this.upcomingMatch && !this.upcomingMatch.isStarted()){
       if ((this.playerService.amICaptainOrAdmin(this.upcomingMatch.homeId) ||
         this.playerService.amICaptainOrAdmin(this.upcomingMatch.awayId))){
         return true;
