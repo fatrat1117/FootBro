@@ -31,16 +31,21 @@ export class MatchesPage {
   onMatchDatesReady;
   onMatchesByDateReady;
   onTournamentTableReady;
-  onEliminationReady;
   onMatchesChanged;
   isEnd = false;
   title = "schedule";
   rules = "";
   type = "";
+
+  // eliminations
+  onEliminationReady;
+  onMatchReady;
   selectedGroup = 0;
   groups = [0, 0, 0, 0];
   selectedElimination = 0;
   eliminations: any;
+  eliminationPairs = [];
+  eliminationMatches = {};
 
   constructor(public navCtrl: NavController,
     private modalCtrl: ModalController,
@@ -72,6 +77,7 @@ export class MatchesPage {
     if (this.navParams.get("type")) {
       this.type = this.navParams.get("type");
       if (this.type == 'cup') {
+        document.addEventListener('servicematchready', this.onMatchReady);
         document.addEventListener('serviceeliminationsready', this.onEliminationReady);
         this.matchService.getEliminationsAsync(this.selectedId);
       }
@@ -159,16 +165,25 @@ export class MatchesPage {
       if (id == this.selectedId) {
         this.eliminations = this.matchService.getEliminations(id);
         this.eliminations.forEach(el => {
-          for (let id of el.matches)
+          for (let id of el.matches) {
             this.matchService.getMatchAsync(id)
+            this.eliminationMatches[id] = {};
+          }
         });
       }
+    }
+
+    this.onMatchReady = e => {
+      let id = e['detail'];
+      if (this.eliminationMatches[id])
+        this.eliminationMatches[id] = this.matchService.getMatch(id);
     }
 
     document.addEventListener('matchdatesready', this.onMatchDatesReady);
     document.addEventListener('matchesbydateready', this.onMatchesByDateReady);
     document.addEventListener('servicetournamenttableready', this.onTournamentTableReady);
     document.addEventListener('matcheschanged', this.onMatchesChanged);
+
 
   }
 
@@ -178,7 +193,8 @@ export class MatchesPage {
     document.removeEventListener('servicetournamenttableready', this.onTournamentTableReady);
     document.removeEventListener('matcheschanged', this.onMatchesChanged);
     if (this.type == 'cup')
-      document.addEventListener('serviceeliminationsready', this.onEliminationReady);
+      document.removeEventListener('serviceeliminationsready', this.onEliminationReady);
+      document.removeEventListener('servicematchready', this.onMatchReady);
   }
 
   addYears() {
@@ -252,6 +268,7 @@ export class MatchesPage {
     this.matchService.getMatchesByDateAsync(date, this.selectedId);
   }
 
+  /*
   onSelectionChange() {
     this.selectedDate = null;
     if (this.selectedId == "all") {
@@ -261,8 +278,8 @@ export class MatchesPage {
       this.matchService.getMatchDatesAsync(this.selectedId);
       this.matchService.getTournamentTableAsync(this.selectedId);
     }
-
   }
+  */
 
   enterNewGame() {
     let modal = this.modalCtrl.create(NewGamePage, { tournamentId: 'all' === this.selectedId ? null : this.selectedId });
@@ -329,7 +346,23 @@ export class MatchesPage {
     return this.eliminations[this.selectedElimination].matches;
   }
 
-  getSelectedName() {
+  getSelectedNextName() {
     return this.getEliminationTitle(this.eliminations[this.selectedElimination].nextName);
+  }
+
+  onEliminationChange(ev) {
+    this.eliminationPairs = [];
+    let ms = this.eliminations[ev].matches;
+
+    let pair = [];
+    for (let i = 0; i < ms.length; ++i) {
+      pair.push(this.eliminationMatches[ms[i]]);
+      if (i % 2 == 1) {
+        this.eliminationPairs.push(pair);
+        pair = [];
+      }
+    }
+    if (pair.length != 0)
+      this.eliminationPairs.push(pair);
   }
 }
