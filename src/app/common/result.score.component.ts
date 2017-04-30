@@ -37,7 +37,7 @@ import * as moment from 'moment';
       </ion-row>
       <ion-row *ngIf="!canShowScores() && !canShowInputScores()">
           <ion-label *ngIf="!canShowInformAll()" no-margin>{{versusLabel | trans}}</ion-label>
-          <div *ngIf="canShowInformAll()"full color="dark" class="group-message flex-direction-column"
+          <div *ngIf="canShowInformAll()" full color="dark" class="group-message flex-direction-column"
              (click)="informAllClick($event)" >
              <ion-icon name="megaphone" class="inline-flex-center"></ion-icon>
             <p class="inline-flex-center">{{'informAll' | trans}}</p>
