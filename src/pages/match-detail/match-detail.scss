@@ -18,6 +18,16 @@ page-match-detail {
       justify-content: center;
     }
 
+    .inline-flex-vertical-center{
+      display: inline-flex;
+      align-items: center;
+    }
+    .text-nowrap{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .flex-direction-column{
       display: flex;
       flex-direction: column;
@@ -69,12 +79,93 @@ page-match-detail {
       height: 100%;
       width: 100%;
       //padding: 15px 10px 15px 10px;
-      background-color: #171717;
+      background-color: #1f1f21;
       //数据显示区域
       .content-list {
         margin: 0px;
-        background: #40444d;
+        background: #1f1f21;
         text-align: center;
+
+        .match-detail-info {
+          margin: 1rem;
+
+          //公用
+          ion-item{
+            background-color: #333335;
+            padding: 5px;
+            font-size: 1.4rem;
+            display: flex;
+            .item-inner {
+              padding: 0;
+              border-bottom: 1px solid #434343;
+            }
+            ion-label {
+              display: flex;
+              margin: 0;
+            }
+          }
+
+          .common-title{
+
+            .common-icon{
+              flex:0 0 5%;
+              max-width: 5%;
+            }
+            .common-content{
+              white-space: initial;
+              flex: 0 0 95%;
+              max-width: 95%;
+              padding-left: 1rem;
+            }
+
+          }
+          //具体比赛时间栏目
+          .time-title {
+            .time-icon{
+            }
+            .time-content {
+            }
+          }
+          //地图--标题
+          .map-title {
+            background-color: #333335;
+            .map-icon{
+            }
+            .map-content {
+            }
+          }
+          .clothes-title{
+            .clothes-icon{
+            }
+            .clothes-content{
+            }
+          }
+          .clothes-title .item-inner{
+            border-bottom:none;
+          }
+        }
+
+        //报名情况
+        .registration-info{
+          margin:1rem;
+          ion-col{
+            border: 1px solid #434343;
+            background-color: #333335;
+          }
+          .common-sub-label{
+            font-size: 1rem;
+            color:#969696;
+          }
+          .number-absent{
+            color:#f4c20d;
+          }
+          .number-register{
+            color:#AFE76C;
+          }
+
+
+        }
+
         //居中对战时间按钮
         .content-center-button {
           margin-top: 10px;
@@ -121,11 +212,94 @@ page-match-detail {
             height: 15px;
           }
         }
-        //地图--标题
-        .map-title {
-          background: #2d2e32;
+
+      }
+
+      //报名详细栏目
+      .registration-detail{
+        margin: 0;
+        ion-item-divider{
+          padding: 1rem;
+          font-size: 1.4rem;
+          .item-inner{
+            background-color: #333335;
+            ion-label{
+              margin: 0;
+            }
+          }
+        }
+        .common-row{
+          padding: 1rem;
+          font-size: 1.4rem;
+         .common-row-content{
+           padding: 0 1.5rem;
+           display: flex;
+           justify-content: space-between;
+         }
+        }
+        .common-individuals{
+
+        }
+        .participants-row{
+          .participants-row-content{
+            .one{
+              color:#AFE76C;
+            }
+
+          }
+
+        }
+        .participants-individuals{
+
+        }
+        .absents-row{
+          .absents-row-content{
+            .one{
+              color:#f4c20d;
+            }
+
+          }
+        }
+        .absents-individuals{
+
+        }
+        .pending-row{
+
+        }
+        .pending-individuals{
+
         }
       }
+
+      //按钮组
+      .match-detail-button-group{
+        button{
+          min-height: 3.5rem;
+          color: #1f1f21;
+        }
+        .pending-col{
+          button{
+            background-color: #ccc;
+            ion-icon{
+            }
+          }
+        }
+        .absent-col{
+          button{
+            background-color: #f4c20d;
+            ion-icon{
+            }
+          }
+        }
+        .participate-col{
+          button{
+            background-color: #AFE76C;
+            ion-icon{
+            }
+          }
+        }
+      }
+
       //地图
       .map-back {
         padding: 0px 10px 10px 10px;

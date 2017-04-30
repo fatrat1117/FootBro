@@ -37,18 +37,12 @@ import * as moment from 'moment';
       </ion-row>
       <ion-row *ngIf="!canShowScores() && !canShowInputScores()">
           <ion-label *ngIf="!canShowInformAll()" no-margin>{{versusLabel | trans}}</ion-label>
-          <div *ngIf="canShowInformAll()"full color="dark" class="group-message flex-direction-column"
+          <div *ngIf="canShowInformAll()" full color="dark" class="group-message flex-direction-column"
              (click)="informAllClick($event)" >
              <ion-icon name="megaphone" class="inline-flex-center"></ion-icon>
             <p class="inline-flex-center">{{'informAll' | trans}}</p>
           </div>
       </ion-row>
-        <!--<ion-col class="menu-col" center width-33>-->
-      <!--<div full color="dark" class="group-message flex-direction-column">-->
-        <!--<ion-icon name="megaphone" class="inline-flex-center"></ion-icon>-->
-        <!--<p class="inline-flex-center">{{'informAll' | trans}}</p>-->
-      <!--</div>-->
-    <!--</ion-col>-->
     </ion-col>
     <!--右边队伍信息-->
     <ion-col text-center width-33>
@@ -74,13 +68,14 @@ export class ResultScoreComponent {
     private modal: ModalController) {
 
   }
-  informAllClick(event){
+  informAllClick(e){
     alert("Cheers!Love, the cavalry is here!");
-    event.stopPropagation();
+    e.stopPropagation();
+    e.preventDefault();
   }
   //调用此函数之前必须检查比赛是否开始，比赛还没开始才能调用!
   canShowInformAll(){
-    if (this.upcomingMatch){
+    if (this.upcomingMatch && !this.upcomingMatch.isStarted()){
       if ((this.playerService.amICaptainOrAdmin(this.upcomingMatch.homeId) ||
         this.playerService.amICaptainOrAdmin(this.upcomingMatch.awayId))){
         return true;
@@ -131,6 +126,7 @@ export class ResultScoreComponent {
   openUpdateMatchPage(e) {
     //console.log('openUpdateMatchPage', e);
     e.stopPropagation();
+    e.preventDefault();
     //let teamId = this.playerService.isCaptain(this.playerService.selfId(), this.upcomingMatch.homeId) ? this.upcomingMatch.homeId : this.upcomingMatch.awayId;
     if (this.playerService.myself().teamId === this.upcomingMatch.homeId ||
       this.playerService.myself().teamId === this.upcomingMatch.awayId)

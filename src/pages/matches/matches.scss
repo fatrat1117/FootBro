@@ -133,6 +133,17 @@ page-matches {
   }
   // table
   .league-stats-standing {
+    .header-row{
+      background-color:color($colors,primary);
+    }
+    .ranking-content{
+       background-color: #333335;
+      .ranking-badge{
+        background-color: transparent;
+        min-width: 32px;
+      }
+    }
+
     .data-column {
       flex: 0 0 8%;
       max-width: 8%;
@@ -152,6 +163,7 @@ page-matches {
     }
     label {
       font-size: 80%;
+      font-weight: 500;
     }
     p {
       margin: auto;
