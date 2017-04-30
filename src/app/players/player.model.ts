@@ -22,6 +22,7 @@ export class Player {
   social;
   wechatShareTime;
   fbShareTime;
+  stats;
 }
 
 export class TeamPlayer extends Player {

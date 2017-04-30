@@ -21,6 +21,7 @@ export class FirebaseManager {
   sortedPublicPlayersMap = {};
   sortedPublicPlayers;
   queryPlayers;
+  cachedPlayerStatsMap = {};
   //pushIdsMap = {};
   cachedAllPublicTeams;
   //matches 
@@ -41,6 +42,7 @@ export class FirebaseManager {
   cachedPendingCheerleaders;
   cachedApprovedCheerleaders;
   sortedPublicCheerleadersMap = {};
+
   //admins
   admins;
 
@@ -641,6 +643,22 @@ export class FirebaseManager {
     return this.cachedPlayersMap[id];
   }
 
+  getPlayerStats(playerId) {
+    return this.cachedPlayerStatsMap[playerId];
+  }
+
+  getPlayerStatsAsync(playerId) {
+    if (this.getPlayerStats(playerId)) 
+      this.FireCustomEvent('playerstatsready', playerId);
+    else {
+      this.af.database.object(`/player_stats/${playerId}`).subscribe(snapshot => {
+        if (snapshot.$exists()) {
+          this.cachedPlayerStatsMap[playerId] = snapshot;
+          this.FireCustomEvent('playerstatsready', playerId);
+        }
+      });
+    }
+  }
   // public
   queryPublicPlayers(orderby, count) {
     console.log('queryPublicPlayers', orderby, count);
