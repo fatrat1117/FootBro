@@ -30,6 +30,7 @@ export class FirebaseManager {
   //cachedMatchSquadMap = {};
   _afTournamentList;
   cachedTournamentTablesMap = {};
+  cachedEliminationMap = {};
   cachedRegisteredTeamsMap = {};
   //squads
   cachedSquads: any = {};
@@ -1040,6 +1041,11 @@ export class FirebaseManager {
       { query: { orderByChild: 'rank' } });
   }
 
+  getEliminationList(id) {
+    return this.af.database.list('/tournaments/list/' + id + '/eliminations');
+  }
+
+
   getTournamentTable(id) {
     return this.cachedTournamentTablesMap[id];
   }
@@ -1051,6 +1057,22 @@ export class FirebaseManager {
       this.getTournamentTableList(id).subscribe(snapshots => {
         this.cachedTournamentTablesMap[id] = snapshots;
         this.FireCustomEvent('tournamenttableready', id);
+      });
+    }
+  }
+
+  getEliminations(id) {
+    return this.cachedEliminationMap[id];
+  }
+
+
+  getEliminationsAsync(id) {
+    if (this.getEliminations(id))
+      this.FireCustomEvent('eliminationsready', id);
+    else {
+      this.getEliminationList(id).subscribe(snapshots => {
+        this.cachedEliminationMap[id] = snapshots;
+        this.FireCustomEvent('eliminationsready', id);
       });
     }
   }

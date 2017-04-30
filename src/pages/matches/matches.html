@@ -118,11 +118,7 @@
 
       <!-- elimination -->
       <div *ngSwitchCase="'eliminations'">
-        <div>
-          <sb-cup-team></sb-cup-team>
-          <sb-cup-team></sb-cup-team>
-          <sb-cup-team></sb-cup-team>
-        </div>
+        <sb-cup-team *ngIf="eliminations.length > 0" [matchIds]="getSelectedMatches()" [title]="getSelectedName()" match2="0"></sb-cup-team>
       </div>
     </div>
 </ion-content>
@@ -138,7 +134,7 @@
   <!-- eliminations -->
   <ion-segment [(ngModel)]="selectedElimination" mode="md" *ngIf="selectedInfo == 'eliminations'">
     <ion-segment-button *ngFor="let e of eliminations; let i = index" [value]="i">
-      Elimination Name
+      {{ getEliminationTitle(e.name) }}
     </ion-segment-button>
   </ion-segment>
   <!-->

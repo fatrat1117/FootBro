@@ -15,6 +15,7 @@ import * as moment from 'moment';
 export class MatchesPage {
   @ViewChild(Content) matchContent: Content;
   @ViewChild('matchHeader') matchHeader;
+  @ViewChild('matchFooter') matchFooter;
 
   dates: number[];
   selectedDate: number;
@@ -23,13 +24,14 @@ export class MatchesPage {
   today;
   selectedInfo: string;
   selectedId: string;
-  afTournamentList;
+  //afTournamentList;
   //Key: year : String eg: 2014, 2017...
   //Value: selectedDate'index in dates : Number eg: 0 , 5 , 27....
   years = {};
   onMatchDatesReady;
   onMatchesByDateReady;
   onTournamentTableReady;
+  onEliminationReady;
   onMatchesChanged;
   isEnd = false;
   title = "schedule";
@@ -38,7 +40,7 @@ export class MatchesPage {
   selectedGroup = 0;
   groups = [0, 0, 0, 0];
   selectedElimination = 0;
-  eliminations = [0, 0];
+  eliminations: any;
 
   constructor(public navCtrl: NavController,
     private modalCtrl: ModalController,
@@ -47,7 +49,7 @@ export class MatchesPage {
     private playerService: PlayerService) {
     this.selectedInfo = "schedule";
     this.selectedId = "all";
-    this.afTournamentList = this.matchService.afTournamentList();
+    //this.afTournamentList = this.matchService.afTournamentList();
   }
 
   ionViewDidLoad() {
@@ -69,6 +71,10 @@ export class MatchesPage {
 
     if (this.navParams.get("type")) {
       this.type = this.navParams.get("type");
+      if (this.type == 'cup') {
+        document.addEventListener('serviceeliminationsready', this.onEliminationReady);
+        this.matchService.getEliminationsAsync(this.selectedId);
+      }
     }
 
     this.matchService.getMatchDatesAsync(this.selectedId);
@@ -130,7 +136,7 @@ export class MatchesPage {
 
     this.onMatchesByDateReady = e => {
       let date = e['detail'];
-      if (this.selectedDate === date) 
+      if (this.selectedDate === date)
         this.matches = this.matchService.getMatchesByDate(date);
     }
 
@@ -148,10 +154,22 @@ export class MatchesPage {
       this.scrollToDate(date);
     };
 
+    this.onEliminationReady = e => {
+      let id = e['detail'];
+      if (id == this.selectedId) {
+        this.eliminations = this.matchService.getEliminations(id);
+        this.eliminations.forEach(el => {
+          for (let id of el.matches)
+            this.matchService.getMatchAsync(id)
+        });
+      }
+    }
+
     document.addEventListener('matchdatesready', this.onMatchDatesReady);
     document.addEventListener('matchesbydateready', this.onMatchesByDateReady);
     document.addEventListener('servicetournamenttableready', this.onTournamentTableReady);
     document.addEventListener('matcheschanged', this.onMatchesChanged);
+
   }
 
   ionViewWillUnload() {
@@ -159,6 +177,8 @@ export class MatchesPage {
     document.removeEventListener('matchesbydateready', this.onMatchesByDateReady);
     document.removeEventListener('servicetournamenttableready', this.onTournamentTableReady);
     document.removeEventListener('matcheschanged', this.onMatchesChanged);
+    if (this.type == 'cup')
+      document.addEventListener('serviceeliminationsready', this.onEliminationReady);
   }
 
   addYears() {
@@ -241,6 +261,7 @@ export class MatchesPage {
       this.matchService.getMatchDatesAsync(this.selectedId);
       this.matchService.getTournamentTableAsync(this.selectedId);
     }
+
   }
 
   enterNewGame() {
@@ -286,8 +307,8 @@ export class MatchesPage {
       return false;
     if ('all' === this.selectedId)
       return this.playerService.amICaptainOrAdminOfCurrentTeam();
-    else 
-      return this.isLeagueAdmin(); 
+    else
+      return this.isLeagueAdmin();
   }
 
   showRules() {
@@ -296,7 +317,19 @@ export class MatchesPage {
     }).present();
   }
 
-  resize() {
-    this.matchContent.resize();
+  getEliminationTitle(name: string) {
+    // localization here
+    if (name)
+      return name;
+
+    return "";
+  }
+
+  getSelectedMatches() {
+    return this.eliminations[this.selectedElimination].matches;
+  }
+
+  getSelectedName() {
+    return this.getEliminationTitle(this.eliminations[this.selectedElimination].nextName);
   }
 }
