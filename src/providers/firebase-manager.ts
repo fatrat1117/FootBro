@@ -31,7 +31,7 @@ export class FirebaseManager {
   //cachedMatchSquadMap = {};
   _afTournamentList;
   cachedTournamentTablesMap = {};
-  cachedEliminationMap = {};
+  //cachedEliminationMap = {};
   cachedRegisteredTeamsMap = {};
   //squads
   cachedSquads: any = {};
@@ -1114,20 +1114,26 @@ export class FirebaseManager {
     }
   }
 
-  getEliminations(id) {
-    return this.cachedEliminationMap[id];
+  getEliminations(tournamentId) {
+    let tournament = this.getTournament(tournamentId);
+    //console.log('getEliminations', tournament);
+    
+    if (tournament && tournament.eliminations)
+      return tournament.eliminations;
+    return null;
+    //return this.cachedEliminationMap[id];
   }
 
 
   getEliminationsAsync(id) {
     if (this.getEliminations(id))
       this.FireCustomEvent('eliminationsready', id);
-    else {
-      this.getEliminationList(id).subscribe(snapshots => {
-        this.cachedEliminationMap[id] = snapshots;
-        this.FireCustomEvent('eliminationsready', id);
-      });
-    }
+    // else {
+    //   this.getEliminationList(id).subscribe(snapshots => {
+    //     this.cachedEliminationMap[id] = snapshots;
+    //     this.FireCustomEvent('eliminationsready', id);
+    //   });
+    // }
   }
 
   registerLeague(teamId: string, leagueId: string) {

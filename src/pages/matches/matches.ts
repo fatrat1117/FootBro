@@ -167,7 +167,7 @@ export class MatchesPage {
         this.eliminations.forEach(el => {
           for (let id of el.matches) {
             this.eliminationMatches[id] = {};
-            this.matchService.getMatchAsync(id)
+            this.matchService.getMatchAsync(id);
           }
         });
       }
