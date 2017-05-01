@@ -29,7 +29,7 @@
 </ion-row>
 <ion-row>
   <label>{{'penalty' | trans}}</label>
-  <ion-toggle [(ngModel)] = "hasPenalty"></ion-toggle>
+  <ion-toggle [disabled] = "0 === homeScore.trim().length || 0 === awayScore.trim().length || homeScore != awayScore" [(ngModel)] = "hasPenalty"></ion-toggle>
 </ion-row>
 </ion-col>
 
@@ -45,7 +45,7 @@
       <ion-input class="score-input" text-center type="number" maxlength="2" [(ngModel)]="awayScore"></ion-input>
     </ion-col>
   </ion-row>
-  <ion-row *ngIf="hasPenalty" center class="score-item">
+  <ion-row *ngIf="canShowPenalty()" center class="score-item">
     <ion-col class="team-score">
       <ion-input class="score-input" text-center type="number" maxlength="2" [(ngModel)]="homePenalty"></ion-input>
     </ion-col>
