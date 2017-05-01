@@ -818,7 +818,7 @@ export class FirebaseManager {
     }
   }
 
-  getTournament(tournamentId) : any {
+  getTournament(tournamentId): any {
     //console.log(this.cachedTournamentsMap);
     return this.cachedTournamentsMap[tournamentId];
   }
@@ -1117,7 +1117,7 @@ export class FirebaseManager {
   getEliminations(tournamentId) {
     let tournament = this.getTournament(tournamentId);
     //console.log('getEliminations', tournament);
-    
+
     if (tournament && tournament.eliminations)
       return tournament.eliminations;
     return null;
@@ -1438,14 +1438,13 @@ export class FirebaseManager {
     })
   }
 
-//compute
-  afTournamentTable (tournamentId, groupId) {
-    let path = `/tournaments/list/${tournamentId}`;
-    if (groupId) { 
-      path += '/';
+  //compute
+  afTournamentTable(tournamentId, groupId) {
+    let path = `/tournaments/list/${tournamentId}/table/`;
+    if (groupId) {
       path += groupId;
     }
-    return this.af.database.object(path + '/table');
+    return this.af.database.object(path);
   }
 
   computeTournamentTable(tournamentId) {
@@ -1461,18 +1460,27 @@ export class FirebaseManager {
       }
     }).subscribe(rawData => {
       sub.unsubscribe();
-      //console.log('raw data', rawData);
-      let tableData = {};
-      rawData.forEach(match => {
-        if ("homeScore" in match && "awayScore" in match) {
-          this.computeOneMatch(tableData, match.homeId, match.awayId, match.homeScore, match.awayScore);
-          this.computeOneMatch(tableData, match.awayId, match.homeId, match.awayScore, match.homeScore);
-        }
-      });
 
-      this.computeRank(tableData);
-      
-      this.afTournamentTable(tournamentId, tournament.groupId).set(tableData).then(() => console.log('computeTournamentTable done'));
+      if (tournament.groups) {
+        tournament.groups.forEach(groupId => {
+          let groupData = rawData.filter(match => {
+            return groupId == match.groupId;
+          });
+          console.log('compute group table', groupData);
+          
+          let tableData = {};
+          groupData.forEach(match => {
+            if ("homeScore" in match && "awayScore" in match) {
+              this.computeOneMatch(tableData, match.homeId, match.awayId, match.homeScore, match.awayScore);
+              this.computeOneMatch(tableData, match.awayId, match.homeId, match.awayScore, match.homeScore);
+            }
+          });
+
+          this.computeRank(tableData);
+
+          this.afTournamentTable(tournamentId, groupId).set(tableData).then(() => console.log('computeTournamentTable done'));
+        });
+      }
     });
   }
 
