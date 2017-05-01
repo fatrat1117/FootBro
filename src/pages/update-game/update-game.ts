@@ -27,8 +27,8 @@ export class UpdateGamePage {
     matchTime;
     tournamentId;
     id;
-    homeScore = '';
-    awayScore = '';
+    homeScore;
+    awayScore;
     myIdentity = 2; //0: home captain, 1: away captain, 2:others
     onMatchSquadReady;
     teamId;
@@ -54,8 +54,8 @@ export class UpdateGamePage {
         this.teamId = params.get('teamId');
         this.adminMode = params.get('adminMode') || this.adminMode;
         this.match = this.matchService.getMatch(this.id);
-        this.homeScore = this.match.homeScore;
-        this.awayScore = this.match.awayScore;
+        this.homeScore = this.match.homeScore || '';
+        this.awayScore = this.match.awayScore || '';
         this.homePenalty = this.match.homePenalty || '';
         this.awayPenalty = this.match.awayPenalty || '';
         if (this.match.home.captain === this.playerService.selfId())
@@ -176,6 +176,12 @@ export class UpdateGamePage {
     }
 
     updateMatch() {
+        //amdin can update score
+        if (this.adminMode) {
+            this.doSimpleUpdate();
+            return;
+        }
+
         //let points = 100 + (0 === this.myIdentity ? this.homePlayers.length : this.awayPlayers.length) * 10;
         let points = this.getTeamPoints();
         let msg = sprintf(this.loc.getString('teamupdateonceandearnpoints'), points);
@@ -200,6 +206,18 @@ export class UpdateGamePage {
         confirm.present();
     }
 
+    doSimpleUpdate () {
+        let updateMatchData = this.getMatchScores();
+        this.matchService.updateMatch(this.id, updateMatchData);
+        this.close();
+    }
+    
+    canShowPenalty() {
+        if (this.hasPenalty && this.homeScore == this.awayScore)
+            return true;
+        return false;
+    }
+
     doUpdateMatch(points) {
         let pushIds = [];
         this.participants.forEach(p => {
@@ -209,15 +227,40 @@ export class UpdateGamePage {
 
         let participants = this.copyAndUpdatePlayersData(this.participants);
 
-        let updateMatchData = {
-            // homeParticipants: copyHomeParticipants,
-            // awayParticipants: copyAwayParticipants,
-        };
+        let updateMatchData = this.getMatchScores();
 
         if (this.teamId === this.match.homeId)
             updateMatchData['isHomeUpdated'] = true;
         else if (this.teamId === this.match.awayId)
             updateMatchData['isAwayUpdated'] = true;
+
+        this.matchService.updateMatch(this.id, updateMatchData);
+        this.teamService.updateMatchParticipants(this.teamId, this.id, participants);
+        this.teamService.teamEarnPoints(this.teamId, points);
+
+        let enMsg = sprintf('%s vs %s (%s : %s), please rate your teammate to earn player points',
+            this.match.home.name,
+            this.match.away.name,
+            updateMatchData.homeScore,
+            updateMatchData.awayScroe
+        );
+
+        let chMsg = sprintf('%s vs %s (%s : %s), 快去给队友打分以获得个人积分吧',
+            this.match.home.name,
+            this.match.away.name,
+            updateMatchData.homeScore,
+            updateMatchData.awayScroe
+        );
+
+        let pushMsg = { 'en': enMsg, 'zh-Hans': chMsg };
+        this.osm.postNotification(pushMsg, pushIds);
+        this.close();
+    }
+
+    getMatchScores() : any {
+        let updateMatchData = {
+        };
+
         let homeScoreStr = this.homeScore.toString().trim();
         let awayScroeStr = this.awayScore.toString().trim();
         if (homeScoreStr.length > 0 && awayScroeStr.length > 0) {
@@ -233,27 +276,7 @@ export class UpdateGamePage {
             }
         }
 
-        this.matchService.updateMatch(this.id, updateMatchData);
-        this.teamService.updateMatchParticipants(this.teamId, this.id, participants);
-        this.teamService.teamEarnPoints(this.teamId, points);
-
-        let enMsg = sprintf('%s vs %s (%s : %s), please rate your teammate to earn player points',
-            this.match.home.name,
-            this.match.away.name,
-            homeScoreStr,
-            awayScroeStr
-        );
-
-        let chMsg = sprintf('%s vs %s (%s : %s), 快去给队友打分以获得个人积分吧',
-            this.match.home.name,
-            this.match.away.name,
-            homeScoreStr,
-            awayScroeStr
-        );
-
-        let pushMsg = { 'en': enMsg, 'zh-Hans': chMsg };
-        this.osm.postNotification(pushMsg, pushIds);
-        this.close();
+        return updateMatchData;
     }
 
     close() {

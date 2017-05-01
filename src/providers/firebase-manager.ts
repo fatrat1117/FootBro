@@ -818,7 +818,7 @@ export class FirebaseManager {
     }
   }
 
-  getTournament(tournamentId) : any {
+  getTournament(tournamentId): any {
     //console.log(this.cachedTournamentsMap);
     return this.cachedTournamentsMap[tournamentId];
   }
@@ -1117,7 +1117,7 @@ export class FirebaseManager {
   getEliminations(tournamentId) {
     let tournament = this.getTournament(tournamentId);
     //console.log('getEliminations', tournament);
-    
+
     if (tournament && tournament.eliminations)
       return tournament.eliminations;
     return null;
@@ -1436,5 +1436,108 @@ export class FirebaseManager {
         }
       });
     })
+  }
+
+  //compute
+  afTournamentTable(tournamentId, groupId) {
+    let path = `/tournaments/list/${tournamentId}/table/`;
+    if (groupId) {
+      path += groupId;
+    }
+    return this.af.database.object(path);
+  }
+
+  computeTournamentTable(tournamentId) {
+    let tournament = this.getTournament(tournamentId);
+    if (!tournament)
+      return;
+
+    //console.log('computeTournamentTable');
+    let sub = this.af.database.list('/matches/list', {
+      query: {
+        orderByChild: 'tournamentId',
+        equalTo: tournamentId
+      }
+    }).subscribe(rawData => {
+      sub.unsubscribe();
+
+      if (tournament.groups) {
+        tournament.groups.forEach(groupId => {
+          let groupData = rawData.filter(match => {
+            return groupId == match.groupId;
+          });
+          console.log('compute group table', groupData);
+          
+          let tableData = {};
+          groupData.forEach(match => {
+            if ("homeScore" in match && "awayScore" in match) {
+              this.computeOneMatch(tableData, match.homeId, match.awayId, match.homeScore, match.awayScore);
+              this.computeOneMatch(tableData, match.awayId, match.homeId, match.awayScore, match.homeScore);
+            }
+          });
+
+          this.computeRank(tableData);
+
+          this.afTournamentTable(tournamentId, groupId).set(tableData).then(() => console.log('computeTournamentTable done'));
+        });
+      }
+    });
+  }
+
+  computeRank(tableData) {
+    let arr = [];
+    for (let key in tableData) {
+      arr.push(tableData[key]);
+      arr[arr.length - 1]["id"] = key;
+    }
+    arr.sort(function (a, b) {
+      if (a.PTS == b.PTS) {
+        let GDA = a.GS - a.GA;
+        let GDB = b.GS - b.GA;
+
+        if (GDA == GDB) {
+          return b.GS - a.GS;
+        }
+
+        return GDB - GDA;
+      }
+
+      return b.PTS - a.PTS;
+    });
+
+    for (let i = 0; i < arr.length; ++i) {
+      tableData[arr[i].id]["rank"] = i + 1;
+    }
+  }
+
+  computeOneMatch(result, teamId1, teamId2, score1, score2) {
+    if (!(teamId1 in result)) {
+      result[teamId1] = {
+        W: 0,
+        L: 0,
+        D: 0,
+        P: 0,
+        PTS: 0,
+        GA: 0,
+        GS: 0,
+        winList: {},
+      }
+    }
+
+    ++result[teamId1].P;
+    result[teamId1].GS = result[teamId1].GS + score1;
+    result[teamId1].GA = result[teamId1].GA + score2;
+    if (score1 > score2) {
+      ++result[teamId1].W;
+      result[teamId1].PTS = result[teamId1].PTS + 3;
+      result[teamId1].winList[teamId2] = true;
+    }
+    else if (score1 < score2) {
+      ++result[teamId1].L;
+    }
+    else {
+      ++result[teamId1].D;
+      result[teamId1].PTS = result[teamId1].PTS + 1;
+    }
   }
 }

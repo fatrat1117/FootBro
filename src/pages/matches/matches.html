@@ -2,6 +2,9 @@
   <ion-navbar>
     <ion-title>{{ title | trans }}</ion-title>
     <ion-buttons end>
+      <button *ngIf = "canShowComputeTable()" ion-button icon-only (click)="computeTournamentTable()">
+        <ion-icon name="calculator"></ion-icon>
+      </button>
       <button *ngIf="canShowAdd()" ion-button icon-only (tap)="enterNewGame()">
         <ion-icon name="md-add" color="primary"></ion-icon>
       </button>
@@ -18,7 +21,7 @@
       <ion-segment-button value="standings">
         {{ 'standings' | trans }}
       </ion-segment-button>
-      <ion-segment-button value="eliminations" *ngIf="type == 'cup'">
+      <ion-segment-button value="eliminations" [hidden]="type != 'cup'">
         {{ 'eliminations' | trans }}
       </ion-segment-button>
     </ion-segment>
@@ -124,7 +127,7 @@
     </div>
 </ion-content>
 
-<ion-footer *ngIf="type == 'cup'">
+<ion-footer #matchFooter [hidden]="type != 'cup'">
   <!-- standings -->
   <ion-segment [(ngModel)]="selectedGroup" mode="md" *ngIf="selectedInfo == 'standings' && tournament && tournament.groups">
     <ion-segment-button *ngFor="let g of tournament.groups" [value]="g">

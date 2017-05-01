@@ -77,6 +77,7 @@ page-update-game {
       background-color: #2c2b31;
       .is-penalty-row{
         justify-content: center;
+        align-items: center;
         padding: 10px;
         margin-top: 2rem;
         .penalty-label{
@@ -90,7 +91,7 @@ page-update-game {
           .toggle-icon{
             max-height: 2rem;
             .toggle-inner{
-              max-height: 1.5rem;
+              max-height: 2rem;
             }
           }
         }
