@@ -182,8 +182,11 @@ export class MatchDetailPage {
             stat.teamName = team.name;
             let sum = 0;
             playerRatings.forEach(r => {
-              sum += r;
+              let tempR = Math.min(10, r);
+              sum += tempR;
+              //console.log(r, sum);
             })
+            //console.log('calculate avg rating', sum, playerRatings.length);
             stat.val = (sum / playerRatings.length).toFixed(1);
             stats['rating'].push(stat);
           }

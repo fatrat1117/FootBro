@@ -88,7 +88,7 @@ export class FirebaseManager {
 
 
   popupLoginPage() {
-    console.log('popupLoginPage');
+    //console.log('popupLoginPage');
 
     let loginPage = this.modalCtrl.create(LoginPage);
     //console.log(loginPage);
