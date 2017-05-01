@@ -126,9 +126,9 @@
 
 <ion-footer *ngIf="type == 'cup'">
   <!-- standings -->
-  <ion-segment [(ngModel)]="selectedGroup" mode="md" *ngIf="selectedInfo == 'standings'">
-    <ion-segment-button *ngFor="let g of groups; let i = index" [value]="i">
-      Group Name
+  <ion-segment [(ngModel)]="selectedGroup" mode="md" *ngIf="selectedInfo == 'standings' && tournament && tournament.groups">
+    <ion-segment-button *ngFor="let g of tournament.groups" [value]="g">
+      {{'group' | trans}} {{g}}
     </ion-segment-button>
   </ion-segment>
 
@@ -138,25 +138,4 @@
       {{ getEliminationTitle(e.name) }}
     </ion-segment-button>
   </ion-segment>
-  <!-->
-  <ion-row text-center>
-    <ion-col *ngFor="let g of groups;">
-      <button ion-button small color="secondary" (click)="showStandings(g)">
-        Group Name
-      </button>
-    </ion-col>
-  </ion-row>
-  <ion-row text-center *ngIf="selectedInfo == 'eliminations'">
-    <ion-col>
-      <button ion-button small color="secondary" (click)="setCurrentPosition(1)">
-        GS
-      </button>
-    </ion-col>
-    <ion-col>
-      <button ion-button small color="secondary" (click)="setCurrentPosition(1)">
-        GS
-      </button>
-    </ion-col>
-  </ion-row>
-  <-->
 </ion-footer>
