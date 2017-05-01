@@ -241,7 +241,7 @@ export class UpdateGamePage {
         this.teamService.updateMatchParticipants(this.teamId, this.id, participants);
         this.teamService.teamEarnPoints(this.teamId, points);
 
-        let enMsg = sprintf('%s vs %s (%s : %s), please rate your teammate to earn player points',
+        let enMsg = sprintf('%s vs %s (%s : %s), rate your teammates to earn player points',
             this.match.home.name,
             this.match.away.name,
             updateMatchData.homeScore,

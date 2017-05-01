@@ -5,6 +5,7 @@ import { PlayerService } from '../../app/players/player.service';
 import { UpdateGamePage } from '../../pages/update-game/update-game';
 import { OneSignalManager } from '../../providers/onesignal-manager'
 import * as moment from 'moment';
+declare var sprintf: any;
 
 @Component({
   selector: 'result-score',
@@ -71,7 +72,16 @@ export class ResultScoreComponent {
   }
   informAllClick(e){
     //alert("Cheers!Love, the cavalry is here!");
-    this.osm.matchNotification_team('joinMatch', this.playerService.myself().teamId, this.upcomingMatch.id);
+    let enMsg = sprintf('A new match is waiting for you to join: %s vs %s',
+      this.upcomingMatch.home.name,
+      this.upcomingMatch.away.name,
+    );
+
+    let chMsg = sprintf('一场新球赛等待你的加入: %s vs %s',
+      this.upcomingMatch.home.name,
+      this.upcomingMatch.away.name,
+    );
+    this.osm.matchNotification_team('joinMatch', this.playerService.myself().teamId, this.upcomingMatch.id, enMsg, chMsg);
     e.stopPropagation();
     e.preventDefault();
   }

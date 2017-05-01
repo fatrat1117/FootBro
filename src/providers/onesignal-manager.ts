@@ -111,7 +111,7 @@ export class OneSignalManager {
 
   
   /****************************** Match ******************************/
-  matchNotification_team(type: string /* 'joinMatch' or 'rateMatch' */, teamId: string, matchId: string) {
+  matchNotification_team(type: string /* 'joinMatch' or 'rateMatch' */, teamId: string, matchId: string, enMsg: string = "", chMsg: string = "") {
     let alert = this.alertController.create({
       title: this.local.getString('sending'),
     });
@@ -128,7 +128,7 @@ export class OneSignalManager {
           }
         })
         document.removeEventListener('serviceteamplayersready', onTeamPlayersReady);
-        this.matchNotification(type, matchId, playerIds, pushIds);
+        this.matchNotification(type, matchId, playerIds, pushIds, enMsg, chMsg);
         alert.dismiss();
       }
     }
