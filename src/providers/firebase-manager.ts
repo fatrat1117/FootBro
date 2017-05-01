@@ -1106,6 +1106,8 @@ export class FirebaseManager {
       return null;
     
     if (tournament.table) {
+      console.log(tournament.table);
+      
       if (groupId != null) {
         return tournament.table[groupId];
       }

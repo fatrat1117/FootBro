@@ -195,13 +195,17 @@ export class MatchService {
 
   getTournamentTable(tournamentId, groupId = null) {
     let table = this.fm.getTournamentTable(tournamentId, groupId);
-    console.log(table);
+    let copyTable = Object.assign({}, table);
+    //console.log(copyTable);
     let teamTables = [];
     for (let teamId in table) {
-      let r = table[teamId];
+      let r = Object.assign({}, table[teamId]);
       r.team = this.teamService.findOrCreateTeamAndPull(teamId);
       teamTables.push(r);
     }
+    teamTables.sort((a, b) => {
+      return a.rank - b.rank;
+    });
     return teamTables;
   }
 
