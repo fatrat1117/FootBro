@@ -19,7 +19,7 @@ export class PlayerService {
       //player.points = playerData.points;
       player.name = playerData['basic-info'].displayName || "John Doe";
       player.photo = playerData['basic-info'].photoURL || "assets/img/none.png";
-      
+
       player.points = playerData.points;
       player.photoLarge = playerData.photoLarge || "assets/img/forTest/messi_banner.png";
       player.wechatShareTime = playerData.wechatShareTime;
@@ -55,7 +55,7 @@ export class PlayerService {
       }
 
       //fix issue is currentTeam is not found
-      if (currentTeamFound) 
+      if (currentTeamFound)
         player.teamId = playerData['basic-info'].teamId;
       else {
         if (player.teams && player.teams.length)
@@ -168,7 +168,7 @@ export class PlayerService {
 
     if (pullSocial)
       this.getPlayerSocialAsync(id);
-    
+
     if (pullStats)
       this.fm.getPlayerStatsAsync(id);
   }
@@ -310,7 +310,7 @@ export class PlayerService {
     return this.amIMemberOfCurrentTeam(teamId) && this.amICaptainOrAdmin(teamId);
   }
 
-  
+
   isCaptain(pId, tId) {
     //console.log('isCaptain', pId, tId);
     if (!pId || !tId)
@@ -408,7 +408,7 @@ export class PlayerService {
   amITeamAdmin(teamId) {
     return this.isTeamAdmin(this.selfId(), teamId);
   }
-  
+
   amICaptainOrAdminOfCurrentTeam() {
     let pId = this.selfId();
     if (!pId)
@@ -444,5 +444,35 @@ export class PlayerService {
 
   saveTeamNickName(playerId, teamId, nickName) {
     this.fm.saveTeamNickName(playerId, teamId, nickName);
-  } 
+  }
+
+  isTournamentAdmin(playerId, tournamentId) {
+    //console.log('isTournamentAdmin', playerId, tournamentId);
+    let player = this.getPlayer(playerId);
+    if (!player)
+      return false;
+    let tournament = this.fm.getTournament(tournamentId);
+    //console.log(tournament);
+    if (!tournament)
+      return false;
+     // console.log('isTournamentAdmin', player, tournament);
+      
+    if (tournament.whitelist)
+      return tournament.whitelist.hasOwnProperty(playerId);
+    return false;
+  }
+
+  amITournamentAdmin(tournamentId) {
+    return this.isTournamentAdmin(this.selfId(), tournamentId);
+  }
+
+  isMyteamInTournament(teamId, tournamentId) {
+    let tournament = this.fm.getTournament(tournamentId);
+    if (!tournament)
+      return false;
+
+    if (tournament.registered)
+      return tournament.registered.hasOwnProperty(teamId);
+    return false;
+  }
 }

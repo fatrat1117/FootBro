@@ -54,15 +54,15 @@ export class MatchesPage {
     private playerService: PlayerService) {
     this.selectedInfo = "schedule";
     this.selectedId = "all";
-    //this.afTournamentList = this.matchService.afTournamentList();
+    if (this.navParams.get('tournamentId'))
+      this.selectedId = this.navParams.get('tournamentId');
   }
 
   ionViewDidLoad() {
     this.eliminationPairs = [];
     this.today = moment(moment().format("YYYY-MM-DD")).unix() * 1000;
     this.addEventListeners();
-    if (this.navParams.get('id')) {
-      this.selectedId = this.navParams.get('id');
+    if (this.navParams.get('tournamentId')) {
       this.matchService.getTournamentTableAsync(this.selectedId);
     }
     if (this.navParams.get('status') == 'end') {
@@ -314,17 +314,26 @@ export class MatchesPage {
     return class1;
   }
 
-  isLeagueAdmin() {
+  canAddTournamentMatch() {
+    if (this.playerService.amITournamentAdmin(this.selectedId))
+      return true;
+
+      //captain or admin of tournament team
+    if (this.playerService.amICaptainOrAdminOfCurrentTeam() &&
+      this.playerService.isMyteamInTournament(this.playerService.myself().teamId, this.selectedId))
+      return true;
+
     return false;
   }
 
   canShowAdd() {
+    // console.log();
     if (this.isEnd)
       return false;
     if ('all' === this.selectedId)
       return this.playerService.amICaptainOrAdminOfCurrentTeam();
     else
-      return this.isLeagueAdmin();
+      return this.canAddTournamentMatch();
   }
 
   showRules() {
