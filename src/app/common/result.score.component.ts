@@ -121,6 +121,10 @@ export class ResultScoreComponent {
     }
 
     //If I am tournament admin
+    return this.amITournamentAdmin();
+  }
+
+  amITournamentAdmin() {
     if (this.upcomingMatch.tournamentId != null && this.playerService.amITournamentAdmin(this.upcomingMatch.tournamentId))
       return true;
 
@@ -135,5 +139,9 @@ export class ResultScoreComponent {
     if (this.playerService.myself().teamId === this.upcomingMatch.homeId ||
       this.playerService.myself().teamId === this.upcomingMatch.awayId)
       this.modal.create(UpdateGamePage, { id: this.upcomingMatch.id, teamId: this.playerService.myself().teamId }).present();
+    else if (this.amITournamentAdmin())
+      this.modal.create(UpdateGamePage, { id: this.upcomingMatch.id, 
+        teamId: this.playerService.myself().teamId,
+      adminMode: true }).present();
   }
 }
