@@ -19,22 +19,29 @@
       </ion-thumbnail>
       <h2>{{ player?.name }}</h2>
       <p item-right class="me-point-wrapper">
-        <button ion-button icon-only (click)="pointsFAQ($event)" class="faq-button">
-          <ion-icon name="help-circle" class="faq-icon"></ion-icon>
-        </button>
          <span class="points">
         {{ player?.points }}
          </span>
-        <span> {{ 'points' | trans }}</span>
-
+        <span class="points-text"> {{ 'points' | trans }}</span>
+        <button ion-button icon-only (click)="personalPointsFAQ($event)" class="faq-button">
+          <ion-icon name="help-circle" class="faq-icon"></ion-icon>
+        </button>
       </p>
     </ion-item>
-    <ion-item *ngIf="!isCheerleader && (player)?.teamId" (tap)="goSwitchTeamPage()" detail-push>
+    <ion-item *ngIf="!isCheerleader && (player)?.teamId" (click)="goSwitchTeamPage()" detail-push>
       <ion-thumbnail item-left>
         <img [src]="(team)?.logo">
       </ion-thumbnail>
       <h2>{{ team?.name }}</h2>
-      <p item-right>{{ team?.points }} <span>{{ 'points' | trans }}</span></p>
+      <p item-right class="me-point-wrapper">
+        <span class="points">
+        {{ team?.points }}
+        </span>
+        <span class="points-text">{{ 'points' | trans }}</span>
+        <button ion-button icon-only (click)="teamPointsFAQ($event)" class="faq-button">
+          <ion-icon name="help-circle" class="faq-icon"></ion-icon>
+        </button>
+      </p>
     </ion-item>
     <!--ion-item *ngIf="!isCheerleader && !player?.teamId" (tap) = "joinTeam()">
       <ion-icon name="md-people" item-left color="gBlue"></ion-icon>

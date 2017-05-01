@@ -1,3 +1,11 @@
+.points-faq-popover{
+  .popover-content{
+    background: white !important;
+    color: #1f1f21 !important;
+  }
+}
+
+
 page-me {
   ion-thumbnail[item-left] {
     min-width: 0;
@@ -22,6 +30,9 @@ page-me {
     }
 
     .points{
+      margin-right: 0.5rem;
+    }
+    .points-text{
       margin-right: 0.5rem;
     }
   }

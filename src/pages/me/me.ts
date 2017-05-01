@@ -15,6 +15,7 @@ import { MessageService } from '../../app/messages/message.service'
 import { SearchTeamPage } from '../search-team/search-team'
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { FAQComponent } from '../../app/common/faq.component';
+import { Localization } from '../../providers/localization'
 
 @Component({
   selector: 'page-me',
@@ -36,7 +37,8 @@ export class MePage {
     private messageService: MessageService,
     private teamService: TeamService,
     private fm: FirebaseManager,
-    private iab: InAppBrowser, private popoverCtrl: PopoverController) {
+    private iab: InAppBrowser, private popoverCtrl: PopoverController,
+              private loc : Localization) {
     this.messageCount = 0;
   }
 
@@ -126,16 +128,9 @@ export class MePage {
 
 
 
-  pointsFAQ(event){
-
-    // if (event){
-    //   event.stopPropagation();
-    //   event.preventDefault();
-    //   console.log("Hello");
-    // }
-
+  personalPointsFAQ(event){
     event.stopPropagation();
-    let faqPage = this.popoverCtrl.create(FAQComponent, { title:"Title",subtitle:"Subtitle",content:"This is content!" }, { cssClass: 'points-faq-popover' });
+    let faqPage = this.popoverCtrl.create(FAQComponent, { title:this.loc.getString('personalPointsFAQTitle'),subtitle:"Subtitle",content:this.loc.getString('personalPointsFAQContent') }, { cssClass: 'points-faq-popover' });
     faqPage.present({
       ev: event
     });
@@ -145,6 +140,19 @@ export class MePage {
         console.log(e);
       }
     });
+  }
 
+  teamPointsFAQ(event){
+    event.stopPropagation();
+    let faqPage = this.popoverCtrl.create(FAQComponent, { title:this.loc.getString('teamPointsFAQTitle'),subtitle:"",content:this.loc.getString('teamPointsFAQContent')},{ cssClass:'points-faq-popover'} );
+    faqPage.present({
+      ev: event
+    });
+
+    faqPage.onDidDismiss(e => {
+      if (e) {
+        console.log(e);
+      }
+    });
   }
 }
