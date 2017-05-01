@@ -376,7 +376,14 @@ export class Localization {
       winningRate: "Winning Rate",
       seasonalRecord: "Seasonal Record",
       attendedMatches: "Attended",
-      totalMatches: "Matches"
+      totalMatches: "Matches",
+      noRequirement:"No Jersey Color Required",
+      absentNumber:"Not Attending Players",
+      attendedNumber:"Attending Players",
+      tbdNumber:"TBD Players",
+
+
+
 
     },
 
@@ -733,6 +740,10 @@ export class Localization {
       seasonalRecord: "赛季数据",
       attendedMatches: "参赛",
       totalMatches:"总场次",
+      noRequirement:"无要求",
+      absentNumber:"人请假",
+      attendedNumber:"人报名",
+      tbdNumber:"人待定",
 
     }
   }

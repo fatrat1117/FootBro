@@ -76,21 +76,21 @@
   </ion-item>
   <ion-item class="common-title clothes-title">
     <ion-icon name="shirt" class="common-icon clothes-icon inline-flex-vertical-center"></ion-icon>
-    <div class="common-content clothes-content">无要求</div>
+    <div class="common-content clothes-content">{{'noRequirement' | trans}}</div>
   </ion-item>
   </div>
 
   <ion-row class="registration-info">
     <ion-col class="absent-number flex-direction-column" width-33 >
-      <span class="number-absent">0人请假</span>
-      <span class="common-sub-label number-cancel">0人取消报名</span>
+      <span class="number-absent">{{'applyleave' | trans}}({{absences.length}})</span>
+      <!--<span class="common-sub-label number-cancel">0人取消报名</span>-->
     </ion-col>
     <ion-col class="registered-number flex-direction-column" width-33 >
-      <span class="number-register">0人报名</span>
-      <span class="common-sub-label number-pending">限额0人</span>
+      <span class="number-register">{{'participants' | trans}}({{attendances.length}})</span>
+      <!--<span class="common-sub-label number-pending">限额0人</span>-->
     </ion-col>
     <ion-col class="pending-number flex-direction-column" width-33 >
-      <div class="number-pending">0人待定</div>
+      <div class="number-pending">{{'TBD' | trans}}({{TBDs.length}})</div>
       <div class="number-dummy"></div>
     </ion-col>
   </ion-row>
