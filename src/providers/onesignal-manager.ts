@@ -2,17 +2,18 @@ import { Injectable } from '@angular/core';
 import { OneSignal } from 'ionic-native';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { Http, Headers, RequestOptions } from '@angular/http'
-import { Platform } from 'ionic-angular';
+import { Platform, AlertController } from 'ionic-angular';
 import * as firebase from 'firebase';
 import { UIHelper } from '../providers/uihelper'
 import { FirebaseManager } from './firebase-manager';
 import { PlayerService } from '../app/players/player.service';
+import { TeamService } from '../app/teams/team.service';
 import { Localization } from '../providers/localization';
 
 @Injectable()
 export class OneSignalManager {
-  constructor(private platform: Platform, private fm: FirebaseManager, private playerService: PlayerService,
-    private uiHelper: UIHelper, private http: Http, private local: Localization) {
+  constructor(private platform: Platform, private fm: FirebaseManager, private playerService: PlayerService, private teamService: TeamService, 
+    private uiHelper: UIHelper, private http: Http, private local: Localization, private alertController: AlertController) {
 
   }
 
@@ -110,12 +111,37 @@ export class OneSignalManager {
 
   
   /****************************** Match ******************************/
-  matchNotification(type: string /* 'joinMatch' or 'rateMatch' */, matchId: string, playerIds: string[], pushids: string[]) {
-    let message = {
-      'en': this.local.getString(type, 'en'),
-      'zh-Hans': this.local.getString(type, 'zh')
-    }
+  matchNotification_team(type: string /* 'joinMatch' or 'rateMatch' */, teamId: string, matchId: string) {
+    let alert = this.alertController.create({
+      title: this.local.getString('sending'),
+    });
+    alert.present();
 
+    let onTeamPlayersReady = e => {
+      if (e['detail'] == teamId) {
+        let playerIds = [];
+        let pushIds = [];
+        this.playerService.getTeamPlayers(teamId).forEach(p => {
+          if (p.pushId) {
+            playerIds.push(p.id);
+            pushIds.push(p.pushId);
+          }
+        })
+        document.removeEventListener('serviceteamplayersready', onTeamPlayersReady);
+        this.matchNotification(type, matchId, playerIds, pushIds);
+        alert.dismiss();
+      }
+    }
+    document.addEventListener('serviceteamplayersready', onTeamPlayersReady);
+    this.playerService.getTeamPlayersAsync(teamId);
+  }
+
+  matchNotification(type: string /* 'joinMatch' or 'rateMatch' */, matchId: string, playerIds: string[], pushIds: string[], enMsg: string = "", chMsg: string = "") {
+    let message = {
+      'en': enMsg != "" ? enMsg : this.local.getString(type + "Detail", 'en'),
+      'zh-Hans': chMsg != "" ? chMsg : this.local.getString(type + "Detail", 'zh')
+    }
+    
     let self = this;
     let success = function (fm: FirebaseManager) {
       let content = {
@@ -130,9 +156,9 @@ export class OneSignalManager {
       })
     }
 
-    this.postNotification(message, pushids, success)
-
+    this.postNotification(message, pushIds, success);
   }
+
 
 
 

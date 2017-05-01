@@ -219,10 +219,13 @@ export class UpdateGamePage {
     }
 
     doUpdateMatch(points) {
+        let playerIds = [];
         let pushIds = [];
         this.participants.forEach(p => {
-            if (p.player && p.player.pushId)
+            if (p.player && p.player.pushId) {
+                playerIds.push(p.player.id);
                 pushIds.push(p.player.pushId);
+            }
         })
 
         let participants = this.copyAndUpdatePlayersData(this.participants);
@@ -242,18 +245,19 @@ export class UpdateGamePage {
             this.match.home.name,
             this.match.away.name,
             updateMatchData.homeScore,
-            updateMatchData.awayScroe
+            updateMatchData.awayScore
         );
 
         let chMsg = sprintf('%s vs %s (%s : %s), 快去给队友打分以获得个人积分吧',
             this.match.home.name,
             this.match.away.name,
             updateMatchData.homeScore,
-            updateMatchData.awayScroe
+            updateMatchData.awayScore
         );
 
-        let pushMsg = { 'en': enMsg, 'zh-Hans': chMsg };
-        this.osm.postNotification(pushMsg, pushIds);
+        this.osm.matchNotification('rateMatch', this.id, playerIds, pushIds, enMsg, chMsg);
+        //let pushMsg = { 'en': enMsg, 'zh-Hans': chMsg };
+        //this.osm.postNotification(pushMsg, pushIds);
         this.close();
     }
 

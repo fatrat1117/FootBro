@@ -3,6 +3,7 @@ import { ModalController } from 'ionic-angular';
 import { Match } from '../../app/matches/match.model'
 import { PlayerService } from '../../app/players/player.service';
 import { UpdateGamePage } from '../../pages/update-game/update-game';
+import { OneSignalManager } from '../../providers/onesignal-manager'
 import * as moment from 'moment';
 
 @Component({
@@ -65,11 +66,12 @@ export class ResultScoreComponent {
   versusLabel = "versus";
 
   constructor(private playerService: PlayerService,
-    private modal: ModalController) {
+    private modal: ModalController, private osm: OneSignalManager) {
 
   }
   informAllClick(e){
-    alert("Cheers!Love, the cavalry is here!");
+    //alert("Cheers!Love, the cavalry is here!");
+    this.osm.matchNotification_team('joinMatch', this.playerService.myself().teamId, this.upcomingMatch.id);
     e.stopPropagation();
     e.preventDefault();
   }

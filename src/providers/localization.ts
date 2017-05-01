@@ -376,7 +376,8 @@ export class Localization {
       winningRate: "Winning Rate",
       seasonalRecord: "Seasonal Record",
       attendedMatches: "Attended",
-      totalMatches: "Matches"
+      totalMatches: "Matches",
+      sending: "Sending...",
 
     },
 
@@ -733,7 +734,7 @@ export class Localization {
       seasonalRecord: "赛季数据",
       attendedMatches: "参赛",
       totalMatches:"总场次",
-      
+      sending: "正在发送...",
     }
   }
 }

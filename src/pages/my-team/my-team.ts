@@ -96,6 +96,8 @@ export class MyTeamPage {
       if (teamId === this.id) {
         this.players = this.playerService.getTeamPlayers(teamId);
         this.captain = this.playerService.getPlayer(this.team.captain);
+        console.log(this.players);
+        
         //console.log(this.team.captain, this.captain);
       }
     };

@@ -3,7 +3,7 @@ import { Events } from 'ionic-angular';
 import { FirebaseManager } from '../../providers/firebase-manager';
 import { Team } from './team.model';
 
-  @Injectable()
+@Injectable()
 export class TeamService {
   teamDataMap = {};
   allTeams = [];
