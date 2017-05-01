@@ -133,6 +133,7 @@ page-matches {
   }
   // table
   .league-stats-standing {
+    overflow-y: scroll;
     .header-row{
       background-color:color($colors,primary);
     }
