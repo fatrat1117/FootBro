@@ -49,8 +49,36 @@ page-my-player{
     max-width: 35%;
   }
 
+  .col-20{
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+
+  .col-40{
+    flex: 0 0 40%;
+    max-width: 40%;
+  }
+  .col-45{
+    flex: 0 0 45%;
+    max-width: 45%;
+  }
+
+
   .text-right{
     text-align: right;
+  }
+
+  .margin-right-bottom-2px{
+    margin-right: 2px;
+    margin-bottom: 2px;
+  }
+
+  .margin-right-2px{
+    margin-right: 2px;
+  }
+
+  .margin-bottom-2px{
+    margin-bottom: 2px;
   }
 
   .my-player-header-card {
@@ -336,6 +364,13 @@ page-my-player{
       margin: 0.5rem 0.5rem 0.5rem 0.5rem;
     }
   }
+
+  .player-yearly-record-content,.player-total-record-content{
+    .personal-data{
+      font-weight: lighter !important;
+      font-size: 1.2rem !important;
+    }
+  }
   .separate{
     height: 2.2px;
     color: #171717;
@@ -347,17 +382,19 @@ page-my-player{
     //background-image: url("/../../assets/img/my-player/bg4@3x.png");
     //min-height: 30px;
           .absolute-center-txt{
-            margin: 0 auto;
-            top: 0;
-            right: 0;
-            left: 0;
-            bottom: 0;
+            //margin: 0 auto;
+            //top: 0;
+            //right: 0;
+            //left: 0;
+            //bottom: 0;
+            //position: absolute;
            display:  flex;
-              align-items: center;
+            align-items: center;
            justify-content: center;
-              position: absolute;
-              font-size: 1.2rem;
-              max-width: 20%;
+            font-size: 1.2rem;
+            flex: 0 0 10%;
+            max-width: 10%;
+            text-align: center;
 
           }
 
@@ -393,15 +430,6 @@ page-my-player{
       position: relative;
     }
 
-    .col-20{
-      flex: 0 0 20%;
-      max-width: 20%;
-    }
-
-    .col-40{
-      flex: 0 0 40%;
-      max-width: 40%;
-    }
 
     .col-left{
       display: flex;
