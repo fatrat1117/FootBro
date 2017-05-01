@@ -46,6 +46,7 @@ export class FirebaseManager {
   admins;
   //tournaments
   cachedTournaments;
+  cachedTournamentsMap = {};
 
   ratePlayerPoints = 100;
   teamInitialPoints = 100;
@@ -198,7 +199,7 @@ export class FirebaseManager {
     this.af.database.list(`/chats/${userId}/${fromId}`).push({
       createdAt: firebase.database.ServerValue.TIMESTAMP,
       content: content,
-      isFromSelf: false, 
+      isFromSelf: false,
       action: action
     })
 
@@ -404,7 +405,7 @@ export class FirebaseManager {
       //console.log("check team name", queriedItems);
       //stopping monitoring changes
       //setTimeout(() => {
-        sub.unsubscribe();
+      sub.unsubscribe();
       //}, this.unsubscribeTimeout);
 
       if (0 === queriedItems.length) {
@@ -469,7 +470,7 @@ export class FirebaseManager {
   saveTeamNickName(playerId, teamId, nickName) {
     this.af.database.object(`teams/${teamId}/players/${playerId}/nickName`).set(nickName);
   }
-  
+
   removeFromTeam(playerId, teamId) {
     this.af.database.object(`players/${playerId}/teams/${teamId}`).remove();
     this.af.database.object(`teams/${teamId}/players/${playerId}`).remove();
@@ -650,7 +651,7 @@ export class FirebaseManager {
   }
 
   getPlayerStatsAsync(playerId) {
-    if (this.getPlayerStats(playerId)) 
+    if (this.getPlayerStats(playerId))
       this.FireCustomEvent('playerstatsready', playerId);
     else {
       this.af.database.object(`/player_stats/${playerId}`).subscribe(snapshot => {
@@ -758,7 +759,7 @@ export class FirebaseManager {
     let userName = user.email;
     if (userName) {
       let len = userName.indexOf('@');
-      if (len != -1) 
+      if (len != -1)
         userName = userName.substr(0, len);
     }
     //todo
@@ -799,10 +800,27 @@ export class FirebaseManager {
       this.FireEvent('tournamentsready');
     else {
       this.afTournamentList().subscribe(snapshots => {
-        this.cachedTournaments = snapshots;
+        if (this.cachedTournaments) {
+          this.cachedTournaments.splice(0);
+          snapshots.forEach(snapshot => {
+            this.cachedTournamentsMap[snapshot.$key] = snapshot;
+            this.cachedTournaments.push(snapshot);
+          });
+        }
+        else {
+          this.cachedTournaments = snapshots;
+          snapshots.forEach(snapshot => {
+            this.cachedTournamentsMap[snapshot.$key] = snapshot;
+          });
+        }
         this.FireEvent('tournamentsready');
       });
     }
+  }
+
+  getTournament(tournamentId) : any {
+    //console.log(this.cachedTournamentsMap);
+    return this.cachedTournamentsMap[tournamentId];
   }
 
   afTournamentAdmin(tournamentId) {
@@ -870,8 +888,8 @@ export class FirebaseManager {
         });
 
         //this.matchesByDateMap[date].forEach(snapshot => {
-          //monitor match change
-          //this.getMatchAsync(snapshot.$key);
+        //monitor match change
+        //this.getMatchAsync(snapshot.$key);
         //});
         //this.matchesByDateMap[date] = matches;
         this.FireCustomEvent('matchesbydateready', date);
@@ -1052,8 +1070,8 @@ export class FirebaseManager {
   getMatchSquadRef(teamId, matchId) {
     return `/team_squads/${teamId}/matches/${matchId}/`;
   }
-  
-  
+
+
   attendMatch(teamId: string, matchId: string) {
     this.af.database.object(this.getMatchSquadRef(teamId, matchId) + 'attendance/' + this.selfId()).set(1);
   }
