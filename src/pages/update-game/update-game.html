@@ -7,9 +7,6 @@
       </button>
     </ion-buttons>
     <ion-buttons right>
-      <!--<button (tap)="deleteMatch()" color="danger" ion-button icon-only clear>
-        <ion-icon *ngIf='0 === updateState' name="md-trash"></ion-icon>
-      </button>-->
       <button [disabled]="!(this.homeScore && this.awayScore)" (tap)="updateMatch()" color="primary" ion-button icon-only clear>
         +{{getTeamPoints()}}
         <ion-icon name="md-cloud-upload"></ion-icon>
@@ -30,6 +27,10 @@
 <ion-row>
   <p class="team-name">{{match?.home?.name}}</p>
 </ion-row>
+<ion-row>
+  <label>{{'penalty' | trans}}</label>
+  <ion-toggle [(ngModel)] = "hasPenalty"></ion-toggle>
+</ion-row>
 </ion-col>
 
 <ion-col width-33>
@@ -42,6 +43,17 @@
     </ion-col>
     <ion-col class="team-score">
       <ion-input class="score-input" text-center type="number" maxlength="2" [(ngModel)]="awayScore"></ion-input>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="hasPenalty" center class="score-item">
+    <ion-col class="team-score">
+      <ion-input class="score-input" text-center type="number" maxlength="2" [(ngModel)]="homePenalty"></ion-input>
+    </ion-col>
+    <ion-col class="colon" text-center>
+      :
+    </ion-col>
+    <ion-col class="team-score">
+      <ion-input class="score-input" text-center type="number" maxlength="2" [(ngModel)]="awayPenalty"></ion-input>
     </ion-col>
   </ion-row>
 </ion-col>

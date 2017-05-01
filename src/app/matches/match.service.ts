@@ -29,6 +29,8 @@ export class MatchService {
       match.awayId = fmMatch.awayId;
       match.homeScore = fmMatch.homeScore;
       match.awayScore = fmMatch.awayScore;
+      match.homePenalty = fmMatch.homePenalty;
+      match.awayPenalty = fmMatch.awayPenalty;
       match.date = fmMatch.date;
       match.time = fmMatch.time;
       match.isHomeUpdated = fmMatch.isHomeUpdated;

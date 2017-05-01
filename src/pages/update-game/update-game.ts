@@ -33,6 +33,10 @@ export class UpdateGamePage {
     onMatchSquadReady;
     teamId;
     participants: PlayerMatchStatsUI[] = [];
+    hasPenalty = false;
+    adminMode = false;
+    homePenalty;
+    awayPenalty;
 
     constructor(public navCtrl: NavController,
         private modalCtrl: ModalController,
@@ -48,9 +52,12 @@ export class UpdateGamePage {
         private osm: OneSignalManager) {
         this.id = params.get('id');
         this.teamId = params.get('teamId');
+        this.adminMode = params.get('adminMode') || this.adminMode;
         this.match = this.matchService.getMatch(this.id);
         this.homeScore = this.match.homeScore;
         this.awayScore = this.match.awayScore;
+        this.homePenalty = this.match.homePenalty || '';
+        this.awayPenalty = this.match.awayPenalty || '';
         if (this.match.home.captain === this.playerService.selfId())
             this.myIdentity = 0;
         else if (this.match.away.captain === this.playerService.selfId())
@@ -214,8 +221,16 @@ export class UpdateGamePage {
         let homeScoreStr = this.homeScore.toString().trim();
         let awayScroeStr = this.awayScore.toString().trim();
         if (homeScoreStr.length > 0 && awayScroeStr.length > 0) {
-            updateMatchData["homeScore"] = Number(this.homeScore);
-            updateMatchData["awayScore"] = Number(this.awayScore);
+            updateMatchData["homeScore"] = Number(homeScoreStr);
+            updateMatchData["awayScore"] = Number(awayScroeStr);
+        }
+        if (this.hasPenalty) {
+            let homePenaltyStr = this.homePenalty.toString().trim();
+            let awayPenaltyStr = this.awayPenalty.toString().trim();
+            if (homePenaltyStr.length > 0 && awayPenaltyStr.length > 0) {
+                updateMatchData["homePenalty"] = Number(homePenaltyStr);
+                updateMatchData["awayPenalty"] = Number(awayPenaltyStr);
+            }
         }
 
         this.matchService.updateMatch(this.id, updateMatchData);

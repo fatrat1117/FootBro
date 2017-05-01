@@ -362,7 +362,8 @@ export class Localization {
             personalPointsFAQContent:"If you are one of the participants of a match, you can earn 100 points after rating your teammates. You can also earn player points by sharing on facebook or wechat moments.",
             teamPointsFAQTitle:"How to earn team points?",
             teamPointsFAQContent:"Once a team captain have updated result and participants of a match, his team receive 100 + 10 * number of participants (cap to 250) points.",
-            group: 'Group'
+            group: 'Group',
+            penalty: 'penalty',
         },
 
         zh: {
@@ -703,7 +704,8 @@ export class Localization {
             personalPointsFAQContent:"如果你参加了一场比赛，那么你可以通过给自己的队友评分来获取100积分.你也能通过分享facebook或者微信朋友圈来分别获取相应积分",
             teamPointsFAQTitle:"如何赚取球队积分?",
             teamPointsFAQContent:"当一个球队的队长更新了比赛结果和参加比赛球员信息之后，他的队伍将能得到100+10*(参与比赛的人数)的分数,但最高不超过250分",
-            group: '组'
+            group: '组',
+            penalty: '点球',
         }
     }
 }
