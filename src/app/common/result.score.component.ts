@@ -133,7 +133,7 @@ export class ResultScoreComponent {
     }
 
     //If I am tournament admin
-    return this.amITournamentAdmin();
+    return this.upcomingMatch.isStarted() && this.amITournamentAdmin();
   }
 
   amITournamentAdmin() {
