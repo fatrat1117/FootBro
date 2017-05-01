@@ -39,7 +39,7 @@
       <ion-row>
         <p class="match-time-text">{{ match?.time | numberToTimePipe }}</p>
       </ion-row>
-      <ion-row *ngIf="match?.groupId">
+      <ion-row *ngIf="match && match.groupId">
         {{'group' | trans}} {{match.groupId}}
       </ion-row>
     </ion-col>
