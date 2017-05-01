@@ -67,8 +67,7 @@ export class GameRatingPage implements OnInit {
 
   //touch事件处理
   onTouchChanged(member, itemId) {
-    member.rating = itemId;
-    //console.log(itemId);
+    member.rating = Math.min(10, itemId);
     for (var i = 0; i < member.starArray.length; i++) {
       if (member.starArray[i].id == itemId + 1) {
         member.starArray[i].src = "ios-star-half";

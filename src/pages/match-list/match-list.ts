@@ -20,13 +20,25 @@ import { GameSchedulePage } from "../game-schedule/game-schedule"
 })
 
 export class MatchListPage {
-  afTournamentList
+  tournaments = [];
+  onTounamentsReady;
+  //afTournamentList
 
   constructor(public navCtrl: NavController, private modal: ModalController, private playerService: PlayerService, private matchService: MatchService) {
   }
 
   ionViewDidLoad() {
-    this.afTournamentList = this.matchService.afTournamentList();
+    this.onTounamentsReady = () => {
+      this.tournaments = this.matchService.getTournaments();
+    }
+
+    document.addEventListener('tournamentsready', this.onTounamentsReady);
+    this.matchService.getTournamentsAsync();
+    //this.afTournamentList = this.matchService.afTournamentList();
+  }
+
+  ionViewWillLeave() {
+    document.removeEventListener('tournamentsready', this.onTounamentsReady);
   }
 
   goMatchesPage() {
@@ -42,14 +54,6 @@ export class MatchListPage {
     else
       this.playerService.checkLogin();
   }
-
-  /*
-  showLeagueResult(league) {
-    this.navCtrl.push(LeagueResultPage, {
-      league: league
-    })
-  }
-  */
 
   leagueClick(league) {
     if (league.status == 'prepare') {

@@ -42,9 +42,10 @@ export class FirebaseManager {
   cachedPendingCheerleaders;
   cachedApprovedCheerleaders;
   sortedPublicCheerleadersMap = {};
-
   //admins
   admins;
+  //tournaments
+  cachedTournaments;
 
   ratePlayerPoints = 100;
   teamInitialPoints = 100;
@@ -88,7 +89,7 @@ export class FirebaseManager {
 
 
   popupLoginPage() {
-    console.log('popupLoginPage');
+    //console.log('popupLoginPage');
 
     let loginPage = this.modalCtrl.create(LoginPage);
     //console.log(loginPage);
@@ -787,6 +788,21 @@ export class FirebaseManager {
     if (!this._afTournamentList)
       this._afTournamentList = this.af.database.list('/tournaments/list');
     return this._afTournamentList;
+  }
+
+  getTournaments() {
+    return this.cachedTournaments;
+  }
+
+  getTournamentsAsync() {
+    if (this.getTournaments())
+      this.FireEvent('tournamentsready');
+    else {
+      this.afTournamentList().subscribe(snapshots => {
+        this.cachedTournaments = snapshots;
+        this.FireEvent('tournamentsready');
+      });
+    }
   }
 
   afTournamentAdmin(tournamentId) {
