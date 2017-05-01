@@ -122,4 +122,16 @@ export class MessagesPage {
   isUserBlockded(userId: string) {
     return this.blacklist.indexOf(userId) > -1;
   }
+
+  getLastContent(msg) {
+    if (msg.isSystem) {
+      let str = msg.lastContent[this.local.langCode];
+      if (str == "")
+        return msg.lastContent;
+      else
+        return str;
+    }
+    else
+      return msg.lastContent;
+  }
 }

@@ -118,8 +118,12 @@ export class OneSignalManager {
 
     let self = this;
     let success = function (fm: FirebaseManager) {
+      let content = {
+        'en': message['en'],
+        'zh': message['zh-Hans']
+      }
       playerIds.forEach(id => {
-        self.fm.addChatToUser(id, this.local.getString(type), true, {
+        self.fm.addChatToUser(id, content, true, {
           type: type,
           detail: matchId
         });
@@ -189,7 +193,7 @@ export class OneSignalManager {
       return
 
     let message = {
-      'en': `${player.name} sent you a new message in group Cheerleaders.`,
+      'en': `${player.name} sent you a new message in Cheerleaders group.`,
       'zh-Hans': `${player.name} 在 拉拉队 群内发送了一条新消息。`
     };
 
@@ -208,13 +212,17 @@ export class OneSignalManager {
   /****************************** Cheerleaders ******************************/
   cheerleaderApproved(id: string, pushId: string) {
     let message = {
-      'en': "Welcome to join SoccerBro Cheerleaders!",
-      'zh-Hans': "欢迎加入拉拉队！"
+      'en': this.local.getString("welcomeCheerleader", 'en'),
+      'zh-Hans': this.local.getString("welcomeCheerleader", 'zh')
     };
 
     let self = this;
     let success = function (fm: FirebaseManager) {
-      self.fm.addChatToUser(id, "Welcome to join SoccerBro Cheerleaders!", true);
+      let content = {
+        'en': message['en'],
+        'zh': message['zh-Hans']
+      }
+      self.fm.addChatToUser(id, content, true);
     }
 
     this.postNotification(message, [pushId], success);

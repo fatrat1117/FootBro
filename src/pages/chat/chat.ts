@@ -301,4 +301,12 @@ export class ChatPage {
     }
     */
   }
+
+  getSystemChatContent(chat) {
+    let str = chat.content[this.local.langCode];
+    if (str == "")
+      return chat.content;
+    else
+      return str;
+  }
 }

@@ -175,7 +175,7 @@ export class FirebaseManager {
     });
   }
 
-  addChatToUser(userId: string, content: string, isSystem: boolean = false, action: any = null) {
+  addChatToUser(userId: string, content, isSystem: boolean = false, action: any = null) {
     if (!isSystem) {
       // add to self
       this.af.database.list(`/chats/${this.auth.uid}/${userId}`).push({

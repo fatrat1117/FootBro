@@ -357,6 +357,7 @@ export class Localization {
             joinMatch: "Clik to Join",
             rateMatchDetail: "Rate your match to earn points!",
             rateMatch: "Click to Rate",
+            welcomeCheerleader: "Welcome to join SoccerBro Cheerleaders!"
         },
 
         zh: {
@@ -692,6 +693,7 @@ export class Localization {
             joinMatch: "点击加入",
             rateMatchDetail: "评分经完成的比赛，赚取更多积分！",
             rateMatch: "点击评分",
+            welcomeCheerleader: "欢迎加入拉拉队！"
         }
     }
 }

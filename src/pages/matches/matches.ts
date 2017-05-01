@@ -143,9 +143,6 @@ export class MatchesPage {
       let date = e['detail'];
       if (this.selectedDate === date)
         this.matches = this.matchService.getMatchesByDate(date);
-
-      console.log(this.matches);
-      
     }
 
     this.onTournamentTableReady = e => {
