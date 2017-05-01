@@ -27,8 +27,8 @@ export class UpdateGamePage {
     matchTime;
     tournamentId;
     id;
-    homeScore = '';
-    awayScore = '';
+    homeScore;
+    awayScore;
     myIdentity = 2; //0: home captain, 1: away captain, 2:others
     onMatchSquadReady;
     teamId;
@@ -54,8 +54,8 @@ export class UpdateGamePage {
         this.teamId = params.get('teamId');
         this.adminMode = params.get('adminMode') || this.adminMode;
         this.match = this.matchService.getMatch(this.id);
-        this.homeScore = this.match.homeScore;
-        this.awayScore = this.match.awayScore;
+        this.homeScore = this.match.homeScore || '';
+        this.awayScore = this.match.awayScore || '';
         this.homePenalty = this.match.homePenalty || '';
         this.awayPenalty = this.match.awayPenalty || '';
         if (this.match.home.captain === this.playerService.selfId())

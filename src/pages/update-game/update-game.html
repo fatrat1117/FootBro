@@ -7,7 +7,7 @@
       </button>
     </ion-buttons>
     <ion-buttons right>
-      <button [disabled]="!(this.homeScore && this.awayScore)" (tap)="updateMatch()" color="primary" ion-button icon-only clear>
+      <button [disabled]="!(homeScore && awayScore)" (tap)="updateMatch()" color="primary" ion-button icon-only clear>
         <span *ngIf = '!adminMode'>+{{getTeamPoints()}}</span>
         <ion-icon name="md-cloud-upload"></ion-icon>
       </button>
@@ -29,7 +29,7 @@
 </ion-row>
 <ion-row>
   <label>{{'penalty' | trans}}</label>
-  <ion-toggle [disabled] = "0 === homeScore.trim().length || 0 === awayScore.trim().length || homeScore != awayScore" [(ngModel)] = "hasPenalty"></ion-toggle>
+  <ion-toggle [disabled] = "homeScore != awayScore" [(ngModel)] = "hasPenalty"></ion-toggle>
 </ion-row>
 </ion-col>
 
