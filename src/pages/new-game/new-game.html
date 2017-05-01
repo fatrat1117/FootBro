@@ -39,6 +39,7 @@
   </ion-row>
 
   <ion-list no-lines class="content-game-info">
+    <ion-item-divider *ngIf='groupId'> {{'group' | trans}} {{groupId}}</ion-item-divider>
     <ion-item class="game-info-item">
       <button ion-button clear full class="game-info-item-left" item-left>{{'Type' | trans}}</button>
       <div class="game-info-item-right" item-right>

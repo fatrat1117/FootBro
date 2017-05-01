@@ -22,6 +22,7 @@ export class NewGamePage {
     matchTime;
     tournamentId;
     id;
+    groupId;
 
     constructor(public navCtrl: NavController,
         private modalCtrl: ModalController,
@@ -32,6 +33,7 @@ export class NewGamePage {
         params: NavParams,
         private mapsAPILoader: MapsAPILoader) {
         this.tournamentId = params.get('tournamentId');
+        this.groupId = params.get('groupId');
         this.id = params.get('id');
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
         if (this.id) {
@@ -186,8 +188,10 @@ export class NewGamePage {
             this.matchService.updateMatch(this.id, matchData);
         }
         else {
-            if (this.tournamentId)
+            if (this.tournamentId != null)
                 matchData["tournamentId"] = this.tournamentId;
+            if (this.groupId != null)
+                matchData["groupId"] = this.groupId;
             matchData['creator'] = this.playerService.selfId();
             this.matchService.scheduleMatch(matchData);
         }

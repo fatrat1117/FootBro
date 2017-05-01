@@ -41,11 +41,12 @@ export class MatchesPage {
   onEliminationReady;
   onMatchReady;
   selectedGroup = 0;
-  groups = [0, 0, 0, 0];
+  //groups = [0, 0, 0, 0];
   selectedElimination = 0;
   eliminations: any;
   eliminationPairs = [];
   eliminationMatches = {};
+  tournament;
 
   constructor(public navCtrl: NavController,
     private modalCtrl: ModalController,
@@ -53,9 +54,10 @@ export class MatchesPage {
     private navParams: NavParams,
     private playerService: PlayerService) {
     this.selectedInfo = "schedule";
-    this.selectedId = "all";
-    if (this.navParams.get('tournamentId'))
-      this.selectedId = this.navParams.get('tournamentId');
+    this.selectedId = this.navParams.get('tournamentId') || "all";
+    this.tournament = this.navParams.get('tournament');
+    if (this.tournament && this.tournament.groups && this.tournament.groups.length)
+      this.selectedGroup = this.tournament.groups[0];
   }
 
   ionViewDidLoad() {
@@ -281,7 +283,12 @@ export class MatchesPage {
   */
 
   enterNewGame() {
-    let modal = this.modalCtrl.create(NewGamePage, { tournamentId: 'all' === this.selectedId ? null : this.selectedId });
+    let options = { tournamentId: 'all' === this.selectedId ? null : this.selectedId };
+    if (this.type) 
+      options['groupId'] = this.selectedGroup;
+    console.log('newGame', options);
+    let modal = this.modalCtrl.create(NewGamePage, 
+    options);
     modal.onDidDismiss(e => {
       if (e && e['date']) {
         let date = e['date'];

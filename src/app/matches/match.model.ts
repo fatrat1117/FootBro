@@ -19,8 +19,11 @@ export class Match {
   away: Team;
   homeScore;
   awayScore;
+  homePenalty;
+  awayPenalty;
   type = 11;
   tournamentId;
+  groupId;
   location = new MatchLocation();
   createBy;
   isHomeUpdated;

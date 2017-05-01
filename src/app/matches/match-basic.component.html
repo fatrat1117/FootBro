@@ -1,4 +1,4 @@
-<ion-grid *ngIf = "match?.dataReady" no-padding>
+<ion-grid *ngIf="match?.dataReady" no-padding>
   <ion-row (tap)="goMatchDetailPage()">
     <ion-col class="matches-info" no-padding>
       <ion-item class="team-bar">
@@ -39,9 +39,9 @@
       <ion-row>
         <p class="match-time-text">{{ match?.time | numberToTimePipe }}</p>
       </ion-row>
-      <!--<ion-row *ngIf="canUpdate()" (tap)="deleteMatch($event)">
-        <ion-icon name = 'trash' color='danger' item-right></ion-icon>
-      </ion-row>-->
+      <ion-row *ngIf="match && match.groupId">
+        {{'group' | trans}} {{match.groupId}}
+      </ion-row>
     </ion-col>
     <!-->
     <ion-col class="matches-time">
