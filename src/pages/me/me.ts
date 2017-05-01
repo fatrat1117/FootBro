@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController,PopoverController } from 'ionic-angular';
 import { FirebaseManager } from '../../providers/firebase-manager';
 import { Player } from '../../app/players/player.model'
 import { Team } from '../../app/teams/team.model'
@@ -14,6 +14,7 @@ import { TeamService } from '../../app/teams/team.service'
 import { MessageService } from '../../app/messages/message.service'
 import { SearchTeamPage } from '../search-team/search-team'
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { FAQComponent } from '../../app/common/faq.component';
 
 @Component({
   selector: 'page-me',
@@ -27,6 +28,7 @@ export class MePage {
   onPlayerReady;
   onTeamReady;
   isCheerleader = false;
+  pointsFAQPage:any;
 
   constructor(private navCtrl: NavController,
     private modalCtrl: ModalController,
@@ -34,7 +36,7 @@ export class MePage {
     private messageService: MessageService,
     private teamService: TeamService,
     private fm: FirebaseManager,
-    private iab: InAppBrowser) {
+    private iab: InAppBrowser, private popoverCtrl: PopoverController) {
     this.messageCount = 0;
   }
 
@@ -67,12 +69,13 @@ export class MePage {
       if (this.player && this.player.teamId === teamId)
         this.team = this.teamService.getTeam(teamId);
     };
-    
+
     document.addEventListener('serviceplayerready', this.onPlayerReady);
     document.addEventListener('serviceteamready', this.onTeamReady);
   }
 
-  goEditPlayerPage() {
+  goEditPlayerPage(event) {
+    // event.stopPropagation();
     this.navCtrl.push(EditPlayerPage);
   }
 
@@ -119,5 +122,29 @@ export class MePage {
 
   openFAQPage() {
     const browser = this.iab.create('https://www.facebook.com/notes/soccerbro-studio/faq/792767360879298/');
+  }
+
+
+
+  pointsFAQ(event){
+
+    // if (event){
+    //   event.stopPropagation();
+    //   event.preventDefault();
+    //   console.log("Hello");
+    // }
+
+    event.stopPropagation();
+    let faqPage = this.popoverCtrl.create(FAQComponent, { title:"Title",subtitle:"Subtitle",content:"This is content!" }, { cssClass: 'points-faq-popover' });
+    faqPage.present({
+      ev: event
+    });
+
+    faqPage.onDidDismiss(e => {
+      if (e) {
+        console.log(e);
+      }
+    });
+
   }
 }

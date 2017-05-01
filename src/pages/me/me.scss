@@ -9,4 +9,20 @@ page-me {
       max-height: 4rem;
     }
   }
+
+  .me-point-wrapper{
+    display: flex;
+    align-items: center;
+    .faq-button{
+      background-color: transparent;
+      .faq-icon{
+        font-size: 2rem;
+        margin-right: 1rem;
+      }
+    }
+
+    .points{
+      margin-right: 0.5rem;
+    }
+  }
 }

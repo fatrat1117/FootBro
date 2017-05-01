@@ -13,12 +13,21 @@
 <ion-content>
   <ion-item-group>
     <!-- Me -->
-    <ion-item (tap)="goEditPlayerPage()" detail-push>
+    <ion-item (click)="goEditPlayerPage($event)" detail-push>
       <ion-thumbnail item-left>
         <img [src]="player?.photo">
       </ion-thumbnail>
       <h2>{{ player?.name }}</h2>
-      <p item-right>{{ player?.points }} <span>{{ 'points' | trans }}</span></p>
+      <p item-right class="me-point-wrapper">
+        <button ion-button icon-only (click)="pointsFAQ($event)" class="faq-button">
+          <ion-icon name="help-circle" class="faq-icon"></ion-icon>
+        </button>
+         <span class="points">
+        {{ player?.points }}
+         </span>
+        <span> {{ 'points' | trans }}</span>
+
+      </p>
     </ion-item>
     <ion-item *ngIf="!isCheerleader && (player)?.teamId" (tap)="goSwitchTeamPage()" detail-push>
       <ion-thumbnail item-left>
@@ -38,7 +47,7 @@
       <ion-icon name="md-aperture" item-left color="gGreen"></ion-icon>
       {{'starcard' | trans}}
     </ion-item-->
-    
+
     <!--<ion-item tappable *ngIf="!player?.teamId" (tap) = "createTeam()">
       <ion-icon name="md-people" item-left color="gBlue"></ion-icon>
       {{'CreateTeam' | trans}}

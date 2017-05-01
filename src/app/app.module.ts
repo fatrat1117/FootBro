@@ -81,6 +81,7 @@ import { ResultScoreComponent } from './common/result.score.component';
 import { SbReportButton } from './common/report.button'
 import { ManagePlayerPopover } from '../pages/team-players/manage-players-menu';
 import { SbCupTeamComponent } from './common/cup.team.component';
+import { FAQComponent} from './common/faq.component';
 
 // directives
 import { KeyboardAttachDirective } from '../providers/keyboard-attach.directive';
@@ -171,6 +172,7 @@ export const firebaseConfig = {
     SbReportButton,
     ManagePlayerPopover,
     SbCupTeamComponent,
+    FAQComponent,
     // directives
     KeyboardAttachDirective
   ],
@@ -234,7 +236,8 @@ export const firebaseConfig = {
     SquadSelectPage,
     ManageSquadPage,
     TeamPlayersPage,
-    ManagePlayerPopover
+    ManagePlayerPopover,
+    FAQComponent
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
     FirebaseManager,

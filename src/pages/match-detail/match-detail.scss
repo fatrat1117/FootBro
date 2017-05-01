@@ -278,6 +278,7 @@ page-match-detail {
           color: #1f1f21;
         }
         .pending-col{
+          flex:1;
           button{
             background-color: #ccc;
             ion-icon{
@@ -285,6 +286,7 @@ page-match-detail {
           }
         }
         .absent-col{
+          flex:1;
           button{
             background-color: #f4c20d;
             ion-icon{
@@ -292,7 +294,9 @@ page-match-detail {
           }
         }
         .participate-col{
+          flex:1.5;
           button{
+            width: 100%;
             background-color: #AFE76C;
             ion-icon{
             }
