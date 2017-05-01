@@ -198,7 +198,7 @@ export class MatchService {
     let copyTable = Object.assign({}, table);
     //console.log(copyTable);
     let teamTables = [];
-    for (let teamId in table) {
+    for (let teamId in copyTable) {
       let r = Object.assign({}, table[teamId]);
       r.team = this.teamService.findOrCreateTeamAndPull(teamId);
       teamTables.push(r);
