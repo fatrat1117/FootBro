@@ -55,11 +55,20 @@ sb-match-basic {
       }
     }
   }
-  .match-time-text {
-    font-size: 75%;
-    width: 100%;
-    text-align: center;
+
+  .time-extra-info-panel{
+    .match-time-text {
+      font-size: 75%;
+      width: 100%;
+      text-align: center;
+    }
+    .groupIdLabel{
+      font-size: 1.2rem;
+      display: flex;
+      justify-content: center;
+    }
   }
+
   /*
   .matches-time {
     -webkit-box-flex: 0;

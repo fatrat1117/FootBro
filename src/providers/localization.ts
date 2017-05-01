@@ -733,7 +733,7 @@ export class Localization {
       seasonalRecord: "赛季数据",
       attendedMatches: "参赛",
       totalMatches:"总场次",
-      
+
     }
   }
 }

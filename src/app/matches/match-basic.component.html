@@ -32,14 +32,14 @@
         </ion-grid>
       </ion-item>
     </ion-col>
-    <ion-col center>
+    <ion-col center class="time-extra-info-panel">
       <ion-row *ngIf="showDate">
         <p class="match-time-text">{{ match?.time | date:'yyyy-MM-dd' }}</p>
       </ion-row>
       <ion-row>
         <p class="match-time-text">{{ match?.time | numberToTimePipe }}</p>
       </ion-row>
-      <ion-row *ngIf="match && match.groupId">
+      <ion-row *ngIf="match && match.groupId" class="groupIdLabel">
         {{'group' | trans}} {{match.groupId}}
       </ion-row>
     </ion-col>
