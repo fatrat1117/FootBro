@@ -279,4 +279,8 @@ export class MatchService {
   getTournamentsAsync() {
     this.fm.getTournamentsAsync();
   }
+
+  computeTournamentTable(tournamentId) {
+    this.fm.computeTournamentTable(tournamentId);
+  }
 }

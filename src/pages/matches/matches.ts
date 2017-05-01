@@ -385,4 +385,14 @@ export class MatchesPage {
     if (this.eliminationPairs.length == 0 && ev == 'eliminations')
       this.onEliminationChange(0);
   }
+
+  canShowComputeTable()  {
+    if ('all' === this.selectedId)
+      return false;
+    return this.playerService.amITournamentAdmin(this.selectedId);
+  }
+
+  computeTournamentTable () {
+    this.matchService.computeTournamentTable(this.selectedId);
+  }
 }
