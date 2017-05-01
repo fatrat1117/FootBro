@@ -91,6 +91,12 @@ export class MatchesPage {
     return this.matchContent.scrollHeight - this.matchHeader.nativeElement.clientHeight;
   }
 
+  getContentHeight() {
+    console.log(this.getMatchScrollHeight() - this.matchFooter.nativeElement.clientHeight);
+    
+    return this.getMatchScrollHeight() - this.matchFooter.nativeElement.clientHeight;
+  }
+
   scrollToDate(date) {
     let selectedFormatDate = moment(date).format("YYYY-MM-DD");
     let cToday = -1;
