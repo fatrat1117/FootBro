@@ -378,7 +378,10 @@ export class Localization {
       attendedMatches: "Attended",
       totalMatches: "Matches",
       sending: "Sending...",
-
+      noRequirement:"No Jersey Color Required",
+      absentNumber:"Not Attending Players",
+      attendedNumber:"Attending Players",
+      tbdNumber:"TBD Players",
     },
 
     zh: {
@@ -735,6 +738,10 @@ export class Localization {
       attendedMatches: "参赛",
       totalMatches:"总场次",
       sending: "正在发送...",
+      noRequirement:"无要求",
+      absentNumber:"人请假",
+      attendedNumber:"人报名",
+      tbdNumber:"人待定",
     }
   }
 }

@@ -167,9 +167,9 @@ export class HomePage {
     if (this.playerService.isAuthenticated()) {
       if (this.selfTeam)
         this.navCtrl.push(ManageSquadPage, { teamId: this.selfTeam.id });
-      else 
+      else
         this.joinTeam();
-    } else 
+    } else
       this.playerService.checkLogin();
   }
 
@@ -178,6 +178,19 @@ export class HomePage {
     if (!this.playerService.isAuthenticated())
       return true;
     return this.playerService.amIPlayer();
+  }
+
+  canShowMainPageBanner(){
+    var isCurrentLoggedIn = this.playerService.isAuthenticated();
+    if (!isCurrentLoggedIn){
+       return true;
+    }else {
+      if (this.selfPlayer && !this.selfPlayer.teamId){
+          return true;
+     }else {
+        return false;
+      }
+    }
   }
 }
 

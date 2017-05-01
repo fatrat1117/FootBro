@@ -75,6 +75,27 @@ page-update-game {
     //战队比分
     .team-info {
       background-color: #2c2b31;
+      .is-penalty-row{
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        margin-top: 2rem;
+        .penalty-label{
+          display: flex;
+          align-items: center;
+          margin-right: 0.5rem;
+        }
+
+        .penalty-toggle{
+          max-width: 3rem;
+          .toggle-icon{
+            max-height: 2rem;
+            .toggle-inner{
+              max-height: 2rem;
+            }
+          }
+        }
+      }
       .team-name {
         margin: 0px auto;
         overflow: hidden;
