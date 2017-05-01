@@ -1099,20 +1099,37 @@ export class FirebaseManager {
   }
 
 
-  getTournamentTable(id) {
-    return this.cachedTournamentTablesMap[id];
+  getTournamentTable(tournamentId, groupId = null) {
+    //return this.cachedTournamentTablesMap[id];
+    let tournament = this.getTournament(tournamentId);
+    if (!tournament)
+      return null;
+    
+    if (tournament.table) {
+      if (groupId != null) {
+        return tournament.table[groupId];
+      }
+
+      return tournament.table;
+    }
+
+    return null;
   }
 
-  getTournamentTableAsync(id) {
-    if (this.getTournamentTable(id))
-      this.FireCustomEvent('tournamenttableready', id);
-    else {
-      this.getTournamentTableList(id).subscribe(snapshots => {
-        this.cachedTournamentTablesMap[id] = snapshots;
-        this.FireCustomEvent('tournamenttableready', id);
-      });
-    }
-  }
+//  // getTournamentTableAsync(tournamentId, groupId = null) {
+//  //   let obj = {
+//   ////    tournamentId: tournamentId,
+//       groupId: groupId
+//   //  };
+//     //if (this.getTournamentTable(id))
+//       this.FireCustomEvent('tournamenttableready', obj);
+//     // else {
+//     //   this.getTournamentTableList(id).subscribe(snapshots => {
+//     //     this.cachedTournamentTablesMap[id] = snapshots;
+//     //     this.FireCustomEvent('tournamenttableready', id);
+//     //   });
+//     // }
+//   }
 
   getEliminations(tournamentId) {
     let tournament = this.getTournament(tournamentId);
@@ -1466,7 +1483,7 @@ export class FirebaseManager {
           let groupData = rawData.filter(match => {
             return groupId == match.groupId;
           });
-          console.log('compute group table', groupData);
+          //console.log('compute group table', groupData);
           
           let tableData = {};
           groupData.forEach(match => {
@@ -1477,7 +1494,7 @@ export class FirebaseManager {
           });
 
           this.computeRank(tableData);
-
+          //console.log(tableData);
           this.afTournamentTable(tournamentId, groupId).set(tableData).then(() => console.log('computeTournamentTable done'));
         });
       }
@@ -1511,6 +1528,7 @@ export class FirebaseManager {
   }
 
   computeOneMatch(result, teamId1, teamId2, score1, score2) {
+    //console.log('compute one match', teamId1, teamId2);
     if (!(teamId1 in result)) {
       result[teamId1] = {
         W: 0,

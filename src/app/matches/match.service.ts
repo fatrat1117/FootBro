@@ -66,17 +66,17 @@ export class MatchService {
       this.fm.FireCustomEvent('serviceteammatchesready', result.id);
     });
 
-    document.addEventListener('tournamenttableready', e => {
-      let id = e['detail'];
-      let table = this.fm.getTournamentTable(id);
-      table.forEach(r => {
-        let rank = r;
-        rank['team'] = this.teamService.findOrCreateTeam(r.id);
-        this.fm.getTeamAsync(r.id);
-      });
-      this.tournamentTableMap[id] = table;
-      this.fm.FireCustomEvent('servicetournamenttableready', id);
-    });
+    // document.addEventListener('tournamenttableready', e => {
+    //   let obj = e['detail'];
+    //   let table = this.fm.getTournamentTable(obj.tournamentId);
+    //   table.forEach(r => {
+    //     let rank = r;
+    //     rank['team'] = this.teamService.findOrCreateTeam(r.id);
+    //     this.fm.getTeamAsync(r.id);
+    //   });
+    //   this.tournamentTableMap[id] = table;
+    //   this.fm.FireCustomEvent('servicetournamenttableready', id);
+    // });
 
     document.addEventListener('eliminationsready', e => {
       let id = e['detail'];
@@ -193,20 +193,28 @@ export class MatchService {
     return this.fm.afTournamentList();
   }
 
-  getTournamentTable(id) {
-    return this.tournamentTableMap[id];
+  getTournamentTable(tournamentId, groupId = null) {
+    let table = this.fm.getTournamentTable(tournamentId, groupId);
+    console.log(table);
+    let teamTables = [];
+    for (let teamId in table) {
+      let r = table[teamId];
+      r.team = this.teamService.findOrCreateTeamAndPull(teamId);
+      teamTables.push(r);
+    }
+    return teamTables;
   }
 
   getEliminations(id) {
     return this.eliminationMap[id];
   }
 
-  getTournamentTableAsync(id) {
-    if (this.getTournamentTable(id))
-      this.fm.FireCustomEvent('servicetournamenttableready', id);
-    else
-      this.fm.getTournamentTableAsync(id);
-  }
+  // getTournamentTableAsync(id) {
+  //   if (this.getTournamentTable(id))
+  //     this.fm.FireCustomEvent('servicetournamenttableready', id);
+  //   else
+  //     this.fm.getTournamentTableAsync(id);
+  // }
 
   getEliminationsAsync(id) {
     if (this.getEliminations(id))

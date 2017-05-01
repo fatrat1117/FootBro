@@ -29,7 +29,7 @@ export class LeagueResultPage {
 
     
     this.addEventListeners();
-    this.matchService.getTournamentTableAsync(this.league.$key);
+    //this.matchService.getTournamentTableAsync(this.league.$key);
   }
 
   ionViewWillUnload() {

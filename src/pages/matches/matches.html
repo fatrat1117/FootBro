@@ -131,7 +131,8 @@
 
 <ion-footer #matchFooter [hidden]="type != 'cup'">
   <!-- standings -->
-  <ion-segment [(ngModel)]="selectedGroup" mode="md" *ngIf="selectedInfo == 'standings' && tournament && tournament.groups">
+  <ion-segment  *ngIf="selectedInfo == 'standings' && tournament && tournament.groups" 
+  [ngModel]="selectedGroup" (ngModelChange)="onSelectedGroupChange($event)" mode="md">
     <ion-segment-button *ngFor="let g of tournament.groups" [value]="g">
       {{'group' | trans}} {{g}}
     </ion-segment-button>
