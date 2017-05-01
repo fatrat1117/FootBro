@@ -93,4 +93,9 @@ export class UIHelper {
       return data;
     }
   }
+
+  isNumber(str){
+    var reg = /^\d+$/;
+    return reg.test(str);
+  }
 }

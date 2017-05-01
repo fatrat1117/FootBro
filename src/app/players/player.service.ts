@@ -132,6 +132,16 @@ export class PlayerService {
       let player = this.findOrCreatePlayer(playerId);
       player.stats = this.fm.getPlayerStats(playerId);
       console.log('player stats', player.stats);
+
+      player.yearlyHistory = [];
+      Object.keys(player.stats).forEach(function (key) {
+          if (uiHelper.isNumber(key)){
+             let history = player.stats[key];
+             history['year'] = key;
+              console.log(key);
+              player.yearlyHistory.push(history);
+          }
+      })
     })
   }
 
@@ -456,7 +466,7 @@ export class PlayerService {
     if (!tournament)
       return false;
      // console.log('isTournamentAdmin', player, tournament);
-      
+
     if (tournament.whitelist)
       return tournament.whitelist.hasOwnProperty(playerId);
     return false;

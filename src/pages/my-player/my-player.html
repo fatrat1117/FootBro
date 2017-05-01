@@ -166,21 +166,31 @@
       <ion-col class="subtitle">生涯记录</ion-col>
     </ion-row>
     <ion-row>
-      <ion-col width-16.6 text-center class="personal-data-header">总进球</ion-col>
-      <ion-col width-16.6 text-center class="personal-data-header">参赛</ion-col>
-      <ion-col width-16.6 text-center class="personal-data-header">进球</ion-col>
-      <ion-col width-16.6 text-center class="personal-data-header">助攻</ion-col>
-      <ion-col width-16.6 text-center class="personal-data-header">最佳</ion-col>
-      <ion-col width-16.6 text-center class="personal-data-header">评分</ion-col>
+      <ion-col text-center class="personal-data-header">年份</ion-col>
+      <ion-col text-center class="personal-data-header">总进球</ion-col>
+      <ion-col text-center class="personal-data-header">参赛</ion-col>
+      <ion-col text-center class="personal-data-header">进球</ion-col>
+      <ion-col text-center class="personal-data-header">助攻</ion-col>
+      <ion-col text-center class="personal-data-header">最佳</ion-col>
+      <ion-col text-center class="personal-data-header">评分</ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col width-16.6 text-center class="personal-data">{{player?.stats?.overall?.goal | ifNullThenZeroPipe}}</ion-col>
-      <ion-col width-16.6 text-center class="personal-data">{{player?.stats?.overall?.attended | ifNullThenZeroPipe}}</ion-col>
-      <ion-col width-16.6 text-center class="personal-data">{{player?.stats?.overall?.total_matches | ifNullThenZeroPipe}}</ion-col>
-      <ion-col width-16.6 text-center class="personal-data">{{player?.stats?.overall?.asst | ifNullThenZeroPipe}}</ion-col>
-      <ion-col width-16.6 text-center class="personal-data">{{player?.stats?.overall?.mvps | ifNullThenZeroPipe}}</ion-col>
-      <ion-col width-16.6 text-center class="personal-data">{{player?.stats?.overall?.avg_pts | ifNullThenZeroPipe}}</ion-col>
+    <ion-row *ngFor='let history of player?.yearlyHistory' class="player-yearly-record-content">
+      <!--<ion-col width-16.6 text-center class="personal-data">{{player?.stats?.overall?.goal | ifNullThenZeroPipe}}</ion-col>-->
+      <!--<ion-col width-16.6 text-center class="personal-data">{{player?.stats?.overall?.attended | ifNullThenZeroPipe}}</ion-col>-->
+      <!--<ion-col width-16.6 text-center class="personal-data">{{player?.stats?.overall?.total_matches | ifNullThenZeroPipe}}</ion-col>-->
+      <!--<ion-col width-16.6 text-center class="personal-data">{{player?.stats?.overall?.asst | ifNullThenZeroPipe}}</ion-col>-->
+      <!--<ion-col width-16.6 text-center class="personal-data">{{player?.stats?.overall?.mvps | ifNullThenZeroPipe}}</ion-col>-->
+      <!--<ion-col width-16.6 text-center class="personal-data">{{player?.stats?.overall?.avg_pts | ifNullThenZeroPipe}}</ion-col>-->
+      <ion-col text-center class="personal-data">{{history?.year | ifNullThenZeroPipe}}</ion-col>
+      <ion-col text-center class="personal-data">{{history?.goal | ifNullThenZeroPipe}}</ion-col>
+      <ion-col text-center class="personal-data">{{history?.attended | ifNullThenZeroPipe}}</ion-col>
+      <ion-col text-center class="personal-data">{{history?.total_matches | ifNullThenZeroPipe}}</ion-col>
+      <ion-col text-center class="personal-data">{{history?.asst | ifNullThenZeroPipe}}</ion-col>
+      <ion-col text-center class="personal-data">{{history?.mvps | ifNullThenZeroPipe}}</ion-col>
+      <ion-col text-center class="personal-data">{{history?.avg_pts | ifNullThenZeroPipe}}</ion-col>
     </ion-row>
+
+      <!--</ion-row>-->
     <ion-row class="personal-data-title">
       <ion-col class="subtitle">{{'vote' | trans}}</ion-col>
     </ion-row>

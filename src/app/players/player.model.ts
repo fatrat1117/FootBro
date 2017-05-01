@@ -23,6 +23,7 @@ export class Player {
   wechatShareTime;
   fbShareTime;
   stats;
+  yearlyHistory = [];
 }
 
 export class TeamPlayer extends Player {
