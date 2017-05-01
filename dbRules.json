@@ -78,7 +78,9 @@
             ".write": true,
             "players": {
                 ".indexOn": [
-                    "popularity"
+                    "popularity",
+                  	"assists",
+                    "goals"
                 ],
                 ".validate": "newData.exists()",
                 "$id": {
@@ -143,12 +145,23 @@
         },
         "teams_matches": {
             ".read": true,
-            ".write": "root.child('admins').hasChild(auth.uid)"
+            ".write": "root.child('admins').hasChild(auth.uid)",
+            "$id":{
+              "matches": {
+              ".indexOn":[
+                "date"
+              ]
+            }
+            }
         },
         "teams_stats": {
             ".read": true,
             ".write": "root.child('admins').hasChild(auth.uid)"
         },
+        "player_stats": {
+            ".read": true,
+            ".write": "root.child('admins').hasChild(auth.uid)"
+        },  
         "tournaments": {
             ".read": true,
             ".write": "root.child('admins').hasChild(auth.uid) || root.child('teams').child(root.child('players').child(auth.uid).child('basic-info').child('teamId').val()).child('basic-info').child('captain').val() === auth.uid",

@@ -21,6 +21,7 @@ export class FirebaseManager {
   sortedPublicPlayersMap = {};
   sortedPublicPlayers;
   queryPlayers;
+  cachedPlayerStatsMap = {};
   //pushIdsMap = {};
   cachedAllPublicTeams;
   //matches 
@@ -41,6 +42,7 @@ export class FirebaseManager {
   cachedPendingCheerleaders;
   cachedApprovedCheerleaders;
   sortedPublicCheerleadersMap = {};
+
   //admins
   admins;
 
@@ -173,7 +175,7 @@ export class FirebaseManager {
     });
   }
 
-  addChatToUser(userId: string, content: string, isSystem: boolean = false) {
+  addChatToUser(userId: string, content, isSystem: boolean = false, action: any = null) {
     if (!isSystem) {
       // add to self
       this.af.database.list(`/chats/${this.auth.uid}/${userId}`).push({
@@ -195,7 +197,8 @@ export class FirebaseManager {
     this.af.database.list(`/chats/${userId}/${fromId}`).push({
       createdAt: firebase.database.ServerValue.TIMESTAMP,
       content: content,
-      isFromSelf: false
+      isFromSelf: false, 
+      action: action
     })
 
     this.af.database.object(`/chats/${userId}/basic-info/${fromId}`).set({
@@ -641,6 +644,22 @@ export class FirebaseManager {
     return this.cachedPlayersMap[id];
   }
 
+  getPlayerStats(playerId) {
+    return this.cachedPlayerStatsMap[playerId];
+  }
+
+  getPlayerStatsAsync(playerId) {
+    if (this.getPlayerStats(playerId)) 
+      this.FireCustomEvent('playerstatsready', playerId);
+    else {
+      this.af.database.object(`/player_stats/${playerId}`).subscribe(snapshot => {
+        if (snapshot.$exists()) {
+          this.cachedPlayerStatsMap[playerId] = snapshot;
+          this.FireCustomEvent('playerstatsready', playerId);
+        }
+      });
+    }
+  }
   // public
   queryPublicPlayers(orderby, count) {
     console.log('queryPublicPlayers', orderby, count);

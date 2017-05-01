@@ -19,7 +19,7 @@
     "@angular/platform-server": "2.4.8",
     "@ionic-native/badge": "^3.5.0",
     "@ionic-native/camera": "^3.2.4",
-    "@ionic-native/core": "3.1.1",
+    "@ionic-native/core": "3.6.0",
     "@ionic-native/in-app-browser": "3.1.1",
     "@ionic-native/launch-navigator": "^3.2.3",
     "@ionic-native/splash-screen": "3.1.1",

@@ -125,6 +125,13 @@ export class PlayerService {
       let playerId = e['detail'];
       let player = this.findOrCreatePlayer(playerId);
       player.social = this.fm.getPlayerSocial(playerId);
+    });
+
+    document.addEventListener('playerstatsready', e => {
+      let playerId = e['detail'];
+      let player = this.findOrCreatePlayer(playerId);
+      player.stats = this.fm.getPlayerStats(playerId);
+      console.log('player stats', player.stats);
     })
   }
 
@@ -151,7 +158,7 @@ export class PlayerService {
     return player;
   }
 
-  getPlayerAsync(id, pullSocial = false) {
+  getPlayerAsync(id, pullSocial = false, pullStats = false) {
     if (this.getPlayer(id)) {
       this.fm.FireCustomEvent('serviceplayerready', id);
     }
@@ -161,6 +168,9 @@ export class PlayerService {
 
     if (pullSocial)
       this.getPlayerSocialAsync(id);
+    
+    if (pullStats)
+      this.fm.getPlayerStatsAsync(id);
   }
 
   getSelfPlayer(): Player {

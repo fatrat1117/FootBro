@@ -14,7 +14,7 @@
           <img [src]="getPlayerInfo(msg.playerId)?.photo">
         </ion-thumbnail>
         <h2 class="sender-name">{{ getPlayerInfo(msg.playerId)?.name }}</h2>
-        <p *ngIf="!isUserBlockded(msg.playerId)">{{ msg.lastContent }}</p>
+        <p *ngIf="!isUserBlockded(msg.playerId)">{{ getLastContent(msg) }}</p>
         <p *ngIf="isUserBlockded(msg.playerId)" color="danger">{{ 'blocked' | trans }}</p>
         <ion-note item-right text-right>
           <p>{{ msg.lastTimestamp | momentPipe }}</p>

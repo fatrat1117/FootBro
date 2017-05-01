@@ -366,8 +366,6 @@ export class MatchesPage {
   }
 
   onSegmentChange(ev) {
-    console.log(this.eliminationPairs);
-    
     if (this.eliminationPairs.length == 0 && ev == 'eliminations')
       this.onEliminationChange(0);
   }

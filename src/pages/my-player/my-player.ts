@@ -51,7 +51,7 @@ export class MyPlayerPage {
 
     document.addEventListener('serviceteamready', this.onTeamReady);
     document.addEventListener('serviceplayerready', this.onPlayerReady);
-    this.service.getPlayerAsync(this.id, true);
+    this.service.getPlayerAsync(this.id, true, true);
   }
 
   ionViewWillUnload() {

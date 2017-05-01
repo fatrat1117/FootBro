@@ -1,6 +1,8 @@
 import { Component, Directive, ViewChild } from '@angular/core';
 import { Keyboard } from 'ionic-native';
-import { NavController, NavParams, Content, AlertController } from 'ionic-angular';
+import { NavController, NavParams, Content, AlertController, ModalController } from 'ionic-angular';
+
+import { MatchDetailPage } from '../match-detail/match-detail';
 
 import { MomentPipe } from '../../pipes/moment.pipe'
 import * as moment from 'moment';
@@ -11,6 +13,7 @@ import { Chat } from '../../app/chats/shared/chat.model'
 import { ChatService } from '../../app/chats/chat.service'
 import { Player } from '../../app/players/player.model';
 import { PlayerService } from '../../app/players/player.service';
+import { MatchService } from '../../app/matches/match.service';
 
 
 
@@ -45,9 +48,13 @@ export class ChatPage {
   onPlayerReady: any;
   watchListMap : {};
 
+  onMatchReady: any;
+  todoAction: any;
+
   constructor(private navCtrl: NavController, private navParams: NavParams, 
               private chatService: ChatService, private local: Localization,
-              private alertCtrl : AlertController, private playerService: PlayerService) {
+              private alertCtrl: AlertController, private playerService: PlayerService,
+              private matchService: MatchService, private modalController: ModalController) {
   }
 
   ionViewDidLoad() {
@@ -66,6 +73,24 @@ export class ChatPage {
       if (this.watchListMap[playerId])
         this.watchListMap[playerId] = this.playerService.getPlayer(playerId);
     };
+
+    this.onMatchReady = e => {
+      let id = e['detail'];
+      if (this.todoAction && this.todoAction.detail == id) {
+        if (this.todoAction.type == 'joinMatch') {
+          this.modalController.create(MatchDetailPage, {
+            match: this.matchService.getMatch(id)
+          }).present();
+        }
+        else if (this.todoAction.type == 'rateMatch') {
+          this.modalController.create(MatchDetailPage, {
+            match: this.matchService.getMatch(id),
+            selectedValue: 'players'
+          }).present();
+        }
+        this.todoAction = null;
+      }
+    }
 
     if (this.groupName == "cheerleaders") {
       this.subscription = this.chatService.getClGroupChats(this.isUnread).subscribe(chats => {
@@ -95,6 +120,8 @@ export class ChatPage {
     this.hasNoChatsMessage = this.local.getString(this.hasNoChatsMessageId);
     this.blockingMessage = this.local.getString('blockingMsg');
     this.blockedMessage = this.local.getString('blockedMsg');
+
+    document.addEventListener('servicematchready', this.onMatchReady);
   }
 
   ionViewWillLeave() {
@@ -107,6 +134,7 @@ export class ChatPage {
 
   ionViewWillUnload() {
     document.removeEventListener('serviceplayerready', this.onPlayerReady);
+    document.removeEventListener('servicematchready', this.onMatchReady);
   }
 
   ionViewDidEnter() {
@@ -244,5 +272,41 @@ export class ChatPage {
       return this.watchListMap[playerId];
     else
       return null;
+  }
+
+  getActionName(type) {
+    if (type) {
+      return this.local.getString(type);
+    }
+    return ""
+  }
+
+  onSystemClick(action) {
+    if (action.detail) {
+      this.todoAction = action;
+      this.matchService.getMatchAsync(action.detail);
+    }
+    /*
+    switch (action.type) {
+      case "joinMatch":
+        this.todoAction = action;
+        this.matchService.getMatchAsync(action.detail);
+        break;
+      case "rateMatch":
+        this.todoAction = action;
+        this.matchService.getMatchAsync(action.detail);
+        break;
+      default:
+        break;
+    }
+    */
+  }
+
+  getSystemChatContent(chat) {
+    let str = chat.content[this.local.langCode];
+    if (str == "")
+      return chat.content;
+    else
+      return str;
   }
 }

@@ -1,6 +1,6 @@
 export class Message {
   playerId: string;
-  lastContent: string;
+  lastContent: any;
   lastTimestamp: number;
   isUnread: boolean;
   isSystem: boolean;

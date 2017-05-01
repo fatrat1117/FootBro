@@ -7,11 +7,12 @@ import * as firebase from 'firebase';
 import { UIHelper } from '../providers/uihelper'
 import { FirebaseManager } from './firebase-manager';
 import { PlayerService } from '../app/players/player.service';
+import { Localization } from '../providers/localization';
 
 @Injectable()
 export class OneSignalManager {
   constructor(private platform: Platform, private fm: FirebaseManager, private playerService: PlayerService,
-    private uiHelper: UIHelper, private http: Http) {
+    private uiHelper: UIHelper, private http: Http, private local: Localization) {
 
   }
 
@@ -107,6 +108,35 @@ export class OneSignalManager {
 
 
 
+  
+  /****************************** Match ******************************/
+  matchNotification(type: string /* 'joinMatch' or 'rateMatch' */, matchId: string, playerIds: string[], pushids: string[]) {
+    let message = {
+      'en': this.local.getString(type, 'en'),
+      'zh-Hans': this.local.getString(type, 'zh')
+    }
+
+    let self = this;
+    let success = function (fm: FirebaseManager) {
+      let content = {
+        'en': message['en'],
+        'zh': message['zh-Hans']
+      }
+      playerIds.forEach(id => {
+        self.fm.addChatToUser(id, content, true, {
+          type: type,
+          detail: matchId
+        });
+      })
+    }
+
+    this.postNotification(message, pushids, success)
+
+  }
+
+
+
+
 
 
   /****************************** Invitation ******************************/
@@ -163,7 +193,7 @@ export class OneSignalManager {
       return
 
     let message = {
-      'en': `${player.name} sent you a new message in group Cheerleaders.`,
+      'en': `${player.name} sent you a new message in Cheerleaders group.`,
       'zh-Hans': `${player.name} 在 拉拉队 群内发送了一条新消息。`
     };
 
@@ -182,13 +212,17 @@ export class OneSignalManager {
   /****************************** Cheerleaders ******************************/
   cheerleaderApproved(id: string, pushId: string) {
     let message = {
-      'en': "Welcome to join SoccerBro Cheerleaders!",
-      'zh-Hans': "欢迎加入拉拉队！"
+      'en': this.local.getString("welcomeCheerleader", 'en'),
+      'zh-Hans': this.local.getString("welcomeCheerleader", 'zh')
     };
 
     let self = this;
     let success = function (fm: FirebaseManager) {
-      self.fm.addChatToUser(id, "Welcome to join SoccerBro Cheerleaders!", true);
+      let content = {
+        'en': message['en'],
+        'zh': message['zh-Hans']
+      }
+      self.fm.addChatToUser(id, content, true);
     }
 
     this.postNotification(message, [pushId], success);
