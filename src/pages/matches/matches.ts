@@ -40,7 +40,7 @@ export class MatchesPage {
   // eliminations
   onEliminationReady;
   onMatchReady;
-  selectedGroup = 0;
+  selectedGroup = 'A';
   //groups = [0, 0, 0, 0];
   selectedElimination = 0;
   eliminations: any;
@@ -65,7 +65,7 @@ export class MatchesPage {
     this.today = moment(moment().format("YYYY-MM-DD")).unix() * 1000;
     this.addEventListeners();
     if (this.navParams.get('tournamentId')) {
-      this.matchService.getTournamentTableAsync(this.selectedId);
+      this.refreshTournamentTable();
     }
     if (this.navParams.get('status') == 'end') {
       this.selectedInfo = "standings";
@@ -85,6 +85,11 @@ export class MatchesPage {
     }
 
     this.matchService.getMatchDatesAsync(this.selectedId);
+  }
+
+  refreshTournamentTable() {
+    let groupId = 'cup' == this.type ? this.selectedGroup : null;
+    this.matchStandings = this.matchService.getTournamentTable(this.selectedId, groupId);
   }
 
   getMatchScrollHeight() {
@@ -153,13 +158,13 @@ export class MatchesPage {
         this.matches = this.matchService.getMatchesByDate(date);
     }
 
-    this.onTournamentTableReady = e => {
-      let tournamentId = e['detail'];
-      if (tournamentId === this.selectedId)
-        //console.log(tournamentId);
-        this.matchStandings = this.matchService.getTournamentTable(tournamentId);
-      //console.log(this.matchStandings);
-    };
+    // this.onTournamentTableReady = e => {
+    //   let tournamentId = e['detail'];
+    //   if (tournamentId === this.selectedId)
+    //     //console.log(tournamentId);
+    //     this.matchStandings = this.matchService.getTournamentTable(tournamentId);
+    //   //console.log(this.matchStandings);
+    // };
 
     this.onMatchesChanged = e => {
       let date = e['detail'];
@@ -402,5 +407,10 @@ export class MatchesPage {
 
   computeTournamentTable () {
     this.matchService.computeTournamentTable(this.selectedId);
+  }
+
+  onSelectedGroupChange(e) {
+    this.selectedGroup = e;
+    this.refreshTournamentTable();
   }
 }
