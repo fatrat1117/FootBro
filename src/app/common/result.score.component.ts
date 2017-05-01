@@ -120,6 +120,10 @@ export class ResultScoreComponent {
       return true;
     }
 
+    //If I am tournament admin
+    if (this.upcomingMatch.tournamentId != null && this.playerService.amITournamentAdmin(this.upcomingMatch.tournamentId))
+      return true;
+
     return false;
   }
 
