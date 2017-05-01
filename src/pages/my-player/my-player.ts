@@ -206,7 +206,7 @@ export class MyPlayerPage {
   changeCoverPhoto() {
     if (this.id !== this.service.selfId())
       return;
-    
+
     let actionSheet = this.actionSheetCtrl.create({
       buttons: [{
           text: this.local.getString('changecoverphoto'),
@@ -222,7 +222,7 @@ export class MyPlayerPage {
         }
       ]
     });
-    actionSheet.present(); 
+    actionSheet.present();
   }
 
   doChangeCoverPhoto() {
@@ -237,5 +237,12 @@ export class MyPlayerPage {
     }
 
     this.fm.selectImgUploadGetUrl(this.selfId + 'Large', 512, 512, success, error);
+  }
+
+  getAvgInfomation(a,b){
+    if (b != 0){
+      return parseFloat((a/b).toFixed(1));
+    }
+    return 0;
   }
 }

@@ -85,4 +85,12 @@ export class UIHelper {
   stringToUpperCase(str){
     return str.toUpperCase();
   }
+
+  ifNullThenZero(data){
+    if (!data && data != 0){
+      return 0;
+    }else{
+      return data;
+    }
+  }
 }

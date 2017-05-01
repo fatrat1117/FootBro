@@ -46,7 +46,7 @@ export class GroupThreePipe implements PipeTransform {
   }
 
   transform(arr) {
-    
+
     let newArr = [];
     if (arr) {
       let a = [];
@@ -94,5 +94,21 @@ export class GroupNPipe implements PipeTransform {
     return rowArray;
   }
 }
-  
+
+@Pipe({
+  name: 'ifNullThenZeroPipe',
+})
+
+export class IfNullThenZeroPipe implements PipeTransform{
+  constructor(){
+  }
+  transform(data){
+    if (!data && data!=0){
+      return 0;
+    }else{
+      return data;
+    }
+  }
+}
+
 

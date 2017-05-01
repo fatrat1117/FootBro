@@ -80,30 +80,30 @@
     <hr class="separate" no-margin>
     <ion-row>
       <ion-col width-25 text-center class="personal-data-header">总进球</ion-col>
-      <ion-col width-25 text-center class="personal-data">102</ion-col>
+      <ion-col width-25 text-center class="personal-data">{{player?.stats?.overall?.goal | ifNullThenZeroPipe}}</ion-col>
       <ion-col width-25 text-center class="personal-data-header">总助攻</ion-col>
-      <ion-col width-25 text-center class="personal-data">78</ion-col>
+      <ion-col width-25 text-center class="personal-data">{{player?.stats?.overall?.asst | ifNullThenZeroPipe}}</ion-col>
     </ion-row>
     <hr class="separate" no-margin>
     <ion-row>
       <ion-col width-25 text-center class="personal-data-header">场均进球</ion-col>
-      <ion-col width-25 text-center class="personal-data">54</ion-col>
+      <ion-col width-25 text-center class="personal-data">{{getAvgInfomation(player?.stats?.overall?.goal | ifNullThenZeroPipe , player?.stats?.overall?.total_matches | ifNullThenZeroPipe)}}</ion-col>
       <ion-col width-25 text-center class="personal-data-header">场均助攻</ion-col>
-      <ion-col width-25 text-center class="personal-data">65</ion-col>
+      <ion-col width-25 text-center class="personal-data">{{getAvgInfomation(player?.stats?.overall?.asst | ifNullThenZeroPipe , player?.stats?.overall?.total_matches | ifNullThenZeroPipe)}}</ion-col>
     </ion-row>
     <hr class="separate" no-margin>
     <ion-row>
       <ion-col width-25 text-center class="personal-data-header">出勤率</ion-col>
-      <ion-col width-25 text-center class="personal-data">100%</ion-col>
+      <ion-col width-25 text-center class="personal-data">{{player?.stats?.overall?.attend_rate | ifNullThenZeroPipe}}</ion-col>
       <ion-col width-25 text-center class="personal-data-header">全场最佳</ion-col>
-      <ion-col width-25 text-center class="personal-data">23</ion-col>
+      <ion-col width-25 text-center class="personal-data">{{player?.stats?.overall?.mvps | ifNullThenZeroPipe}}</ion-col>
     </ion-row>
     <hr class="separate" no-margin>
     <ion-row>
       <ion-col width-25 text-center class="personal-data-header">出场胜率</ion-col>
-      <ion-col width-25 text-center class="personal-data">95%</ion-col>
+      <ion-col width-25 text-center class="personal-data">{{player?.stats?.overall?.attend_win_rate | ifNullThenZeroPipe}}</ion-col>
       <ion-col width-25 text-center class="personal-data-header">未出场胜率</ion-col>
-      <ion-col width-25 text-center class="personal-data">91%</ion-col>
+      <ion-col width-25 text-center class="personal-data">{{player?.stats?.overall?.not_attend_win_rate | ifNullThenZeroPipe}}</ion-col>
     </ion-row>
     <hr class="separate" no-margin>
   </ion-grid>
@@ -118,13 +118,13 @@
     <ion-row class="win-progress">
     <ion-col width-50 class="col-35">
     <div class="winning-circle">
-        <sb-rate-circle  [rate]="80"></sb-rate-circle>
+        <sb-rate-circle  [rate]="player?.stats?.overall?.attend_win_rate | ifNullThenZeroPipe"></sb-rate-circle>
     </div>
     </ion-col>
     <ion-col class="absolute-center-txt">胜率</ion-col>
     <ion-col width-50 class="col-35">
       <div class="winning-circle">
-        <sb-rate-circle  [rate]="80"></sb-rate-circle>
+        <sb-rate-circle  [rate]="player?.stats?.overall?.not_attend_win_rate | ifNullThenZeroPipe"></sb-rate-circle>
     </div>
     </ion-col>
     </ion-row>
@@ -174,12 +174,12 @@
       <ion-col width-16.6 text-center class="personal-data-header">评分</ion-col>
     </ion-row>
     <ion-row>
-      <ion-col width-16.6 text-center class="personal-data">56</ion-col>
-      <ion-col width-16.6 text-center class="personal-data">1032</ion-col>
-      <ion-col width-16.6 text-center class="personal-data">432</ion-col>
-      <ion-col width-16.6 text-center class="personal-data">564</ion-col>
-      <ion-col width-16.6 text-center class="personal-data">647</ion-col>
-      <ion-col width-16.6 text-center class="personal-data">99.99</ion-col>
+      <ion-col width-16.6 text-center class="personal-data">{{player?.stats?.overall?.goal | ifNullThenZeroPipe}}</ion-col>
+      <ion-col width-16.6 text-center class="personal-data">{{player?.stats?.overall?.attended | ifNullThenZeroPipe}}</ion-col>
+      <ion-col width-16.6 text-center class="personal-data">{{player?.stats?.overall?.total_matches | ifNullThenZeroPipe}}</ion-col>
+      <ion-col width-16.6 text-center class="personal-data">{{player?.stats?.overall?.asst | ifNullThenZeroPipe}}</ion-col>
+      <ion-col width-16.6 text-center class="personal-data">{{player?.stats?.overall?.mvps | ifNullThenZeroPipe}}</ion-col>
+      <ion-col width-16.6 text-center class="personal-data">{{player?.stats?.overall?.avg_pts | ifNullThenZeroPipe}}</ion-col>
     </ion-row>
     <ion-row class="personal-data-title">
       <ion-col class="subtitle">{{'vote' | trans}}</ion-col>
