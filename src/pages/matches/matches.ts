@@ -383,12 +383,14 @@ export class MatchesPage {
 
   onSegmentChange(ev) {
     if (this.eliminationPairs.length == 0 && ev == 'eliminations')
-      this.onEliminationChange(0);
+      this.onEliminationChange(0);;
   }
 
   canShowComputeTable()  {
     if ('all' === this.selectedId)
       return false;
+    if (this.type != "cup")
+      return false; 
     return this.playerService.amITournamentAdmin(this.selectedId);
   }
 

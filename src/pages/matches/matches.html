@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-title>{{ title | trans }}</ion-title>
     <ion-buttons end>
-      <button *ngIf = "canShowComputeTable()" (click)="computeTournamentTable()">
+      <button *ngIf = "canShowComputeTable()" ion-button icon-only (click)="computeTournamentTable()">
         <ion-icon name="calculator"></ion-icon>
       </button>
       <button *ngIf="canShowAdd()" ion-button icon-only (tap)="enterNewGame()">
