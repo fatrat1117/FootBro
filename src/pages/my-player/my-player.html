@@ -73,7 +73,7 @@
 
   </ion-card>
 
-  <ion-grid>
+  <ion-grid *ngIf="player && player.stats">
     <ion-row class="personal-data-title">
       <ion-col class="subtitle">{{'careerRecord' | trans}}</ion-col>
     </ion-row>
