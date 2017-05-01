@@ -49,7 +49,7 @@
   </div>
   <-->
 
-  <div *ngFor="let league of afTournamentList | async" class="card-background-page">
+  <div *ngFor="let league of tournaments" class="card-background-page">
     <ion-card (tap) = "leagueClick(league)">
       <div class="card-title">{{ league.name }}</div>
       <div class="card-bottom-banner">

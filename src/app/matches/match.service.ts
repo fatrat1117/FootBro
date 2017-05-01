@@ -268,4 +268,12 @@ export class MatchService {
   TBDMatch(teamId: string, matchId: string) {
     this.fm.TBDMatch(teamId, matchId);
   }
+
+  getTournaments() {
+    return this.fm.getTournaments();
+  }
+
+  getTournamentsAsync() {
+    this.fm.getTournamentsAsync();
+  }
 }
