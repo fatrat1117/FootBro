@@ -59,7 +59,7 @@
       </div>
       <!-- table -->
       <div *ngSwitchCase="'standings'">
-        <div class="league-stats-standing">
+        <div class="league-stats-standing" [ngStyle]="{'height.px': getContentHeight()}">
           <ion-grid>
             <ion-row no-margin class="header-row">
               <ion-col width-50>
@@ -121,8 +121,10 @@
 
       <!-- elimination -->
       <div *ngSwitchCase="'eliminations'">
-        <sb-cup-team *ngIf="eliminations.length > 0" [matchPairs]="eliminationPairs" [title]="getSelectedNextName()"></sb-cup-team>
-        <!--sb-cup-team *ngIf="eliminations.length > 0" [matchIds]="getSelectedMatches()" [title]="getSelectedName()"></sb-cup-team-->
+        <div style="overflow-y: scroll" [ngStyle]="{'height.px': getContentHeight()}">
+          <sb-cup-team *ngIf="eliminations.length > 0" [matchPairs]="eliminationPairs" [title]="getSelectedNextName()"></sb-cup-team>
+          <!--sb-cup-team *ngIf="eliminations.length > 0" [matchIds]="getSelectedMatches()" [title]="getSelectedName()"></sb-cup-team-->
+        </div>
       </div>
     </div>
 </ion-content>
