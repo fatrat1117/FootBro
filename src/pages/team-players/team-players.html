@@ -40,7 +40,7 @@
   </div>
 
   <ion-list class="player-list">
-    <ion-item *ngFor="let player of players" class="player-item">
+    <ion-item *ngFor="let player of players" class="player-item" (click) = "goPlayerPage(player.id)">
       <ion-row class="player-item-row">
         <ion-avatar item-left class="player-avatar-wrapper">
         <img [src] = "player.photo" class="player-avatar"/>
@@ -51,7 +51,7 @@
           <!--<div class="not-set-position" *ngIf = "isSetPosition(player.position) == false">{{ 'NotSet' | trans }}</div>-->
         </ion-col>
         <ion-col class="player-operation flex-center" >
-          <ion-icon *ngIf = "canShowSettings(player.id)" name="settings" (tap) = "popupManageMenu($event, player)"></ion-icon>
+          <ion-icon *ngIf = "canShowSettings(player.id)" name="settings" (click) = "popupManageMenu($event, player)"></ion-icon>
         </ion-col>
         <ion-col class="player-team-role flex-center" [ngClass]="player.teamRole">{{player.teamRole | trans}}</ion-col>
         <!--[ngClass]="getLocalizationClass('foot-data')"-->

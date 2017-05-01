@@ -6,6 +6,7 @@ import { TeamService } from '../../app/teams/team.service';
 import { ManagePlayerPopover } from './manage-players-menu';
 import { Localization } from '../../providers/localization';
 import { UIHelper } from '../../providers/uihelper';
+import { MyPlayerPage } from "../my-player/my-player";
 declare var sprintf: any;
 
 @Component({
@@ -41,6 +42,8 @@ export class TeamPlayersPage {
   }
 
   popupManageMenu(myEvent, player) {
+    myEvent.stopPropagation();
+    myEvent.preventDefault();
     let popover = this.popoverCtrl.create(ManagePlayerPopover, { teamId: this.teamId, teamPlayer: player },{ cssClass: 'team-player-operation-popover' });
     popover.onDidDismiss(e => {
       if (e) {
@@ -93,4 +96,7 @@ export class TeamPlayersPage {
     return this.uiHelper.stringToUpperCase(str);
   }
 
+  goPlayerPage(pId) {
+    this.nav.push(MyPlayerPage, { id: pId });
+  }
 }
