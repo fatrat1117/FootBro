@@ -55,15 +55,16 @@ export class MatchDetailPage {
     this.matchId = navParams.get('matchId');
     if (navParams.get('selectedValue'))
       this.matchSegments = navParams.get('selectedValue');
+    this.squadSettings = {};
     if (this.match) {
+      this.squadSettings.matchId = this.match.id;
       this.initialize();
     }
+    else
+      this.squadSettings.matchId = this.matchId;
   }
 
   initialize() {
-    this.squadSettings = {};
-    this.squadSettings.matchId = this.match.id;
-
     //only show captain's team
     if (this.playerService.isAuthenticated()) {
       if (this.playerService.amIMemberOfCurrentTeam(this.match.homeId)) {
