@@ -13,7 +13,6 @@ import { Chat } from '../../app/chats/shared/chat.model'
 import { ChatService } from '../../app/chats/chat.service'
 import { Player } from '../../app/players/player.model';
 import { PlayerService } from '../../app/players/player.service';
-import { MatchService } from '../../app/matches/match.service';
 
 
 
@@ -48,13 +47,10 @@ export class ChatPage {
   onPlayerReady: any;
   watchListMap : {};
 
-  onMatchReady: any;
-  todoAction: any;
-
   constructor(private navCtrl: NavController, private navParams: NavParams, 
               private chatService: ChatService, private local: Localization,
               private alertCtrl: AlertController, private playerService: PlayerService,
-              private matchService: MatchService, private modalController: ModalController) {
+              private modalController: ModalController) {
   }
 
   ionViewDidLoad() {
@@ -74,6 +70,7 @@ export class ChatPage {
         this.watchListMap[playerId] = this.playerService.getPlayer(playerId);
     };
 
+    /*
     this.onMatchReady = e => {
       let id = e['detail'];
       if (this.todoAction && this.todoAction.detail == id) {
@@ -91,6 +88,7 @@ export class ChatPage {
         this.todoAction = null;
       }
     }
+    */
 
     if (this.groupName == "cheerleaders") {
       this.subscription = this.chatService.getClGroupChats(this.isUnread).subscribe(chats => {
@@ -121,7 +119,7 @@ export class ChatPage {
     this.blockingMessage = this.local.getString('blockingMsg');
     this.blockedMessage = this.local.getString('blockedMsg');
 
-    document.addEventListener('servicematchready', this.onMatchReady);
+    //document.addEventListener('servicematchready', this.onMatchReady);
   }
 
   ionViewWillLeave() {
@@ -134,7 +132,7 @@ export class ChatPage {
 
   ionViewWillUnload() {
     document.removeEventListener('serviceplayerready', this.onPlayerReady);
-    document.removeEventListener('servicematchready', this.onMatchReady);
+    //document.removeEventListener('servicematchready', this.onMatchReady);
   }
 
   ionViewDidEnter() {
@@ -282,11 +280,10 @@ export class ChatPage {
   }
 
   onSystemClick(action) {
-    console.log(action);
-    
     if (action.detail) {
-      this.todoAction = action;
-      this.matchService.getMatchAsync(action.detail);
+      this.modalController.create(MatchDetailPage, {
+        matchId: action.detail
+      }).present();
     }
     /*
     switch (action.type) {
