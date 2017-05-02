@@ -75,6 +75,8 @@ export class TabsPage {
         // setup tags
         if (this.selfPlayer.role == "cheerleader") 
           OneSignal.sendTag("role", "cheerleader");
+        else
+          OneSignal.deleteTags(["role", "block-cheerleader"]);
       }
     });
 
