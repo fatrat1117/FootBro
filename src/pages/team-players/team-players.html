@@ -51,7 +51,7 @@
           <!--<div class="not-set-position" *ngIf = "isSetPosition(player.position) == false">{{ 'NotSet' | trans }}</div>-->
         </ion-col>
         <ion-col class="player-operation flex-center" >
-          <ion-icon *ngIf = "canShowSettings(player.id)" name="settings" class="bigger-icon" (click) = "popupManageMenu($event, player)"></ion-icon>
+          <ion-icon *ngIf = "canShowSettings(player.id)" name="md-settings" class="bigger-icon" (click) = "popupManageMenu($event, player)"></ion-icon>
         </ion-col>
         <ion-col class="player-team-role flex-center" [ngClass]="player.teamRole">{{player.teamRole | trans}}</ion-col>
         <!--[ngClass]="getLocalizationClass('foot-data')"-->

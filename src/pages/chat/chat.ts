@@ -282,6 +282,8 @@ export class ChatPage {
   }
 
   onSystemClick(action) {
+    console.log(action);
+    
     if (action.detail) {
       this.todoAction = action;
       this.matchService.getMatchAsync(action.detail);

@@ -32,7 +32,7 @@
       </ion-item>
       <ion-item-options *ngIf="!selectMode" side="right">
         <button color='danger' [disabled]="squad.creator !== playerService.selfId()" ion-button icon-only clear (tap)="deleteSquad(squad.$key)">
-          <ion-icon name='trash' item-right></ion-icon>
+          <ion-icon name='md-trash' item-right></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>

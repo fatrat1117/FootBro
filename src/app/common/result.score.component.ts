@@ -41,7 +41,7 @@ declare var sprintf: any;
           <ion-label *ngIf="!canShowInformAll()" no-margin>{{versusLabel | trans}}</ion-label>
           <div *ngIf="canShowInformAll()" full color="dark" class="group-message flex-direction-column"
              (click)="informAllClick($event)" >
-             <ion-icon name="megaphone" class="inline-flex-center"></ion-icon>
+             <ion-icon name="md-megaphone" class="inline-flex-center"></ion-icon>
             <p class="inline-flex-center">{{'informAll' | trans}}</p>
           </div>
       </ion-row>
