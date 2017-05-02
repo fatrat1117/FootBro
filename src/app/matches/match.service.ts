@@ -37,6 +37,7 @@ export class MatchService {
       match.isAwayUpdated = fmMatch.isAwayUpdated;
       match.dataReady = true;
       match.groupId = fmMatch.groupId;
+      match.informed = fmMatch.informed;
       //console.log(match.groupId);
       match.home = this.teamService.findOrCreateTeam(match.homeId);
       this.fm.getTeamAsync(match.homeId);

@@ -134,6 +134,7 @@ export class OneSignalManager {
     }
     document.addEventListener('serviceteamplayersready', onTeamPlayersReady);
     this.playerService.getTeamPlayersAsync(teamId);
+    this.fm.setMatchInformed(matchId, teamId);
   }
 
   matchNotification(type: string /* 'joinMatch' or 'rateMatch' */, matchId: string, playerIds: string[], pushIds: string[], enMsg: string = "", chMsg: string = "") {

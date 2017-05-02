@@ -901,6 +901,10 @@ export class FirebaseManager {
     return this.cachedMatchesMap[id];
   }
 
+  setMatchInformed(matchId, teamId) {
+    this.af.database.object(`/matches/list/${matchId}/informed/${teamId}`).set(true);
+  }
+
   getMatchAsync(id) {
     if (this.getMatch(id))
       this.FireCustomEvent('matchready', id);

@@ -31,6 +31,7 @@ export class Match {
   homeSquad;
   awaySquad;
   dataReady = false;
+  informed;
   isStarted = function () {
     let now = moment().unix() * 1000;
     //console.log(now, this.time);
