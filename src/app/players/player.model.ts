@@ -22,7 +22,7 @@ export class Player {
   social;
   wechatShareTime;
   fbShareTime;
-  stats;
+  stats = {};
   yearlyHistory = [];
 }
 

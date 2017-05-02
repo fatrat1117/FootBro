@@ -130,15 +130,15 @@ export class PlayerService {
     document.addEventListener('playerstatsready', e => {
       let playerId = e['detail'];
       let player = this.findOrCreatePlayer(playerId);
-      player.stats = this.fm.getPlayerStats(playerId);
-      console.log('player stats', player.stats);
+      Object.assign(player.stats, this.fm.getPlayerStats(playerId));
+      //console.log('player stats', player.stats);
 
-      player.yearlyHistory = [];
+      player.yearlyHistory.splice(0);
       Object.keys(player.stats).forEach(function (key) {
           if (uiHelper.isNumber(key)){
              let history = player.stats[key];
              history['year'] = key;
-              console.log(key);
+              //console.log(key);
               player.yearlyHistory.push(history);
           }
       })
