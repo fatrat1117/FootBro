@@ -7,7 +7,7 @@
 <ion-content>
   <div class="card-background-page">
     <ion-card (tap) = "goMatchesPage()">
-      <!--img src="assets/img/match/background.png"/-->
+      <img class="league-background-img" src="assets/img/match/background.png"/>
       <div class="card-title">{{'FriendlyMatches' | trans}}</div>
       <div class="card-bottom-banner">
         <ion-row>
@@ -26,6 +26,7 @@
   <!-->
   <div class="card-background-page">
     <ion-card (tap) = "goLeaguePage()">
+      <img class="league-background-img" src="assets/img/match/background.png"/>
       <div class="card-title">超级联赛</div>
       <div class="card-bottom-banner">
         <ion-row>
@@ -39,7 +40,7 @@
             </ion-row>
           </ion-col>
           <ion-col class="right" bottom>
-            <button ion-button small full no-margin color="primary"> 
+            <button ion-button small full no-margin color="primary">
               点击报名
             </button>
           </ion-col>
@@ -51,6 +52,8 @@
 
   <div *ngFor="let league of tournaments" class="card-background-page">
     <ion-card (tap) = "leagueClick(league)">
+      <img *ngIf="league.type === 'cup'" class="league-background-img" src="assets/img/match/league-sample1.jpg"/>
+      <img *ngIf="league.type !== 'cup'" class="league-background-img" src="assets/img/match/background.png"/>
       <div class="card-title">{{ league.name }}</div>
       <div class="card-bottom-banner">
         <ion-row>
