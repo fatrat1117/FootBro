@@ -73,12 +73,13 @@ export class PlayerService {
       player.role = "player";
       if (playerData.role)
         player.role = playerData.role;
-
+      
       if (playerData.joinTime)
         player.joinTime = playerData.joinTime;
 
       this.playersMap[id] = player;
       if (player.role && player.role === 'cheerleader') {
+        player.photo = player.photoMedium;
         //this.fm. getCheerleaderPublicAsync(id);
       }
       else
