@@ -37,10 +37,18 @@
     </ion-col>
     <ion-col *ngIf = "selfTeam" class="menu-col"  center>
       <button ion-button icon-only full color="dark" (tap)="enterManageSquadPage()">
-        <ion-icon name="md-people" color="gGreen"></ion-icon>
+        <ion-icon name="football"></ion-icon>
       </button>
       <button ion-button full color="dark" (tap)="enterManageSquadPage()">
         <p>{{'squads' | trans}}</p>
+      </button>
+    </ion-col>
+    <ion-col *ngIf = "selfTeam" class="menu-col"  center>
+      <button ion-button icon-only full color="dark" (tap)="openTeamPlayersPage()">
+        <ion-icon name="people" color="gGreen"></ion-icon>
+      </button>
+      <button ion-button full color="dark" (tap)="openTeamPlayersPage()">
+        <p>{{'players' | trans}}</p>
       </button>
     </ion-col>
   </ion-row>
@@ -110,48 +118,4 @@
       </ion-col>
     </ion-row>
   </div>
-
-  <!--ion-row class="home-menu">
-    <ion-col (tap)="enterCheeringTeam()" class="menu-col" width-25>
-      <ion-row><img src="assets/icon/home/icon-1.png"/></ion-row>
-      <ion-row><p no-margin>{{'Cheerleaders' | trans}}</p></ion-row>
-    </ion-col>
-    <ion-col (tap)="enterGameSchedule()" class="menu-col" width-25>
-      <ion-row><img src="assets/icon/home/icon-2.png"/></ion-row>
-      <ion-row><p no-margin>万人赛</p></ion-row>
-    </ion-col>
-    <ion-col class="menu-col" (tap)="enterRankPage()" width-25>
-      <ion-row><img src="assets/icon/home/icon-3.png"/></ion-row>
-      <ion-row><p no-margin>{{ 'Ranks'|trans }}</p></ion-row>
-    </ion-col>
-    <ion-col class="menu-col" (tap)="testSquad()" width-25>
-      <ion-row><img src="assets/icon/home/icon-4.png"/></ion-row>
-      <ion-row><p no-margin>合作赛事</p></ion-row>
-    </ion-col>
-  </ion-row-->
-
-  <!--ion-list class="home-news">
-    <ion-row class="news-row" ion-item *ngFor="let item of items" (tap)="selectItems(item)">
-      <ion-thumbnail item-left>
-        <img src="assets/img/home/news_pic.png">
-      </ion-thumbnail>
-      <ion-row>
-        <h2>早报: 老司机翻车了</h2>
-      </ion-row>
-      <ion-row>
-        <div class="news-subtitle">切尔西13连胜被终结; 皇马主场轻取塞维利亚</div>
-      </ion-row>
-      <ion-row class="news-operation">
-        <ion-col class="top-col" width-66>
-          <div class="top-border">
-            <h5>置顶</h5>
-          </div>
-        </ion-col>
-        <ion-col class="comments-col" width-33>
-          <div class="comments-div">
-            <h5>336评论</h5><img src="assets/img/home/comments.png" /></div>
-        </ion-col>
-      </ion-row>
-    </ion-row>
-  </ion-list-->
 </ion-content>

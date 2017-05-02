@@ -15,7 +15,7 @@ import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
 import { Team } from '../../app/teams/team.model'
 import { TeamService } from '../../app/teams/team.service'
-
+import {TeamPlayersPage} from '../team-players/team-players'
 declare var sprintf: any;
 
 @Component({
@@ -191,6 +191,10 @@ export class HomePage {
         return false;
       }
     }
+  }
+
+  openTeamPlayersPage() {
+    this.navCtrl.push(TeamPlayersPage, { teamId: this.selfTeam.id });
   }
 }
 
