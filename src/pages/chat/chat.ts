@@ -281,9 +281,12 @@ export class ChatPage {
 
   onSystemClick(action) {
     if (action.detail) {
-      this.modalController.create(MatchDetailPage, {
+      let param = {
         matchId: action.detail
-      }).present();
+      }
+      if (action.type == 'rateMatch')
+        param['selectedValue'] = 'players';
+      this.modalController.create(MatchDetailPage, param).present();
     }
     /*
     switch (action.type) {
