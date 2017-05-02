@@ -24,6 +24,7 @@ export class MatchDetailPage {
   matchSegments = 'info';
   squadSettings: any;
   onMatchSquadReady;
+  onMatchReady;
   squad;
   homeSquad;
   awaySquad;
@@ -38,6 +39,7 @@ export class MatchDetailPage {
   attendances = [];
   absences = [];
   TBDs = [];
+  matchId;
 
   constructor(private viewCtrl: ViewController,
     private modal: ModalController,
@@ -50,9 +52,15 @@ export class MatchDetailPage {
     private loc: Localization,
     private matchService: MatchService) {
     this.match = navParams.get('match');
+    this.matchId = navParams.get('matchId');
     if (navParams.get('selectedValue'))
       this.matchSegments = navParams.get('selectedValue');
+    if (this.match) {
+      this.initialize();
+    }
+  }
 
+  initialize() {
     this.squadSettings = {};
     this.squadSettings.matchId = this.match.id;
 
@@ -73,6 +81,24 @@ export class MatchDetailPage {
   }
 
   ionViewDidLoad() {
+    if (this.match)
+      this.addEventListeners();
+    else {
+      //if only match id is passed
+      this.onMatchReady = e => {
+        let matchId = e['detail'];
+        if (matchId === this.matchId) {
+          this.match = this.matchService.getMatch(matchId);
+          this.initialize();
+          this.addEventListeners();
+        }
+      }
+      document.addEventListener('servicematchready', this.onMatchReady);
+      this.matchService.getMatchAsync(this.matchId);
+    }
+  }
+
+  addEventListeners() {
     this.onMatchSquadReady = (teamId, matchId) => {
       if (matchId === this.match.id) {
         if ('teamId' in this.squadSettings && teamId === this.squadSettings.teamId) {
@@ -95,10 +121,20 @@ export class MatchDetailPage {
     this.teamService.getMatchSquadAsync(this.match.homeId, this.match.id);
     this.teamService.getMatchSquadAsync(this.match.awayId, this.match.id);
     this.squadSettings.offsetY = this.pageHeader.nativeElement.clientHeight;
+
+    if ('players' === this.matchSegments) {
+      setTimeout(() => {
+        this.getCombinedStats();
+      }, 2000);
+    }
   }
 
   ionViewWillUnload() {
-    this.events.unsubscribe('servicematchsquadready', this.onMatchSquadReady);
+    if (this.onMatchSquadReady)
+      this.events.unsubscribe('servicematchsquadready', this.onMatchSquadReady);
+
+    if (this.onMatchReady)
+      document.removeEventListener('servicematchready', this.onMatchReady);
   }
 
   initializePlayerStats(stats) {
@@ -437,18 +473,18 @@ export class MatchDetailPage {
       this.TBDs.splice(0);
 
       for (let playerId in this.squad.attendance) {
-          let playerEnrollInfo = this.squad.attendance[playerId];
-          switch (playerEnrollInfo) {
-            case 0:
+        let playerEnrollInfo = this.squad.attendance[playerId];
+        switch (playerEnrollInfo) {
+          case 0:
             this.absences.push(this.playerService.findOrCreatePlayerAndPull(playerId));
             break;
-            case 1:
+          case 1:
             this.attendances.push(this.playerService.findOrCreatePlayerAndPull(playerId));
             break;
-            case 2:
+          case 2:
             this.TBDs.push(this.playerService.findOrCreatePlayerAndPull(playerId));
             break;
-          }
+        }
       }
     }
   }
@@ -456,7 +492,7 @@ export class MatchDetailPage {
   getDisabled(stat) {
     if (this.squad && this.squad.attendance && stat === this.squad.attendance[this.playerService.selfId()])
       return true;
-    
+
     return false;
   }
 }
