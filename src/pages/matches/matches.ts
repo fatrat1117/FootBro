@@ -98,7 +98,7 @@ export class MatchesPage {
 
   getContentHeight() {
     console.log(this.getMatchScrollHeight() - this.matchFooter.nativeElement.clientHeight);
-    
+
     return this.getMatchScrollHeight() - this.matchFooter.nativeElement.clientHeight;
   }
 
@@ -295,11 +295,11 @@ export class MatchesPage {
 
   enterNewGame() {
     let options = { tournamentId: 'all' === this.selectedId ? null : this.selectedId };
-    if (this.type) 
+    if (this.type)
       options['groupId'] = this.selectedGroup;
     console.log('newGame', options);
-    let modal = this.modalCtrl.create(NewGamePage, 
-    options);
+    let modal = this.modalCtrl.create(NewGamePage,
+      options);
     modal.onDidDismiss(e => {
       if (e && e['date']) {
         let date = e['date'];
@@ -336,7 +336,7 @@ export class MatchesPage {
     if (this.playerService.amITournamentAdmin(this.selectedId))
       return true;
 
-      //captain or admin of tournament team
+    //captain or admin of tournament team
     if (this.playerService.amICaptainOrAdminOfCurrentTeam() &&
       this.playerService.isMyteamInTournament(this.playerService.myself().teamId, this.selectedId))
       return true;
@@ -393,19 +393,29 @@ export class MatchesPage {
   }
 
   onSegmentChange(ev) {
-    if (this.eliminationPairs.length == 0 && ev == 'eliminations')
-      this.onEliminationChange(0);;
+    this.selectedInfo = ev;
+    switch (ev) {
+      case "standings":
+        this.refreshTournamentTable();
+        break;
+      case 'eliminations':
+        {
+          if (this.eliminationPairs.length == 0)
+            this.onEliminationChange(0);;
+        }
+        break;
+    }
   }
 
-  canShowComputeTable()  {
+  canShowComputeTable() {
     if ('all' === this.selectedId)
       return false;
     if (this.type != "cup")
-      return false; 
+      return false;
     return this.playerService.amITournamentAdmin(this.selectedId);
   }
 
-  computeTournamentTable () {
+  computeTournamentTable() {
     this.matchService.computeTournamentTable(this.selectedId);
   }
 
