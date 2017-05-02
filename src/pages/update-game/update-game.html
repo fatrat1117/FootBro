@@ -82,7 +82,7 @@
         <button ion-button item-left clear class="item-game-info-left-text">{{'participants' | trans}}</button>
         <button ion-button item-right clear icon-right class="item-game-info-right-text"
                 (tap)='choosePlayers(teamId, participants)'>
-          <ion-icon name="md-add-circle"></ion-icon>
+          <ion-icon name="md-add-circle" class="bigger-icon"></ion-icon>
         </button>
       </ion-item>
 
@@ -95,7 +95,7 @@
           </button>
           <button ion-button item-right icon-right clear color="light">
             <p class="player-name">{{player?.player?.name}}</p>
-            <ion-icon [name]="player.expanded ? 'ios-arrow-down' : 'ios-arrow-back'"></ion-icon>
+            <ion-icon [name]="player.expanded ? 'ios-arrow-up' : 'ios-arrow-down'" class="bigger-icon"></ion-icon>
           </button>
         </ion-item>
         <!--<ion-item class="expandable-member-property" *ngFor="let item of player.items" [hidden]="player.hidden">-->
