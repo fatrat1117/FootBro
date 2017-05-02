@@ -123,10 +123,12 @@ export class MePage {
   // }
 
   openFAQPage() {
-    const browser = this.iab.create('https://www.facebook.com/notes/soccerbro-studio/faq/792767360879298/');
+    this.iab.create('https://www.facebook.com/notes/soccerbro-studio/faq/792767360879298/');
   }
 
-
+  openWebsite() {
+    this.iab.create('https://www.soccerbrostudio.com/');
+  }
 
   personalPointsFAQ(event){
     event.stopPropagation();

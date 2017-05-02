@@ -65,6 +65,10 @@
     </ion-item-->
 
     <ion-item-divider></ion-item-divider>
+    <ion-item (tap)="openWebsite()"  detail-push>
+      <ion-icon name="globe" item-left color="gGreen"></ion-icon>
+      {{'website' | trans}}
+    </ion-item>
     <ion-item (tap)="goFeedbackPage()"  detail-push>
       <ion-icon name="notifications" item-left color="gBlue"></ion-icon>
       {{'Feedback' | trans}}
