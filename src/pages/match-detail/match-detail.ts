@@ -254,6 +254,8 @@ export class MatchDetailPage {
   canShowSquadSegment() {
     if (!this.playerService.isAuthenticated())
       return false;
+    if (!this.match)
+      return false;
 
     if (this.playerService.amIMemberOfCurrentTeam(this.match.homeId) ||
       this.playerService.amIMemberOfCurrentTeam(this.match.awayId)) {
@@ -275,6 +277,8 @@ export class MatchDetailPage {
   }
 
   isMatchEditable() {
+    if (!this.match)
+      return false;
     //updated by at least one captain, do not show
     if (this.match.isHomeUpdated || this.match.isAwayUpdated)
       return false;
@@ -452,6 +456,8 @@ export class MatchDetailPage {
   }
 
   canShowEnroll() {
+    if (!this.match)
+      return false;
     return !this.match.isStarted() && this.playerService.amIMemberOfTeam(this.squadSettings.teamId);
   }
 
