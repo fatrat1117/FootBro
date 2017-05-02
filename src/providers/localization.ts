@@ -383,6 +383,8 @@ export class Localization {
       attendedNumber:"Attending Players",
       tbdNumber:"TBD Players",
       website: "Website",
+      enteremail: 'Please enter your email',
+      enterpwd: 'Must contain at least 6 digits',
     },
 
     zh: {
@@ -747,6 +749,8 @@ export class Localization {
       attendedNumber:"人报名",
       tbdNumber:"人待定",
       website: "网站",
+      enteremail: '请输入你的电子邮箱地址',
+      enterpwd: '密码至少应包含六位数字',
     }
   }
 }
