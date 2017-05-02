@@ -191,7 +191,7 @@
       <ion-col text-center class="personal-data margin-bottom-2px">{{history?.avg_pts | ifNullThenZeroPipe}}</ion-col>
     </ion-row>
     <ion-row class="player-total-record-content">
-      <ion-col width-16.6 text-center class="personal-data margin-right-2px">总共</ion-col>
+      <ion-col width-16.6 text-center class="personal-data margin-right-2px">{{'total' | trans}}</ion-col>
       <ion-col width-16.6 text-center class="personal-data margin-right-2px">{{player?.stats?.overall?.goal | ifNullThenZeroPipe}}</ion-col>
       <ion-col width-16.6 text-center class="personal-data margin-right-2px">{{player?.stats?.overall?.asst | ifNullThenZeroPipe}}</ion-col>
       <ion-col width-16.6 text-center class="personal-data margin-right-2px">{{player?.stats?.overall?.attended | ifNullThenZeroPipe}}</ion-col>
