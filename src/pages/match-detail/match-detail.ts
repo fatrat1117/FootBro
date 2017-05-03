@@ -126,7 +126,7 @@ export class MatchDetailPage {
     if ('players' === this.matchSegments) {
       setTimeout(() => {
         this.getCombinedStats();
-      }, 2000);
+      }, 1000);
     }
   }
 
