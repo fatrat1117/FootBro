@@ -23,8 +23,8 @@
                 }
             },
             "chats": {
-              ".read": true,
-              ".write": true
+              ".read": "data.parent().child('approved').hasChild(auth.uid)",
+              ".write": "data.parent().child('approved').hasChild(auth.uid)"
             }
         },
         "matches": {
@@ -161,7 +161,7 @@
         "player_stats": {
             ".read": true,
             ".write": "root.child('admins').hasChild(auth.uid)"
-        },  
+        }, 
         "tournaments": {
             ".read": true,
             ".write": "root.child('admins').hasChild(auth.uid) || root.child('teams').child(root.child('players').child(auth.uid).child('basic-info').child('teamId').val()).child('basic-info').child('captain').val() === auth.uid",

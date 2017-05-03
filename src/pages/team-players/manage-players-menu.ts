@@ -43,7 +43,7 @@ export class ManagePlayerPopover {
   appointAdmin() {
     this.playerService.appointTeamAdmin(this.teamId, this.teamPlayer.id);
     if (this.teamPlayer.pushId && this.osm) {
-      let enMsg = sprintf('You have been appoint to admin of %s',
+      let enMsg = sprintf('You have been appointed to the admin of %s',
         this.team.name
       );
 
