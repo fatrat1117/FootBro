@@ -76,11 +76,11 @@
   <ion-option value="popularity">
     {{'Popularity' | trans}}
   </ion-option>
-    <ion-option value="assists">
-    {{'assists' | trans}}
-  </ion-option>
   <ion-option value="goals">
     {{'goals' | trans}}
+  </ion-option>
+  <ion-option value="assists">
+    {{'assists' | trans}}
   </ion-option>
 </ion-select>
 </ion-item>
@@ -99,9 +99,17 @@
   <ion-col class="position" text-center>
     {{p.position | uppercase | trans}}
   </ion-col>
-  <ion-col class="popularity" text-center>
+  <ion-col *ngIf="playerSortByStr == 'popularity'" class="popularity" text-center>
     <ion-icon name='ios-flame' color="danger"></ion-icon>
     <span ion-text color="danger">{{p.popularity}}</span>
+  </ion-col>
+  <ion-col *ngIf="playerSortByStr == 'goals'" class="goals" text-center>
+    <ion-icon name='locate' color="danger"></ion-icon>
+    <span ion-text color="danger">{{p.goals}}</span>
+  </ion-col>
+  <ion-col *ngIf="playerSortByStr == 'assists'" class="assists" text-center>
+    <ion-icon name='ios-send' color="danger"></ion-icon>
+    <span ion-text color="danger">{{p.assists}}</span>
   </ion-col>
 </ion-row>
 </ion-item>
