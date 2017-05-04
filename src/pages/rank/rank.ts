@@ -64,9 +64,7 @@ export class RankPage {
 
   sortPlayerBy(str) {
     this.playerSortByStr = str;
-    this.playerRanks.sort((a, b) => {
-      return b.popularity - a.popularity;
-    })
+    this.rankService.getPlayerRanksAsync(this.playerSortByStr, this.numOfTeams);
   }
 
   moreTeam(infiniteScroll) {

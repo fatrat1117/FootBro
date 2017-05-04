@@ -70,6 +70,20 @@
 </ion-infinite-scroll>
 </div>
 <div *ngSwitchCase="'players'">
+        <ion-item style="margin-bottom: 10px" class="sortby">
+<ion-label>{{'SortBy' | trans}}</ion-label>
+<ion-select [ngModel]="playerSortByStr" (ngModelChange)="sortPlayerBy($event)" text-center>
+  <ion-option value="popularity">
+    {{'Popularity' | trans}}
+  </ion-option>
+    <ion-option value="assists">
+    {{'assists' | trans}}
+  </ion-option>
+  <ion-option value="goals">
+    {{'goals' | trans}}
+  </ion-option>
+</ion-select>
+</ion-item>
   <ion-list>
     <ion-item *ngFor="let p of playerRanks; let i = index;" (tap)="goPlayerPage(p.id)" style="margin-bottom:10px" text-wrap class="rank-player-items">
 <ion-avatar item-left>

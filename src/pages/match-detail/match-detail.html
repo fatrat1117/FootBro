@@ -46,7 +46,7 @@
   </ion-item>-->
   </div>
 
-  <ion-row *ngIf="canShowEnroll()" class="registration-info">
+  <ion-row *ngIf="amIMember()" class="registration-info">
     <ion-col class="absent-number flex-direction-column" width-33 >
       <span class="number-absent">{{'applyleave' | trans}}({{absences.length}})</span>
       <!--<span class="common-sub-label number-cancel">0人取消报名</span>-->

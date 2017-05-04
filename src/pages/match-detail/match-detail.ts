@@ -461,6 +461,12 @@ export class MatchDetailPage {
     return !this.match.isStarted() && this.playerService.amIMemberOfTeam(this.squadSettings.teamId);
   }
 
+  amIMember() {
+    if (!this.match)
+      return false;
+    return this.playerService.amIMemberOfTeam(this.squadSettings.teamId);
+  }
+
   attendMatch() {
     this.matchService.attendMatch(this.squadSettings.teamId, this.match.id);
   }
