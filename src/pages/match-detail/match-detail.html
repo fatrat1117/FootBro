@@ -179,7 +179,7 @@
 </div>
 </ion-content>
 
-<ion-footer *ngIf="matchSegments=='info'" style="background: #2d2e32"> 
+<ion-footer *ngIf="matchSegments=='info' && canShowEnroll()" style="background: #2d2e32"> 
   <ion-row padding-horizontal class="match-detail-button-group">
     <ion-col text-center class="pending-col">
       <button ion-button block color="secondary" [disabled]="getDisabled(2)" small (click)="TBDMatch()">
