@@ -32,14 +32,13 @@
   <result-score [upcomingMatch]="match" [hostPageName]="currPageName"></result-score>
 
   <div class="match-detail-info">
-
-  <ion-item class="common-title time-title">
-    <ion-icon name="time" class="common-icon time-icon inline-flex-vertical-center"></ion-icon>
-    <div class="common-content time-content"> {{match?.time | date:'MM-dd EEEE  H:mm'}}</div>
-  </ion-item>
   <ion-item class="common-title map-title" (tap)="navigateToField()">
     <ion-icon name="navigate" color="iPrimary" class="common-icon map-icon inline-flex-vertical-center"></ion-icon>
     <div class="common-content map-content">{{match?.location?.name}}{{match?.location?.address}}</div>
+  </ion-item>
+  <ion-item class="common-title time-title">
+    <ion-icon name="time" class="common-icon time-icon inline-flex-vertical-center"></ion-icon>
+    <div class="common-content time-content"> {{match?.time | date:'MM-dd EEEE  H:mm'}}</div>
   </ion-item>
   <!--<ion-item class="common-title clothes-title">
     <ion-icon name="shirt" class="common-icon clothes-icon inline-flex-vertical-center"></ion-icon>
@@ -47,7 +46,7 @@
   </ion-item>-->
   </div>
 
-  <ion-row class="registration-info">
+  <ion-row *ngIf="canShowEnroll()" class="registration-info">
     <ion-col class="absent-number flex-direction-column" width-33 >
       <span class="number-absent">{{'applyleave' | trans}}({{absences.length}})</span>
       <!--<span class="common-sub-label number-cancel">0人取消报名</span>-->
