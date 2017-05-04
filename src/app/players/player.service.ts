@@ -64,6 +64,14 @@ export class PlayerService {
           player.teamId = null;
       }
 
+      //show nickname in the team for team members
+      if (player.teamId && player.id != this.selfId() && this.amIMemberOfTeam(player.teamId)) {
+        let fmTeam = this.fm.getTeam(player.teamId);
+        //console.log(fmTeam);
+        if (fmTeam && fmTeam.players && fmTeam.players[player.id] && fmTeam.players[player.id].hasOwnProperty('nickName'))
+            player.name = fmTeam.players[player.id].nickName;
+      }
+
       if (playerData.cheerleaders) {
         player.cheerleaders = [];
         for (let id in playerData.cheerleaders)
