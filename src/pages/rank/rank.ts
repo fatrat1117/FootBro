@@ -43,6 +43,7 @@ export class RankPage {
         if (this.playerScroll)
           this.playerScroll.complete();
       }, 500);
+
     };
 
     document.addEventListener('serviceteamrankschanged', this.onTeamRanksChanged);
