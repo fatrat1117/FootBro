@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {ViewController, ModalController} from 'ionic-angular';
+import { Keyboard } from 'ionic-native';
 import {TeamService} from '../../app/teams/team.service';
 import {CreateTeamPage} from '../create-team/create-team'
 
@@ -19,6 +20,10 @@ export class SearchTeamPage {
   ionViewDidLoad() {
       this.totalTeams = this.service.getAllTeams();
       this.resetFilter();
+  }
+
+  ionViewWillUnload() {
+    Keyboard.close();
   }
 
   resetFilter() {
