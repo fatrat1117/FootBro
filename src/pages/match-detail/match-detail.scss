@@ -3,77 +3,67 @@ page-match-detail {
   //     $unselected-date-color: #40444D;
   $darker-background: #2D2E32;
   $lighter-backgroud: #425065;
-  $header-bar-color:#585F6F;
-  $player-stats-darker-background:#373e4c;
+  $header-bar-color: #585F6F;
+  $player-stats-darker-background: #373e4c;
   //$player-stats-lighter-background;
-  $player-stats-lighter-background:color($colors,primary);
-  $player-stats-darker-font:#93abc5;
-
-
+  $player-stats-lighter-background: color($colors, primary);
+  $player-stats-darker-font: #93abc5;
   ion-content {
-
     //全局共享属性
-    .inline-flex-center{
+    .inline-flex-center {
       display: inline-flex;
       justify-content: center;
     }
-
-    .inline-flex-vertical-center{
+    .inline-flex-vertical-center {
       display: inline-flex;
       align-items: center;
     }
-    .text-nowrap{
+    .text-nowrap {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-
-    .flex-direction-column{
+    .flex-direction-column {
       display: flex;
       flex-direction: column;
     }
-
     //比赛菜单
-    .match-detail-menu{
-      .menu-col{
-          p{
-            margin:0;
-            padding: 5px;
-          }
-          .button-inner{
-            flex-direction: column;
-          }
+    .match-detail-menu {
+      .menu-col {
+        p {
+          margin: 0;
+          padding: 5px;
+        }
+        .button-inner {
+          flex-direction: column;
+        }
       }
       //.menu-col:active{
       //  background-color: #00A000;
       //}
-      .team-name{
-        .team-logo{
+      .team-name {
+        .team-logo {
           max-width: 3rem;
           border-radius: 50%;
           margin: 0 auto;
         }
       }
-
-      .opponent{
-        .opponent-logo{
+      .opponent {
+        .opponent-logo {
           max-width: 3rem;
           border-radius: 50%;
           margin: 0 auto;
         }
       }
-
-      .group-message{
-        ion-icon{
+      .group-message {
+        ion-icon {
           font-size: 3rem;
         }
       }
-      .group-message:active{
-        background-color: rgb(38,38,39);
+      .group-message:active {
+        background-color: rgb(38, 38, 39);
       }
     }
-
-
     //给整个内容区调整背景及边距
     .content-all {
       height: 100%;
@@ -85,12 +75,10 @@ page-match-detail {
         margin: 0px;
         background: #1f1f21;
         text-align: center;
-
         .match-detail-info {
           margin: 1rem;
-
           //公用
-          ion-item{
+          ion-item {
             background-color: #333335;
             padding: 5px;
             font-size: 1.4rem;
@@ -104,68 +92,55 @@ page-match-detail {
               margin: 0;
             }
           }
-
-          .common-title{
-
-            .common-icon{
-              flex:0 0 5%;
+          .common-title {
+            .common-icon {
+              flex: 0 0 5%;
               max-width: 5%;
             }
-            .common-content{
+            .common-content {
               white-space: initial;
               flex: 0 0 95%;
               max-width: 95%;
               padding-left: 1rem;
             }
-
           }
           //具体比赛时间栏目
           .time-title {
-            .time-icon{
-            }
-            .time-content {
-            }
+            .time-icon {}
+            .time-content {}
           }
           //地图--标题
           .map-title {
             background-color: #333335;
-            .map-icon{
-            }
-            .map-content {
-            }
+            .map-icon {}
+            .map-content {}
           }
-          .clothes-title{
-            .clothes-icon{
-            }
-            .clothes-content{
-            }
+          .clothes-title {
+            .clothes-icon {}
+            .clothes-content {}
           }
-          .clothes-title .item-inner{
-            border-bottom:none;
+          .clothes-title .item-inner {
+            border-bottom: none;
           }
         }
-
         //报名情况
-        .registration-info{
-          margin:1rem;
-          ion-col{
+        .registration-info {
+          margin: 1rem;
+          ion-col {
             border: 1px solid #434343;
             background-color: #333335;
           }
-          .common-sub-label{
+          .common-sub-label {
             font-size: 1rem;
-            color:#969696;
+            color: #969696;
           }
-          .number-absent{
-            color:#f4c20d;
+          .number-absent {
+            color: #f4c20d;
           }
-          .number-register{
-            color:#AFE76C;
+          .number-register {
+            color: #AFE76C;
           }
-
-
         }
-
         //居中对战时间按钮
         .content-center-button {
           margin-top: 10px;
@@ -193,7 +168,6 @@ page-match-detail {
             //width: 20%;
           }
         }
-
         //红牌
         .red-style {
           text-align: center;
@@ -212,11 +186,9 @@ page-match-detail {
             height: 15px;
           }
         }
-
       }
-
       //报名详细栏目
-      .registration-detail{
+      .registration-detail {
         margin: 0;
 
         .player-name{
@@ -225,89 +197,71 @@ page-match-detail {
         ion-item-divider{
           padding: 1rem;
           font-size: 1.4rem;
-          .item-inner{
+          .item-inner {
             background-color: #333335;
-            ion-label{
+            ion-label {
               margin: 0;
             }
           }
         }
-        .common-row{
+        .common-row {
           padding: 1rem;
           font-size: 1.4rem;
-         .common-row-content{
-           padding: 0 1.5rem;
-           display: flex;
-           justify-content: space-between;
-         }
-        }
-        .common-individuals{
-
-        }
-        .participants-row{
-          .participants-row-content{
-            .one{
-              color:#AFE76C;
-            }
-
-          }
-
-        }
-        .participants-individuals{
-
-        }
-        .absents-row{
-          .absents-row-content{
-            .one{
-              color:#f4c20d;
-            }
-
+          .common-row-content {
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
           }
         }
-        .absents-individuals{
-
+        .common-individuals {}
+        .participants-row {
+          .participants-row-content {
+            .one {
+              color: #AFE76C;
+            }
+          }
         }
-        .pending-row{
-
+        .participants-individuals {}
+        .absents-row {
+          .absents-row-content {
+            .one {
+              color: #f4c20d;
+            }
+          }
         }
-        .pending-individuals{
-
-        }
+        .absents-individuals {}
+        .pending-row {}
+        .pending-individuals {}
       }
-
       //按钮组
-      .match-detail-button-group{
-        button{
+      .match-detail-button-group {
+        button {
           min-height: 3.5rem;
           color: #1f1f21;
         }
-        .pending-col{
-          flex:1;
-          button{
+        .pending-col {
+          flex: 1;
+          button {
             background-color: #ccc;
-            ion-icon{
-            }
+            ion-icon {}
           }
         }
-        .absent-col{
-          flex:1;
-          button{
+        .absent-col {
+          flex: 1;
+          button {
             background-color: #f4c20d;
-            ion-icon{
-            }
+            ion-icon {}
           }
         }
-        .participate-col{
-          flex:1.5;
-          button{
+        .participate-col {
+          flex: 1.5;
+          button {
             width: 100%;
             background-color: #AFE76C;
-            ion-icon{
-            }
+            ion-icon {}
           }
         }
       }
-
       //地图
       .map-back {
         padding: 0px 10px 10px 10px;
@@ -359,7 +313,6 @@ page-match-detail {
       }
     }
   }
-
   //通用
   .no-margin {
     margin: 0px;
@@ -373,69 +326,67 @@ page-match-detail {
   .default-font-size {
     font-size: 1.2rem;
   }
-
   .matches-date-tab-col {
-        .date-tab-list {
-          ion-item {
-            padding-left: 0;
-            min-height: 2.8rem;
-            .item-inner {
-              padding-right: 0;
-              border-bottom: 1px solid $darker-background;
-              ion-label {
-                font-size: 1rem;
-                margin: 0 auto;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-                .year {
-                  min-height: 1.4rem;
-                  background-color: $darker-background;
-                  color: #E1C61E;
-                }
-                .date-inner {
-                  min-height: 2.8rem;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                  text-align: center;
-                  white-space: initial;
-                  max-width: 100%;
-                  padding: 1.2rem 0rem 1.2rem 0rem;
-                }
-              }
+    .date-tab-list {
+      ion-item {
+        padding-left: 0;
+        min-height: 2.8rem;
+        .item-inner {
+          padding-right: 0;
+          border-bottom: 1px solid $darker-background;
+          ion-label {
+            font-size: 1rem;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            .year {
+              min-height: 1.4rem;
+              background-color: $darker-background;
+              color: #E1C61E;
             }
-          }
-          ion-item::before {
-            content: " ";
-            height: 0;
-            width: 0;
-            position: absolute;
-            right: -9px;
-            border-style: solid;
-            border-width: 15px 15px 15px 15px;
-            border-color: transparent transparent transparent transparent;
-            z-index: 0;
-          }
-          .ion-item-selected::before {
-            border-color: transparent $darker-background transparent transparent;
-          }
-          .ion-item-changeYear::before {
-            top: 1.4rem;
+            .date-inner {
+              min-height: 2.8rem;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+              white-space: initial;
+              max-width: 100%;
+              padding: 1.2rem 0rem 1.2rem 0rem;
+            }
           }
         }
       }
-
-  .left-scrollview {
-        width: 20%;
-        height: 100%;
-        left: 0;
-        right: 0;
-        overflow-y: scroll;
-        position: fixed;
-        background: $darker-background;
+      ion-item::before {
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        right: -9px;
+        border-style: solid;
+        border-width: 15px 15px 15px 15px;
+        border-color: transparent transparent transparent transparent;
+        z-index: 0;
       }
+      .ion-item-selected::before {
+        border-color: transparent $darker-background transparent transparent;
+      }
+      .ion-item-changeYear::before {
+        top: 1.4rem;
+      }
+    }
+  }
+  .left-scrollview {
+    width: 20%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    overflow-y: scroll;
+    position: fixed;
+    background: $darker-background;
+  }
   .right-scrollview {
     width: 80%;
     height: 100%;
@@ -443,66 +394,89 @@ page-match-detail {
     overflow-y: scroll;
     position: fixed;
     background: $darker-background;
-
-    .right-view-grid{
+    .right-view-grid {
       padding: 0px;
     }
-    .header-title{
+    .header-title {
       background: $header-bar-color;
     }
-    .flex-width-30{
-      flex:0 0 30%;
+    .flex-width-30 {
+      flex: 0 0 30%;
       max-width: 30%;
     }
-    .playerStats{
-      ion-col{
+    .playerStats {
+      ion-col {
         background-color: $lighter-backgroud;
         display: flex;
         max-height: 4rem;
-        ion-avatar{
+        ion-avatar {
           min-height: 25px;
           min-width: 25px;
-          img{
+          img {
             max-width: 25px;
             max-height: 25px;
             margin-right: 0;
             border-radius: 50%;
-
           }
         }
-        ion-item{
-          padding-left:0;
+        ion-item {
+          padding-left: 0;
           background-color: $lighter-backgroud;
           min-height: 1.8rem;
           max-height: 3rem;
-          .item-inner{
+          .item-inner {
             padding-right: 0;
             border-bottom: none;
-            ion-label{
+            ion-label {
               margin: 0;
               font-size: 1.2rem;
             }
           }
-
         }
       }
-
-      .rank{
+      .rank {
         align-items: center;
       }
     }
   }
-
-.avatar-top {
-  display: inline-block;
-  text-align: center;
-  padding-top: 10px;
-  padding-right: 10px;
-  img {
-    max-width: 40px;
-    max-height: 40px;
-    border-radius: 50%;
-    margin: auto;
+  .avatar-top {
+    display: inline-block;
+    text-align: center;
+    padding-top: 10px;
+    padding-right: 10px;
+    img {
+      max-width: 40px;
+      max-height: 40px;
+      border-radius: 50%;
+      margin: auto;
+    }
   }
-}
+  .match-detail-button-group {
+    button {
+      min-height: 3.5rem;
+      color: #1f1f21;
+    }
+    .pending-col {
+      flex: 1;
+      button {
+        background-color: #ccc;
+        ion-icon {}
+      }
+    }
+    .absent-col {
+      flex: 1;
+      button {
+        background-color: #f4c20d;
+        ion-icon {}
+      }
+    }
+    .participate-col {
+      flex: 1.5;
+      button {
+        width: 100%;
+        background-color: #AFE76C;
+        ion-icon {}
+      }
+    }
+  }
 }

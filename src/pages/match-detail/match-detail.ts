@@ -249,6 +249,8 @@ export class MatchDetailPage {
     }
     else if ('players' === e)
       this.getCombinedStats();
+
+    this.matchDetailContent.resize();
   }
 
   canShowSquadSegment() {
