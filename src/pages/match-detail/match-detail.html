@@ -74,7 +74,7 @@
     <ion-item class="common-individuals participants-individuals" *ngIf="attendances.length" text-wrap>
       <div *ngFor="let p of attendances" class="avatar-top">
         <img [src]="p?.photo" />
-        <p>{{ p?.name }}</p>
+        <p class="player-name text-nowrap">{{ p?.name }}</p>
       </div>
     </ion-item>
     <ion-item-divider class="common-row absents-row">
@@ -86,7 +86,7 @@
     <ion-item class="common-individuals absents-individuals" *ngIf="absences.length" text-wrap>
       <div *ngFor="let p of absences" class="avatar-top">
         <img [src]="p?.photo" />
-        <p>{{ p?.name }}</p>
+        <p class="player-name text-nowrap">{{ p?.name }}</p>
       </div>
     </ion-item>
     <ion-item-divider class="common-row pending-row">
@@ -98,7 +98,7 @@
     <ion-item class="common-individuals pending-individuals" *ngIf="TBDs.length" text-wrap>
       <div *ngFor="let p of TBDs" class="avatar-top">
         <img [src]="p?.photo" />
-        <p>{{ p?.name }}</p>
+        <p class="player-name text-nowrap">{{ p?.name }}</p>
       </div>
     </ion-item>
   </ion-list>

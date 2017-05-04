@@ -218,6 +218,10 @@ page-match-detail {
       //报名详细栏目
       .registration-detail{
         margin: 0;
+
+        .player-name{
+          max-width: 100px;
+        }
         ion-item-divider{
           padding: 1rem;
           font-size: 1.4rem;
