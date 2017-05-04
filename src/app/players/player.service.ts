@@ -299,9 +299,14 @@ export class PlayerService {
   }
 
   isMemberOfTeam(playerId, teamId) {
+    if (!playerId)
+      return false;
+
     let team = this.fm.getTeam(teamId);
     if (team && team.players) {
       let teamPlayer = team.players[playerId];
+      //console.log('isMemberOfTeam', playerId, teamPlayer);
+      
       if (!teamPlayer)
         return false;
       //check legacy code where ismember is not there
