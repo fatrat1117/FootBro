@@ -295,7 +295,7 @@ export class MatchesPage {
 
   enterNewGame() {
     let options = { tournamentId: 'all' === this.selectedId ? null : this.selectedId };
-    if (this.type)
+    if (this.type == "cup")
       options['groupId'] = this.selectedGroup;
     console.log('newGame', options);
     let modal = this.modalCtrl.create(NewGamePage,
