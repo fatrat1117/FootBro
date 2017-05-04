@@ -102,26 +102,23 @@
       </div>
     </ion-item>
   </ion-list>
-  <ion-row padding-horizontal class="match-detail-button-group">
+  <!--ion-row padding-horizontal class="match-detail-button-group">
     <ion-col text-center class="pending-col">
       <button ion-button block color="secondary" [disabled]="getDisabled(2)" small (click)="TBDMatch()">
-        <!--<ion-icon name="checkmark"></ion-icon>-->
         {{'TBD' | trans}}
       </button>
     </ion-col>
     <ion-col text-center class="absent-col">
       <button ion-button block color="secondary" [disabled]="getDisabled(0)" small (click)="absentMatch()">
-        <!--<ion-icon name="checkmark"></ion-icon>-->
         {{'applyleave' | trans}}
       </button>
     </ion-col>
     <ion-col text-center class="participate-col">
       <button ion-button [disabled]="getDisabled(1)" small (click)="attendMatch()">
-        <!--<ion-icon name="close"></ion-icon>-->
         {{'Going' | trans}}
       </button>
     </ion-col>
-  </ion-row>
+  </ion-row-->
 </div>
 <button *ngIf='canShowDelete()' (tap)="deleteMatch()" color='danger' ion-button block>{{'deletematch' | trans}}</button>
 </div>
@@ -181,3 +178,26 @@
   </div>
 </div>
 </ion-content>
+
+<ion-footer *ngIf="matchSegments=='info'" style="background: #2d2e32"> 
+  <ion-row padding-horizontal class="match-detail-button-group">
+    <ion-col text-center class="pending-col">
+      <button ion-button block color="secondary" [disabled]="getDisabled(2)" small (click)="TBDMatch()">
+        <!--<ion-icon name="checkmark"></ion-icon>-->
+        {{'TBD' | trans}}
+      </button>
+    </ion-col>
+    <ion-col text-center class="absent-col">
+      <button ion-button block color="secondary" [disabled]="getDisabled(0)" small (click)="absentMatch()">
+        <!--<ion-icon name="checkmark"></ion-icon>-->
+        {{'applyleave' | trans}}
+      </button>
+    </ion-col>
+    <ion-col text-center class="participate-col">
+      <button ion-button [disabled]="getDisabled(1)" small (click)="attendMatch()">
+        <!--<ion-icon name="close"></ion-icon>-->
+        {{'Going' | trans}}
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
