@@ -102,6 +102,8 @@ export class PlayerService {
       let player = this.getPlayer(id);
       if (player) {
         player.popularity = playerPublicData.popularity;
+        player.assists = playerPublicData.assists;
+        player.goals = playerPublicData.goals;
       }
     });
 

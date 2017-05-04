@@ -24,6 +24,8 @@ export class Player {
   fbShareTime;
   stats = {};
   yearlyHistory = [];
+  assists;
+  goals;
 }
 
 export class TeamPlayer extends Player {
