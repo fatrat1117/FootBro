@@ -385,6 +385,7 @@ export class Localization {
       website: "Website",
       enteremail: 'Please enter your email',
       enterpwd: 'Must contain at least 6 digits',
+      group: 'Group',
     },
 
     zh: {
@@ -751,6 +752,7 @@ export class Localization {
       website: "网站",
       enteremail: '请输入你的电子邮箱地址',
       enterpwd: '密码至少应包含六位数字',
+      group: '组',
     }
   }
 }
