@@ -79,10 +79,11 @@
       </ion-item>
 
       <ion-item class="game-info-item">
-        <button ion-button item-left clear class="item-game-info-left-text">{{'participants' | trans}}</button>
-        <button ion-button item-right clear icon-right class="item-game-info-right-text"
-                (tap)='choosePlayers(teamId, participants)'>
+        <button disabled ion-button item-left clear class="item-game-info-left-text">{{'participants' | trans}}</button>
+        <button ion-button large clear icon-left full class="item-game-info-right-text"
+                (click)='choosePlayers(teamId, participants)'>
           <ion-icon name="md-add-circle" class="bigger-icon"></ion-icon>
+          {{ 'addPlayer' | trans }}
         </button>
       </ion-item>
 

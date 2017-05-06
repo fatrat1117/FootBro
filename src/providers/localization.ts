@@ -386,6 +386,7 @@ export class Localization {
       enteremail: 'Please enter your email',
       enterpwd: 'Must contain at least 6 digits',
       group: 'Group',
+      addPlayer: 'Add Player',
     },
 
     zh: {
@@ -753,6 +754,7 @@ export class Localization {
       enteremail: '请输入你的电子邮箱地址',
       enterpwd: '密码至少应包含六位数字',
       group: '组',
+      addPlayer: '添加球员',
     }
   }
 }

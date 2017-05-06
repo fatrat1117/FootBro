@@ -165,11 +165,15 @@ page-update-game {
         .item-game-info-left-text{
           color:white;
           font-size: 1.8rem;
+          opacity: 1.0;
         }
         //右边文字（参赛球员）
         .item-game-info-right-text{
-          color:gray;
-          font-size: 1.2rem;
+          color: #f4c20d;
+          font-size: 1.5rem;
+          .button-inner{
+            justify-content:flex-end;
+          }
         }
       }
       //微亮item样式

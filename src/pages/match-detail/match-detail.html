@@ -68,7 +68,7 @@
     <ion-item-divider class="common-row participants-row">
       <div class="common-row-content participants-row-content">
         <span class="one">{{'participants' | trans}}({{attendances.length}})</span>
-        <span class="two"> <ion-icon name="add-circle" class="inline-flex-vertical-center"></ion-icon></span>
+        <!--span class="two"> <ion-icon name="add-circle" class="inline-flex-vertical-center"></ion-icon></span-->
       </div>
     </ion-item-divider>
     <ion-item class="common-individuals participants-individuals" *ngIf="attendances.length" text-wrap>
@@ -80,7 +80,7 @@
     <ion-item-divider class="common-row absents-row">
       <div class="common-row-content absents-row-content">
         <span class="one">{{'applyleave' | trans}}({{absences.length}})</span>
-        <span class="two"><ion-icon name="add-circle" class="inline-flex-vertical-center"></ion-icon></span>
+        <!--span class="two"><ion-icon name="add-circle" class="inline-flex-vertical-center"></ion-icon></span-->
       </div>
     </ion-item-divider>
     <ion-item class="common-individuals absents-individuals" *ngIf="absences.length" text-wrap>
