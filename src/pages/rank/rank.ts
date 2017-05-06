@@ -16,7 +16,7 @@ export class RankPage {
   playerRanks;
   numOfTeams = 0;
   teamScroll;
-  numOfPlayers = 0;
+  numOfPlayers = 100;
   playerScroll;
   onTeamRanksChanged;
   onPlayerRanksChanged;
@@ -50,7 +50,7 @@ export class RankPage {
     document.addEventListener('serviceplayerrankschanged', this.onPlayerRanksChanged);
 
     this.rankService.getTeamRanksAsync(this.teamSortByStr, this.numOfTeams + 10);
-    this.rankService.getPlayerRanksAsync(this.playerSortByStr, this.numOfPlayers + 20);
+    this.rankService.getPlayerRanksAsync(this.playerSortByStr, this.numOfPlayers);
   }
 
   ionViewWillUnload() {
@@ -65,7 +65,7 @@ export class RankPage {
 
   sortPlayerBy(str) {
     this.playerSortByStr = str;
-    this.rankService.getPlayerRanksAsync(this.playerSortByStr, this.numOfTeams);
+    this.rankService.getPlayerRanksAsync(this.playerSortByStr, this.numOfPlayers);
   }
 
   moreTeam(infiniteScroll) {

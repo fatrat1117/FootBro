@@ -388,6 +388,7 @@ export class Localization {
       group: 'Group',
       addPlayer: 'Add Player',
       groups: 'Groups',
+      top100: 'Top 100',
     },
 
     zh: {
@@ -757,6 +758,7 @@ export class Localization {
       group: '组',
       addPlayer: '添加球员',
       groups: '小组赛',
+      top100: '100强',
     }
   }
 }
