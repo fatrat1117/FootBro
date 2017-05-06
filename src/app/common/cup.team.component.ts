@@ -19,13 +19,13 @@ declare var sprintf: any;
             <img [src]="p[0].home?.logo" class="content-left-img" item-left>
             <button ion-button clear disabled class="team-name">{{ p[0].home?.name }}</button>
             <button ion-button clear disabled color="secondary" item-right class="team-score">{{ p[0].homeScore }} 
-            <span *ngIf="p[0].homePenalty">({{p[0].homePenalty}})</span></button>
+            <span *ngIf="p[0].homePenalty>=0">&nbsp;({{p[0].homePenalty}})</span></button>
           </ion-item>
           <ion-item class="content-left-list-item">
             <img [src]="p[0].away?.logo" class="content-left-img" item-left>
             <button ion-button clear disabled class="team-name">{{ p[0].away?.name }}</button>
             <button ion-button clear disabled color="secondary" item-right class="team-score">{{ p[0].awayScore }}
-            <span *ngIf="p[0].awayPenalty">({{p[0].awayPenalty}})</span></button>
+            <span *ngIf="p[0].awayPenalty>=0">&nbsp;({{p[0].awayPenalty}})</span></button>
           </ion-item>
         </ion-list>
       </div>
@@ -39,13 +39,13 @@ declare var sprintf: any;
             <img [src]="p[1].home?.logo" class="content-left-img" item-left>
             <button ion-button clear disabled class="team-name">{{ p[1].home?.name }}</button>
             <button ion-button clear disabled color="secondary" item-right class="team-score">{{ p[1].homeScore }}
-            <span *ngIf="p[1].homePenalty">({{p[1].homePenalty}})</span></button>
+            <span *ngIf="p[1].homePenalty>=0">&nbsp;({{p[1].homePenalty}})</span></button>
           </ion-item>
           <ion-item class="content-left-list-item">
             <img [src]="p[1].away?.logo" class="content-left-img" item-left>
             <button ion-button clear disabled class="team-name">{{ p[1].away?.name }}</button>
             <button ion-button clear disabled color="secondary" item-right class="team-score">{{ p[1].awayScore }}
-            <span *ngIf="p[1].awayPenalty">({{p[1].awayPenalty}})</span></button>
+            <span *ngIf="p[1].awayPenalty>=0">&nbsp;({{p[1].awayPenalty}})</span></button>
           </ion-item>
         </ion-list>
       </div>

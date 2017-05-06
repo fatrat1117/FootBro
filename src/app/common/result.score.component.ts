@@ -25,12 +25,14 @@ declare var sprintf: any;
       <ion-row *ngIf="canShowScores()" center justify-content-center>
         <ion-col>
           {{upcomingMatch?.homeScore}}
+          <span *ngIf="upcomingMatch.homePenalty>=0">&nbsp;({{upcomingMatch.homePenalty}})</span>
         </ion-col>
         <ion-col>
           :
         </ion-col>
         <ion-col>
           {{upcomingMatch?.awayScore}}
+          <span *ngIf="upcomingMatch.awayPenalty>=0">&nbsp;({{upcomingMatch.awayPenalty}})</span>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="canShowInputScores()" center justify-content-center>
