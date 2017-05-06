@@ -387,6 +387,7 @@ export class Localization {
       enterpwd: 'Must contain at least 6 digits',
       group: 'Group',
       addPlayer: 'Add Player',
+      groups: 'Groups',
     },
 
     zh: {
@@ -755,6 +756,7 @@ export class Localization {
       enterpwd: '密码至少应包含六位数字',
       group: '组',
       addPlayer: '添加球员',
+      groups: '小组赛',
     }
   }
 }
