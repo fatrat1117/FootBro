@@ -57,11 +57,12 @@ export class MatchesPage {
     this.selectedId = this.navParams.get('tournamentId') || "all";
     this.tournament = this.navParams.get('tournament');
     this.type = this.navParams.get("type") || 'league';
-    if (this.tournament)
+    if (this.tournament) {
       if (this.tournament.groups && this.tournament.groups.length)
         this.selectedGroup = this.tournament.groups[0];
-    if (this.tournament.type)
-      this.type = this.tournament.type;
+      if (this.tournament.type)
+        this.type = this.tournament.type;
+    }
   }
 
   ionViewDidLoad() {
@@ -356,7 +357,8 @@ export class MatchesPage {
   }
 
   canShowAdd() {
-    // console.log();
+    if (!this.playerService.isAuthenticated())
+      return false;
     if (this.isEnd)
       return false;
     if ('all' === this.selectedId)

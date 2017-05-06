@@ -89,6 +89,9 @@ export class ResultScoreComponent {
   }
   //调用此函数之前必须检查比赛是否开始，比赛还没开始才能调用!
   canShowInformAll(){
+    if (!this.playerService.isAuthenticated())
+      return false;
+      
     if (this.upcomingMatch && !this.upcomingMatch.isStarted()){
       //already informed
       if (this.upcomingMatch.informed && this.upcomingMatch.informed[this.playerService.myself().teamId])

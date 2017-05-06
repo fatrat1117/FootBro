@@ -240,7 +240,7 @@ export const firebaseConfig = {
     ManagePlayerPopover,
     FAQComponent
   ],
-  providers: [{ provide: ErrorHandler, useClass: MyErrorHandler },
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
     FirebaseManager,
     OneSignalManager,
     Localization,
