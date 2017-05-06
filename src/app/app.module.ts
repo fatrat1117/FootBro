@@ -71,8 +71,6 @@ import { SbLoadingComponent } from './common/loading.component';
 import { SbRateCircleComponent } from './common/rate.circle.component';
 import { SbModalNavbarComponent } from './common/modal.navbar.component';
 import { SbShareButtonComponent } from './common/share.button.component';
-import { SbFbShareButtonComponent } from './common/fb.share.button.component';
-import { SbWechatShareButtonComponent } from './common/wechat.share.button.component';
 import { SbMatchBasicComponent } from './matches/match-basic.component';
 import { MatchDetailPage } from "../pages/match-detail/match-detail";
 import { GameRatingPage } from "../pages/game-rating/game-rating";
@@ -165,8 +163,6 @@ export const firebaseConfig = {
     SbRateCircleComponent,
     SbModalNavbarComponent,
     SbShareButtonComponent,
-    SbFbShareButtonComponent,
-    SbWechatShareButtonComponent,
     SbMatchBasicComponent,
     NoRecordComponent,
     ResultScoreComponent,

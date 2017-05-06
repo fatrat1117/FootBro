@@ -3,6 +3,7 @@ import { ViewController } from 'ionic-angular';
 import { Screenshot, SocialSharing } from 'ionic-native';
 import { PlayerService } from '../../app/players/player.service'
 import { FirebaseManager } from '../../providers/firebase-manager'
+import { UIHelper } from '../../providers/uihelper'
 
 declare var Wechat: any;
 
@@ -14,7 +15,8 @@ export class SharePage {
   isWechatInstalled = false;
   sharePoints = 200;
   constructor(private viewCtrl: ViewController,
-    private playerService: PlayerService) {
+    private playerService: PlayerService,
+    private uiHelper: UIHelper) {
     let self = this;
     if (Wechat) {
       Wechat.isInstalled(function (installed) {
@@ -47,10 +49,10 @@ export class SharePage {
           }
         },
         err => {
-          alert(err);
+          self.uiHelper.showAlert(err);
         });
     }, err => {
-      alert(err);
+      self.uiHelper.showAlert(err);
     });
   }
 
@@ -69,14 +71,14 @@ export class SharePage {
       this.sharePhoto(res.URI, type);
       console.log(res, type);
     },
-      () => {
-        alert('Screenshot failed');
+      (err) => {
+        this.uiHelper.showAlert(err);
       });
   }
 
   sharePhoto(picAddress, type) {
     if (typeof Wechat == "undefined") {
-      alert("Wechat plugin is not installed.");
+      this.uiHelper.showAlert("Wechat plugin is not installed.");
       return false;
     }
     var params = {

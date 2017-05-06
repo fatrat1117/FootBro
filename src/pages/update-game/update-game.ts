@@ -136,14 +136,6 @@ export class UpdateGamePage {
         ++player[key];
     }
 
-    openUpdate() {
-        alert("update");
-    }
-    //右上角删除
-    openDelete() {
-        alert("delete");
-    }
-
     searchTeam(teamType) {
         let searchTeamModal = this.modalCtrl.create(SearchTeamPage);
         searchTeamModal.onDidDismiss(data => {

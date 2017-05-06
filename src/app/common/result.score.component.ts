@@ -73,7 +73,6 @@ export class ResultScoreComponent {
 
   }
   informAllClick(e){
-    //alert("Cheers!Love, the cavalry is here!");
     let enMsg = sprintf('A new match is waiting for you to join: %s vs %s',
       this.upcomingMatch.home.name,
       this.upcomingMatch.away.name,

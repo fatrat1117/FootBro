@@ -85,10 +85,10 @@ export class CheerleaderService {
           this.fm.submitCheerleaderInfo(url);
           this.uiHelper.presentToast('ApplicationSubmited');
         }, e => {
-          alert(e);
+          this.uiHelper.showAlert(e);
         })
     }, err => {
-      alert(err);
+      this.uiHelper.showAlert(err);
     });
   }
 

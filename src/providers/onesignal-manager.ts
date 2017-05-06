@@ -60,7 +60,7 @@ export class OneSignalManager {
         },
         function (failedResponse) {
           console.log("Notification Post Failed: ", failedResponse);
-          //alert("Notification Post Failed:\n" + JSON.stringify(failedResponse));
+  
         }
       );
     }

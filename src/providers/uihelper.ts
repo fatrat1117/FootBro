@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastController } from 'ionic-angular';
+import { ToastController, AlertController } from 'ionic-angular';
 import { Localization } from './localization';
 import * as moment from 'moment';
 declare var sprintf: any;
@@ -7,7 +7,8 @@ declare var sprintf: any;
 @Injectable()
 export class UIHelper {
   constructor(private toastCtrl: ToastController,
-    private loc: Localization) {
+    private loc: Localization,
+    private alertCtrl: AlertController) {
   }
 
   squadHalfImageSize = 20;
@@ -97,5 +98,14 @@ export class UIHelper {
   isNumber(str){
     var reg = /^\d+$/;
     return reg.test(str);
+  }
+
+  showAlert(msg) {
+    let alert = this.alertCtrl.create({
+      title: this.loc.getString('SoccerBro'),
+      subTitle: msg,
+      buttons: [this.loc.getString('OK')]
+    });
+    alert.present();
   }
 }

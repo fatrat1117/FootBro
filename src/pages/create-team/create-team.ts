@@ -3,6 +3,7 @@ import { ViewController } from 'ionic-angular';
 import { TeamService } from '../../app/teams/team.service';
 import { Localization } from '../../providers/localization'
 import { FirebaseManager } from '../../providers/firebase-manager'
+import { UIHelper } from '../../providers/uihelper'
 
 @Component({
   selector: 'page-create-team',
@@ -21,7 +22,8 @@ export class CreateTeamPage {
   constructor(private viewCtrl: ViewController,
     private service: TeamService,
     private loc: Localization,
-    private fm: FirebaseManager) {
+    private fm: FirebaseManager,
+    private uiHelper: UIHelper) {
     this.busy = false;
     this.location = 'SG';
     this.teamName = '';
@@ -39,7 +41,7 @@ export class CreateTeamPage {
         }
 
         let error = err => {
-          alert(err);
+          self.uiHelper.showAlert(err);
           self.busy = false;
         }
         self.fm.updateImgGetUrl(this.logoData, teamId, this.fm.smallImageSize, this.fm.smallImageSize, success, error);
@@ -49,7 +51,7 @@ export class CreateTeamPage {
 
     this.onFail = e => {
       this.busy = false;
-      alert(this.loc.getString(e['detail']));
+      this.uiHelper.showAlert(this.loc.getString(e['detail']));
     };
 
 
