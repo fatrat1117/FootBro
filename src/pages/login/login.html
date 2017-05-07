@@ -16,21 +16,17 @@
   <div padding>
     <ion-label>{{'UsingSBAccount' | trans}}</ion-label>
     <ion-label>{{'Email' | trans}}</ion-label>
-    <ion-item>
-      <ion-input maxlength="128" type="text" [(ngModel)]="_credentials.email" [placeholder]="'enteremail' | trans"></ion-input>
-    </ion-item>
+    <ion-input class='login-input' maxlength="128" type="text" [(ngModel)]="_credentials.email" [placeholder]="'enteremail' | trans"></ion-input>
     <ion-label>{{'Password' | trans}}</ion-label>
-    <ion-item>
-      <ion-input maxlength="32" type="password" [(ngModel)]="_credentials.password" [placeholder]="'enterpwd' | trans"></ion-input>
-    </ion-item>
+    <ion-input class='login-input' maxlength="32" type="password" [(ngModel)]="_credentials.password" [placeholder]="'enterpwd' | trans"></ion-input>
   </div>
 
   <div padding>
-    <button ion-button type="submit" class="dark_green" [disabled]="busy || !_credentials.email.length || !_credentials.password.length"
+    <button ion-button color='darkGreen' [disabled]="busy || !_credentials.email.length || !_credentials.password.length"
       (tap)="login(_credentials, $event)" block>{{ 'Login' | trans }}</button>
-    <button ion-button type="submit" class="dark_green" [disabled]="busy || !_credentials.email.length || !_credentials.password.length"
+    <button ion-button color='darkGreen' [disabled]="busy || !_credentials.email.length || !_credentials.password.length"
       (tap)="registerUser($event)" block>{{ 'CreateAccount' | trans }}</button>
-    <button ion-button type="submit" class="dark_green" [disabled]="busy || !_credentials.email.length" (tap)="ResetPassword()"
+    <button ion-button color='darkGreen' [disabled]="busy || !_credentials.email.length" (tap)="ResetPassword()"
       block>{{ 'ResetPwd' | trans }}</button>
     <button ion-button [disabled]="busy" (tap)="dismiss()" block color='lightGrey'>{{'Cancel' | trans}}</button>
   </div>
