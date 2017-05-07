@@ -1,6 +1,9 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{'top100' | trans}}</ion-title>
+    <ion-buttons right>
+      <sb-share-button></sb-share-button>
+    </ion-buttons>
   </ion-navbar>
   <ion-segment padding [(ngModel)]="stats" mode="md">
     <ion-segment-button value="teams">
