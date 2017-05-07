@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Clipboard } from 'ionic-native';
-import { NavController, NavParams, ModalController, AlertController, ActionSheetController } from 'ionic-angular';
+import { Content, NavController, NavParams, ModalController, AlertController, ActionSheetController } from 'ionic-angular';
 import { Localization } from '../../providers/localization';
 import { SearchPlayerPage } from '../search-player/search-player'
 import { SearchMatchPage } from '../search-match/search-match'
 import { MatchDetailPage } from '../match-detail/match-detail'
 import { TeamPlayersPage } from '../team-players/team-players';
+import { ChatPage } from '../chat/chat'
 import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
 import { Team } from '../../app/teams/team.model'
@@ -21,6 +22,8 @@ declare var sprintf: any;
   templateUrl: 'my-team.html'
 })
 export class MyTeamPage {
+  @ViewChild(Content) content: Content;
+
   first = [];
   selfId: string;
   selfPlayer: Player;
@@ -359,5 +362,29 @@ export class MyTeamPage {
     }
 
     this.fm.selectImgUploadGetUrl(this.id + 'Large', 512, 512, success, error);
+  }
+
+  contactCaptain() {
+    if (this.playerService.isAuthenticated()) {
+      this.nav.push(ChatPage, {
+        isSystem: false,
+        isUnread: false,
+        user: this.captain
+      })
+    }
+    else
+      this.playerService.checkLogin();
+  }
+
+  isCaptain() {
+    if (this.captain && this.captain.id == this.selfId)
+    {
+      this.content.resize();
+      return true;
+    }
+    else
+    {
+      return false;
+    }
   }
 }

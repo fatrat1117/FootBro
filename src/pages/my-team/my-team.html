@@ -295,3 +295,10 @@
   </ion-item>
 </ion-list>-->
 </ion-content>
+
+<ion-footer *ngIf="!isCaptain()">
+  <button ion-button full icon-left no-margin color="gYellow" style="color: white" (click)="contactCaptain()">
+    <ion-icon name="md-chatbubbles"></ion-icon>
+    {{ 'contactCaptain' | trans }}
+  </button>
+</ion-footer>
