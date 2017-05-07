@@ -391,6 +391,8 @@ export class Localization {
       groups: 'Groups',
       top100: 'Top 100',
       welcomeToClGroup: 'Welcome to Cheerleaders group chat!',
+      yellows: 'Yellow Cards',
+      reds: 'Red Cards'
     },
 
     zh: {
@@ -763,6 +765,8 @@ export class Localization {
       groups: '小组赛',
       top100: '100强',
       welcomeToClGroup: '欢迎来到拉拉队聊天室！',
+      yellows: '黄牌',
+      reds: '红牌'
     }
   }
 }

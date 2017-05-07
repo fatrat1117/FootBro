@@ -143,8 +143,8 @@ export class MatchDetailPage {
   initializePlayerStats(stats) {
     stats['goals'] = [];
     stats['assists'] = [];
-    stats['redcards'] = [];
-    stats['yellowcards'] = [];
+    stats['reds'] = [];
+    stats['yellows'] = [];
     stats['owngoals'] = [];
     stats['rating'] = [];
   }
@@ -152,11 +152,12 @@ export class MatchDetailPage {
   updatePlayerStats(stats, squad, team) {
     stats['goals'] = [];
     stats['assists'] = [];
-    stats['redcards'] = [];
-    stats['yellowcards'] = [];
+    stats['reds'] = [];
+    stats['yellows'] = [];
     stats['owngoals'] = [];
     stats['rating'] = [];
-
+    //console.log('updatePlayerStats', squad);
+    
     if (squad) {
       if ('participants' in squad) {
         squad.participants.forEach(p => {
@@ -176,20 +177,20 @@ export class MatchDetailPage {
             stats['assists'].push(stat);
           }
 
-          if (p.redcards) {
+          if (p.reds) {
             let stat: any = {};
             stat.player = this.playerService.findOrCreatePlayerAndPull(p.id);
             stat.teamName = team.name;
-            stat.val = p.redcards;
-            stats['redcards'].push(stat);
+            stat.val = p.reds;
+            stats['reds'].push(stat);
           }
 
-          if (p.yellowcards) {
+          if (p.yellows) {
             let stat: any = {};
             stat.player = this.playerService.findOrCreatePlayerAndPull(p.id);
             stat.teamName = team.name;
-            stat.val = p.yellowcards;
-            stats['yellowcards'].push(stat);
+            stat.val = p.yellows;
+            stats['yellows'].push(stat);
           }
 
           if (p.owngoals) {
