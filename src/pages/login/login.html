@@ -6,31 +6,35 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="login-content" padding>
+<ion-content padding>
   <div padding>
     <button ion-button [disabled]="busy" class="login-connect-btn login-connect-btn-fb" block (tap)="registerUserWithFacebook($event)">
-            <ion-icon name="logo-facebook"></ion-icon>&nbsp;<b>
-        {{'ConnectWithFacebook' | trans}}</b></button>
+            <ion-icon name="logo-facebook"></ion-icon>&nbsp;
+        {{'ConnectWithFacebook' | trans}}</button>
   </div>
-  <p>{{'UsingSBAccount' | trans}}</p>
-  <div class="list">
+
+  <div padding>
+    <ion-label>{{'UsingSBAccount' | trans}}</ion-label>
+    <ion-label>{{'Email' | trans}}</ion-label>
     <ion-item>
-      <ion-label fixed><b class="signin">{{'Email' | trans}}</b></ion-label>
       <ion-input maxlength="128" type="text" [(ngModel)]="_credentials.email" [placeholder]="'enteremail' | trans"></ion-input>
     </ion-item>
+    <ion-label>{{'Password' | trans}}</ion-label>
     <ion-item>
-      <ion-label fixed><b class="signin">{{'Password' | trans}}</b></ion-label>
       <ion-input maxlength="32" type="password" [(ngModel)]="_credentials.password" [placeholder]="'enterpwd' | trans"></ion-input>
     </ion-item>
   </div>
 
-  <div class="login-connect" padding>
-    <button ion-button type="submit" class="dark_green" [disabled]="busy || !_credentials.email.length || !_credentials.password.length" (tap)="login(_credentials, $event)" block><b>{{ 'Login' | trans }}</b></button>
-    <button ion-button type="submit" class="dark_green" [disabled]="busy || !_credentials.email.length || !_credentials.password.length" (tap)="registerUser($event)" block><b>{{ 'CreateAccount' | trans }}</b></button>
-    <button ion-button type="submit" class="dark_green" [disabled]="busy || !_credentials.email.length" (tap)="ResetPassword()" block><b>{{ 'ResetPwd' | trans }}</b></button>
-    <button ion-button [disabled]="busy" (tap)="dismiss()" block danger class="cancel"><b>{{'Cancel' | trans}}</b></button>
-  </div>
   <div padding>
-    <p *ngIf="error" danger>{{error}}</p>
+    <button ion-button type="submit" class="dark_green" [disabled]="busy || !_credentials.email.length || !_credentials.password.length"
+      (tap)="login(_credentials, $event)" block>{{ 'Login' | trans }}</button>
+    <button ion-button type="submit" class="dark_green" [disabled]="busy || !_credentials.email.length || !_credentials.password.length"
+      (tap)="registerUser($event)" block>{{ 'CreateAccount' | trans }}</button>
+    <button ion-button type="submit" class="dark_green" [disabled]="busy || !_credentials.email.length" (tap)="ResetPassword()"
+      block>{{ 'ResetPwd' | trans }}</button>
+    <button ion-button [disabled]="busy" (tap)="dismiss()" block color='lightGrey'>{{'Cancel' | trans}}</button>
+  </div>
+  <div>
+    <p *ngIf="error" color='danger'>{{error}}</p>
   </div>
 </ion-content>
