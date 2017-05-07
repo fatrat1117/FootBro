@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { OneSignal } from 'ionic-native';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { LoginPage } from '../pages/login/login';
+import { Localization } from './localization'
 import { NavController, ModalController, Platform } from 'ionic-angular';
 import { Subject } from 'rxjs/Subject';
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -56,7 +57,8 @@ export class FirebaseManager {
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,
     private platform: Platform,
-    private camera: Camera) {
+    private camera: Camera,
+    private local: Localization) {
     document.addEventListener('playernotregistered', e => {
       let id = e['detail'];
       if (this.auth && id === this.auth.uid) {
@@ -1410,6 +1412,19 @@ export class FirebaseManager {
       responseRate: 0
     });
     this.af.database.object(this.playerPublicRef(id)).remove();
+
+    // add group chat entry
+    let content = {
+      en: this.local.getString('welcomeToClGroup', 'en'),
+      zh: this.local.getString('welcomeToClGroup', 'zh')
+    }
+    this.af.database.object(`/chats/${id}/basic-info/1/`).set({
+      groupName: "cheerleaders",
+      isSystem: false,
+      isUnread: true,
+      lastContent: content,
+      lastTimestamp: firebase.database.ServerValue.TIMESTAMP
+    })
   }
 
   getCheerleaderPublic(id) {

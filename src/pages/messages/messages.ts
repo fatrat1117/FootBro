@@ -124,7 +124,7 @@ export class MessagesPage {
   }
 
   getLastContent(msg) {
-    if (msg.isSystem) {
+    if (msg.lastContent[this.local.langCode]) {
       let str = msg.lastContent[this.local.langCode];
       if (str == "")
         return msg.lastContent;

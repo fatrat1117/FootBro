@@ -357,7 +357,7 @@ export class Localization {
       joinMatch: "Clik to Join",
       rateMatchDetail: "Rate your match to earn points!",
       rateMatch: "Click to Rate",
-      welcomeCheerleader: "Welcome to join SoccerBro Cheerleaders!",
+      welcomeCheerleader: "Welcome to SoccerBro Cheerleaders!",
       personalPointsFAQTitle: "How to earn player points?",
       personalPointsFAQContent: "If you are one of the participants of a match, you can earn 100 points after rating your teammates. You can also earn player points by inviting players, sharing on facebook or wechat moments.",
       teamPointsFAQTitle: "How to earn team points?",
@@ -390,6 +390,7 @@ export class Localization {
       contactCaptain: 'Contact Captain',
       groups: 'Groups',
       top100: 'Top 100',
+      welcomeToClGroup: 'Welcome to Cheerleaders group chat!',
     },
 
     zh: {
@@ -761,6 +762,7 @@ export class Localization {
       contactCaptain: '联系队长',
       groups: '小组赛',
       top100: '100强',
+      welcomeToClGroup: '欢迎来到拉拉队聊天室！',
     }
   }
 }
