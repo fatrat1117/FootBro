@@ -54,10 +54,12 @@ export class UpdateGamePage {
         this.teamId = params.get('teamId');
         this.adminMode = params.get('adminMode') || this.adminMode;
         this.match = this.matchService.getMatch(this.id);
-        this.homeScore = this.match.homeScore || '';
-        this.awayScore = this.match.awayScore || '';
-        this.homePenalty = this.match.homePenalty || '';
-        this.awayPenalty = this.match.awayPenalty || '';
+        this.homeScore = this.match.homeScore >= 0 ? this.match.homeScore : '';
+        this.awayScore = this.match.awayScore >= 0 ? this.match.awayScore : '';
+        this.homePenalty = this.match.homePenalty >= 0 ? this.match.homePenalty : '';
+        this.awayPenalty = this.match.awayPenalty >= 0 ? this.match.awayPenalty : '';
+        //this.homePenalty = this.match.homePenalty || '';
+        //this.awayPenalty = this.match.awayPenalty || '';
         if (this.match.home.captain === this.playerService.selfId())
             this.myIdentity = 0;
         else if (this.match.away.captain === this.playerService.selfId())
@@ -132,14 +134,6 @@ export class UpdateGamePage {
 
     plus(player, key) {
         ++player[key];
-    }
-
-    openUpdate() {
-        alert("update");
-    }
-    //右上角删除
-    openDelete() {
-        alert("delete");
     }
 
     searchTeam(teamType) {

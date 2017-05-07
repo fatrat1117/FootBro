@@ -9,7 +9,8 @@ import { TeamService } from '../../app/teams/team.service'
 import { NewGamePage } from '../../pages/new-game/new-game'
 import { EditGameRatingPage } from '../edit-game-rating/edit-game-rating';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
-import { Localization } from '../../providers/localization'
+import { Localization } from '../../providers/localization';
+import { UIHelper } from '../../providers/uihelper'
 
 @Component({
   selector: 'page-match-detail',
@@ -50,7 +51,8 @@ export class MatchDetailPage {
     private launchNavigator: LaunchNavigator,
     private alertCtrl: AlertController,
     private loc: Localization,
-    private matchService: MatchService) {
+    private matchService: MatchService,
+    private uiHelper: UIHelper) {
     this.match = navParams.get('match');
     this.matchId = navParams.get('matchId');
     if (navParams.get('selectedValue'))
@@ -378,7 +380,9 @@ export class MatchDetailPage {
       this.launchNavigator.navigate([this.match.location.lat, this.match.location.lng], options)
         .then(
         success => console.log('Launched navigator'),
-        error => alert(error)
+        error => {
+          this.uiHelper.showAlert(error);
+        }
         );
     }
 

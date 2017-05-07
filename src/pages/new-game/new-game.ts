@@ -138,14 +138,6 @@ export class NewGamePage {
         item.number = item.number + 1;
         item.color = "secondary";
     }
-    //更新数据
-    openUpdate() {
-        alert("update");
-    }
-    //右上角删除
-    openDelete() {
-        alert("delete");
-    }
 
     searchTeam(teamType) {
         let searchTeamModal = this.modalCtrl.create(SearchTeamPage);

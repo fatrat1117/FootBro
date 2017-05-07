@@ -119,7 +119,6 @@ export class HomePage {
 
     let modal = this.modalCtrl.create(ModalContentPage, characterNum);
     modal.present();
-    // alert("123");
   }
 
   testSquad() {

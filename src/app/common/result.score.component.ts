@@ -73,7 +73,6 @@ export class ResultScoreComponent {
 
   }
   informAllClick(e){
-    //alert("Cheers!Love, the cavalry is here!");
     let enMsg = sprintf('A new match is waiting for you to join: %s vs %s',
       this.upcomingMatch.home.name,
       this.upcomingMatch.away.name,
@@ -89,6 +88,9 @@ export class ResultScoreComponent {
   }
   //调用此函数之前必须检查比赛是否开始，比赛还没开始才能调用!
   canShowInformAll(){
+    if (!this.playerService.isAuthenticated())
+      return false;
+      
     if (this.upcomingMatch && !this.upcomingMatch.isStarted()){
       //already informed
       if (this.upcomingMatch.informed && this.upcomingMatch.informed[this.playerService.myself().teamId])

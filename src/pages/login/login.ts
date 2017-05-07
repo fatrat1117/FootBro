@@ -1,17 +1,18 @@
 import * as firebase from 'firebase';
-import {Modal, NavController, ViewController} from 'ionic-angular';
-import {Component, Inject} from '@angular/core';
+import { NavController, ViewController } from 'ionic-angular';
+import { Component } from '@angular/core';
 import {
     AngularFire, firebaseAuthConfig, AuthProviders,
     AuthMethods
 } from 'angularfire2';
-import {Facebook} from 'ng2-cordova-oauth/core';
-import {OauthCordova} from 'ng2-cordova-oauth/platform/cordova'
-import {Localization} from '../../providers/localization';
+import { Facebook } from 'ng2-cordova-oauth/core';
+import { OauthCordova } from 'ng2-cordova-oauth/platform/cordova'
+import { Localization } from '../../providers/localization';
+import { UIHelper } from '../../providers/uihelper'
 
 @Component({
     selector: 'page-login',
-  templateUrl: 'login.html',
+    templateUrl: 'login.html',
 })
 export class LoginPage {
 
@@ -24,7 +25,10 @@ export class LoginPage {
     })
     private cordovaOauth: OauthCordova = new OauthCordova();
 
-    constructor(public af: AngularFire, public viewCtrl: ViewController, private local: Localization){
+    constructor(private af: AngularFire,
+        private viewCtrl: ViewController,
+        private local: Localization,
+        private uiHelper: UIHelper) {
         this._credentials = {
             email: '',
             password: ''
@@ -73,25 +77,28 @@ export class LoginPage {
         this.cordovaOauth.logInVia(this.facebookProvider).then(fb => {
             console.log("Facebook success: " + JSON.stringify(fb));
             try {
-            let token = fb["access_token"];
-            console.log(token, firebase);
-            let creds = firebase.auth.FacebookAuthProvider.credential(token);
-            console.log(creds);
+                let token = fb["access_token"];
+                console.log(token, firebase);
+                let creds = firebase.auth.FacebookAuthProvider.credential(token);
+                console.log(creds);
 
-            let providerConfig = {
-                provider: AuthProviders.Facebook,
-                method: AuthMethods.OAuthToken,
-                scope: ['email'],
-            };
-            
-            this.af.auth.login(creds, providerConfig).then((value) => {
-                console.log('firebase success');
-                this.dismiss();
-            }).catch((error) => {
-                this.error = error;
-                self.busy = false;
-            });
-            } catch(e) {alert(e);}
+                let providerConfig = {
+                    provider: AuthProviders.Facebook,
+                    method: AuthMethods.OAuthToken,
+                    scope: ['email'],
+                };
+
+                this.af.auth.login(creds, providerConfig).then((value) => {
+                    console.log('firebase success');
+                    this.dismiss();
+                }).catch((error) => {
+                    this.error = error;
+                    self.busy = false;
+                });
+            } catch (e) 
+            { 
+                self.uiHelper.showAlert(e); 
+            }
         }).catch((error) => {
             //this.error = error;
             self.busy = false;
@@ -144,10 +151,10 @@ export class LoginPage {
         let self = this;
         this.busy = true;
         firebase.auth().sendPasswordResetEmail(this._credentials.email).then(_ => {
-            alert(this.local.getString('ResetMsg'));
+            self.uiHelper.showAlert(this.local.getString('ResetMsg'));
             self.busy = false;
         }).catch(err => {
-            alert(err);
+            self.uiHelper.showAlert(err);
             self.busy = false;
         });
     }

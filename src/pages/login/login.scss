@@ -11,11 +11,6 @@ page-login{
     color: #ffffff;
   }
 
-
-  .login-connect-btn{
-
-  }
-
   .login-connect-btn-fb{
     background-color: #3b5998;
   }
@@ -28,5 +23,11 @@ page-login{
   }
   .login-connect .cancel{
     background-color: rgb(64,68,77);
+  }
+
+  .login-input {
+    border-style: solid;
+    border-width: 1px;
+    border-color: color($colors, gGreen);
   }
 }

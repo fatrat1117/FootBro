@@ -164,7 +164,7 @@
         }, 
         "tournaments": {
             ".read": true,
-            ".write": "root.child('admins').hasChild(auth.uid) || root.child('teams').child(root.child('players').child(auth.uid).child('basic-info').child('teamId').val()).child('basic-info').child('captain').val() === auth.uid",
+            ".write": "root.child('players').hasChild(auth.uid)",
             "list" : {
               "$id": {
                 ".validate": "$id != null && $id != 'undefined'"

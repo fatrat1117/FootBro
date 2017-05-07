@@ -40,14 +40,14 @@ export class MatchesPage {
   // eliminations
   onEliminationReady;
   onMatchReady;
-  selectedGroup = 'A';
+  selectedGroup;
   //groups = [0, 0, 0, 0];
   selectedElimination = 0;
   eliminations: any;
   eliminationPairs = [];
   eliminationMatches = {};
   tournament;
-
+  standingTitle = 'standings';
   constructor(public navCtrl: NavController,
     private modalCtrl: ModalController,
     private matchService: MatchService,
@@ -56,8 +56,13 @@ export class MatchesPage {
     this.selectedInfo = "schedule";
     this.selectedId = this.navParams.get('tournamentId') || "all";
     this.tournament = this.navParams.get('tournament');
-    if (this.tournament && this.tournament.groups && this.tournament.groups.length)
-      this.selectedGroup = this.tournament.groups[0];
+    this.type = this.navParams.get("type") || 'league';
+    if (this.tournament) {
+      if (this.tournament.groups && this.tournament.groups.length)
+        this.selectedGroup = this.tournament.groups[0];
+      if (this.tournament.type)
+        this.type = this.tournament.type;
+    }
   }
 
   ionViewDidLoad() {
@@ -71,25 +76,31 @@ export class MatchesPage {
       this.selectedInfo = "standings";
       this.isEnd = true;
       this.title = "results";
+      this.refreshTournamentTable();
     }
 
     if (this.navParams.get("rules")) {
       this.rules = this.navParams.get("rules");
     }
 
-    if (this.navParams.get("type")) {
-      this.type = this.navParams.get("type");
-      if (this.type == 'cup') {
-        this.matchService.getEliminationsAsync(this.selectedId);
-      }
+    if (this.type == 'cup') {
+      this.standingTitle = 'groups';
+      this.matchService.getEliminationsAsync(this.selectedId);
     }
 
     this.matchService.getMatchDatesAsync(this.selectedId);
   }
 
   refreshTournamentTable() {
+    if (this.type == 'cup') {
+      if (!this.selectedGroup)
+        this.selectedGroup = 'A';
+    }
+    //console.log('refreshTournamentTable', this.type, this.selectedGroup);
+
     let groupId = 'cup' == this.type ? this.selectedGroup : null;
     this.matchStandings = this.matchService.getTournamentTable(this.selectedId, groupId);
+    //console.log(this.matchStandings);
   }
 
   getMatchScrollHeight() {
@@ -97,7 +108,7 @@ export class MatchesPage {
   }
 
   getContentHeight() {
-    console.log(this.getMatchScrollHeight() - this.matchFooter.nativeElement.clientHeight);
+    //console.log(this.getMatchScrollHeight() - this.matchFooter.nativeElement.clientHeight);
 
     return this.getMatchScrollHeight() - this.matchFooter.nativeElement.clientHeight;
   }
@@ -295,7 +306,8 @@ export class MatchesPage {
 
   enterNewGame() {
     let options = { tournamentId: 'all' === this.selectedId ? null : this.selectedId };
-    if (this.type == "cup")
+    //only groups schedule has groupId
+    if (this.type == "cup" && this.selectedInfo == 'standings')
       options['groupId'] = this.selectedGroup;
     console.log('newGame', options);
     let modal = this.modalCtrl.create(NewGamePage,
@@ -345,7 +357,8 @@ export class MatchesPage {
   }
 
   canShowAdd() {
-    // console.log();
+    if (!this.playerService.isAuthenticated())
+      return false;
     if (this.isEnd)
       return false;
     if ('all' === this.selectedId)
@@ -395,8 +408,9 @@ export class MatchesPage {
   onSegmentChange(ev) {
     this.selectedInfo = ev;
     switch (ev) {
-      case "standings":
+      case "standings": {
         this.refreshTournamentTable();
+      }
         break;
       case 'eliminations':
         {

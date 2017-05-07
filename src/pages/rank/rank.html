@@ -1,6 +1,9 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{'Ranks' | trans}}</ion-title>
+    <ion-title>{{'top100' | trans}}</ion-title>
+    <ion-buttons right>
+      <sb-share-button></sb-share-button>
+    </ion-buttons>
   </ion-navbar>
   <ion-segment padding [(ngModel)]="stats" mode="md">
     <ion-segment-button value="teams">
@@ -70,7 +73,7 @@
 </ion-infinite-scroll>
 </div>
 <div *ngSwitchCase="'players'">
-        <ion-item style="margin-bottom: 10px" class="sortby">
+  <ion-item style="margin-bottom: 10px" class="sortby">
 <ion-label>{{'SortBy' | trans}}</ion-label>
 <ion-select [ngModel]="playerSortByStr" (ngModelChange)="sortPlayerBy($event)" text-center>
   <ion-option value="popularity">
@@ -84,10 +87,10 @@
   </ion-option>
 </ion-select>
 </ion-item>
-  <ion-list>
-    <ion-item *ngFor="let p of playerRanks; let i = index;" (tap)="goPlayerPage(p.id)" style="margin-bottom:10px" text-wrap class="rank-player-items">
+<ion-list>
+  <ion-item *ngFor="let p of playerRanks; let i = index;" (tap)="goPlayerPage(p.id)" style="margin-bottom:10px" text-wrap class="rank-player-items">
 <ion-avatar item-left>
-  <img [src]="p.photo">
+  <img [src]="p.photo"/>
 </ion-avatar>
 <ion-row center class="rank-player-specs">
   <ion-col class="badge">
@@ -114,10 +117,10 @@
 </ion-row>
 </ion-item>
 </ion-list>
-<ion-infinite-scroll (ionInfinite)="morePlayer($event)">
+<!--<ion-infinite-scroll (ionInfinite)="morePlayer($event)">
   <ion-infinite-scroll-content loadingSpinner="circles">
   </ion-infinite-scroll-content>
-</ion-infinite-scroll>
+</ion-infinite-scroll>-->
 </div>
 </div>
 </ion-content>
