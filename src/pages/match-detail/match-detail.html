@@ -17,7 +17,7 @@
       </ion-segment-button>
     </ion-segment>
     <ion-buttons right>
-      <button *ngIf='canShowEdit()' color='primaryYellow' (tap)="edit()" ion-button icon-only clear>
+      <button *ngIf='canShowEdit()' color='gBlue' (tap)="edit()" ion-button icon-only clear>
           <ion-icon name="md-create"></ion-icon>
       </button>
       <sb-share-button></sb-share-button>
@@ -25,37 +25,46 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content #matchDetailContent [ngSwitch]="matchSegments" style="width: 100%; height: 100%" no-bounce>
 <div class="content-all" *ngSwitchCase="'info'" style="width: 100%; height: 100%">
 <ion-list no-lines class="content-list" center>
   <result-score [upcomingMatch]="match" [hostPageName]="currPageName"></result-score>
-
+  <ion-row>
+    <ion-col width-33>
+      <button ion-button icon-only clear color="white" text-center (click)="pickColor()">
+      <ion-icon name="shirt"></ion-icon>
+      </button>
+    </ion-col>
+    <ion-col width-33>
+      {{'JerseyColor' | trans}}
+    </ion-col>
+    <ion-col width-33>
+      <button ion-button icon-only clear color="white" text-center>
+      <ion-icon name="shirt"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
   <div class="match-detail-info">
-  <ion-item class="common-title map-title" (tap)="navigateToField()">
-    <ion-icon name="navigate" color="iPrimary" class="common-icon map-icon inline-flex-vertical-center"></ion-icon>
-    <div class="common-content map-content">{{match?.location?.name}}{{match?.location?.address}}</div>
-  </ion-item>
-  <ion-item class="common-title time-title">
-    <ion-icon name="time" class="common-icon time-icon inline-flex-vertical-center"></ion-icon>
-    <div class="common-content time-content"> {{match?.time | date:'MM-dd EEEE  H:mm'}}</div>
-  </ion-item>
-  <!--<ion-item class="common-title clothes-title">
-    <ion-icon name="shirt" class="common-icon clothes-icon inline-flex-vertical-center"></ion-icon>
-    <div class="common-content clothes-content">{{'noRequirement' | trans}}</div>
-  </ion-item>-->
+    <ion-item class="common-title map-title" (tap)="navigateToField()">
+      <ion-icon name="navigate" color="iPrimary" class="common-icon map-icon inline-flex-vertical-center"></ion-icon>
+      <div class="common-content map-content">{{match?.location?.name}}{{match?.location?.address}}</div>
+    </ion-item>
+    <ion-item class="common-title time-title">
+      <ion-icon name="time" class="common-icon time-icon inline-flex-vertical-center"></ion-icon>
+      <div class="common-content time-content"> {{match?.time | date:'MM-dd EEEE H:mm'}}</div>
+    </ion-item>
   </div>
 
   <ion-row *ngIf="amIMember()" class="registration-info">
-    <ion-col class="absent-number flex-direction-column" width-33 >
+    <ion-col class="absent-number flex-direction-column" width-33>
       <span class="number-absent">{{'applyleave' | trans}}({{absences.length}})</span>
       <!--<span class="common-sub-label number-cancel">0人取消报名</span>-->
     </ion-col>
-    <ion-col class="registered-number flex-direction-column" width-33 >
+    <ion-col class="registered-number flex-direction-column" width-33>
       <span class="number-register">{{'participants' | trans}}({{attendances.length}})</span>
       <!--<span class="common-sub-label number-pending">限额0人</span>-->
     </ion-col>
-    <ion-col class="pending-number flex-direction-column" width-33 >
+    <ion-col class="pending-number flex-direction-column" width-33>
       <div class="number-pending">{{'TBD' | trans}}({{TBDs.length}})</div>
       <div class="number-dummy"></div>
     </ion-col>
@@ -102,23 +111,6 @@
       </div>
     </ion-item>
   </ion-list>
-  <!--ion-row padding-horizontal class="match-detail-button-group">
-    <ion-col text-center class="pending-col">
-      <button ion-button block color="secondary" [disabled]="getDisabled(2)" small (click)="TBDMatch()">
-        {{'TBD' | trans}}
-      </button>
-    </ion-col>
-    <ion-col text-center class="absent-col">
-      <button ion-button block color="secondary" [disabled]="getDisabled(0)" small (click)="absentMatch()">
-        {{'applyleave' | trans}}
-      </button>
-    </ion-col>
-    <ion-col text-center class="participate-col">
-      <button ion-button [disabled]="getDisabled(1)" small (click)="attendMatch()">
-        {{'Going' | trans}}
-      </button>
-    </ion-col>
-  </ion-row-->
 </div>
 <button *ngIf='canShowDelete()' (tap)="deleteMatch()" color='danger' ion-button block>{{'deletematch' | trans}}</button>
 </div>
@@ -179,25 +171,25 @@
 </div>
 </ion-content>
 
-<ion-footer *ngIf="matchSegments=='info' && canShowEnroll()" style="background: #2d2e32"> 
-  <ion-row padding-horizontal class="match-detail-button-group">
-    <ion-col text-center class="pending-col">
-      <button ion-button block color="secondary" [disabled]="getDisabled(2)" small (click)="TBDMatch()">
+<ion-footer *ngIf="matchSegments=='info' && canShowEnroll()" style="background: #2d2e32">
+<ion-row padding-horizontal class="match-detail-button-group">
+  <ion-col text-center class="pending-col">
+    <button ion-button block color="secondary" [disabled]="getDisabled(2)" small (click)="TBDMatch()">
         <!--<ion-icon name="checkmark"></ion-icon>-->
         {{'TBD' | trans}}
       </button>
-    </ion-col>
-    <ion-col text-center class="absent-col">
-      <button ion-button block color="secondary" [disabled]="getDisabled(0)" small (click)="absentMatch()">
+  </ion-col>
+  <ion-col text-center class="absent-col">
+    <button ion-button block color="secondary" [disabled]="getDisabled(0)" small (click)="absentMatch()">
         <!--<ion-icon name="checkmark"></ion-icon>-->
         {{'applyleave' | trans}}
       </button>
-    </ion-col>
-    <ion-col text-center class="participate-col">
-      <button ion-button [disabled]="getDisabled(1)" small (click)="attendMatch()">
+  </ion-col>
+  <ion-col text-center class="participate-col">
+    <button ion-button [disabled]="getDisabled(1)" small (click)="attendMatch()">
         <!--<ion-icon name="close"></ion-icon>-->
         {{'Going' | trans}}
       </button>
-    </ion-col>
-  </ion-row>
+  </ion-col>
+</ion-row>
 </ion-footer>

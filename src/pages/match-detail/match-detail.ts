@@ -235,7 +235,7 @@ export class MatchDetailPage {
       }
     }
 
-    console.log(stats);
+    //console.log(stats);
   }
 
   segmentChange(e) {
@@ -380,7 +380,7 @@ export class MatchDetailPage {
 
       this.launchNavigator.navigate([this.match.location.lat, this.match.location.lng], options)
         .then(
-        success => console.log('Launched navigator'),
+        success => {},
         error => {
           this.uiHelper.showAlert(error);
         }
