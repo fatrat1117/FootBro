@@ -93,8 +93,7 @@ export class TeamService {
     });
 
     document.addEventListener('playerready', e => {
-      console.log(this.bRefreshPlayerTeams);
-      
+      //console.log(this.bRefreshPlayerTeams);
       if (this.bRefreshPlayerTeams) {
         let id = e['detail'];
         let player = this.fm.getPlayer(id);

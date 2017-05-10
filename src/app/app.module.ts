@@ -1,5 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicStorageModule } from '@ionic/storage';
 import { MyErrorHandler } from '../providers/exception-handler'
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
@@ -47,10 +48,12 @@ import { EditGameRatingPage } from '../pages/edit-game-rating/edit-game-rating';
 import { SquadSelectPage } from '../pages/squad-select/squad-select';
 import { ManageSquadPage } from '../pages/manage-squad/manage-squad';
 import { TeamPlayersPage } from '../pages/team-players/team-players';
+import { ColorPickerPage} from '../pages/color-picker/color-picker';
 
 // services
 import { AngularFireModule } from 'angularfire2';
 import { FirebaseManager } from '../providers/firebase-manager';
+import { LocalStorage } from '../providers/local-storage';
 import { OneSignalManager } from '../providers/onesignal-manager';
 import { UIHelper } from '../providers/uihelper';
 import { PlayerService } from './players/player.service';
@@ -171,6 +174,7 @@ export const firebaseConfig = {
     ManagePlayerPopover,
     SbCupTeamComponent,
     FAQComponent,
+    ColorPickerPage,
     // directives
     KeyboardAttachDirective
   ],
@@ -185,7 +189,8 @@ export const firebaseConfig = {
       apiKey: 'AIzaSyA9L3ja5ZcViqTc5Tgz8tG6QvJGlYO-fa4',
       libraries: ["places"]
     }),
-    IonicImageLoader.forRoot()
+    IonicStorageModule.forRoot(),
+    IonicImageLoader.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -236,10 +241,12 @@ export const firebaseConfig = {
     ManageSquadPage,
     TeamPlayersPage,
     ManagePlayerPopover,
-    FAQComponent
+    FAQComponent,
+    ColorPickerPage
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
     FirebaseManager,
+    LocalStorage,
     OneSignalManager,
     Localization,
     UIHelper,

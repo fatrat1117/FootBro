@@ -14,7 +14,7 @@
 <ion-content>
   <ion-card no-margin class="my-player-header-card">
     <div class="banner">
-      <img [src]="player?.photoLarge" (tap)="changeCoverPhoto()">
+      <img-loader useImg [src]="player?.photoLarge" (tap)="changeCoverPhoto()"></img-loader>
       <div class="banner-info clearfloat">
         <div class="fl info-pop">
           <div class="pop-number">
@@ -28,7 +28,7 @@
         </div>
         <h1 class="fr info-name">{{player?.name}}</h1>
         <div class="player-logo">
-          <img [src]="player?.photo">
+          <img-loader useImg [src]="player?.photo"></img-loader>
         </div>
       </div>
     </div>
@@ -38,10 +38,6 @@
     </div>
 
     <ion-row class="player-statistics clearfloat">
-      <!--div class="company-logo">
-        <img src="assets/img/forTest/box.png">
-        <h4 no-margin>SoccerBro</h4>
-      </div-->
       <ion-col no-padding class="block height">
         <div class="flex-center txt height-inner">
           <ion-col no-padding width-50 class="fl flex-end data">{{player?.height}}</ion-col>

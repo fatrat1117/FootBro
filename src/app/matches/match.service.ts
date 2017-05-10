@@ -38,6 +38,7 @@ export class MatchService {
       match.dataReady = true;
       match.groupId = fmMatch.groupId;
       match.informed = fmMatch.informed;
+      match.colors = fmMatch.colors;
       //console.log(match.groupId);
       match.home = this.teamService.findOrCreateTeam(match.homeId);
       this.fm.getTeamAsync(match.homeId);
@@ -296,5 +297,9 @@ export class MatchService {
 
   computeTournamentTable(tournamentId) {
     this.fm.computeTournamentTable(tournamentId);
+  }
+
+  setJerseyColor(matchId, teamId, color) {
+    this.fm.setJerseyColor(matchId, teamId, color);
   }
 }
