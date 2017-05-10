@@ -37,8 +37,8 @@ export class TeamTable {
 export class Team {
   id;
   popularity;
-  logo;
-  photoLarge: string;
+  logo = "assets/img/none.png";
+  photoLarge = "assets/img/team/court.png";
   name;
   ability;
   totalPlayers;

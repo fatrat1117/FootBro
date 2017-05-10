@@ -2,9 +2,9 @@ export class Player {
   id: string;
   created: boolean;
   name: string;
-  photo: string;
-  photoMedium: string;
-  photoLarge: string;
+  photo = "assets/img/none.png";
+  photoMedium = "assets/img/none.png";
+  photoLarge = "assets/img/forTest/messi_banner.png";
   teamId: string;
   description: string;
   foot: string;
