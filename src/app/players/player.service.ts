@@ -180,6 +180,9 @@ export class PlayerService {
   }
 
   getPlayerAsync(id, pullSocial = false, pullStats = false) {
+    if (null == id)
+      return;
+      
     if (this.getPlayer(id)) {
       this.fm.FireCustomEvent('serviceplayerready', id);
     }

@@ -35,8 +35,8 @@ export class CheeringTeamPage {
     private playerService: PlayerService,
     private cheerleaderService: CheerleaderService,
     private messageService: MessageService,
-    private alertCtrl : AlertController,
-    private loc : Localization) {
+    private alertCtrl: AlertController,
+    private loc: Localization) {
     if (this.playerService.isAuthenticated())
       this.afPendingSelf = this.cheerleaderService.afPendingCheerleaderSelf();
   }
@@ -48,9 +48,10 @@ export class CheeringTeamPage {
     if (this.playerService.isAdmin())
       this.cheerleaderService.getPendingCheerleadersAsync();
     this.cheerleaderService.getApprovedCheerleadersAsync();
-    this.playerService.getPlayerAsync(this.playerService.selfId());
-    this.messageService.prepareBlacklist();
-    
+    if (this.playerService.isAuthenticated()) {
+      this.playerService.getPlayerAsync(this.playerService.selfId());
+      this.messageService.prepareBlacklist();
+    }
   }
 
   ionViewWillUnload() {
