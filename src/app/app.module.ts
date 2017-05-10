@@ -1,5 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicStorageModule } from '@ionic/storage';
 import { MyErrorHandler } from '../providers/exception-handler'
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
@@ -51,6 +52,7 @@ import { TeamPlayersPage } from '../pages/team-players/team-players';
 // services
 import { AngularFireModule } from 'angularfire2';
 import { FirebaseManager } from '../providers/firebase-manager';
+import { LocalStorage } from '../providers/local-storage';
 import { OneSignalManager } from '../providers/onesignal-manager';
 import { UIHelper } from '../providers/uihelper';
 import { PlayerService } from './players/player.service';
@@ -183,7 +185,8 @@ export const firebaseConfig = {
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA9L3ja5ZcViqTc5Tgz8tG6QvJGlYO-fa4',
       libraries: ["places"]
-    })
+    }),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -238,6 +241,7 @@ export const firebaseConfig = {
   ],
   providers: [{ provide: ErrorHandler, useClass: MyErrorHandler },
     FirebaseManager,
+    LocalStorage,
     OneSignalManager,
     Localization,
     UIHelper,
