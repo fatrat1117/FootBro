@@ -36,7 +36,6 @@ export class LocalStorage {
       // handle error
       console.log(error);
     });
-    this.file.getFile
   }
 
   saveToLocal(url, path, success) {
