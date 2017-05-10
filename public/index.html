@@ -9,71 +9,105 @@
     <meta http-equiv="pragma" content="no-cache"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <meta name="viewport" content="width=768px, user-scalable=yes, minimum-scale=0.1"/>
+    <!--<meta name="viewport" content="width=768px, user-scalable=yes, minimum-scale=0.1"/>-->
     <meta name="HandheldFriendly" content="true"/>
     <meta name="MobileOptimized" content="768"/>
-    <!--<link rel="stylesheet" href="css/min/master.min.css">-->
+    <link rel="stylesheet" href="css/min/master.min.css">
+    <link rel="stylesheet" href="css/min/main.min.css">
 
 
-
-    <style>
-        body {
-            font-size: 20px;
-            color: rgb(51, 51, 51);
-            background-color: rgb(225, 227, 226);
-            font-weight: 100;
-            font-family: ciscosanstt_thinregular, 微软雅黑, 宋体, Arial, Helvetica, sans-serif;
-            margin: 0px;
-            padding: 0px;
-        }
-
-        #body_container {
-            width: 768px;
-            margin-left: auto;
-            margin-right: auto;
-            background-color: white;
-            min-height: 1000px;
-            box-shadow: 0px 0px 15px rgba(0,0,0,0.7);
-        }
-        table
-        {
-            margin: 10px 0;
-            width: 100%;
-            display: block;
-        }
-    </style>
  </head>
 
 <body>
-    <div id="body_container" style="margin-left: 0  !important; height: 100% !important; min-height: 1000px !important;">
-        <div style="padding-top: 30px;">
-            <img src="img/masthead.png"/>
-        </div>
 
-		<div>
-			<table>
+    <div class="header_container">
+       <div class="header_title">
+         <img class="img" src="img/soccerbro_fav.png"/>
+         <span>SoccerBro</span>
+       </div>
+    </div>
+    <div id="body_container">
+
+		<div class="banner">
+			<table class="banner_table">
 				<tr>
 					<td colspan="2" style="text-align: center; padding : 17px; font-size: 30px;">
-                        Welcome to SoccerBro, you can download our app from
+            Welcome to SoccerBro, you can download our app from
 					</td>
 				</tr>
 				<tr>
 					<td style="text-align: center; ">
 						<div style=" margin-left: 70px;">
-                            <a href="https://itunes.apple.com/us/app/soccerbro/id1118724239?ls=1&mt=8" target="_blank"><img style="width: 60%;" src="img/ios.png"/></a>
+              <a href="https://itunes.apple.com/us/app/soccerbro/id1118724239?ls=1&mt=8" target="_blank"><img class="png ios-png" src="img/ios.png"/></a>
 							<br/><br/>
 							<span style="font-size: 20px;">iOS</span>
 						</div>
 					</td>
 					<td style="text-align: center;">
 						<div style=" margin-right: 70px;">
-                            <a href="https://play.google.com/store/apps/details?id=com.SoccerBro.SoccerBro" target="_blank"><img style="width: 60%;" src="img/android.png"/></a><br/><br/>
+              <a href="https://play.google.com/store/apps/details?id=com.SoccerBro.SoccerBro" target="_blank"><img class="png android-png" src="img/android.png"/></a><br/><br/>
 							<span style="font-size: 20px;">Android</span>
 						</div>
 					</td>
 				</tr>
 			</table>
 		</div>
-	</div>
+
+      <div class="sponsor">
+
+        <div class="row column">
+          <p class="lead">Team Sponsors</p>
+        </div>
+
+        <div class="row small-up-1 medium-up-2 large-up-3">
+          <div class="column">
+            <div class="callout">
+              <!--<p>STK AUTO - 速达汽修</p>-->
+              <p><img src="img/sponsors/stkauto.jpg" alt="image of a planet called Pegasi B"></p>
+              <p class="lead">STK AUTO - 速达汽修</p>
+              <p class="subheader">新加坡最大的华人汽修公司</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="callout">
+              <!--<p>Pegasi B</p>-->
+              <p><img src="img/sponsors/luchuanxian.jpg" alt="image of a planet called Pegasi B"></p>
+              <p class="lead">撸串先-私房串烧</p>
+              <p class="subheader">烧烤一站式购物</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="callout">
+              <!--<p>Pegasi B</p>-->
+              <p><img src="img/sponsors/dmc.jpg" alt="image of a planet called Pegasi B"></p>
+              <p class="lead">德众勤业</p>
+              <p class="subheader">商务咨询</p>
+            </div>
+          </div>
+          <div class="column">
+            <div class="callout">
+              <!--<p>Pegasi B</p>-->
+              <p><img src="img/sponsors/sgjobs.jpg" alt="image of a planet called Pegasi B"></p>
+              <p class="lead">润天国际</p>
+              <p class="subheader">新加坡本地劳务中介公司</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer-container">
+      <div class="row">
+        <div class="medium-6 columns">
+          <ul class="menu">
+            <li><a href="#">About US</a></li>
+          </ul>
+        </div>
+        <div class="medium-6 columns">
+          <ul class="menu float-right">
+            <li class="menu-text">2017© SoccerBro Studio</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
 </body>
 </html>
