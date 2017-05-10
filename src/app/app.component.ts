@@ -52,7 +52,7 @@ export class MyApp {
         }
       });
 
-      //this.imageLoaderConfig.setImageReturnType('base64');
+      this.imageLoaderConfig.setImageReturnType('base64');
       this.imageLoaderConfig.useImageTag(true);
       this.imageLoaderConfig.setFallbackUrl('assets/img/none.png');
       this.imageLoaderConfig.enableDebugMode();
