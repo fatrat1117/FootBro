@@ -13,14 +13,10 @@ declare var sprintf: any;
     <button disabled ion-button class="game-time" ngClass="{{hostPageName}}">
       {{upcomingMatch?.time | date:'yyyy-MM-dd h:mma'}}
     </button>
-  <!--对战信息-->
   <ion-row class="game-info" ngClass="{{hostPageName}}" center justify-content-center>
-    <!--左边队伍信息-->
     <ion-col text-center width-33>
       <img [src]="upcomingMatch?.home?.logo" class="team-logo">
-      <!--p class="team-left-text">{{match?.home?.name}}</p-->
     </ion-col>
-    <!--中间比分-->
     <ion-col width-33 class="game-score">
       <ion-row *ngIf="canShowScores()" center justify-content-center>
         <ion-col>
@@ -72,7 +68,7 @@ export class ResultScoreComponent {
     private modal: ModalController, private osm: OneSignalManager) {
 
   }
-  informAllClick(e){
+  informAllClick(e) {
     let enMsg = sprintf('A new match is waiting for you to join: %s vs %s',
       this.upcomingMatch.home.name,
       this.upcomingMatch.away.name,
@@ -87,18 +83,18 @@ export class ResultScoreComponent {
     e.preventDefault();
   }
   //调用此函数之前必须检查比赛是否开始，比赛还没开始才能调用!
-  canShowInformAll(){
+  canShowInformAll() {
     if (!this.playerService.isAuthenticated())
       return false;
-      
-    if (this.upcomingMatch && !this.upcomingMatch.isStarted()){
+
+    if (this.upcomingMatch && !this.upcomingMatch.isStarted()) {
       //already informed
       if (this.upcomingMatch.informed && this.upcomingMatch.informed[this.playerService.myself().teamId])
         return false;
       if ((this.playerService.amICaptainOrAdmin(this.upcomingMatch.homeId) ||
-        this.playerService.amICaptainOrAdmin(this.upcomingMatch.awayId))){
+        this.playerService.amICaptainOrAdmin(this.upcomingMatch.awayId))) {
         return true;
-      }else{
+      } else {
         return false;
       }
     }
@@ -159,8 +155,10 @@ export class ResultScoreComponent {
       this.playerService.myself().teamId === this.upcomingMatch.awayId)
       this.modal.create(UpdateGamePage, { id: this.upcomingMatch.id, teamId: this.playerService.myself().teamId }).present();
     else if (this.amITournamentAdmin())
-      this.modal.create(UpdateGamePage, { id: this.upcomingMatch.id, 
+      this.modal.create(UpdateGamePage, {
+        id: this.upcomingMatch.id,
         teamId: this.playerService.myself().teamId,
-      adminMode: true }).present();
+        adminMode: true
+      }).present();
   }
 }

@@ -90,6 +90,7 @@ import { KeyboardAttachDirective } from '../providers/keyboard-attach.directive'
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { Camera } from '@ionic-native/camera';
 import { Badge } from '@ionic-native/badge';
+import { IonicImageLoader } from 'ionic-image-loader';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCrhL6g6rHs7-X09jw5Oq8I_g0fspD8bf8",
@@ -186,7 +187,8 @@ export const firebaseConfig = {
       apiKey: 'AIzaSyA9L3ja5ZcViqTc5Tgz8tG6QvJGlYO-fa4',
       libraries: ["places"]
     }),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    IonicImageLoader.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -239,7 +241,7 @@ export const firebaseConfig = {
     ManagePlayerPopover,
     FAQComponent
   ],
-  providers: [{ provide: ErrorHandler, useClass: MyErrorHandler },
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
     FirebaseManager,
     LocalStorage,
     OneSignalManager,

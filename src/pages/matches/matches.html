@@ -90,7 +90,7 @@
               <ion-col width-50>
                 <ion-badge class="ranking-badge" color="sky">{{ i+1 }}</ion-badge>
                 <ion-thumbnail>
-                  <img [src]="s?.team?.logo">
+                  <img-loader useImg [src]="s?.team?.logo"></img-loader>
                 </ion-thumbnail>
                 <p text-left>
                   <label>{{ s?.team?.name }}</label>
