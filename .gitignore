@@ -34,3 +34,5 @@ Thumbs.db
 UserInterfaceState.xcuserstate
 
 docs/build/
+public/node_modules/
+public/css/
