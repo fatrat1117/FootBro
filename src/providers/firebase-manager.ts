@@ -1029,6 +1029,10 @@ export class FirebaseManager {
     }
   }
 
+  setJerseyColor(matchId, teamId, color) {
+    this.af.database.object(`/matches/list/${matchId}/colors/${teamId}`).set(color);
+  }
+
   createTeamSquad(teamId, squadObj) {
     console.log('createTeamSquad', teamId, squadObj);
     this.af.database.list(`/team_squads/${teamId}/squads/`).push(squadObj);

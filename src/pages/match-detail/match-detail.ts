@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { ViewController, NavParams, ModalController, Events, AlertController, Content } from 'ionic-angular';
+import { ViewController, NavParams, ModalController, Events, AlertController, Content, PopoverController } from 'ionic-angular';
 import { Match } from '../../app/matches/match.model';
 import { EditSquadPage } from '../edit-squad/edit-squad';
 import { SharePage } from '../share/share';
@@ -10,7 +10,8 @@ import { NewGamePage } from '../../pages/new-game/new-game'
 import { EditGameRatingPage } from '../edit-game-rating/edit-game-rating';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import { Localization } from '../../providers/localization';
-import { UIHelper } from '../../providers/uihelper'
+import { UIHelper } from '../../providers/uihelper';
+import { ColorPickerPage } from '../../pages/color-picker/color-picker';
 
 @Component({
   selector: 'page-match-detail',
@@ -52,7 +53,8 @@ export class MatchDetailPage {
     private alertCtrl: AlertController,
     private loc: Localization,
     private matchService: MatchService,
-    private uiHelper: UIHelper) {
+    private uiHelper: UIHelper,
+    private popoverCtrl: PopoverController) {
     this.match = navParams.get('match');
     this.matchId = navParams.get('matchId');
     if (navParams.get('selectedValue'))
@@ -69,10 +71,13 @@ export class MatchDetailPage {
   initialize() {
     //only show captain's team
     if (this.playerService.isAuthenticated()) {
-      if (this.playerService.amIMemberOfCurrentTeam(this.match.homeId)) {
+      if (this.playerService.amIMemberOfCurrentTeam(this.match.homeId))
         this.squadSettings.teamId = this.match.homeId;
-      }
       else if (this.playerService.amIMemberOfCurrentTeam(this.match.awayId))
+        this.squadSettings.teamId = this.match.awayId;
+      else if (this.playerService.amIMemberOfTeam(this.match.homeId))
+        this.squadSettings.teamId = this.match.homeId;
+      else if (this.playerService.amIMemberOfTeam(this.match.awayId))
         this.squadSettings.teamId = this.match.awayId;
     }
     this.initializePlayerStats(this.homePlayerStats);
@@ -514,5 +519,37 @@ export class MatchDetailPage {
       return true;
 
     return false;
+  }
+
+  pickColor(teamId) {
+    if (!teamId)
+      return;
+    
+    if (!this.playerService.amICaptainOrAdmin(teamId))
+      return;
+
+    let popover = this.popoverCtrl.create(ColorPickerPage);
+    popover.onDidDismiss(data => {
+      if (data != null) {
+        this.matchService.setJerseyColor(this.squadSettings.matchId, teamId, data.color);
+        //this.jerseyColor = data.color;
+      }
+    });
+    popover.present();
+  }
+
+  getHomeColor() {
+    //console.log(this.match);
+    if (this.match && this.match.homeId && this.match.colors)
+      return this.match.colors[this.match.homeId] || 'white';
+
+    return 'white';
+  }
+
+  getAwayColor() {
+    if (this.match && this.match.awayId && this.match.colors)
+      return this.match.colors[this.match.awayId] || 'white';
+
+    return 'white';
   }
 }

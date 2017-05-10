@@ -48,6 +48,7 @@ import { EditGameRatingPage } from '../pages/edit-game-rating/edit-game-rating';
 import { SquadSelectPage } from '../pages/squad-select/squad-select';
 import { ManageSquadPage } from '../pages/manage-squad/manage-squad';
 import { TeamPlayersPage } from '../pages/team-players/team-players';
+import { ColorPickerPage} from '../pages/color-picker/color-picker';
 
 // services
 import { AngularFireModule } from 'angularfire2';
@@ -173,6 +174,7 @@ export const firebaseConfig = {
     ManagePlayerPopover,
     SbCupTeamComponent,
     FAQComponent,
+    ColorPickerPage,
     // directives
     KeyboardAttachDirective
   ],
@@ -239,7 +241,8 @@ export const firebaseConfig = {
     ManageSquadPage,
     TeamPlayersPage,
     ManagePlayerPopover,
-    FAQComponent
+    FAQComponent,
+    ColorPickerPage
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
     FirebaseManager,

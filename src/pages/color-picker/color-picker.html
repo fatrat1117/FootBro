@@ -1,0 +1,9 @@
+<ion-grid>
+  <ion-row no-padding class="row-dots" *ngFor="let row of colors">
+    <ion-col no-padding *ngFor="let clr of row">
+      <button ion-button icon-only clear (click)="selectedColor(clr)">
+        <ion-icon name="shirt" [style.color] = "clr"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
