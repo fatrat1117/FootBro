@@ -1,7 +1,7 @@
 import { Component, ElementRef } from '@angular/core';
 import { NavController, ModalController, NavParams, ViewController, Platform, AlertController } from 'ionic-angular';
 import { Localization } from '../../providers/localization';
-import { LocalStorage } from '../../providers/local-storage';
+// import { LocalStorage } from '../../providers/local-storage';
 import { CheeringTeamPage } from '../cheering-team/cheering-team';
 import { RankPage } from '../rank/rank';
 import { GameSchedulePage } from "../game-schedule/game-schedule";
@@ -35,8 +35,7 @@ export class HomePage {
   onTeamReady;
 
   constructor(public navCtrl: NavController, private local: Localization, private elRef: ElementRef, public modalCtrl: ModalController,
-    private playerService: PlayerService, private teamService: TeamService, private alertCtrl: AlertController, 
-    private ls: LocalStorage) {
+    private playerService: PlayerService, private teamService: TeamService, private alertCtrl: AlertController) {
     this.slides = [];
     //this.loadSlides(local.langCode, 4);
     this.loadSlides(local.langCode, 1);
@@ -83,7 +82,7 @@ export class HomePage {
       }
     }
 
-    this.ls.download();
+    //this.ls.download();
   }
 
   loadSlides(langCode: string, total: number) {
@@ -198,6 +197,11 @@ export class HomePage {
 
   openTeamPlayersPage() {
     this.navCtrl.push(TeamPlayersPage, { teamId: this.selfTeam.id });
+  }
+
+  onImageLoad(ev) {
+    console.log(ev);
+    
   }
 }
 
