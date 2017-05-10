@@ -2,18 +2,17 @@
   <ion-navbar no-padding swipeBackEnabled="false">
     <ion-title>{{'TeamInfo' | trans}}</ion-title>
     <ion-buttons *ngIf="isMember()" right>
-      <!--<button ion-button clear color="primary" (click)="openTeamPlayersPage()">{{'players' | trans}}</button>-->
       <sb-share-button></sb-share-button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content class="content-background-page">
   <div class="content-top" (tap)="changeCoverPhoto()">
-    <img [src]="team?.photoLarge" class="team-background-img" />
+    <img-loader useImg [src]="team?.photoLarge" class="team-background-img"></img-loader>
 
     <div class="team-banner-components">
       <ion-row>
-        <img [src]="team?.logo" class="thumbnail-img" />
+        <img-loader useImg [src]="team?.logo" class="thumbnail-img"></img-loader>
         <h6 class="team-name default-font-size-h6">{{team.name}}</h6>
       </ion-row>
 
@@ -106,13 +105,9 @@
   <div class="team-member-info">
     <ion-row class="team-member-display" center>
       <ion-col>
-        <img [src]="captain?.photo" class="team-member-img">
+        <img-loader useImg [src]="captain?.photo" class="team-member-img"></img-loader>
         <p class="team-member-name">{{captain?.name}} ({{'Captain' | trans}})</p>
       </ion-col>
-      <!--<ion-col *ngFor="let p of players?.slice(0,3)">
-        <img [src]="p?.photo" class="team-member-img">
-        <p class="team-member-name">{{p.name}}</p>
-      </ion-col>-->
       <ion-col>
         <button ion-button clear icon-right class="team-see-more-members" (tap)="openTeamPlayersPage()">
         <p class="team-see-more-member-text">{{'ViewAll' | trans}} (<a style="color: #00ff00;">{{team.totalPlayers}} </a>{{'Players' | trans | lowercase}})</p>
