@@ -31,16 +31,16 @@
   <result-score [upcomingMatch]="match" [hostPageName]="currPageName"></result-score>
   <ion-row>
     <ion-col width-33>
-      <button ion-button icon-only clear color="white" text-center (click)="pickColor()">
-      <ion-icon name="shirt"></ion-icon>
+      <button ion-button icon-only clear (click)="pickColor(match.homeId)">
+      <ion-icon name="shirt" [style.color]="getHomeColor()" ></ion-icon>
       </button>
     </ion-col>
     <ion-col width-33>
       {{'JerseyColor' | trans}}
     </ion-col>
     <ion-col width-33>
-      <button ion-button icon-only clear color="white" text-center>
-      <ion-icon name="shirt"></ion-icon>
+      <button ion-button icon-only clear (click)="pickColor(match.awayId)">
+      <ion-icon name="shirt" [style.color]="getAwayColor()"></ion-icon>
       </button>
     </ion-col>
   </ion-row>
