@@ -1,24 +1,47 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs/Observable';
-import { Http, Response } from '@angular/http'
+import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { File } from '@ionic-native/file';
 
 import * as firebase from 'firebase';
 
 @Injectable()
 export class LocalStorage {
-  constructor(private storage: Storage, private http: Http) {
+
+  constructor(private storage: Storage, private transfer: Transfer, private file: File) {
 
   }
 
-  getImage(url: string) {
-
+  getImage(url, id, success) {
+    this.storage.ready().then(() => {
+       // Or to get a key/value pair
+       this.storage.get(url).then((path) => {
+         if (path) {
+           success(path);
+         }
+         else {
+           this.download(url, id, success);
+         }
+       });
+    });
   }
 
-  saveToLocal() {
+  download(url, id, success) {
+    let fileTransfer: TransferObject = this.transfer.create();
+    fileTransfer.download(url, this.file.cacheDirectory + id +'.png').then((entry) => {
+      console.log('download complete: ' + entry.toURL());
+      this.saveToLocal(url, entry.toURL(), success);
+    }, (error) => {
+      // handle error
+      console.log(error);
+    });
   }
 
-  download() {
-    let url = "https://firebasestorage.googleapis.com/v0/b/project-3416565325366537224.appspot.com/o/images%2F1kLb7Vs6G9aVum1PHZ6DWElk4nB2.png?alt=media&token=22f157cd-23e8-4c43-bc9a-1b30174f6a44";
+  saveToLocal(url, path, success) {
+     this.storage.ready().then(() => {
+       this.storage.set(url, path);
+       success(path);
+     })
   }
 }

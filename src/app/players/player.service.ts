@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FirebaseManager } from '../../providers/firebase-manager';
+import { LocalStorage } from '../../providers/local-storage';
 import { Player } from './player.model';
 import { UIHelper } from '../../providers/uihelper';
 
@@ -9,7 +10,7 @@ export class PlayerService {
   teamPlayersMap = {};
   bRefreshTeamPlayers = false;
 
-  constructor(private fm: FirebaseManager, private uiHelper: UIHelper) {
+  constructor(private fm: FirebaseManager, private uiHelper: UIHelper, private ls: LocalStorage) {
     document.addEventListener('playerready', e => {
       let id = e['detail'];
 
@@ -92,8 +93,19 @@ export class PlayerService {
       }
       else
         this.fm.getPlayerPublicAsync(id);
-
-      this.fm.FireCustomEvent('serviceplayerready', id);
+      
+      if (playerData['basic-info'].photoURL) {
+        let success = path => {
+          console.log(path);
+          player.photo = path;
+          this.fm.FireCustomEvent('serviceplayerready', id);
+        }
+        this.ls.getImage(player.photo, player.id, success)
+      }
+      else
+      {
+        this.fm.FireCustomEvent('serviceplayerready', id);
+      }
     });
 
     document.addEventListener('playerpublicready', e => {

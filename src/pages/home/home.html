@@ -74,8 +74,8 @@
     <ion-row margin-left margin-right center>
       <ion-col width-50 class="home-block">
         <ion-thumbnail (tap)="goPlayerPage()">
-          <img-loader useImg class="img-block" [src]="selfPlayer?.photo"></img-loader>
-        <!--<img class="img-block" [src]="selfPlayer?.photo">-->
+          <!--img-loader class="img-block" [src]="selfPlayer?.photo"></img-loader-->
+          <img class="img-block" [src]="selfPlayer?.photo">
         </ion-thumbnail>
       </ion-col>
       <ion-col width-50 class="home-block" *ngIf="selfTeam">
