@@ -19,14 +19,16 @@ export class PlayerService {
       player.id = playerData.$key;
       //player.points = playerData.points;
       player.name = playerData['basic-info'].displayName || "John Doe";
-      player.photo = playerData['basic-info'].photoURL || "assets/img/none.png";
-
       player.points = playerData.points;
+
+      /** ToDo: LH */
+      //player.photo = playerData['basic-info'].photoURL || "assets/img/none.png";
       player.photoLarge = playerData.photoLarge || "assets/img/forTest/messi_banner.png";
-      player.wechatShareTime = playerData.wechatShareTime;
-      player.fbShareTime = playerData.fbShareTime;
       if (playerData.photoMedium)
         player.photoMedium = playerData.photoMedium;
+
+      player.wechatShareTime = playerData.wechatShareTime;
+      player.fbShareTime = playerData.fbShareTime;
       if ('points' in playerData)
         player.points = playerData.points;
       else
@@ -87,25 +89,32 @@ export class PlayerService {
         player.joinTime = playerData.joinTime;
 
       this.playersMap[id] = player;
+      /** cheerleader need photo in chat room */
       if (player.role && player.role === 'cheerleader') {
+        // ToDo: LH
+        // Move to the success of photoMedium?
         player.photo = player.photoMedium;
         //this.fm. getCheerleaderPublicAsync(id);
       }
       else
         this.fm.getPlayerPublicAsync(id);
       
+      /** test cache */
       if (playerData['basic-info'].photoURL) {
         let success = path => {
           console.log(path);
           player.photo = path;
-          this.fm.FireCustomEvent('serviceplayerready', id);
+          //this.fm.FireCustomEvent('serviceplayerready', id);
         }
-        this.ls.getImage(player.photo, player.id, success)
+
+        let error = code => {
+          // ToDo: LH, error code 400 and 403, replace link with assets/img/none.png
+          //console.log(code);
+        }
+        this.ls.getImage(playerData['basic-info'].photoURL, success, error)
       }
-      else
-      {
-        this.fm.FireCustomEvent('serviceplayerready', id);
-      }
+
+      this.fm.FireCustomEvent('serviceplayerready', id);
     });
 
     document.addEventListener('playerpublicready', e => {

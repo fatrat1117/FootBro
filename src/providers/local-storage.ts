@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs/Observable';
 import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { Platform } from 'ionic-angular';
 import { File } from '@ionic-native/file';
 
 import * as firebase from 'firebase';
@@ -9,39 +10,83 @@ import * as firebase from 'firebase';
 @Injectable()
 export class LocalStorage {
 
-  constructor(private storage: Storage, private transfer: Transfer, private file: File) {
+  constructor(private storage: Storage, private transfer: Transfer, private file: File, private platform: Platform) {
 
   }
 
-  getImage(url, id, success) {
+  getImage(url: string, success, fail) {
+    // null
+    if (!url) {
+      success("assets/img/none.png");
+      return;
+    }
+
+    // non-mobile
+    if (this.platform.is('mobileweb') || this.platform.is('core')) {
+      success(url);
+      return;
+    }
+
+    // is local path
+    if (!url.startsWith("http") && !url.startsWith("https")) {
+      success(url)
+      return;
+    }
+
     this.storage.ready().then(() => {
-       // Or to get a key/value pair
-       this.storage.get(url).then((path) => {
-         if (path) {
-           success(path);
-         }
-         else {
-           this.download(url, id, success);
-         }
-       });
+      this.storage.get(url).then((path) => {
+        // found key-value
+        if (path) {
+          // file name = 36(UUID) + 4 (.png)
+          var fileName = path.substr(path.length - 40);
+          console.log("Try to get from cache: " + path + "\nFile name: " + fileName);
+
+          // check if file exist in cache
+          this.file.checkFile(this.file.cacheDirectory, fileName).then(_ => {
+            console.log("Found file in cache.")
+            success(path);
+          }).catch(_ => {
+            console.log('File doesnt exist in cache')
+            this.download(url, success, fail);
+          })
+        }
+        else {
+          this.download(url, success, fail);
+        }
+      });
     });
   }
 
-  download(url, id, success) {
+  download(url, success, fail) {
     let fileTransfer: TransferObject = this.transfer.create();
-    fileTransfer.download(url, this.file.cacheDirectory + id +'.png').then((entry) => {
-      console.log('download complete: ' + entry.toURL());
+    let name = this.generateUUID() + '.png';
+    fileTransfer.download(url, this.file.cacheDirectory + name).then((entry) => {
       this.saveToLocal(url, entry.toURL(), success);
     }, (error) => {
       // handle error
-      console.log(error);
+      fail(error['http_status'])
+      console.log("Download error: " + error['http_status'])
     });
   }
 
   saveToLocal(url, path, success) {
-     this.storage.ready().then(() => {
-       this.storage.set(url, path);
-       success(path);
-     })
+    this.storage.ready().then(() => {
+      this.storage.set(url, path);
+      console.log("Saved to cache:" + path);
+      success(path);
+    })
+  }
+
+  generateUUID() { // Public Domain/MIT
+    var d = new Date().getTime();
+    if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
+      d += performance.now(); //use high-precision timer if available
+    }
+    // length = 36
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = (d + Math.random() * 16) % 16 | 0;
+      d = Math.floor(d / 16);
+      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
   }
 }
