@@ -40,6 +40,7 @@ export class PlayerMatchStatsUI {
   reds = 0;
   yellows = 0;
   owngoals = 0;
+  saves = 0;
   expanded = false; //UI use
 }
 
