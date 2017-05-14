@@ -128,7 +128,7 @@
         <!--</button>-->
         <no-record *ngIf="null === tournament" message="{{'searchMatchPageNoRecord' | trans}}"></no-record>
         <div *ngIf="null !== tournament">
-          <div class="left-scrollview matches-date-tab-col" [ngStyle]="{'height.px': getMatchDetailScrollHeight()}">
+          <div class="left-scrollview player-left-scrollview matches-date-tab-col" [ngStyle]="{'height.px': getMatchDetailScrollHeight()}">
             <ion-list class="date-tab-list">
               <ion-item *ngFor="let cat of statCategories;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (tap)='showStat(cat)'
                         [style.background]="selectedCat === cat ? '#20bd16' : '#373e4c'" [style.color]="selectedCat === cat ? '#ffffff' : '#93ABC5'">
@@ -139,7 +139,7 @@
             </ion-list>
           </div>
 
-          <div class="right-scrollview matches-match-info-col" *ngIf='selectedStats' [ngStyle]="{'height.px': getMatchDetailScrollHeight()}">
+          <div class="right-scrollview player-right-scrollview matches-match-info-col" *ngIf='selectedStats' [ngStyle]="{'height.px': getMatchDetailScrollHeight()}">
             <ion-grid class="right-view-grid">
               <ion-row class="header-title">
                 <!--<ion-col width-10>{{'Rank' | trans}}</ion-col>-->

@@ -472,6 +472,17 @@ export class MatchesPage {
     this.selectedStats = this.allPlayersStats[cat];
   }
 
+  getBinaryInsertSortingFromHighToLowIndex(target,val){
+     if (!target || target.length <= 0){
+       return 0;
+     }
+
+     var targetLength = target.length;
+     var mid = Math.floor(targetLength / 2);
+
+
+  }
+
   updatePlayerStats(stats) {
     stats['goals'] = [];
     stats['assists'] = [];
@@ -508,6 +519,7 @@ export class MatchesPage {
   //invoke when load
   getCombinedStats() {
     this.statCategories = ['goals','assists'];
+    this.selectedCat = this.statCategories[0];
     this.updatePlayerStats(this.allPlayersStats);
   }
 }

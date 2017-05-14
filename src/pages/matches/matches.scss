@@ -2,6 +2,12 @@ page-matches {
   $selected-date-color: #585F6F;
   $unselected-date-color: #40444D;
   $darker-background: #2D2E32;
+  $lighter-backgroud: #425065;
+  $header-bar-color: #585F6F;
+  $player-stats-darker-background: #373e4c;
+  $player-stats-lighter-background: color($colors, primary);
+  $player-stats-darker-font: #93abc5;
+
   // schedule
   .matches-date-tab-col {
     .date-tab-list {
@@ -116,6 +122,17 @@ page-matches {
     position: fixed;
     background: $darker-background;
   }
+
+  .player-left-scrollview{
+    width: 20%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    overflow-y: scroll;
+    position: fixed;
+    background: $darker-background;
+
+  }
   .right-scrollview {
     width: 85%;
     left: 15%;
@@ -125,6 +142,60 @@ page-matches {
     position: fixed;
     background: $darker-background;
   }
+
+  .player-right-scrollview{
+    width: 80%;
+    height: 100%;
+    left: 20%;
+    overflow-y: scroll;
+    position: fixed;
+    background: $darker-background;
+    .right-view-grid {
+      padding: 0px;
+    }
+    .header-title {
+      background: $header-bar-color;
+    }
+    .flex-width-30 {
+      flex: 0 0 30%;
+      max-width: 30%;
+    }
+    .playerStats {
+      ion-col {
+        background-color: $lighter-backgroud;
+        display: flex;
+        max-height: 4rem;
+        ion-avatar {
+          min-height: 25px;
+          min-width: 25px;
+          img {
+            max-width: 25px;
+            max-height: 25px;
+            margin-right: 0;
+            border-radius: 50%;
+          }
+        }
+        ion-item {
+          padding-left: 0;
+          background-color: $lighter-backgroud;
+          min-height: 1.8rem;
+          max-height: 3rem;
+          .item-inner {
+            padding-right: 0;
+            border-bottom: none;
+            ion-label {
+              margin: 0;
+              font-size: 1.2rem;
+            }
+          }
+        }
+      }
+      .rank {
+        align-items: center;
+      }
+    }
+  }
+
   .mvp-avatar {
     height: 80%;
     width: 80%;
