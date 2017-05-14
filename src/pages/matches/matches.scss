@@ -16,6 +16,16 @@ page-matches {
     justify-content: center;
   }
 
+  .flex-width-30 {
+    flex: 0 0 30%;
+    max-width: 30%;
+  }
+
+  .flex-width-60{
+    flex: 0 0 60%;
+    max-width: 60%;
+  }
+
   // schedule
   .matches-date-tab-col {
     .date-tab-list {
@@ -164,10 +174,7 @@ page-matches {
     .header-title {
       background: $header-bar-color;
     }
-    .flex-width-30 {
-      flex: 0 0 30%;
-      max-width: 30%;
-    }
+
     .playerStats {
       ion-col {
         background-color: $lighter-backgroud;

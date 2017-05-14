@@ -144,8 +144,8 @@
               <ion-row class="header-title">
                 <!--<ion-col width-10>{{'Rank' | trans}}</ion-col>-->
                 <ion-col width-20></ion-col>
-                <ion-col width-30 class="flex-width-30">{{'Player' | trans}}</ion-col>
-                <ion-col width-30 class="flex-width-30">{{'Team' | trans}}</ion-col>
+                <ion-col width-60 class="flex-width-60">{{'Player' | trans}}</ion-col>
+                <!--<ion-col width-30 class="flex-width-30">{{'Team' | trans}}</ion-col>-->
                 <ion-col width-20 text-center>{{'total' | trans}}</ion-col>
               </ion-row>
               <ion-row *ngFor="let stat of selectedStats;let i=index" class="playerStats">
@@ -156,14 +156,14 @@
                     <img [src]="stat.player?.photo" />
                   </ion-avatar>
                 </ion-col>
-                <ion-col width-30 no-margin class="flex-width-30 flex-center">
+                <ion-col width-60 no-margin class="flex-width-60">
                   <ion-item>
                     {{stat.player?.name}}
                   </ion-item>
                 </ion-col>
-                <ion-col width-30 class="flex-width-30 flex-center">
-                  <ion-label no-margin>{{stat.player?.teamId}}</ion-label>
-                </ion-col>
+                <!--<ion-col width-30 class="flex-width-30 flex-center">-->
+                  <!--<ion-label no-margin>{{stat.player?.teamId}}</ion-label>-->
+                <!--</ion-col>-->
                 <ion-col width-20 class="flex-center">
                   <ion-label no-margin text-center>{{stat.val}}</ion-label>
                 </ion-col>

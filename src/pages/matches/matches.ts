@@ -474,6 +474,16 @@ export class MatchesPage {
     this.selectedStats = this.allPlayersStats[cat];
   }
 
+
+  sortStatsObjCompare(b,a) {
+  if (a.val < b.val)
+    return -1;
+  if (a.val > b.val)
+    return 1;
+  return 0;
+}
+
+
   getBinaryInsertSortingFromHighToLowIndex(target,val){
      if (!target || target.length <= 0) {
        return 0;
@@ -532,6 +542,8 @@ export class MatchesPage {
         // var currSortIndex =this.getBinaryInsertSortingFromHighToLowIndex(stats['goals'],goals[goalKey]['number']);
         stats['goals'].push(newGoalObj);
        }
+       //sort
+      stats['goals'].sort(this.sortStatsObjCompare);
     }
 
     if (assists){
@@ -544,10 +556,15 @@ export class MatchesPage {
         // var currSortIndex =this.getBinaryInsertSortingFromHighToLowIndex(stats['assists'],assists[assistKey]['number']);
         stats['assists'].push(newAssistObj);
       }
+      stats['assists'].sort(this.sortStatsObjCompare);
     }
+
+
 
     this.selectedCat = this.statCategories[0];
     this.selectedStats = this.allPlayersStats[this.selectedCat];
+
+
     // console.log(stats);
   }
   //invoke when load
