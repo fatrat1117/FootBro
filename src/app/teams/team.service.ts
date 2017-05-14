@@ -52,9 +52,8 @@ export class TeamService {
           if (403 == code || 400 == code)
             this.updateTeamLogo(team.id, this.fm.defaultSmallImage);
         }
-        this.ls.getImage(fmTeam['basic-info'].logo, success, error);
 
-        let success2 = cachedURL => {
+         let success2 = cachedURL => {
           team.photoLarge = cachedURL;
         }
 
@@ -63,7 +62,9 @@ export class TeamService {
           if (403 == code || 400 == code)
             this.updatePhotoLarge(team.id, this.fm.defaultTeamLargeImage);
         }
-        this.ls.getImage(fmTeam.photoLarge, success, error);
+        
+        this.ls.getImage(fmTeam['basic-info'].logo, success, error);
+        this.ls.getImage(fmTeam.photoLarge, success2, error2);
 
         this.fm.FireCustomEvent('serviceteamready', teamId);
       }
