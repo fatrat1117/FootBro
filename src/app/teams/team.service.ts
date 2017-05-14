@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Events } from 'ionic-angular';
 import { FirebaseManager } from '../../providers/firebase-manager';
 import { Team } from './team.model';
+import { LocalStorage } from '../../providers/local-storage';
 
 @Injectable()
 export class TeamService {
@@ -11,39 +12,63 @@ export class TeamService {
   bRefreshPlayerTeams = false;
 
   constructor(private fm: FirebaseManager,
-  public events: Events) {
+    public events: Events,
+    private ls: LocalStorage) {
     document.addEventListener('teamready', e => {
       let teamId = e['detail'];
-      let team = this.fm.getTeam(teamId);
+      let fmTeam = this.fm.getTeam(teamId);
 
-      if (team) {
-        let teamData = this.findOrCreateTeam(team.$key);
+      if (fmTeam) {
+        let team = this.findOrCreateTeam(fmTeam.$key);
 
-        teamData.id = team.$key;
-        teamData.logo = team['basic-info'].logo;
-        teamData.name = team['basic-info'].name;
-        teamData.captain = team['basic-info'].captain;
-        teamData.players = team.players;
-        teamData.points = team.points;
-        teamData.photoLarge = team.photoLarge || "assets/img/team/court.png";
-        if (!teamData.points)
-          teamData.points = 0;
-        if (team.players)
-          teamData.totalPlayers = Object.keys(team.players).length;
+        team.id = fmTeam.$key;
+        // teamData.logo = team['basic-info'].logo;
+        team.name = fmTeam['basic-info'].name;
+        team.captain = fmTeam['basic-info'].captain;
+        team.players = fmTeam.players;
+        team.points = fmTeam.points;
+        // teamData.photoLarge = team.photoLarge || "assets/img/team/court.png";
+        if (!team.points)
+          team.points = 0;
+        if (fmTeam.players)
+          team.totalPlayers = Object.keys(fmTeam.players).length;
         else
-          teamData.totalPlayers = 0;
+          team.totalPlayers = 0;
 
         let teamPublic = this.fm.getTeamPublic(teamId);
         if (teamPublic) {
-          teamData.ability = teamPublic.ability || 1000;
-          teamData.popularity = teamPublic.popularity;
+          team.ability = teamPublic.ability || 1000;
+          team.popularity = teamPublic.popularity;
         }
         else
           this.fm.getTeamPublicAsync(teamId);
+
+        let success = cachedURL => {
+          team.logo = cachedURL;
+        }
+
+        let error = code => {
+          // ToDo: LH, error code 400 and 403, replace link with assets/img/none.png
+          if (403 == code || 400 == code)
+            this.updateTeamLogo(team.id, this.fm.defaultSmallImage);
+        }
+
+         let success2 = cachedURL => {
+          team.photoLarge = cachedURL;
+        }
+
+        let error2 = code => {
+          // ToDo: LH, error code 400 and 403, replace link with assets/img/none.png
+          if (403 == code || 400 == code)
+            this.updatePhotoLarge(team.id, this.fm.defaultTeamLargeImage);
+        }
+        
+        this.ls.getImage(fmTeam['basic-info'].logo, success, error);
+        this.ls.getImage(fmTeam.photoLarge, success2, error2);
+
         this.fm.FireCustomEvent('serviceteamready', teamId);
       }
-    }
-    );
+    });
 
     document.addEventListener('teampublicready', e => {
       let teamId = e['detail'];
@@ -248,7 +273,7 @@ export class TeamService {
   saveTeamSquad(teamId, squadObj, squadId = null) {
     if (squadId)
       this.fm.updateTeamSquad(teamId, squadId, squadObj);
-    else 
+    else
       this.fm.createTeamSquad(teamId, squadObj);
   }
 
@@ -257,7 +282,7 @@ export class TeamService {
   }
 
   getMatchSquad(teamId, matchId) {
-    console.log('getMatchSquad', teamId, matchId);  
+    console.log('getMatchSquad', teamId, matchId);
     let team = this.getTeam(teamId);
     if (team)
       return team.matchSquads[matchId];

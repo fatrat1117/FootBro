@@ -53,7 +53,9 @@ export class FirebaseManager {
   teamInitialPoints = 100;
   smallImageSize = 256;
   unsubscribeTimeout = 500;
-
+  defaultSmallImage = "assets/img/none.png";
+  defaultPlayerLargeImage = "assets/img/forTest/messi_banner.png";
+  defaultTeamLargeImage = "assets/img/team/court.png";
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,
     private platform: Platform,
@@ -584,6 +586,10 @@ export class FirebaseManager {
   updatePlayerPhoto(id: string, photoUrl) {
     console.log('updatePlayerPhoto', id, photoUrl);
     this.af.database.object(`/players/${id}/basic-info/photoURL`).set(photoUrl);
+  }
+
+   updatePlayerPhotoMedium(id: string, photoUrl) {
+    this.af.database.object(`/players/${id}/photoMedium`).set(photoUrl);
   }
 
   updatePlayerPhotoLarge(id: string, photoUrl) {
