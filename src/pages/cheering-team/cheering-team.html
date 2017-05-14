@@ -37,7 +37,7 @@
                   <button ion-button icon-only clear class="chat-logo" color="lightGrey" (tap)="approve(clItem.id)">
                     <ion-icon name="md-lock"></ion-icon>
                   </button>
-                  <img useImg [src]="clItem.photoMedium">
+                  <img [src]="clItem.photoMedium">
                 </div>
               </ion-row>
               <ion-row class="item-row">
@@ -57,7 +57,7 @@
       <div *ngIf='afPendingSelf && (afPendingSelf | async)?.$exists()' class="baby-self" width-50 no-margin>
         <ion-row class="self-row">
           <div class="baby-img-frame">
-            <img useImg [src]="(afPendingSelf | async)?.photo">
+            <img [src]="(afPendingSelf | async)?.photo">
           </div>
         </ion-row>
         <ion-row class="self-row">
@@ -84,8 +84,8 @@
                   (tap)="unlockCheerleader(approvedCheerleaders[i])">
                   <ion-icon name="md-unlock"></ion-icon>
                 </button>
-                <img useImg *ngIf="!isBlocking(approvedCheerleaders[i].id)" [src]="approvedCheerleaders[i].photoMedium">
-                <img useImg *ngIf="isBlocking(approvedCheerleaders[i].id)" src="assets/img/blocked.png">
+                <img *ngIf="!isBlocking(approvedCheerleaders[i].id)" [src]="approvedCheerleaders[i].photoMedium">
+                <img *ngIf="isBlocking(approvedCheerleaders[i].id)" src="assets/img/blocked.png">
               </div>
             </ion-row>
             <ion-row class="item-row">

@@ -6,7 +6,6 @@ import { Localization } from '../providers/localization';
 import * as localforage from "localforage";
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
-import { ImageLoaderConfig } from 'ionic-image-loader';
 
 import { FirebaseManager } from '../providers/firebase-manager';
 import { OneSignalManager } from '../providers/onesignal-manager';
@@ -23,7 +22,7 @@ export class MyApp {
     loc: Localization,
     fm: FirebaseManager,
     osm: OneSignalManager,
-    app: App, private imageLoaderConfig: ImageLoaderConfig) {
+    app: App) {
     loc.setLang(navigator.language);
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -51,11 +50,6 @@ export class MyApp {
           modalCtrl.create(TutorialPage).present();
         }
       });
-
-      this.imageLoaderConfig.setImageReturnType('base64');
-      this.imageLoaderConfig.useImageTag(true);
-      this.imageLoaderConfig.setFallbackUrl('assets/img/none.png');
-      this.imageLoaderConfig.enableDebugMode();
     });
   }
 

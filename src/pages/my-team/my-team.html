@@ -8,11 +8,11 @@
 </ion-header>
 <ion-content class="content-background-page">
   <div class="content-top" (tap)="changeCoverPhoto()">
-    <img useImg [src]="team?.photoLarge" class="team-background-img">
+    <img [src]="team?.photoLarge" class="team-background-img">
 
     <div class="team-banner-components">
       <ion-row>
-        <img useImg [src]="team?.logo" class="thumbnail-img">
+        <img [src]="team?.logo" class="thumbnail-img">
         <h6 class="team-name default-font-size-h6">{{team.name}}</h6>
       </ion-row>
 

@@ -1,6 +1,8 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
+import { Transfer } from '@ionic-native/transfer'; 
+import { File } from '@ionic-native/file';
 import { MyErrorHandler } from '../providers/exception-handler'
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
@@ -91,7 +93,6 @@ import { KeyboardAttachDirective } from '../providers/keyboard-attach.directive'
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { Camera } from '@ionic-native/camera';
 import { Badge } from '@ionic-native/badge';
-import { IonicImageLoader } from 'ionic-image-loader';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCrhL6g6rHs7-X09jw5Oq8I_g0fspD8bf8",
@@ -176,7 +177,7 @@ export const firebaseConfig = {
     FAQComponent,
     ColorPickerPage,
     // directives
-    KeyboardAttachDirective
+    KeyboardAttachDirective,
   ],
   imports: [
     IonicModule.forRoot(MyApp, {
@@ -190,7 +191,6 @@ export const firebaseConfig = {
       libraries: ["places"]
     }),
     IonicStorageModule.forRoot(),
-    IonicImageLoader.forRoot(),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -258,7 +258,9 @@ export const firebaseConfig = {
     RankService,
     Camera,
     LaunchNavigator,
-    Badge],
+    Badge,
+    Transfer,
+    File],
 })
 export class AppModule {
 }

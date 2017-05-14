@@ -80,7 +80,7 @@
       </ion-col>
       <ion-col width-50 class="home-block" *ngIf="selfTeam">
         <ion-thumbnail (tap)="goTeamPage()">
-          <img useImg class="img-block" [src]="selfTeam?.logo">
+          <img class="img-block" [src]="selfTeam?.logo">
         </ion-thumbnail>
       </ion-col>
       <ion-col width-50 class="home-block" text-center *ngIf="!selfTeam && showJoinTeam">
@@ -109,7 +109,7 @@
     <ion-row center margin-left margin-right>
       <ion-col width-100 class="home-cheerleader-block">
         <ion-thumbnail>
-          <img useImg class="img-block" [src]="selfPlayer?.photoMedium">
+          <img class="img-block" [src]="selfPlayer?.photoMedium">
         </ion-thumbnail>
       </ion-col>
     </ion-row>

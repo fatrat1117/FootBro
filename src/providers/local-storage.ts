@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs/Observable';
-import { Transfer, FileUploadOptions, TransferObject } from '@ionic-native/transfer';
+import { Transfer, TransferObject } from '@ionic-native/transfer';
 import { Platform } from 'ionic-angular';
 import { File } from '@ionic-native/file';
 
@@ -17,18 +17,21 @@ export class LocalStorage {
   getImage(url: string, success, fail) {
     // null
     if (!url) {
+      console.log("URL is null");
       success("assets/img/none.png");
       return;
     }
 
     // non-mobile
     if (this.platform.is('mobileweb') || this.platform.is('core')) {
+      console.log("Non-mobile");
       success(url);
       return;
     }
 
     // is local path
     if (!url.startsWith("http") && !url.startsWith("https")) {
+      console.log("URL is local path: " + url);
       success(url)
       return;
     }
@@ -59,6 +62,8 @@ export class LocalStorage {
   }
 
   download(url, success, fail) {
+    console.log("Download from server: " + url);
+    
     let fileTransfer: TransferObject = this.transfer.create();
     let name = this.generateUUID() + '.png';
     fileTransfer.download(url, this.file.cacheDirectory + name).then((entry) => {

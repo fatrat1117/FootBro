@@ -14,7 +14,7 @@
 <ion-content>
   <ion-card no-margin class="my-player-header-card">
     <div class="banner">
-      <img useImg [src]="player?.photoLarge" (tap)="changeCoverPhoto()">
+      <img [src]="player?.photoLarge" (tap)="changeCoverPhoto()">
       <div class="banner-info clearfloat">
         <div class="fl info-pop">
           <div class="pop-number">
@@ -28,7 +28,7 @@
         </div>
         <h1 class="fr info-name">{{player?.name}}</h1>
         <div class="player-logo">
-          <img useImg [src]="player?.photo">
+          <img [src]="player?.photo">
         </div>
       </div>
     </div>
