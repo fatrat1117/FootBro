@@ -151,17 +151,12 @@ export class MatchDetailPage {
     stats['reds'] = [];
     stats['yellows'] = [];
     stats['owngoals'] = [];
+    stats['saves'] = [];
     stats['rating'] = [];
   }
 
   updatePlayerStats(stats, squad, team) {
-    stats['goals'] = [];
-    stats['assists'] = [];
-    stats['reds'] = [];
-    stats['yellows'] = [];
-    stats['owngoals'] = [];
-    stats['rating'] = [];
-    //console.log('updatePlayerStats', squad);
+    this.initializePlayerStats(stats);
     
     if (squad) {
       if ('participants' in squad) {
@@ -204,6 +199,14 @@ export class MatchDetailPage {
             stat.teamName = team.name;
             stat.val = p.owngoals;
             stats['owngoals'].push(stat);
+          }
+
+          if (p.saves) {
+            let stat: any = {};
+            stat.player = this.playerService.findOrCreatePlayerAndPull(p.id);
+            stat.teamName = team.name;
+            stat.val = p.saves;
+            stats['saves'].push(stat);
           }
         });
       }
