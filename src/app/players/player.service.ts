@@ -21,12 +21,6 @@ export class PlayerService {
       player.name = playerData['basic-info'].displayName || "John Doe";
       player.points = playerData.points;
 
-      /** ToDo: LH */
-      //player.photo = playerData['basic-info'].photoURL || "assets/img/none.png";
-      player.photoLarge = playerData.photoLarge || "assets/img/forTest/messi_banner.png";
-      if (playerData.photoMedium)
-        player.photoMedium = playerData.photoMedium;
-
       player.wechatShareTime = playerData.wechatShareTime;
       player.fbShareTime = playerData.fbShareTime;
       if ('points' in playerData)
@@ -93,25 +87,49 @@ export class PlayerService {
       if (player.role && player.role === 'cheerleader') {
         // ToDo: LH
         // Move to the success of photoMedium?
-        player.photo = player.photoMedium;
+        //player.photo = player.photoMedium;
         //this.fm. getCheerleaderPublicAsync(id);
       }
       else
         this.fm.getPlayerPublicAsync(id);
       
       /** test cache */
-      if (playerData['basic-info'].photoURL) {
-        let success = path => {
-          console.log(path);
-          player.photo = path;
+      if (playerData['basic-info']) {
+        let success = cachedURL => {
+          //console.log(path);
+          player.photo = cachedURL;
           //this.fm.FireCustomEvent('serviceplayerready', id);
         }
 
         let error = code => {
           // ToDo: LH, error code 400 and 403, replace link with assets/img/none.png
-          //console.log(code);
+          if (403 == code || 400 == code) 
+            this.updatePlayerPhoto(player.id, this.fm.defaultSmallImage);
         }
-        this.ls.getImage(playerData['basic-info'].photoURL, success, error)
+
+        let success2 = cachedURL => {
+          player.photoMedium = cachedURL;
+        }
+
+        let error2 = code => {
+          // ToDo: LH, error code 400 and 403, replace link with assets/img/none.png
+          if (403 == code || 400 == code) 
+            this.updatePlayerPhotoLarge(player.id, this.fm.defaultSmallImage);
+        }
+
+        let success3 = cachedURL => {
+          player.photoLarge = cachedURL;
+        }
+
+        let error3 = code => {
+          // ToDo: LH, error code 400 and 403, replace link with assets/img/none.png
+          if (403 == code || 400 == code) 
+            this.updatePlayerPhotoLarge(player.id, this.fm.defaultPlayerLargeImage);
+        }
+
+        this.ls.getImage(playerData['basic-info'].photoURL, success, error);
+        this.ls.getImage(playerData.photoMedium, success2, error2);
+        this.ls.getImage(playerData.photoLarge, success3, error3);
       }
 
       this.fm.FireCustomEvent('serviceplayerready', id);
@@ -394,6 +412,10 @@ export class PlayerService {
 
   updatePlayerPhoto(playerId, photoUrl) {
     this.fm.updatePlayerPhoto(playerId, photoUrl);
+  }
+
+  updatePlayerPhotoMedium(playerId, photoUrl) {
+    this.fm.updatePlayerPhotoMedium(playerId, photoUrl);
   }
 
   updatePlayerPhotoLarge(playerId, photoUrl) {
