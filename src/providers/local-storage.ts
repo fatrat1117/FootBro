@@ -35,6 +35,7 @@ export class LocalStorage {
 
     this.storage.ready().then(() => {
       this.storage.get(url).then((path) => {
+        console.log('storage get', url, path);
         // found key-value
         if (path) {
           // file name = 36(UUID) + 4 (.png)
