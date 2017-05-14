@@ -21,6 +21,9 @@
       <ion-segment-button value="standings">
         {{ standingTitle | trans }}
       </ion-segment-button>
+      <ion-segment-button *ngIf='canShowPlayersSegment()' value="players">
+        {{'Players' | trans}}
+      </ion-segment-button>
       <ion-segment-button value="eliminations" [hidden]="type != 'cup'">
         {{ 'eliminations' | trans }}
       </ion-segment-button>
@@ -119,6 +122,57 @@
         </div>
       </div>
 
+      <div class="content-all" *ngSwitchCase="'players'">
+        <!--<button *ngIf='canShowRate()' (tap)="openRatePlayersPage()" ion-button block>-->
+          <!--{{'rateplayers' | trans}}-->
+        <!--</button>-->
+        <no-record *ngIf="null === tournament" message="{{'searchMatchPageNoRecord' | trans}}"></no-record>
+        <div *ngIf="null !== tournament">
+          <div class="left-scrollview matches-date-tab-col" [ngStyle]="{'height.px': getMatchDetailScrollHeight()}">
+            <ion-list class="date-tab-list">
+              <ion-item *ngFor="let cat of statCategories;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (tap)='showStat(cat)'
+                        [style.background]="selectedCat === cat ? '#20bd16' : '#373e4c'" [style.color]="selectedCat === cat ? '#ffffff' : '#93ABC5'">
+                <div class="date-inner">
+                  {{cat | trans}}
+                </div>
+              </ion-item>
+            </ion-list>
+          </div>
+
+          <div class="right-scrollview matches-match-info-col" *ngIf='selectedStats' [ngStyle]="{'height.px': getMatchDetailScrollHeight()}">
+            <ion-grid class="right-view-grid">
+              <ion-row class="header-title">
+                <!--<ion-col width-10>{{'Rank' | trans}}</ion-col>-->
+                <ion-col width-20></ion-col>
+                <ion-col width-30 class="flex-width-30">{{'Player' | trans}}</ion-col>
+                <ion-col width-30 class="flex-width-30">{{'Team' | trans}}</ion-col>
+                <ion-col width-20 text-center>{{'total' | trans}}</ion-col>
+              </ion-row>
+              <ion-row *ngFor="let stat of selectedStats;let i=index" class="playerStats">
+                <ion-col width-20 class="rank">
+
+                  <ion-label no-margin>{{i+1}}</ion-label>
+                  <ion-avatar item-left>
+                    <img [src]="stat.player?.photo" />
+                  </ion-avatar>
+                </ion-col>
+                <ion-col width-30 no-margin class="flex-width-30">
+                  <ion-item>
+                    {{stat.player?.name}}
+                  </ion-item>
+                </ion-col>
+                <ion-col width-30 class="flex-width-30">
+                  <ion-label no-margin>{{stat.player?.teamId}}</ion-label>
+                </ion-col>
+                <ion-col width-20>
+                  <ion-label no-margin text-center>{{stat.val}}</ion-label>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </div>
+      </div>
+
       <!-- elimination -->
       <div *ngSwitchCase="'eliminations'">
         <div style="overflow-y: scroll" [ngStyle]="{'height.px': getContentHeight()}">
@@ -131,7 +185,7 @@
 
 <ion-footer #matchFooter [hidden]="type != 'cup'">
   <!-- standings -->
-  <ion-segment  *ngIf="selectedInfo == 'standings' && tournament && tournament.groups" 
+  <ion-segment  *ngIf="selectedInfo == 'standings' && tournament && tournament.groups"
   [ngModel]="selectedGroup" (ngModelChange)="onSelectedGroupChange($event)" mode="md">
     <ion-segment-button *ngFor="let g of tournament.groups" [value]="g">
       {{'group' | trans}} {{g}}

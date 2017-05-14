@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { Content, NavController, ModalController, NavParams } from 'ionic-angular';
-import { Match } from '../../app/matches/match.model'
-import { MatchService } from '../../app/matches/match.service'
-import { PlayerService } from '../../app/players/player.service'
+import { Match } from '../../app/matches/match.model';
+import { MatchService } from '../../app/matches/match.service';
+import { PlayerService } from '../../app/players/player.service';
+import { TeamService } from '../../app/teams/team.service';
 import { NewGamePage } from "../new-game/new-game";
 import { MatchRulesPage } from "./match-rules"
 import * as moment from 'moment';
@@ -31,11 +32,18 @@ export class MatchesPage {
   onMatchDatesReady;
   onMatchesByDateReady;
   onTournamentTableReady;
+  onPlayerReady;
   onMatchesChanged;
   isEnd = false;
   title = "schedule";
   rules = "";
   type = "";
+
+  //players
+  statCategories = [];//Goals, Assists
+  selectedCat = "";
+  selectedStats = [];
+  allPlayersStats = {}; //allPlayersStats['goals']  allPlayersStats['assists']
 
   // eliminations
   onEliminationReady;
@@ -52,7 +60,8 @@ export class MatchesPage {
     private modalCtrl: ModalController,
     private matchService: MatchService,
     private navParams: NavParams,
-    private playerService: PlayerService) {
+    private playerService: PlayerService,
+    private teamService: TeamService) {
     this.selectedInfo = "schedule";
     this.selectedId = this.navParams.get('tournamentId') || "all";
     this.tournament = this.navParams.get('tournament');
@@ -89,6 +98,12 @@ export class MatchesPage {
     }
 
     this.matchService.getMatchDatesAsync(this.selectedId);
+
+    //get player combined stats
+    setTimeout(() => {
+      this.getCombinedStats();
+    }, 1000);
+
   }
 
   refreshTournamentTable() {
@@ -202,6 +217,7 @@ export class MatchesPage {
       if (this.eliminationMatches[id])
         this.eliminationMatches[id] = this.matchService.getMatch(id);
     }
+
 
     document.addEventListener('matchdatesready', this.onMatchDatesReady);
     document.addEventListener('matchesbydateready', this.onMatchesByDateReady);
@@ -429,6 +445,10 @@ export class MatchesPage {
     return this.playerService.amITournamentAdmin(this.selectedId);
   }
 
+  canShowPlayersSegment() {
+    return true;
+  }
+
   computeTournamentTable() {
     this.matchService.computeTournamentTable(this.selectedId);
   }
@@ -436,5 +456,58 @@ export class MatchesPage {
   onSelectedGroupChange(e) {
     this.selectedGroup = e;
     this.refreshTournamentTable();
+  }
+
+  getMatchDetailScrollHeight() {
+    return this.matchContent.scrollHeight - this.matchHeader.nativeElement.clientHeight;
+  }
+
+  // initializePlayerStats(stats) {
+  //   stats['goals'] = [];
+  //   stats['assists'] = [];
+  // }
+
+  showStat(cat) {
+    this.selectedCat = cat;
+    this.selectedStats = this.allPlayersStats[cat];
+  }
+
+  updatePlayerStats(stats) {
+    stats['goals'] = [];
+    stats['assists'] = [];
+
+
+    var goals = this.tournament.goals;
+    var assists = this.tournament.assists;
+
+    //console.log('updatePlayerStats', squad);
+    if (goals){
+
+      for (var goalKey in goals){
+        var newGoalObj = {
+          player: this.playerService.findOrCreatePlayerAndPull(goalKey),
+          val: goals[goalKey]['number']
+        };
+        stats['goals'].push(newGoalObj);
+      }
+    }
+
+    if (assists){
+
+      for (var assistKey in assists){
+        var newAssistObj = {
+           player: this.playerService.findOrCreatePlayerAndPull(assistKey),
+           val: assists[assistKey]['number']
+        };
+        stats['assists'].push(newAssistObj);
+      }
+    }
+
+    console.log(stats);
+  }
+  //invoke when load
+  getCombinedStats() {
+    this.statCategories = ['goals','assists'];
+    this.updatePlayerStats(this.allPlayersStats);
   }
 }
