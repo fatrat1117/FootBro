@@ -479,7 +479,7 @@ export class MatchesPage {
        return 0;
      }
 
-     if (target.length == 1 || target.length==2){
+     if (target.length == 1){
        if (val > target[0].val){
          return 0;
        }else if (val < target[0].val){
@@ -497,13 +497,13 @@ export class MatchesPage {
 
      var mid = Math.floor((hIndex+lIndex) / 2);
 
-     while (mid != targetLength - 1 && mid != 0){
+     while (hIndex > lIndex){
        if (val > target[mid].val){
-          hIndex = mid;
+          hIndex = mid - 1;
           mid = Math.floor((hIndex + lIndex) / 2);
        }else if(val < target[mid].val){
-          lIndex = mid;
-          mid = Math.ceil((hIndex + lIndex) / 2);
+          lIndex = mid + 1;
+          mid = Math.floor((hIndex + lIndex) / 2);
        }else{
          return mid;
        }
@@ -529,8 +529,8 @@ export class MatchesPage {
           val: goals[goalKey]['number']
         };
 
-        var currSortIndex =this.getBinaryInsertSortingFromHighToLowIndex(stats['goals'],goals[goalKey]['number']);
-        stats['goals'].splice(currSortIndex,0,newGoalObj);
+        // var currSortIndex =this.getBinaryInsertSortingFromHighToLowIndex(stats['goals'],goals[goalKey]['number']);
+        stats['goals'].push(newGoalObj);
        }
     }
 
@@ -541,8 +541,8 @@ export class MatchesPage {
            player: this.playerService.findOrCreatePlayerAndPull(assistKey),
            val: assists[assistKey]['number']
         };
-        var currSortIndex =this.getBinaryInsertSortingFromHighToLowIndex(stats['assists'],assists[assistKey]['number']);
-        stats['assists'].splice(currSortIndex,0, newAssistObj);
+        // var currSortIndex =this.getBinaryInsertSortingFromHighToLowIndex(stats['assists'],assists[assistKey]['number']);
+        stats['assists'].push(newAssistObj);
       }
     }
 

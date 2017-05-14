@@ -8,6 +8,14 @@ page-matches {
   $player-stats-lighter-background: color($colors, primary);
   $player-stats-darker-font: #93abc5;
 
+
+  //overall
+  .flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   // schedule
   .matches-date-tab-col {
     .date-tab-list {
