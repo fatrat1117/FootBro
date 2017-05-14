@@ -66,6 +66,9 @@ export class MatchesPage {
     this.selectedId = this.navParams.get('tournamentId') || "all";
     this.tournament = this.navParams.get('tournament');
     this.type = this.navParams.get("type") || 'league';
+    this.allPlayersStats['goals'] = [];
+    this.allPlayersStats['assists'] = [];
+
     if (this.tournament) {
       if (this.tournament.groups && this.tournament.groups.length)
         this.selectedGroup = this.tournament.groups[0];
@@ -98,12 +101,6 @@ export class MatchesPage {
     }
 
     this.matchService.getMatchDatesAsync(this.selectedId);
-
-    //get player combined stats
-    setTimeout(() => {
-      this.getCombinedStats();
-    }, 1000);
-
   }
 
   refreshTournamentTable() {
@@ -434,6 +431,9 @@ export class MatchesPage {
             this.onEliminationChange(0);;
         }
         break;
+      case 'players':
+      this.getCombinedStats();
+        break;
     }
   }
 
@@ -473,10 +473,6 @@ export class MatchesPage {
   }
 
   updatePlayerStats(stats) {
-    stats['goals'] = [];
-    stats['assists'] = [];
-
-
     var goals = this.tournament.goals;
     var assists = this.tournament.assists;
 
