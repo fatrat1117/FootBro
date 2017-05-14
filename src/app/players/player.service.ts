@@ -109,12 +109,15 @@ export class PlayerService {
 
         let success2 = cachedURL => {
           player.photoMedium = cachedURL;
+          if (player.role && player.role === 'cheerleader') {
+            player.photo = player.photoMedium;
+          }
         }
 
         let error2 = code => {
           // ToDo: LH, error code 400 and 403, replace link with assets/img/none.png
           if (403 == code || 400 == code) 
-            this.updatePlayerPhotoLarge(player.id, this.fm.defaultSmallImage);
+            this.updatePlayerPhotoMedium(player.id, this.fm.defaultSmallImage);
         }
 
         let success3 = cachedURL => {

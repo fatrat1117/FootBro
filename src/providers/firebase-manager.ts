@@ -55,7 +55,7 @@ export class FirebaseManager {
   unsubscribeTimeout = 500;
   defaultSmallImage = "assets/img/none.png";
   defaultPlayerLargeImage = "assets/img/forTest/messi_banner.png";
-
+  defaultTeamLargeImage = "assets/img/team/court.png";
   constructor(private modalCtrl: ModalController,
     private af: AngularFire,
     private platform: Platform,
