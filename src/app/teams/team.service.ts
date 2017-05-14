@@ -12,8 +12,8 @@ export class TeamService {
   bRefreshPlayerTeams = false;
 
   constructor(private fm: FirebaseManager,
-  public events: Events,
-  private ls: LocalStorage) {
+    public events: Events,
+    private ls: LocalStorage) {
     document.addEventListener('teamready', e => {
       let teamId = e['detail'];
       let fmTeam = this.fm.getTeam(teamId);
@@ -22,12 +22,12 @@ export class TeamService {
         let team = this.findOrCreateTeam(fmTeam.$key);
 
         team.id = fmTeam.$key;
-       // teamData.logo = team['basic-info'].logo;
+        // teamData.logo = team['basic-info'].logo;
         team.name = fmTeam['basic-info'].name;
         team.captain = fmTeam['basic-info'].captain;
         team.players = fmTeam.players;
         team.points = fmTeam.points;
-       // teamData.photoLarge = team.photoLarge || "assets/img/team/court.png";
+        // teamData.photoLarge = team.photoLarge || "assets/img/team/court.png";
         if (!team.points)
           team.points = 0;
         if (fmTeam.players)
@@ -49,15 +49,25 @@ export class TeamService {
 
         let error = code => {
           // ToDo: LH, error code 400 and 403, replace link with assets/img/none.png
-          if (403 == code || 400 == code) 
+          if (403 == code || 400 == code)
             this.updateTeamLogo(team.id, this.fm.defaultSmallImage);
         }
-
         this.ls.getImage(fmTeam['basic-info'].logo, success, error);
+
+        let success2 = cachedURL => {
+          team.photoLarge = cachedURL;
+        }
+
+        let error2 = code => {
+          // ToDo: LH, error code 400 and 403, replace link with assets/img/none.png
+          if (403 == code || 400 == code)
+            this.updatePhotoLarge(team.id, this.fm.defaultTeamLargeImage);
+        }
+        this.ls.getImage(fmTeam.photoLarge, success, error);
+
         this.fm.FireCustomEvent('serviceteamready', teamId);
       }
-    }
-    );
+    });
 
     document.addEventListener('teampublicready', e => {
       let teamId = e['detail'];
@@ -262,7 +272,7 @@ export class TeamService {
   saveTeamSquad(teamId, squadObj, squadId = null) {
     if (squadId)
       this.fm.updateTeamSquad(teamId, squadId, squadObj);
-    else 
+    else
       this.fm.createTeamSquad(teamId, squadObj);
   }
 
@@ -271,7 +281,7 @@ export class TeamService {
   }
 
   getMatchSquad(teamId, matchId) {
-    console.log('getMatchSquad', teamId, matchId);  
+    console.log('getMatchSquad', teamId, matchId);
     let team = this.getTeam(teamId);
     if (team)
       return team.matchSquads[matchId];
