@@ -187,6 +187,22 @@
             </button>
           </div>
         </ion-item>
+        <ion-item class="expandable-member-property" [hidden]="!player.expanded">
+          <ion-icon name="md-hand" class="desc-img" item-left color="darkGreen"></ion-icon>
+          <button ion-button clear color="light">{{'saves' | trans}}</button>
+          <div item-right>
+            <button [disabled]="player.saves <= 0" ion-button icon-only clear (tap)="minus(player, 'saves')"
+                    color="light">
+              <ion-icon name="md-arrow-dropleft"></ion-icon>
+            </button>
+            <button ion-button clear color="secondary">
+              {{player.saves}}
+            </button>
+            <button ion-button icon-only clear (tap)="plus(player, 'saves')">
+              <ion-icon name="md-arrow-dropright" color="secondary"></ion-icon>
+            </button>
+          </div>
+        </ion-item>
       </div>
     </div>
   </ion-list>
