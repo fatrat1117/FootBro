@@ -111,7 +111,7 @@ export class PlayerService {
           player.photoMedium = cachedURL;
           if (player.role && player.role === 'cheerleader') {
             player.photo = player.photoMedium;
-            this.fm.FireCustomEvent('servicecheerleaderready', id);
+            this.fm.FireCustomEvent('serviceplayerready', id);
           }
         }
 

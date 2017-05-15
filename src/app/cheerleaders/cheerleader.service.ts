@@ -40,7 +40,7 @@ export class CheerleaderService {
       this.fm.FireEvent('serviceapprovedcheerleadersready');
     });
 
-    document.addEventListener('servicecheerleaderready', e => {
+    document.addEventListener('serviceplayerready', e => {
       let id = e['detail'];
       let cheerleader = this.findOrCreateCheerleader(id);
       let p = this.playerService.getPlayer(id);
