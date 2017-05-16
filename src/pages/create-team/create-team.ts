@@ -85,7 +85,7 @@ export class CreateTeamPage {
     let success = data => {
       self.logoData = data;
       self.busy = false;
-      self.logoUrl = "data:image/png;base64," + data;
+      self.logoUrl = "data:image/jpg;base64," + data;
     }
     let error = err => {
       console.log(err);

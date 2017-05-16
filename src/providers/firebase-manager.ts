@@ -51,7 +51,7 @@ export class FirebaseManager {
 
   ratePlayerPoints = 100;
   teamInitialPoints = 100;
-  smallImageSize = 256;
+  smallImageSize = 192;
   unsubscribeTimeout = 500;
   defaultSmallImage = "assets/img/none.png";
   defaultPlayerLargeImage = "assets/img/forTest/messi_banner.png";
@@ -1285,7 +1285,7 @@ export class FirebaseManager {
 
   b64toBlob(b64Data, contentType, sliceSize) {
     contentType = contentType || '';
-    sliceSize = sliceSize || 512;
+    sliceSize = sliceSize || 256;
 
     var byteCharacters = atob(b64Data);
     var byteArrays = [];
@@ -1322,7 +1322,7 @@ export class FirebaseManager {
     const options: CameraOptions = {
       allowEdit: true,
       quality: 75,
-      encodingType: this.camera.EncodingType.PNG,
+      encodingType: this.camera.EncodingType.JPEG,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       destinationType: this.camera.DestinationType.DATA_URL,
       targetWidth: width,
@@ -1341,16 +1341,16 @@ export class FirebaseManager {
 
     // imageData is either a base64 encoded string or a file URI
     // If it's base64:
-    let contentType = 'image/png';
+    let contentType = 'image/jpg';
     let b64Data = imageData;
 
     let blob = this.b64toBlob(b64Data, contentType, width);
 
     let metadata = {
-      contentType: 'image/png',
+      contentType: 'image/jpg',
     };
     let storageRef = firebase.storage().ref();
-    let uploadTask = storageRef.child('images/' + imgId + '.png').put(blob, metadata);;
+    let uploadTask = storageRef.child('images/' + imgId + '.jpg').put(blob, metadata);;
     uploadTask.on('state_changed', function (snapshot) {
       // Observe state change events such as progress, pause, and resume
       // See below for more detail

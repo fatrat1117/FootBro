@@ -74,8 +74,8 @@ export class CheerleaderService {
   }
 
   submitInfo() {
-    let width = 512;
-    let height = 512;
+    let width = 256; //512;
+    let height = 256; //512;
 
     this.fm.selectImgGetData(width, height, imgData => {
       console.log("imgData: " + imgData);

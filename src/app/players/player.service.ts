@@ -105,6 +105,8 @@ export class PlayerService {
           // ToDo: LH, error code 400 and 403, replace link with assets/img/none.png
           if (403 == code || 400 == code) 
             this.updatePlayerPhoto(player.id, this.fm.defaultSmallImage);
+          else
+            success(this.fm.defaultSmallImage);
         }
 
         let success2 = cachedURL => {
@@ -119,6 +121,8 @@ export class PlayerService {
           // ToDo: LH, error code 400 and 403, replace link with assets/img/none.png
           if (403 == code || 400 == code) 
             this.updatePlayerPhotoMedium(player.id, this.fm.defaultSmallImage);
+          else
+            success2(this.fm.defaultSmallImage);
         }
 
         let success3 = cachedURL => {
@@ -129,6 +133,8 @@ export class PlayerService {
           // ToDo: LH, error code 400 and 403, replace link with assets/img/none.png
           if (403 == code || 400 == code) 
             this.updatePlayerPhotoLarge(player.id, this.fm.defaultPlayerLargeImage);
+          else
+            success3(this.fm.defaultPlayerLargeImage);
         }
 
         this.ls.getImage(playerData['basic-info'].photoURL, success, error);

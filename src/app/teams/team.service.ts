@@ -51,6 +51,8 @@ export class TeamService {
           // ToDo: LH, error code 400 and 403, replace link with assets/img/none.png
           if (403 == code || 400 == code)
             this.updateTeamLogo(team.id, this.fm.defaultSmallImage);
+          else
+            success(this.fm.defaultSmallImage);
         }
 
          let success2 = cachedURL => {
@@ -61,6 +63,8 @@ export class TeamService {
           // ToDo: LH, error code 400 and 403, replace link with assets/img/none.png
           if (403 == code || 400 == code)
             this.updatePhotoLarge(team.id, this.fm.defaultTeamLargeImage);
+          else
+            success2(this.fm.defaultTeamLargeImage);
         }
         
         this.ls.getImage(fmTeam['basic-info'].logo, success, error);

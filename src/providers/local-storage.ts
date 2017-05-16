@@ -18,7 +18,8 @@ export class LocalStorage {
     // null
     if (!url) {
       console.log("URL is null");
-      success("assets/img/none.png");
+      //success("assets/img/none.png");
+      fail(-1)
       return;
     }
 
@@ -41,12 +42,12 @@ export class LocalStorage {
         //console.log('storage get', url, path);
         // found key-value
         if (path) {
-          // file name = 36(UUID) + 4 (.png)
+          // file name = 36(UUID) + 4 (.jpg)
           var fileName = path.substr(path.length - 40);
           console.log("Try to get from cache: " + path + "\nFile name: " + fileName);
 
           // check if file exist in cache
-          this.file.checkFile(this.file.cacheDirectory, fileName).then(_ => {
+          this.file.checkFile(this.file.dataDirectory, fileName).then(_ => {
             console.log("Found file in cache.")
             success(path);
           }).catch(_ => {
@@ -65,8 +66,8 @@ export class LocalStorage {
     console.log("Download from server: " + url);
     
     let fileTransfer: TransferObject = this.transfer.create();
-    let name = this.generateUUID() + '.png';
-    fileTransfer.download(url, this.file.cacheDirectory + name).then((entry) => {
+    let name = this.generateUUID() + '.jpg';
+    fileTransfer.download(url, this.file.dataDirectory + name).then((entry) => {
       this.saveToLocal(url, entry.toURL(), success);
     }, (error) => {
       // handle error
