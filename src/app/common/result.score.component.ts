@@ -18,6 +18,7 @@ declare var sprintf: any;
       <img [src]="upcomingMatch?.home?.logo" class="team-logo">
     </ion-col>
     <ion-col width-33 class="game-score">
+    <ion-grid>
       <ion-row *ngIf="canShowScores()" center justify-content-center>
         <ion-col>
           {{upcomingMatch?.homeScore}}
@@ -43,8 +44,8 @@ declare var sprintf: any;
             <p class="inline-flex-center">{{'informAll' | trans}}</p>
           </div>
       </ion-row>
+           </ion-grid>
     </ion-col>
-    <!--右边队伍信息-->
     <ion-col text-center width-33>
       <img [src]="upcomingMatch?.away?.logo" class="team-logo">
       <!--p class="team-right-text">{{match?.away?.name}}</p-->
