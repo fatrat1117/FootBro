@@ -37,7 +37,7 @@ export class MatchListPage {
     //this.afTournamentList = this.matchService.afTournamentList();
   }
 
-  ionViewWillLeave() {
+  ionViewWillUnload() {
     document.removeEventListener('tournamentsready', this.onTounamentsReady);
   }
 
