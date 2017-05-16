@@ -36,7 +36,7 @@ declare var sprintf: any;
       <button ion-button color="gYellow" class="input-score" (click)="openUpdateMatchPage($event)">{{'inputscores' | trans}}
       </button>
       </ion-row>
-      <ion-row *ngIf="!canShowScores() && !canShowInputScores()">
+      <ion-row *ngIf="!canShowScores() && !canShowInputScores()" center justify-content-center>
           <ion-label *ngIf="!canShowInformAll()" no-margin>{{versusLabel | trans}}</ion-label>
           <div *ngIf="canShowInformAll()" full color="dark" class="group-message flex-direction-column"
              (click)="informAllClick($event)" >
