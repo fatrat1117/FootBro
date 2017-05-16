@@ -33,6 +33,7 @@ export class Match {
   dataReady = false;
   informed;
   colors;
+  updateTime;
   isStarted = function () {
     let now = moment().unix() * 1000;
     //console.log(now, this.time);

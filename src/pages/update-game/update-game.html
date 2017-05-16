@@ -8,7 +8,7 @@
     </ion-buttons>
     <ion-buttons right>
       <button [disabled]="!(homeScore && awayScore)" (tap)="updateMatch()" color="primary" ion-button icon-only clear>
-        <span *ngIf='!adminMode'>+{{getTeamPoints()}}</span>
+        <span *ngIf='!adminMode && !squad.participantsConfirmed'>+{{getTeamPoints()}}</span>
         <ion-icon name="md-cloud-upload"></ion-icon>
       </button>
     </ion-buttons>

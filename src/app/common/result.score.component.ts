@@ -128,15 +128,22 @@ export class ResultScoreComponent {
     if (this.upcomingMatch.date < april2)
       return false;
 
-    if (this.upcomingMatch.isStarted() &&
-      ((this.playerService.amIMemberCaptainOrAdmin(this.upcomingMatch.homeId) && !this.upcomingMatch.isHomeUpdated)
-        || (this.playerService.amIMemberCaptainOrAdmin(this.upcomingMatch.awayId) && !this.upcomingMatch.isAwayUpdated))
-    ) {
+    //not started
+    if (!this.upcomingMatch.isStarted())
+      return false;
+    // if (this.upcomingMatch.isStarted() &&
+    //   ((this.playerService.amIMemberCaptainOrAdmin(this.upcomingMatch.homeId) && !this.upcomingMatch.isHomeUpdated)
+    //     || (this.playerService.amIMemberCaptainOrAdmin(this.upcomingMatch.awayId) && !this.upcomingMatch.isAwayUpdated))
+    // ) {
+    //   return true;
+    // }
+
+    if (this.playerService.amIMemberCaptainOrAdmin(this.upcomingMatch.homeId)
+      || this.playerService.amIMemberCaptainOrAdmin(this.upcomingMatch.awayId))
       return true;
-    }
 
     //If I am tournament admin
-    return this.upcomingMatch.isStarted() && this.amITournamentAdmin();
+    return this.amITournamentAdmin();
   }
 
   amITournamentAdmin() {

@@ -39,7 +39,7 @@ export class MatchService {
       match.groupId = fmMatch.groupId;
       match.informed = fmMatch.informed;
       match.colors = fmMatch.colors;
-      //console.log(match.groupId);
+      match.updateTime = fmMatch.updateTime;
       match.home = this.teamService.findOrCreateTeam(match.homeId);
       this.fm.getTeamAsync(match.homeId);
       match.away = this.teamService.findOrCreateTeam(match.awayId);

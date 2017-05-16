@@ -37,6 +37,7 @@ export class UpdateGamePage {
     adminMode = false;
     homePenalty;
     awayPenalty;
+    squad : any = {};
 
     constructor(public navCtrl: NavController,
         private modalCtrl: ModalController,
@@ -54,12 +55,11 @@ export class UpdateGamePage {
         this.teamId = params.get('teamId');
         this.adminMode = params.get('adminMode') || this.adminMode;
         this.match = this.matchService.getMatch(this.id);
+        console.log('enter update match UI', this.match);
         this.homeScore = this.match.homeScore >= 0 ? this.match.homeScore : '';
         this.awayScore = this.match.awayScore >= 0 ? this.match.awayScore : '';
         this.homePenalty = this.match.homePenalty >= 0 ? this.match.homePenalty : '';
         this.awayPenalty = this.match.awayPenalty >= 0 ? this.match.awayPenalty : '';
-        //this.homePenalty = this.match.homePenalty || '';
-        //this.awayPenalty = this.match.awayPenalty || '';
         if (this.match.home.captain === this.playerService.selfId())
             this.myIdentity = 0;
         else if (this.match.away.captain === this.playerService.selfId())
@@ -68,7 +68,7 @@ export class UpdateGamePage {
         this.matchDate = helper.numberToDateString(this.match.date);
         this.matchTime = helper.numberToTimeString(this.match.time);
     }
-    //显示或关闭队员得分详情
+    
     clickTeamMember(player) {
         player.expanded = !player.expanded;
     }
@@ -77,6 +77,7 @@ export class UpdateGamePage {
         this.onMatchSquadReady = (teamId, matchId) => {
             if (teamId === this.teamId && matchId === this.id) {
                 let squad = this.teamService.getMatchSquad(teamId, matchId);
+                this.squad = squad;
                 if ('participants' in squad)
                     this.copyParticipants(this.participants, squad.participants);
                 else {
@@ -176,9 +177,8 @@ export class UpdateGamePage {
             return;
         }
 
-        //let points = 100 + (0 === this.myIdentity ? this.homePlayers.length : this.awayPlayers.length) * 10;
         let points = this.getTeamPoints();
-        let msg = sprintf(this.loc.getString('teamupdateonceandearnpoints'), points);
+        let msg = this.squad.participantsConfirmed ? this.loc.getString('confirmmodify') : sprintf(this.loc.getString('teamupdateonceandearnpoints'), points);
         let self = this;
         let confirm = this.alertCtrl.create({
             title: this.loc.getString('note'),
@@ -233,7 +233,8 @@ export class UpdateGamePage {
 
         this.matchService.updateMatch(this.id, updateMatchData);
         this.teamService.updateMatchParticipants(this.teamId, this.id, participants);
-        this.teamService.teamEarnPoints(this.teamId, points);
+        if (!this.squad.participantsConfirmed)
+            this.teamService.teamEarnPoints(this.teamId, points);
 
         let enMsg = sprintf('%s vs %s (%s : %s), rate your teammates to earn player points',
             this.match.home.name,
@@ -250,8 +251,6 @@ export class UpdateGamePage {
         );
 
         this.osm.matchNotification('rateMatch', this.id, playerIds, pushIds, enMsg, chMsg);
-        //let pushMsg = { 'en': enMsg, 'zh-Hans': chMsg };
-        //this.osm.postNotification(pushMsg, pushIds);
         this.close();
     }
 
@@ -304,13 +303,7 @@ export class UpdateGamePage {
         modal.onDidDismiss(e => {
             if (e && e['selectedIds']) {
                 let selectedIds = e['selectedIds'];
-                //console.log(selectedIds, players);
-                //delete not selected players
-                // for (let i = players.length - 1; i >= 0; --i) {
-                //     let p = players[i];
-                //     if (selectedIds[p.id] != true)
-                //         players.splice(i, 1);
-                // }
+
                 for (let id in selectedIds) {
                     //add only new
                     if (selectedIds[id] && existingPlayersMap[id] != true) {
@@ -320,7 +313,6 @@ export class UpdateGamePage {
                         players.push(data);
                     }
                 }
-                //console.log(this.homePlayers);
             }
         });
 

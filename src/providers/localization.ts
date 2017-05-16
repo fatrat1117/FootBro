@@ -225,7 +225,7 @@ export class Localization {
       warning: 'Warning',
       note: 'Please Note',
       starcard: 'Star Card',
-      teamupdateonceandearnpoints: 'Upon confirming, you can not modify the match data again. You team will earn %d points.',
+      teamupdateonceandearnpoints: 'Upon confirming, you team will earn %d points.',
       rateearnpoints: 'Upon confirming, you can not rate again. You will earn %d points.',
       teaminvitation: "%s invited you to join \"%s\". \n\nCopy this message and go back to \"SoccerBro\" to accept the invitation.\n(%s)",
       teamInvitationCopied: "Invitation link is copied. Send to players to invite them",
@@ -393,7 +393,8 @@ export class Localization {
       welcomeToClGroup: 'Welcome to Cheerleaders group chat!',
       yellows: 'Yellow Cards',
       reds: 'Red Cards',
-      saves: 'Saves'
+      saves: 'Saves',
+      confirmmodify: 'Comfirm modification?',
     },
 
     zh: {
@@ -600,7 +601,7 @@ export class Localization {
       warning: '警告',
       note: '请注意',
       starcard: '球星卡',
-      teamupdateonceandearnpoints: '确认之后你就不能够再修改比赛数据. 你的球队会得到%d积分',
+      teamupdateonceandearnpoints: '确认之后, 你的球队会得到%d积分',
       rateearnpoints: '确认之后就不能再对本次比赛评分. 你将获得%d积分.',
       teaminvitation: "%s 邀请你加入\“%s\”。\n\n复制这条信息，打开\“绿茵兄弟\”即可加入。\n(%s)",
       teamInvitationCopied: "成功复制邀请链接，发送给球员邀请入队",
@@ -768,7 +769,8 @@ export class Localization {
       welcomeToClGroup: '欢迎来到拉拉队聊天室！',
       yellows: '黄牌',
       reds: '红牌',
-      saves: '扑救'
+      saves: '扑救',
+      confirmmodify: '确认修改吗?',
     }
   }
 }

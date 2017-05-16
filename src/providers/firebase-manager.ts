@@ -1022,6 +1022,8 @@ export class FirebaseManager {
   }
 
   updateMatch(id, matchObj) {
+    let now = moment().unix() * 1000;
+    matchObj['updateTime'] = now;
     console.log('updateMatch', matchObj);
     let date = matchObj.date;
     this.afMatch(id).update(matchObj).then(() => {
