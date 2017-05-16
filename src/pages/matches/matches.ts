@@ -42,7 +42,7 @@ export class MatchesPage {
 
 
   //players
-  statCategories = ['goals','assists'];//Goals, Assists
+  statCategories = ['goals', 'assists'];//Goals, Assists
   selectedCat = this.statCategories[0];
   selectedStats = [];
   allPlayersStats = {}; //allPlayersStats['goals']  allPlayersStats['assists']
@@ -434,7 +434,7 @@ export class MatchesPage {
         }
         break;
       case 'players':
-      this.getCombinedStats();
+        this.getCombinedStats();
         break;
     }
   }
@@ -475,51 +475,51 @@ export class MatchesPage {
   }
 
 
-  sortStatsObjCompare(b,a) {
-  if (a.val < b.val)
-    return -1;
-  if (a.val > b.val)
-    return 1;
-  return 0;
-}
+  sortStatsObjCompare(b, a) {
+    if (a.val < b.val)
+      return -1;
+    if (a.val > b.val)
+      return 1;
+    return 0;
+  }
 
 
-  getBinaryInsertSortingFromHighToLowIndex(target,val){
-     if (!target || target.length <= 0) {
-       return 0;
-     }
+  getBinaryInsertSortingFromHighToLowIndex(target, val) {
+    if (!target || target.length <= 0) {
+      return 0;
+    }
 
-     if (target.length == 1){
-       if (val > target[0].val){
-         return 0;
-       }else if (val < target[0].val){
-         return 1;
-       }else {
-         return 0;
-       }
-     }
+    if (target.length == 1) {
+      if (val > target[0].val) {
+        return 0;
+      } else if (val < target[0].val) {
+        return 1;
+      } else {
+        return 0;
+      }
+    }
 
 
 
-     var targetLength = target.length;
-     var hIndex = targetLength - 1;
-     var lIndex = 0;
+    var targetLength = target.length;
+    var hIndex = targetLength - 1;
+    var lIndex = 0;
 
-     var mid = Math.floor((hIndex+lIndex) / 2);
+    var mid = Math.floor((hIndex + lIndex) / 2);
 
-     while (hIndex > lIndex){
-       if (val > target[mid].val){
-          hIndex = mid - 1;
-          mid = Math.floor((hIndex + lIndex) / 2);
-       }else if(val < target[mid].val){
-          lIndex = mid + 1;
-          mid = Math.floor((hIndex + lIndex) / 2);
-       }else{
-         return mid;
-       }
-     }
+    while (hIndex > lIndex) {
+      if (val > target[mid].val) {
+        hIndex = mid - 1;
+        mid = Math.floor((hIndex + lIndex) / 2);
+      } else if (val < target[mid].val) {
+        lIndex = mid + 1;
+        mid = Math.floor((hIndex + lIndex) / 2);
+      } else {
+        return mid;
+      }
+    }
 
-     return mid;
+    return mid;
 
   }
 
@@ -531,41 +531,39 @@ export class MatchesPage {
     var assists = this.tournament.assists;
 
     //console.log('updatePlayerStats', squad);
-    if (goals){
+    if (goals) {
 
-      for (var goalKey in goals){
-        var newGoalObj = {
-          player: this.playerService.findOrCreatePlayerAndPull(goalKey),
-          val: goals[goalKey]['number']
-        };
-
-        // var currSortIndex =this.getBinaryInsertSortingFromHighToLowIndex(stats['goals'],goals[goalKey]['number']);
-        stats['goals'].push(newGoalObj);
-       }
-       //sort
+      for (var goalKey in goals) {
+        if (goals[goalKey]['number'] > 0) {
+          var newGoalObj = {
+            player: this.playerService.findOrCreatePlayerAndPull(goalKey),
+            val: goals[goalKey]['number'],
+            team: this.teamService.findOrCreateTeamAndPull(goals[goalKey]['teamID'])
+          };
+          stats['goals'].push(newGoalObj);
+        }
+      }
+      //sort
       stats['goals'].sort(this.sortStatsObjCompare);
     }
 
-    if (assists){
+    if (assists) {
 
-      for (var assistKey in assists){
-        var newAssistObj = {
-           player: this.playerService.findOrCreatePlayerAndPull(assistKey),
-           val: assists[assistKey]['number']
-        };
-        // var currSortIndex =this.getBinaryInsertSortingFromHighToLowIndex(stats['assists'],assists[assistKey]['number']);
-        stats['assists'].push(newAssistObj);
+      for (var assistKey in assists) {
+        if (assists[assistKey]['number'] > 0) {
+          var newAssistObj = {
+            player: this.playerService.findOrCreatePlayerAndPull(assistKey),
+            val: assists[assistKey]['number'],
+            team: this.teamService.findOrCreateTeamAndPull(assists[assistKey]['teamID'])
+          };
+          stats['assists'].push(newAssistObj);
+        }
       }
       stats['assists'].sort(this.sortStatsObjCompare);
     }
 
-
-
     this.selectedCat = this.statCategories[0];
     this.selectedStats = this.allPlayersStats[this.selectedCat];
-
-
-    // console.log(stats);
   }
   //invoke when load
   getCombinedStats() {
