@@ -56,10 +56,10 @@ export class UpdateGamePage {
         this.adminMode = params.get('adminMode') || this.adminMode;
         this.match = this.matchService.getMatch(this.id);
         console.log('enter update match UI', this.match);
-        this.homeScore = this.match.homeScore >= 0 ? this.match.homeScore : '';
-        this.awayScore = this.match.awayScore >= 0 ? this.match.awayScore : '';
-        this.homePenalty = this.match.homePenalty >= 0 ? this.match.homePenalty : '';
-        this.awayPenalty = this.match.awayPenalty >= 0 ? this.match.awayPenalty : '';
+        this.homeScore = this.match.homeScore >= 0 ? this.match.homeScore.toString() : '';
+        this.awayScore = this.match.awayScore >= 0 ? this.match.awayScore.toString() : '';
+        this.homePenalty = this.match.homePenalty >= 0 ? this.match.homePenalty.toString() : '';
+        this.awayPenalty = this.match.awayPenalty >= 0 ? this.match.awayPenalty.toString() : '';
         if (this.match.home.captain === this.playerService.selfId())
             this.myIdentity = 0;
         else if (this.match.away.captain === this.playerService.selfId())
@@ -317,5 +317,16 @@ export class UpdateGamePage {
         });
 
         modal.present();
+    }
+
+    canEnableUpdate() {
+        //console.log(this.homeScore, this.awayScore);
+        
+        if (null == this.homeScore || null == this.awayScore)
+            return false;
+        if (this.homeScore == '' || this.awayScore == '')
+            return false;
+        
+        return this.homeScore >= 0 && this.awayScore >= 0;
     }
 }
