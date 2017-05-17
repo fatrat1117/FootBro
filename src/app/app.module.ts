@@ -94,6 +94,7 @@ import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { Camera } from '@ionic-native/camera';
 import { Badge } from '@ionic-native/badge';
 
+/*
 export const firebaseConfig = {
   apiKey: "AIzaSyCrhL6g6rHs7-X09jw5Oq8I_g0fspD8bf8",
   authDomain: "project-3416565325366537224.firebaseapp.com",
@@ -101,6 +102,15 @@ export const firebaseConfig = {
   projectId: "project-3416565325366537224",
   storageBucket: "project-3416565325366537224.appspot.com",
   messagingSenderId: "149844388984"
+};
+*/
+
+export const firebaseConfig = {
+  apiKey: "AIzaSyA9L3ja5ZcViqTc5Tgz8tG6QvJGlYO-fa4",
+  authDomain: "stk-soccer.firebaseapp.com",
+  databaseURL: "https://stk-soccer.firebaseio.com",
+  storageBucket: "stk-soccer.appspot.com",
+  messagingSenderId: "63493717987"
 };
 
 @NgModule({
