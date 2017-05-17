@@ -29,21 +29,21 @@
     </ion-row>
     <ion-row class="baby-row">
       <div *ngIf='playerService.isAdmin()' class="baby-admin">
-        <ion-row *ngFor='let clrow of pendingCheerleaders | groupNPipe:2;let i = index' no-margin>
-          <ion-col class="cheerleader-item" width-50 *ngFor='let clItem of clrow; let j = index'>
-            <div *ngIf='clItem'>
+        <ion-row *ngFor="let clrow of pendingGrid" no-margin>
+          <ion-col class="cheerleader-item" width-50 *ngFor='let i of clrow'>
+            <div *ngIf='pendingCheerleaders[i]'>
               <ion-row class="item-row">
                 <div class="baby-img-frame">
-                  <button ion-button icon-only clear class="chat-logo" color="lightGrey" (tap)="approve(clItem.id)">
+                  <button ion-button icon-only clear class="chat-logo" color="lightGrey" (tap)="approve(pendingCheerleaders[i].id)">
                     <ion-icon name="md-lock"></ion-icon>
                   </button>
-                  <img [src]="clItem.photoMedium">
+                  <img [src]="pendingCheerleaders[i].photoMedium">
                 </div>
               </ion-row>
               <ion-row class="item-row">
                 <div class="baby-status">
                   <ion-row>
-                    <h3>{{clItem.name}}</h3>
+                    <h3>{{pendingCheerleaders[i].name}}</h3>
                   </ion-row>
                 </div>
               </ion-row>

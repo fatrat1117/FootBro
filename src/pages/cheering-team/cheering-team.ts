@@ -29,6 +29,8 @@ export class CheeringTeamPage {
   approvedGrid: number[][];
   oldTotal: number;
   blacklist: string[];
+  pendingGrid: number[][];
+  oldPendingTotal: number;
 
   constructor(private nav: NavController,
     private modalCtrl: ModalController,
@@ -71,12 +73,13 @@ export class CheeringTeamPage {
   addEventListeners() {
     this.onPendingCheerleadersReady = e => {
       this.pendingCheerleaders = this.cheerleaderService.getPendingCheerleaders();
+      this.pendingGrid = this.buildGrid(this.pendingCheerleaders.length, this.oldPendingTotal);
     };
 
     this.onApprovedCheerleadersReady = e => {
       this.approvedCheerleaders = this.cheerleaderService.getApprovedCheerleaders();
       this.shuffle(this.approvedCheerleaders);
-      this.buildGrid(this.approvedCheerleaders.length)
+      this.approvedGrid = this.buildGrid(this.approvedCheerleaders.length, this.oldTotal);
       if (this.cheerleaderService.isCheerleader(this.playerService.selfId()))
         this.amICheerleader = true;
       else
@@ -154,6 +157,29 @@ export class CheeringTeamPage {
     });
   }
 
+  buildGrid(total: number, old: number) {
+    if (total == old)
+      return
+    old = total;
+    let grid = [];
+
+    let row = [];
+    for (let i = 0; i < total; ++i) {
+      row.push(i);
+
+      if ((i + 1) % 2 == 0) {
+        grid.push(row)
+        row = [];
+      }
+    }
+    if (row.length > 0) {
+      grid.push(row);
+    }
+
+    return grid;
+  }
+
+/*
   buildGrid(total: number) {
     if (total == this.oldTotal)
       return
@@ -173,6 +199,27 @@ export class CheeringTeamPage {
       this.approvedGrid.push(row);
     }
   }
+
+  buildPendingGrid(total: number) {
+    if (total == this.oldPendingTotal)
+      return
+    this.oldPendingTotal = total;
+    this.pendingGrid = [];
+
+    let row = [];
+    for (let i = 0; i < total; ++i) {
+      row.push(i);
+
+      if ((i + 1) % 2 == 0) {
+        this.pendingGrid.push(row)
+        row = [];
+      }
+    }
+    if (row.length > 0) {
+      this.pendingGrid.push(row);
+    }
+  }
+  */
 
   onReport(id) {
     let confirm = this.alertCtrl.create({
