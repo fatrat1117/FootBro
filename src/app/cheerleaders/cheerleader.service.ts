@@ -16,24 +16,29 @@ export class CheerleaderService {
   constructor(private fm: FirebaseManager, private osm: OneSignalManager,
     private playerService: PlayerService, private uiHelper: UIHelper, private loc : Localization) {
     document.addEventListener('pendingcheerleadersready', e => {
-      this.pendingCheerleaders = [];
+      if (this.pendingCheerleaders)
+        this.pendingCheerleaders.splice(0);
+      else
+        this.pendingCheerleaders = [];
       this.fm.cachedPendingCheerleaders.forEach(fmCheerleader => {
-        let cheerleader = this.findOrCreateCheerleader(fmCheerleader.$key);
+        //console.log('pending', fmCheerleader);
+        let cheerleader = this.findOrCreateCheerleaderAndPull(fmCheerleader.$key);
         cheerleader.photoMedium = fmCheerleader.photo;
         this.pendingCheerleaders.push(cheerleader);
-        this.playerService.getPlayerAsync(fmCheerleader.$key);
       });
 
       this.fm.FireEvent('servicependingcheerleadersready');
     });
 
     document.addEventListener('approvedcheerleadersready', e => {
-      this.approvedCheerleaders = [];
+      if (this.approvedCheerleaders)
+        this.approvedCheerleaders.splice(0);
+      else
+        this.approvedCheerleaders = [];
       this.fm.cachedApprovedCheerleaders.forEach(fmCheerleader => {
-        let cheerleader = this.findOrCreateCheerleader(fmCheerleader.$key);
-        cheerleader.photoMedium = fmCheerleader.photo;
+        //console.log('approved', fmCheerleader);
+        let cheerleader = this.findOrCreateCheerleaderAndPull(fmCheerleader.$key);
         this.approvedCheerleaders.push(cheerleader);
-        this.playerService.getPlayerAsync(fmCheerleader.$key);
         this.fm.getCheerleaderPublicAsync(fmCheerleader.$key);
       });
 
@@ -44,13 +49,11 @@ export class CheerleaderService {
       let id = e['detail'];
       let cheerleader = this.findOrCreateCheerleader(id);
       let p = this.playerService.getPlayer(id);
+      console.log('cheerleaderready', p);
       cheerleader.name = p.name;
-      if (p.photoMedium)
-        cheerleader.photoMedium = p.photoMedium;
-      if (p.pushId)
-        cheerleader.pushId = p.pushId;
-      if (p.joinTime)
-        cheerleader.joinTime = p.joinTime;
+      cheerleader.photoMedium = p.photoMedium;
+      cheerleader.pushId = p.pushId;
+      cheerleader.joinTime = p.joinTime;
 
       if ('points' in p)
         cheerleader.points = p.points;
@@ -98,6 +101,19 @@ export class CheerleaderService {
       cheerleader = new Cheerleader();
       cheerleader.id = id;
       this.cheerleadersMap[id] = cheerleader;
+    } else {
+      cheerleader = this.cheerleadersMap[id];
+    }
+    return cheerleader;
+  }
+
+  findOrCreateCheerleaderAndPull(id): Cheerleader {
+    let cheerleader;
+    if (!this.cheerleadersMap[id]) {
+      cheerleader = new Cheerleader();
+      cheerleader.id = id;
+      this.cheerleadersMap[id] = cheerleader;
+      this.playerService.getPlayerAsync(id);
     } else {
       cheerleader = this.cheerleadersMap[id];
     }
