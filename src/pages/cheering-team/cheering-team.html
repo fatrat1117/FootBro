@@ -18,7 +18,7 @@
           </span>
         </div>
       </ion-col>
-      <ion-col *ngIf="!amICheerleader" width-50 no-margin>
+      <ion-col *ngIf="!cheerleaderService.amICheerleader()" width-50 no-margin>
         <div class="baby-top-button" (tap)="becomeCheerleader()">
           <button class="top-button" ion-button icon-only small>
             <ion-icon name="md-heart" class="football-icon" color="gRed"></ion-icon>

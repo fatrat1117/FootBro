@@ -54,6 +54,7 @@ export class CheerleaderService {
       cheerleader.photoMedium = p.photoMedium;
       cheerleader.pushId = p.pushId;
       cheerleader.joinTime = p.joinTime;
+      cheerleader.role = p.role;
 
       if ('points' in p)
         cheerleader.points = p.points;
@@ -153,7 +154,14 @@ export class CheerleaderService {
   }
 
   isCheerleader(id) {
-    return this.cheerleadersMap[id] && this.cheerleadersMap[id].photoMedium;
+    if (!id)
+      return false;
+    //console.log('isCheerleader', id, this.cheerleadersMap[id]);
+    return this.cheerleadersMap[id] && this.cheerleadersMap[id].role == 'cheerleader';
+  }
+
+  amICheerleader() {
+    return this.isCheerleader(this.playerService.selfId());
   }
 
   blockUser(userId: string) {

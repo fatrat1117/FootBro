@@ -19,7 +19,6 @@ export class CheeringTeamPage {
   colorArray = [-1, -1, -1, -1];
   pendingCheerleaders;
   approvedCheerleaders;
-  amICheerleader = true;
   afPendingSelf;
   onPendingCheerleadersReady;
   onApprovedCheerleadersReady;
@@ -80,10 +79,6 @@ export class CheeringTeamPage {
       this.approvedCheerleaders = this.cheerleaderService.getApprovedCheerleaders();
       this.shuffle(this.approvedCheerleaders);
       this.approvedGrid = this.buildGrid(this.approvedCheerleaders.length, this.oldTotal);
-      if (this.cheerleaderService.isCheerleader(this.playerService.selfId()))
-        this.amICheerleader = true;
-      else
-        this.amICheerleader = false;
     };
 
     this.onPlayerReady = e => {
