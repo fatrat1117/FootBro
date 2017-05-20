@@ -134,7 +134,24 @@ export class CheeringTeamPage {
   }
 
   approve(id) {
-    this.cheerleaderService.approve(id);
+    let confirm = this.alertCtrl.create({
+      title: 'Approve?',
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            //console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Confirm',
+          handler: () => {
+             this.cheerleaderService.approve(id);
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
   isUnlocked(id) {
