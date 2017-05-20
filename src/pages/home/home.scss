@@ -1,10 +1,8 @@
- // global css
-.alert-title {
-  color: #fff;
-}
-
-
-
+// global css
+ .alert-title {
+   color: #fff;
+ }
+ 
  page-home {
    ion-header {
      ion-navbar.toolbar {
@@ -53,7 +51,6 @@
      .menu-col {
        padding: 0px;
        button {
-         //background-color: #222;
          box-shadow: none;
          opacity: 1;
          padding: 0px;
@@ -94,6 +91,11 @@
        }
      }
      */
+   }
+   .bottom-row {
+     border-style: solid;
+     border-color: #444;
+     border-width: 2px 0px 0px 0px;
    }
    .login-button {
      //color: white;
