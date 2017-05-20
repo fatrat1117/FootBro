@@ -29,7 +29,6 @@ export class UpdateGamePage {
     id;
     homeScore;
     awayScore;
-    myIdentity = 2; //0: home captain, 1: away captain, 2:others
     onMatchSquadReady;
     teamId;
     participants: PlayerMatchStatsUI[] = [];
@@ -55,15 +54,11 @@ export class UpdateGamePage {
         this.teamId = params.get('teamId');
         this.adminMode = params.get('adminMode') || this.adminMode;
         this.match = this.matchService.getMatch(this.id);
-        console.log('enter update match UI', this.match);
+        console.log('enter update match UI', this.teamId, this.match);
         this.homeScore = this.match.homeScore >= 0 ? this.match.homeScore.toString() : '';
         this.awayScore = this.match.awayScore >= 0 ? this.match.awayScore.toString() : '';
         this.homePenalty = this.match.homePenalty >= 0 ? this.match.homePenalty.toString() : '';
         this.awayPenalty = this.match.awayPenalty >= 0 ? this.match.awayPenalty.toString() : '';
-        if (this.match.home.captain === this.playerService.selfId())
-            this.myIdentity = 0;
-        else if (this.match.away.captain === this.playerService.selfId())
-            this.myIdentity = 1;
         this.minDate = moment("20160101", "YYYYMMDD").format("YYYY-MM-DD");
         this.matchDate = helper.numberToDateString(this.match.date);
         this.matchTime = helper.numberToTimeString(this.match.time);
@@ -171,14 +166,9 @@ export class UpdateGamePage {
     }
 
     updateMatch() {
-        //amdin can update score
-        if (this.adminMode) {
-            this.doSimpleUpdate();
-            return;
-        }
-
         let points = this.getTeamPoints();
-        let msg = this.squad.participantsConfirmed ? this.loc.getString('confirmmodify') : sprintf(this.loc.getString('teamupdateonceandearnpoints'), points);
+        let msg = (this.squad.participantsConfirmed || this.adminMode)
+         ? this.loc.getString('confirmmodify') : sprintf(this.loc.getString('teamupdateonceandearnpoints'), points);
         let self = this;
         let confirm = this.alertCtrl.create({
             title: this.loc.getString('note'),
@@ -233,7 +223,7 @@ export class UpdateGamePage {
 
         this.matchService.updateMatch(this.id, updateMatchData);
         this.teamService.updateMatchParticipants(this.teamId, this.id, participants);
-        if (!this.squad.participantsConfirmed)
+        if (!this.squad.participantsConfirmed && !this.adminMode)
             this.teamService.teamEarnPoints(this.teamId, points);
 
         let enMsg = sprintf('%s vs %s (%s : %s), rate your teammates to earn player points',
