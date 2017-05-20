@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { ModalController } from 'ionic-angular';
+import { ModalController, AlertController } from 'ionic-angular';
 import { Match } from '../../app/matches/match.model'
 import { PlayerService } from '../../app/players/player.service';
+import { TeamService } from '../../app/teams/team.service';
 import { UpdateGamePage } from '../../pages/update-game/update-game';
-import { OneSignalManager } from '../../providers/onesignal-manager'
+import { OneSignalManager } from '../../providers/onesignal-manager';
+import { Localization } from '../../providers/localization'
 import * as moment from 'moment';
 declare var sprintf: any;
 
@@ -66,7 +68,11 @@ export class ResultScoreComponent {
   versusLabel = "versus";
 
   constructor(private playerService: PlayerService,
-    private modal: ModalController, private osm: OneSignalManager) {
+    private teamService: TeamService,
+    private modal: ModalController,
+    private osm: OneSignalManager,
+    private alertCtrl: AlertController,
+    private loc: Localization) {
 
   }
   informAllClick(e) {
@@ -132,16 +138,15 @@ export class ResultScoreComponent {
     //not started
     if (!this.upcomingMatch.isStarted())
       return false;
-    // if (this.upcomingMatch.isStarted() &&
-    //   ((this.playerService.amIMemberCaptainOrAdmin(this.upcomingMatch.homeId) && !this.upcomingMatch.isHomeUpdated)
-    //     || (this.playerService.amIMemberCaptainOrAdmin(this.upcomingMatch.awayId) && !this.upcomingMatch.isAwayUpdated))
-    // ) {
-    //   return true;
-    // }
 
-    if (this.playerService.amIMemberCaptainOrAdmin(this.upcomingMatch.homeId)
-      || this.playerService.amIMemberCaptainOrAdmin(this.upcomingMatch.awayId))
+    if ((this.playerService.amIMemberCaptainOrAdmin(this.upcomingMatch.homeId) && !this.upcomingMatch.isHomeUpdated)
+      || (this.playerService.amIMemberCaptainOrAdmin(this.upcomingMatch.awayId) && !this.upcomingMatch.isAwayUpdated)) {
       return true;
+    }
+
+    // if (this.playerService.amIMemberCaptainOrAdmin(this.upcomingMatch.homeId)
+    //   || this.playerService.amIMemberCaptainOrAdmin(this.upcomingMatch.awayId))
+    //   return true;
 
     //If I am tournament admin
     return this.amITournamentAdmin();
@@ -163,10 +168,47 @@ export class ResultScoreComponent {
       this.playerService.myself().teamId === this.upcomingMatch.awayId)
       this.modal.create(UpdateGamePage, { id: this.upcomingMatch.id, teamId: this.playerService.myself().teamId }).present();
     else if (this.amITournamentAdmin())
+      this.adminOpenUpdateMatchPage();
+  }
+
+  adminOpenUpdateMatchPage() {
+    let alert = this.alertCtrl.create();
+    alert.setTitle(this.loc.getString('selectateam'));
+    let homeTeam = this.teamService.getTeam(this.upcomingMatch.homeId);
+    let awayTeam = this.teamService.getTeam(this.upcomingMatch.awayId);
+    if (!homeTeam || !awayTeam)
+      return;
+
+    alert.addInput({
+      type: 'radio',
+      label: homeTeam.name,
+      value: homeTeam.id,
+      checked: true
+    });
+
+    alert.addInput({
+      type: 'radio',
+      label: awayTeam.name,
+      value: awayTeam.id
+    });
+
+    alert.addButton(this.loc.getString('Cancel'));
+    alert.addButton({
+      text: this.loc.getString('OK'),
+      handler: teamId => {
+        this.doAdminOpenUpdateMatchPage(teamId);
+      }
+    });
+    alert.present();
+  }
+
+  doAdminOpenUpdateMatchPage(teamId) {
+    if (teamId) {
       this.modal.create(UpdateGamePage, {
         id: this.upcomingMatch.id,
-        teamId: this.playerService.myself().teamId,
+        teamId: teamId,
         adminMode: true
       }).present();
+    }
   }
 }
