@@ -29,6 +29,7 @@ export class FirebaseManager {
   matchDatesMap = {};
   matchesByDateMap = {};
   cachedMatchesMap = {};
+  teamMatchesMap = {};
   //cachedMatchSquadMap = {};
   _afTournamentList;
   cachedTournamentTablesMap = {};
@@ -588,7 +589,7 @@ export class FirebaseManager {
     this.af.database.object(`/players/${id}/basic-info/photoURL`).set(photoUrl);
   }
 
-   updatePlayerPhotoMedium(id: string, photoUrl) {
+  updatePlayerPhotoMedium(id: string, photoUrl) {
     this.af.database.object(`/players/${id}/photoMedium`).set(photoUrl);
   }
 
@@ -947,24 +948,38 @@ export class FirebaseManager {
     }
   }
 
-  getTeamMatchesAsync(teamId) {
-    let sub = this.af.database.list('/team_squads/' + teamId + '/matches', {
-      query: {
-        orderByChild: 'time'
-      }
-    }).subscribe(snapshots => {
-      setTimeout(() => {
-        sub.unsubscribe();
-        snapshots.sort((a, b) => { return b.time - a.time });
-        //console.log(snapshots);
+  getTeamMatches(teamId) {
+    return this.teamMatchesMap[teamId];
+  }
 
-        let result = {
-          id: teamId,
-          matches: snapshots
-        };
-        this.FireCustomEvent('teammatchesready', result);
-      }, this.unsubscribeTimeout);
-    })
+  getTeamMatchesAsync(teamId) {
+    if (this.getTeamMatches(teamId))
+      this.FireCustomEvent('teammatchesready', teamId);
+    else {
+      this.af.database.list('/team_squads/' + teamId + '/matches').subscribe(snapshots => {
+        snapshots.sort((a, b) => { return b.time - a.time });
+        this.teamMatchesMap[teamId] = snapshots;
+        this.FireCustomEvent('teammatchesready', teamId);
+      });
+    }
+
+    // let sub = this.af.database.list('/team_squads/' + teamId + '/matches', {
+    //   query: {
+    //     orderByChild: 'time'
+    //   }
+    // }).subscribe(snapshots => {
+    //   setTimeout(() => {
+    //     sub.unsubscribe();
+    //     snapshots.sort((a, b) => { return b.time - a.time });
+    //     console.log(snapshots);
+
+    //     let result = {
+    //       id: teamId,
+    //       matches: snapshots
+    //     };
+    //     this.FireCustomEvent('teammatchesready', result);
+    //   }, this.unsubscribeTimeout);
+    // })
   }
 
   afMatchList() {
@@ -1122,10 +1137,10 @@ export class FirebaseManager {
     let tournament = this.getTournament(tournamentId);
     if (!tournament)
       return null;
-    
+
     if (tournament.table) {
       //console.log('getTournamentTable', tournament.table);
-      
+
       if (groupId != null) {
         //console.log('group getTournamentTable', groupId, tournament.table);
         return tournament.table[groupId];
@@ -1137,20 +1152,20 @@ export class FirebaseManager {
     return null;
   }
 
-//  // getTournamentTableAsync(tournamentId, groupId = null) {
-//  //   let obj = {
-//   ////    tournamentId: tournamentId,
-//       groupId: groupId
-//   //  };
-//     //if (this.getTournamentTable(id))
-//       this.FireCustomEvent('tournamenttableready', obj);
-//     // else {
-//     //   this.getTournamentTableList(id).subscribe(snapshots => {
-//     //     this.cachedTournamentTablesMap[id] = snapshots;
-//     //     this.FireCustomEvent('tournamenttableready', id);
-//     //   });
-//     // }
-//   }
+  //  // getTournamentTableAsync(tournamentId, groupId = null) {
+  //  //   let obj = {
+  //   ////    tournamentId: tournamentId,
+  //       groupId: groupId
+  //   //  };
+  //     //if (this.getTournamentTable(id))
+  //       this.FireCustomEvent('tournamenttableready', obj);
+  //     // else {
+  //     //   this.getTournamentTableList(id).subscribe(snapshots => {
+  //     //     this.cachedTournamentTablesMap[id] = snapshots;
+  //     //     this.FireCustomEvent('tournamenttableready', id);
+  //     //   });
+  //     // }
+  //   }
 
   getEliminations(tournamentId) {
     let tournament = this.getTournament(tournamentId);
@@ -1518,7 +1533,7 @@ export class FirebaseManager {
             return groupId == match.groupId;
           });
           //console.log('compute group table', groupData);
-          
+
           let tableData = {};
           groupData.forEach(match => {
             if ("homeScore" in match && "awayScore" in match) {

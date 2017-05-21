@@ -99,8 +99,7 @@ export class MyTeamPage {
       if (teamId === this.id) {
         this.players = this.playerService.getTeamPlayers(teamId);
         this.captain = this.playerService.getPlayer(this.team.captain);
-        console.log(this.players);
-        
+        //console.log(this.players);
         //console.log(this.team.captain, this.captain);
       }
     };
@@ -125,7 +124,7 @@ export class MyTeamPage {
     document.addEventListener('serviceteamstatsdataready', this.onTeamStatsDataReady);
     document.addEventListener('serviceteamplayersready', this.onTeamPlayersReady);
     document.addEventListener('serviceteammatchesready', this.onTeamMatchesReady);
-    document.addEventListener('teammatcheschanged', this.onTeamMatchesChanged);
+    //document.addEventListener('teammatcheschanged', this.onTeamMatchesChanged);
   }
 
   ionViewWillUnload() {
@@ -133,26 +132,28 @@ export class MyTeamPage {
     document.removeEventListener('serviceteamstatsdataready', this.onTeamStatsDataReady);
     document.removeEventListener('serviceteamplayersready', this.onTeamPlayersReady);
     document.removeEventListener('serviceteammatchesready', this.onTeamMatchesReady);
-    document.removeEventListener('teammatcheschanged', this.onTeamMatchesChanged);
+    //document.removeEventListener('teammatcheschanged', this.onTeamMatchesChanged);
   }
 
   updateUpcomingMatch() {
+    this.upcomingMatch = this.matchService.getUpcomingMatch(this.id);
+    this.lastMatch = this.matchService.getLastMatch(this.id);
     //console.log(this.matches);
-    if (this.matches.length) {
-      let index = 0;
-      let now = moment().unix() * 1000;
-      for (let i = 1; i < this.matches.length; ++i) {
-        let match = this.matches[i];
-        //console.log(match.$key, match.date, match.id, now);
-        if (match.time < now)
-          break;
-        index = i;
-      }
-      this.upcomingMatch = this.matches[index];
-      if (index + 1 < this.matches.length)
-        this.lastMatch = this.matches[index + 1];
-      console.log('last match', this.lastMatch);
-    }
+    // if (this.matches.length) {
+    //   let index = 0;
+    //   let now = moment().unix() * 1000;
+    //   for (let i = 1; i < this.matches.length; ++i) {
+    //     let match = this.matches[i];
+    //     //console.log(match.$key, match.date, match.id, now);
+    //     if (match.time < now)
+    //       break;
+    //     index = i;
+    //   }
+    //   this.upcomingMatch = this.matches[index];
+    //   if (index + 1 < this.matches.length)
+    //     this.lastMatch = this.matches[index + 1];
+    //   console.log('last match', this.lastMatch);
+    // }
   }
 
   isMember() {

@@ -7,6 +7,7 @@ import { TeamService } from '../teams/team.service';
 import { Team } from '../teams/team.model';
 import { PlayerMatchStatsUI } from '../players/player.model';
 import { PlayerService } from '../players/player.service';
+import * as moment from 'moment';
 
 @Injectable()
 export class MatchService {
@@ -15,6 +16,8 @@ export class MatchService {
   tournamentTableMap = {};
   eliminationMap = {};
   registeredTeamsMap = {};
+  upcomingMatchesMap = {};
+  lastMatchesMap = {};
 
   constructor(private fm: FirebaseManager,
     private teamService: TeamService,
@@ -54,17 +57,19 @@ export class MatchService {
     });
 
     document.addEventListener('teammatchesready', e => {
-      let result = e['detail'];
-      if (this.teamMatchesMap[result.id])
-        this.teamMatchesMap[result.id].splice(0);
+      let teamId = e['detail'];
+      let fmMatches = this.fm.getTeamMatches(teamId);
+      if (this.teamMatchesMap[teamId])
+        this.teamMatchesMap[teamId].splice(0);
       else
-        this.teamMatchesMap[result.id] = [];
-      result.matches.forEach(m => {
+        this.teamMatchesMap[teamId] = [];
+      fmMatches.forEach(m => {
         let match = this.findOrCreateMatchAndPull(m.$key);
         match.time = m.time;
-        this.teamMatchesMap[result.id].push(match);
+        this.teamMatchesMap[teamId].push(match);
       });
-      this.fm.FireCustomEvent('serviceteammatchesready', result.id);
+      this.updateUpcomingMatch(teamId);
+      this.fm.FireCustomEvent('serviceteammatchesready', teamId);
     });
 
     document.addEventListener('eliminationsready', e => {
@@ -99,24 +104,12 @@ export class MatchService {
         registeredTeams.push(team);
       });
 
-      console.log(registeredTeams);
+      //console.log(registeredTeams);
 
       this.registeredTeamsMap[id] = registeredTeams;
       this.fm.FireCustomEvent('serviceregisteredteamsready', id);
     });
   }
-
-  // copyParticipants(target, source) {
-  //   if (source) {
-  //       target.splice(0);
-  //       source.forEach(p => {
-  //         let copy = Object.assign({}, p);
-  //         copy['player'] = this.playerService.findOrCreatePlayer(p.id);
-  //         target.push(copy);
-  //         this.fm.getPlayerAsync(p.id);
-  //       })
-  //     }
-  // }
 
   findOrCreateMatch(id): Match {
     let match;
@@ -170,12 +163,58 @@ export class MatchService {
       this.fm.getMatchAsync(id);
   }
 
+
+  updateUpcomingMatch(teamId) {
+    let matches = this.getTeamMatches(teamId);
+    if (!matches || matches.length <= 0)
+      return;
+    let index = 0;
+    let now = moment().unix() * 1000;
+    for (let i = 1; i < matches.length; ++i) {
+      let match = matches[i];
+      if (match.time < now)
+        break;
+      index = i;
+    }
+    this.upcomingMatchesMap[teamId] = matches[index];
+    if (index + 1 < matches.length)
+      this.lastMatchesMap[teamId] = matches[index + 1];
+
+    //console.log(this.matches);
+    // if (this.matches.length) {
+    //   let index = 0;
+    //   let now = moment().unix() * 1000;
+    //   for (let i = 1; i < this.matches.length; ++i) {
+    //     let match = this.matches[i];
+    //     //console.log(match.$key, match.date, match.id, now);
+    //     if (match.time < now)
+    //       break;
+    //     index = i;
+    //   }
+    //   this.upcomingMatch = this.matches[index];
+    //   if (index + 1 < this.matches.length)
+    //     this.lastMatch = this.matches[index + 1];
+    //   console.log('last match', this.lastMatch);
+    // }
+  }
+
+  getUpcomingMatch(teamId) {
+    return this.upcomingMatchesMap[teamId];
+  }
+
+  getLastMatch(teamId) {
+    return this.lastMatchesMap[teamId];
+  }
+
   getTeamMatches(id) {
     return this.teamMatchesMap[id];
   }
 
-  getTeamMatchesAsync(id) {
-    this.fm.getTeamMatchesAsync(id);
+  getTeamMatchesAsync(teamId) {
+    if (this.getTeamMatches(teamId))
+      this.fm.FireCustomEvent('serviceteammatchesready', teamId);
+    else
+      this.fm.getTeamMatchesAsync(teamId);
   }
 
   afTournamentList() {
