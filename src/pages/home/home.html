@@ -5,18 +5,16 @@
 </ion-header>
 
 <ion-content no-bounce>
-  <ion-row><!--*ngIf="canShowMainPageBanner()"-->
-    <!--ion-slides autoplay="3000" loop="true">
-      <ion-slide *ngFor="let slide of slides">
-        <img [src]="slide.image"/>
-      </ion-slide>
-    </ion-slides-->
+  <ion-row *ngIf = "canShowBanner()">
     <ion-slides loop="false">
       <ion-slide *ngFor="let slide of slides">
         <img [src]="slide.image" />
       </ion-slide>
     </ion-slides>
   </ion-row>
+  
+  <ion-item *ngIf="!canShowBanner() && upcomingMatch.dataReady" (click)="seeMoreTeamGamePlan()" detail-push>{{'teamschedule' | trans}}</ion-item>
+  <result-score *ngIf="!canShowBanner() && upcomingMatch.dataReady" [upcomingMatch]="upcomingMatch" hostPageName="my-team"  (click)="showMatch(upcomingMatch)"></result-score>
 
   <ion-row class="home-menu" no-padding>
     <ion-col class="menu-col" center>

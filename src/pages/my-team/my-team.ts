@@ -41,7 +41,7 @@ export class MyTeamPage {
   onTeamStatsDataReady;
   onTeamPlayersReady;
   onTeamMatchesReady;
-  onTeamMatchesChanged;
+  //onTeamMatchesChanged;
   currPageName = "my-team";
   lastMatch;
 
@@ -113,12 +113,12 @@ export class MyTeamPage {
       }
     };
 
-    this.onTeamMatchesChanged = e => {
-      let teamId = e['detail'];
-      if (teamId === this.id) {
-        this.matchService.getTeamMatchesAsync(teamId);
-      }
-    }
+    // this.onTeamMatchesChanged = e => {
+    //   let teamId = e['detail'];
+    //   if (teamId === this.id) {
+    //     this.matchService.getTeamMatchesAsync(teamId);
+    //   }
+    // }
 
     document.addEventListener('serviceplayerready', this.onPlayerReady);
     document.addEventListener('serviceteamstatsdataready', this.onTeamStatsDataReady);

@@ -75,7 +75,7 @@ export class FirebaseManager {
 
   initialize() {
     this.af.auth.subscribe(auth => {
-      //console.log(auth);
+      console.log(auth);
       this.auth = auth;
       if (auth) {
         this.getPlayerAsync(auth.uid);
@@ -1009,10 +1009,10 @@ export class FirebaseManager {
 
     this.afMatch(matchId).remove().then(() => {
       this.FireCustomEvent('matcheschanged', date);
-      if (homeId)
-        this.FireCustomEvent('teammatcheschanged', homeId);
-      if (awayId)
-        this.FireCustomEvent('teammatcheschanged', awayId);
+      // if (homeId)
+      //   this.FireCustomEvent('teammatcheschanged', homeId);
+      // if (awayId)
+      //   this.FireCustomEvent('teammatcheschanged', awayId);
     });
   }
 

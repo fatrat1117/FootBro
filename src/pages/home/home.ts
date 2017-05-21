@@ -16,7 +16,10 @@ import { Player } from '../../app/players/player.model'
 import { PlayerService } from '../../app/players/player.service'
 import { Team } from '../../app/teams/team.model'
 import { TeamService } from '../../app/teams/team.service'
-import {TeamPlayersPage} from '../team-players/team-players'
+import { MatchService } from '../../app/matches/match.service'
+import { TeamPlayersPage } from '../team-players/team-players'
+import { SearchMatchPage } from '../search-match/search-match'
+import { MatchDetailPage } from '../match-detail/match-detail'
 declare var sprintf: any;
 
 @Component({
@@ -26,16 +29,19 @@ declare var sprintf: any;
 
 export class HomePage {
   slides: any[];
-  items = ["item1", "item2", "item3"];
   selfPlayer: Player;
   selfTeam: Team;
   showLogin: boolean;
   showJoinTeam: boolean;
+  upcomingMatch;
+  matches;
   onPlayerReady;
   onTeamReady;
+  onTeamMatchesReady;
 
   constructor(public navCtrl: NavController, private local: Localization, private elRef: ElementRef, public modalCtrl: ModalController,
-    private playerService: PlayerService, private teamService: TeamService, private alertCtrl: AlertController) {
+    private playerService: PlayerService, private teamService: TeamService, private alertCtrl: AlertController,
+    private matchService: MatchService) {
     this.slides = [];
     //this.loadSlides(local.langCode, 4);
     this.loadSlides(local.langCode, 1);
@@ -48,6 +54,8 @@ export class HomePage {
   ionViewDidLoad() {
     document.addEventListener('userlogin', e => {
       document.addEventListener('serviceplayerready', this.onPlayerReady);
+      document.addEventListener('serviceteamready', this.onTeamReady);
+      document.addEventListener('serviceteammatchesready', this.onTeamMatchesReady);
       this.showLogin = false;
       this.playerService.getPlayerAsync(this.playerService.selfId());
     });
@@ -55,19 +63,35 @@ export class HomePage {
     document.addEventListener('userlogout', e => {
       this.showLogin = true;
       this.selfPlayer = null;
-      this.selfTeam = null
+      this.selfTeam = null;
       document.removeEventListener('serviceteamready', this.onTeamReady);
       document.removeEventListener('serviceplayerready', this.onPlayerReady);
+      document.removeEventListener('serviceteammatchesready', this.onTeamMatchesReady);
     });
+
+    this.onTeamReady = e => {
+      let teamId = e['detail'];
+      if (this.playerService.myself() && this.playerService.myself().teamId === teamId) {
+        this.selfTeam = this.teamService.getTeam(e['detail']);
+      }
+    }
+
+    this.onTeamMatchesReady = e => {
+      let teamId = e['detail'];
+      if (this.playerService.myself() && this.playerService.myself().teamId === teamId) {
+        this.matches = this.matchService.getTeamMatches(teamId);
+        this.upcomingMatch = this.matchService.getUpcomingMatch(teamId);
+        //console.log('onTeamMatchesReady', this.upcomingMatch);
+      }
+    };
 
     this.onPlayerReady = e => {
       if (this.playerService.selfId() && e['detail'] == this.playerService.selfId()) {
         this.selfPlayer = this.playerService.getPlayer(e['detail']);
-        //console.log(this.selfPlayer);
 
         if (this.selfPlayer.teamId) {
-          document.addEventListener('serviceteamready', this.onTeamReady);
           this.teamService.getTeamAsync(this.selfPlayer.teamId);
+          this.matchService.getTeamMatchesAsync(this.selfPlayer.teamId);
           this.showJoinTeam = false;
         }
         else {
@@ -75,14 +99,6 @@ export class HomePage {
         }
       }
     };
-
-    this.onTeamReady = e => {
-      if (this.selfPlayer.teamId && e['detail'] == this.selfPlayer.teamId) {
-        this.selfTeam = this.teamService.getTeam(e['detail']);
-      }
-    }
-
-    //this.ls.download();
   }
 
   loadSlides(langCode: string, total: number) {
@@ -112,10 +128,6 @@ export class HomePage {
 
   enterGameSchedule() {
     this.navCtrl.push(GameSchedulePage);
-  }
-
-  selectItems(item: string) {
-    console.log("Selected Item", item);
   }
 
   openModal(characterNum: number) {
@@ -182,14 +194,14 @@ export class HomePage {
     return this.playerService.amIPlayer();
   }
 
-  canShowMainPageBanner(){
+  canShowMainPageBanner() {
     var isCurrentLoggedIn = this.playerService.isAuthenticated();
-    if (!isCurrentLoggedIn){
-       return true;
-    }else {
-      if (this.selfPlayer && !this.selfPlayer.teamId){
-          return true;
-     }else {
+    if (!isCurrentLoggedIn) {
+      return true;
+    } else {
+      if (this.selfPlayer && !this.selfPlayer.teamId) {
+        return true;
+      } else {
         return false;
       }
     }
@@ -199,9 +211,21 @@ export class HomePage {
     this.navCtrl.push(TeamPlayersPage, { teamId: this.selfTeam.id });
   }
 
-  onImageLoad(ev) {
-    console.log(ev);
-    
+  canShowBanner() {
+    if (this.playerService.isAuthenticated() && this.playerService.myself() && this.playerService.myself().teamId && this.upcomingMatch)
+      return false;
+
+    return true;
+  }
+
+  seeMoreTeamGamePlan() {
+    this.navCtrl.push(SearchMatchPage, { matches: this.matches, showDate: true });
+  }
+
+  showMatch(match) {
+    if (match) {
+      this.modalCtrl.create(MatchDetailPage, { match: match }).present();
+    }
   }
 }
 

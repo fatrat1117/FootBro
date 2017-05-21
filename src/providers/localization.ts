@@ -396,6 +396,8 @@ export class Localization {
       saves: 'Saves',
       confirmmodify: 'Comfirm modification?',
       selectateam: 'Please select a team',
+      penalty: 'Penalty',
+      teamschedule: 'Team Schedule',
     },
 
     zh: {
@@ -773,6 +775,7 @@ export class Localization {
       saves: '扑救',
       confirmmodify: '确认修改吗?',
       selectateam: '请选择一个球队',
+      teamschedule: '球队日程',
     }
   }
 }
