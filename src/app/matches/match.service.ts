@@ -50,35 +50,22 @@ export class MatchService {
       match.location.name = fmMatch.locationName;
       match.location.address = fmMatch.locationAddress;
 
-      //this.copyParticipants(match.homeParticipants, fmMatch.homeParticipants);
-      //this.copyParticipants(match.awayParticipants, fmMatch.awayParticipants);
-      //console.log(match);
       this.fm.FireCustomEvent('servicematchready', id);
     });
 
     document.addEventListener('teammatchesready', e => {
       let result = e['detail'];
-      let matches = [];
-      this.teamMatchesMap[result.id] = matches;
+      if (this.teamMatchesMap[result.id])
+        this.teamMatchesMap[result.id].splice(0);
+      else
+        this.teamMatchesMap[result.id] = [];
       result.matches.forEach(m => {
         let match = this.findOrCreateMatchAndPull(m.$key);
         match.time = m.time;
-        matches.push(match);
+        this.teamMatchesMap[result.id].push(match);
       });
       this.fm.FireCustomEvent('serviceteammatchesready', result.id);
     });
-
-    // document.addEventListener('tournamenttableready', e => {
-    //   let obj = e['detail'];
-    //   let table = this.fm.getTournamentTable(obj.tournamentId);
-    //   table.forEach(r => {
-    //     let rank = r;
-    //     rank['team'] = this.teamService.findOrCreateTeam(r.id);
-    //     this.fm.getTeamAsync(r.id);
-    //   });
-    //   this.tournamentTableMap[id] = table;
-    //   this.fm.FireCustomEvent('servicetournamenttableready', id);
-    // });
 
     document.addEventListener('eliminationsready', e => {
       let id = e['detail'];
@@ -90,8 +77,8 @@ export class MatchService {
         newEl.name = els[i].name;
         newEl.matches = [];
         if (i < els.length - 1)
-          newEl.nextName = els[i+1].name;
-        for(let m in els[i].matches) {
+          newEl.nextName = els[i + 1].name;
+        for (let m in els[i].matches) {
           newEl.matches.push(m);
         }
         newEls.push(newEl);
