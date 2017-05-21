@@ -75,7 +75,7 @@ export class FirebaseManager {
 
   initialize() {
     this.af.auth.subscribe(auth => {
-      console.log(auth);
+      //console.log(auth);
       this.auth = auth;
       if (auth) {
         this.getPlayerAsync(auth.uid);

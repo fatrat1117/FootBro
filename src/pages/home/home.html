@@ -12,9 +12,9 @@
       </ion-slide>
     </ion-slides>
   </ion-row>
-  
-  <ion-item *ngIf="!canShowBanner() && upcomingMatch.dataReady" (click)="seeMoreTeamGamePlan()" detail-push>{{'teamschedule' | trans}}</ion-item>
+
   <result-score *ngIf="!canShowBanner() && upcomingMatch.dataReady" [upcomingMatch]="upcomingMatch" hostPageName="my-team"  (click)="showMatch(upcomingMatch)"></result-score>
+  <ion-item *ngIf="!canShowBanner() && upcomingMatch.dataReady" (click)="seeMoreTeamGamePlan()" color = "darkGreen" detail-push>{{'teamschedule' | trans}}</ion-item>
 
   <ion-row class="home-menu" no-padding>
     <ion-col class="menu-col" center>

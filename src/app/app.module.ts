@@ -255,7 +255,7 @@ export const firebaseConfig = {
     FAQComponent,
     ColorPickerPage
   ],
-  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
+  providers: [{ provide: ErrorHandler, useClass: MyErrorHandler },
     FirebaseManager,
     LocalStorage,
     OneSignalManager,
