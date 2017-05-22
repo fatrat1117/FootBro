@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="3010000" id="com.SoccerBro.SoccerBro" version="3.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="3030000" id="com.SoccerBro.SoccerBro" version="3.3.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>SoccerBro</name>
     <description>Brotherhood for all football players</description>
-    <author email="soccerbro.sg@gmail.com" href="http://soccerbro.com/">SoccerBro Team</author>
+    <author email="support@soccerbrostudio.com" href="www.soccerbrostudio.com">SoccerBro Team</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
