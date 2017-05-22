@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content no-bounce>
-  <ion-row *ngIf = "canShowBanner()">
+  <ion-row *ngIf = "showLogin">
     <ion-slides loop="false">
       <ion-slide *ngFor="let slide of slides">
         <img [src]="slide.image" />
@@ -13,10 +13,10 @@
     </ion-slides>
   </ion-row>
 
+  <!--ion-item *ngIf="!canShowBanner() && upcomingMatch.dataReady" (click)="seeMoreTeamGamePlan()" detail-push>{{'teamschedule' | trans}}</ion-item-->
   <result-score *ngIf="!canShowBanner() && upcomingMatch.dataReady" [upcomingMatch]="upcomingMatch" hostPageName="my-team" (click)="showMatch(upcomingMatch)"></result-score>
-  <ion-item *ngIf="!canShowBanner() && upcomingMatch.dataReady" (click)="seeMoreTeamGamePlan()" detail-push>{{'teamschedule' | trans}}</ion-item>
 
-  <ion-row class="home-menu" no-padding>
+  <ion-row class="home-menu" no-padding style="margin-top: 2rem">
     <ion-col class="menu-col" center>
       <button ion-button icon-only full color="dark" (tap)="enterCheeringTeam()">
         <ion-icon name="md-flower" color="gRed"></ion-icon>
@@ -35,7 +35,7 @@
     </ion-col>
   </ion-row>
   <ion-row *ngIf = "selfTeam" class="home-menu bottom-row" no-padding>
-    <ion-col class="menu-col"  center>
+    <ion-col *ngIf = "selfTeam" class="menu-col"  center>
       <button ion-button icon-only full color="dark" (tap)="enterManageSquadPage()">
         <ion-icon name="md-football" color="gYellow"></ion-icon>
       </button>
@@ -49,6 +49,14 @@
       </button>
       <button ion-button full color="dark" (tap)="openTeamPlayersPage()">
         <p>{{'players' | trans}}</p>
+      </button>
+    </ion-col>
+    <ion-col class="menu-col"  center>
+      <button *ngIf="upcomingMatch?.dataReady" ion-button icon-only full color="dark" (tap)="openTeamPlayersPage()">
+        <ion-icon name="md-calendar" color="light"></ion-icon>
+      </button>
+      <button ion-button full color="dark" (tap)="seeMoreTeamGamePlan()">
+        <p>{{'schedule' | trans}}</p>
       </button>
     </ion-col>
   </ion-row>
