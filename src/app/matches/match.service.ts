@@ -227,10 +227,11 @@ export class MatchService {
     //console.log('table', copyTable);
     let teamTables = [];
     for (let teamId in copyTable) {
-      let r = Object.assign({}, table[teamId]);
-      r.team = this.teamService.findOrCreateTeamAndPull(teamId);
-      //console.log(r);
-      teamTables.push(r);
+      if (teamId !== 'winlist') {
+        let r = Object.assign({}, table[teamId]);
+        r.team = this.teamService.findOrCreateTeamAndPull(teamId);
+        teamTables.push(r);
+      }
     }
     teamTables.sort((a, b) => {
       return a.rank - b.rank;
