@@ -15,8 +15,7 @@ import { UIHelper } from '../../providers/uihelper'
     templateUrl: 'login.html',
 })
 export class LoginPage {
-
-    error: any
+    //error: any
     busy: boolean;
     _credentials: any;
     private facebookProvider = new Facebook({
@@ -34,21 +33,12 @@ export class LoginPage {
             password: ''
         };
         this.busy = false;
-        //this.cordovaOauth = new CordovaOauth(new Facebook({clientId: "502807016597247", appScope: ["email"]}));
     }
 
     dismiss() {
         this.viewCtrl.dismiss();
     }
-    /**
-     * this create in the user using the form credentials. 
-     *
-     * we are preventing the default behavor of submitting 
-     * the form
-     * 
-     * @param _credentials {Object} the email and password from the form
-     * @param _event {Object} the event information from the form submit
-     */
+
     registerUser(_event) {
         _event.preventDefault();
         this.busy = true;
@@ -64,7 +54,7 @@ export class LoginPage {
                 //return this.login(_credentials, _event);
             })
             .catch(e => {
-                self.error = e;
+                self.uiHelper.showAlert(e);
                 self.busy = false;
             });
     }
@@ -92,7 +82,7 @@ export class LoginPage {
                     console.log('firebase success');
                     this.dismiss();
                 }).catch((error) => {
-                    this.error = error;
+                    self.uiHelper.showAlert(error);
                     self.busy = false;
                 });
             } catch (e) 
@@ -130,19 +120,9 @@ export class LoginPage {
             provider: AuthProviders.Password,
             method: AuthMethods.Password
         }).then((authData) => {
-            //console.log(authData)
-            // if (addUser) {
-            //     const itemObservable = this.af.database.object('/users/' + authData.uid);
-            //     itemObservable.set({
-            //         "provider": authData.auth.providerData[0].providerId,
-            //         "avatar": authData.auth.photoURL || "MISSING",
-            //         "displayName": authData.auth.providerData[0].displayName || authData.auth.email,
-            //     })
-            // } else {
             this.dismiss();
-            //}
         }).catch((error) => {
-            this.error = error
+            self.uiHelper.showAlert(error);
             self.busy = false;
         });
     }

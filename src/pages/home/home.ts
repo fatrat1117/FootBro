@@ -32,6 +32,7 @@ export class HomePage {
   selfPlayer: Player;
   selfTeam: Team;
   showLogin: boolean;
+  showBanner = false;
   showJoinTeam: boolean;
   upcomingMatch;
   matches;
@@ -62,6 +63,7 @@ export class HomePage {
 
     document.addEventListener('userlogout', e => {
       this.showLogin = true;
+      this.showBanner = false;
       this.selfPlayer = null;
       this.selfTeam = null;
       document.removeEventListener('serviceteamready', this.onTeamReady);
@@ -88,6 +90,8 @@ export class HomePage {
     this.onPlayerReady = e => {
       if (this.playerService.selfId() && e['detail'] == this.playerService.selfId()) {
         this.selfPlayer = this.playerService.getPlayer(e['detail']);
+        if ("cheerleader" === this.selfPlayer.role) 
+          this.showBanner = true;
 
         if (this.selfPlayer.teamId) {
           this.teamService.getTeamAsync(this.selfPlayer.teamId);
