@@ -45,7 +45,7 @@ export class HomePage {
     private matchService: MatchService) {
     this.slides = [];
     //this.loadSlides(local.langCode, 4);
-    this.loadSlides(local.langCode, 1);
+    this.loadSlides(local.langCode, 2);
     this.selfPlayer = null;
     this.selfTeam = null;
     this.showLogin = false;
