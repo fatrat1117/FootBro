@@ -49,7 +49,7 @@ export class CheerleaderService {
       let id = e['detail'];
       let cheerleader = this.findOrCreateCheerleader(id);
       let p = this.playerService.getPlayer(id);
-      console.log('cheerleaderready', p);
+      //console.log('cheerleaderready', p);
       cheerleader.name = p.name;
       cheerleader.photoMedium = p.photoMedium;
       cheerleader.pushId = p.pushId;
