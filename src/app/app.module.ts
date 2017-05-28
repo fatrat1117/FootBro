@@ -51,6 +51,7 @@ import { SquadSelectPage } from '../pages/squad-select/squad-select';
 import { ManageSquadPage } from '../pages/manage-squad/manage-squad';
 import { TeamPlayersPage } from '../pages/team-players/team-players';
 import { ColorPickerPage} from '../pages/color-picker/color-picker';
+import { EditPositionPage } from '../pages/edit-position/edit-position';
 
 // services
 import { AngularFireModule } from 'angularfire2';
@@ -93,17 +94,6 @@ import { KeyboardAttachDirective } from '../providers/keyboard-attach.directive'
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { Camera } from '@ionic-native/camera';
 import { Badge } from '@ionic-native/badge';
-
-/*
-export const firebaseConfig = {
-  apiKey: "AIzaSyCrhL6g6rHs7-X09jw5Oq8I_g0fspD8bf8",
-  authDomain: "project-3416565325366537224.firebaseapp.com",
-  databaseURL: "https://project-3416565325366537224.firebaseio.com",
-  projectId: "project-3416565325366537224",
-  storageBucket: "project-3416565325366537224.appspot.com",
-  messagingSenderId: "149844388984"
-};
-*/
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCrhL6g6rHs7-X09jw5Oq8I_g0fspD8bf8",
@@ -162,6 +152,7 @@ export const firebaseConfig = {
     SquadSelectPage,
     ManageSquadPage,
     TeamPlayersPage,
+    EditPositionPage,
     // pipes
     TransPipe,
     StringToDatePipe,
@@ -253,7 +244,8 @@ export const firebaseConfig = {
     TeamPlayersPage,
     ManagePlayerPopover,
     FAQComponent,
-    ColorPickerPage
+    ColorPickerPage,
+    EditPositionPage
   ],
   providers: [{ provide: ErrorHandler, useClass: MyErrorHandler },
     FirebaseManager,

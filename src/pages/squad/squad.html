@@ -26,12 +26,3 @@
   </ion-row>
   <ion-icon *ngIf="substitutes.length > 5" name="ios-more" class="more-icon"></ion-icon>
 </ion-grid>
-
-<!--ion-grid *ngIf="!settings.editMode" class="bench" no-padding>
-  <ion-row *ngFor="let ps of substitutes | groupNPipe:5" text-center>
-    <ion-col class="playersDiv" *ngFor="let p of ps" text-center>
-      <img class="image" [src]="p.photo">
-      <p class="name">{{p.name}}</p>
-    </ion-col>
-  </ion-row>
-</ion-grid-->

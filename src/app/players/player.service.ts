@@ -9,6 +9,28 @@ export class PlayerService {
   playersMap = {};
   teamPlayersMap = {};
   bRefreshTeamPlayers = false;
+  positionMap = {      
+      gk: 'gk',
+      cb: 'cb',
+      sb: 'rb',
+      dmf: 'dm',
+      amf: 'am',
+      cf: 'cf',
+      sf: 'rw',
+      lw: 'lw',
+      ss: 'ss',
+      rw: 'rw',
+      am: 'am',
+      lm: 'lm',
+      cm: 'cm',
+      rm: 'rm',
+      dm: 'dm',
+      lwb: 'lwb',
+      rwb: 'rwb',
+      lb: 'lb',
+      rb: 'rb',
+      sw: 'sw',
+    }
 
   constructor(private fm: FirebaseManager, private uiHelper: UIHelper, private ls: LocalStorage) {
     document.addEventListener('playerready', e => {
@@ -28,8 +50,9 @@ export class PlayerService {
       else
         player.points = 0;
 
-      if (playerData['detail-info'] && 'position' in playerData['detail-info'])
-        player.position = playerData['detail-info'].position;
+      if (playerData['detail-info'] && 'position' in playerData['detail-info']) {
+        player.position = this.positionMap[playerData['detail-info'].position];
+      }
       if (playerData['detail-info'] && 'pushId' in playerData['detail-info'])
         player.pushId = playerData['detail-info'].pushId;
       if (playerData['detail-info'] && 'height' in playerData['detail-info'])

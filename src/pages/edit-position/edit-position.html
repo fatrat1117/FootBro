@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'Position' | trans}}</ion-title>
+    <ion-buttons left>
+      <button (click)="close()" color = 'danger' ion-button icon-only clear>
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content no-bounce>
+    <img src="assets/img/soccer-field-background.jpg" style="width: 100%; height: 100%">
+    <button ion-button clear (click) = "selectPosition('cf')">{{'cf' | trans}}</button>
+    <button ion-button clear (click) = "selectPosition('lw')">{{'lw' | trans}}</button>
+    <button ion-button clear (click) = "selectPosition('ss')">{{'ss' | trans}}</button>
+    <button ion-button clear (click) = "selectPosition('rw')">{{'rw' | trans}}</button>
+    <button ion-button clear (click) = "selectPosition('am')">{{'am' | trans}}</button>
+    <button ion-button clear (click) = "selectPosition('lm')">{{'lm' | trans}}</button>
+    <button ion-button clear (click) = "selectPosition('cm')">{{'cm' | trans}}</button>
+    <button ion-button clear (click) = "selectPosition('rm')">{{'rm' | trans}}</button>
+    <button ion-button clear (click) = "selectPosition('dm')">{{'dm' | trans}}</button>
+    <button ion-button clear (click) = "selectPosition('lwb')">{{'lwb' | trans}}</button>
+    <button ion-button clear (click) = "selectPosition('rwb')">{{'rwb' | trans}}</button>
+    <button ion-button clear (click) = "selectPosition('lb')">{{'lb' | trans}}</button>
+    <button ion-button clear (click) = "selectPosition('rb')">{{'rb' | trans}}</button>
+    <button ion-button clear (click) = "selectPosition('cb')">{{'cb' | trans}}</button>
+    <button ion-button clear (click) = "selectPosition('sw')">{{'sw' | trans}}</button>
+    <button ion-button clear (click) = "selectPosition('gk')">{{'gk' | trans}}</button>
+</ion-content>

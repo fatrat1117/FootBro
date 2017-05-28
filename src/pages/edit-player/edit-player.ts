@@ -4,7 +4,7 @@ import { NavController, ModalController } from 'ionic-angular';
 import { EditPlayerNamePage } from './edit-player-name'
 import { EditPlayerHeightPage } from './edit-player-height'
 import { EditPlayerWeightPage } from './edit-player-weight'
-import { EditPlayerPositionPage } from './edit-player-position'
+import { EditPositionPage } from '../edit-position/edit-position'
 import { EditPlayerFootPage } from './edit-player-foot'
 import { EditPlayerDescriptionPage } from './edit-player-description'
 
@@ -72,7 +72,7 @@ export class EditPlayerPage {
   }
 
   editPosition() {
-   this.modalCtrl.create(EditPlayerPositionPage, {
+   this.modalCtrl.create(EditPositionPage, {
      position: this.player.position
    }).present();
   }
