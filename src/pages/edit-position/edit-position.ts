@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavParams, ModalController, ViewController} from 'ionic-angular'
 import { PlayerService } from '../../app/players/player.service'
 
@@ -8,6 +8,7 @@ import { PlayerService } from '../../app/players/player.service'
 })
 export class EditPositionPage {
   position;
+    @ViewChild('contentCtrl') contentCtrl;
   constructor(params: NavParams,
   private modal: ModalController,
   private viewCtrl: ViewController,
@@ -23,4 +24,8 @@ export class EditPositionPage {
     this.playerService.updatePlayerDetail('position', pos);
     this.viewCtrl.dismiss({position: pos});
   }
+
+  //ionViewDidLoad() {
+    //console.log(this.contentCtrl);
+  //}
 }

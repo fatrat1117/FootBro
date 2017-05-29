@@ -8,30 +8,83 @@
     </ion-buttons>
   </ion-navbar>
 </ion-header>
-<ion-content no-bounce>
+<ion-content no-bounce #contentCtrl>
     <img src="assets/img/soccer-field-background.jpg" style="width: 100%; height: 100%">
     <ion-grid style="position: absolute; left: 0px; top: 0px">
-      <ion-row style="margin-top: 30px">
-        <ion-col text-center width-100 (tap) = "selectPosition('cf')">
+      <ion-row [style.height.px]="contentCtrl.contentHeight * 0.15">
+        <ion-col text-center width-100 (tap) = "selectPosition('cf')" class="text-vcenter">
           {{'cf' | trans}}
-          <!--<button ion-button clear (click) = "selectPosition('cf')" color = 'white'>{{'cf' | trans}}</button>-->
+        </ion-col>
+      </ion-row>
+      <ion-row [style.height.px]="contentCtrl.contentHeight * 0.1">
+                <ion-col text-center width-33 (tap) = "selectPosition('lw')" class="text-vcenter">
+          {{'lw' | trans}}
+        </ion-col>
+        <ion-col text-center width-33 (tap) = "selectPosition('ss')" class="text-vcenter">
+          {{'ss' | trans}}
+        </ion-col>
+        <ion-col text-center width-33 (tap) = "selectPosition('rw')" class="text-vcenter">
+          {{'rw' | trans}}
+        </ion-col>
+      </ion-row>
+
+      <ion-row [style.height.px]="contentCtrl.contentHeight * 0.2">
+        <ion-col text-center width-100 (tap) = "selectPosition('am')" class="text-vcenter">
+          {{'am' | trans}}
+        </ion-col>
+      </ion-row>
+
+      <ion-row [style.height.px]="contentCtrl.contentHeight * 0.05">
+        <ion-col text-center width-33 (tap) = "selectPosition('lm')" class="text-vcenter">
+          {{'lm' | trans}}
+        </ion-col>
+        <ion-col text-center width-33 (tap) = "selectPosition('cm')" class="text-vcenter">
+          {{'cm' | trans}}
+        </ion-col>
+        <ion-col text-center width-33 (tap) = "selectPosition('rm')" class="text-vcenter">
+          {{'rm' | trans}}
+        </ion-col>
+      </ion-row>
+
+      <ion-row [style.height.px]="contentCtrl.contentHeight * 0.15">
+        <ion-col text-center width-100 (tap) = "selectPosition('dm')" class="text-vcenter">
+          {{'dm' | trans}}
+        </ion-col>
+      </ion-row>
+
+       <ion-row [style.height.px]="contentCtrl.contentHeight * 0.05">
+        <ion-col text-center width-33 (tap) = "selectPosition('lwb')" class="text-vcenter">
+          {{'lwb' | trans}}
+        </ion-col>
+        <ion-col text-center width-33>
+        </ion-col>
+        <ion-col text-center width-33 (tap) = "selectPosition('rwb')" class="text-vcenter">
+          {{'rwb' | trans}}
+        </ion-col>
+      </ion-row>
+
+      <ion-row [style.height.px]="contentCtrl.contentHeight * 0.1">
+        <ion-col text-center width-33 (tap) = "selectPosition('lb')" class="text-vcenter">
+          {{'lb' | trans}}
+        </ion-col>
+        <ion-col text-center width-33 (tap) = "selectPosition('cb')" class="text-vcenter">
+          {{'cb' | trans}}
+        </ion-col>
+        <ion-col text-center width-33 (tap) = "selectPosition('rb')" class="text-vcenter">
+          {{'rb' | trans}}
+        </ion-col>
+      </ion-row>
+
+      <ion-row [style.height.px]="contentCtrl.contentHeight * 0.05">
+        <ion-col text-center width-100 (tap) = "selectPosition('sw')" class="text-vcenter">
+          {{'sw' | trans}}
+        </ion-col>
+      </ion-row>
+
+      <ion-row [style.height.px]="contentCtrl.contentHeight * 0.1">
+        <ion-col text-center width-100 (tap) = "selectPosition('gk')" class="text-vcenter">
+          {{'gk' | trans}}
         </ion-col>
       </ion-row>
     </ion-grid>
-<!--    
-    <button ion-button clear (click) = "selectPosition('lw')">{{'lw' | trans}}</button>
-    <button ion-button clear (click) = "selectPosition('ss')" style="position: absolute; top: 15%; left: 45%" color = 'white'>{{'ss' | trans}}</button>
-    <button ion-button clear (click) = "selectPosition('rw')">{{'rw' | trans}}</button>
-    <button ion-button clear (click) = "selectPosition('am')">{{'am' | trans}}</button>
-    <button ion-button clear (click) = "selectPosition('lm')">{{'lm' | trans}}</button>
-    <button ion-button clear (click) = "selectPosition('cm')">{{'cm' | trans}}</button>
-    <button ion-button clear (click) = "selectPosition('rm')">{{'rm' | trans}}</button>
-    <button ion-button clear (click) = "selectPosition('dm')">{{'dm' | trans}}</button>
-    <button ion-button clear (click) = "selectPosition('lwb')">{{'lwb' | trans}}</button>
-    <button ion-button clear (click) = "selectPosition('rwb')">{{'rwb' | trans}}</button>
-    <button ion-button clear (click) = "selectPosition('lb')">{{'lb' | trans}}</button>
-    <button ion-button clear (click) = "selectPosition('rb')">{{'rb' | trans}}</button>
-    <button ion-button clear (click) = "selectPosition('cb')">{{'cb' | trans}}</button>
-    <button ion-button clear (click) = "selectPosition('sw')">{{'sw' | trans}}</button>
-    <button ion-button clear (click) = "selectPosition('gk')">{{'gk' | trans}}</button>-->
 </ion-content>
