@@ -100,6 +100,7 @@ export class HomePage {
         }
         else {
           this.showJoinTeam = true;
+          this.showBanner = true;
         }
       }
     };
