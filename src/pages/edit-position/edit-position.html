@@ -10,9 +10,17 @@
 </ion-header>
 <ion-content no-bounce>
     <img src="assets/img/soccer-field-background.jpg" style="width: 100%; height: 100%">
-    <button ion-button clear (click) = "selectPosition('cf')">{{'cf' | trans}}</button>
+    <ion-grid style="position: absolute; left: 0px; top: 0px">
+      <ion-row style="margin-top: 30px">
+        <ion-col text-center width-100 (tap) = "selectPosition('cf')">
+          {{'cf' | trans}}
+          <!--<button ion-button clear (click) = "selectPosition('cf')" color = 'white'>{{'cf' | trans}}</button>-->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+<!--    
     <button ion-button clear (click) = "selectPosition('lw')">{{'lw' | trans}}</button>
-    <button ion-button clear (click) = "selectPosition('ss')">{{'ss' | trans}}</button>
+    <button ion-button clear (click) = "selectPosition('ss')" style="position: absolute; top: 15%; left: 45%" color = 'white'>{{'ss' | trans}}</button>
     <button ion-button clear (click) = "selectPosition('rw')">{{'rw' | trans}}</button>
     <button ion-button clear (click) = "selectPosition('am')">{{'am' | trans}}</button>
     <button ion-button clear (click) = "selectPosition('lm')">{{'lm' | trans}}</button>
@@ -25,5 +33,5 @@
     <button ion-button clear (click) = "selectPosition('rb')">{{'rb' | trans}}</button>
     <button ion-button clear (click) = "selectPosition('cb')">{{'cb' | trans}}</button>
     <button ion-button clear (click) = "selectPosition('sw')">{{'sw' | trans}}</button>
-    <button ion-button clear (click) = "selectPosition('gk')">{{'gk' | trans}}</button>
+    <button ion-button clear (click) = "selectPosition('gk')">{{'gk' | trans}}</button>-->
 </ion-content>
