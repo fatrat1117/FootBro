@@ -1,7 +1,6 @@
 .header_container{
    .header_title{
      background: #96BF32;
-     padding: 10px;
      color: white;
      .img{
        max-width: 3rem;
@@ -18,13 +17,6 @@
     .png{
       width: 40%;
     }
-    .ios-png{
-
-    }
-
-    .android-png{
-
-    }
   }
 }
 
@@ -36,3 +28,12 @@
     color:white;
   }
 }
+
+.banner-img {
+  width: 100%;
+  height: auto;
+}
+
+// .banner-area {
+//   max-width: 768px;
+// }
