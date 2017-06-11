@@ -239,6 +239,7 @@ export class Localization {
       stats: 'stats',
       owngoals: 'Own Goals',
       rating: 'Rating',
+      ratings: 'Ratings',
       excellent: 'Excellent',
       verygood: 'Very Good',
       good: 'Good',
@@ -412,6 +413,7 @@ export class Localization {
       rb: 'RB',
       sw: 'SW',
       rememberme: 'Remember Me',
+      mom: 'Man of Match',
     },
 
     zh: {
@@ -632,6 +634,7 @@ export class Localization {
       stats: '技术统计',
       owngoals: '乌龙球',
       rating: '评分',
+      ratings: '评分',
       excellent: '球王',
       verygood: '很好',
       good: '好',
@@ -803,7 +806,8 @@ export class Localization {
       lb: '左后卫',
       rb: '右后卫',
       sw: '清道夫',
-      rememberme: '记住我'
+      rememberme: '记住我',
+      mom: '全场最佳',
     }
   }
 }

@@ -30,8 +30,8 @@ export class MatchDetailPage {
   squad;
   homeSquad;
   awaySquad;
-  homePlayerStats = {};
-  awayPlayerStats = {};
+  homePlayerStats: any = {};
+  awayPlayerStats: any = {};
   allPlayersStats = {};
   statCategories = [];
   selectedStats;
@@ -42,7 +42,8 @@ export class MatchDetailPage {
   absences = [];
   TBDs = [];
   matchId;
-
+  homeMOM;
+  awayMOM;
   constructor(private viewCtrl: ViewController,
     private modal: ModalController,
     navParams: NavParams,
@@ -106,6 +107,20 @@ export class MatchDetailPage {
     }
   }
 
+  updateHomeMOM() {
+    console.log(this.homePlayerStats);
+    if (this.homePlayerStats && this.homePlayerStats.ratings && this.homePlayerStats.ratings.length) {
+      this.homeMOM = this.homePlayerStats.ratings[0];
+    }
+  }
+
+  updateAwayMOM() {
+    console.log(this.awayPlayerStats);
+    if (this.awayPlayerStats && this.awayPlayerStats.ratings && this.awayPlayerStats.ratings.length) {
+      this.awayMOM = this.awayPlayerStats.ratings[0];
+    }
+  }
+
   addEventListeners() {
     this.onMatchSquadReady = (teamId, matchId) => {
       if (matchId === this.match.id) {
@@ -117,10 +132,12 @@ export class MatchDetailPage {
         if (teamId === this.match.homeId) {
           this.homeSquad = this.teamService.getMatchSquad(this.match.homeId, matchId);
           this.updatePlayerStats(this.homePlayerStats, this.homeSquad, this.match.home);
+          this.updateHomeMOM();
         }
         else if (teamId === this.match.awayId) {
           this.awaySquad = this.teamService.getMatchSquad(this.match.awayId, matchId);
           this.updatePlayerStats(this.awayPlayerStats, this.awaySquad, this.match.away);
+          this.updateAwayMOM();
         }
       }
     }
@@ -152,12 +169,12 @@ export class MatchDetailPage {
     stats['yellows'] = [];
     stats['owngoals'] = [];
     stats['saves'] = [];
-    stats['rating'] = [];
+    stats['ratings'] = [];
   }
 
   updatePlayerStats(stats, squad, team) {
     this.initializePlayerStats(stats);
-    
+
     if (squad) {
       if ('participants' in squad) {
         squad.participants.forEach(p => {
@@ -236,14 +253,12 @@ export class MatchDetailPage {
             })
             //console.log('calculate avg rating', sum, playerRatings.length);
             stat.val = (sum / playerRatings.length).toFixed(1);
-            stats['rating'].push(stat);
+            stats['ratings'].push(stat);
           }
         }
-        //console.log(playerRatingsMap);
+        stats['ratings'].sort((a, b) => { return b.val - a.val; });
       }
     }
-
-    //console.log(stats);
   }
 
   segmentChange(e) {
@@ -388,7 +403,7 @@ export class MatchDetailPage {
 
       this.launchNavigator.navigate([this.match.location.lat, this.match.location.lng], options)
         .then(
-        success => {},
+        success => { },
         error => {
           this.uiHelper.showAlert(error);
         }
@@ -527,7 +542,7 @@ export class MatchDetailPage {
   pickColor(teamId) {
     if (!teamId)
       return;
-    
+
     if (!this.playerService.amICaptainOrAdmin(teamId))
       return;
 

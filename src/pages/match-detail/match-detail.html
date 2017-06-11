@@ -35,40 +35,37 @@
       <ion-icon name="shirt" [style.color]="getHomeColor()" ></ion-icon>
       </button>
     </ion-col>
-    <ion-col width-33 style="margin-top: 1rem">
-      {{'JerseyColor' | trans}}
-    </ion-col>
-    <ion-col width-33>
-      <button ion-button icon-only clear (click)="pickColor(match.awayId)">
+    <ion-col width-33 style="margin-top: 1rem"> {{'JerseyColor' | trans}}
+</ion-col>
+<ion-col width-33>
+  <button ion-button icon-only clear (click)="pickColor(match.awayId)">
       <ion-icon name="shirt" [style.color]="getAwayColor()"></ion-icon>
       </button>
-    </ion-col>
-  </ion-row>
-  <div class="match-detail-info">
-    <ion-item class="common-title map-title" (tap)="navigateToField()">
-      <ion-icon name="navigate" color="iPrimary" class="common-icon map-icon inline-flex-vertical-center"></ion-icon>
-      <div class="common-content map-content">{{match?.location?.name}}{{match?.location?.address}}</div>
-    </ion-item>
-    <ion-item class="common-title time-title">
-      <ion-icon name="time" class="common-icon time-icon inline-flex-vertical-center"></ion-icon>
-      <div class="common-content time-content"> {{match?.time | date:'MM-dd EEEE H:mm'}}</div>
-    </ion-item>
-  </div>
+</ion-col>
+</ion-row>
+<div class="match-detail-info">
+  <ion-item class="common-title map-title" (tap)="navigateToField()">
+    <ion-icon name="navigate" color="iPrimary" class="common-icon map-icon inline-flex-vertical-center"></ion-icon>
+    <div class="common-content map-content">{{match?.location?.name}}{{match?.location?.address}}</div>
+  </ion-item>
+  <ion-item class="common-title time-title">
+    <ion-icon name="time" class="common-icon time-icon inline-flex-vertical-center"></ion-icon>
+    <div class="common-content time-content"> {{match?.time | date:'MM-dd EEEE H:mm'}}</div>
+  </ion-item>
+</div>
 
-  <ion-row *ngIf="amIMember()" class="registration-info">
-    <ion-col class="absent-number flex-direction-column" width-33>
-      <span class="number-absent">{{'applyleave' | trans}}({{absences.length}})</span>
-      <!--<span class="common-sub-label number-cancel">0人取消报名</span>-->
-    </ion-col>
-    <ion-col class="registered-number flex-direction-column" width-33>
-      <span class="number-register">{{'participants' | trans}}({{attendances.length}})</span>
-      <!--<span class="common-sub-label number-pending">限额0人</span>-->
-    </ion-col>
-    <ion-col class="pending-number flex-direction-column" width-33>
-      <div class="number-pending">{{'TBD' | trans}}({{TBDs.length}})</div>
-      <div class="number-dummy"></div>
-    </ion-col>
-  </ion-row>
+<ion-row *ngIf="amIMember()" class="registration-info">
+  <ion-col class="absent-number flex-direction-column" width-33>
+    <span class="number-absent">{{'applyleave' | trans}}({{absences.length}})</span>
+  </ion-col>
+  <ion-col class="registered-number flex-direction-column" width-33>
+    <span class="number-register">{{'participants' | trans}}({{attendances.length}})</span>
+  </ion-col>
+  <ion-col class="pending-number flex-direction-column" width-33>
+    <div class="number-pending">{{'TBD' | trans}}({{TBDs.length}})</div>
+    <div class="number-dummy"></div>
+  </ion-col>
+</ion-row>
 
 </ion-list>
 
@@ -77,7 +74,6 @@
     <ion-item-divider class="common-row participants-row">
       <div class="common-row-content participants-row-content">
         <span class="one">{{'participants' | trans}}({{attendances.length}})</span>
-        <!--span class="two"> <ion-icon name="add-circle" class="inline-flex-vertical-center"></ion-icon></span-->
       </div>
     </ion-item-divider>
     <ion-item class="common-individuals participants-individuals" *ngIf="attendances.length" text-wrap>
@@ -89,7 +85,6 @@
     <ion-item-divider class="common-row absents-row">
       <div class="common-row-content absents-row-content">
         <span class="one">{{'applyleave' | trans}}({{absences.length}})</span>
-        <!--span class="two"><ion-icon name="add-circle" class="inline-flex-vertical-center"></ion-icon></span-->
       </div>
     </ion-item-divider>
     <ion-item class="common-individuals absents-individuals" *ngIf="absences.length" text-wrap>
@@ -111,6 +106,25 @@
       </div>
     </ion-item>
   </ion-list>
+</div>
+<div *ngIf = "match && match.isStarted()">
+  <ion-item-divider>{{'mom' | trans}}</ion-item-divider>
+  <ion-row>
+    <ion-col *ngIf="homeMOM" width-50>
+      <img [src] = "homeMOM?.player?.photo" class="mom-img">
+    </ion-col>
+    <ion-col *ngIf="awayMOM" width-50>
+      <img [src] = "awayMOM?.player?.photo" class="mom-img">
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col *ngIf="homeMOM" width-50 text-center>
+      {{homeMOM?.player?.name}}
+    </ion-col>
+    <ion-col *ngIf="awayMOM" width-50 text-center>
+      {{awayMOM?.player?.name}}
+    </ion-col>
+  </ion-row>
 </div>
 <button *ngIf='canShowDelete()' (tap)="deleteMatch()" color='danger' ion-button block>{{'deletematch' | trans}}</button>
 </div>
@@ -139,7 +153,6 @@
     <div class="right-scrollview matches-match-info-col" *ngIf='selectedStats' [ngStyle]="{'height.px': getMatchDetailScrollHeight()}">
       <ion-grid class="right-view-grid">
         <ion-row class="header-title">
-          <!--<ion-col width-10>{{'Rank' | trans}}</ion-col>-->
           <ion-col width-20></ion-col>
           <ion-col width-30 class="flex-width-30">{{'Player' | trans}}</ion-col>
           <ion-col width-30 class="flex-width-30">{{'Team' | trans}}</ion-col>
@@ -175,19 +188,16 @@
 <ion-row padding-horizontal class="match-detail-button-group">
   <ion-col text-center class="pending-col">
     <button ion-button block color="secondary" [disabled]="getDisabled(2)" small (click)="TBDMatch()">
-        <!--<ion-icon name="checkmark"></ion-icon>-->
         {{'TBD' | trans}}
       </button>
   </ion-col>
   <ion-col text-center class="absent-col">
     <button ion-button block color="secondary" [disabled]="getDisabled(0)" small (click)="absentMatch()">
-        <!--<ion-icon name="checkmark"></ion-icon>-->
         {{'applyleave' | trans}}
       </button>
   </ion-col>
   <ion-col text-center class="participate-col">
     <button ion-button [disabled]="getDisabled(1)" small (click)="attendMatch()">
-        <!--<ion-icon name="close"></ion-icon>-->
         {{'Going' | trans}}
       </button>
   </ion-col>
