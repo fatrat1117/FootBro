@@ -411,6 +411,7 @@ export class Localization {
       lb: 'LB',
       rb: 'RB',
       sw: 'SW',
+      rememberme: 'Remember Me',
     },
 
     zh: {
@@ -802,6 +803,7 @@ export class Localization {
       lb: '左后卫',
       rb: '右后卫',
       sw: '清道夫',
+      rememberme: '记住我'
     }
   }
 }

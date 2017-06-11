@@ -9,6 +9,7 @@ import { Facebook } from 'ng2-cordova-oauth/core';
 import { OauthCordova } from 'ng2-cordova-oauth/platform/cordova'
 import { Localization } from '../../providers/localization';
 import { UIHelper } from '../../providers/uihelper'
+import { Storage } from '@ionic/storage';
 
 @Component({
     selector: 'page-login',
@@ -18,6 +19,7 @@ export class LoginPage {
     //error: any
     busy: boolean;
     _credentials: any;
+    rememberMe: false;
     private facebookProvider = new Facebook({
         clientId: "463670290510920",
         appScope: ["email"]
@@ -27,16 +29,45 @@ export class LoginPage {
     constructor(private af: AngularFire,
         private viewCtrl: ViewController,
         private local: Localization,
-        private uiHelper: UIHelper) {
+        private uiHelper: UIHelper,
+        private storage: Storage) {
         this._credentials = {
             email: '',
             password: ''
         };
         this.busy = false;
+
+        storage.get('rememberme').then((val) => {
+            if (val)
+                this.rememberMe = val;
+        });
+
+        storage.get('email').then((val) => {
+            if (val)
+                this._credentials.email = val;
+        });
+
+        storage.get('pwd').then((val) => {
+            if (val)
+                this._credentials.password = val;
+        });
     }
 
     dismiss() {
         this.viewCtrl.dismiss();
+    }
+
+    saveSettings() {
+        this.storage.set('rememberme', this.rememberMe);
+
+        if (this.rememberMe) {
+            this.storage.set('email', this._credentials.email);
+            this.storage.set('pwd', this._credentials.password);
+        }
+        else {
+            this.storage.remove('email');
+            this.storage.remove('pwd');
+        }
     }
 
     registerUser(_event) {
@@ -45,13 +76,11 @@ export class LoginPage {
 
         let self = this;
         let _credentials = this._credentials;
-        console.log("create user");
+        //console.log("create user");
         this.af.auth.createUser(_credentials)
             .then((user) => {
-                console.log(`Create User Success:`, user);
-                //_credentials.created = true;
+                self.saveSettings();
                 self.dismiss();
-                //return this.login(_credentials, _event);
             })
             .catch(e => {
                 self.uiHelper.showAlert(e);
@@ -85,9 +114,8 @@ export class LoginPage {
                     self.uiHelper.showAlert(error);
                     self.busy = false;
                 });
-            } catch (e) 
-            { 
-                self.uiHelper.showAlert(e); 
+            } catch (e) {
+                self.uiHelper.showAlert(e);
             }
         }).catch((error) => {
             //this.error = error;
@@ -95,9 +123,6 @@ export class LoginPage {
         });
     }
 
-    registerUserWithWechat(_event) {
-
-    }
     /**
      * this logs in the user using the form credentials.
      * 
@@ -120,6 +145,7 @@ export class LoginPage {
             provider: AuthProviders.Password,
             method: AuthMethods.Password
         }).then((authData) => {
+            self.saveSettings();
             this.dismiss();
         }).catch((error) => {
             self.uiHelper.showAlert(error);
