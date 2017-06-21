@@ -3341,10 +3341,11 @@
 				events['x'] = e.pageX;
 
 			}else{
-
-				events['y'] = e.touches[0].pageY;
-
-				events['x'] =  e.touches[0].pageX;
+				if (e.touches){
+					events['y'] = e.touches[0].pageY;
+					events['x'] =  e.touches[0].pageX;
+				}
+				
 
 			}
 
