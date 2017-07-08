@@ -14,11 +14,11 @@
   <ion-item-group>
     <!-- Me -->
     <ion-item (click)="goEditPlayerPage($event)" detail-push>
-      <ion-thumbnail item-left>
+      <ion-thumbnail item-start>
         <img [src]="player?.photo">
       </ion-thumbnail>
       <h2>{{ player?.name }}</h2>
-      <p item-right class="me-point-wrapper">
+      <p item-end class="me-point-wrapper">
          <span class="points">
         {{ player?.points }}
          </span>
@@ -29,11 +29,11 @@
       </p>
     </ion-item>
     <ion-item *ngIf="!isCheerleader && (player)?.teamId" (click)="goSwitchTeamPage()" detail-push>
-      <ion-thumbnail item-left>
+      <ion-thumbnail item-start>
         <img [src]="(team)?.logo">
       </ion-thumbnail>
       <h2>{{ team?.name }}</h2>
-      <p item-right class="me-point-wrapper">
+      <p item-end class="me-point-wrapper">
         <span class="points">
         {{ team?.points }}
         </span>
@@ -44,41 +44,41 @@
       </p>
     </ion-item>
     <!--ion-item *ngIf="!isCheerleader && !player?.teamId" (tap) = "joinTeam()">
-      <ion-icon name="md-people" item-left color="gBlue"></ion-icon>
+      <ion-icon name="md-people" item-start color="gBlue"></ion-icon>
       {{'JoinTeam' | trans}}
     </ion-item-->
 
     <!-- show pages -->
     <!--ion-item-divider *ngIf="!isCheerleader"></ion-item-divider>
     <ion-item *ngIf="!isCheerleader" (tap)="goPlayerPage()" detail-push>
-      <ion-icon name="md-aperture" item-left color="gGreen"></ion-icon>
+      <ion-icon name="md-aperture" item-start color="gGreen"></ion-icon>
       {{'starcard' | trans}}
     </ion-item-->
 
     <!--<ion-item tappable *ngIf="!player?.teamId" (tap) = "createTeam()">
-      <ion-icon name="md-people" item-left color="gBlue"></ion-icon>
+      <ion-icon name="md-people" item-start color="gBlue"></ion-icon>
       {{'CreateTeam' | trans}}
     </ion-item>-->
     <!--ion-item *ngIf="!isCheerleader && (player)?.teamId" detail-push (tap)="goTeamPage()">
-      <ion-icon name="md-people" item-left color="gBlue"></ion-icon>
+      <ion-icon name="md-people" item-start color="gBlue"></ion-icon>
       {{'MyTeam' | trans}}
     </ion-item-->
 
     <ion-item-divider></ion-item-divider>
     <ion-item (tap)="openWebsite()"  detail-push>
-      <ion-icon name="globe" item-left color="gGreen"></ion-icon>
+      <ion-icon name="globe" item-start color="gGreen"></ion-icon>
       {{'website' | trans}}
     </ion-item>
     <ion-item (tap)="goFeedbackPage()"  detail-push>
-      <ion-icon name="notifications" item-left color="gBlue"></ion-icon>
+      <ion-icon name="notifications" item-start color="gBlue"></ion-icon>
       {{'Feedback' | trans}}
     </ion-item>
     <ion-item (tap)="openFAQPage()"  detail-push>
-      <ion-icon name="md-help" item-left color="gYellow"></ion-icon>
+      <ion-icon name="md-help" item-start color="gYellow"></ion-icon>
       {{'help' | trans}}
     </ion-item>
     <ion-item tappable (tap)="onLogout()">
-      <ion-icon name="md-log-out" item-left color="danger"></ion-icon>
+      <ion-icon name="md-log-out" item-start color="danger"></ion-icon>
       {{'Logout' | trans}}
     </ion-item>
 

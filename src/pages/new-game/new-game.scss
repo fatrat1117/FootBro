@@ -231,7 +231,7 @@ page-new-game {
         height:50px;
         background-color: #2e2f34;
         //普通item
-        .game-info-item-left{
+        .game-info-item-start{
           margin: 0px;
           padding: 0px;
           width: 30%;
@@ -240,7 +240,7 @@ page-new-game {
           color:#aaaaaa;
           font-size:1.5rem;
         }
-        .game-info-item-right{
+        .game-info-item-end{
           margin: 0px;
           padding: 0px;
           width: 100%;
@@ -269,7 +269,7 @@ page-new-game {
         height:50px;
         background-color: #41444d;
         //左边部分
-        .game-info-item-left{
+        .game-info-item-start{
           margin: 0px;
           padding: 0px;
           width: 30%;
@@ -279,7 +279,7 @@ page-new-game {
           font-size:1.5rem;
         }
           //右边70%部分
-        .game-info-item-right-gray{
+        .game-info-item-end-gray{
           //margin: 0px;
           //padding: 0px;
           width: 100%;

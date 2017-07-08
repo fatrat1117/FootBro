@@ -62,7 +62,7 @@
 
   <div *ngIf="!selfPlayer && showLogin">
     <ion-row center margin>
-      <button ion-button round icon-left color="gYellow" class="login-button" (tap)="login()">
+      <button ion-button round icon-start color="gYellow" class="login-button" (tap)="login()">
         <ion-icon name="md-log-in"></ion-icon>
         {{'Login' | trans}}
       </button>
@@ -91,7 +91,7 @@
         </ion-thumbnail>
       </ion-col>
       <ion-col width-50 class="home-block" text-center *ngIf="!selfTeam && showJoinTeam">
-        <button ion-button icon-left (tap)="joinTeam()">
+        <button ion-button icon-start (tap)="joinTeam()">
           <ion-icon name="md-add"></ion-icon>
           {{'JoinTeam' | trans}}
         </button>

@@ -10,13 +10,13 @@
     <no-record *ngIf="!hasMessage()" [message]="noRecordMessage"></no-record>
     <ion-item-sliding *ngFor="let msg of messages | reversePipe" #slidingItem>
       <ion-item (tap)="enterChatPage(msg)">
-        <ion-thumbnail item-left>
+        <ion-thumbnail item-start>
           <img [src]="getPlayerInfo(msg.playerId)?.photo">
         </ion-thumbnail>
         <h2 class="sender-name">{{ getPlayerInfo(msg.playerId)?.name }}</h2>
         <p *ngIf="!isUserBlockded(msg.playerId)">{{ getLastContent(msg) }}</p>
         <p *ngIf="isUserBlockded(msg.playerId)" color="danger">{{ 'blocked' | trans }}</p>
-        <ion-note item-right text-right>
+        <ion-note item-end text-right>
           <p>{{ msg.lastTimestamp | momentPipe }}</p>
           <ion-badge *ngIf="msg.isUnread" color="gBlue">New</ion-badge>
         </ion-note>

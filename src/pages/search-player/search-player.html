@@ -22,7 +22,7 @@
       <ion-checkbox *ngIf='selectPlayersMode' color="primary" style="margin-right: 10px"
       [checked] = 'selectedPlayersMap[player.id]'
       (ionChange)="onSelectionChange(player.id, $event)"></ion-checkbox>
-      <ion-avatar item-left>
+      <ion-avatar item-start>
         <ion-img [src] = "player.photo"></ion-img>
       </ion-avatar>
       {{ player.name }}
@@ -34,7 +34,7 @@
       <ion-checkbox *ngIf='selectPlayersMode' color="primary" style="margin-right: 10px"
       [checked] = 'selectedPlayersMap[player.id]'
       (ionChange)="onSelectionChange(player.id, $event)"></ion-checkbox>
-      <ion-avatar item-left>
+      <ion-avatar item-start>
         <img [src] = "player.photo"/>
       </ion-avatar>
       {{ player.name }}

@@ -54,7 +54,7 @@
           <ion-item *ngIf="!isFromSelf(chat)" class="chat-room-msg-item">
             <div *ngIf="chat.senderId">
               <div class="chat-room-avatar-div">
-                <ion-thumbnail item-left>
+                <ion-thumbnail item-start>
                   <img [src]=" getPlayerInfo(chat.senderId)?.photo">
                 </ion-thumbnail>
               </div>

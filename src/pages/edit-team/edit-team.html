@@ -7,19 +7,13 @@
   <ion-item-group>
     <ion-item (tap)="changeLogo()">
       <h2>{{'Logo' | trans}}</h2>
-      <ion-thumbnail item-right>
+      <ion-thumbnail item-end>
         <img [src]="team?.logo">
       </ion-thumbnail>
     </ion-item>
     <ion-item detail-push (tap)="editName()">
       <h2>{{'TeamName' | trans}}</h2>
-      <p item-right>{{ team?.name }}</p>
+      <p item-end>{{ team?.name }}</p>
     </ion-item>
-    <!--<ion-item-divider></ion-item-divider>
-    <ion-item tappable (tap)="choosePlayer()">
-      <ion-icon item-left name="md-alert" color="danger"></ion-icon>
-      {{'PromoteToCaptain' | trans}}
-    </ion-item>-->
-
   </ion-item-group>
 </ion-content>

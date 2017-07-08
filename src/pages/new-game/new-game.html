@@ -18,14 +18,14 @@
 <ion-content>
   <ion-row class="team-info" center>
     <ion-col class="team-flag" (tap)="searchTeam(1)">
-      <button ion-button icon-left clear full style="margin:0px;padding:0px;" color="light">
+      <button ion-button icon-start clear full style="margin:0px;padding:0px;" color="light">
         <ion-icon name="md-flag" color="danger"></ion-icon>
         {{'HomeTeam' | trans}}
       </button>
     </ion-col>
     <ion-col></ion-col>
     <ion-col class="team-flag" (tap)="searchTeam(2)">
-      <button ion-button icon-left clear full style="margin:0px;padding:0px;"color="light">
+      <button ion-button icon-start clear full style="margin:0px;padding:0px;"color="light">
         <ion-icon name="md-flag" color="primary"></ion-icon>
         {{'AwayTeam' | trans}}
         </button> 
@@ -41,8 +41,8 @@
   <ion-list no-lines class="content-game-info">
     <ion-item-divider *ngIf='groupId'> {{'group' | trans}} {{groupId}}</ion-item-divider>
     <ion-item class="game-info-item">
-      <button ion-button clear full class="game-info-item-left" item-left>{{'Type' | trans}}</button>
-      <div class="game-info-item-right" item-right>
+      <button ion-button clear full class="game-info-item-start" item-start>{{'Type' | trans}}</button>
+      <div class="game-info-item-end" item-end>
         <ion-select style="max-width: 100%;" text-center [ngModel]="match.type" (ngModelChange)="match.type=toNumber($event)">
           <ion-option value="5">5 v 5</ion-option>
           <ion-option value="7">7 v 7</ion-option>
@@ -52,22 +52,22 @@
     </ion-item>
 
     <ion-item class="game-info-item-light">
-      <button ion-button clear full class="game-info-item-left" item-left>{{'Location' | trans}}</button>
-      <div class="game-info-item-right-gray" item-right text-center>
+      <button ion-button clear full class="game-info-item-start" item-start>{{'Location' | trans}}</button>
+      <div class="game-info-item-end-gray" item-end text-center>
         <input class="google-location" id="autocompleteInput" [ngModel]="match.location.name"/>
       </div>
     </ion-item>
 
     <ion-item class="game-info-item">
-      <button ion-button clear full class="game-info-item-left" item-left>{{'Date' | trans}}</button>
-      <div class="game-info-item-right" item-right>
+      <button ion-button clear full class="game-info-item-start" item-start>{{'Date' | trans}}</button>
+      <div class="game-info-item-end" item-end>
         <ion-datetime text-center displayFormat="YYYY-MM-DD" [min]="minDate" [(ngModel)]="matchDate"></ion-datetime>
       </div>
     </ion-item>
 
     <ion-item class="game-info-item-light">
-      <button ion-button clear full class="game-info-item-left" item-left>{{'Time' | trans}}</button>
-      <div class="game-info-item-right-gray" item-right>
+      <button ion-button clear full class="game-info-item-start" item-start>{{'Time' | trans}}</button>
+      <div class="game-info-item-end-gray" item-end>
         <ion-datetime text-center displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="matchTime"></ion-datetime>
       </div>
     </ion-item>

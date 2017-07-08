@@ -51,8 +51,8 @@
   </div>
   <ion-list class="subtitle no-margin">
     <ion-item color="dark">
-      <button ion-button item-left clear class="subtitle-text">{{'recentmatches' | trans}}</button>
-      <button ion-button item-right icon-right clear class="subtitle-text-small" (tap)="seeMoreTeamGamePlan()">
+      <button ion-button item-start clear class="subtitle-text">{{'recentmatches' | trans}}</button>
+      <button ion-button item-end icon-end clear class="subtitle-text-small" (tap)="seeMoreTeamGamePlan()">
         {{'ViewAll' | trans}}
         <ion-icon name="ios-arrow-forward"></ion-icon>
       </button>
@@ -66,7 +66,7 @@
   </div>
   <ion-list class="no-margin">
     <ion-item class="subtitle">
-      <button ion-button item-left clear class="subtitle-text">{{'WholeSeasonRecord' | trans}}</button>
+      <button ion-button item-start clear class="subtitle-text">{{'WholeSeasonRecord' | trans}}</button>
     </ion-item>
   </ion-list>
   <ion-row class="team-info-title">
@@ -99,7 +99,7 @@
   </ion-row>
   <ion-list class="no-margin">
     <ion-item class="subtitle">
-      <button ion-button item-left clear class="subtitle-text">{{'Players' | trans}}</button>
+      <button ion-button item-start clear class="subtitle-text">{{'Players' | trans}}</button>
     </ion-item>
   </ion-list>
   <div class="team-member-info">
@@ -109,7 +109,7 @@
         <p class="team-member-name">{{captain?.name}} ({{'Captain' | trans}})</p>
       </ion-col>
       <ion-col>
-        <button ion-button clear icon-right class="team-see-more-members" (tap)="openTeamPlayersPage()">
+        <button ion-button clear icon-end class="team-see-more-members" (tap)="openTeamPlayersPage()">
         <p class="team-see-more-member-text">{{'ViewAll' | trans}} (<a style="color: #00ff00;">{{team.totalPlayers}} </a>{{'Players' | trans | lowercase}})</p>
 <ion-icon name="ios-arrow-forward"></ion-icon>
 </button>
@@ -118,7 +118,7 @@
 </div>
 <ion-list class="no-margin">
   <ion-item class="subtitle">
-    <button ion-button item-left clear class="subtitle-text">{{'Records' | trans}}</button>
+    <button ion-button item-start clear class="subtitle-text">{{'Records' | trans}}</button>
   </ion-item>
 </ion-list>
 <ion-row class="team-all-game">
@@ -165,11 +165,11 @@
 <ion-list *ngIf='matches && mostGFMatchId' no-lines="true" class="game-data-assist">
   <ion-item class="game-data-assist-item">
     <ion-row>
-      <div item-left class="goal-title">{{'maxgf' | trans}}</div>
-      <p item-right class="goal-data">{{matchService.getMatch(mostGFMatchId)?.homeScore}} : {{matchService.getMatch(mostGFMatchId)?.awayScore}}</p>
+      <div item-start class="goal-title">{{'maxgf' | trans}}</div>
+      <p item-end class="goal-data">{{matchService.getMatch(mostGFMatchId)?.homeScore}} : {{matchService.getMatch(mostGFMatchId)?.awayScore}}</p>
     </ion-row>
     <ion-row>
-      <div item-right class="goal-data-detail-wrapper">
+      <div item-end class="goal-data-detail-wrapper">
         <p class="goal-data-detail">{{matchService.getMatch(mostGFMatchId)?.home?.name}} VS {{matchService.getMatch(mostGFMatchId)?.away?.name}} / {{matchService.getMatch(mostGFMatchId)?.date
           | date:'mediumDate'}}</p>
       </div>
@@ -177,37 +177,37 @@
   </ion-item>
   <ion-item *ngIf='matches && mostGAMatchId' class="game-data-assist-item">
     <ion-row>
-      <div item-left class="goal-title">{{'maxga' | trans}}</div>
+      <div item-start class="goal-title">{{'maxga' | trans}}</div>
       <p class="goal-data">{{matchService.getMatch(mostGAMatchId)?.homeScore}} : {{matchService.getMatch(mostGAMatchId)?.awayScore}}</p>
     </ion-row>
     <ion-row>
-      <div item-right class="goal-data-detail-wrapper">
+      <div item-end class="goal-data-detail-wrapper">
         <p class="goal-data-detail">{{matchService.getMatch(mostGAMatchId)?.home?.name}} VS {{matchService.getMatch(mostGAMatchId)?.away?.name}} / {{matchService.getMatch(mostGAMatchId)?.date
           | date:'mediumDate'}}</p>
       </div>
     </ion-row>
   </ion-item>
   <ion-item class="game-data-assist-item">
-    <div item-left class="goal-title-2">{{'maxvictory' | trans}}</div>
-    <div item-right>
+    <div item-start class="goal-title-2">{{'maxvictory' | trans}}</div>
+    <div item-end>
       <p class="goal-data">{{team?.overall?.win_streak}}</p>
     </div>
   </ion-item>
   <ion-item class="game-data-assist-item">
-    <div item-left class="goal-title-2">{{'maxlose' | trans}}</div>
-    <div item-right>
+    <div item-start class="goal-title-2">{{'maxlose' | trans}}</div>
+    <div item-end>
       <p class="goal-data">{{team?.overall?.lose_streak}}</p>
     </div>
   </ion-item>
   <ion-item class="game-data-assist-item">
-    <div item-left class="goal-title-2">{{'mostundefeated' | trans}}</div>
-    <div item-right>
+    <div item-start class="goal-title-2">{{'mostundefeated' | trans}}</div>
+    <div item-end>
       <p class="goal-data">{{team?.overall?.draw_streak}}</p>
     </div>
   </ion-item>
   <ion-item class="game-data-assist-item">
-    <div item-left class="goal-title-2">{{'mostcleansheets' | trans}}</div>
-    <div item-right>
+    <div item-start class="goal-title-2">{{'mostcleansheets' | trans}}</div>
+    <div item-end>
       <p class="goal-data">{{team?.overall?.noGA_streak}}</p>
     </div>
   </ion-item>
@@ -220,12 +220,12 @@
 <ion-list no-lines="true" class="team-best-member-info no-margin no-padding">
 
   <ion-item class="team-best-member-award-title">
-    <img src="assets/icon/b2.png" item-left class="award-img">
+    <img src="assets/icon/b2.png" item-start class="award-img">
     <p class="award-title"> 射手王</p>
   </ion-item>
 
   <ion-item class="team-best-member-award-people">
-    <img src="assets/img/icon1.jpg" class="left-image" item-left>
+    <img src="assets/img/icon1.jpg" class="left-image" item-start>
     <ion-row>
       <ion-col>
         <ion-row class="award-team-member-name">梅西</ion-row>
@@ -244,12 +244,12 @@
 
 
   <ion-item class="team-best-member-award-title">
-    <img src="assets/icon/b3.png" item-left class="award-img">
+    <img src="assets/icon/b3.png" item-start class="award-img">
     <p class="award-title"> 助攻王</p>
 
   </ion-item>
   <ion-item class="team-best-member-award-people">
-    <img src="assets/img/icon1.jpg" class="left-image" item-left>
+    <img src="assets/img/icon1.jpg" class="left-image" item-start>
     <ion-row>
       <ion-col>
         <ion-row class="award-team-member-name">梅西</ion-row>
@@ -267,12 +267,12 @@
   </ion-item>
 
   <ion-item class="team-best-member-award-title">
-    <img src="assets/icon/b4.png" item-left class="award-img">
+    <img src="assets/icon/b4.png" item-start class="award-img">
     <p class="award-title"> MVP</p>
   </ion-item>
 
   <ion-item class="team-best-member-award-people no-margin">
-    <img src="assets/img/icon1.jpg" class="left-image" item-left>
+    <img src="assets/img/icon1.jpg" class="left-image" item-start>
     <ion-row>
       <ion-col>
         <ion-row class="award-team-member-name">梅西</ion-row>
@@ -292,7 +292,7 @@
 </ion-content>
 
 <ion-footer *ngIf="!isCaptain()">
-  <button ion-button full icon-left no-margin color="darkYellow" style="color: white" (click)="contactCaptain()">
+  <button ion-button full icon-start no-margin color="darkYellow" style="color: white" (click)="contactCaptain()">
     <ion-icon name="md-chatbubbles"></ion-icon>
     {{ 'contactCaptain' | trans }}
   </button>

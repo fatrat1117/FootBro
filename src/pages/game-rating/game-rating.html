@@ -18,7 +18,7 @@
 <!--<button ion-button full clear class="tip-string">刚结束一场比赛，请对你的队友进行评分</button>-->
 <ion-list no-lines class="list-start-evalute">
   <ion-item *ngFor="let p of players" class="item-evalute">
-    <img [src]="p.player?.photo" class="img-evalute" item-left>
+    <img [src]="p.player?.photo" class="img-evalute" item-start>
     <div>
       <button ion-button clear class="member-name">{{p?.player?.name}}</button>
       <div class="star-touch-back">
@@ -28,7 +28,7 @@
         <div class="touch-back" (pan)="panStar(p,$event)" (click)="clickStar(p,$event)"></div>
       </div>
     </div>
-    <button ion-button clear color="{{getRatingColor(p.rating)}}" class="evalute-string" item-right>
+    <button ion-button clear color="{{getRatingColor(p.rating)}}" class="evalute-string" item-end>
         {{getRatingString(p.rating)}}
       </button>
   </ion-item>

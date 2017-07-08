@@ -8,35 +8,35 @@
     <!-- Basic -->
     <ion-item (tap)="changePhoto()">
       <h2>{{'Photo' | trans}}</h2>
-      <ion-thumbnail item-right>
+      <ion-thumbnail item-end>
         <img [src]="player?.photo">
       </ion-thumbnail>
     </ion-item>
     <ion-item detail-push (tap)="editName()">
       <h2>{{'Nickname' | trans}}</h2>
-      <p item-right>{{ player?.name }}</p>
+      <p item-end>{{ player?.name }}</p>
     </ion-item>
     <!-- Detail -->
     <ion-item-divider></ion-item-divider>
     <ion-item *ngIf="!isCheerleader" detail-push (tap)="editHeight()">
       <h2>{{'HeightCM' | trans}}</h2>
-      <p item-right>{{ player?.height }}</p>
+      <p item-end>{{ player?.height }}</p>
     </ion-item>
     <ion-item *ngIf="!isCheerleader" detail-push (tap)="editWeight()">
       <h2>{{'WeightKG' | trans}}</h2>
-      <p item-right>{{ player?.weight }}</p>
+      <p item-end>{{ player?.weight }}</p>
     </ion-item>
     <ion-item *ngIf="!isCheerleader" detail-push (tap)="editPosition()">
       <h2>{{'Position' | trans}}</h2>
-      <p item-right>{{ player?.position | trans }}</p>
+      <p item-end>{{ player?.position | trans }}</p>
     </ion-item>
     <ion-item *ngIf="!isCheerleader" detail-push (tap)="editFoot()">
       <h2>{{'Foot' | trans}}</h2>
-      <p item-right>{{ player?.foot | trans}}</p>
+      <p item-end>{{ player?.foot | trans}}</p>
     </ion-item>
     <ion-item detail-push (tap)="editDescription()">
-      <h2 item-left>{{'Description' | trans}}</h2>
-      <p item-right style="margin-left: 20%">{{ player?.description }}</p>
+      <h2 item-start>{{'Description' | trans}}</h2>
+      <p item-end style="margin-left: 20%">{{ player?.description }}</p>
     </ion-item>
   </ion-item-group>
 </ion-content>

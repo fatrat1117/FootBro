@@ -20,7 +20,7 @@ import { PlayerService } from '../../app/players/player.service'
     <ion-list>
       <ion-item *ngFor="let v of values" (tap)="changePosition(v)">
         <h2>{{ v | trans }}</h2>
-        <ion-icon *ngIf="v == selectedValue" item-right name="md-checkmark" color="primary"></ion-icon>
+        <ion-icon *ngIf="v == selectedValue" item-end name="md-checkmark" color="primary"></ion-icon>
       </ion-item>
     </ion-list>
   </ion-content>

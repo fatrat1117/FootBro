@@ -39,8 +39,8 @@ import { Subscription } from 'rxjs/rx';
 export class KeyboardAttachDirective {
   @Input('keyboardAttach') content: Content;
 
-  private onShowSubscription: Subscription;
-  private onHideSubscription: Subscription;
+  private onShowSubscription;
+  private onHideSubscription;
 
   constructor(
     private elementRef: ElementRef,

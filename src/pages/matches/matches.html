@@ -147,7 +147,7 @@
               <ion-row *ngFor="let stat of selectedStats;let i=index" class="playerStats">
                 <ion-col width-20 class="rank flex-center">
                   <ion-label no-margin>{{i+1}}</ion-label>
-                  <ion-avatar item-left>
+                  <ion-avatar item-start>
                     <img [src]="stat.player?.photo" />
                   </ion-avatar>
                 </ion-col>

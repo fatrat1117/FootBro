@@ -22,17 +22,17 @@
   <ion-list class="container">
     <ion-item-sliding *ngFor="let squad of team.squads">
       <ion-item (tap)="onClickSquad(squad)">
-        <!--<ion-avatar item-left>-->
+        <!--<ion-avatar item-start>-->
           <!--<img src="assets/img/none.png">-->
         <!--</ion-avatar>-->
-        <div class="numberCircle" item-left [ngClass]="{'vs5': getSquadNumber(squad.formation) === 5, 'vs7': getSquadNumber(squad.formation) === 7, 'vs11': getSquadNumber(squad.formation) === 11}">{{getSquadNumber(squad.formation)}}</div>
+        <div class="numberCircle" item-start [ngClass]="{'vs5': getSquadNumber(squad.formation) === 5, 'vs7': getSquadNumber(squad.formation) === 7, 'vs11': getSquadNumber(squad.formation) === 11}">{{getSquadNumber(squad.formation)}}</div>
         <h2>{{squad.name}}</h2>
         <p>{{squad.formation}}</p>
         <p>{{'creator' | trans}}: {{playerService.getPlayer(squad.creator)?.name}}</p>
       </ion-item>
       <ion-item-options *ngIf="!selectMode" side="right">
         <button color='danger' [disabled]="squad.creator !== playerService.selfId()" ion-button icon-only clear (tap)="deleteSquad(squad.$key)">
-          <ion-icon name='md-trash' item-right></ion-icon>
+          <ion-icon name='md-trash' item-end></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>

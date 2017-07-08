@@ -1,5 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { Transfer } from '@ionic-native/transfer'; 
 import { File } from '@ionic-native/file';
@@ -182,6 +184,8 @@ export const firebaseConfig = {
     KeyboardAttachDirective,
   ],
   imports: [
+    BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: true,
       backButtonText: ''
@@ -247,7 +251,7 @@ export const firebaseConfig = {
     ColorPickerPage,
     EditPositionPage
   ],
-  providers: [{ provide: ErrorHandler, useClass: MyErrorHandler },
+  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
     FirebaseManager,
     LocalStorage,
     OneSignalManager,

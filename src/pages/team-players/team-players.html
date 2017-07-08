@@ -21,7 +21,7 @@
       <ion-checkbox *ngIf='selectPlayersMode' color="primary" style="margin-right: 10px"
       [checked] = 'selectedPlayersMap[player.id]'
       (ionChange)="onSelectionChange(player.id, $event)"></ion-checkbox>
-      <ion-avatar item-left>
+      <ion-avatar item-start>
         <ion-img [src] = "player.photo"></ion-img>
       </ion-avatar>
       {{ player.name }}
@@ -42,7 +42,7 @@
   <ion-list class="player-list">
     <ion-item *ngFor="let player of players" class="player-item" (click) = "goPlayerPage(player.id)">
       <ion-row class="player-item-row">
-        <ion-avatar item-left class="player-avatar-wrapper">
+        <ion-avatar item-start class="player-avatar-wrapper">
         <img [src] = "player.photo" class="player-avatar"/>
         </ion-avatar>
         <ion-col class="player-name">

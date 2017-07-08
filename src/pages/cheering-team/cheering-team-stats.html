@@ -24,19 +24,19 @@
     </ion-row>
     </ion-item>
     <ion-item>
-      <ion-icon name="md-unlock" item-left></ion-icon>
+      <ion-icon name="md-unlock" item-start></ion-icon>
       {{ 'unlockPoints' | trans }}
-      <ion-note color="primary-text" item-right>{{ unlockAmount }}</ion-note>
+      <ion-note color="primary-text" item-end>{{ unlockAmount }}</ion-note>
     </ion-item>
     <ion-item>
-      <ion-icon name="md-pin" item-left></ion-icon>
+      <ion-icon name="md-pin" item-start></ion-icon>
       {{ 'Location' | trans }}
-      <ion-note item-right color="primary-text">{{ 'singapore' | trans }}</ion-note>
+      <ion-note item-end color="primary-text">{{ 'singapore' | trans }}</ion-note>
     </ion-item>
     <ion-item>
-      <ion-icon name="md-calendar" item-left></ion-icon>
+      <ion-icon name="md-calendar" item-start></ion-icon>
       {{ 'joinDate' | trans }}
-      <ion-note item-right color="primary-text">{{ cheerleader?.joinTime | date:'yyyy-MM-dd' }}</ion-note>
+      <ion-note item-end color="primary-text">{{ cheerleader?.joinTime | date:'yyyy-MM-dd' }}</ion-note>
     </ion-item>
 
     <ion-item>

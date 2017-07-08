@@ -32,7 +32,7 @@
   <ion-item *ngFor="let t of teamRanks; let i = index;" style="margin-bottom:10px" text-wrap (tap)='goTeamPage(t.id)' class="rank-team-items">
 <ion-row>
   <ion-col width-25>
-    <ion-thumbnail item-left>
+    <ion-thumbnail item-start>
       <img [src]="t.logo">
     </ion-thumbnail>
     <ion-badge class="rank-badge" color="sky">{{ i+1 }}</ion-badge>
@@ -89,7 +89,7 @@
 </ion-item>
 <ion-list>
   <ion-item *ngFor="let p of playerRanks; let i = index;" (tap)="goPlayerPage(p.id)" style="margin-bottom:10px" text-wrap class="rank-player-items">
-<ion-avatar item-left>
+<ion-avatar item-start>
   <img [src]="p.photo">
 </ion-avatar>
 <ion-row center class="rank-player-specs">
