@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { OneSignal } from 'ionic-native';
-import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
+import { FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import { Http, Headers, RequestOptions } from '@angular/http'
 import { Platform, AlertController } from 'ionic-angular';
 import * as firebase from 'firebase';

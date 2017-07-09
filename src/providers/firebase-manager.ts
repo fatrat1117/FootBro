@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { OneSignal } from 'ionic-native';
-import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../pages/login/login';
 import { Localization } from './localization'
 import { NavController, ModalController, Platform } from 'ionic-angular';
@@ -58,7 +59,8 @@ export class FirebaseManager {
   defaultPlayerLargeImage = "assets/img/forTest/messi_banner.png";
   defaultTeamLargeImage = "assets/img/team/court.png";
   constructor(private modalCtrl: ModalController,
-    private af: AngularFire,
+    private afDb: AngularFireDatabase,
+    private afAuth: AngularFireAuth, 
     private platform: Platform,
     private camera: Camera,
     private local: Localization) {
@@ -74,7 +76,7 @@ export class FirebaseManager {
   }
 
   initialize() {
-    this.af.auth.subscribe(auth => {
+    this.afAuth.authState.subscribe(auth => {
       //console.log(auth);
       this.auth = auth;
       if (auth) {
@@ -90,7 +92,7 @@ export class FirebaseManager {
   }
 
   afTournamentMatchDate(id, day) {
-    return this.af.database.object('/tournaments/list/' + id + '/dates/' + day);
+    return this.afDb.object('/tournaments/list/' + id + '/dates/' + day);
   }
 
 
@@ -116,7 +118,7 @@ export class FirebaseManager {
 
   /****************************** Messages ******************************/
   getAllMessages() {
-    return this.af.database.list(`/chats/${this.auth.uid}/basic-info/`, {
+    return this.afDb.list(`/chats/${this.auth.uid}/basic-info/`, {
       query: {
         orderByChild: 'lastTimestamp'
       }
@@ -124,26 +126,26 @@ export class FirebaseManager {
   }
 
   getBlackList() {
-    return this.af.database.list(`/chats/${this.auth.uid}/black-list/`);
+    return this.afDb.list(`/chats/${this.auth.uid}/black-list/`);
   }
 
   deleteMessage(playerId: string) {
-    this.af.database.object(`/chats/${this.auth.uid}/basic-info/${playerId}`).remove();
-    this.af.database.object(`/chats/${this.auth.uid}/${playerId}`).remove();
+    this.afDb.object(`/chats/${this.auth.uid}/basic-info/${playerId}`).remove();
+    this.afDb.object(`/chats/${this.auth.uid}/${playerId}`).remove();
   }
 
   block(playerId: string) {
-    this.af.database.object(`/chats/${this.auth.uid}/black-list/${playerId}`).set(true);
+    this.afDb.object(`/chats/${this.auth.uid}/black-list/${playerId}`).set(true);
     OneSignal.sendTag("block-cheerleader", "true");
   }
 
   unblock(playerId: string) {
-    this.af.database.object(`/chats/${this.auth.uid}/black-list/${playerId}`).remove();
+    this.afDb.object(`/chats/${this.auth.uid}/black-list/${playerId}`).remove();
     OneSignal.deleteTag("block-cheerleader");
   }
 
   isBlockedBy(userId: string) {
-    return this.af.database.object(`/chats/${userId}/black-list/${this.auth.uid}`);
+    return this.afDb.object(`/chats/${userId}/black-list/${this.auth.uid}`);
   }
 
 
@@ -153,7 +155,7 @@ export class FirebaseManager {
 
   /****************************** Chat Room ******************************/
   updateUnread(userId: string, isUnread: boolean) {
-    this.af.database.object(`/chats/${this.auth.uid}/basic-info/${userId}`).update({
+    this.afDb.object(`/chats/${this.auth.uid}/basic-info/${userId}`).update({
       isUnread: isUnread,
     })
   }
@@ -163,7 +165,7 @@ export class FirebaseManager {
       this.updateUnread(userId, false);
     }
 
-    return this.af.database.list(`/chats/${this.auth.uid}/${userId}`, {
+    return this.afDb.list(`/chats/${this.auth.uid}/${userId}`, {
       query: {
         limitToLast: subject
       }
@@ -175,7 +177,7 @@ export class FirebaseManager {
       this.updateUnread("1", false);
     }
 
-    return this.af.database.list(`/cheerleaders/chats`, {
+    return this.afDb.list(`/cheerleaders/chats`, {
       query: {
         limitToLast: subject
       }
@@ -185,13 +187,13 @@ export class FirebaseManager {
   addChatToUser(userId: string, content, isSystem: boolean = false, action: any = null) {
     if (!isSystem) {
       // add to self
-      this.af.database.list(`/chats/${this.auth.uid}/${userId}`).push({
+      this.afDb.list(`/chats/${this.auth.uid}/${userId}`).push({
         createdAt: firebase.database.ServerValue.TIMESTAMP,
         content: content,
         isFromSelf: true
       })
 
-      this.af.database.object(`/chats/${this.auth.uid}/basic-info/${userId}`).set({
+      this.afDb.object(`/chats/${this.auth.uid}/basic-info/${userId}`).set({
         isSystem: false,
         isUnread: false,
         lastContent: content,
@@ -201,14 +203,14 @@ export class FirebaseManager {
 
     // add to other
     let fromId = isSystem ? "0" : this.auth.uid;
-    this.af.database.list(`/chats/${userId}/${fromId}`).push({
+    this.afDb.list(`/chats/${userId}/${fromId}`).push({
       createdAt: firebase.database.ServerValue.TIMESTAMP,
       content: content,
       isFromSelf: false,
       action: action
     })
 
-    this.af.database.object(`/chats/${userId}/basic-info/${fromId}`).set({
+    this.afDb.object(`/chats/${userId}/basic-info/${fromId}`).set({
       isSystem: isSystem,
       isUnread: true,
       lastContent: content,
@@ -217,7 +219,7 @@ export class FirebaseManager {
   }
 
   addClGroupChat(content: string) {
-    this.af.database.list(`/cheerleaders/chats`).push({
+    this.afDb.list(`/cheerleaders/chats`).push({
       createdAt: firebase.database.ServerValue.TIMESTAMP,
       content: content,
       senderId: this.auth.uid
@@ -225,7 +227,7 @@ export class FirebaseManager {
 
     let onApprovedCheerleadersReady = e => {
       this.getApprovedCheerleaders().forEach(cl => {
-        this.af.database.object(`/chats/${cl.$key}/basic-info/1`).set({
+        this.afDb.object(`/chats/${cl.$key}/basic-info/1`).set({
           isUnread: true,
           lastContent: content,
           lastTimestamp: firebase.database.ServerValue.TIMESTAMP,
@@ -264,7 +266,7 @@ export class FirebaseManager {
 
   //af   
   afTeamBasic(teamId: string) {
-    return this.af.database.object(`/teams/${teamId}/basic-info`);
+    return this.afDb.object(`/teams/${teamId}/basic-info`);
   }
 
   getTeamPublic(id) {
@@ -275,7 +277,7 @@ export class FirebaseManager {
     if (this.sortedPublicTeamsMap[id])
       this.FireCustomEvent('teampublicready', id);
     else {
-      this.af.database.object(`/public/teams/${id}`).subscribe(snapshot => {
+      this.afDb.object(`/public/teams/${id}`).subscribe(snapshot => {
         this.sortedPublicTeamsMap[id] = snapshot;
         this.FireCustomEvent('teampublicready', id);
       });
@@ -290,7 +292,7 @@ export class FirebaseManager {
     if (this.cachedTeamStatsMap[id])
       this.FireCustomEvent('teamstatsdataready', id);
     else {
-      this.af.database.object(`/teams_stats/${id}`).subscribe(snapshot => {
+      this.afDb.object(`/teams_stats/${id}`).subscribe(snapshot => {
         console.log('getTeamStatsAsync', snapshot);
         this.cachedTeamStatsMap[id] = snapshot;
         this.FireCustomEvent('teamstatsdataready', id);
@@ -304,7 +306,7 @@ export class FirebaseManager {
 
   getAllPublicTeamsAsync() {
     if (!this.getAllPublicTeams()) {
-      this.af.database.list(`/public/teams/`, {
+      this.afDb.list(`/public/teams/`, {
         query: { orderByChild: 'name' }
       }).subscribe(snapshots => {
         this.cachedAllPublicTeams = snapshots;
@@ -317,7 +319,7 @@ export class FirebaseManager {
     //console.log('getPublicTeams', orderby, count);
     //if (!this.afSortedPublicTeams) {
     //  console.log('subscribe sorted public teams')
-    this.afSortedPublicTeams = this.af.database.list(`/public/teams/`, {
+    this.afSortedPublicTeams = this.afDb.list(`/public/teams/`, {
       query: {
         orderByChild: orderby,
         limitToLast: count
@@ -356,7 +358,7 @@ export class FirebaseManager {
     if (this.getTeam(teamId))
       this.FireCustomEvent('teamready', teamId);
     else {
-      this.af.database.object(`/teams/${teamId}`).subscribe(snapshot => {
+      this.afDb.object(`/teams/${teamId}`).subscribe(snapshot => {
         if (snapshot.$exists()) {
           //console.log(snapshot);
           if ('$value' in snapshot && null == snapshot.$value) {
@@ -372,7 +374,7 @@ export class FirebaseManager {
             }
             else {
               //fix all missing properties
-              this.af.database.object(`/teams/${teamId}`).update(
+              this.afDb.object(`/teams/${teamId}`).update(
                 {
                   yearBuilt: 2016,
                   points: this.teamInitialPoints
@@ -392,14 +394,14 @@ export class FirebaseManager {
     //cause pulic team changed to fire multiple times, need a fix
     let teamPublicData = this.sortedPublicTeamsMap[teamId];
     if (teamPublicData) {
-      this.af.database.object(`public/teams/${teamId}`).update({ popularity: teamPublicData.popularity + 1 });
+      this.afDb.object(`public/teams/${teamId}`).update({ popularity: teamPublicData.popularity + 1 });
     };
   }
 
   createTeam(teamObj, isDefault) {
     let self = this;
     console.log("createTeam", teamObj);
-    const queryObservable = this.af.database.list(this.publicTeamsRef(), {
+    const queryObservable = this.afDb.list(this.publicTeamsRef(), {
       query: {
         orderByChild: 'name',
         equalTo: teamObj.name
@@ -429,13 +431,13 @@ export class FirebaseManager {
           }
         };
 
-        this.af.database.list('/teams').push(teamData).then(newTeam => {
+        this.afDb.list('/teams').push(teamData).then(newTeam => {
           console.log('create team success', newTeam);
           let newTeamId = newTeam["key"];
           //joinTeam
           this.joinTeam(newTeamId, isDefault);
           //update public
-          this.af.database.object(this.publicTeamRef(newTeamId)).update(
+          this.afDb.object(this.publicTeamRef(newTeamId)).update(
             {
               name: teamObj.name,
               popularity: 1,
@@ -450,35 +452,35 @@ export class FirebaseManager {
   }
 
   joinTeam(id, isDefault) {
-    this.af.database.object(this.teamPlayerRef(this.selfId(), id)).set(true);
-    this.af.database.object(this.playerTeamRef(this.selfId(), id)).set({ isMember: true });
+    this.afDb.object(this.teamPlayerRef(this.selfId(), id)).set(true);
+    this.afDb.object(this.playerTeamRef(this.selfId(), id)).set({ isMember: true });
     //set default team if no team
     if (isDefault || !this.selfTeamId())
       this.setDefaultTeam(id);
   }
 
   afTeam(teamId: string) {
-    return this.af.database.object(`/teams/${teamId}`);
+    return this.afDb.object(`/teams/${teamId}`);
   }
 
   afTeamPublic(teamId: string) {
-    return this.af.database.object(`public/teams/${teamId}`);
+    return this.afDb.object(`public/teams/${teamId}`);
   }
 
   quitTeam(teamId) {
     //remove from self teams
-    //this.af.database.list(`players/${this.selfId()}/teams/${id}`).remove();
-    //this.af.database.list(`teams/${id}/players/${this.selfId()}`).remove();
+    //this.afDb.list(`players/${this.selfId()}/teams/${id}`).remove();
+    //this.afDb.list(`teams/${id}/players/${this.selfId()}`).remove();
     this.removeFromTeam(this.selfId(), teamId);
   }
 
   saveTeamNickName(playerId, teamId, nickName) {
-    this.af.database.object(`teams/${teamId}/players/${playerId}/nickName`).set(nickName);
+    this.afDb.object(`teams/${teamId}/players/${playerId}/nickName`).set(nickName);
   }
 
   removeFromTeam(playerId, teamId) {
-    this.af.database.object(`players/${playerId}/teams/${teamId}`).remove();
-    this.af.database.object(`teams/${teamId}/players/${playerId}`).remove();
+    this.afDb.object(`players/${playerId}/teams/${teamId}`).remove();
+    this.afDb.object(`teams/${teamId}/players/${playerId}`).remove();
   }
 
   deleteTeam(id) {
@@ -491,30 +493,30 @@ export class FirebaseManager {
   }
 
   updateTeamName(id: string, name: string) {
-    this.af.database.object(`teams/${id}/basic-info/name`).set(name);
+    this.afDb.object(`teams/${id}/basic-info/name`).set(name);
     this.getAfTeamPublicName(id).set(name);
   }
 
   updateTeamLogo(id: string, logo: string) {
     console.log('updateTeamLogo', id, logo);
-    this.af.database.object(`teams/${id}/basic-info/logo`).set(logo);
+    this.afDb.object(`teams/${id}/basic-info/logo`).set(logo);
   }
 
   updateTeamPhotoLarge(teamId, photoUrl) {
-    this.af.database.object(`/teams/${teamId}/photoLarge`).set(photoUrl);
+    this.afDb.object(`/teams/${teamId}/photoLarge`).set(photoUrl);
   }
 
   promoteNewCaptain(teamId: string, playerId: string) {
-    this.af.database.object(`teams/${teamId}/basic-info/captain`).set(playerId);
+    this.afDb.object(`teams/${teamId}/basic-info/captain`).set(playerId);
   }
 
   // for check team from clipboard
   getAfTeamPublicName(teamId: string) {
-    return this.af.database.object(`/public/teams/${teamId}/name`);
+    return this.afDb.object(`/public/teams/${teamId}/name`);
   }
 
   setTeamRole(teamId, playerId, role) {
-    this.af.database.object(`teams/${teamId}/players/${playerId}/teamRole`).set(role);
+    this.afDb.object(`teams/${teamId}/players/${playerId}/teamRole`).set(role);
   }
 
 
@@ -543,7 +545,7 @@ export class FirebaseManager {
   }
   //af
   afPlayerBasic(id) {
-    return this.af.database.object(this.playerBasicRef(id));
+    return this.afDb.object(this.playerBasicRef(id));
   }
 
   selfId() {
@@ -573,39 +575,39 @@ export class FirebaseManager {
   updateWechatShareTime(playerId) {
     if (playerId) {
       let now = moment().unix() * 1000;
-      this.af.database.object(`/players/${playerId}/wechatShareTime`).set(now);
+      this.afDb.object(`/players/${playerId}/wechatShareTime`).set(now);
     }
   }
 
   updateFacebookShareTime(playerId) {
     if (playerId) {
       let now = moment().unix() * 1000;
-      this.af.database.object(`/players/${playerId}/fbShareTime`).set(now);
+      this.afDb.object(`/players/${playerId}/fbShareTime`).set(now);
     }
   }
 
   updatePlayerPhoto(id: string, photoUrl) {
     console.log('updatePlayerPhoto', id, photoUrl);
-    this.af.database.object(`/players/${id}/basic-info/photoURL`).set(photoUrl);
+    this.afDb.object(`/players/${id}/basic-info/photoURL`).set(photoUrl);
   }
 
   updatePlayerPhotoMedium(id: string, photoUrl) {
-    this.af.database.object(`/players/${id}/photoMedium`).set(photoUrl);
+    this.afDb.object(`/players/${id}/photoMedium`).set(photoUrl);
   }
 
   updatePlayerPhotoLarge(id: string, photoUrl) {
-    this.af.database.object(`/players/${id}/photoLarge`).set(photoUrl);
+    this.afDb.object(`/players/${id}/photoLarge`).set(photoUrl);
   }
 
   increasePlayerPopularity(id) {
     let publicData = this.sortedPublicPlayersMap[id];
     if (publicData) {
       let p = publicData.popularity ? publicData.popularity + 1 : 1;
-      this.af.database.object(`public/players/${id}/popularity`).set(p);
+      this.afDb.object(`public/players/${id}/popularity`).set(p);
     };
   }
   getPlayerDetail(id) {
-    return this.af.database.object(`/players/${id}/detail-info`);
+    return this.afDb.object(`/players/${id}/detail-info`);
   }
 
   getPlayerPublic(id) {
@@ -616,7 +618,7 @@ export class FirebaseManager {
     if (this.sortedPublicPlayersMap[id])
       this.FireCustomEvent('playerpublicready', id);
     else {
-      this.af.database.object(`/public/players/${id}`).subscribe(snapshot => {
+      this.afDb.object(`/public/players/${id}`).subscribe(snapshot => {
         this.sortedPublicPlayersMap[id] = snapshot;
         this.FireCustomEvent('playerpublicready', id);
       });
@@ -628,7 +630,7 @@ export class FirebaseManager {
       this.FireCustomEvent('playerready', id);
     }
     else {
-      this.af.database.object(`/players/${id}`).subscribe(snapshot => {
+      this.afDb.object(`/players/${id}`).subscribe(snapshot => {
         if (snapshot && snapshot['basic-info']) {
           if ('points' in snapshot) {
             if ('img/none.png' === snapshot['basic-info'].photoURL)
@@ -638,7 +640,7 @@ export class FirebaseManager {
           }
           else {
             //fix all missing properties
-            this.af.database.object(`/players/${id}`).update(
+            this.afDb.object(`/players/${id}`).update(
               {
                 joinTime: firebase.database.ServerValue.TIMESTAMP,
                 points: this.ratePlayerPoints
@@ -663,7 +665,7 @@ export class FirebaseManager {
     if (this.getPlayerStats(playerId))
       this.FireCustomEvent('playerstatsready', playerId);
     else {
-      this.af.database.object(`/player_stats/${playerId}`).subscribe(snapshot => {
+      this.afDb.object(`/player_stats/${playerId}`).subscribe(snapshot => {
         if (snapshot.$exists()) {
           this.cachedPlayerStatsMap[playerId] = snapshot;
           this.FireCustomEvent('playerstatsready', playerId);
@@ -674,7 +676,7 @@ export class FirebaseManager {
   // public
   queryPublicPlayers(orderby, count) {
     console.log('queryPublicPlayers', orderby, count);
-    let afQuery = this.af.database.list(this.publicPlayersRef(), {
+    let afQuery = this.afDb.list(this.publicPlayersRef(), {
       query: {
         orderByChild: orderby,
         limitToLast: count
@@ -715,7 +717,7 @@ export class FirebaseManager {
     if (this.getPlayerSocial(playerId))
       this.FireCustomEvent('playersocialready', playerId);
     else {
-      this.af.database.object(this.getPlayerSocialRef(playerId)).subscribe(snapshot => {
+      this.afDb.object(this.getPlayerSocialRef(playerId)).subscribe(snapshot => {
         this.cachedPlayersSocialMap[playerId] = snapshot;
         this.FireCustomEvent('playersocialready', playerId);
       });
@@ -731,7 +733,7 @@ export class FirebaseManager {
   }
 
   likePlayer(playerId, val, tag) {
-    this.af.database.object(this.getPlayerSocialVotesRef(playerId) + tag + '/').set(val);
+    this.afDb.object(this.getPlayerSocialVotesRef(playerId) + tag + '/').set(val);
   }
 
   //Fire document events 
@@ -748,11 +750,11 @@ export class FirebaseManager {
   }
 
   updatePlayerBasic(property: string, value) {
-    this.af.database.object(`players/${this.auth.uid}/basic-info/${property}`).set(value);
+    this.afDb.object(`players/${this.auth.uid}/basic-info/${property}`).set(value);
   }
 
   updatePlayerDetail(property: string, value) {
-    this.af.database.object(`players/${this.auth.uid}/detail-info/${property}`).set(value);
+    this.afDb.object(`players/${this.auth.uid}/detail-info/${property}`).set(value);
   }
 
   registerPlayer() {
@@ -778,7 +780,7 @@ export class FirebaseManager {
       created: true
     });
     //update player public
-    this.af.database.object(this.playerPublicRef(this.auth.uid)).update({ popularity: 1 });
+    this.afDb.object(this.playerPublicRef(this.auth.uid)).update({ popularity: 1 });
   }
 
 
@@ -787,16 +789,16 @@ export class FirebaseManager {
 
   /****************************** Matches ******************************/
   afMatchDates() {
-    return this.af.database.list('/matches/dates');
+    return this.afDb.list('/matches/dates');
   }
 
   afTournamentDates(id) {
-    return this.af.database.list('/tournaments/list/' + id + '/dates');
+    return this.afDb.list('/tournaments/list/' + id + '/dates');
   }
 
   afTournamentList() {
     if (!this._afTournamentList)
-      this._afTournamentList = this.af.database.list('/tournaments/list');
+      this._afTournamentList = this.afDb.list('/tournaments/list');
     return this._afTournamentList;
   }
 
@@ -833,11 +835,11 @@ export class FirebaseManager {
   }
 
   afTournamentAdmin(tournamentId) {
-    return this.af.database.object('/tournaments/list/' + tournamentId + '/whitelist/' + this.selfId());
+    return this.afDb.object('/tournaments/list/' + tournamentId + '/whitelist/' + this.selfId());
   }
 
   afMatch(id) {
-    return this.af.database.object('/matches/list/' + id);
+    return this.afDb.object('/matches/list/' + id);
   }
 
   matchListRef() {
@@ -881,7 +883,7 @@ export class FirebaseManager {
   }
 
   getMatchesByDateAsync(date, tournamentId) {
-    let afQuery = this.af.database.list(this.matchListRef(), {
+    let afQuery = this.afDb.list(this.matchListRef(), {
       query: {
         orderByChild: 'date',
         equalTo: date
@@ -911,7 +913,7 @@ export class FirebaseManager {
   }
 
   setMatchInformed(matchId, teamId) {
-    this.af.database.object(`/matches/list/${matchId}/informed/${teamId}`).set(true);
+    this.afDb.object(`/matches/list/${matchId}/informed/${teamId}`).set(true);
   }
 
   getMatchAsync(id) {
@@ -928,7 +930,7 @@ export class FirebaseManager {
   }
 
   deleteTeamSquad(teamId, squadId) {
-    this.af.database.object(`/team_squads/${teamId}/squads/${squadId}/`).remove();
+    this.afDb.object(`/team_squads/${teamId}/squads/${squadId}/`).remove();
   }
 
   getTeamSquads(teamId) {
@@ -941,7 +943,7 @@ export class FirebaseManager {
     if (this.getTeamSquads(teamId))
       this.FireCustomEvent('teamsquadsready', teamId);
     else {
-      this.af.database.list(`/team_squads/${teamId}/squads/`).subscribe(squads => {
+      this.afDb.list(`/team_squads/${teamId}/squads/`).subscribe(squads => {
         this.cachedTeamSquads[teamId] = squads;
         this.FireCustomEvent('teamsquadsready', teamId);
       });
@@ -956,14 +958,14 @@ export class FirebaseManager {
     if (this.getTeamMatches(teamId))
       this.FireCustomEvent('teammatchesready', teamId);
     else {
-      this.af.database.list('/team_squads/' + teamId + '/matches').subscribe(snapshots => {
+      this.afDb.list('/team_squads/' + teamId + '/matches').subscribe(snapshots => {
         snapshots.sort((a, b) => { return b.time - a.time });
         this.teamMatchesMap[teamId] = snapshots;
         this.FireCustomEvent('teammatchesready', teamId);
       });
     }
 
-    // let sub = this.af.database.list('/team_squads/' + teamId + '/matches', {
+    // let sub = this.afDb.list('/team_squads/' + teamId + '/matches', {
     //   query: {
     //     orderByChild: 'time'
     //   }
@@ -983,15 +985,15 @@ export class FirebaseManager {
   }
 
   afMatchList() {
-    return this.af.database.list('/matches/list');
+    return this.afDb.list('/matches/list');
   }
 
   afMatchDate(day) {
-    return this.af.database.object('/matches/dates/' + day);
+    return this.afDb.object('/matches/dates/' + day);
   }
 
   deleteMatchSquad(teamId, matchId) {
-    this.af.database.object(this.getMatchSquadRef(teamId, matchId)).remove();
+    this.afDb.object(this.getMatchSquadRef(teamId, matchId)).remove();
   }
 
   deleteMatch(matchId) {
@@ -1021,8 +1023,8 @@ export class FirebaseManager {
 
     //update team matches list
     if ('time' in matchObj && 'homeId' in matchObj && 'awayId' in matchObj) {
-      this.af.database.object(this.getMatchSquadRef(matchObj.homeId, matchId) + 'time').set(matchObj.time);
-      this.af.database.object(this.getMatchSquadRef(matchObj.awayId, matchId) + 'time').set(matchObj.time);
+      this.afDb.object(this.getMatchSquadRef(matchObj.homeId, matchId) + 'time').set(matchObj.time);
+      this.afDb.object(this.getMatchSquadRef(matchObj.awayId, matchId) + 'time').set(matchObj.time);
     }
   }
 
@@ -1053,21 +1055,21 @@ export class FirebaseManager {
   }
 
   setJerseyColor(matchId, teamId, color) {
-    this.af.database.object(`/matches/list/${matchId}/colors/${teamId}`).set(color);
+    this.afDb.object(`/matches/list/${matchId}/colors/${teamId}`).set(color);
   }
 
   createTeamSquad(teamId, squadObj) {
     console.log('createTeamSquad', teamId, squadObj);
-    this.af.database.list(`/team_squads/${teamId}/squads/`).push(squadObj);
+    this.afDb.list(`/team_squads/${teamId}/squads/`).push(squadObj);
   }
 
   updateTeamSquad(teamId, squadId, squadObj) {
-    this.af.database.object(`/team_squads/${teamId}/squads/${squadId}`).set(squadObj);
+    this.afDb.object(`/team_squads/${teamId}/squads/${squadId}`).set(squadObj);
   }
 
   saveMatchSquad(teamId, matchId, squadObj) {
     console.log('updateMatch', teamId, matchId, squadObj);
-    this.af.database.object(`/team_squads/${teamId}/matches/${matchId}`).update(squadObj);
+    this.afDb.object(`/team_squads/${teamId}/matches/${matchId}`).update(squadObj);
   }
 
   getMatchSquad(teamId, matchId) {
@@ -1085,7 +1087,7 @@ export class FirebaseManager {
       this.FireCustomEvent('matchsquadready', detail);
     }
     else {
-      this.af.database.object(this.getMatchSquadRef(teamId, matchId)).subscribe(snapshot => {
+      this.afDb.object(this.getMatchSquadRef(teamId, matchId)).subscribe(snapshot => {
         if (snapshot.$exists()) {
           this.cachedSquads[teamId] = {};
           this.cachedSquads[teamId][matchId] = snapshot;
@@ -1096,8 +1098,8 @@ export class FirebaseManager {
   }
 
   updateMatchParticipants(teamId, matchId, participants) {
-    this.af.database.object(this.getMatchSquadRef(teamId, matchId) + 'participants').set(participants);
-    this.af.database.object(this.getMatchSquadRef(teamId, matchId) + 'participantsConfirmed').set(true);
+    this.afDb.object(this.getMatchSquadRef(teamId, matchId) + 'participants').set(participants);
+    this.afDb.object(this.getMatchSquadRef(teamId, matchId) + 'participantsConfirmed').set(true);
   }
 
   getMatchSquadRef(teamId, matchId) {
@@ -1106,29 +1108,29 @@ export class FirebaseManager {
 
 
   attendMatch(teamId: string, matchId: string) {
-    this.af.database.object(this.getMatchSquadRef(teamId, matchId) + 'attendance/' + this.selfId()).set(1);
+    this.afDb.object(this.getMatchSquadRef(teamId, matchId) + 'attendance/' + this.selfId()).set(1);
   }
 
   absentMatch(teamId: string, matchId: string) {
-    this.af.database.object(this.getMatchSquadRef(teamId, matchId) + 'attendance/' + this.selfId()).set(0);
+    this.afDb.object(this.getMatchSquadRef(teamId, matchId) + 'attendance/' + this.selfId()).set(0);
   }
 
   TBDMatch(teamId: string, matchId: string) {
-    this.af.database.object(this.getMatchSquadRef(teamId, matchId) + 'attendance/' + this.selfId()).set(2);
+    this.afDb.object(this.getMatchSquadRef(teamId, matchId) + 'attendance/' + this.selfId()).set(2);
   }
 
   ratePlayers(teamId, matchId, ratings) {
-    this.af.database.object(this.getMatchSquadRef(teamId, matchId) + 'ratings/' + this.selfId()).set(ratings);
+    this.afDb.object(this.getMatchSquadRef(teamId, matchId) + 'ratings/' + this.selfId()).set(ratings);
     this.playerEarnPoints(this.selfId(), this.ratePlayerPoints, this.getPlayer(this.selfId()).points + this.ratePlayerPoints);
   }
 
   getTournamentTableList(id) {
-    return this.af.database.list('/tournaments/list/' + id + '/table',
+    return this.afDb.list('/tournaments/list/' + id + '/table',
       { query: { orderByChild: 'rank' } });
   }
 
   getEliminationList(id) {
-    return this.af.database.list('/tournaments/list/' + id + '/eliminations');
+    return this.afDb.list('/tournaments/list/' + id + '/eliminations');
   }
 
 
@@ -1190,13 +1192,13 @@ export class FirebaseManager {
   }
 
   registerLeague(teamId: string, leagueId: string) {
-    this.af.database.object(`/tournaments/list/${leagueId}/registered/${teamId}`).set({
+    this.afDb.object(`/tournaments/list/${leagueId}/registered/${teamId}`).set({
       timestamp: firebase.database.ServerValue.TIMESTAMP
     })
   }
 
   getRegisteredTeamList(leagueId: string) {
-    return this.af.database.list('/tournaments/list/' + leagueId + '/registered',
+    return this.afDb.list('/tournaments/list/' + leagueId + '/registered',
       { query: { orderByChild: 'timestamp' } });
   }
 
@@ -1224,24 +1226,24 @@ export class FirebaseManager {
   updatePlayerPoints(targetId: string, usedPoint: number, newPoints: number) {
     console.log(this.auth);
 
-    this.af.database.object(`/players/${this.auth.uid}/points`).update({ total: newPoints });
-    this.af.database.object(`/players/${this.auth.uid}/points/to/${targetId}`).set(usedPoint);
-    this.af.database.object(`/players/${targetId}/points/from/${this.auth.uid}`).set(usedPoint);
+    this.afDb.object(`/players/${this.auth.uid}/points`).update({ total: newPoints });
+    this.afDb.object(`/players/${this.auth.uid}/points/to/${targetId}`).set(usedPoint);
+    this.afDb.object(`/players/${targetId}/points/from/${this.auth.uid}`).set(usedPoint);
   }
   */
 
   // DONOT use this, use playerEarnPoints instead
   updatePlayerPoints(playerId: string, newPoints: number) {
-    this.af.database.object(`/players/${playerId}/points`).set(newPoints);
+    this.afDb.object(`/players/${playerId}/points`).set(newPoints);
   }
 
   // DONOT use this, use teamEarnPoints instead
   updateTeamPoints(teamId: string, newPoints: number) {
-    this.af.database.object(`/teams/${teamId}/points`).set(newPoints);
+    this.afDb.object(`/teams/${teamId}/points`).set(newPoints);
   }
 
   placeOrder(fromId: string, toId: string, amount: number) {
-    this.af.database.list(`/orders`).push({
+    this.afDb.list(`/orders`).push({
       from: fromId,
       to: toId,
       amount: amount,
@@ -1252,10 +1254,10 @@ export class FirebaseManager {
   unlockCheerleader(cheerleaderId: string, newPoints: number, newUnlockPoints: number, selfNewPoints: number) {
     this.placeOrder(this.auth.uid, cheerleaderId, newUnlockPoints - 10);
     this.updatePlayerPoints(cheerleaderId, newPoints);
-    this.af.database.object(`/public/cheerleaders/${cheerleaderId}/unlockPoints`).set(newUnlockPoints);
+    this.afDb.object(`/public/cheerleaders/${cheerleaderId}/unlockPoints`).set(newUnlockPoints);
 
     this.updatePlayerPoints(this.auth.uid, selfNewPoints);
-    this.af.database.object(`/players/${this.auth.uid}/cheerleaders/${cheerleaderId}`).set(true);
+    this.afDb.object(`/players/${this.auth.uid}/cheerleaders/${cheerleaderId}`).set(true);
   }
 
   playerEarnPoints(playerId: string, amount: number, newPoints: number) {
@@ -1290,7 +1292,7 @@ export class FirebaseManager {
   */
 
   sendFeedback(content: string) {
-    this.af.database.list(`misc/feedbacks/`).push({
+    this.afDb.list(`misc/feedbacks/`).push({
       content: content,
       creator: this.auth.uid,
       timestamp: firebase.database.ServerValue.TIMESTAMP
@@ -1387,7 +1389,7 @@ export class FirebaseManager {
   }
 
   submitCheerleaderInfo(url) {
-    this.af.database.object(this.pendingCheerleadersRef() + this.auth.uid).set({ photo: url });
+    this.afDb.object(this.pendingCheerleadersRef() + this.auth.uid).set({ photo: url });
   }
 
   getPendingCheerleaders() {
@@ -1398,7 +1400,7 @@ export class FirebaseManager {
     if (this.getPendingCheerleaders())
       this.FireEvent('pendingcheerleadersready');
     else {
-      this.af.database.list(this.pendingCheerleadersRef()).subscribe(snapshots => {
+      this.afDb.list(this.pendingCheerleadersRef()).subscribe(snapshots => {
         this.cachedPendingCheerleaders = snapshots;
         this.FireEvent('pendingcheerleadersready');
       })
@@ -1413,7 +1415,7 @@ export class FirebaseManager {
     if (this.getApprovedCheerleaders())
       this.FireEvent('approvedcheerleadersready');
     else {
-      this.af.database.list(this.approvedCheerleadersRef()).subscribe(snapshots => {
+      this.afDb.list(this.approvedCheerleadersRef()).subscribe(snapshots => {
         this.cachedApprovedCheerleaders = snapshots;
         this.FireEvent('approvedcheerleadersready');
       })
@@ -1422,30 +1424,30 @@ export class FirebaseManager {
 
   approveCheerleader(cheerleader) {
     let id = cheerleader.id;
-    this.af.database.object(this.playerRef(id)).update({
+    this.afDb.object(this.playerRef(id)).update({
       role: 'cheerleader',
       photoMedium: cheerleader.photoMedium
     });
-    this.af.database.object(this.pendingCheerleadersRef() + id).remove();
-    this.af.database.object(this.approvedCheerleadersRef() + id).set(true);
+    this.afDb.object(this.pendingCheerleadersRef() + id).remove();
+    this.afDb.object(this.approvedCheerleadersRef() + id).set(true);
 
     let cheerleaderPublic = this.getPlayerPublic(id);
     //console.log(cheerleaderPublic);
-    this.af.database.object(this.cheerleaderPublicRef(id)).set({
+    this.afDb.object(this.cheerleaderPublicRef(id)).set({
       popularity: cheerleaderPublic.popularity || 1,
       unlockPoints: 100,
       received: 0,
       responsed: 0,
       responseRate: 0
     });
-    this.af.database.object(this.playerPublicRef(id)).remove();
+    this.afDb.object(this.playerPublicRef(id)).remove();
 
     // add group chat entry
     let content = {
       en: this.local.getString('welcomeToClGroup', 'en'),
       zh: this.local.getString('welcomeToClGroup', 'zh')
     }
-    this.af.database.object(`/chats/${id}/basic-info/1/`).set({
+    this.afDb.object(`/chats/${id}/basic-info/1/`).set({
       groupName: "cheerleaders",
       isSystem: false,
       isUnread: true,
@@ -1462,7 +1464,7 @@ export class FirebaseManager {
     if (this.sortedPublicCheerleadersMap[id])
       this.FireCustomEvent('cheerleaderpublicready', id);
     else {
-      this.af.database.object(`/public/cheerleaders/${id}`).subscribe(snapshot => {
+      this.afDb.object(`/public/cheerleaders/${id}`).subscribe(snapshot => {
         this.sortedPublicCheerleadersMap[id] = snapshot;
         this.FireCustomEvent('cheerleaderpublicready', id);
       });
@@ -1471,14 +1473,14 @@ export class FirebaseManager {
 
   afPendingCheerleaderSelf() {
     if (this.selfId())
-      return this.af.database.object(this.pendingCheerleadersRef() + this.selfId());
+      return this.afDb.object(this.pendingCheerleadersRef() + this.selfId());
     return null;
   }
 
   //admins 
   getAdminsAsync() {
     if (!this.admins) {
-      this.af.database.object('/admins/').subscribe(snapshot => {
+      this.afDb.object('/admins/').subscribe(snapshot => {
         this.admins = snapshot;
         for (let adminId in snapshot) {
           this.getPlayerAsync(adminId);
@@ -1488,17 +1490,17 @@ export class FirebaseManager {
   }
 
   logout() {
-    this.af.auth.logout();
+    this.afAuth.auth.signOut();
   }
 
   migrateData() {
     //match time for sorting
-    let sub = this.af.database.list(this.matchListRef()).subscribe(matches => {
+    let sub = this.afDb.list(this.matchListRef()).subscribe(matches => {
       sub.unsubscribe();
       matches.forEach(match => {
         if ('homeId' in match && 'awayId' in match && 'time' in match) {
-          this.af.database.object(this.getMatchSquadRef(match.homeId, match.$key) + 'time').set(match.time);
-          this.af.database.object(this.getMatchSquadRef(match.awayId, match.$key) + 'time').set(match.time);
+          this.afDb.object(this.getMatchSquadRef(match.homeId, match.$key) + 'time').set(match.time);
+          this.afDb.object(this.getMatchSquadRef(match.awayId, match.$key) + 'time').set(match.time);
         }
       });
     })
@@ -1510,7 +1512,7 @@ export class FirebaseManager {
     if (groupId) {
       path += groupId;
     }
-    return this.af.database.object(path);
+    return this.afDb.object(path);
   }
 
   computeTournamentTable(tournamentId) {
@@ -1519,7 +1521,7 @@ export class FirebaseManager {
       return;
 
     //console.log('computeTournamentTable');
-    let sub = this.af.database.list('/matches/list', {
+    let sub = this.afDb.list('/matches/list', {
       query: {
         orderByChild: 'tournamentId',
         equalTo: tournamentId

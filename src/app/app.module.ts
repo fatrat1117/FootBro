@@ -57,6 +57,8 @@ import { EditPositionPage } from '../pages/edit-position/edit-position';
 
 // services
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FirebaseManager } from '../providers/firebase-manager';
 import { LocalStorage } from '../providers/local-storage';
 import { OneSignalManager } from '../providers/onesignal-manager';
@@ -191,7 +193,9 @@ export const firebaseConfig = {
       backButtonText: ''
     }),
     RoundProgressModule,
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(firebaseConfig, "soccerbro"),
+    AngularFireDatabaseModule, // imports firebase/database, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA9L3ja5ZcViqTc5Tgz8tG6QvJGlYO-fa4',
       libraries: ["places"]

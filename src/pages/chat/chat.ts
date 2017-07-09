@@ -6,7 +6,7 @@ import { MatchDetailPage } from '../match-detail/match-detail';
 
 import { MomentPipe } from '../../pipes/moment.pipe'
 import * as moment from 'moment';
-import { FirebaseListObservable } from 'angularfire2';
+import { FirebaseListObservable } from 'angularfire2/database';;
 
 import { Localization } from '../../providers/localization';
 import { Chat } from '../../app/chats/shared/chat.model'
