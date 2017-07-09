@@ -98,6 +98,9 @@ import { KeyboardAttachDirective } from '../providers/keyboard-attach.directive'
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
 import { Camera } from '@ionic-native/camera';
 import { Badge } from '@ionic-native/badge';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { Keyboard } from '@ionic-native/keyboard';
+import { StatusBar } from '@ionic-native/status-bar';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCrhL6g6rHs7-X09jw5Oq8I_g0fspD8bf8",
@@ -271,7 +274,10 @@ export const firebaseConfig = {
     LaunchNavigator,
     Badge,
     Transfer,
-    File],
+    File,
+    SplashScreen,
+    Keyboard,
+    StatusBar],
 })
 export class AppModule {
 }

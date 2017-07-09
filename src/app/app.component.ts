@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
-import { StatusBar, Splashscreen, OneSignal, Keyboard, Clipboard } from 'ionic-native';
+import { OneSignal, Clipboard } from 'ionic-native';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { Keyboard } from '@ionic-native/keyboard';
+import { StatusBar } from '@ionic-native/status-bar';
 import { ModalController, App } from 'ionic-angular';
 import { Localization } from '../providers/localization';
 import * as localforage from "localforage";
@@ -22,7 +25,10 @@ export class MyApp {
     loc: Localization,
     fm: FirebaseManager,
     osm: OneSignalManager,
-    app: App) {
+    app: App,
+    splashScreen : SplashScreen,
+    keyboard: Keyboard,
+    statusBar: StatusBar) {
     loc.setLang(navigator.language);
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -36,9 +42,9 @@ export class MyApp {
       //   console.error(error);
       // });
 
-      Splashscreen.hide();
-      StatusBar.styleBlackOpaque();
-      Keyboard.disableScroll(true);
+      splashScreen.hide();
+      statusBar.styleBlackOpaque();
+      keyboard.disableScroll(true);
       //this.registerForPushNotifications();
       fm.initialize();
       osm.initialize(app.getRootNav().getActiveChildNav());
