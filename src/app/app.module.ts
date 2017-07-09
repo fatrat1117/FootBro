@@ -193,7 +193,7 @@ export const firebaseConfig = {
       backButtonText: ''
     }),
     RoundProgressModule,
-    AngularFireModule.initializeApp(firebaseConfig, "soccerbro"),
+    AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AgmCoreModule.forRoot({
