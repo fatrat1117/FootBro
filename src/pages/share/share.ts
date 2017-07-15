@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ViewController } from 'ionic-angular';
-import { Screenshot, SocialSharing } from 'ionic-native';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { Screenshot } from '@ionic-native/screenshot';
 import { PlayerService } from '../../app/players/player.service'
 import { FirebaseManager } from '../../providers/firebase-manager'
 import { UIHelper } from '../../providers/uihelper'
@@ -16,7 +17,9 @@ export class SharePage {
   sharePoints = 200;
   constructor(private viewCtrl: ViewController,
     private playerService: PlayerService,
-    private uiHelper: UIHelper) {
+    private uiHelper: UIHelper,
+    private screenshot: Screenshot,
+    private socialSharing: SocialSharing) {
     let self = this;
     if (Wechat) {
       Wechat.isInstalled(function (installed) {
@@ -38,9 +41,9 @@ export class SharePage {
   shareToFacebook() {
     let self = this;
 
-    Screenshot.URI(10).then((res) => {
+    this.screenshot.URI(10).then((res) => {
       //console.log(res);
-      SocialSharing.shareViaFacebook(null, res.URI, null)
+      this.socialSharing.shareViaFacebook(null, res.URI, null)
         .then(() => {
           let player = self.playerService.getSelfPlayer();
           if (player && !player.fbShareTime) {
@@ -67,7 +70,7 @@ export class SharePage {
 
   shareToWeChat(type: number) {
     //this.viewCtrl.dismiss();
-    Screenshot.URI(10).then((res) => {
+    this.screenshot.URI(10).then((res) => {
       this.sharePhoto(res.URI, type);
       console.log(res, type);
     },

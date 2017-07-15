@@ -1,4 +1,3 @@
-import { Keyboard } from 'ionic-native';
 import { Component, ViewChild } from '@angular/core';
 import { ViewController, NavParams} from 'ionic-angular';
 

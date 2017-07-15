@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { OneSignal } from 'ionic-native';
+import { OneSignal } from '@ionic-native/onesignal';
 import { FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2/database';
 import { Http, Headers, RequestOptions } from '@angular/http'
 import { Platform, AlertController } from 'ionic-angular';
@@ -13,7 +13,8 @@ import { Localization } from '../providers/localization';
 @Injectable()
 export class OneSignalManager {
   constructor(private platform: Platform, private fm: FirebaseManager, private playerService: PlayerService, private teamService: TeamService, 
-    private uiHelper: UIHelper, private http: Http, private local: Localization, private alertController: AlertController) {
+    private uiHelper: UIHelper, private http: Http, private local: Localization, private alertController: AlertController,
+    private os: OneSignal) {
 
   }
 
@@ -22,22 +23,22 @@ export class OneSignalManager {
       this.platform.is('core'))
       return;
 
-    OneSignal.startInit('f6268d9c-3503-4696-8e4e-a6cf2c028fc6', '63493717987');
+    this.os.startInit('f6268d9c-3503-4696-8e4e-a6cf2c028fc6', '63493717987');
 
-    OneSignal.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.None);
+    this.os.inFocusDisplaying(this.os.OSInFocusDisplayOption.None);
 
     //OneSignal.handleNotificationReceived().subscribe(() => {
     //console.log("received");
     //});
 
-    OneSignal.handleNotificationOpened().subscribe(() => {
+    this.os.handleNotificationOpened().subscribe(() => {
       tabRef.select(2);
       //this.navCtrl.push(MessagesPage);
       //console.log("opened");
       //this.modalCtrl.create(MessagesPage).present();
     });
 
-    OneSignal.endInit();
+    this.os.endInit();
   }
 
   postNotification(messageObj, pushIds, success = null) {
@@ -90,20 +91,6 @@ export class OneSignalManager {
       console.log(JSON.stringify(error.json()));
     });
     // end......
-
-    /*
-    if (window["plugins"] && window["plugins"].OneSignal) {
-      window["plugins"].OneSignal.postNotification(notificationObj,
-        function (successResponse) {
-          if (success)
-            success();
-        },
-        function (failedResponse) {
-          console.log("Notification Post Failed: ", failedResponse);
-        }
-      );
-    }
-    */
   }
 
 
@@ -271,5 +258,13 @@ export class OneSignalManager {
     setTimeout(function () {
       self.uiHelper.presentToast('Thanksforyourfeedback');
     }, 1000);
+  }
+
+  sendTag(key, val) {
+    this.os.sendTag(key, val);
+  }
+
+  deleteTags(kvs) {
+    this.os.deleteTags(kvs);
   }
 }

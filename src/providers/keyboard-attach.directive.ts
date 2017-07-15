@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Input } from '@angular/core';
 import { Content, Platform } from 'ionic-angular';
-import { Keyboard } from 'ionic-native';
+import { Keyboard } from '@ionic-native/keyboard';
 import { Subscription } from 'rxjs/rx';
 
 
@@ -44,11 +44,12 @@ export class KeyboardAttachDirective {
 
   constructor(
     private elementRef: ElementRef,
-    private platform: Platform
+    private platform: Platform,
+    private kb : Keyboard
   ) {
     if (this.platform.is('cordova') && this.platform.is('ios')) {
-      this.onShowSubscription = Keyboard.onKeyboardShow().subscribe(e => this.onShow(e));
-      this.onHideSubscription = Keyboard.onKeyboardHide().subscribe(() => this.onHide());
+      this.onShowSubscription = this.kb.onKeyboardShow().subscribe(e => this.onShow(e));
+      this.onHideSubscription = this.kb.onKeyboardHide().subscribe(() => this.onHide());
     }
   }
 

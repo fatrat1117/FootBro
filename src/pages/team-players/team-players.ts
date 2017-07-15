@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Clipboard } from 'ionic-native';
+import { Clipboard } from '@ionic-native/clipboard';
 import { NavController, NavParams, ViewController, PopoverController, AlertController } from 'ionic-angular';
 import { PlayerService } from '../../app/players/player.service';
 import { TeamService } from '../../app/teams/team.service';
@@ -27,7 +27,9 @@ export class TeamPlayersPage {
     private popoverCtrl: PopoverController,
     private alertCtrl: AlertController,
     private loc: Localization,
-    private teamSerive: TeamService, private uiHelper: UIHelper,) {
+    private teamSerive: TeamService, 
+    private uiHelper: UIHelper,
+    private cb: Clipboard) {
     this.teamId = navParams.get('teamId');
     this.team = this.teamSerive.getTeam(this.teamId);
     if (this.playersService.isAuthenticated()) {
@@ -71,7 +73,7 @@ export class TeamPlayersPage {
     //let id = this.selfId + "%" + this.team.id;
 
     let msg = sprintf(this.loc.getString('teaminvitation'), this.playersService.myself().name, this.team.name, this.invitationCode);
-    Clipboard.copy(msg);
+    this.cb.copy(msg);
     let alert = this.alertCtrl.create({
       title: this.loc.getString('SoccerBro'),
       message: this.loc.getString('teamInvitationCopied'),

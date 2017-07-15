@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { Clipboard } from 'ionic-native';
 import { Content, NavController, NavParams, ModalController, AlertController, ActionSheetController } from 'ionic-angular';
 import { Localization } from '../../providers/localization';
 import { SearchPlayerPage } from '../search-player/search-player'

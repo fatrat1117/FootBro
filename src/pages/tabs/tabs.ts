@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { OneSignal, Clipboard } from 'ionic-native';
+import { Clipboard } from '@ionic-native/clipboard';
 import { Badge } from '@ionic-native/badge';
 import { Tabs, Platform, AlertController, ToastController } from 'ionic-angular';
 import { Localization } from '../../providers/localization';
@@ -38,7 +38,8 @@ export class TabsPage {
 
   constructor(private fm: FirebaseManager, private osm: OneSignalManager, private platform: Platform, private alertCtrl: AlertController,
     private toastCtrl: ToastController, private local: Localization, private badge: Badge,
-    private playerService: PlayerService, private teamService: TeamService, private messageService: MessageService) {
+    private playerService: PlayerService, private teamService: TeamService, 
+    private cb: Clipboard, private messageService: MessageService) {
 
   }
 
@@ -74,9 +75,9 @@ export class TabsPage {
         this.checkClipboard();
         // setup tags
         if (this.selfPlayer.role == "cheerleader") 
-          OneSignal.sendTag("role", "cheerleader");
+          this.osm.sendTag("role", "cheerleader");
         else
-          OneSignal.deleteTags(["role", "block-cheerleader"]);
+          this.osm.deleteTags(["role", "block-cheerleader"]);
       }
     });
 
@@ -90,7 +91,7 @@ export class TabsPage {
       this.platform.is('core'))
       return;
 
-    Clipboard.paste().then(
+    this.cb.paste().then(
       (resolve: string) => {
         //setTimeout(this.getTeamInfo(resolve), 1000);
         this.getTeamInfo(resolve);
@@ -153,14 +154,14 @@ export class TabsPage {
         {
           text: this.local.getString("Cancel"),
           handler: () => {
-            Clipboard.copy("");
+            this.cb.copy("");
           }
         },
         {
           text: this.local.getString("join"),
           handler: () => {
             this.confirmJoin(teamId, teamName, invitorId)
-            Clipboard.copy("");
+            this.cb.copy("");
           }
         }
       ]

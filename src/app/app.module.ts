@@ -101,6 +101,10 @@ import { Badge } from '@ionic-native/badge';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Keyboard } from '@ionic-native/keyboard';
 import { StatusBar } from '@ionic-native/status-bar';
+import { OneSignal } from '@ionic-native/onesignal';
+import { SocialSharing } from '@ionic-native/social-sharing';
+import { Screenshot } from '@ionic-native/screenshot';
+import { Clipboard } from '@ionic-native/clipboard';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCrhL6g6rHs7-X09jw5Oq8I_g0fspD8bf8",
@@ -277,7 +281,11 @@ export const firebaseConfig = {
     File,
     SplashScreen,
     Keyboard,
-    StatusBar],
+    StatusBar,
+    OneSignal,
+    SocialSharing,
+    Screenshot,
+    Clipboard],
 })
 export class AppModule {
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { OneSignal } from 'ionic-native';
+import { OneSignal } from '@ionic-native/onesignal';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { LoginPage } from '../pages/login/login';
@@ -63,7 +63,8 @@ export class FirebaseManager {
     private afAuth: AngularFireAuth, 
     private platform: Platform,
     private camera: Camera,
-    private local: Localization) {
+    private local: Localization,
+    private os : OneSignal) {
     document.addEventListener('playernotregistered', e => {
       let id = e['detail'];
       if (this.auth && id === this.auth.uid) {
@@ -136,12 +137,12 @@ export class FirebaseManager {
 
   block(playerId: string) {
     this.afDb.object(`/chats/${this.auth.uid}/black-list/${playerId}`).set(true);
-    OneSignal.sendTag("block-cheerleader", "true");
+    this.os.sendTag("block-cheerleader", "true");
   }
 
   unblock(playerId: string) {
     this.afDb.object(`/chats/${this.auth.uid}/black-list/${playerId}`).remove();
-    OneSignal.deleteTag("block-cheerleader");
+    this.os.deleteTag("block-cheerleader");
   }
 
   isBlockedBy(userId: string) {
@@ -564,7 +565,7 @@ export class FirebaseManager {
   updatePushId() {
     if (!(this.platform.is('mobileweb') ||
       this.platform.is('core'))) {
-      OneSignal.getIds().then(ids => {
+      this.os.getIds().then(ids => {
         console.log('push ids', ids);
         this.getPlayerDetail(this.auth.uid).update({ pushId: ids.userId });
         //this.pushIdsMap[this.auth.uid] = ids.userId;
@@ -1278,19 +1279,6 @@ export class FirebaseManager {
 
 
   /****************************** Misc ******************************/
-  /*
-  postNotification(senderId: string, targetId: string) {
-    let notificationObj = {
-      app_id: "f6268d9c-3503-4696-8e4e-a6cf2c028fc6",
-      contents: "user name",
-      include_player_ids: [targetId]
-    };
-
-    OneSignal.postNotification(notificationObj);
-
-  }
-  */
-
   sendFeedback(content: string) {
     this.afDb.list(`misc/feedbacks/`).push({
       content: content,

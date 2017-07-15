@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { OneSignal } from 'ionic-native';
 import { Subject } from 'rxjs/Subject';
-
+import { OneSignalManager } from '../../providers/onesignal-manager';
 import { FirebaseManager } from '../../providers/firebase-manager'
 
 import { Message } from './message.model';
@@ -12,7 +11,7 @@ export class MessageService {
   blacklist: string[];
   subscription: any;
   blSubscription: any;
-  constructor(private fm: FirebaseManager) {
+  constructor(private fm: FirebaseManager, private osm : OneSignalManager) {
     this.messages = [];
 
     document.addEventListener('userlogout', e => {
@@ -56,7 +55,7 @@ export class MessageService {
       items.forEach(i => {
         this.blacklist.push(i.$key);
         if (i.$key == "1")
-          OneSignal.sendTag("block-cheerleader", "true");
+          this.osm.sendTag("block-cheerleader", "true");
       })
       this.fm.FireEvent("serviceblacklistready");
     })

@@ -1,5 +1,4 @@
 import { Component, Directive, ViewChild } from '@angular/core';
-import { Keyboard } from 'ionic-native';
 import { NavController, NavParams, Content, AlertController, ModalController } from 'ionic-angular';
 
 import { MatchDetailPage } from '../match-detail/match-detail';
@@ -136,23 +135,6 @@ export class ChatPage {
   }
 
   ionViewDidEnter() {
-    //this.scrollView();
-    /*
-    this.showSub = Keyboard.onKeyboardShow().subscribe(e => {
-      console.log("showkeyboard");
-      //this.scrollToBottom();
-      //this.content.resize();
-      let keyboardHeight: number = e.keyboardHeight || (e.detail && e.detail.keyboardHeight);
-      this.setElementPosition(keyboardHeight);
-    })
-    this.hideSub = Keyboard.onKeyboardHide().subscribe(e => {
-      console.log("hidekeyboard");
-      //this.scrollToBottom();
-      //this.content.resize();
-      this.setElementPosition(0);
-    })
-    //this.scrollToBottom();
-    */
   }
 
   scrollView() {

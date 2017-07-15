@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ViewController,NavParams } from 'ionic-angular';
-import { Screenshot, SocialSharing } from 'ionic-native';
 
 declare var Wechat: any;
 
