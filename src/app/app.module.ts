@@ -220,7 +220,7 @@ export const firebaseConfig = {
     TabsPage,
     MePage,
     MessagesPage,
-    ChatPage,
+    //ChatPage,
     EditPlayerPage,
     EditPlayerNamePage,
     EditPlayerHeightPage,
