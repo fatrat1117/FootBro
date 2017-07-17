@@ -21,9 +21,11 @@ import { PlayerService } from '../../app/players/player.service';
   providers: [ChatService]
 })
 
+/*
 @Directive({
   selector: '[keyboardAttach]'
 })
+*/
 export class ChatPage {
   @ViewChild('content') content: Content;
   //chats: FirebaseListObservable<any[]>;

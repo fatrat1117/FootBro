@@ -92,7 +92,7 @@ import { SbCupTeamComponent } from './common/cup.team.component';
 import { FAQComponent} from './common/faq.component';
 
 // directives
-import { KeyboardAttachDirective } from '../providers/keyboard-attach.directive';
+//import { KeyboardAttachDirective } from '../providers/keyboard-attach.directive';
 
 //native
 import { LaunchNavigator } from '@ionic-native/launch-navigator';
@@ -190,7 +190,7 @@ export const firebaseConfig = {
     FAQComponent,
     ColorPickerPage,
     // directives
-    KeyboardAttachDirective,
+    //KeyboardAttachDirective,
   ],
   imports: [
     BrowserModule,
@@ -220,7 +220,7 @@ export const firebaseConfig = {
     TabsPage,
     MePage,
     MessagesPage,
-    //ChatPage,
+    ChatPage,
     EditPlayerPage,
     EditPlayerNamePage,
     EditPlayerHeightPage,

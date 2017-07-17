@@ -87,7 +87,8 @@
   </ion-toolbar>
 </ion-footer-->
 
-<ion-footer [keyboardAttach]="content" class="chat-room-footer" *ngIf="!isSystem && !isBlocked">
+<!-- [keyboardAttach]="content" -->
+<ion-footer class="chat-room-footer" *ngIf="!isSystem && !isBlocked">
   <ion-toolbar text-center>
     <input #input type="text" class="text-input" [(ngModel)]="newMessage">
     <ion-buttons right>
