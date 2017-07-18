@@ -17,7 +17,7 @@ export class LocalStorage {
   getImage(url: string, success, fail) {
     // null
     if (!url) {
-      console.log("URL is null");
+      //console.log("URL is null");
       //success("assets/img/none.png");
       fail(-1)
       return;
@@ -25,7 +25,7 @@ export class LocalStorage {
 
     // non-mobile
     if (this.platform.is('mobileweb') || this.platform.is('core')) {
-      console.log("Non-mobile");
+      //console.log("Non-mobile");
       success(url);
       return;
     }
@@ -63,7 +63,7 @@ export class LocalStorage {
   }
 
   download(url, success, fail) {
-    console.log("Download from server: " + url);
+    //console.log("Download from server: " + url);
     
     let fileTransfer: TransferObject = this.transfer.create();
     let name = this.generateUUID() + '.jpg';
@@ -79,7 +79,7 @@ export class LocalStorage {
   saveToLocal(url, path, success) {
     this.storage.ready().then(() => {
       this.storage.set(url, path);
-      console.log("Saved to cache:" + path);
+      //console.log("Saved to cache:" + path);
       success(path);
     })
   }

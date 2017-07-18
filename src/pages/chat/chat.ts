@@ -1,5 +1,6 @@
 import { Component, Directive, ViewChild } from '@angular/core';
-import { NavController, NavParams, Content, AlertController, ModalController } from 'ionic-angular';
+import { NavController, NavParams, Content, AlertController, ModalController, Platform } from 'ionic-angular';
+import { Keyboard } from '@ionic-native/keyboard';
 
 import { MatchDetailPage } from '../match-detail/match-detail';
 
@@ -8,7 +9,7 @@ import * as moment from 'moment';
 import { FirebaseListObservable } from 'angularfire2/database';;
 
 import { Localization } from '../../providers/localization';
-import { Chat } from '../../app/chats/shared/chat.model'
+import { Chat } from '../../app/chats/chat.model';
 import { ChatService } from '../../app/chats/chat.service'
 import { Player } from '../../app/players/player.model';
 import { PlayerService } from '../../app/players/player.service';
@@ -28,6 +29,7 @@ import { PlayerService } from '../../app/players/player.service';
 */
 export class ChatPage {
   @ViewChild('content') content: Content;
+  @ViewChild('input') input: any;
   //chats: FirebaseListObservable<any[]>;
   chats: any[];
   user: Player;
@@ -48,10 +50,31 @@ export class ChatPage {
   onPlayerReady: any;
   watchListMap : {};
 
+  // Keyboard
+  onShowSubscription;
+  onHideSubscription;
+
   constructor(private navCtrl: NavController, private navParams: NavParams, 
               private chatService: ChatService, private local: Localization,
               private alertCtrl: AlertController, private playerService: PlayerService,
-              private modalController: ModalController) {
+              private modalController: ModalController,
+              private platform: Platform, private kb : Keyboard) {
+
+
+    
+    if (this.platform.is('cordova') && this.platform.is('ios')) {
+      this.onShowSubscription = this.kb.onKeyboardShow().subscribe(e => this.onShow(e));
+      this.onHideSubscription = this.kb.onKeyboardHide().subscribe(() => this.onHide());
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.onShowSubscription) {
+      this.onShowSubscription.unsubscribe();
+    }
+    if (this.onHideSubscription) {
+      this.onHideSubscription.unsubscribe();
+    }
   }
 
   ionViewDidLoad() {
@@ -294,5 +317,24 @@ export class ChatPage {
       return chat.content;
     else
       return str;
+  }
+
+  /** Resize keyboard */
+  private onShow(e) {
+    let keyboardHeight: number = e.keyboardHeight || (e.detail && e.detail.keyboardHeight);
+    this.setElementPosition(keyboardHeight);
+  };
+
+  private onHide() {
+    this.setElementPosition(0);
+  };
+
+  private setElementPosition(pixels: number) {
+    this.input.nativeElement.style.paddingBottom = pixels + 'px';
+    this.content.resize();
+    setTimeout(_ => {
+      if (this.content && this.content._scroll)
+        this.content.scrollToBottom()
+    }, 100)
   }
 }

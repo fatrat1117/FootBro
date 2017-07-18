@@ -88,9 +88,9 @@
 </ion-footer-->
 
 <!-- [keyboardAttach]="content" -->
-<ion-footer class="chat-room-footer" *ngIf="!isSystem && !isBlocked">
+<ion-footer #input class="chat-room-footer" *ngIf="!isSystem && !isBlocked">
   <ion-toolbar text-center>
-    <input #input type="text" class="text-input" [(ngModel)]="newMessage">
+    <input type="text" class="text-input" [(ngModel)]="newMessage">
     <ion-buttons right>
       <button *ngIf="newMessage?.trim()" ion-button class="send-button" (tap)="sendMessage(input)">
         {{ 'Send' | trans }}

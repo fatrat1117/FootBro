@@ -133,7 +133,7 @@ export class PlayerService {
         }
 
         let success2 = cachedURL => {
-          console.log('photoMedium ok', cachedURL);
+          //console.log('photoMedium ok', cachedURL);
           
           player.photoMedium = cachedURL;
           if (player.role && player.role === 'cheerleader') {
