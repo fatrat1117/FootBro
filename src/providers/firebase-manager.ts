@@ -759,8 +759,8 @@ export class FirebaseManager {
   }
 
   registerPlayer() {
-    console.log("first time login");
-    let user = this.auth.auth;
+    console.log("first time login", this.auth);
+    let user = this.auth;
     let photoURL = user.photoURL || 'assets/img/none.png';
     let providerData = user.providerData[0]
     if (providerData.providerId.toLowerCase().indexOf('facebook') != -1) {
