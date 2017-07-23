@@ -15,14 +15,29 @@
 
   <div padding>
     <ion-label>{{'UsingSBAccount' | trans}}</ion-label>
-    <ion-label>{{'Email' | trans}}</ion-label>
+    <ion-list class="login-area">
+      <ion-item>
+        <ion-label stacked>{{'Email' | trans}}</ion-label>
+        <ion-input maxlength="128" type="text" [(ngModel)]="_credentials.email" [placeholder]="'enteremail' | trans"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>{{'Password' | trans}}</ion-label>
+        <ion-input maxlength="32" type="password" [(ngModel)]="_credentials.password" [placeholder]="'enterpwd' | trans"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{'rememberme' | trans}}</ion-label>
+        <ion-checkbox [(ngModel)]="rememberMe"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+
+    <!--<ion-label>{{'Email' | trans}}</ion-label>
     <ion-input class='login-input' maxlength="128" type="text" [(ngModel)]="_credentials.email" [placeholder]="'enteremail' | trans"></ion-input>
     <ion-label>{{'Password' | trans}}</ion-label>
     <ion-input class='login-input' maxlength="32" type="password" [(ngModel)]="_credentials.password" [placeholder]="'enterpwd' | trans"></ion-input>
     <ion-item>
       <ion-label>{{'rememberme' | trans}}</ion-label>
       <ion-checkbox [(ngModel)]="rememberMe"></ion-checkbox>
-    </ion-item>
+    </ion-item>-->
   </div>
 
   <div padding>
@@ -33,7 +48,4 @@
     <button ion-button color='darkGreen' [disabled]="busy || !_credentials.email.length" (tap)="ResetPassword()" block>{{ 'ResetPwd' | trans }}</button>
     <button ion-button [disabled]="busy" (tap)="dismiss()" block color='lightGrey'>{{'Cancel' | trans}}</button>
   </div>
-  <!--<div>
-    <p *ngIf="error" color='danger'>{{error}}</p>
-  </div>-->
 </ion-content>
