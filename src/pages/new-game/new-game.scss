@@ -292,11 +292,13 @@ page-new-game {
             font-size:1.5rem;
           }
           .google-location {
-            width:100%; 
-            border:none; 
-            text-align:center;
-            //color: #222; 
-            background-color: transparent;
+            input{
+              width:100%; 
+              border:none; 
+              text-align:center;
+              //color: #222; 
+              background-color: transparent;
+            }
           }
         }
       }

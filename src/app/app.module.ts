@@ -6,7 +6,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { Transfer } from '@ionic-native/transfer'; 
 import { File } from '@ionic-native/file';
 import { MyErrorHandler } from '../providers/exception-handler'
-import { AgmCoreModule } from 'angular2-google-maps/core';
+//import { AgmCoreModule } from '@agm/core';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { MyApp } from './app.component';
 import { TutorialPage } from '../pages/tutorial/tutorial';
@@ -203,10 +203,12 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    /*
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA9L3ja5ZcViqTc5Tgz8tG6QvJGlYO-fa4',
       libraries: ["places"]
     }),
+    */
     IonicStorageModule.forRoot(),
   ],
   bootstrap: [IonicApp],

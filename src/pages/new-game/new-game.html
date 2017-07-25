@@ -8,7 +8,7 @@
     </ion-buttons>
     <ion-buttons right>
       <button [disabled]="!(match.home && match.away &&  match.type && matchDate && matchTime && match.location.address)" (tap)="scheduleMatch()"
-              color="primary" ion-button icon-only clear>
+        color="primary" ion-button icon-only clear>
          <ion-icon name="md-cloud-upload"></ion-icon>
       </button>
     </ion-buttons>
@@ -25,10 +25,10 @@
     </ion-col>
     <ion-col></ion-col>
     <ion-col class="team-flag" (tap)="searchTeam(2)">
-      <button ion-button icon-start clear full style="margin:0px;padding:0px;"color="light">
+      <button ion-button icon-start clear full style="margin:0px;padding:0px;" color="light">
         <ion-icon name="md-flag" color="primary"></ion-icon>
         {{'AwayTeam' | trans}}
-        </button> 
+        </button>
     </ion-col>
   </ion-row>
 
@@ -51,13 +51,6 @@
       </div>
     </ion-item>
 
-    <ion-item class="game-info-item-light">
-      <button ion-button clear full class="game-info-item-start" item-start>{{'Location' | trans}}</button>
-      <div class="game-info-item-end-gray" item-end text-center>
-        <input class="google-location" id="autocompleteInput" [ngModel]="match.location.name"/>
-      </div>
-    </ion-item>
-
     <ion-item class="game-info-item">
       <button ion-button clear full class="game-info-item-start" item-start>{{'Date' | trans}}</button>
       <div class="game-info-item-end" item-end>
@@ -71,5 +64,16 @@
         <ion-datetime text-center displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="matchTime"></ion-datetime>
       </div>
     </ion-item>
+
+    <ion-item class="game-info-item-light">
+      <button ion-button clear full class="game-info-item-start" item-start>{{'Location' | trans}}</button>
+      <div class="game-info-item-end-gray" item-end text-center>
+        <ion-input class="google-location" type="search" [ngModel]="match.location.name" (input)="searchAddress($event)">
+        </ion-input>
+      </div>
+    </ion-item>
+    <ion-item-group [hidden]="autoCompleteItems.length == 0" style="width: 70%; float: right">
+      <ion-item *ngFor="let item of autoCompleteItems" (tap)="selectAddress(item)" color="white" style="font-size: 1.2rem">{{ item.description }}</ion-item>
+    </ion-item-group>
   </ion-list>
 </ion-content>
