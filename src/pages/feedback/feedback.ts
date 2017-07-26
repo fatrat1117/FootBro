@@ -8,12 +8,12 @@ import { OneSignalManager } from '../../providers/onesignal-manager'
     <ion-navbar>
       <ion-title>{{ 'Feedback' | trans }}</ion-title>
       <!--ion-buttons left>
-        <button (tap)="dismiss()" ion-button icon-only>
+        <button (click)="dismiss()" ion-button icon-only>
           <ion-icon name="md-close" color="danger"></ion-icon>
         </button>
       </ion-buttons-->
       <ion-buttons right>
-        <button [disabled] = "!isEnabled" (tap)="onSubmit()" text-center ion-button clear color="primary">
+        <button [disabled] = "!isEnabled" (click)="onSubmit()" text-center ion-button clear color="primary">
           {{ 'Submit' | trans }}
         </button>
       </ion-buttons>

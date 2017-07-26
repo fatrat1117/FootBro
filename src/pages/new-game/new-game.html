@@ -2,12 +2,12 @@
   <ion-navbar>
     <ion-title>{{'NewMatch' | trans}}</ion-title>
     <ion-buttons left>
-      <button (tap)="close()" color='danger' ion-button icon-only clear>
+      <button (click)="close()" color='danger' ion-button icon-only clear>
         <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons right>
-      <button [disabled]="!(match.home && match.away &&  match.type && matchDate && matchTime && match.location.address)" (tap)="scheduleMatch()"
+      <button [disabled]="!(match.home && match.away &&  match.type && matchDate && matchTime && match.location.address)" (click)="scheduleMatch()"
         color="primary" ion-button icon-only clear>
          <ion-icon name="md-cloud-upload"></ion-icon>
       </button>
@@ -73,7 +73,7 @@
       </div>
     </ion-item>
     <ion-item-group [hidden]="autoCompleteItems.length == 0" style="width: 70%; float: right">
-      <ion-item *ngFor="let item of autoCompleteItems" (tap)="selectAddress(item)" color="white" style="font-size: 1.2rem">{{ item.description }}</ion-item>
+      <ion-item *ngFor="let item of autoCompleteItems" (click)="selectAddress(item)" color="white" style="font-size: 1.2rem">{{ item.description }}</ion-item>
     </ion-item-group>
   </ion-list>
 </ion-content>

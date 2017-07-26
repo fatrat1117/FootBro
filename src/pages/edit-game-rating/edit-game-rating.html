@@ -2,12 +2,12 @@
   <ion-navbar>
     <ion-title>{{'rating' | trans}}</ion-title>
     <ion-buttons left>
-      <button (tap)="close()" color='danger' ion-button icon-only clear>
+      <button (click)="close()" color='danger' ion-button icon-only clear>
         <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons right>
-      <button (tap)="ratePlayers()" color="primary" ion-button icon-only clear>
+      <button (click)="ratePlayers()" color="primary" ion-button icon-only clear>
         +{{playerPoints}}
         <ion-icon name="md-cloud-upload"></ion-icon>
       </button>

@@ -1,43 +1,15 @@
 <ion-header>
   <ion-navbar>
     <ion-title>{{'Players' | trans}}</ion-title>
-    <!--<ion-buttons left *ngIf="showClose">
-      <button (tap)="close()" color='danger' ion-button icon-only clear>
-        <ion-icon name="close"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-buttons *ngIf='selectPlayersMode' right>
-      <button color='primary' (tap) = 'dismiss()' ion-button clear>
-        {{'OK' | trans}}
-      </button>
-    </ion-buttons>-->
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <!-- virtual scroll bug<ion-list [virtualScroll]="filteredPlayers" approxItemHeight = "58px">
-    <ion-item *virtualItem="let player" (tap)="selectPlayer(player.id)">
-      <ion-label *ngIf='selectPlayersMode'>{{ player.name }}</ion-label>
-      <ion-checkbox *ngIf='selectPlayersMode' color="primary" style="margin-right: 10px"
-      [checked] = 'selectedPlayersMap[player.id]'
-      (ionChange)="onSelectionChange(player.id, $event)"></ion-checkbox>
-      <ion-avatar item-start>
-        <ion-img [src] = "player.photo"></ion-img>
-      </ion-avatar>
-      {{ player.name }}
-    </ion-item>
-  </ion-list>-->
   <div class="list-header">
     <div class="player-label">{{'Player' | trans}}</div>
     <div class="player-option">{{'Settings' | trans}}</div>
     <div class="player-role">{{'Role' | trans}}</div>
   </div>
-  <!--<div class="usage-notification-panel">
-    <div class="notification-text">
-      <ion-icon name="bulb" class="icon"></ion-icon>
-      <span class="text-content">{{'EditNumberByClickingClothesIcon' | trans}}</span>
-    </div>
-  </div>-->
 
   <ion-list class="player-list">
     <ion-item *ngFor="let player of players" class="player-item" (click) = "goPlayerPage(player.id)">
@@ -48,17 +20,13 @@
         <ion-col class="player-name">
           <div class="name-text">{{ player.name }}</div>
           <div class="position" *ngIf = "isSetPosition(player.position)">{{ toUpperCase(player.position)}}</div>
-          <!--<div class="not-set-position" *ngIf = "isSetPosition(player.position) == false">{{ 'NotSet' | trans }}</div>-->
         </ion-col>
         <ion-col class="player-operation flex-center">
           <button *ngIf = "canShowSettings(player.id)" color="lightGrey" ion-button icon-only full clear (click)="popupManageMenu($event, player)">
             <ion-icon name="md-settings"></ion-icon>
           </button>
-
-          <!--ion-icon *ngIf = "canShowSettings(player.id)" name="md-settings" class="bigger-icon" (click) = "popupManageMenu($event, player)"></ion-icon-->
         </ion-col>
         <ion-col class="player-team-role flex-center" [ngClass]="player.teamRole">{{player.teamRole | trans}}</ion-col>
-        <!--[ngClass]="getLocalizationClass('foot-data')"-->
       </ion-row>
     </ion-item>
   </ion-list>

@@ -9,7 +9,7 @@ import { PlayerService } from '../../app/players/player.service'
     <ion-navbar>
       <ion-title>{{ 'Position' | trans }}</ion-title>
       <ion-buttons left>
-        <button (tap)="dismiss()" ion-button icon-only>
+        <button (click)="dismiss()" ion-button icon-only>
           <ion-icon name="md-close" color="danger"></ion-icon>
         </button>
       </ion-buttons>
@@ -18,7 +18,7 @@ import { PlayerService } from '../../app/players/player.service'
 
   <ion-content>
     <ion-list>
-      <ion-item *ngFor="let v of values" (tap)="changePosition(v)">
+      <ion-item *ngFor="let v of values" (click)="changePosition(v)">
         <h2>{{ v | trans }}</h2>
         <ion-icon *ngIf="v == selectedValue" item-end name="md-checkmark" color="primary"></ion-icon>
       </ion-item>

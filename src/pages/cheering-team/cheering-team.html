@@ -34,7 +34,7 @@
             <div *ngIf='pendingCheerleaders[i]'>
               <ion-row class="item-row">
                 <div class="baby-img-frame">
-                  <button ion-button icon-only clear class="chat-logo" color="lightGrey" (tap)="approve(pendingCheerleaders[i].id)">
+                  <button ion-button icon-only clear class="chat-logo" color="lightGrey" (click)="approve(pendingCheerleaders[i].id)">
                     <ion-icon name="md-lock"></ion-icon>
                   </button>
                   <img [src]="pendingCheerleaders[i].photoMedium">
@@ -77,11 +77,11 @@
             <ion-row class="item-row">
               <div class="baby-img-frame">
                 <button *ngIf="isUnlocked(approvedCheerleaders[i].id) && !isBlocking(approvedCheerleaders[i].id)" ion-button icon-only clear small class="chat-logo" color="primary"
-                  (tap)="enterChatPage(approvedCheerleaders[i])">
+                  (click)="enterChatPage(approvedCheerleaders[i])">
                   <ion-icon name="md-chatbubbles"></ion-icon>
                 </button>
                 <button *ngIf="!isUnlocked(approvedCheerleaders[i].id) && !isBlocking(approvedCheerleaders[i].id)" ion-button icon-only clear small class="chat-logo" color="gYellow"
-                  (tap)="unlockCheerleader(approvedCheerleaders[i])">
+                  (click)="unlockCheerleader(approvedCheerleaders[i])">
                   <ion-icon name="md-unlock"></ion-icon>
                 </button>
                 <img *ngIf="!isBlocking(approvedCheerleaders[i].id)" [src]="approvedCheerleaders[i].photoMedium">

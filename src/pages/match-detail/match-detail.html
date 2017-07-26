@@ -1,7 +1,7 @@
 <ion-header #pageHeader>
   <ion-toolbar>
     <ion-buttons left>
-      <button (tap)="dismiss()" color='danger' ion-button icon-only clear>
+      <button (click)="dismiss()" color='danger' ion-button icon-only clear>
         <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
@@ -17,7 +17,7 @@
       </ion-segment-button>
     </ion-segment>
     <ion-buttons right>
-      <button *ngIf='canShowEdit()' color='gBlue' (tap)="edit()" ion-button icon-only clear>
+      <button *ngIf='canShowEdit()' color='gBlue' (click)="edit()" ion-button icon-only clear>
           <ion-icon name="md-create"></ion-icon>
       </button>
       <sb-share-button></sb-share-button>
@@ -44,7 +44,7 @@
 </ion-col>
 </ion-row>
 <div class="match-detail-info">
-  <ion-item class="common-title map-title" (tap)="navigateToField()">
+  <ion-item class="common-title map-title" (click)="navigateToField()">
     <ion-icon name="navigate" color="iPrimary" class="common-icon map-icon inline-flex-vertical-center"></ion-icon>
     <div class="common-content map-content">{{match?.location?.name}}, {{match?.location?.address}}</div>
   </ion-item>
@@ -126,7 +126,7 @@
     </ion-col>
   </ion-row>
 </div>
-<button *ngIf='canShowDelete()' (tap)="deleteMatch()" color='danger' ion-button block>{{'deletematch' | trans}}</button>
+<button *ngIf='canShowDelete()' (click)="deleteMatch()" color='danger' ion-button block>{{'deletematch' | trans}}</button>
 </div>
 
 <div class="content-all" *ngSwitchCase="'squad'">
@@ -134,14 +134,14 @@
 </div>
 
 <div class="content-all" *ngSwitchCase="'players'">
-  <button *ngIf='canShowRate()' (tap)="openRatePlayersPage()" ion-button block>
+  <button *ngIf='canShowRate()' (click)="openRatePlayersPage()" ion-button block>
           {{'rateplayers' | trans}}
       </button>
   <no-record *ngIf="statCategories.length <= 0" message="{{'searchMatchPageNoRecord' | trans}}"></no-record>
   <div *ngIf="statCategories.length > 0">
     <div class="left-scrollview matches-date-tab-col" [ngStyle]="{'height.px': getMatchDetailScrollHeight()}">
       <ion-list class="date-tab-list">
-        <ion-item *ngFor="let cat of statCategories;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (tap)='showStat(cat)'
+        <ion-item *ngFor="let cat of statCategories;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (click)='showStat(cat)'
           [style.background]="selectedCat === cat ? '#20bd16' : '#373e4c'" [style.color]="selectedCat === cat ? '#ffffff' : '#93ABC5'">
           <div class="date-inner">
             {{cat | trans}}

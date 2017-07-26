@@ -5,7 +5,7 @@
       <button *ngIf = "canShowComputeTable()" ion-button icon-only (click)="computeTournamentTable()">
         <ion-icon name="md-calculator"></ion-icon>
       </button>
-      <button *ngIf="canShowAdd()" ion-button icon-only (tap)="enterNewGame()">
+      <button *ngIf="canShowAdd()" ion-button icon-only (click)="enterNewGame()">
         <ion-icon name="md-add" color="primary"></ion-icon>
       </button>
       <button *ngIf="rules" ion-button icon-only (click)="showRules()">
@@ -32,17 +32,12 @@
 </ion-header>
 <ion-content #matchContent no-bounce>
 
-  <!-->
-  <ion-fab top right edge>
-    <button ion-fab mini (tap)="enterNewGame()"><ion-icon color="dark" name="md-add"></ion-icon></button>
-  </ion-fab>
-  <-->
     <div [ngSwitch]="selectedInfo" [ngStyle]="{'height':'100%'}">
       <!-- schedule -->
       <div *ngSwitchCase="'schedule'" [ngStyle]="{'height':'100%'}">
         <div class="left-scrollview matches-date-tab-col" id="sketchElement" [ngStyle]="{'height.px': getMatchScrollHeight()}">
           <ion-list class="date-tab-list">
-            <ion-item *ngFor="let date of dates;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (tap)="showMatches(date)"
+            <ion-item *ngFor="let date of dates;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (click)="showMatches(date)"
               [style.background]="selectedDate == date ? '#585F6F' : '#40444D'" [style.color]="selectedDate == date ? '#00ef00' : '#F2EDE7'"
               [ngClass]="addDateSelectNgClass(i,date)">
               <ion-item *ngIf="isChangeYear(i) == true" class="year">
@@ -127,7 +122,7 @@
         <div *ngIf="null !== tournament">
           <div class="left-scrollview player-left-scrollview matches-date-tab-col" [ngStyle]="{'height.px': getMatchDetailScrollHeight()}">
             <ion-list class="date-tab-list">
-              <ion-item *ngFor="let cat of statCategories;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (tap)='showStat(cat)'
+              <ion-item *ngFor="let cat of statCategories;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (click)='showStat(cat)'
                         [style.background]="selectedCat === cat ? '#20bd16' : '#373e4c'" [style.color]="selectedCat === cat ? '#ffffff' : '#93ABC5'">
                 <div class="date-inner">
                   {{cat | trans}}

@@ -17,44 +17,44 @@
 
   <ion-row class="home-menu" no-padding style="margin-top: 2rem">
     <ion-col class="menu-col" center>
-      <button ion-button icon-only full color="dark" (tap)="enterCheeringTeam()">
+      <button ion-button icon-only full color="dark" (click)="enterCheeringTeam()">
         <ion-icon name="md-flower" color="gRed"></ion-icon>
       </button>
-      <button ion-button full color="dark" (tap)="enterCheeringTeam()">
+      <button ion-button full color="dark" (click)="enterCheeringTeam()">
         <p>{{'Cheerleaders' | trans}}</p>
       </button>
     </ion-col>
     <ion-col class="menu-col" center>
-      <button ion-button icon-only full color="dark" (tap)="enterRankPage()">
+      <button ion-button icon-only full color="dark" (click)="enterRankPage()">
         <ion-icon name="md-podium" color="gBlue"></ion-icon>
       </button>
-      <button ion-button full color="dark" (tap)="enterRankPage()">
+      <button ion-button full color="dark" (click)="enterRankPage()">
         <p>{{'Ranks' | trans}}</p>
       </button>
     </ion-col>
   </ion-row>
   <ion-row *ngIf = "selfTeam" class="home-menu bottom-row" no-padding>
     <ion-col *ngIf = "selfTeam" class="menu-col"  center>
-      <button ion-button icon-only full color="dark" (tap)="enterManageSquadPage()">
+      <button ion-button icon-only full color="dark" (click)="enterManageSquadPage()">
         <ion-icon name="md-football" color="gYellow"></ion-icon>
       </button>
-      <button ion-button full color="dark" (tap)="enterManageSquadPage()">
+      <button ion-button full color="dark" (click)="enterManageSquadPage()">
         <p>{{'squads' | trans}}</p>
       </button>
     </ion-col>
     <ion-col class="menu-col"  center>
-      <button ion-button icon-only full color="dark" (tap)="openTeamPlayersPage()">
+      <button ion-button icon-only full color="dark" (click)="openTeamPlayersPage()">
         <ion-icon name="md-people" color="gGreen"></ion-icon>
       </button>
-      <button ion-button full color="dark" (tap)="openTeamPlayersPage()">
+      <button ion-button full color="dark" (click)="openTeamPlayersPage()">
         <p>{{'players' | trans}}</p>
       </button>
     </ion-col>
     <ion-col class="menu-col"  center>
-      <button *ngIf="upcomingMatch?.dataReady" ion-button icon-only full color="dark" (tap)="seeMoreTeamGamePlan()">
+      <button *ngIf="upcomingMatch?.dataReady" ion-button icon-only full color="dark" (click)="seeMoreTeamGamePlan()">
         <ion-icon name="md-calendar" color="light"></ion-icon>
       </button>
-      <button ion-button full color="dark" (tap)="seeMoreTeamGamePlan()">
+      <button ion-button full color="dark" (click)="seeMoreTeamGamePlan()">
         <p>{{'schedule' | trans}}</p>
       </button>
     </ion-col>
@@ -62,7 +62,7 @@
 
   <div *ngIf="!selfPlayer && showLogin">
     <ion-row center margin>
-      <button ion-button round icon-start color="gYellow" class="login-button" (tap)="login()">
+      <button ion-button round icon-start color="gYellow" class="login-button" (click)="login()">
         <ion-icon name="md-log-in"></ion-icon>
         {{'Login' | trans}}
       </button>
@@ -91,7 +91,7 @@
         </ion-thumbnail>
       </ion-col>
       <ion-col width-50 class="home-block" text-center *ngIf="!selfTeam && showJoinTeam">
-        <button ion-button icon-start (tap)="joinTeam()">
+        <button ion-button icon-start (click)="joinTeam()">
           <ion-icon name="md-add"></ion-icon>
           {{'JoinTeam' | trans}}
         </button>
