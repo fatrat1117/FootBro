@@ -103,4 +103,5 @@
     <plugin name="onesignal-cordova-plugin" spec="^2.0.11" />
     <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="^3.2.2" />
     <engine name="android" spec="~6.2.3" />
+    <plugin name="cordova-clipboard" spec="^1.0.0" />
 </widget>
