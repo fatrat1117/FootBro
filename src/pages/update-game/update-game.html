@@ -2,12 +2,12 @@
   <ion-navbar>
     <ion-title>{{'updatematch' | trans}}</ion-title>
     <ion-buttons left>
-      <button (tap)="close()" color='danger' ion-button icon-only clear>
+      <button (click)="close()" color='danger' ion-button icon-only clear>
         <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons right>
-      <button [disabled]="!canEnableUpdate()" (tap)="updateMatch()" color="primary" ion-button icon-only clear>
+      <button [disabled]="!canEnableUpdate()" (click)="updateMatch()" color="primary" ion-button icon-only clear>
         <span *ngIf='!adminMode && !squad.participantsConfirmed'>+{{getTeamPoints()}}</span>
         <ion-icon name="md-cloud-upload"></ion-icon>
       </button>
@@ -105,14 +105,14 @@
           <ion-icon name="md-football" class="desc-img" item-start></ion-icon>
           <button ion-button clear color="light">{{'Goals' | trans}}</button>
           <div item-end>
-            <button [disabled]="player.goals <= 0" ion-button icon-only clear (tap)="minus(player, 'goals')"
+            <button [disabled]="player.goals <= 0" ion-button icon-only clear (click)="minus(player, 'goals')"
                     color="light">
               <ion-icon name="md-arrow-dropleft"></ion-icon>
             </button>
             <button ion-button clear color="secondary">
               {{player.goals}}
             </button>
-            <button ion-button icon-only clear (tap)="plus(player, 'goals')">
+            <button ion-button icon-only clear (click)="plus(player, 'goals')">
               <ion-icon name="md-arrow-dropright" color="secondary"></ion-icon>
             </button>
           </div>
@@ -123,14 +123,14 @@
           <ion-icon name="md-contacts" class="desc-img" item-start color="gGreen"></ion-icon>
           <button ion-button clear color="light">{{'Assists' | trans}}</button>
           <div item-end>
-            <button [disabled]="player.assists <= 0" ion-button icon-only clear (tap)="minus(player, 'assists')"
+            <button [disabled]="player.assists <= 0" ion-button icon-only clear (click)="minus(player, 'assists')"
                     color="light">
               <ion-icon name="md-arrow-dropleft"></ion-icon>
             </button>
             <button ion-button clear color="secondary">
               {{player.assists}}
             </button>
-            <button ion-button icon-only clear (tap)="plus(player,  'assists')">
+            <button ion-button icon-only clear (click)="plus(player,  'assists')">
               <ion-icon name="md-arrow-dropright" color="secondary"></ion-icon>
             </button>
           </div>
@@ -141,14 +141,14 @@
 
           <button ion-button clear color="light">{{'Yellowcard' | trans}}</button>
           <div item-end>
-            <button [disabled]="player.yellows <= 0" ion-button icon-only clear (tap)="minus(player, 'yellows')"
+            <button [disabled]="player.yellows <= 0" ion-button icon-only clear (click)="minus(player, 'yellows')"
                     color="light">
               <ion-icon name="md-arrow-dropleft"></ion-icon>
             </button>
             <button ion-button clear color="secondary">
               {{player.yellows}}
             </button>
-            <button [disabled]="player.yellows > 1" ion-button icon-only clear (tap)="plus(player, 'yellows')">
+            <button [disabled]="player.yellows > 1" ion-button icon-only clear (click)="plus(player, 'yellows')">
               <ion-icon name="md-arrow-dropright" color="secondary"></ion-icon>
             </button>
           </div>
@@ -158,14 +158,14 @@
           <ion-icon name="md-square" class="desc-img" item-start [ngStyle]="{'color': 'red'}"></ion-icon>
           <button ion-button clear color="light">{{'Redcard' | trans}}</button>
           <div item-end>
-            <button [disabled]="player.reds <= 0" ion-button icon-only clear (tap)="minus(player, 'reds')"
+            <button [disabled]="player.reds <= 0" ion-button icon-only clear (click)="minus(player, 'reds')"
                     color="light">
               <ion-icon name="md-arrow-dropleft"></ion-icon>
             </button>
             <button ion-button clear color="secondary">
               {{player.reds}}
             </button>
-            <button [disabled]="player.reds > 0" ion-button icon-only clear (tap)="plus(player, 'reds')">
+            <button [disabled]="player.reds > 0" ion-button icon-only clear (click)="plus(player, 'reds')">
               <ion-icon name="md-arrow-dropright" color="secondary"></ion-icon>
             </button>
           </div>
@@ -175,14 +175,14 @@
           <ion-icon name="md-egg" class="desc-img" item-start></ion-icon>
           <button ion-button clear color="light">{{'owngoals' | trans}}</button>
           <div item-end>
-            <button [disabled]="player.owngoals <= 0" ion-button icon-only clear (tap)="minus(player, 'owngoals')"
+            <button [disabled]="player.owngoals <= 0" ion-button icon-only clear (click)="minus(player, 'owngoals')"
                     color="light">
               <ion-icon name="md-arrow-dropleft"></ion-icon>
             </button>
             <button ion-button clear color="secondary">
               {{player.owngoals}}
             </button>
-            <button [disabled]="player.owngoals > 3" ion-button icon-only clear (tap)="plus(player, 'owngoals')">
+            <button [disabled]="player.owngoals > 3" ion-button icon-only clear (click)="plus(player, 'owngoals')">
               <ion-icon name="md-arrow-dropright" color="secondary"></ion-icon>
             </button>
           </div>
@@ -191,14 +191,14 @@
           <ion-icon name="md-hand" class="desc-img" item-start color="darkGreen"></ion-icon>
           <button ion-button clear color="light">{{'saves' | trans}}</button>
           <div item-end>
-            <button [disabled]="player.saves <= 0" ion-button icon-only clear (tap)="minus(player, 'saves')"
+            <button [disabled]="player.saves <= 0" ion-button icon-only clear (click)="minus(player, 'saves')"
                     color="light">
               <ion-icon name="md-arrow-dropleft"></ion-icon>
             </button>
             <button ion-button clear color="secondary">
               {{player.saves}}
             </button>
-            <button ion-button icon-only clear (tap)="plus(player, 'saves')">
+            <button ion-button icon-only clear (click)="plus(player, 'saves')">
               <ion-icon name="md-arrow-dropright" color="secondary"></ion-icon>
             </button>
           </div>

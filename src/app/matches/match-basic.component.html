@@ -45,19 +45,5 @@
         {{'group' | trans}} {{match.groupId}}
       </ion-row>
     </ion-col>
-    <!-->
-    <ion-col class="matches-time">
-      <div class="matches-time-wrapper">
-        <ion-item>
-          <p>{{ match?.time | numberToTimePipe }}</p>
-        </ion-item>
-        <ion-item>
-        </ion-item>
-        <ion-item>
-          <button *ngIf="canUpdate()" class="detail-button" text-center ion-button clear (tap)="goUpdateMatchPage($event)">Update</button>
-        </ion-item>
-      </div>
-    </ion-col>
-    <-->
   </ion-row>
 </ion-grid>

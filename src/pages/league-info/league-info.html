@@ -30,7 +30,7 @@
         {{ league?.rules }}
       </div>
       <div class="application-button">
-        <button *ngIf="isRegistered() < 0" ion-button full (tap)="registerTeam()">{{ 'registerNow' | trans }}</button>
+        <button *ngIf="isRegistered() < 0" ion-button full (click)="registerTeam()">{{ 'registerNow' | trans }}</button>
         <button *ngIf="isRegistered() >= 0" disabled ion-button full>{{ 'registered' | trans }}</button>
       </div>
     </div>
