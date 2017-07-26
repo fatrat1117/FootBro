@@ -80,7 +80,7 @@ export class NewGamePage {
   }
 
   searchAddress(event) {
-    this.autoCompleteItems = [];
+    //this.autoCompleteItems = [];
     let query = event.target.value;
     if (!query || query == "")
       return;
@@ -89,12 +89,13 @@ export class NewGamePage {
     this.autoCompleteService.getPlacePredictions(
       { input: query, componentRestrictions: { country: 'SG' } },
       function (predictions, status) {
-        self.autoCompleteItems = [];
+        var newItems = [];
         if (predictions) {
           predictions.forEach(p => {
-            self.autoCompleteItems.push(p);
+            newItems.push(p);
           })
         }
+        self.autoCompleteItems = newItems;
       }
     );
 

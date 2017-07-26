@@ -74,6 +74,9 @@
     </ion-item>
     <ion-item-group [hidden]="autoCompleteItems.length == 0" style="width: 70%; float: right">
       <ion-item *ngFor="let item of autoCompleteItems" (tap)="selectAddress(item)" color="white" style="font-size: 1.2rem">{{ item.description }}</ion-item>
+      <ion-item color="white" style="text-align: right">
+        <img style="width: 40%" src="assets/img/powered_by_google.png">
+      </ion-item>
     </ion-item-group>
   </ion-list>
 </ion-content>
