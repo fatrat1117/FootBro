@@ -32,7 +32,7 @@
     "@ionic-native/status-bar": "^3.12.1",
     "@ionic-native/transfer": "^3.8.0",
     "@ionic/storage": "2.0.1",
-    "angular-svg-round-progressbar": "^1.0.3",
+    "angular-svg-round-progressbar": "^1.1.0",
     "angularfire2": "^4.0.0-rc.0",
     "com.darktalker.cordova.screenshot": "https://github.com/gitawego/cordova-screenshot.git",
     "cordova-android": "^6.2.3",
