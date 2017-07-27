@@ -34,7 +34,7 @@
         "@ionic/storage": "2.0.1",
         "angular-svg-round-progressbar": "^1.1.0",
         "angularfire2": "^4.0.0-rc.0",
-        "com.darktalker.cordova.screenshot": "https://github.com/gitawego/cordova-screenshot.git",
+        "com.darktalker.cordova.screenshot": "file:node_modules\\com.darktalker.cordova.screenshot",
         "cordova-android": "^6.2.3",
         "cordova-clipboard": "^1.0.0",
         "cordova-ios": "^4.4.0",
@@ -91,7 +91,6 @@
     "description": "SoccerBro",
     "cordova": {
         "plugins": {
-            "com.darktalker.cordova.screenshot": {},
             "cordova-plugin-camera": {},
             "cordova-plugin-console": {},
             "cordova-plugin-device": {},
@@ -108,7 +107,8 @@
             "ionic-plugin-keyboard": {},
             "onesignal-cordova-plugin": {},
             "uk.co.workingedge.phonegap.plugin.launchnavigator": {},
-            "cordova-clipboard": {}
+            "cordova-clipboard": {},
+            "com.darktalker.cordova.screenshot": {}
         },
         "platforms": [
             "android",
