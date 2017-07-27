@@ -9,7 +9,7 @@
 
     <no-record *ngIf="!hasMessage()" [message]="noRecordMessage"></no-record>
     <ion-item-sliding *ngFor="let msg of messages | reversePipe" #slidingItem>
-      <ion-item (click)="enterChatPage(msg)">
+      <button ion-item (click)="enterChatPage(msg)">
         <ion-thumbnail item-start>
           <img [src]="getPlayerInfo(msg.playerId)?.photo">
         </ion-thumbnail>
@@ -20,7 +20,7 @@
           <p>{{ msg.lastTimestamp | momentPipe }}</p>
           <ion-badge *ngIf="msg.isUnread" color="gBlue">New</ion-badge>
         </ion-note>
-      </ion-item>
+      </button>
       <ion-item-options side="right">
         <button ion-button color="danger" text-capitalize  (click)="deleteMessage(msg.playerId, slidingItem)">
           {{ 'delete' | trans }}

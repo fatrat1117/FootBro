@@ -13,7 +13,7 @@
 <ion-content>
   <ion-item-group>
     <!-- Me -->
-    <ion-item (click)="goEditPlayerPage($event)" detail-push>
+    <button ion-item (click)="goEditPlayerPage($event)" detail-push>
       <ion-thumbnail item-start>
         <img [src]="player?.photo">
       </ion-thumbnail>
@@ -27,8 +27,8 @@
           <ion-icon name="help-circle" class="faq-icon"></ion-icon>
         </button>
       </p>
-    </ion-item>
-    <ion-item *ngIf="!isCheerleader && (player)?.teamId" (click)="goSwitchTeamPage()" detail-push>
+    </button>
+    <button ion-item *ngIf="!isCheerleader && (player)?.teamId" (click)="goSwitchTeamPage()" detail-push>
       <ion-thumbnail item-start>
         <img [src]="(team)?.logo">
       </ion-thumbnail>
@@ -42,27 +42,7 @@
           <ion-icon name="help-circle" class="faq-icon"></ion-icon>
         </button>
       </p>
-    </ion-item>
-    <!--ion-item *ngIf="!isCheerleader && !player?.teamId" (tap) = "joinTeam()">
-      <ion-icon name="md-people" item-start color="gBlue"></ion-icon>
-      {{'JoinTeam' | trans}}
-    </ion-item-->
-
-    <!-- show pages -->
-    <!--ion-item-divider *ngIf="!isCheerleader"></ion-item-divider>
-    <ion-item *ngIf="!isCheerleader" (tap)="goPlayerPage()" detail-push>
-      <ion-icon name="md-aperture" item-start color="gGreen"></ion-icon>
-      {{'starcard' | trans}}
-    </ion-item-->
-
-    <!--<ion-item tappable *ngIf="!player?.teamId" (tap) = "createTeam()">
-      <ion-icon name="md-people" item-start color="gBlue"></ion-icon>
-      {{'CreateTeam' | trans}}
-    </ion-item>-->
-    <!--ion-item *ngIf="!isCheerleader && (player)?.teamId" detail-push (tap)="goTeamPage()">
-      <ion-icon name="md-people" item-start color="gBlue"></ion-icon>
-      {{'MyTeam' | trans}}
-    </ion-item-->
+    </button>
 
     <ion-item-divider></ion-item-divider>
     <ion-item (tap)="openWebsite()"  detail-push>

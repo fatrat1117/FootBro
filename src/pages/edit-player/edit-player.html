@@ -6,37 +6,37 @@
 <ion-content>
   <ion-item-group>
     <!-- Basic -->
-    <ion-item (click)="changePhoto()">
+    <button ion-item (click)="changePhoto()">
       <h2>{{'Photo' | trans}}</h2>
       <ion-thumbnail item-end>
         <img [src]="player?.photo">
       </ion-thumbnail>
-    </ion-item>
-    <ion-item detail-push (click)="editName()">
+    </button>
+    <button ion-item detail-push (click)="editName()">
       <h2>{{'Nickname' | trans}}</h2>
       <p item-end>{{ player?.name }}</p>
-    </ion-item>
+    </button>
     <!-- Detail -->
     <ion-item-divider></ion-item-divider>
-    <ion-item *ngIf="!isCheerleader" detail-push (click)="editHeight()">
+    <button ion-item *ngIf="!isCheerleader" detail-push (click)="editHeight()">
       <h2>{{'HeightCM' | trans}}</h2>
       <p item-end>{{ player?.height }}</p>
-    </ion-item>
-    <ion-item *ngIf="!isCheerleader" detail-push (click)="editWeight()">
+    </button>
+    <button ion-item *ngIf="!isCheerleader" detail-push (click)="editWeight()">
       <h2>{{'WeightKG' | trans}}</h2>
       <p item-end>{{ player?.weight }}</p>
-    </ion-item>
-    <ion-item *ngIf="!isCheerleader" detail-push (click)="editPosition()">
+    </button>
+    <button ion-item *ngIf="!isCheerleader" detail-push (click)="editPosition()">
       <h2>{{'Position' | trans}}</h2>
       <p item-end>{{ player?.position | trans }}</p>
-    </ion-item>
-    <ion-item *ngIf="!isCheerleader" detail-push (click)="editFoot()">
+    </button>
+    <button ion-item *ngIf="!isCheerleader" detail-push (click)="editFoot()">
       <h2>{{'Foot' | trans}}</h2>
       <p item-end>{{ player?.foot | trans}}</p>
-    </ion-item>
-    <ion-item detail-push (click)="editDescription()">
+    </button>
+    <button ion-item detail-push (click)="editDescription()">
       <h2 item-start>{{'Description' | trans}}</h2>
       <p item-end style="margin-left: 20%">{{ player?.description }}</p>
-    </ion-item>
+    </button>
   </ion-item-group>
 </ion-content>

@@ -12,7 +12,7 @@
   </div>
 
   <ion-list class="player-list">
-    <ion-item *ngFor="let player of players" class="player-item" (click) = "goPlayerPage(player.id)">
+    <button ion-item *ngFor="let player of players" class="player-item" (click) = "goPlayerPage(player.id)">
       <ion-row class="player-item-row">
         <ion-avatar item-start class="player-avatar-wrapper">
         <img [src] = "player.photo" class="player-avatar"/>
@@ -28,7 +28,7 @@
         </ion-col>
         <ion-col class="player-team-role flex-center" [ngClass]="player.teamRole">{{player.teamRole | trans}}</ion-col>
       </ion-row>
-    </ion-item>
+    </button>
   </ion-list>
 </ion-content>
 

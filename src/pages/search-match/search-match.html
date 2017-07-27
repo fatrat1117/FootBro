@@ -7,9 +7,9 @@
   <ion-list class="search-match-container">
     <no-record *ngIf="!hasMatches()" [message]="noRecordMessage"></no-record>
     <div *ngFor="let match of matches" class="search-march-item">
-      <ion-item no-margin no-padding *ngIf="match.dataReady" (click)="openMatchDetailPage(match)">
+      <button ion-item no-margin no-padding *ngIf="match.dataReady" (click)="openMatchDetailPage(match)">
         <result-score [upcomingMatch]="match" hostPageName="my-team"></result-score>
-      </ion-item>
+      </button>
     </div>
   </ion-list>
 </ion-content>

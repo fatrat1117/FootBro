@@ -88,7 +88,7 @@
       </ion-item>
 
       <div class="content-expandable" *ngFor="let player of participants">
-        <ion-item class="expandable-member-name" (click)="clickTeamMember(player)">
+        <button ion-item class="expandable-member-name" (click)="clickTeamMember(player)">
           <button ion-button item-start icon-only clear (click)="deleteTeamPlayer(player, $event, participants)"
                   class="member-img-button">
             <ion-icon name="md-remove-circle" color="danger"></ion-icon>
@@ -98,7 +98,7 @@
             <p class="player-name">{{player?.player?.name}}</p>
             <ion-icon [name]="player.expanded ? 'ios-arrow-up' : 'ios-arrow-down'" class="bigger-icon"></ion-icon>
           </button>
-        </ion-item>
+        </button>
         <!--<ion-item class="expandable-member-property" *ngFor="let item of player.items" [hidden]="player.hidden">-->
         <ion-item class="expandable-member-property" [hidden]="!player.expanded">
           <!--<img src="assets/icon/b2.png" class="desc-img" item-start/>-->

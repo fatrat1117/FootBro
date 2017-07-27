@@ -21,7 +21,7 @@
   </ion-card>
   <ion-list class="container">
     <ion-item-sliding *ngFor="let squad of team.squads">
-      <ion-item (click)="onClickSquad(squad)">
+      <button ion-item (click)="onClickSquad(squad)">
         <!--<ion-avatar item-start>-->
           <!--<img src="assets/img/none.png">-->
         <!--</ion-avatar>-->
@@ -29,7 +29,7 @@
         <h2>{{squad.name}}</h2>
         <p>{{squad.formation}}</p>
         <p>{{'creator' | trans}}: {{playerService.getPlayer(squad.creator)?.name}}</p>
-      </ion-item>
+      </button>
       <ion-item-options *ngIf="!selectMode" side="right">
         <button color='danger' [disabled]="squad.creator !== playerService.selfId()" ion-button icon-only clear (click)="deleteSquad(squad.$key)">
           <ion-icon name='md-trash' item-end></ion-icon>

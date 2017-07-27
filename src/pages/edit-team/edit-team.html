@@ -5,15 +5,15 @@
 </ion-header>
 <ion-content>
   <ion-item-group>
-    <ion-item (click)="changeLogo()">
+    <button ion-item (click)="changeLogo()">
       <h2>{{'Logo' | trans}}</h2>
       <ion-thumbnail item-end>
         <img [src]="team?.logo">
       </ion-thumbnail>
-    </ion-item>
-    <ion-item detail-push (click)="editName()">
+    </button>
+    <button ion-item detail-push (click)="editName()">
       <h2>{{'TeamName' | trans}}</h2>
       <p item-end>{{ team?.name }}</p>
-    </ion-item>
+    </button>
   </ion-item-group>
 </ion-content>
