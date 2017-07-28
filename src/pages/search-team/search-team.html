@@ -16,7 +16,7 @@
 </ion-header>
 <ion-content>
     <ion-list>
-    <button ion-item *ngFor="let team of filteredTeams" (click)="dismiss(team)">
+    <button ion-item *ngFor="let team of filteredTeams" (click)="dismiss(team)" detail-none>
       <ion-avatar item-start class="team-img">
         <img [src] = "team.logo"/>
       </ion-avatar>

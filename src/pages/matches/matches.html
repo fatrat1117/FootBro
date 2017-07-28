@@ -39,7 +39,7 @@
           <ion-list class="date-tab-list">
             <button ion-item *ngFor="let date of dates;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (click)="showMatches(date)"
               [style.background]="selectedDate == date ? '#585F6F' : '#40444D'" [style.color]="selectedDate == date ? '#00ef00' : '#F2EDE7'"
-              [ngClass]="addDateSelectNgClass(i,date)">
+              [ngClass]="addDateSelectNgClass(i,date)" detail-none>
               <ion-item *ngIf="isChangeYear(i) == true" class="year">
                 -{{getYearStringFromDate(date)}}-
               </ion-item>
@@ -123,7 +123,7 @@
           <div class="left-scrollview player-left-scrollview matches-date-tab-col" [ngStyle]="{'height.px': getMatchDetailScrollHeight()}">
             <ion-list class="date-tab-list">
               <button ion-item *ngFor="let cat of statCategories;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (click)='showStat(cat)'
-                        [style.background]="selectedCat === cat ? '#20bd16' : '#373e4c'" [style.color]="selectedCat === cat ? '#ffffff' : '#93ABC5'">
+                        [style.background]="selectedCat === cat ? '#20bd16' : '#373e4c'" [style.color]="selectedCat === cat ? '#ffffff' : '#93ABC5'" detail-none>
                 <div class="date-inner">
                   {{cat | trans}}
                 </div>

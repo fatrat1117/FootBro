@@ -44,7 +44,7 @@
 </ion-col>
 </ion-row>
 <div class="match-detail-info">
-  <button ion-item class="common-title map-title" (click)="navigateToField()">
+  <button ion-item class="common-title map-title" (click)="navigateToField()" detail-none>
     <ion-icon name="navigate" color="iPrimary" class="common-icon map-icon inline-flex-vertical-center"></ion-icon>
     <div class="common-content map-content">{{match?.location?.name}}, {{match?.location?.address}}</div>
   </button>
@@ -142,7 +142,7 @@
     <div class="left-scrollview matches-date-tab-col" [ngStyle]="{'height.px': getMatchDetailScrollHeight()}">
       <ion-list class="date-tab-list">
         <button ion-item *ngFor="let cat of statCategories;let i = index;" #list_item [id]="'matches-scroll-target-'+i" (click)='showStat(cat)'
-          [style.background]="selectedCat === cat ? '#20bd16' : '#373e4c'" [style.color]="selectedCat === cat ? '#ffffff' : '#93ABC5'">
+          [style.background]="selectedCat === cat ? '#20bd16' : '#373e4c'" [style.color]="selectedCat === cat ? '#ffffff' : '#93ABC5'" detail-none>
           <div class="date-inner">
             {{cat | trans}}
           </div>

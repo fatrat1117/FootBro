@@ -5,7 +5,7 @@
 </ion-header>
 <ion-content>
   <ion-item-group>
-    <button ion-item (click)="changeLogo()">
+    <button ion-item (click)="changeLogo()" detail-none>
       <h2>{{'Logo' | trans}}</h2>
       <ion-thumbnail item-end>
         <img [src]="team?.logo">

@@ -17,7 +17,7 @@
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let player of filteredPlayers" (click)="selectPlayer(player.id)">
+    <button ion-item *ngFor="let player of filteredPlayers" (click)="selectPlayer(player.id)" detail-none>
       <ion-label *ngIf='selectPlayersMode'>{{ player.name }}</ion-label>
       <ion-checkbox *ngIf='selectPlayersMode' color="primary" style="margin-right: 10px"
       [checked] = 'selectedPlayersMap[player.id]'

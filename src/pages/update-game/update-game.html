@@ -88,7 +88,7 @@
       </ion-item>
 
       <div class="content-expandable" *ngFor="let player of participants">
-        <button ion-item class="expandable-member-name" (click)="clickTeamMember(player)">
+        <button ion-item class="expandable-member-name" (click)="clickTeamMember(player)" detail-none>
           <button ion-button item-start icon-only clear (click)="deleteTeamPlayer(player, $event, participants)"
                   class="member-img-button">
             <ion-icon name="md-remove-circle" color="danger"></ion-icon>

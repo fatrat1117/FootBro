@@ -18,7 +18,7 @@ import { PlayerService } from '../../app/players/player.service'
 
   <ion-content>
     <ion-list>
-      <button ion-item *ngFor="let v of values" (click)="changePosition(v)">
+      <button ion-item *ngFor="let v of values" (click)="changePosition(v)" detail-none>
         <h2>{{ v | trans }}</h2>
         <ion-icon *ngIf="v == selectedValue" item-end name="md-checkmark" color="primary"></ion-icon>
       </button>

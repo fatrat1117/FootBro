@@ -29,7 +29,7 @@
 </ion-select>
 </ion-item>
 <ion-list>
-  <button ion-item *ngFor="let t of teamRanks; let i = index;" style="margin-bottom:10px" text-wrap (click)='goTeamPage(t.id)' class="rank-team-items">
+  <button ion-item *ngFor="let t of teamRanks; let i = index;" style="margin-bottom:10px" text-wrap (click)='goTeamPage(t.id)' class="rank-team-items" detail-none>
 <ion-row>
   <ion-col width-25>
     <ion-thumbnail item-start>
@@ -88,7 +88,7 @@
 </ion-select>
 </ion-item>
 <ion-list>
-  <button ion-item *ngFor="let p of playerRanks; let i = index;" (click)="goPlayerPage(p.id)" style="margin-bottom:10px" text-wrap class="rank-player-items">
+  <button ion-item *ngFor="let p of playerRanks; let i = index;" (click)="goPlayerPage(p.id)" style="margin-bottom:10px" text-wrap class="rank-player-items" detail-none>
 <ion-avatar item-start>
   <img [src]="p.photo">
 </ion-avatar>

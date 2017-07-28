@@ -9,7 +9,7 @@
 
     <no-record *ngIf="!hasMessage()" [message]="noRecordMessage"></no-record>
     <ion-item-sliding *ngFor="let msg of messages | reversePipe" #slidingItem>
-      <button ion-item (click)="enterChatPage(msg)">
+      <button ion-item (click)="enterChatPage(msg)" detail-none>
         <ion-thumbnail item-start>
           <img [src]="getPlayerInfo(msg.playerId)?.photo">
         </ion-thumbnail>
