@@ -34,7 +34,7 @@
     </ion-col>
   </ion-row>
   <ion-row *ngIf = "selfTeam" class="home-menu bottom-row" no-padding>
-    <ion-col *ngIf = "selfTeam" class="menu-col"  center>
+    <ion-col class="menu-col"  center>
       <button ion-button icon-only full color="dark" (click)="enterManageSquadPage()">
         <ion-icon name="md-football" color="gYellow"></ion-icon>
       </button>
@@ -50,8 +50,8 @@
         <p>{{'players' | trans}}</p>
       </button>
     </ion-col>
-    <ion-col class="menu-col"  center>
-      <button *ngIf="upcomingMatch?.dataReady" ion-button icon-only full color="dark" (click)="seeMoreTeamGamePlan()">
+    <ion-col class="menu-col"  center *ngIf="upcomingMatch?.dataReady">
+      <button ion-button icon-only full color="dark" (click)="seeMoreTeamGamePlan()">
         <ion-icon name="md-calendar" color="light"></ion-icon>
       </button>
       <button ion-button full color="dark" (click)="seeMoreTeamGamePlan()">
