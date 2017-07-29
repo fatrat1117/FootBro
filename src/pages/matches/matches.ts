@@ -147,7 +147,7 @@ export class MatchesPage {
 
       if (scrollableDiv) {
         scrollableDiv.scrollTop = 0;
-        let scrollableItem = scrollableDiv.getElementsByTagName("ion-item");
+        let scrollableItem = scrollableDiv.getElementsByTagName("button");
 
         if (scrollableItem.length > 0) {
           scrollableDiv.scrollTop += scrollableItem[0].clientHeight * cToday;
