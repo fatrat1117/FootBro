@@ -12,12 +12,12 @@
   </div>
 
   <ion-list class="player-list">
-    <button ion-item *ngFor="let player of players" class="player-item" (click) = "goPlayerPage(player.id)" detail-none>
+    <ion-item *ngFor="let player of players" class="player-item">
       <ion-row class="player-item-row">
-        <ion-avatar item-start class="player-avatar-wrapper">
+        <ion-avatar item-start class="player-avatar-wrapper" (tap) = "goPlayerPage(player.id)">
         <img [src] = "player.photo" class="player-avatar"/>
         </ion-avatar>
-        <ion-col class="player-name">
+        <ion-col class="player-name" (tap) = "goPlayerPage(player.id)">
           <div class="name-text">{{ player.name }}</div>
           <div class="position" *ngIf = "isSetPosition(player.position)">{{ toUpperCase(player.position)}}</div>
         </ion-col>
@@ -26,9 +26,9 @@
             <ion-icon name="md-settings"></ion-icon>
           </button>
         </ion-col>
-        <ion-col class="player-team-role flex-center" [ngClass]="player.teamRole">{{player.teamRole | trans}}</ion-col>
+        <ion-col button-clear ion-col class="player-team-role flex-center" [ngClass]="player.teamRole" (tap) = "goPlayerPage(player.id)">{{player.teamRole | trans}}</ion-col>
       </ion-row>
-    </button>
+    </ion-item>
   </ion-list>
 </ion-content>
 
