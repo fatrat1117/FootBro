@@ -31,13 +31,13 @@
 <ion-list>
   <button ion-item *ngFor="let t of teamRanks; let i = index;" style="margin-bottom:10px" text-wrap (click)='goTeamPage(t.id)' class="rank-team-items" detail-none>
 <ion-row>
-  <ion-col width-25>
+  <ion-col>
     <ion-thumbnail item-start>
       <img [src]="t.logo">
     </ion-thumbnail>
     <ion-badge class="rank-badge" color="sky">{{ i+1 }}</ion-badge>
   </ion-col>
-  <ion-col width-75 class="rank-team-specs">
+  <ion-col col-8 class="rank-team-specs">
     <ion-row>
       <ion-col>
         <h2 text-center class="rank-team-name">
