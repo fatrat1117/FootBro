@@ -68,39 +68,4 @@ sb-match-basic {
       justify-content: center;
     }
   }
-
-  /*
-  .matches-time {
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 0 25%;
-    -ms-flex: 0 0 25%;
-    flex: 0 0 25%;
-    max-width: 25%;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    .matches-time-wrapper {
-      .item {
-        min-height: 2.2em;
-        font-size: 75%;
-      }
-      .item-inner {
-        border-bottom: none;
-      }
-      ion-label {
-        margin: 0;
-        text-align: center;
-      }
-      .detail-button {
-        display: block;
-        margin: 0;
-      }
-      .update-button {
-        display: block;
-        margin: 0;
-        top: -0.5em;
-      }
-    }
-  }
-  */
 }

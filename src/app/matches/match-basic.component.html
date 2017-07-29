@@ -35,10 +35,7 @@
       </ion-item>
     </ion-col>
     <ion-col center class="time-extra-info-panel">
-      <ion-row *ngIf="showDate">
-        <p class="match-time-text">{{ match?.time | date:'yyyy-MM-dd' }}</p>
-      </ion-row>
-      <ion-row>
+      <ion-row style="margin-top: 25px">
         <p class="match-time-text">{{ match?.time | numberToTimePipe }}</p>
       </ion-row>
       <ion-row *ngIf="match && match.groupId" class="groupIdLabel">
