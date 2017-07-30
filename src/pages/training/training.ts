@@ -12,7 +12,7 @@ export class TrainingPage {
       title: 'abc',
       level: 1,
       description: 'xxxx',
-      url: 'https://www.youtube.com/embed/Gym1QEsdHI0',
+      url: 'https://www.youtube.com/embed/Gym1QEsdHI0?autoplay=1',
       type: 'physical'
     },
     {
