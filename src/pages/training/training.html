@@ -4,5 +4,9 @@
   </ion-navbar>
 </ion-header>
 <ion-content no-bounce>
-  <iframe src="http://www.youtube.com/embed/Gym1QEsdHI0"></iframe>
+  <ion-list>
+    <ion-item *ngFor = "let video of videos">
+        <iframe [src]="video.url"></iframe>
+    </ion-item>
+    </ion-list>
 </ion-content>
