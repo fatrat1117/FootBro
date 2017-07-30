@@ -75,7 +75,7 @@ import { RankService } from './rank/rank.service';
 import { TransPipe, Localization } from '../providers/localization';
 import { StringToDatePipe, NumberToTimePipe, MomentPipe, StringToYearOnlyPipe } from '../pipes/moment.pipe';
 import { TeamBasicPipe } from '../pipes/team.pipe';
-import { ReversePipe, MapToArrayPipe, GroupThreePipe, GroupNPipe,IfNullThenZeroPipe} from '../pipes/utilities.pipe';
+import { ReversePipe, MapToArrayPipe, GroupThreePipe, GroupNPipe,IfNullThenZeroPipe, SafePipe} from '../pipes/utilities.pipe';
 
 // components
 import { SbLoadingComponent } from './common/loading.component';
@@ -178,6 +178,7 @@ export const firebaseConfig = {
     GroupNPipe,
     StringToYearOnlyPipe,
     IfNullThenZeroPipe,
+    SafePipe,
     // components
     SbLoadingComponent,
     SbRateCircleComponent,
