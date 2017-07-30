@@ -414,6 +414,7 @@ export class Localization {
       sw: 'SW',
       rememberme: 'Remember Me',
       mom: 'Man of Match',
+      training: 'Training',
     },
 
     zh: {
@@ -808,6 +809,7 @@ export class Localization {
       sw: '清道夫',
       rememberme: '记住我',
       mom: '全场最佳',
+      training: '训练',
     }
   }
 }

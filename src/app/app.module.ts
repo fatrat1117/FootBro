@@ -54,6 +54,7 @@ import { ManageSquadPage } from '../pages/manage-squad/manage-squad';
 import { TeamPlayersPage } from '../pages/team-players/team-players';
 import { ColorPickerPage} from '../pages/color-picker/color-picker';
 import { EditPositionPage } from '../pages/edit-position/edit-position';
+import { TrainingPage } from '../pages/training/training';
 
 // services
 import { AngularFireModule } from 'angularfire2';
@@ -164,6 +165,7 @@ export const firebaseConfig = {
     ManageSquadPage,
     TeamPlayersPage,
     EditPositionPage,
+    TrainingPage,
     // pipes
     TransPipe,
     StringToDatePipe,
@@ -262,7 +264,8 @@ export const firebaseConfig = {
     ManagePlayerPopover,
     FAQComponent,
     ColorPickerPage,
-    EditPositionPage
+    EditPositionPage,
+    TrainingPage,
   ],
   providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler },
     FirebaseManager,

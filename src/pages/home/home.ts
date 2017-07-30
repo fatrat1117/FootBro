@@ -20,6 +20,7 @@ import { MatchService } from '../../app/matches/match.service'
 import { TeamPlayersPage } from '../team-players/team-players'
 import { SearchMatchPage } from '../search-match/search-match'
 import { MatchDetailPage } from '../match-detail/match-detail'
+import { TrainingPage } from '../training/training';
 declare var sprintf: any;
 
 @Component({
@@ -190,6 +191,10 @@ export class HomePage {
         this.joinTeam();
     } else
       this.playerService.checkLogin();
+  }
+
+  enterTrainingPage() {
+    this.navCtrl.push(TrainingPage, { teamId: this.selfTeam.id });
   }
 
   amIPlayer() {
