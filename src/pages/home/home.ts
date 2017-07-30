@@ -194,7 +194,7 @@ export class HomePage {
   }
 
   enterTrainingPage() {
-    this.navCtrl.push(TrainingPage, { teamId: this.selfTeam.id });
+    this.navCtrl.push(TrainingPage/*, { teamId: this.selfTeam.id }*/);
   }
 
   amIPlayer() {
