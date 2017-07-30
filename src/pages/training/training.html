@@ -5,8 +5,10 @@
 </ion-header>
 <ion-content no-bounce>
   <ion-list>
-    <ion-item *ngFor = "let video of videos">
-        <iframe [src]="video.url | safe" width="100%"></iframe>
+    <ion-item *ngFor="let video of videos">
+      <youtube-player [videoId]="video.id" width="100%" (change)="onStateChange($event)">
+      </youtube-player>
+      <!--<iframe id = "ik_player_iframe" [src]="video.url | safe" width="100%"></iframe>-->
     </ion-item>
-    </ion-list>
+  </ion-list>
 </ion-content>
