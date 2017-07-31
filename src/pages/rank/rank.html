@@ -46,21 +46,20 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col width-33>
-        <p text-center>
-          <ion-icon name='md-football' [color]="teamSortByStr=='ability' ? 'gYellow' : 'none'"></ion-icon>
-          &nbsp;{{'Ability' | trans}}</p>
-        <p text-center ion-text [color]="teamSortByStr=='ability' ? 'secondary' : 'primary-text'">{{t.ability}}</p>
+      <ion-col text-center>
+        <ion-icon name='md-football' [color]="teamSortByStr=='ability' ? 'gYellow' : 'none'"></ion-icon>
+        <p>{{'Ability' | trans}}</p>
+        <p ion-text [color]="teamSortByStr=='ability' ? 'secondary' : 'primary-text'">{{t.ability}}</p>
       </ion-col>
-      <ion-col width-33>
-        <p text-center>
-          <ion-icon name='md-people'></ion-icon>&nbsp;{{'Players' | trans}}</p>
-        <p text-center ion-text color="primary-text">{{t.totalPlayers}}</p>
+      <ion-col text-center>
+        <ion-icon name='md-people'></ion-icon>
+        <p>{{'Players' | trans}}</p>
+        <p ion-text color="primary-text">{{t.totalPlayers}}</p>
       </ion-col>
-      <ion-col width-33>
-        <p text-center>
-          <ion-icon name='md-flame' [color]="teamSortByStr=='popularity' ? 'danger' : 'none'"></ion-icon>&nbsp;{{'Popularity' | trans}}</p>
-        <p text-center ion-text [color]="teamSortByStr=='popularity' ? 'secondary' : 'primary-text'">{{t.popularity}}</p>
+      <ion-col text-center>
+        <ion-icon name='md-flame' [color]="teamSortByStr=='popularity' ? 'danger' : 'none'"></ion-icon>
+        <p>{{'Popularity' | trans}}</p>
+        <p ion-text [color]="teamSortByStr=='popularity' ? 'secondary' : 'primary-text'">{{t.popularity}}</p>
       </ion-col>
     </ion-row>
   </ion-col>
