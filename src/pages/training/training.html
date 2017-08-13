@@ -4,11 +4,15 @@
   </ion-navbar>
 </ion-header>
 <ion-content no-bounce>
+  <!--<youtube-player [videoId]="videoId" width="100%" (change)="onStateChange($event)">
+      </youtube-player>-->
   <ion-list>
-    <ion-item *ngFor="let video of videos">
-      <youtube-player [videoId]="video.id" width="100%" (change)="onStateChange($event)">
-      </youtube-player>
-      <!--<iframe id = "ik_player_iframe" [src]="video.url | safe" width="100%"></iframe>-->
-    </ion-item>
+    <button ion-item *ngFor="let video of videos" (click)="playVideo(video.id)">
+      <ion-thumbnail item-start>
+      <img [src]="getThumbnailUrl(video.id)">
+    </ion-thumbnail>
+    <h2>video.title</h2>
+    <p>{{video.viewed}} {{'playertrained' | trans}}</p>
+    </button>
   </ion-list>
 </ion-content>

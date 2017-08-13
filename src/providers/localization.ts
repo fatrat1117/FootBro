@@ -415,6 +415,7 @@ export class Localization {
       rememberme: 'Remember Me',
       mom: 'Man of Match',
       training: 'Training',
+      playertrained: 'player(s) trained'
     },
 
     zh: {
@@ -810,6 +811,7 @@ export class Localization {
       rememberme: '记住我',
       mom: '全场最佳',
       training: '训练',
+      playertrained: '球员训练过'
     }
   }
 }

@@ -8,6 +8,7 @@ import { NavParams, ModalController, ViewController } from 'ionic-angular'
 export class TrainingPage {
   ik_player;
   videos = [];
+  videoId = 'Gym1QEsdHI0';
   constructor() {
     this.videos = [{
       title: 'abc',
@@ -23,7 +24,7 @@ export class TrainingPage {
       description: 'xxxx',
       url: 'https://www.youtube.com/embed/Gym1QEsdHI0?enablejsapi=1',
       type: 'technique',
-      id: 'Gym1QEsdHI0'
+      id: 'tnLlNzB9OdA'
     },
     {
       title: 'gdgfdg',
@@ -31,10 +32,13 @@ export class TrainingPage {
       description: 'xxxx',
       url: 'https://www.youtube.com/embed/Gym1QEsdHI0?enablejsapi=1',
       type: 'tactics',
-      id: 'Gym1QEsdHI0'
+      id: 'NxV_02Uk1_E'
     }];
+    // let index = this.getRandomInt(0, 2);
+    // console.log(this.videos, index);
+    // this.videoId = this.videos[index].id;
   }
-
+  
   //this function is called by the API
   // onYouTubeIframeAPIReady() {
   //   //creates the player object
@@ -54,8 +58,16 @@ export class TrainingPage {
   // function onYouTubePlayerStateChange(event) {
   //   console.log('Video state changed');
   // }
+ getThumbnailUrl(id) {
+   return 'https://i1.ytimg.com/vi/' + id + '/2.jpg';
+ }
 
   onStateChange(event) {
     console.log('player state', event);
+  }
+
+  playVideo(id) {
+    this.videoId = id;
+    console.log(this.videoId);
   }
 }
