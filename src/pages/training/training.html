@@ -5,9 +5,9 @@
 </ion-header>
 <ion-content no-bounce>
   <ion-list>
-    <button ion-item *ngFor="let video of afTrainings | async" (click)="playVideo(video.id)">
+    <button ion-item *ngFor="let video of afTrainings | async" (click)="playVideo(video)">
       <ion-thumbnail item-start>
-      <img [src]="getThumbnailUrl(video.id)">
+      <img [src]="getThumbnailUrl(video.videoId)">
     </ion-thumbnail>
     <h2>{{video.title}}</h2>
     <h3>{{'Type' | trans}}: {{video.type | trans}}</h3>

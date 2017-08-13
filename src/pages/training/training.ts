@@ -64,9 +64,8 @@ export class TrainingPage {
    return 'https://i1.ytimg.com/vi/' + id + '/2.jpg';
  }
 
-  playVideo(id) {
-    this.nav.push(TrainingVideoPage, {videoId: id});
-    // this.videoId = id;
-    // console.log(this.videoId);
+  playVideo(video) {
+    this.fm.increaseTrainingViewed(video.id, video.viewed);
+    this.nav.push(TrainingVideoPage, {videoId: video.videoId});
   }
 }

@@ -1602,4 +1602,8 @@ export class FirebaseManager {
   afGetTrainings() {
     return this.afDb.list('/training/');
   }
+
+  increaseTrainingViewed(index, count) {
+    this.afDb.object(`/training/${index}/viewed/`).set(count + 1);
+  }
 }
