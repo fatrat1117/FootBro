@@ -415,7 +415,11 @@ export class Localization {
       rememberme: 'Remember Me',
       mom: 'Man of Match',
       training: 'Training',
-      playertrained: 'player(s) trained'
+      playertrained: 'player(s) trained',
+      physical: 'physical',
+      technique: 'technique',
+      tactics: 'tactics',
+      video: 'Video',
     },
 
     zh: {
@@ -811,7 +815,11 @@ export class Localization {
       rememberme: '记住我',
       mom: '全场最佳',
       training: '训练',
-      playertrained: '球员训练过'
+      playertrained: '球员训练过',
+      physical: '身体',
+      technique: '技术',
+      tactics: '战术',
+      video: '视频',
     }
   }
 }

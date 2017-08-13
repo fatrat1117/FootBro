@@ -60,11 +60,11 @@ export class FirebaseManager {
   defaultTeamLargeImage = "assets/img/team/court.png";
   constructor(private modalCtrl: ModalController,
     private afDb: AngularFireDatabase,
-    private afAuth: AngularFireAuth, 
+    private afAuth: AngularFireAuth,
     private platform: Platform,
     private camera: Camera,
     private local: Localization,
-    private os : OneSignal) {
+    private os: OneSignal) {
     document.addEventListener('playernotregistered', e => {
       let id = e['detail'];
       if (this.auth && id === this.auth.uid) {
@@ -1596,5 +1596,10 @@ export class FirebaseManager {
       ++result[teamId1].D;
       result[teamId1].PTS = result[teamId1].PTS + 1;
     }
+  }
+
+  //training
+  afGetTrainings() {
+    return this.afDb.list('/training/');
   }
 }

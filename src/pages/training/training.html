@@ -4,14 +4,13 @@
   </ion-navbar>
 </ion-header>
 <ion-content no-bounce>
-  <!--<youtube-player [videoId]="videoId" width="100%" (change)="onStateChange($event)">
-      </youtube-player>-->
   <ion-list>
-    <button ion-item *ngFor="let video of videos" (click)="playVideo(video.id)">
+    <button ion-item *ngFor="let video of afTrainings | async" (click)="playVideo(video.id)">
       <ion-thumbnail item-start>
       <img [src]="getThumbnailUrl(video.id)">
     </ion-thumbnail>
-    <h2>video.title</h2>
+    <h2>{{video.title}}</h2>
+    <h3>{{'Type' | trans}}: {{video.type | trans}}</h3>
     <p>{{video.viewed}} {{'playertrained' | trans}}</p>
     </button>
   </ion-list>

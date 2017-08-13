@@ -1,0 +1,9 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{'video' | trans}}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content no-bounce>
+  <youtube-player [videoId]="videoId" width="100%" (change)="onStateChange($event)">
+  </youtube-player>
+</ion-content>
