@@ -13,5 +13,7 @@ export class TrainingVideoPage {
 
   onStateChange(event) {
     console.log('player state', event);
+    if (0 == event.data) {
+    }
   }
 }
