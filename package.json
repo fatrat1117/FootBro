@@ -71,7 +71,6 @@
     "@ionic/app-scripts": "1.3.7",
     "@ionic/cli-plugin-cordova": "1.4.1",
     "@ionic/cli-plugin-ionic-angular": "1.3.2",
-    "ng2-youtube-player": "0.0.3",
     "typescript": "2.3.4"
   },
   "cordovaPlugins": [

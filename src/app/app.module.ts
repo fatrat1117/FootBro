@@ -6,7 +6,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { Transfer } from '@ionic-native/transfer'; 
 import { File } from '@ionic-native/file';
 import { MyErrorHandler } from '../providers/exception-handler'
-import { YoutubePlayerModule } from 'ng2-youtube-player';
+//import { YoutubePlayerModule } from 'ng2-youtube-player';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { MyApp } from './app.component';
 import { TutorialPage } from '../pages/tutorial/tutorial';
@@ -199,7 +199,7 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
-    YoutubePlayerModule,
+    //YoutubePlayerModule,
     HttpModule,
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: true,

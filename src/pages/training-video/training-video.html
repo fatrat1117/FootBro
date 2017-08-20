@@ -4,6 +4,5 @@
   </ion-navbar>
 </ion-header>
 <ion-content no-bounce>
-  <youtube-player [videoId]="videoId" width="100%" (change)="onStateChange($event)">
-  </youtube-player>
+    <iframe id="player" type="text/html" width="100%" [src]="videoUrl" frameborder="0"></iframe>
 </ion-content>
