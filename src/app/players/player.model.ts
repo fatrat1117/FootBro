@@ -26,6 +26,9 @@ export class Player {
   yearlyHistory = [];
   assists;
   goals;
+  physical;
+  technique;
+  tactics;  
 }
 
 export class TeamPlayer extends Player {

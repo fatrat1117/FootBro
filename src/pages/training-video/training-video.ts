@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
 import { NavParams } from 'ionic-angular'
+import { PlayerService } from '../../app/players/player.service'
 
 @Component({
   selector: 'page-training-video',
   templateUrl: 'training-video.html'
 })
 export class TrainingVideoPage {
-  videoId = '';
-  constructor(param: NavParams) {
-    this.videoId = param.get('videoId');
+  video;
+  constructor(param: NavParams,
+  private player: PlayerService) {
+    this.video = param.get('video');
+    //console.log(this.video);
   }
 
   onStateChange(event) {

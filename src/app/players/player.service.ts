@@ -6,6 +6,7 @@ import { UIHelper } from '../../providers/uihelper';
 
 @Injectable()
 export class PlayerService {
+  initStat = 10;
   playersMap = {};
   teamPlayersMap = {};
   bRefreshTeamPlayers = false;
@@ -178,6 +179,9 @@ export class PlayerService {
         player.popularity = playerPublicData.popularity;
         player.assists = playerPublicData.assists;
         player.goals = playerPublicData.goals;
+        player.physical = ('physical' in playerPublicData) ? playerPublicData.physical : this.initStat;
+        player.technique = ('technique' in playerPublicData) ? playerPublicData.technique : this.initStat;
+        player.tactics = ('tactics' in playerPublicData) ? playerPublicData.tactics : this.initStat;
       }
     });
 
@@ -581,5 +585,9 @@ export class PlayerService {
     if (tournament.registered)
       return tournament.registered.hasOwnProperty(teamId);
     return false;
+  }
+
+  gainAbilityExp(type) {
+
   }
 }

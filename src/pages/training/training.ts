@@ -66,6 +66,6 @@ export class TrainingPage {
 
   playVideo(video) {
     this.fm.increaseTrainingViewed(video.id, video.viewed);
-    this.nav.push(TrainingVideoPage, {videoId: video.videoId});
+    this.nav.push(TrainingVideoPage, {video: video});
   }
 }
