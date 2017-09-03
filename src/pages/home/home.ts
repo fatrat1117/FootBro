@@ -193,8 +193,8 @@ export class HomePage {
       this.playerService.checkLogin();
   }
 
-  enterTrainingPage() {
-    this.navCtrl.push(TrainingPage/*, { teamId: this.selfTeam.id }*/);
+  enterTrainingPage(type) {
+    this.navCtrl.push(TrainingPage, { type: type });
   }
 
   amIPlayer() {

@@ -8,19 +8,19 @@
   <img [src]="getBannerImage()" (click) = 'enterCheeringTeam()'>
   <ion-item-divider>{{'trainingmessage' | trans}}</ion-item-divider>
   <ion-list>
-    <button ion-item>
+    <button ion-item (click)="enterTrainingPage('physical')">
       <ion-thumbnail item-start>
       <img src="assets/img/physical.jpg">
     </ion-thumbnail>
     <h2>{{'physical' | trans}}</h2>
     </button>
-    <button ion-item>
+    <button ion-item (click)="enterTrainingPage('technique')">
       <ion-thumbnail item-start>
       <img src="assets/img/technique.jpg">
     </ion-thumbnail>
     <h2>{{'technique' | trans}}</h2>
     </button>
-    <button ion-item>
+    <button ion-item (click)="enterTrainingPage('tactics')">
       <ion-thumbnail item-start>
       <img src="assets/img/tactics.jpg">
     </ion-thumbnail>

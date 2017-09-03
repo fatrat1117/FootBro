@@ -1603,6 +1603,15 @@ export class FirebaseManager {
     return this.afDb.list('/training/');
   }
 
+  afQueryTrainings(type) {
+    return this.afDb.list('/training/', {
+      query: {
+        orderByChild: 'type',
+        equalTo: type
+      }
+    });
+  }
+
   increaseTrainingViewed(index, count) {
     this.afDb.object(`/training/${index}/viewed/`).set(count + 1);
   }

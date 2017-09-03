@@ -10,8 +10,9 @@ import { FirebaseManager } from '../../providers/firebase-manager';
 export class TrainingPage {
   videos = [];
   afTrainings;
-  constructor( private fm : FirebaseManager, private nav: NavController) {
-    this.afTrainings = this.fm.afGetTrainings();
+  constructor( private fm : FirebaseManager, private nav: NavController, params: NavParams) {
+    //this.afTrainings = this.fm.afGetTrainings();
+    this.afTrainings = this.fm.afQueryTrainings(params.get('type'));
     // this.videos = [{
     //   title: 'abc',
     //   level: 1,
