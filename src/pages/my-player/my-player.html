@@ -68,16 +68,18 @@
     </ion-row>
 
   </ion-card>
-  <!--<ion-card>
+  <ion-card *ngIf='showCharts' style="display: block; background: white">
     <ion-card-header>
-      {{'Ability' | trans}}
+      {{'abilitybytraining' | trans}}
     </ion-card-header>
-    <ion-card-content>-->
-      <div style="display: block; width: 90%; left: 10%">
-        <canvas baseChart [data]="radarChartData" [labels]="radarChartLabels" chartType="radar" [options]="radarOptions"></canvas>
-      </div>
-    <!--</ion-card-content>
-  </ion-card>-->
+    <ion-card-content>
+        <canvas baseChart [data]="radarChartData" 
+        [labels]="radarChartLabels" 
+        chartType="radar" 
+        [options]="radarOptions"
+        [colors]="colors"></canvas>
+    </ion-card-content>
+  </ion-card>
 
   <ion-grid>
     <ion-row class="personal-data-title">

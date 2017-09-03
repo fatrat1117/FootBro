@@ -6,7 +6,7 @@ import { UIHelper } from '../../providers/uihelper';
 
 @Injectable()
 export class PlayerService {
-  initStat = 10;
+  initStat = 20;
   playersMap = {};
   teamPlayersMap = {};
   bRefreshTeamPlayers = false;

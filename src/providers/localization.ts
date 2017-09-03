@@ -420,7 +420,8 @@ export class Localization {
       technique: 'technique',
       tactics: 'tactics',
       video: 'Video',
-      trainingmessage: 'Training can reduce the chance of injury'
+      trainingmessage: 'Training can reduce the chance of injury',
+      abilitybytraining: 'Ability (Acquired during training)'
     },
 
     zh: {
@@ -821,7 +822,8 @@ export class Localization {
       technique: '技术',
       tactics: '战术',
       video: '视频',
-      trainingmessage: '训练可以减少受伤几率'
+      trainingmessage: '训练可以减少受伤几率',
+      abilitybytraining: '能力值 (通过训练提升)'
     }
   }
 }

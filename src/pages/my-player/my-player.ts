@@ -5,8 +5,8 @@ import { PlayerService } from '../../app/players/player.service'
 import { TeamService } from '../../app/teams/team.service'
 import { Team } from '../../app/teams/team.model'
 import { ChatPage } from '../chat/chat'
-import { Localization} from '../../providers/localization';
-import { FirebaseManager} from '../../providers/firebase-manager';
+import { Localization } from '../../providers/localization';
+import { FirebaseManager } from '../../providers/firebase-manager';
 
 @Component({
   selector: 'page-my-player',
@@ -22,19 +22,39 @@ export class MyPlayerPage {
   onTeamReady;
   socialStats = {};
   radarChartLabels;
-  radarChartData = [[10, 10, 10]];
-  public radarOptions = { legend: false};
+  radarChartData;;
+  radarOptions;
+  colors = [{
+    borderColor: '#00ff00',
+    backgroundColor: '#b5e61d',
+    borderWidth: 1
+  }];
+  showCharts = false;
   constructor(private navCtrl: NavController,
     private service: PlayerService,
     params: NavParams,
-    private teamService: TeamService,private local: Localization,
+    private teamService: TeamService, private local: Localization,
     private actionSheetCtrl: ActionSheetController,
-    private fm : FirebaseManager) {
+    private fm: FirebaseManager) {
     this.id = params.get('id');
 
-    this.radarChartLabels = [local.getString('physical'), 
-    local.getString('technique'), 
-    local.getString('tactics')];
+    this.radarChartLabels = [
+      local.getString('technique'),
+      local.getString('tactics'),
+      local.getString('physical'),];
+
+    this.radarChartData = [[this.service.initStat, this.service.initStat, this.service.initStat]];
+
+    this.radarOptions = {
+      legend: { display: false },
+      scale: {
+        ticks: {
+          suggestedMin: 0,
+          suggestedMax: 100,
+          stepSize: this.service.initStat
+        }
+      }
+    };
   }
 
   ionViewDidLoad() {
@@ -50,8 +70,18 @@ export class MyPlayerPage {
       let id = e['detail'];
       if (this.id === id) {
         this.player = this.service.getPlayer(id);
-        //console.log(this.player);
-        
+        setTimeout(() => {
+          //console.log(this.player);
+          this.radarChartData = [[this.player.technique, this.player.tactics, this.player.physical]];
+          //console.log(this.radarChartData);
+          this.showCharts = true;
+          //this.radarChartData[0][0] = this.player.technique;
+          //this.radarChartData[0][1] = this.player.tactics;
+          //this.radarChartData[0][2] = this.player.physical;
+        },
+          1000
+        );
+
         //this.radarChartData = [[this.player.physical, this.player.technique, this.player.tactics]];
         if (this.player.teamId)
           this.teamService.getTeamAsync(this.player.teamId);
@@ -142,7 +172,7 @@ export class MyPlayerPage {
   getPercent(key, flag) {
     let oppKey = 'opp' + key;
     if (flag) {
-      this.getNumber(key,flag);
+      this.getNumber(key, flag);
       this.getNumber(key, !flag);
     }
     if (key in this.socialStats && oppKey in this.socialStats) {
@@ -180,9 +210,9 @@ export class MyPlayerPage {
     return false;
   }
 
-  getLocalizationClass(suffix){
-      let localCode = this.local.langCode;
-       return localCode + "-" + suffix;
+  getLocalizationClass(suffix) {
+    let localCode = this.local.langCode;
+    return localCode + "-" + suffix;
   }
 
   changeCoverPhoto() {
@@ -191,17 +221,17 @@ export class MyPlayerPage {
 
     let actionSheet = this.actionSheetCtrl.create({
       buttons: [{
-          text: this.local.getString('changecoverphoto'),
-          handler: () => {
-            this.doChangeCoverPhoto();
-          }
-        },{
-          text: this.local.getString('Cancel'),
-          role: 'cancel',
-          handler: () => {
-            //console.log('Cancel clicked');
-          }
+        text: this.local.getString('changecoverphoto'),
+        handler: () => {
+          this.doChangeCoverPhoto();
         }
+      }, {
+        text: this.local.getString('Cancel'),
+        role: 'cancel',
+        handler: () => {
+          //console.log('Cancel clicked');
+        }
+      }
       ]
     });
     actionSheet.present();
@@ -221,9 +251,9 @@ export class MyPlayerPage {
     this.fm.selectImgUploadGetUrl(this.selfId + 'Large', 512, 512, success, error);
   }
 
-  getAvgInfomation(a,b){
-    if (b != 0){
-      return parseFloat((a/b).toFixed(1));
+  getAvgInfomation(a, b) {
+    if (b != 0) {
+      return parseFloat((a / b).toFixed(1));
     }
     return 0;
   }
