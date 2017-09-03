@@ -420,6 +420,7 @@ export class Localization {
       technique: 'technique',
       tactics: 'tactics',
       video: 'Video',
+      trainingmessage: 'Training can reduce the chance of injury'
     },
 
     zh: {
@@ -820,6 +821,7 @@ export class Localization {
       technique: '技术',
       tactics: '战术',
       video: '视频',
+      trainingmessage: '训练可以减少受伤几率'
     }
   }
 }

@@ -6,6 +6,27 @@
 
 <ion-content no-bounce>
   <img [src]="getBannerImage()" (click) = 'enterCheeringTeam()'>
+  <ion-item-divider>{{'trainingmessage' | trans}}</ion-item-divider>
+  <ion-list>
+    <button ion-item>
+      <ion-thumbnail item-start>
+      <img [src]="">
+    </ion-thumbnail>
+    <h2>{{'physical' | trans}}</h2>
+    </button>
+    <button ion-item>
+      <ion-thumbnail item-start>
+      <img [src]="">
+    </ion-thumbnail>
+    <h2>{{'technique' | trans}}</h2>
+    </button>
+    <button ion-item>
+      <ion-thumbnail item-start>
+      <img [src]="">
+    </ion-thumbnail>
+    <h2>{{'tactics' | trans}}</h2>
+    </button>
+  </ion-list>
   <!--<ion-row *ngIf = "showLogin || showBanner">
     <ion-slides loop="true" autoplay='3000'>
       <ion-slide *ngFor="let slide of slides">
@@ -16,7 +37,7 @@
 
   <!--<result-score *ngIf="!canShowBanner() && upcomingMatch.dataReady" [upcomingMatch]="upcomingMatch" hostPageName="my-team" (click)="showMatch(upcomingMatch)"></result-score>-->
 
-  <ion-row class="home-menu" no-padding style="margin-top: 2rem">
+  <!--<ion-row class="home-menu" no-padding style="margin-top: 2rem">-->
     <!--<ion-col class="menu-col" center>
       <button ion-button icon-only full color="dark" (click)="enterCheeringTeam()">
         <ion-icon name="md-flower" color="gOrange"></ion-icon>
@@ -25,6 +46,24 @@
         <p>{{'Cheerleaders' | trans}}</p>
       </button>
     </ion-col>-->
+    <!--<ion-col class="menu-col" center>
+      <button ion-button icon-only full color="dark" (click)="enterRankPage()">
+        <ion-icon name="md-podium" color="gBlue"></ion-icon>
+      </button>
+      <button ion-button full color="dark" (click)="enterRankPage()">
+        <p>{{'Ranks' | trans}}</p>
+      </button>
+    </ion-col>-->
+    <!--<ion-col class="menu-col" center>
+      <button ion-button icon-only full color="dark" (click)="enterTrainingPage()">
+        <ion-icon name="logo-youtube" color="gRed"></ion-icon>
+      </button>
+      <button ion-button full color="dark" (click)="enterTrainingPage()">
+        <p>{{'training' | trans}}</p>
+      </button>
+    </ion-col>-->
+  <!--</ion-row>-->
+  <ion-row class="home-menu bottom-row" no-padding>
     <ion-col class="menu-col" center>
       <button ion-button icon-only full color="dark" (click)="enterRankPage()">
         <ion-icon name="md-podium" color="gBlue"></ion-icon>
@@ -33,17 +72,7 @@
         <p>{{'Ranks' | trans}}</p>
       </button>
     </ion-col>
-    <ion-col class="menu-col" center>
-      <button ion-button icon-only full color="dark" (click)="enterTrainingPage()">
-        <ion-icon name="logo-youtube" color="gRed"></ion-icon>
-      </button>
-      <button ion-button full color="dark" (click)="enterTrainingPage()">
-        <p>{{'training' | trans}}</p>
-      </button>
-    </ion-col>
-  </ion-row>
-  <ion-row *ngIf = "selfTeam" class="home-menu bottom-row" no-padding>
-    <ion-col class="menu-col"  center>
+    <ion-col class="menu-col"  center *ngIf = "selfTeam">
       <button ion-button icon-only full color="dark" (click)="enterManageSquadPage()">
         <ion-icon name="md-football" color="gYellow"></ion-icon>
       </button>
@@ -51,7 +80,7 @@
         <p>{{'squads' | trans}}</p>
       </button>
     </ion-col>
-    <ion-col class="menu-col"  center>
+    <ion-col class="menu-col"  center *ngIf = "selfTeam">
       <button ion-button icon-only full color="dark" (click)="openTeamPlayersPage()">
         <ion-icon name="md-people" color="gGreen"></ion-icon>
       </button>
@@ -59,7 +88,7 @@
         <p>{{'players' | trans}}</p>
       </button>
     </ion-col>
-    <ion-col class="menu-col"  center *ngIf="upcomingMatch?.dataReady">
+    <ion-col class="menu-col"  center *ngIf="upcomingMatch?.dataReady && selfTeam">
       <button ion-button icon-only full color="dark" (click)="seeMoreTeamGamePlan()">
         <ion-icon name="md-calendar" color="light"></ion-icon>
       </button>
