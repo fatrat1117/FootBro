@@ -587,7 +587,13 @@ export class PlayerService {
     return false;
   }
 
-  gainAbilityExp(type) {
-
+  finishTraining(trainingType) {
+    if (this.isAuthenticated()) {
+      let myself = this.myself();
+      let stat = this.initStat;
+      if (trainingType in myself) 
+        stat = myself[trainingType];
+      this.fm.finishTraining(trainingType, stat + 1);
+    }
   }
 }

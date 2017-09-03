@@ -538,7 +538,7 @@ export class FirebaseManager {
   }
 
   playerPublicRef(id) {
-    return `public/players/${id}`;
+    return `public/players/${id}/`;
   }
 
   cheerleaderPublicRef(id) {
@@ -1605,5 +1605,10 @@ export class FirebaseManager {
 
   increaseTrainingViewed(index, count) {
     this.afDb.object(`/training/${index}/viewed/`).set(count + 1);
+  }
+
+  finishTraining(trainingType, stat) {
+    console.log('finishTraining ', trainingType, ' ', stat);
+    this.afDb.object(this.playerPublicRef(this.selfId()) + trainingType).set(stat);
   }
 }
