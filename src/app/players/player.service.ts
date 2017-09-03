@@ -3,6 +3,8 @@ import { FirebaseManager } from '../../providers/firebase-manager';
 import { LocalStorage } from '../../providers/local-storage';
 import { Player } from './player.model';
 import { UIHelper } from '../../providers/uihelper';
+import { Localization } from '../../providers/localization';
+declare var sprintf: any;
 
 @Injectable()
 export class PlayerService {
@@ -33,7 +35,8 @@ export class PlayerService {
       sw: 'sw',
     }
 
-  constructor(private fm: FirebaseManager, private uiHelper: UIHelper, private ls: LocalStorage) {
+  constructor(private fm: FirebaseManager, private uiHelper: UIHelper, private ls: LocalStorage,
+  private loc: Localization) {
     document.addEventListener('playerready', e => {
       let id = e['detail'];
 
@@ -593,7 +596,10 @@ export class PlayerService {
       let stat = this.initStat;
       if (trainingType in myself) 
         stat = myself[trainingType];
-      this.fm.finishTraining(trainingType, stat + 1);
+      let newStat = stat + 1;
+      this.fm.finishTraining(trainingType, newStat);
+      let msg = sprintf(this.loc.getString('congrats'), this.loc.getString(trainingType), newStat);
+      this.uiHelper.showToastMessage(msg);
     }
   }
 }
