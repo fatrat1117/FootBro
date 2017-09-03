@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavParams, NavController } from 'ionic-angular'
 import { TrainingVideoPage } from '../training-video/training-video';
 import { FirebaseManager } from '../../providers/firebase-manager';
+import { Localization } from '../../providers/localization';
 
 @Component({
   selector: 'page-training',
@@ -10,7 +11,8 @@ import { FirebaseManager } from '../../providers/firebase-manager';
 export class TrainingPage {
   videos = [];
   afTrainings;
-  constructor( private fm : FirebaseManager, private nav: NavController, params: NavParams) {
+  constructor( private fm : FirebaseManager, private nav: NavController, params: NavParams,
+  private loc: Localization) {
     //this.afTrainings = this.fm.afGetTrainings();
     this.afTrainings = this.fm.afQueryTrainings(params.get('type'));
     // this.videos = [{
@@ -68,5 +70,12 @@ export class TrainingPage {
   playVideo(video) {
     this.fm.increaseTrainingViewed(video.id, video.viewed);
     this.nav.push(TrainingVideoPage, {video: video});
+  }
+
+  getVideoTitle(video) {
+    let lang = this.loc.langCode;
+    if (video.title)
+      return video.title[lang];
+    return '';
   }
 }

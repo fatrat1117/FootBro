@@ -9,7 +9,7 @@
       <ion-thumbnail item-start>
       <img [src]="getThumbnailUrl(video.videoId)">
     </ion-thumbnail>
-    <h2>{{video.title}}</h2>
+    <h2>{{getVideoTitle(video)}}</h2>
     <h3>{{'Type' | trans}}: {{video.type | trans}}</h3>
     <p>{{video.viewed}} {{'playertrained' | trans}}</p>
     </button>
