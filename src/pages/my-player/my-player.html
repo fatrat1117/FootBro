@@ -68,14 +68,16 @@
     </ion-row>
 
   </ion-card>
-  <ion-card>
+  <!--<ion-card>
     <ion-card-header>
       {{'Ability' | trans}}
     </ion-card-header>
-    <ion-card-content>
-      <canvas baseChart [data]="radarChartData" [labels]="radarChartLabels" chartType="radar" [options]="radarOptions"></canvas>
-    </ion-card-content>
-  </ion-card>
+    <ion-card-content>-->
+      <div style="display: block; width: 90%; left: 10%">
+        <canvas baseChart [data]="radarChartData" [labels]="radarChartLabels" chartType="radar" [options]="radarOptions"></canvas>
+      </div>
+    <!--</ion-card-content>
+  </ion-card>-->
 
   <ion-grid>
     <ion-row class="personal-data-title">
