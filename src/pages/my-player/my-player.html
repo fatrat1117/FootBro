@@ -68,6 +68,14 @@
     </ion-row>
 
   </ion-card>
+  <ion-card>
+    <ion-card-header>
+      {{'Ability' | trans}}
+    </ion-card-header>
+    <ion-card-content>
+      <canvas baseChart [data]="radarChartData" [labels]="radarChartLabels" chartType="radar" [options]="radarOptions"></canvas>
+    </ion-card-content>
+  </ion-card>
 
   <ion-grid>
     <ion-row class="personal-data-title">
@@ -107,55 +115,59 @@
   <ion-grid class="win-rate">
 
     <ion-row class="win-rate-circle-title">
-      <ion-col class="align-center col-45"><h4 class="progressTxt">{{'attendWinRateShort' | trans}}</h4></ion-col>
+      <ion-col class="align-center col-45">
+        <h4 class="progressTxt">{{'attendWinRateShort' | trans}}</h4>
+      </ion-col>
       <ion-col width-10></ion-col>
-      <ion-col class="align-center col-45"><h4 class="progressTxt">{{'notAttendWinRateShort' | trans}}</h4></ion-col>
+      <ion-col class="align-center col-45">
+        <h4 class="progressTxt">{{'notAttendWinRateShort' | trans}}</h4>
+      </ion-col>
     </ion-row>
 
     <ion-row class="win-progress">
-    <ion-col class="col-45">
-    <div class="winning-circle">
-        <sb-rate-circle  [rate]="player?.stats?.overall?.attend_win_rate | ifNullThenZeroPipe"></sb-rate-circle>
-    </div>
-    </ion-col>
-    <ion-col class="absolute-center-txt">{{'winningRate' | trans}}</ion-col>
-    <ion-col class="col-45">
-      <div class="winning-circle">
-        <sb-rate-circle  [rate]="player?.stats?.overall?.not_attend_win_rate | ifNullThenZeroPipe"></sb-rate-circle>
-    </div>
-    </ion-col>
+      <ion-col class="col-45">
+        <div class="winning-circle">
+          <sb-rate-circle [rate]="player?.stats?.overall?.attend_win_rate | ifNullThenZeroPipe"></sb-rate-circle>
+        </div>
+      </ion-col>
+      <ion-col class="absolute-center-txt">{{'winningRate' | trans}}</ion-col>
+      <ion-col class="col-45">
+        <div class="winning-circle">
+          <sb-rate-circle [rate]="player?.stats?.overall?.not_attend_win_rate | ifNullThenZeroPipe"></sb-rate-circle>
+        </div>
+      </ion-col>
     </ion-row>
 
     <!--<ion-row class="goal-rate">-->
-      <!--<ion-col width-50 class="flex-center">0.0</ion-col>-->
-      <!--<ion-col class="main-font absolute-center-txt">进球率</ion-col>-->
-      <!--<ion-col width-50 text-center class="flex-center">0.0</ion-col>-->
+    <!--<ion-col width-50 class="flex-center">0.0</ion-col>-->
+    <!--<ion-col class="main-font absolute-center-txt">进球率</ion-col>-->
+    <!--<ion-col width-50 text-center class="flex-center">0.0</ion-col>-->
     <!--</ion-row>-->
     <!--<ion-row class="loss-rate">-->
-     <!--<ion-col width-50 class="flex-center">0.0</ion-col>-->
-      <!--<ion-col class="main-font absolute-center-txt">失球率</ion-col>-->
-     <!--<ion-col width-50 text-center class="flex-center">0.0</ion-col>-->
+    <!--<ion-col width-50 class="flex-center">0.0</ion-col>-->
+    <!--<ion-col class="main-font absolute-center-txt">失球率</ion-col>-->
+    <!--<ion-col width-50 text-center class="flex-center">0.0</ion-col>-->
     <!--</ion-row>-->
 
     <!--<hr class="separate" no-margin>-->
 
     <!--<ion-row class="records">-->
-      <!--<ion-col width-50 class="flex-center">最佳纪录</ion-col>-->
-      <!--<ion-col width-50 class="flex-center">最差纪录</ion-col>-->
+    <!--<ion-col width-50 class="flex-center">最佳纪录</ion-col>-->
+    <!--<ion-col width-50 class="flex-center">最差纪录</ion-col>-->
     <!--</ion-row>-->
 
     <!--<ion-row class="records-value">-->
-      <!--<ion-col width-50 class="flex-center best">98.69</ion-col>-->
-      <!--<ion-col width-50 class="flex-center worse">无评分</ion-col>-->
+    <!--<ion-col width-50 class="flex-center best">98.69</ion-col>-->
+    <!--<ion-col width-50 class="flex-center worse">无评分</ion-col>-->
     <!--</ion-row>-->
 
     <!--<ion-row class="match-time">-->
-      <!--<ion-col width-50 class="flex-center best-time">2016年12月3日</ion-col>-->
-      <!--<ion-col width-50 class="flex-center worst-time">2016年12月03日</ion-col>-->
+    <!--<ion-col width-50 class="flex-center best-time">2016年12月3日</ion-col>-->
+    <!--<ion-col width-50 class="flex-center worst-time">2016年12月03日</ion-col>-->
     <!--</ion-row>-->
     <!--<ion-row class="match-duel">-->
-      <!--<ion-col  width-50 class="flex-center best-duel">巴塞罗那0-0皇家马德里</ion-col>-->
-      <!--<ion-col width-50 class="flex-center worst-duel">巴塞罗那0-0皇家马德里</ion-col>-->
+    <!--<ion-col  width-50 class="flex-center best-duel">巴塞罗那0-0皇家马德里</ion-col>-->
+    <!--<ion-col width-50 class="flex-center worst-duel">巴塞罗那0-0皇家马德里</ion-col>-->
     <!--</ion-row>-->
   </ion-grid>
   <ion-grid>
@@ -196,14 +208,15 @@
       <ion-col width-16.6 text-center class="personal-data">{{player?.stats?.overall?.avg_pts | ifNullThenZeroPipe}}</ion-col>
     </ion-row>
 
-      <!--</ion-row>-->
+    <!--</ion-row>-->
     <ion-row class="personal-data-title">
       <ion-col class="subtitle">{{'vote' | trans}}</ion-col>
     </ion-row>
     <ion-row class="light-grey">
       <div class="feedHead">
         <div class="wrapper">
-          <div class="rose"><ion-icon name="md-flower" color="gRed"></ion-icon><span class="picText">{{'charm' | trans}}</span>
+          <div class="rose">
+            <ion-icon name="md-flower" color="gRed"></ion-icon><span class="picText">{{'charm' | trans}}</span>
           </div>
         </div>
       </div>
@@ -213,128 +226,129 @@
         <div class="wrapper">
           <div class="clearfloat totalText">
             <h1 class="fl max-width-35" style="margin: 0">{{'Ilikehim' | trans}}</h1>
-            <h2 class="fr max-width-35 text-right">{{'Idislikehim' | trans}}</h2>
-          </div>
-          <ion-row class="clearfloat totalFeedBack">
+<h2 class="fr max-width-35 text-right">{{'Idislikehim' | trans}}</h2>
+</div>
+<ion-row class="clearfloat totalFeedBack">
 
-            <ion-col width-10 class="feed-back-like" (tap)="likeHim()">
-              <div class="like fl">
-                <ion-icon name="md-thumbs-up" [ngStyle]="{'color': isLiked('charm') ? '#db3236' : none}"></ion-icon>
-                <!--img [src]="getLikePic('charm')" (tap)="likeHim()"-->
-              </div>
-            </ion-col>
-            <ion-col width-80 class="feed-back-bar fl">
-              <div [ngStyle]="{'width':getPercent('charm', true)+'%'}" class="redPrg fl">
-                <div class="redStrip"></div>
-                <span class="stripText">{{socialStats['charm']}}</span>
-              </div>
-              <div [ngStyle]="{'width':getPercent('charm', false)+'%'}" class="bluePrg fl">
-                <div class="blueStrip"></div>
-                <span class="blueText">{{socialStats['oppcharm']}}</span>
-              </div>
-            </ion-col>
-            <ion-col width-10 class="feed-back-unlike" (tap)="dislikeHim()">
-              <div class="unLike fr">
-                <ion-icon name="md-thumbs-down" [ngStyle]="{'color': isUnliked('charm') ? '#0F7AFE' : none}"></ion-icon>
-                <!--img [src]="getUnlikePic('charm')" (tap)="dislikeHim()"-->
-              </div>
-            </ion-col>
-          </ion-row>
-        </div>
+  <ion-col width-10 class="feed-back-like" (tap)="likeHim()">
+    <div class="like fl">
+      <ion-icon name="md-thumbs-up" [ngStyle]="{'color': isLiked('charm') ? '#db3236' : none}"></ion-icon>
+      <!--img [src]="getLikePic('charm')" (tap)="likeHim()"-->
+    </div>
+  </ion-col>
+  <ion-col width-80 class="feed-back-bar fl">
+    <div [ngStyle]="{'width':getPercent('charm', true)+'%'}" class="redPrg fl">
+      <div class="redStrip"></div>
+      <span class="stripText">{{socialStats['charm']}}</span>
+    </div>
+    <div [ngStyle]="{'width':getPercent('charm', false)+'%'}" class="bluePrg fl">
+      <div class="blueStrip"></div>
+      <span class="blueText">{{socialStats['oppcharm']}}</span>
+    </div>
+  </ion-col>
+  <ion-col width-10 class="feed-back-unlike" (tap)="dislikeHim()">
+    <div class="unLike fr">
+      <ion-icon name="md-thumbs-down" [ngStyle]="{'color': isUnliked('charm') ? '#0F7AFE' : none}"></ion-icon>
+      <!--img [src]="getUnlikePic('charm')" (tap)="dislikeHim()"-->
+    </div>
+  </ion-col>
+</ion-row>
+</div>
+</div>
+</ion-row>
+<ion-row class="light-grey">
+  <div class="feedHead">
+    <div class="wrapper">
+      <div class="rose">
+        <ion-icon name="md-football" color="primary-text"></ion-icon>
+        <span class="picText">{{'skill' | trans}}</span>
       </div>
-    </ion-row>
-    <ion-row class="light-grey">
-      <div class="feedHead">
-        <div class="wrapper">
-          <div class="rose">
-            <ion-icon name="md-football" color="primary-text"></ion-icon>
-            <span class="picText">{{'skill' | trans}}</span>
-          </div>
-        </div>
-      </div>
-    </ion-row>
-    <ion-row class="personal-data-title">
-      <div class="feedBack">
-        <div class="wrapper">
-          <div class="clearfloat totalText">
-            <h1 class="fl max-width-35" style="margin: 0">{{'heisagoodplayer' | trans}}</h1>
-            <h2 class="fr max-width-35 wy-text-right ">{{'hesucks' | trans}}</h2>
-          </div>
-          <ion-row class="clearfloat totalFeedBack">
+    </div>
+  </div>
+</ion-row>
+<ion-row class="personal-data-title">
+  <div class="feedBack">
+    <div class="wrapper">
+      <div class="clearfloat totalText">
+        <h1 class="fl max-width-35" style="margin: 0">{{'heisagoodplayer' | trans}}</h1>
+<h2 class="fr max-width-35 wy-text-right ">{{'hesucks' | trans}}</h2>
+</div>
+<ion-row class="clearfloat totalFeedBack">
 
-            <ion-col width-10 class="feed-back-like" (tap)="likeSkill()">
-              <div class="like fl">
-                <ion-icon name="md-thumbs-up" [ngStyle]="{'color': isLiked('skill') ? '#db3236' : none}"></ion-icon>
-              </div>
-            </ion-col>
-            <ion-col width-80 class="feed-back-bar fl">
-              <div [ngStyle]="{'width':getPercent('skill', true)+'%'}" class="redPrg fl">
-                <div class="redStrip"></div>
-                <span class="stripText">{{socialStats['skill']}}</span>
-              </div>
-              <div [ngStyle]="{'width':getPercent('skill', false)+'%'}" class="bluePrg fl">
-                <div class="blueStrip"></div>
-                <span class="blueText">{{socialStats['oppskill']}}</span>
-              </div>
-            </ion-col>
-            <ion-col width-10 class="feed-back-unlike" (tap)="dislikeSkill()">
-              <div class="unLike fr">
-                <ion-icon name="md-thumbs-down" [ngStyle]="{'color': isUnliked('skill') ? '#0F7AFE' : none}"></ion-icon>
-              </div>
-            </ion-col>
-          </ion-row>
-        </div>
+  <ion-col width-10 class="feed-back-like" (tap)="likeSkill()">
+    <div class="like fl">
+      <ion-icon name="md-thumbs-up" [ngStyle]="{'color': isLiked('skill') ? '#db3236' : none}"></ion-icon>
+    </div>
+  </ion-col>
+  <ion-col width-80 class="feed-back-bar fl">
+    <div [ngStyle]="{'width':getPercent('skill', true)+'%'}" class="redPrg fl">
+      <div class="redStrip"></div>
+      <span class="stripText">{{socialStats['skill']}}</span>
+    </div>
+    <div [ngStyle]="{'width':getPercent('skill', false)+'%'}" class="bluePrg fl">
+      <div class="blueStrip"></div>
+      <span class="blueText">{{socialStats['oppskill']}}</span>
+    </div>
+  </ion-col>
+  <ion-col width-10 class="feed-back-unlike" (tap)="dislikeSkill()">
+    <div class="unLike fr">
+      <ion-icon name="md-thumbs-down" [ngStyle]="{'color': isUnliked('skill') ? '#0F7AFE' : none}"></ion-icon>
+    </div>
+  </ion-col>
+</ion-row>
+</div>
+</div>
+</ion-row>
+<ion-row class="light-grey">
+  <div class="feedHead">
+    <div class="wrapper">
+      <div class="rose">
+        <ion-icon name="md-person" color="gGreen"></ion-icon><span class="picText">{{'playstyle' | trans}}</span>
       </div>
-    </ion-row>
-    <ion-row class="light-grey">
-      <div class="feedHead">
-        <div class="wrapper">
-          <div class="rose"><ion-icon name="md-person" color="gGreen"></ion-icon><span class="picText">{{'playstyle' | trans}}</span>
-          </div>
-        </div>
-      </div>
-    </ion-row>
-    <ion-row class="personal-data-title">
-      <div class="feedBack">
-        <div class="wrapper">
-          <div class="clearfloat totalText">
-            <h1 class="fl max-width-35 " style="margin: 0">{{'heiscleanandelegant' | trans}}</h1>
-            <h2 class="fr max-width-35 text-right">{{'heisdirty' | trans}}</h2>
-          </div>
-          <ion-row class="clearfloat totalFeedBack">
+    </div>
+  </div>
+</ion-row>
+<ion-row class="personal-data-title">
+  <div class="feedBack">
+    <div class="wrapper">
+      <div class="clearfloat totalText">
+        <h1 class="fl max-width-35 " style="margin: 0">{{'heiscleanandelegant' | trans}}</h1>
+<h2 class="fr max-width-35 text-right">{{'heisdirty' | trans}}</h2>
+</div>
+<ion-row class="clearfloat totalFeedBack">
 
-            <ion-col width-10 class="feed-back-like" (tap)="likeStyle()">
-              <div class="like fl">
-                <ion-icon name="md-thumbs-up" [ngStyle]="{'color': isLiked('style') ? '#db3236' : none}"></ion-icon>
-              </div>
-            </ion-col>
-            <ion-col width-80 class="feed-back-bar fl">
-              <div [ngStyle]="{'width':getPercent('style', true)+'%'}" class="redPrg fl">
-                <div class="redStrip"></div>
-                <span class="stripText">{{socialStats['style']}}</span>
-              </div>
-              <div [ngStyle]="{'width':getPercent('style', false)+'%'}" class="bluePrg fl">
-                <div class="blueStrip"></div>
-                <span class="blueText">{{socialStats['oppstyle']}}</span>
-              </div>
-            </ion-col>
-            <ion-col width-10 class="feed-back-unlike" (tap)="dislikeStyle()">
-              <div class="unLike fr">
-                <ion-icon name="md-thumbs-down" [ngStyle]="{'color': isUnliked('style') ? '#0F7AFE' : none}"></ion-icon>
-              </div>
-            </ion-col>
-          </ion-row>
-        </div>
-      </div>
-    </ion-row>
-    <ion-row class="personal-data-title">
-      <ion-col class="subtitle">{{'Description' | trans}}</ion-col>
-    </ion-row>
-    <ion-row class="light-grey personal-data">
-      <div class="description">
-        <p>{{player?.description}}</p>
-      </div>
-    </ion-row>
-  </ion-grid>
+  <ion-col width-10 class="feed-back-like" (tap)="likeStyle()">
+    <div class="like fl">
+      <ion-icon name="md-thumbs-up" [ngStyle]="{'color': isLiked('style') ? '#db3236' : none}"></ion-icon>
+    </div>
+  </ion-col>
+  <ion-col width-80 class="feed-back-bar fl">
+    <div [ngStyle]="{'width':getPercent('style', true)+'%'}" class="redPrg fl">
+      <div class="redStrip"></div>
+      <span class="stripText">{{socialStats['style']}}</span>
+    </div>
+    <div [ngStyle]="{'width':getPercent('style', false)+'%'}" class="bluePrg fl">
+      <div class="blueStrip"></div>
+      <span class="blueText">{{socialStats['oppstyle']}}</span>
+    </div>
+  </ion-col>
+  <ion-col width-10 class="feed-back-unlike" (tap)="dislikeStyle()">
+    <div class="unLike fr">
+      <ion-icon name="md-thumbs-down" [ngStyle]="{'color': isUnliked('style') ? '#0F7AFE' : none}"></ion-icon>
+    </div>
+  </ion-col>
+</ion-row>
+</div>
+</div>
+</ion-row>
+<ion-row class="personal-data-title">
+  <ion-col class="subtitle">{{'Description' | trans}}</ion-col>
+</ion-row>
+<ion-row class="light-grey personal-data">
+  <div class="description">
+    <p>{{player?.description}}</p>
+  </div>
+</ion-row>
+</ion-grid>
 
 </ion-content>

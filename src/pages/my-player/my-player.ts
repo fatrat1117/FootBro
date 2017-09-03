@@ -21,7 +21,9 @@ export class MyPlayerPage {
   onPlayerReady;
   onTeamReady;
   socialStats = {};
-
+  radarChartLabels;
+  radarChartData = [[10, 10, 10]];
+  public radarOptions = { legend: false};
   constructor(private navCtrl: NavController,
     private service: PlayerService,
     params: NavParams,
@@ -29,6 +31,10 @@ export class MyPlayerPage {
     private actionSheetCtrl: ActionSheetController,
     private fm : FirebaseManager) {
     this.id = params.get('id');
+
+    this.radarChartLabels = [local.getString('physical'), 
+    local.getString('technique'), 
+    local.getString('tactics')];
   }
 
   ionViewDidLoad() {
@@ -44,6 +50,9 @@ export class MyPlayerPage {
       let id = e['detail'];
       if (this.id === id) {
         this.player = this.service.getPlayer(id);
+        //console.log(this.player);
+        
+        //this.radarChartData = [[this.player.physical, this.player.technique, this.player.tactics]];
         if (this.player.teamId)
           this.teamService.getTeamAsync(this.player.teamId);
       }
@@ -170,33 +179,6 @@ export class MyPlayerPage {
     }
     return false;
   }
-
-
-  /*
-  getLikePic(key) {
-    if (this.player && this.player.social && this.player.social.votes) {
-      let myVote = this.player.social.votes[this.service.selfId()];
-      if (myVote && key in myVote) {
-        if (myVote[key])
-          return "assets/icon/good@2x.png";
-      }
-    }
-
-    return "assets/icon/good_push@2x.png";
-  }
-
-  getUnlikePic(key) {
-    if (this.player && this.player.social && this.player.social.votes) {
-      let myVote = this.player.social.votes[this.service.selfId()];
-      if (myVote && key in myVote) {
-        if (false === myVote[key])
-          return "assets/icon/bed@2x.png";
-      }
-    }
-
-    return "assets/icon/bed_push@2x.png";
-  }
-  */
 
   getLocalizationClass(suffix){
       let localCode = this.local.langCode;

@@ -8,6 +8,7 @@ import { File } from '@ionic-native/file';
 import { MyErrorHandler } from '../providers/exception-handler'
 import { YoutubePlayerModule } from 'ng2-youtube-player';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
+import { ChartsModule } from 'ng2-charts';
 import { MyApp } from './app.component';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { RankPage } from '../pages/rank/rank';
@@ -209,6 +210,7 @@ export const firebaseConfig = {
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    ChartsModule,
     /*
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA9L3ja5ZcViqTc5Tgz8tG6QvJGlYO-fa4',
