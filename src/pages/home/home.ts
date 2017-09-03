@@ -237,5 +237,9 @@ export class HomePage {
       this.modalCtrl.create(MatchDetailPage, { match: match }).present();
     }
   }
+
+  getBannerImage() {
+    return `assets/img/banners/${this.local.langCode}/1.jpg`;
+  }
 }
 
