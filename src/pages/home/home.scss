@@ -108,6 +108,11 @@
        border-radius: 3%;
      }
    }
+   .join-button {
+     display: flex !important;
+     justify-content: center !important;
+     align-items: center !important;
+   }
    .home-cheerleader-block {
      .img-block {
        margin: 0px auto;

@@ -109,26 +109,26 @@
 
   <div *ngIf="selfPlayer && selfPlayer?.role != 'cheerleader'">
     <ion-row margin-left margin-right>
-      <ion-col width-50 text-center>
+      <ion-col col-6 text-center>
         <h2 style="margin-bottom: 0px">{{ 'starcard' | trans }}</h2>
       </ion-col>
-      <ion-col width-50 text-center *ngIf="selfTeam">
+      <ion-col col-6 text-center *ngIf="selfTeam">
         <h2 style="margin-bottom: 0px">{{ 'Team' | trans }}</h2>
       </ion-col>
     </ion-row>
     <ion-row margin-left margin-right center>
-      <ion-col width-50 class="home-block">
+      <ion-col col-6 class="home-block">
         <ion-thumbnail (tap)="goPlayerPage()">
           <!--img-loader class="img-block" [src]="selfPlayer?.photo"></img-loader-->
           <img class="img-block" [src]="selfPlayer?.photo">
         </ion-thumbnail>
       </ion-col>
-      <ion-col width-50 class="home-block" *ngIf="selfTeam">
+      <ion-col col-6 class="home-block" *ngIf="selfTeam">
         <ion-thumbnail (tap)="goTeamPage()">
           <img class="img-block" [src]="selfTeam?.logo">
         </ion-thumbnail>
       </ion-col>
-      <ion-col width-50 class="home-block" text-center *ngIf="!selfTeam && showJoinTeam">
+      <ion-col col-6 class="home-block join-button" text-center *ngIf="!selfTeam && showJoinTeam">
         <button ion-button icon-start (click)="joinTeam()">
           <ion-icon name="md-add"></ion-icon>
           {{'JoinTeam' | trans}}
@@ -136,10 +136,10 @@
       </ion-col>
     </ion-row>
     <ion-row margin-left margin-right>
-      <ion-col text-center width-50>
+      <ion-col text-center col-6>
         {{ selfPlayer?.name }}
       </ion-col>
-      <ion-col text-center width-50 *ngIf="selfTeam">
+      <ion-col text-center col-6 *ngIf="selfTeam">
         {{ selfTeam?.name }}
       </ion-col>
     </ion-row>
@@ -147,19 +147,19 @@
 
   <div *ngIf="selfPlayer && selfPlayer?.role == 'cheerleader'">
     <ion-row text-center margin-left margin-right>
-      <ion-col width-100 text-center>
+      <ion-col col-12 text-center>
         <h2 style="margin-bottom: 0px">{{ 'Cheerleader' | trans }}</h2>
       </ion-col>
     </ion-row>
     <ion-row center margin-left margin-right>
-      <ion-col width-100 class="home-cheerleader-block">
+      <ion-col col-12 class="home-cheerleader-block">
         <ion-thumbnail>
           <img class="img-block" [src]="selfPlayer?.photoMedium">
         </ion-thumbnail>
       </ion-col>
     </ion-row>
     <ion-row text-center margin-left margin-right>
-      <ion-col width-100 text-center>
+      <ion-col col-12 text-center>
         {{ selfPlayer?.name }}
       </ion-col>
     </ion-row>
