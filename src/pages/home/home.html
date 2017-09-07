@@ -6,8 +6,57 @@
 
 <ion-content no-bounce>
   <img [src]="getBannerImage()" (click) = 'enterCheeringTeam()'>
+
+    <ion-row class="home-menu bottom-row" no-padding>
+    <ion-col class="menu-col" center>
+      <button ion-button icon-only full color="dark" (click)="enterRankPage()">
+        <ion-icon name="md-podium" color="gBlue"></ion-icon>
+      </button>
+      <button ion-button full color="dark" (click)="enterRankPage()">
+        <p>{{'Ranks' | trans}}</p>
+      </button>
+    </ion-col>
+    <ion-col class="menu-col"  center *ngIf = "selfTeam">
+      <button ion-button icon-only full color="dark" (click)="enterManageSquadPage()">
+        <ion-icon name="md-football" color="gYellow"></ion-icon>
+      </button>
+      <button ion-button full color="dark" (click)="enterManageSquadPage()">
+        <p>{{'squads' | trans}}</p>
+      </button>
+    </ion-col>
+    <ion-col class="menu-col"  center *ngIf = "selfTeam">
+      <button ion-button icon-only full color="dark" (click)="openTeamPlayersPage()">
+        <ion-icon name="md-people" color="gGreen"></ion-icon>
+      </button>
+      <button ion-button full color="dark" (click)="openTeamPlayersPage()">
+        <p>{{'players' | trans}}</p>
+      </button>
+    </ion-col>
+    <ion-col class="menu-col"  center *ngIf="upcomingMatch?.dataReady && selfTeam">
+      <button ion-button icon-only full color="dark" (click)="seeMoreTeamGamePlan()">
+        <ion-icon name="md-calendar" color="light"></ion-icon>
+      </button>
+      <button ion-button full color="dark" (click)="seeMoreTeamGamePlan()">
+        <p>{{'schedule' | trans}}</p>
+      </button>
+    </ion-col>
+  </ion-row>
+
   <ion-item-divider>{{'trainingmessage' | trans}}</ion-item-divider>
-  <ion-list>
+  <ion-row>
+    <ion-col>
+       <img src="assets/img/physical.jpg" (click) = "enterTrainingPage('physical')">
+       <!--<p>text</p>-->
+    </ion-col>
+    <ion-col>
+      <img src="assets/img/technique.jpg" (click) = "enterTrainingPage('technique')">
+    </ion-col>
+    <ion-col>
+      <img src="assets/img/tactics.jpg" (click) = "enterTrainingPage('tactics')">
+    </ion-col>
+  </ion-row>
+
+  <!--<ion-list>
     <button ion-item (click)="enterTrainingPage('physical')">
       <ion-thumbnail item-start>
       <img src="assets/img/physical.jpg">
@@ -26,7 +75,7 @@
     </ion-thumbnail>
     <h2>{{'tactics' | trans}}</h2>
     </button>
-  </ion-list>
+  </ion-list>-->
   <!--<ion-row *ngIf = "showLogin || showBanner">
     <ion-slides loop="true" autoplay='3000'>
       <ion-slide *ngFor="let slide of slides">
@@ -63,40 +112,6 @@
       </button>
     </ion-col>-->
   <!--</ion-row>-->
-  <ion-row class="home-menu bottom-row" no-padding>
-    <ion-col class="menu-col" center>
-      <button ion-button icon-only full color="dark" (click)="enterRankPage()">
-        <ion-icon name="md-podium" color="gBlue"></ion-icon>
-      </button>
-      <button ion-button full color="dark" (click)="enterRankPage()">
-        <p>{{'Ranks' | trans}}</p>
-      </button>
-    </ion-col>
-    <ion-col class="menu-col"  center *ngIf = "selfTeam">
-      <button ion-button icon-only full color="dark" (click)="enterManageSquadPage()">
-        <ion-icon name="md-football" color="gYellow"></ion-icon>
-      </button>
-      <button ion-button full color="dark" (click)="enterManageSquadPage()">
-        <p>{{'squads' | trans}}</p>
-      </button>
-    </ion-col>
-    <ion-col class="menu-col"  center *ngIf = "selfTeam">
-      <button ion-button icon-only full color="dark" (click)="openTeamPlayersPage()">
-        <ion-icon name="md-people" color="gGreen"></ion-icon>
-      </button>
-      <button ion-button full color="dark" (click)="openTeamPlayersPage()">
-        <p>{{'players' | trans}}</p>
-      </button>
-    </ion-col>
-    <ion-col class="menu-col"  center *ngIf="upcomingMatch?.dataReady && selfTeam">
-      <button ion-button icon-only full color="dark" (click)="seeMoreTeamGamePlan()">
-        <ion-icon name="md-calendar" color="light"></ion-icon>
-      </button>
-      <button ion-button full color="dark" (click)="seeMoreTeamGamePlan()">
-        <p>{{'schedule' | trans}}</p>
-      </button>
-    </ion-col>
-  </ion-row>
 
   <div *ngIf="!selfPlayer && showLogin">
     <ion-row center margin>
