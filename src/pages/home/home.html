@@ -44,15 +44,17 @@
 
   <ion-item-divider>{{'trainingmessage' | trans}}</ion-item-divider>
   <ion-row>
-    <ion-col>
+    <ion-col text-center>
        <img src="assets/img/physical.jpg" (click) = "enterTrainingPage('physical')">
-       <!--<p>text</p>-->
+       {{'physical' | trans}}
     </ion-col>
-    <ion-col>
+    <ion-col text-center>
       <img src="assets/img/technique.jpg" (click) = "enterTrainingPage('technique')">
+      {{'technique' | trans}}
     </ion-col>
-    <ion-col>
+    <ion-col text-center>
       <img src="assets/img/tactics.jpg" (click) = "enterTrainingPage('tactics')">
+      {{'tactics' | trans}}
     </ion-col>
   </ion-row>
 

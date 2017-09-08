@@ -184,4 +184,17 @@
      width: 100%;
      height: calc(100% - (184px + 56px));
    }
+
+   .training-btn {
+     width: 100%;
+     height: 100%;
+     color: white;
+   }
+
+   .training-img {
+     z-index: -1;
+     position: absolute;
+     left: 0px;
+     top: 0px;
+   }
  }
