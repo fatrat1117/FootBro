@@ -5,8 +5,6 @@
 </ion-header>
 
 <ion-content no-bounce>
-  <img [src]="getBannerImage()" (click) = 'enterCheeringTeam()'>
-
     <ion-row class="home-menu bottom-row" no-padding>
     <ion-col class="menu-col" center>
       <button ion-button icon-only full color="dark" (click)="enterRankPage()">
@@ -41,7 +39,7 @@
       </button>
     </ion-col>
   </ion-row>
-
+   <img [src]="getBannerImage()" (click) = 'enterCheeringTeam()'>
   <ion-item-divider>{{'trainingmessage' | trans}}</ion-item-divider>
   <ion-row>
     <ion-col text-center>
