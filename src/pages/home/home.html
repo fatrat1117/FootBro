@@ -39,19 +39,19 @@
       </button>
     </ion-col>
   </ion-row>
-   <img [src]="getBannerImage()" (click) = 'enterCheeringTeam()'>
+   <img [src]="getBannerImage()" (tap) = 'enterCheeringTeam()'>
   <ion-item-divider>{{'trainingmessage' | trans}}</ion-item-divider>
   <ion-row>
     <ion-col text-center>
-       <img src="assets/img/physical.jpg" (click) = "enterTrainingPage('physical')">
+       <img src="assets/img/physical.jpg" (tap) = "enterTrainingPage('physical')">
        {{'physical' | trans}}
     </ion-col>
     <ion-col text-center>
-      <img src="assets/img/technique.jpg" (click) = "enterTrainingPage('technique')">
+      <img src="assets/img/technique.jpg" (tap) = "enterTrainingPage('technique')">
       {{'technique' | trans}}
     </ion-col>
     <ion-col text-center>
-      <img src="assets/img/tactics.jpg" (click) = "enterTrainingPage('tactics')">
+      <img src="assets/img/tactics.jpg" (tap) = "enterTrainingPage('tactics')">
       {{'tactics' | trans}}
     </ion-col>
   </ion-row>
