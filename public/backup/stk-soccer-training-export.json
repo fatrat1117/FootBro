@@ -6,7 +6,7 @@
   },
   "type" : "physical",
   "videoId" : "pUgiAE9SaJI",
-  "viewed" : 9
+  "viewed" : 999
 }, {
   "id" : "1",
   "title" : {
@@ -15,7 +15,7 @@
   },
   "type" : "physical",
   "videoId" : "xUhBosIguRQ",
-  "viewed" : 9
+  "viewed" : 999
 },
 {
   "id" : "2",
@@ -25,7 +25,7 @@
   },
   "type" : "technique",
   "videoId" : "Po8y2Oaob08",
-  "viewed" : 9
+  "viewed" : 999
 },
 {
   "id" : "3",
@@ -35,7 +35,7 @@
   },
   "type" : "physical",
   "videoId" : "uE15A4qom20",
-  "viewed" : 9
+  "viewed" : 999
 },
 {
   "id" : "4",
@@ -45,7 +45,7 @@
   },
   "type" : "technique",
   "videoId" : "2wjGTnc9mNM",
-  "viewed" : 9
+  "viewed" : 999
 },
 {
   "id" : "5",
@@ -55,7 +55,7 @@
   },
   "type" : "technique",
   "videoId" : "cRwk4qPAEBg",
-  "viewed" : 9
+  "viewed" : 999
 },
 {
   "id" : "6",
@@ -65,7 +65,7 @@
   },
   "type" : "technique",
   "videoId" : "oRwQd8VBIPM",
-  "viewed" : 9
+  "viewed" : 999
 },
 {
   "id" : "7",
@@ -75,7 +75,7 @@
   },
   "type" : "technique",
   "videoId" : "nqE-WMg1FOs",
-  "viewed" : 9
+  "viewed" : 999
 },
 {
   "id" : "8",
@@ -85,7 +85,7 @@
   },
   "type" : "technique",
   "videoId" : "xHC8ozrKgRA",
-  "viewed" : 9
+  "viewed" : 999
 },
 {
   "id" : "9",
@@ -95,7 +95,7 @@
   },
   "type" : "technique",
   "videoId" : "WZthasLct_w",
-  "viewed" : 9
+  "viewed" : 999
 },
 {
   "id" : "10",
@@ -105,7 +105,7 @@
   },
   "type" : "technique",
   "videoId" : "Sm-u_ESEmjE",
-  "viewed" : 9
+  "viewed" : 999
 },
 {
   "id" : "11",
@@ -115,7 +115,7 @@
   },
   "type" : "technique",
   "videoId" : "dNB-iS8kHms",
-  "viewed" : 9
+  "viewed" : 999
 },
 {
   "id" : "12",
@@ -125,7 +125,7 @@
   },
   "type" : "technique",
   "videoId" : "hBFKuooKobU",
-  "viewed" : 9
+  "viewed" : 999
 },
 {
   "id" : "13",
@@ -135,7 +135,7 @@
   },
   "type" : "technique",
   "videoId" : "BFCCGWnbDFA",
-  "viewed" : 9
+  "viewed" : 999
 },
 {
   "id" : "14",
@@ -145,7 +145,7 @@
   },
   "type" : "technique",
   "videoId" : "InvqGXICwsQ",
-  "viewed" : 9
+  "viewed" : 999
 },
 {
   "id" : "15",
@@ -155,7 +155,7 @@
   },
   "type" : "technique",
   "videoId" : "pssaLEEtU2g",
-  "viewed" : 9
+  "viewed" : 999
 },
 {
   "id" : "16",
@@ -165,7 +165,7 @@
   },
   "type" : "technique",
   "videoId" : "ziXYzblzgzQ",
-  "viewed" : 9
+  "viewed" : 999
 },
 {
   "id" : "17",
@@ -175,7 +175,7 @@
   },
   "type" : "technique",
   "videoId" : "3J7zjMDhQDg",
-  "viewed" : 9
+  "viewed" : 999
 },{
   "id" : "18",
   "title" : {
@@ -184,7 +184,7 @@
   },
   "type" : "technique",
   "videoId" : "SHsN8j7HRm4",
-  "viewed" : 9
+  "viewed" : 999
 }, {
   "id" : "19",
   "title" : {
@@ -193,7 +193,7 @@
   },
   "type" : "technique",
   "videoId" : "1VdyP_V8aTc",
-  "viewed" : 9
+  "viewed" : 999
 },
 {
   "id" : "20",
@@ -203,5 +203,35 @@
   },
   "type" : "technique",
   "videoId" : "3J7zjMDhQDg",
-  "viewed" : 9
-} ]
+  "viewed" : 999
+},
+{
+  "id" : "21",
+  "title" : {
+    "en" : "Striker Movement",
+    "zh" : "前锋跑位"
+  },
+  "type" : "tactics",
+  "videoId" : "FttpQxXDsqQ",
+  "viewed" : 999
+} ,
+{
+  "id" : "22",
+  "title" : {
+    "en" : "Football Tactics Using the Channels",
+    "zh" : "跑传空挡"
+  },
+  "type" : "tactics",
+  "videoId" : "NncEwM2ssfk",
+  "viewed" : 999
+} ,
+{
+  "id" : "23",
+  "title" : {
+    "en" : "Winger Movement",
+    "zh" : "边锋跑位"
+  },
+  "type" : "tactics",
+  "videoId" : "OIH_rueIiOE",
+  "viewed" : 999
+}  ]
