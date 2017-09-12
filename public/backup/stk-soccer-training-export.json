@@ -2,7 +2,7 @@
   "id" : "0",
   "title" : {
     "en" : "Crossing Technique Football Part 1",
-    "zh" : "长传一"
+    "zh" : "传中一"
   },
   "type" : "technique",
   "videoId" : "SHsN8j7HRm4",
@@ -11,7 +11,7 @@
   "id" : "1",
   "title" : {
     "en" : "Crossing Technique Football Part 2",
-    "zh" : "长传二"
+    "zh" : "传中二"
   },
   "type" : "technique",
   "videoId" : "1VdyP_V8aTc",
@@ -22,6 +22,156 @@
   "title" : {
     "en" : "How to Curl a Football",
     "zh" : "弧旋球"
+  },
+  "type" : "technique",
+  "videoId" : "Po8y2Oaob08",
+  "viewed" : 9
+},
+{
+  "id" : "3",
+  "title" : {
+    "en" : "How to Chip Like Messi",
+    "zh" : "像梅西一样挑球"
+  },
+  "type" : "technique",
+  "videoId" : "3J7zjMDhQDg",
+  "viewed" : 9
+},
+{
+  "id" : "4",
+  "title" : {
+    "en" : "Long Pass Technique Football",
+    "zh" : "长传"
+  },
+  "type" : "technique",
+  "videoId" : "2wjGTnc9mNM",
+  "viewed" : 9
+},
+{
+  "id" : "5",
+  "title" : {
+    "en" : "Long Pass Technique Football, Driven Passes",
+    "zh" : "低空长传"
+  },
+  "type" : "technique",
+  "videoId" : "cRwk4qPAEBg",
+  "viewed" : 9
+},
+{
+  "id" : "6",
+  "title" : {
+    "en" : "How to Improve Your Dribbling",
+    "zh" : "如何提高盘球技巧"
+  },
+  "type" : "technique",
+  "videoId" : "oRwQd8VBIPM",
+  "viewed" : 9
+},
+{
+  "id" : "7",
+  "title" : {
+    "en" : "How to Juggle a Soccer Ball",
+    "zh" : "如何颠球"
+  },
+  "type" : "technique",
+  "videoId" : "nqE-WMg1FOs",
+  "viewed" : 9
+},
+{
+  "id" : "8",
+  "title" : {
+    "en" : "Power Shot Technique",
+    "zh" : "大力射门技术"
+  },
+  "type" : "technique",
+  "videoId" : "xHC8ozrKgRA",
+  "viewed" : 9
+},
+{
+  "id" : "9",
+  "title" : {
+    "en" : "How to Bend a Soccer ball with the Outside of Your Foot",
+    "zh" : "外脚背传球"
+  },
+  "type" : "technique",
+  "videoId" : "WZthasLct_w",
+  "viewed" : 9
+},
+{
+  "id" : "10",
+  "title" : {
+    "en" : "How to Improve Your Passing Accuracy in Football",
+    "zh" : "如何提高传球精度"
+  },
+  "type" : "technique",
+  "videoId" : "Sm-u_ESEmjE",
+  "viewed" : 9
+},
+{
+  "id" : "11",
+  "title" : {
+    "en" : "1v1 Attacking",
+    "zh" : "单挑"
+  },
+  "type" : "technique",
+  "videoId" : "dNB-iS8kHms",
+  "viewed" : 9
+},
+{
+  "id" : "12",
+  "title" : {
+    "en" : "Football Turns Tutorial",
+    "zh" : "急停变向"
+  },
+  "type" : "technique",
+  "videoId" : "hBFKuooKobU",
+  "viewed" : 9
+},
+{
+  "id" : "13",
+  "title" : {
+    "en" : "Football Turns - First Touch",
+    "zh" : "第一时间触球变向"
+  },
+  "type" : "technique",
+  "videoId" : "BFCCGWnbDFA",
+  "viewed" : 9
+},
+{
+  "id" : "14",
+  "title" : {
+    "en" : "How to Shield the Ball in Soccer",
+    "zh" : "护球"
+  },
+  "type" : "technique",
+  "videoId" : "InvqGXICwsQ",
+  "viewed" : 9
+},
+{
+  "id" : "15",
+  "title" : {
+    "en" : "Body Feints",
+    "zh" : "身体晃动假动作"
+  },
+  "type" : "technique",
+  "videoId" : "pssaLEEtU2g",
+  "viewed" : 9
+},
+{
+  "id" : "16",
+  "title" : {
+    "en" : "How to Improve Your Dribbling, 3 Styles of Dribbling",
+    "zh" : "如何提高带球技巧"
+  },
+  "type" : "technique",
+  "videoId" : "ziXYzblzgzQ",
+  "viewed" : 9
+},
+{
+  "id" : "17",
+  "title" : {
+    "en" : "Three Types of First Touches",
+    "zh" : "3种第一时间触球技术"
   },
   "type" : "technique",
   "videoId" : "3J7zjMDhQDg",
