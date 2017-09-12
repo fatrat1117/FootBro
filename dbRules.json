@@ -23,8 +23,8 @@
                 }
             },
             "chats": {
-              ".read": "data.parent().child('approved').hasChild(auth.uid)",
-              ".write": "data.parent().child('approved').hasChild(auth.uid)"
+                ".read": "data.parent().child('approved').hasChild(auth.uid)",
+                ".write": "data.parent().child('approved').hasChild(auth.uid)"
             }
         },
         "matches": {
@@ -32,7 +32,7 @@
             "dates": {
                 ".write": "root.child('players').hasChild(auth.uid)",
                 "$id": {
-                  ".validate": "$id != null && $id != 'undefined'"
+                    ".validate": "$id != null && $id != 'undefined'"
                 }
             },
             "list": {
@@ -41,6 +41,7 @@
                 ".write": "root.child('players').hasChild(auth.uid)",
                 ".indexOn": [
                     "date",
+                    "time",
                     "tournamentId"
                 ],
                 ".validate": "newData.exists()",
@@ -79,7 +80,7 @@
             "players": {
                 ".indexOn": [
                     "popularity",
-                  	"assists",
+                    "assists",
                     "goals"
                 ],
                 ".validate": "newData.exists()",
@@ -146,12 +147,13 @@
         "teams_matches": {
             ".read": true,
             ".write": "root.child('admins').hasChild(auth.uid)",
-            "$id":{
-              "matches": {
-              ".indexOn":[
-                "date"
-              ]
-            }
+            "$id": {
+                "matches": {
+                    ".indexOn": [
+                        "date",
+                        "time"
+                    ]
+                }
             }
         },
         "teams_stats": {
@@ -161,15 +163,22 @@
         "player_stats": {
             ".read": true,
             ".write": "root.child('admins').hasChild(auth.uid)"
-        }, 
+        },
         "tournaments": {
             ".read": true,
             ".write": "root.child('players').hasChild(auth.uid)",
-            "list" : {
-              "$id": {
-                ".validate": "$id != null && $id != 'undefined'"
-              }
+            "list": {
+                "$id": {
+                    ".validate": "$id != null && $id != 'undefined'"
+                }
             }
+        },
+        "training": {
+            ".read": true,
+            ".write": true,
+            ".indexOn": [
+                "type"
+            ]
         }
     }
 }

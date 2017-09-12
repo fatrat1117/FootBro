@@ -1,20 +1,20 @@
 [ {
   "id" : "0",
   "title" : {
-    "en" : "Crossing Technique Football Part 1",
-    "zh" : "传中一"
+    "en" : "How to Improve Physical Fitness",
+    "zh" : "如何提高身体素质"
   },
-  "type" : "technique",
-  "videoId" : "SHsN8j7HRm4",
+  "type" : "physical",
+  "videoId" : "pUgiAE9SaJI",
   "viewed" : 9
 }, {
   "id" : "1",
   "title" : {
-    "en" : "Crossing Technique Football Part 2",
-    "zh" : "传中二"
+    "en" : "How to run faster",
+    "zh" : "如何跑得更快"
   },
-  "type" : "technique",
-  "videoId" : "1VdyP_V8aTc",
+  "type" : "physical",
+  "videoId" : "xUhBosIguRQ",
   "viewed" : 9
 },
 {
@@ -30,11 +30,11 @@
 {
   "id" : "3",
   "title" : {
-    "en" : "How to Chip Like Messi",
-    "zh" : "像梅西一样挑球"
+    "en" : "How to run longer",
+    "zh" : "如何提高体能"
   },
-  "type" : "technique",
-  "videoId" : "3J7zjMDhQDg",
+  "type" : "physical",
+  "videoId" : "uE15A4qom20",
   "viewed" : 9
 },
 {
@@ -172,6 +172,34 @@
   "title" : {
     "en" : "Three Types of First Touches",
     "zh" : "3种第一时间触球技术"
+  },
+  "type" : "technique",
+  "videoId" : "3J7zjMDhQDg",
+  "viewed" : 9
+},{
+  "id" : "18",
+  "title" : {
+    "en" : "Crossing Technique Football Part 1",
+    "zh" : "传中一"
+  },
+  "type" : "technique",
+  "videoId" : "SHsN8j7HRm4",
+  "viewed" : 9
+}, {
+  "id" : "19",
+  "title" : {
+    "en" : "Crossing Technique Football Part 2",
+    "zh" : "传中二"
+  },
+  "type" : "technique",
+  "videoId" : "1VdyP_V8aTc",
+  "viewed" : 9
+},
+{
+  "id" : "20",
+  "title" : {
+    "en" : "How to Chip Like Messi",
+    "zh" : "像梅西一样挑球"
   },
   "type" : "technique",
   "videoId" : "3J7zjMDhQDg",
