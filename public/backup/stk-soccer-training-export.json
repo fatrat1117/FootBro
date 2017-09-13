@@ -234,4 +234,54 @@
   "type" : "tactics",
   "videoId" : "OIH_rueIiOE",
   "viewed" : 999
-}  ]
+},
+{
+  "id" : "24",
+  "title" : {
+    "en" : "How to Play Attacking Midfielder",
+    "zh" : "前腰教学"
+  },
+  "type" : "tactics",
+  "videoId" : "N-PggOxE25Q",
+  "viewed" : 999
+} ,
+{
+  "id" : "25",
+  "title" : {
+    "en" : "How to Play Defensive Midfielder",
+    "zh" : "后腰教学"
+  },
+  "type" : "tactics",
+  "videoId" : "QOh-lXuaVFs",
+  "viewed" : 999
+} ,
+{
+  "id" : "26",
+  "title" : {
+    "en" : "How to Play Fullback in Football",
+    "zh" : "助攻型边卫教学"
+  },
+  "type" : "tactics",
+  "videoId" : "T1Xv2_jFteI",
+  "viewed" : 999
+} ,
+{
+  "id" : "27",
+  "title" : {
+    "en" : "How to Play Center Back",
+    "zh" : "中卫教学"
+  },
+  "type" : "tactics",
+  "videoId" : "_fKvOeik6ek",
+  "viewed" : 999
+} ,
+{
+  "id" : "28",
+  "title" : {
+    "en" : "Switching the Point of Attack",
+    "zh" : "换边进攻教学"
+  },
+  "type" : "tactics",
+  "videoId" : "T6dFzb1TN70",
+  "viewed" : 999
+}   ]
